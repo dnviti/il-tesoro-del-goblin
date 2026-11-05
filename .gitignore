@@ -1,0 +1,10 @@
+# File pesanti di musica e video: restano nella cartella del progetto, non in repo
+*.wav
+*.mp3
+*.mp4
+*.webm
+*.zip
+*.tgz
+__pycache__/
+*.pyc
+node_modules/

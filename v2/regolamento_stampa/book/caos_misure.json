@@ -1,0 +1,198 @@
+{
+ "ver": "2.0",
+ "partite": "30.000–40.000",
+ "base_min": [
+  "26",
+  "29,5",
+  "30"
+ ],
+ "caos_min": [
+  "26",
+  "29,5",
+  "30,5"
+ ],
+ "equilibrio": "Le quattro classi della base restano tra 0,96 e 1,05 volte la vittoria attesa (1 = perfetto), ognuna con il suo stile: il Mago trova pagine con la Pagina strappata e fruga meglio con la Biglia, il Chierico si fa luce con la Lanterna, e battere i Coboldi non dà Indizi, così il Guerriero non scappa via a forza di scontri. In quattro il Caos aggiunge circa mezzo minuto; in due la partita resta uguale.",
+ "perche_gemelle": "Abbiamo provato anche a far saltare su una Crepa qualsiasi: il salto era sempre a portata di mano e in 3 e 4 giocatori il Ladro perdeva parte del suo vantaggio di movimento. Con le coppie il salto è una scorciatoia da preparare, e ogni giocatore sa da dove può spuntare un avversario.",
+ "minaccia": "Coboldo 9, Fromboliere 10, Borseggiatore 11",
+ "aiuto": [
+  [
+   "1",
+   "Crollo",
+   "perdi 2 PV"
+  ],
+  [
+   "2",
+   "Imboscata",
+   "gira un Coboldo e combatti"
+  ],
+  [
+   "3",
+   "Vento",
+   "muovi ancora D6"
+  ],
+  [
+   "4",
+   "Bottega",
+   "riprendi 1 carta"
+  ],
+  [
+   "5",
+   "Mappa",
+   "prendi 1 Indizio"
+  ],
+  [
+   "6",
+   "Scambio",
+   "cambia posto con un eroe"
+  ]
+ ],
+ "tabella": [
+  [
+   "1",
+   "Crollo",
+   "La Crepa si allarga sotto i tuoi piedi: perdi 2 PV."
+  ],
+  [
+   "2",
+   "Imboscata",
+   "Gira il primo Coboldo di MIMI della pila e combattilo (pagina 5)."
+  ],
+  [
+   "3",
+   "Vento del Goblin",
+   "Muovi subito di nuovo di D6 esagoni e risolvi dove ti fermi. Se il Vento ti porta su un’altra Crepa, scegli di nuovo."
+  ],
+  [
+   "4",
+   "Bottega",
+   "Qualcosa di tuo cade fuori da MIMI: riprendi 1 carta dai tuoi scarti."
+  ],
+  [
+   "5",
+   "Mappa perduta",
+   "Una pagina della mappa di Geronimo: prendi 1 Indizio."
+  ],
+  [
+   "6",
+   "Scambio",
+   "Se vuoi, scambiati di posto con un eroe a scelta. Non è un Duello."
+  ]
+ ],
+ "coboldi": [
+  {
+   "nome": "Coboldo di MIMI",
+   "nome_corto": "Coboldo",
+   "pv": 4,
+   "att": "+1",
+   "dif": 10,
+   "tratto": "D6 − 1",
+   "testo": "Il custode del fondo. Nessun trucco: morde e basta."
+  },
+  {
+   "nome": "Coboldo fromboliere",
+   "nome_corto": "Fromboliere",
+   "pv": 3,
+   "att": "+2",
+   "dif": 10,
+   "tratto": "Agguato",
+   "testo": "<b>Agguato</b>: nel primo round attacca lui per primo, poi lo scontro va avanti come sempre."
+  },
+  {
+   "nome": "Coboldo borseggiatore",
+   "nome_corto": "Borseggiatore",
+   "pv": 4,
+   "att": "+1",
+   "dif": 11,
+   "tratto": "Borseggio",
+   "testo": "<b>Borseggio</b>: la prima volta che ti colpisce scarti 1 carta a caso dalla mano. Se lo sconfiggi peschi 1 carta in più."
+  }
+ ],
+ "carte": [
+  {
+   "nome": "Biglia del nulla",
+   "tipo": "Incantesimo",
+   "righe": [
+    "Fruga in una Crepa",
+    "da dove sei: tira il D6",
+    "sulla tabella del Caos.",
+    "Mago: tira due D6 e scegli."
+   ]
+  },
+  {
+   "nome": "Pagina strappata",
+   "tipo": "Incantesimo",
+   "righe": [
+    "Tira il D6: con 5 o 6",
+    "prendi 1 Indizio,",
+    "altrimenti peschi 1 carta.",
+    "Mago: basta un 4."
+   ]
+  },
+  {
+   "nome": "Coboldo pentito",
+   "tipo": "Incantesimo · scontro",
+   "righe": [
+    "Un Coboldo di MIMI",
+    "passa dalla tua parte:",
+    "infligge 3 danni",
+    "al nemico."
+   ]
+  },
+  {
+   "nome": "Lanterna dei Coboldi",
+   "tipo": "Equipaggiamento · Elmo",
+   "righe": [
+    "+1 AR. Chierico: +1 ATT.",
+    "Quando frughi in una",
+    "Crepa tira due D6",
+    "e scegli quale tenere."
+   ]
+  },
+  {
+   "nome": "Vento di nulla",
+   "tipo": "Incantesimo",
+   "righe": [
+    "Un avversario a scelta,",
+    "nel suo prossimo turno,",
+    "muove di 1 esagono",
+    "soltanto."
+   ]
+  },
+  {
+   "nome": "Risata del Goblin",
+   "tipo": "Incantesimo",
+   "righe": [
+    "Tutti tirano il D6,",
+    "tu due e tieni il più alto.",
+    "Il più alto prende",
+    "1 Indizio (pari: nessuno)."
+   ]
+  }
+ ],
+ "faq": [
+  [
+   "Posso attraversare se sulla gemella c’è un eroe?",
+   "No: la Crepa gemella deve essere libera, senza eroi sopra o accanto. Allora puoi solo frugare."
+  ],
+  [
+   "Attraversare conta come movimento?",
+   "Sì, ma non tiri niente e sulla gemella non succede niente: il tuo turno finisce lì. Al prossimo turno riparti da quella Crepa."
+  ],
+  [
+   "Perché battere un Coboldo non dà l’Indizio?",
+   "I Coboldi non hanno pagine della mappa: tengono in ordine le cianfrusaglie. Per questo dai Coboldi peschi una carta."
+  ],
+  [
+   "Con la Biglia del nulla posso attraversare?",
+   "No: la Biglia fa solo frugare. Per attraversare devi fermarti su una Crepa."
+  ],
+  [
+   "Ho la Lanterna e uso la Biglia: tiro tre dadi?",
+   "No, al massimo due: tiri due D6 e scegli."
+  ],
+  [
+   "Il Borseggiatore mi ruba l’ultima carta?",
+   "Se non hai carte in mano non ti ruba niente."
+  ]
+ ]
+}

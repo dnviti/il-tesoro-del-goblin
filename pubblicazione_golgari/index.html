@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Il Tesoro del Goblin</title>
+<meta name="description" content="Il Tesoro del Goblin: versione giocabile, regolamenti da stampare e risorse del gioco.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@500;700;800&family=Alegreya+Sans:wght@400;500;700&family=Pirata+One&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6efe1;--card:#fffaf0;--ink:#2b2118;--muted:#6f5f4c;--line:#e3d5bb;--acc:#7a3b12;--acc2:#2f6b3a}
+@media (prefers-color-scheme:dark){:root{--bg:#17130f;--card:#221c16;--ink:#f1e7d6;--muted:#b6a58c;--line:#3a3026;--acc:#e7a464;--acc2:#8fd19a}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 "Alegreya Sans",system-ui,sans-serif}
+main{max-width:880px;margin:0 auto;padding:40px 16px 64px}
+h1{font:400 clamp(40px,8vw,64px)/1 "Pirata One",serif;margin:0 0 8px;color:var(--acc)}
+.lead{font-family:Alegreya,serif;font-size:20px;color:var(--muted);margin:0 0 32px}
+h2{font:700 22px/1.2 Alegreya,serif;margin:36px 0 12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+a.card{display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;color:inherit;text-decoration:none;transition:border-color .15s,transform .15s}
+a.card:hover,a.card:focus-visible{border-color:var(--acc);transform:translateY(-1px)}
+.t{font-weight:700;color:var(--acc)}
+.d{color:var(--muted);font-size:15px;margin-top:4px}
+.s{font-size:13px;color:var(--muted);margin-top:8px}
+.big .t{font-size:20px}
+footer{margin-top:48px;font-size:14px;color:var(--muted)}
+</style>
+</head>
+<body>
+<main>
+<h1>Il Tesoro del Goblin</h1>
+<p class="lead">Gioco da tavolo fantasy di esplorazione e carte di Alessandro De Simone. Qui trovi la versione giocabile, i regolamenti da stampare e le risorse del gioco.</p>
+
+<h2>Gioca</h2>
+<div class="grid">
+<a class="card big" href="gioco/"><div class="t">Versione giocabile</div><div class="d">Da 2 a 4 giocatori, persone o IA, sulle Carte Trama v2. Con le regole adottate, tutte le carte e il simulatore di bilanciamento.</div></a>
+<a class="card big" href="officina/"><div class="t">Officina del Goblin</div><div class="d">Strumento per progettare carte, nemici, eventi e terreni delle espansioni e provarli nel simulatore.</div><div class="s">Aggiornata sulle Carte Trama v2. La collezione resta nel tuo browser.</div></a>
+</div>
+
+<h2>Regolamenti da stampare</h2>
+<div class="grid">
+<a class="card" href="regolamenti/Regolamento_base_v5.pdf"><div class="t">Regolamento base</div><div class="d">Libretto A5 della scatola base, versione 5.</div><div class="s">PDF · 1,4 MB</div></a>
+<a class="card" href="regolamenti/Inizia_subito_v5.pdf"><div class="t">Inizia subito</div><div class="d">Foglio A4 per partire in pochi minuti, versione 5.</div><div class="s">PDF · 0,5 MB</div></a>
+<a class="card" href="regolamenti/Il_Caos_del_Goblin.pdf"><div class="t">Il Caos del Goblin</div><div class="d">Espansione «Le Crepe di MIMI»: libretto A5 di 8 pagine.</div><div class="s">PDF · 0,8 MB</div></a>
+</div>
+
+<h2>Risorse del gioco</h2>
+<div class="grid">
+<a class="card" href="risorse/Catalogo_carte_v2.xlsx"><div class="t">Catalogo delle carte v2</div><div class="d">Tutte le carte con valori ed effetti.</div><div class="s">Excel · 21 KB</div></a>
+<a class="card" href="risorse/Carte_Trama_Il_Tesoro_del_Goblin_v2.pptx"><div class="t">Carte Trama v2</div><div class="d">Le carte originali: Mappe, Equipaggiamenti, Incantesimi.</div><div class="s">PowerPoint · 14 MB</div></a>
+<a class="card" href="risorse/Carte_Trama_Elenco_v2.xlsx"><div class="t">Elenco delle Carte Trama v2</div><div class="d">L'elenco originale delle carte.</div><div class="s">Excel · 19 KB</div></a>
+<a class="card" href="risorse/Carte_Nemico_v2.pptx"><div class="t">Carte Nemico v2</div><div class="d">I nemici a livelli sul layout della carta Nemico.</div><div class="s">PowerPoint · 0,3 MB</div></a>
+</div>
+
+<h2>Video</h2>
+<div class="grid">
+<a class="card" href="video/tutorial_come_si_gioca.mp4"><div class="t">Come si gioca</div><div class="d">Tutorial in dialogo, circa 13 minuti.</div><div class="s">MP4 · 53 MB · ancora sulle regole del 21/10: la versione nuova è in arrivo</div></a>
+<a class="card" href="video/partita_al_tavolo.mp4"><div class="t">Una partita al tavolo</div><div class="d">Dalla preparazione alla vittoria, circa 4 minuti.</div><div class="s">MP4 · 16 MB · regole v5</div></a>
+</div>
+
+<footer>© Alessandro De Simone · Il Tesoro del Goblin · prototipo in sviluppo</footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,72 @@
+## runs/f_rnd_2.txt
+CLS: Guerriero 1.04 | Mago 1.04 | Oracolo 0.99 | Ladro 0.93
+RACE: Sanguar 1.03 | Umani 1.03 | Tiefling 1.01 | Elfi 1.01 | Halfling 1.00 | Nani 0.98 | Orchi 0.97 | Yumaniani 0.96
+reasons {"boss":10000}
+TIME all: 23.3 min (mediana 21.8, 10-90% 14-35) · inizio 5.4 · centro 7.2 · finale 10.6 · giri 3.6
+TIME 2p: 23.3 min (mediana 21.8, 10-90% 14-35) · inizio 5.4 · centro 7.2 · finale 10.6 · giri 3.6
+DIGITALE 2p 15.7 min
+COUNTS dado 32.0 · turno 8.2 · carta 11.5 · movimento 8.2 · casella 5.4 · scontro 6.2 · attacco 15.0 · livello 1.1 · sconfitta 1.5
+## runs/f_rnd_3.txt
+CLS: Guerriero 1.03 | Oracolo 1.01 | Ladro 0.98 | Mago 0.98
+RACE: Sanguar 1.04 | Halfling 1.02 | Orchi 1.00 | Tiefling 1.00 | Umani 0.99 | Nani 0.98 | Yumaniani 0.98 | Elfi 0.98
+reasons {"boss":10000}
+TIME all: 27.5 min (mediana 26.0, 10-90% 17-39) · inizio 5.7 · centro 9.7 · finale 12.1 · giri 2.7
+TIME 3p: 27.5 min (mediana 26.0, 10-90% 17-39) · inizio 5.7 · centro 9.7 · finale 12.1 · giri 2.7
+DIGITALE 3p 18.5 min
+COUNTS dado 37.6 · turno 9.2 · carta 14.8 · movimento 9.2 · casella 6.3 · scontro 7.2 · attacco 16.7 · livello 1.1 · sconfitta 1.7
+## runs/f_rnd_4.txt
+CLS: Ladro 1.07 | Guerriero 0.99 | Oracolo 0.99 | Mago 0.94
+RACE: Sanguar 1.07 | Umani 1.05 | Nani 1.01 | Halfling 1.00 | Elfi 0.99 | Yumaniani 0.97 | Tiefling 0.97 | Orchi 0.93
+reasons {"boss":10000}
+TIME all: 30.9 min (mediana 29.5, 10-90% 19-44) · inizio 5.8 · centro 11.8 · finale 13.3 · giri 2.3
+TIME 4p: 30.9 min (mediana 29.5, 10-90% 19-44) · inizio 5.8 · centro 11.8 · finale 13.3 · giri 2.3
+DIGITALE 4p 20.9 min
+COUNTS dado 43.3 · turno 10.1 · carta 17.1 · movimento 10.1 · casella 7.1 · scontro 8.1 · attacco 18.3 · sconfitta 1.9 · livello 1.1
+## runs/f_dft_2.txt
+CLS: Mago 1.02 | Guerriero 1.02 | Oracolo 1.02 | Ladro 0.94
+RACE: Orchi 1.02 | Yumaniani 1.01 | Halfling 1.01 | Elfi 1.00 | Umani 1.00 | Nani 1.00 | Tiefling 0.99 | Sanguar 0.98
+reasons {"boss":10000}
+TIME all: 22.5 min (mediana 21.1, 10-90% 14-33) · inizio 5.4 · centro 6.7 · finale 10.5 · giri 3.5
+TIME 2p: 22.5 min (mediana 21.1, 10-90% 14-33) · inizio 5.4 · centro 6.7 · finale 10.5 · giri 3.5
+DIGITALE 2p 15.2 min
+COUNTS dado 31.2 · turno 8.0 · carta 11.2 · movimento 8.0 · casella 5.3 · scontro 5.9 · attacco 14.2 · livello 1.0 · sconfitta 1.4
+## runs/f_dft_3.txt
+CLS: Oracolo 1.04 | Guerriero 1.01 | Ladro 0.98 | Mago 0.97
+RACE: Sanguar 1.04 | Umani 1.02 | Elfi 1.02 | Nani 1.01 | Yumaniani 0.99 | Orchi 0.98 | Halfling 0.98 | Tiefling 0.97
+reasons {"boss":10000}
+TIME all: 26.4 min (mediana 24.9, 10-90% 16-38) · inizio 5.6 · centro 8.7 · finale 12.1 · giri 2.6
+TIME 3p: 26.4 min (mediana 24.9, 10-90% 16-38) · inizio 5.6 · centro 8.7 · finale 12.1 · giri 2.6
+DIGITALE 3p 17.8 min
+COUNTS dado 36.7 · turno 8.9 · carta 14.2 · movimento 8.9 · casella 6.1 · scontro 6.9 · attacco 15.8 · sconfitta 1.6 · livello 1.0
+## runs/f_dft_4.txt
+CLS: Oracolo 1.07 | Guerriero 1.02 | Ladro 0.98 | Mago 0.94
+RACE: Umani 1.03 | Sanguar 1.03 | Halfling 1.02 | Elfi 1.01 | Yumaniani 1.00 | Tiefling 0.99 | Nani 0.96 | Orchi 0.96
+reasons {"boss":10000}
+TIME all: 29.4 min (mediana 28.2, 10-90% 18-42) · inizio 5.7 · centro 10.5 · finale 13.2 · giri 2.2
+TIME 4p: 29.4 min (mediana 28.2, 10-90% 18-42) · inizio 5.7 · centro 10.5 · finale 13.2 · giri 2.2
+DIGITALE 4p 19.9 min
+COUNTS dado 42.0 · turno 9.6 · carta 16.3 · movimento 9.6 · casella 6.7 · scontro 7.6 · attacco 17.4 · livello 1.0 · sconfitta 1.7
+## runs/f_mb_2.txt
+CLS: Guerriero 1.04 | Mago 1.03 | Oracolo 0.98 | Ladro 0.95
+RACE: Tiefling 1.02 | Halfling 1.02 | Sanguar 1.01 | Orchi 1.00 | Elfi 1.00 | Yumaniani 0.99 | Nani 0.99 | Umani 0.97
+reasons {"boss":10000}
+TIME all: 23.4 min (mediana 21.9, 10-90% 14-35) · inizio 5.6 · centro 7.3 · finale 10.6 · giri 3.6
+TIME 2p: 23.4 min (mediana 21.9, 10-90% 14-35) · inizio 5.6 · centro 7.3 · finale 10.6 · giri 3.6
+DIGITALE 2p 15.8 min
+COUNTS dado 32.4 · turno 8.2 · carta 11.6 · movimento 8.2 · casella 5.4 · scontro 6.2 · attacco 15.3 · livello 1.1 · sconfitta 1.5
+## runs/f_mb_3.txt
+CLS: Guerriero 1.03 | Oracolo 1.01 | Ladro 0.99 | Mago 0.98
+RACE: Sanguar 1.04 | Halfling 1.03 | Elfi 1.01 | Yumaniani 1.00 | Tiefling 1.00 | Umani 0.99 | Nani 0.98 | Orchi 0.96
+reasons {"boss":10000}
+TIME all: 27.7 min (mediana 26.3, 10-90% 17-40) · inizio 5.7 · centro 9.9 · finale 12.1 · giri 2.8
+TIME 3p: 27.7 min (mediana 26.3, 10-90% 17-40) · inizio 5.7 · centro 9.9 · finale 12.1 · giri 2.8
+DIGITALE 3p 18.7 min
+COUNTS dado 38.0 · turno 9.3 · carta 14.8 · movimento 9.3 · casella 6.4 · scontro 7.2 · attacco 17.0 · livello 1.1 · sconfitta 1.7
+## runs/f_mb_4.txt
+CLS: Guerriero 1.04 | Ladro 1.02 | Oracolo 1.02 | Mago 0.92
+RACE: Halfling 1.05 | Sanguar 1.02 | Elfi 1.02 | Nani 1.01 | Umani 0.99 | Yumaniani 0.97 | Orchi 0.97 | Tiefling 0.97
+reasons {"boss":10000}
+TIME all: 31.4 min (mediana 30.0, 10-90% 19-45) · inizio 5.9 · centro 12.0 · finale 13.5 · giri 2.3
+TIME 4p: 31.4 min (mediana 30.0, 10-90% 19-45) · inizio 5.9 · centro 12.0 · finale 13.5 · giri 2.3
+DIGITALE 4p 21.2 min
+COUNTS dado 44.1 · turno 10.2 · carta 17.3 · movimento 10.2 · casella 7.2 · scontro 8.1 · attacco 18.7 · livello 1.1 · sconfitta 1.9

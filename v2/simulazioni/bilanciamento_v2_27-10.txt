@@ -1,0 +1,117 @@
+### base_2
+{"secs":13.405,"errors":0,"score":95.508,"parts":{"classi":0.926,"gauss":0.972,"turno":0.953,"finite":1},"mean":6.224,"sd":2.18,"skew":0.65,"kurt":0.513,"r2":0.972,"first":1.047,"draws":0}
+CLS: Ladro 1.12 | Guerriero 0.99 | Mago 0.95 | Oracolo 0.94
+RACE: Sanguar 1.10 | Orchi 1.04 | Elfi 1.02 | Tiefling 0.99 | Yumaniani 0.99 | Halfling 0.99 | Nani 0.95 | Umani 0.93
+reasons {"boss":3000}
+TIME all: 34.3 min (mediana 33.3, 10-90% 24-46) · inizio 6.2 · centro 17.1 · finale 10.9 · giri 6.2
+TIME 2p: 34.3 min (mediana 33.3, 10-90% 24-46) · inizio 6.2 · centro 17.1 · finale 10.9 · giri 6.2
+DIGITALE 2p 23.0 min
+COUNTS dado 49.7 · turno 13.4 · carta 13.9 · movimento 13.4 · casella 10.3 · scontro 8.3 · attacco 25.9 · livello 2.3 · sconfitta 1.2
+### base_3
+{"secs":15.553,"errors":0,"score":92.548,"parts":{"classi":0.874,"gauss":0.959,"turno":0.919,"finite":1},"mean":5.275,"sd":1.746,"skew":0.645,"kurt":0.28,"r2":0.959,"first":1.081,"draws":0}
+CLS: Ladro 1.22 | Guerriero 0.96 | Oracolo 0.93 | Mago 0.90
+RACE: Sanguar 1.09 | Tiefling 1.06 | Elfi 1.05 | Orchi 1.05 | Yumaniani 0.98 | Halfling 0.97 | Nani 0.92 | Umani 0.89
+reasons {"boss":3000}
+TIME all: 43.7 min (mediana 42.5, 10-90% 30-59) · inizio 6.5 · centro 24.6 · finale 12.5 · giri 5.3
+TIME 3p: 43.7 min (mediana 42.5, 10-90% 30-59) · inizio 6.5 · centro 24.6 · finale 12.5 · giri 5.3
+DIGITALE 3p 29.4 min
+COUNTS dado 60.7 · turno 16.8 · carta 19.6 · movimento 16.8 · casella 13.3 · scontro 10.4 · attacco 30.4 · livello 3.0 · sconfitta 1.4
+### base_4
+{"secs":18.666,"errors":0,"score":92.31,"parts":{"classi":0.889,"gauss":0.968,"turno":0.88,"finite":1},"mean":4.663,"sd":1.384,"skew":0.652,"kurt":0.417,"r2":0.968,"first":1.12,"draws":0}
+CLS: Ladro 1.19 | Oracolo 0.94 | Guerriero 0.94 | Mago 0.93
+RACE: Sanguar 1.08 | Orchi 1.05 | Umani 1.03 | Elfi 1.02 | Nani 0.99 | Halfling 0.97 | Yumaniani 0.94 | Tiefling 0.92
+reasons {"boss":3000}
+TIME all: 51.9 min (mediana 50.4, 10-90% 37-68) · inizio 6.8 · centro 31.7 · finale 13.4 · giri 4.7
+TIME 4p: 51.9 min (mediana 50.4, 10-90% 37-68) · inizio 6.8 · centro 31.7 · finale 13.4 · giri 4.7
+DIGITALE 4p 35.0 min
+COUNTS dado 70.9 · turno 19.7 · carta 24.6 · movimento 19.7 · casella 15.9 · scontro 12.2 · attacco 34.4 · livello 3.5 · sconfitta 1.6
+### FIN2
+{"secs":14.395,"errors":0,"score":95.6,"parts":{"classi":0.98,"gauss":0.907,"turno":0.945,"finite":1},"mean":3.549,"sd":1.692,"skew":1.176,"kurt":1.645,"r2":0.907,"first":1.055,"draws":0}
+CLS: Mago 1.03 | Oracolo 1.01 | Ladro 0.99 | Guerriero 0.97
+RACE: Sanguar 1.05 | Orchi 1.04 | Elfi 1.01 | Halfling 1.00 | Tiefling 0.99 | Umani 0.98 | Yumaniani 0.97 | Nani 0.96
+reasons {"boss":10000}
+TIME all: 23.4 min (mediana 22.1, 10-90% 15-34) · inizio 5.8 · centro 7.6 · finale 10.0 · giri 3.5
+TIME 2p: 23.4 min (mediana 22.1, 10-90% 15-34) · inizio 5.8 · centro 7.6 · finale 10.0 · giri 3.5
+DIGITALE 2p 15.8 min
+COUNTS dado 34.8 · turno 8.1 · carta 11.1 · movimento 8.1 · casella 5.5 · scontro 5.3 · attacco 18.9 · livello 1.0 · sconfitta 0.9
+### FIN3
+{"secs":19.46,"errors":0,"score":96.506,"parts":{"classi":0.983,"gauss":0.938,"turno":0.946,"finite":1},"mean":2.76,"sd":1.158,"skew":1.242,"kurt":2.421,"r2":0.938,"first":1.054,"draws":0}
+CLS: Ladro 1.03 | Mago 1.00 | Oracolo 0.99 | Guerriero 0.98
+RACE: Sanguar 1.10 | Orchi 1.04 | Halfling 0.99 | Tiefling 0.98 | Elfi 0.98 | Umani 0.98 | Yumaniani 0.97 | Nani 0.96
+reasons {"boss":10000}
+TIME all: 27.7 min (mediana 26.3, 10-90% 18-40) · inizio 6.0 · centro 10.6 · finale 11.1 · giri 2.8
+TIME 3p: 27.7 min (mediana 26.3, 10-90% 18-40) · inizio 6.0 · centro 10.6 · finale 11.1 · giri 2.8
+DIGITALE 3p 18.7 min
+COUNTS dado 40.9 · turno 9.3 · carta 14.2 · movimento 9.3 · casella 6.6 · scontro 6.1 · attacco 21.2 · livello 1.2 · sconfitta 1.0
+### FIN4
+{"secs":24.29,"errors":0,"score":96.946,"parts":{"classi":0.958,"gauss":0.974,"turno":0.964,"finite":1},"mean":2.334,"sd":0.877,"skew":1.156,"kurt":2.211,"r2":0.974,"first":1.036,"draws":0}
+CLS: Ladro 1.07 | Guerriero 0.99 | Oracolo 0.97 | Mago 0.97
+RACE: Sanguar 1.08 | Umani 1.03 | Halfling 1.02 | Orchi 1.00 | Elfi 0.98 | Nani 0.97 | Tiefling 0.96 | Yumaniani 0.95
+reasons {"boss":10000}
+TIME all: 31.4 min (mediana 30.2, 10-90% 21-44) · inizio 6.2 · centro 13.6 · finale 11.7 · giri 2.3
+TIME 4p: 31.4 min (mediana 30.2, 10-90% 21-44) · inizio 6.2 · centro 13.6 · finale 11.7 · giri 2.3
+DIGITALE 4p 21.2 min
+COUNTS dado 46.8 · turno 10.3 · carta 16.7 · movimento 10.3 · casella 7.5 · scontro 6.8 · attacco 23.2 · sconfitta 1.1 · livello 1.2
+### H2
+{"secs":10.956,"errors":0,"score":96.096,"parts":{"classi":0.976,"gauss":0.906,"turno":0.972,"finite":1},"mean":3.529,"sd":1.705,"skew":1.328,"kurt":2.468,"r2":0.906,"first":1.028,"draws":0}
+CLS: Mago 1.04 | Guerriero 0.99 | Oracolo 0.99 | Ladro 0.98
+RACE: Sanguar 1.07 | Orchi 1.02 | Elfi 1.00 | Yumaniani 0.99 | Umani 0.99 | Nani 0.98 | Tiefling 0.98 | Halfling 0.96
+reasons {"boss":6000}
+TIME all: 23.3 min (mediana 22.0, 10-90% 15-34) · inizio 5.8 · centro 7.5 · finale 10.0 · giri 3.5
+TIME 2p: 23.3 min (mediana 22.0, 10-90% 15-34) · inizio 5.8 · centro 7.5 · finale 10.0 · giri 3.5
+DIGITALE 2p 15.7 min
+COUNTS dado 34.7 · turno 8.1 · movimento 8.1 · casella 5.5 · scontro 5.3 · carta 11.0 · attacco 18.9 · livello 1.0 · sconfitta 0.9
+### H3
+{"secs":14.321,"errors":0,"score":97.52,"parts":{"classi":0.988,"gauss":0.952,"turno":0.966,"finite":1},"mean":2.747,"sd":1.125,"skew":1.203,"kurt":2.379,"r2":0.952,"first":1.034,"draws":0}
+CLS: Oracolo 1.01 | Mago 1.00 | Ladro 1.00 | Guerriero 0.98
+RACE: Sanguar 1.06 | Umani 1.03 | Tiefling 1.00 | Halfling 1.00 | Orchi 1.00 | Elfi 0.99 | Yumaniani 0.97 | Nani 0.96
+reasons {"boss":6000}
+TIME all: 27.6 min (mediana 26.3, 10-90% 18-39) · inizio 6.0 · centro 10.6 · finale 10.9 · giri 2.7
+TIME 3p: 27.6 min (mediana 26.3, 10-90% 18-39) · inizio 6.0 · centro 10.6 · finale 10.9 · giri 2.7
+DIGITALE 3p 18.6 min
+COUNTS dado 40.6 · turno 9.2 · carta 14.1 · movimento 9.2 · scontro 6.1 · casella 6.6 · attacco 21.1 · livello 1.1 · sconfitta 1.0
+### H4
+{"secs":16.557,"errors":0,"score":96.514,"parts":{"classi":0.965,"gauss":0.973,"turno":0.937,"finite":1},"mean":2.32,"sd":0.863,"skew":1.142,"kurt":2.208,"r2":0.973,"first":1.063,"draws":0}
+CLS: Ladro 1.05 | Mago 1.01 | Guerriero 0.98 | Oracolo 0.96
+RACE: Sanguar 1.10 | Elfi 1.05 | Orchi 1.02 | Tiefling 0.99 | Halfling 0.97 | Umani 0.97 | Nani 0.96 | Yumaniani 0.95
+reasons {"boss":6000}
+TIME all: 31.4 min (mediana 30.0, 10-90% 21-44) · inizio 6.2 · centro 13.4 · finale 11.8 · giri 2.3
+TIME 4p: 31.4 min (mediana 30.0, 10-90% 21-44) · inizio 6.2 · centro 13.4 · finale 11.8 · giri 2.3
+DIGITALE 4p 21.2 min
+COUNTS dado 47.0 · turno 10.3 · movimento 10.3 · casella 7.5 · carta 16.7 · scontro 6.8 · attacco 23.4 · sconfitta 1.1 · livello 1.2
+### A
+{"secs":21.726,"errors":0,"score":94.487,"parts":{"classi":0.878,"gauss":0.978,"turno":0.972,"finite":1},"mean":2.317,"sd":0.864,"skew":1.186,"kurt":2.632,"r2":0.978,"first":1.028,"draws":0}
+CLS: Ladro 1.20 | Mago 0.98 | Oracolo 0.93 | Guerriero 0.88
+RACE: Sanguar 1.06 | Orchi 1.05 | Halfling 1.03 | Elfi 0.99 | Nani 0.98 | Umani 0.98 | Yumaniani 0.96 | Tiefling 0.95
+reasons {"boss":8000}
+TIME all: 31.0 min (mediana 29.7, 10-90% 21-43) · inizio 6.2 · centro 13.3 · finale 11.5 · giri 2.3
+TIME 4p: 31.0 min (mediana 29.7, 10-90% 21-43) · inizio 6.2 · centro 13.3 · finale 11.5 · giri 2.3
+DIGITALE 4p 20.9 min
+COUNTS dado 45.7 · turno 10.3 · carta 16.6 · movimento 10.3 · casella 7.5 · scontro 6.7 · attacco 22.3 · sconfitta 1.1 · livello 1.2
+### B
+{"secs":21.861,"errors":0,"score":95.354,"parts":{"classi":0.947,"gauss":0.976,"turno":0.913,"finite":1},"mean":2.332,"sd":0.873,"skew":1.104,"kurt":2.034,"r2":0.976,"first":1.087,"draws":0}
+CLS: Ladro 1.08 | Mago 1.01 | Oracolo 0.96 | Guerriero 0.94
+RACE: Sanguar 1.08 | Elfi 1.01 | Nani 1.00 | Yumaniani 1.00 | Orchi 1.00 | Halfling 0.99 | Umani 0.96 | Tiefling 0.96
+reasons {"boss":8000}
+TIME all: 31.4 min (mediana 30.1, 10-90% 21-44) · inizio 6.2 · centro 13.5 · finale 11.7 · giri 2.3
+TIME 4p: 31.4 min (mediana 30.1, 10-90% 21-44) · inizio 6.2 · centro 13.5 · finale 11.7 · giri 2.3
+DIGITALE 4p 21.2 min
+COUNTS dado 46.7 · turno 10.3 · carta 16.8 · movimento 10.3 · casella 7.5 · scontro 6.8 · attacco 23.1 · livello 1.2 · sconfitta 1.2
+### C
+{"secs":21.423,"errors":0,"score":95.671,"parts":{"classi":0.92,"gauss":0.97,"turno":0.968,"finite":1},"mean":2.31,"sd":0.867,"skew":1.153,"kurt":2.074,"r2":0.97,"first":1.032,"draws":0}
+CLS: Ladro 1.12 | Mago 1.02 | Guerriero 0.93 | Oracolo 0.92
+RACE: Sanguar 1.11 | Halfling 1.01 | Orchi 1.01 | Elfi 0.99 | Nani 0.99 | Umani 0.97 | Yumaniani 0.96 | Tiefling 0.96
+reasons {"boss":8000}
+TIME all: 31.0 min (mediana 29.5, 10-90% 20-43) · inizio 6.1 · centro 13.3 · finale 11.6 · giri 2.3
+TIME 4p: 31.0 min (mediana 29.5, 10-90% 20-43) · inizio 6.1 · centro 13.3 · finale 11.6 · giri 2.3
+DIGITALE 4p 20.9 min
+COUNTS dado 45.7 · turno 10.2 · carta 16.6 · movimento 10.2 · casella 7.5 · scontro 6.7 · attacco 22.5 · livello 1.2 · sconfitta 1.1
+### D
+{"secs":21.787,"errors":0,"score":96.705,"parts":{"classi":0.957,"gauss":0.97,"turno":0.958,"finite":1},"mean":2.354,"sd":0.898,"skew":1.194,"kurt":2.465,"r2":0.97,"first":1.042,"draws":0}
+CLS: Mago 1.04 | Ladro 1.03 | Oracolo 0.99 | Guerriero 0.93
+RACE: Sanguar 1.11 | Orchi 1.04 | Halfling 1.02 | Nani 1.01 | Elfi 1.00 | Umani 0.96 | Tiefling 0.93 | Yumaniani 0.93
+reasons {"boss":8000}
+TIME all: 31.6 min (mediana 30.3, 10-90% 21-44) · inizio 6.2 · centro 13.4 · finale 11.9 · giri 2.4
+TIME 4p: 31.6 min (mediana 30.3, 10-90% 21-44) · inizio 6.2 · centro 13.4 · finale 11.9 · giri 2.4
+DIGITALE 4p 21.3 min
+COUNTS dado 47.1 · turno 10.4 · carta 16.8 · movimento 10.4 · casella 7.6 · scontro 6.8 · attacco 23.3 · sconfitta 1.2 · livello 1.2

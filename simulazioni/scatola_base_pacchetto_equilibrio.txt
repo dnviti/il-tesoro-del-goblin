@@ -1,0 +1,34 @@
+Pacchetto equilibrio scatola base (thread gioco fisico), misurato con il simulatore della versione giocabile (plancia stampata). 30.000 partite per riga.
+### nb2
+{"secs":55.849,"errors":0,"score":96.81,"mean":5.183,"sd":2.858,"skew":0.554,"kurt":-0.063,"r2":0.945,"first":1.015,"draws":0}
+CLS: Ladro 1.06 | Chierico 1.00 | Guerriero 0.99 | Mago 0.95
+TIME all: 18.5 min (mediana 17.7, 10-90% 9-29) · inizio 2.7 · centro 6.3 · finale 9.5 · giri 5.2
+### nb3
+{"secs":69.958,"errors":0,"score":95.182,"mean":4.059,"sd":2.35,"skew":0.666,"kurt":0.101,"r2":0.94,"first":0.944,"draws":0}
+CLS: Ladro 1.09 | Chierico 0.99 | Guerriero 0.96 | Mago 0.96
+TIME all: 20.9 min (mediana 19.8, 10-90% 9-34) · inizio 2.7 · centro 7.3 · finale 10.9 · giri 4.1
+### nb4
+{"secs":80.019,"errors":0,"score":94.622,"mean":3.246,"sd":1.998,"skew":0.89,"kurt":0.688,"r2":0.911,"first":0.934,"draws":0}
+CLS: Ladro 1.06 | Mago 1.02 | Chierico 0.98 | Guerriero 0.94
+TIME all: 21.6 min (mediana 20.0, 10-90% 10-36) · inizio 2.8 · centro 7.3 · finale 11.6 · giri 3.2
+### nf
+{"secs":87.71,"errors":0,"score":98.088,"mean":6.352,"sd":2.979,"skew":0.333,"kurt":-0.162,"r2":0.983,"first":1.002,"draws":0}
+CLS: Chierico 1.05 | Warlock 1.04 | Ladro 1.04 | Bardo 1.02 | Paladino 1.01 | Druido 1.00 | Stregone 0.99 | Barbaro 0.99 | Guerriero 0.93 | Mago 0.93
+TIME all: 27.6 min (mediana 26.6, 10-90% 13-43) · inizio 3.8 · centro 12.2 · finale 11.6 · giri 6.4
+### nf2
+{"secs":61.279,"errors":0,"score":97.253,"mean":6.86,"sd":3.096,"skew":0.333,"kurt":-0.044,"r2":0.981,"first":1.037,"draws":0}
+CLS: Ladro 1.08 | Chierico 1.04 | Warlock 1.02 | Stregone 1.01 | Paladino 1.01 | Guerriero 0.99 | Barbaro 0.97 | Mago 0.97 | Druido 0.97 | Bardo 0.94
+TIME all: 22.7 min (mediana 22.4, 10-90% 12-34) · inizio 3.7 · centro 9.2 · finale 9.8 · giri 6.9
+### nl2
+{"secs":53.812,"errors":0,"score":97.124,"mean":5.164,"sd":2.847,"skew":0.526,"kurt":-0.166,"r2":0.938,"first":1.018,"draws":0}
+CLS: Guerriero 1.02 | Ladro 1.01 | Chierico 1.00 | Mago 0.96
+TIME all: 18.4 min (mediana 17.7, 10-90% 9-29) · inizio 2.7 · centro 6.2 · finale 9.5 · giri 5.2
+### nl3
+{"secs":67.848,"errors":0,"score":96.197,"mean":4.091,"sd":2.375,"skew":0.659,"kurt":0.058,"r2":0.919,"first":0.968,"draws":0}
+CLS: Ladro 1.04 | Chierico 1.01 | Guerriero 0.97 | Mago 0.97
+TIME all: 21.0 min (mediana 19.9, 10-90% 9-34) · inizio 2.7 · centro 7.3 · finale 11.0 · giri 4.1
+### nl4
+{"secs":78.372,"errors":0,"score":95.19,"mean":3.249,"sd":1.995,"skew":0.889,"kurt":0.698,"r2":0.913,"first":0.935,"draws":0}
+CLS: Ladro 1.03 | Mago 1.02 | Chierico 0.99 | Guerriero 0.96
+TIME all: 21.5 min (mediana 20.0, 10-90% 10-36) · inizio 2.8 · centro 7.2 · finale 11.6 · giri 3.2
+(nb = scatola base col pacchetto, nf = gioco completo col pacchetto, nl = scatola base senza il +1 PV del Ladro)

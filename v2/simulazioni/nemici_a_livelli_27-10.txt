@@ -1,0 +1,45 @@
+== runs/zf_draft_2.txt
+CLS: Mago 1.06 | Oracolo 1.03 | Guerriero 0.98 | Ladro 0.92
+RACE: Elfi 1.03 | Sanguar 1.03 | Orchi 1.01 | Tiefling 1.01 | Umani 1.00 | Nani 0.98 | Halfling 0.98 | Yumaniani 0.97
+TIME all: 22.3 min (mediana 20.9, 10-90% 14-32) · inizio 5.0 · centro 6.4 · finale 10.8 · giri 3.0
+TIME 2p: 22.3 min (mediana 20.9, 10-90% 14-32) · inizio 5.0 · centro 6.4 · finale 10.8 · giri 3.0
+== runs/zf_draft_3.txt
+CLS: Oracolo 1.03 | Mago 1.00 | Ladro 0.99 | Guerriero 0.97
+RACE: Sanguar 1.07 | Orchi 1.06 | Halfling 1.01 | Elfi 0.99 | Umani 0.98 | Nani 0.97 | Tiefling 0.96 | Yumaniani 0.94
+TIME all: 25.9 min (mediana 24.7, 10-90% 16-37) · inizio 5.2 · centro 8.6 · finale 12.1 · giri 2.3
+TIME 3p: 25.9 min (mediana 24.7, 10-90% 16-37) · inizio 5.2 · centro 8.6 · finale 12.1 · giri 2.3
+== runs/zf_draft_4.txt
+CLS: Oracolo 1.01 | Guerriero 1.01 | Ladro 1.00 | Mago 0.98
+RACE: Sanguar 1.14 | Orchi 1.02 | Umani 1.02 | Elfi 0.98 | Halfling 0.98 | Nani 0.97 | Yumaniani 0.95 | Tiefling 0.94
+TIME all: 29.2 min (mediana 28.0, 10-90% 18-42) · inizio 5.5 · centro 10.4 · finale 13.3 · giri 1.9
+TIME 4p: 29.2 min (mediana 28.0, 10-90% 18-42) · inizio 5.5 · centro 10.4 · finale 13.3 · giri 1.9
+== runs/zf_random_2.txt
+CLS: Mago 1.03 | Oracolo 1.03 | Guerriero 1.00 | Ladro 0.94
+RACE: Sanguar 1.07 | Orchi 1.03 | Elfi 1.01 | Yumaniani 1.00 | Umani 1.00 | Nani 0.98 | Tiefling 0.96 | Halfling 0.96
+TIME all: 22.7 min (mediana 21.3, 10-90% 15-33) · inizio 5.1 · centro 6.9 · finale 10.7 · giri 3.0
+TIME 2p: 22.7 min (mediana 21.3, 10-90% 15-33) · inizio 5.1 · centro 6.9 · finale 10.7 · giri 3.0
+== runs/zf_random_3.txt
+CLS: Oracolo 1.02 | Mago 1.02 | Guerriero 1.00 | Ladro 0.97
+RACE: Sanguar 1.08 | Orchi 1.06 | Halfling 1.02 | Nani 0.99 | Umani 0.99 | Tiefling 0.99 | Elfi 0.96 | Yumaniani 0.92
+TIME all: 27.0 min (mediana 25.6, 10-90% 17-38) · inizio 5.3 · centro 9.5 · finale 12.2 · giri 2.4
+TIME 3p: 27.0 min (mediana 25.6, 10-90% 17-38) · inizio 5.3 · centro 9.5 · finale 12.2 · giri 2.4
+== runs/zf_random_4.txt
+CLS: Oracolo 1.04 | Guerriero 1.01 | Ladro 1.00 | Mago 0.95
+RACE: Sanguar 1.07 | Nani 1.02 | Orchi 1.02 | Elfi 1.01 | Halfling 0.99 | Umani 0.99 | Tiefling 0.98 | Yumaniani 0.94
+TIME all: 30.4 min (mediana 29.2, 10-90% 19-43) · inizio 5.5 · centro 11.6 · finale 13.3 · giri 2.0
+TIME 4p: 30.4 min (mediana 29.2, 10-90% 19-43) · inizio 5.5 · centro 11.6 · finale 13.3 · giri 2.0
+== runs/zt_random_2.txt
+CLS: Mago 1.02 | Guerriero 1.01 | Oracolo 0.99 | Ladro 0.99
+RACE: Sanguar 1.07 | Orchi 1.06 | Elfi 1.00 | Halfling 0.99 | Tiefling 0.98 | Nani 0.98 | Umani 0.97 | Yumaniani 0.95
+TIME all: 23.2 min (mediana 21.9, 10-90% 15-34) · inizio 5.2 · centro 7.1 · finale 10.9 · giri 3.1
+TIME 2p: 23.2 min (mediana 21.9, 10-90% 15-34) · inizio 5.2 · centro 7.1 · finale 10.9 · giri 3.1
+== runs/zt_random_3.txt
+CLS: Oracolo 1.04 | Mago 1.00 | Ladro 0.99 | Guerriero 0.98
+RACE: Sanguar 1.09 | Nani 1.01 | Orchi 1.00 | Elfi 0.99 | Halfling 0.99 | Umani 0.99 | Tiefling 0.98 | Yumaniani 0.94
+TIME all: 27.3 min (mediana 26.1, 10-90% 17-39) · inizio 5.4 · centro 9.6 · finale 12.3 · giri 2.4
+TIME 3p: 27.3 min (mediana 26.1, 10-90% 17-39) · inizio 5.4 · centro 9.6 · finale 12.3 · giri 2.4
+== runs/zt_random_4.txt
+CLS: Ladro 1.04 | Guerriero 1.01 | Mago 0.98 | Oracolo 0.97
+RACE: Sanguar 1.10 | Orchi 1.02 | Elfi 1.01 | Halfling 1.00 | Yumaniani 0.98 | Umani 0.98 | Nani 0.97 | Tiefling 0.93
+TIME all: 31.0 min (mediana 29.7, 10-90% 19-44) · inizio 5.6 · centro 11.9 · finale 13.4 · giri 2.0
+TIME 4p: 31.0 min (mediana 29.7, 10-90% 19-44) · inizio 5.6 · centro 11.9 · finale 13.4 · giri 2.0

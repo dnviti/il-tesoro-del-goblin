@@ -1,0 +1,1 @@
+globalThis.AFTER = r => { const acc = {}; for (const g of r.games) for (const st in g.time.n) for (const k in g.time.n[st]) acc[k] = (acc[k] || 0) + g.time.n[st][k]; const N = r.games.length; console.log('COUNTS ' + Object.entries(acc).map(([k, v]) => `${k} ${(v / N).toFixed(1)}`).join(' · ')); };

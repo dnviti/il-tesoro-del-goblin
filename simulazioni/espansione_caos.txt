@@ -1,0 +1,30 @@
+Espansione «Il Caos del Goblin · Le Crepe di MIMI» v2.0 (21/10 sera) — simulatore fisico (framework_fisico/phys.js + caos_add.js)
+Tempi da tavolo, sacchetto con 8 Sentieri, BAGDRAW. Colonne: minuti, [inizio, centro, finale], p10, p90, indici classi (1 = atteso).
+
+Pezzi da soli (15.000 partite per numero di giocatori)
+c0       Crepe come prima (solo D6)       25.8 / 29.2 / 29.8   4p: Gue 1.052 Lad 1.043 Mag 0.961 Chi 0.944
+tany     + attraversare su Crepa qualsiasi 26.0 / 29.3 / 30.4   3p Lad 0.971; 4p Gue 1.054 Lad 1.002
+ttwin    + attraversare sulla gemella      25.8 / 29.4 / 30.2   4p: Gue 1.002 Lad 1.022 Mag 1.000 Chi 0.976
+cob      + 6 Coboldi (Imboscata)           25.8 / 28.9 / 29.8   neutro
+cards    + 6 carte Caos (prima versione)   24.3 / 27.8 / 28.8   4p Gue 1.066 Chi 0.938
+fulltwin tutto insieme (prima versione)    24.6 / 27.9 / 29.0   4p Gue 1.075 Chi 0.948  -> ritocchi sotto
+
+PP delle carte (2 giocatori, 30.000 partite, carta data all'eroe 0, meno il controllo)
+Biglia del nulla: v1 «vai su una Crepa e risolvila» -0,2; v2 «metti l'eroe su una Crepa e muovi» -0,6; v3 «fruga da dove sei, Mago due D6» +1,7 (scelta)
+Pagina strappata +3,1 · Coboldo pentito 2 danni +0,4, 3 danni +1,0 (scelta) · Lanterna +1 AR +0,85, con Chierico +1 ATT +1,6
+Vento di nulla: v1 «vai sulla Crepa più vicina» +0,2; «non si muove» +5,6 (troppo); «-3 al movimento» +0,4; «muove di 1 soltanto» +2,7 (scelta)
+Risata del Goblin +2,9
+
+Ritocchi per le classi (15.000 partite)
+v2 Mago 4+ sulla Pagina, Chierico +1 ATT con la Lanterna   4p Gue 1.067 Mag 0.954 Chi 0.963
+v3 + Coboldi senza Indizio (peschi 1 carta)               25.8 / 29.3 / 30.3   4p Gue 1.032 Lad 1.052 Mag 0.953 Chi 0.963
+v4 + Biglia v3 e Vento -3                                  25.6 / 29.4 / 30.5   0,946–1,053
+chiCob (Chierico cura 2 PV col Coboldo pentito): nessun effetto (4p Chi 0.957), scartato
+
+DEFINITIVO v5 (CX {"trav":"twin","cob":true,"cards":"all","magoPag":1,"chiLan":"att","cobNoClue":1,"vento":99})
+np2 25.93  Gue 1.013 Lad 0.972 Mag 1.012 Chi 1.002   (30.000)
+np3 29.47  Gue 1.041 Lad 1.017 Mag 0.971 Chi 0.971   (30.000)
+np4 30.71  Gue 1.067 Lad 1.017 Mag 0.962 Chi 0.954   (30.000)
+np4 30.72  Gue 1.038 Lad 1.025 Mag 0.975 Chi 0.963   (40.000, ripetizione)
+Per partita: 1,7-1,9 frugate, 0,13 attraversamenti, 0,3 Coboldi; carte Caos giocate 0,2-0,7 ciascuna.
+Riprodurre: cd sorgenti/framework_fisico && N=30000 ./caos.sh caos

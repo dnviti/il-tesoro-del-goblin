@@ -1,0 +1,424 @@
+<title>Il Tesoro del Goblin</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@500;700;800&family=Alegreya+Sans:wght@400;500;700&family=Pirata+One&display=swap" rel="stylesheet">
+<style>
+/* Layout: plancia esagonale a sinistra, scheda dei due avventurieri e azioni a destra, mano di carte sotto la plancia.
+   Mondo unico notturno (blu notte e oro della scheda personaggio), quindi un solo tema scuro voluto. */
+:root{
+  color-scheme: dark;
+  --bg:#0c1424; --panel:#141f36; --panel2:#1a2944; --line:#2a3b5e; --line2:#3a4f78;
+  --fg:#ece4d0; --muted:#9ba7bf; --gold:#e3b04f; --gold2:#f6d68b;
+  --parch:#efe2c2; --parch2:#e2d0a6; --ink:#2b2216; --ink2:#5b4a33;
+  --ti:#7656c2; --te:#b2742f; --tc:#b23741; --tm:#3b7d4f;
+  --good:#6cc487; --bad:#ec6d64; --p0:#e8714f; --p1:#4fbcd0; --p2:#c08be6; --p3:#a3d65c;
+  --hid:#1d2b47; --hid2:#24365a;
+  --f-display:'Pirata One', 'Luminari', 'Papyrus', fantasy;
+  --f-card:'Alegreya', 'Iowan Old Style', Georgia, serif;
+  --f-body:'Alegreya Sans', 'Segoe UI', system-ui, sans-serif;
+  --r:10px;
+}
+*{box-sizing:border-box}
+html,body{background:var(--bg)}
+body{color:var(--fg);font-family:var(--f-body);font-size:15px;line-height:1.45;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:0 32px;
+  background-image:radial-gradient(1200px 500px at 15% -10%, #1b2b4d 0%, transparent 60%), radial-gradient(900px 500px at 110% 10%, #241c3a 0%, transparent 55%);background-attachment:fixed}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--gold2);outline-offset:2px}
+.wrap{max-width:1280px;margin:0 auto}
+
+/* Testata */
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;padding-block:18px 14px;border-bottom:1px solid var(--line);margin-bottom:18px}
+.brand{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-right:auto}
+.brand h1{font-family:var(--f-display);font-weight:400;font-size:clamp(30px,5vw,44px);line-height:1;margin:0;color:var(--gold2);letter-spacing:.5px;text-shadow:0 2px 0 #00000066}
+.brand span{color:var(--muted);font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+nav{display:flex;gap:6px;flex-wrap:wrap}
+nav button{background:transparent;border:1px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer;color:var(--muted)}
+nav button[aria-current="page"]{background:var(--gold);border-color:var(--gold);color:#1b1408;font-weight:700}
+nav button:hover{border-color:var(--gold)}
+
+.btn{background:var(--gold);color:#1b1408;border:1px solid var(--gold);border-radius:8px;padding:9px 14px;font-weight:700;cursor:pointer;text-align:left;line-height:1.25}
+.btn:hover{background:var(--gold2)}
+.btn.ghost{background:transparent;color:var(--fg);border-color:var(--line2);font-weight:500}
+.btn.ghost:hover{border-color:var(--gold);background:#ffffff08}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn.sm{padding:5px 10px;font-size:13px}
+.chip{display:inline-flex;align-items:center;border:1px solid var(--line2);border-radius:999px;padding:1px 9px;font-size:12px;color:var(--muted);white-space:nowrap}
+.chip.gold{border-color:var(--gold);color:var(--gold2)}
+.chip.good{border-color:var(--good);color:var(--good)}
+.chip.bad{border-color:var(--bad);color:var(--bad)}
+.chip.map{border-color:var(--tm);color:#9fd8ad}
+.pdot{display:inline-block;width:11px;height:11px;border-radius:50%;flex:none}
+.pdot.p0,.p0 .dot{background:var(--p0)} .pdot.p1,.p1 .dot{background:var(--p1)} .pdot.p2,.p2 .dot{background:var(--p2)} .pdot.p3,.p3 .dot{background:var(--p3)}
+
+/* Preparazione */
+.intro{max-width:70ch;color:var(--muted);margin:0 0 18px}
+.intro b{color:var(--fg)}
+.setup-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:16px}
+.pset{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:16px;min-width:0}
+.pset h3{display:flex;align-items:center;gap:8px;margin:0 0 12px;font-family:var(--f-card);font-size:20px}
+.pset .dot{width:12px;height:12px;border-radius:50%}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.fld{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.fld input,.fld select{background:var(--panel2);border:1px solid var(--line2);border-radius:8px;padding:8px 10px;text-transform:none;letter-spacing:0;font-size:15px;color:var(--fg);min-width:0;width:100%}
+.raceinfo{color:var(--gold2);font-size:14px;margin:10px 0 0}
+.deckhead{display:flex;align-items:center;justify-content:space-between;margin-top:14px;gap:8px}
+.deckhead h4{margin:0;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.decklist{list-style:none;padding:0;margin:8px 0 0;display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:4px 12px;font-size:14px}
+.decklist li{display:flex;gap:6px;align-items:center;min-width:0}
+.tag{font-size:10px;font-weight:700;border-radius:4px;padding:1px 5px;color:#fff;flex:none}
+.tag.t-TI{background:var(--ti)}.tag.t-TE{background:var(--te)}.tag.t-TC{background:var(--tc)}.tag.t-TM{background:var(--tm)}
+.setup-opts{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:flex-end;margin-top:18px;padding:16px;border:1px dashed var(--line2);border-radius:var(--r)}
+.setup-opts .fld{min-width:220px;flex:1}
+.setup-opts .btn{font-size:17px;padding:11px 22px}
+.setup-opts .chk{display:flex;align-items:center;gap:8px;min-height:44px;cursor:pointer}
+.setup-opts .chk input{width:20px;height:20px;accent-color:var(--gold, #e8c66a)}
+
+/* Partita */
+.game{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:18px;align-items:start}
+.leftcol,.side{display:flex;flex-direction:column;gap:14px;min-width:0}
+#status{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:44px}
+.turnline{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.turnline b{font-family:var(--f-card);font-size:18px}
+.die{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;width:46px;height:46px;border-radius:10px;background:var(--parch);color:var(--ink);font-family:var(--f-card);font-weight:800;font-size:20px;line-height:1;box-shadow:0 2px 0 var(--parch2);animation:roll .35s ease-out;flex:none}
+.die small{font-size:9px;font-family:var(--f-body);font-weight:700;color:var(--ink2)}
+@keyframes roll{from{transform:rotate(-25deg) scale(.7)}to{transform:none}}
+.boardbox{background:radial-gradient(circle at 50% 40%, #1a2a49, #111b30 70%);border:1px solid var(--line);border-radius:14px;padding:10px}
+#board{display:block;width:100%;height:auto;max-height:72vh}
+.hex polygon{fill:var(--hid);stroke:#0c1424;stroke-width:2}
+.hex.hid polygon{fill:var(--hid2)}
+.hex.rv polygon{fill:#2c3d61}
+.hex.ty-start polygon{fill:#3a3355}
+.hex.ty-creatura polygon{fill:#5a2c34}
+.hex.ty-miniboss polygon{fill:#6e2531}
+.hex.ty-locanda polygon{fill:#5a4724}
+.hex.ty-fonte polygon{fill:#22506a}
+.hex.ty-fabbro polygon{fill:#4a4a55}
+.hex.ty-trappola polygon{fill:#4e2a52}
+.hex.ty-evento polygon{fill:#5a3f1c}
+.tempobox{margin-top:12px;padding:12px 16px;border:1px dashed var(--line2);border-radius:var(--r)}
+.tempobox summary{cursor:pointer;font-weight:600}
+.tempogrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px 14px;margin-top:10px}
+.hex.ty-indizio polygon{fill:#5c5226}
+.hex.tok polygon{fill:#3a4f7a;stroke:#c9a74a;stroke-dasharray:4 3}
+.hex.tok .glyph{fill:#e8c66a;font-weight:700}
+.hex.done polygon{fill:#2a3a5a}
+.hex.ty-start.done polygon{fill:#3a3355}
+.hex.ty-start .glyph{font-size:13px;font-weight:700;fill:#d9c9ff;font-family:var(--f-body)}
+.hex .glyph{fill:var(--parch);font-size:17px;text-anchor:middle;dominant-baseline:middle;pointer-events:none;font-family:'Segoe UI Symbol','DejaVu Sans',sans-serif}
+.hex.treasure polygon{fill:#7a5a14;stroke:var(--gold2);stroke-width:2.5}
+.hex.treasure .glyph{fill:var(--gold2);font-size:20px}
+.hex.reach{cursor:pointer}
+.hex.reach polygon{stroke:var(--gold);stroke-width:2.2;filter:brightness(1.25)}
+.hex.reach:hover polygon{fill:#8a6a24}
+.token circle{stroke:#0c1424;stroke-width:3}
+.token.p0 circle{fill:var(--p0)} .token.p1 circle{fill:var(--p1)} .token.p2 circle{fill:var(--p2)} .token.p3 circle{fill:var(--p3)}
+.token text{fill:#0c1424;font-weight:800;font-size:14px;text-anchor:middle;dominant-baseline:middle;font-family:var(--f-body);pointer-events:none}
+.token{pointer-events:none}
+.token.active circle{stroke:var(--gold2);stroke-width:3}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--muted);margin-top:8px;padding-inline:4px}
+.legend span b{color:var(--parch);font-weight:400;margin-right:4px;font-family:'Segoe UI Symbol','DejaVu Sans',sans-serif}
+
+#action{display:flex;flex-direction:column;gap:10px}
+.prompt,.over,.combat{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:14px}
+.prompt h2,.over h2{margin:0 0 10px;font-family:var(--f-card);font-size:19px;line-height:1.25;text-wrap:balance}
+.prompt p{margin:0 0 8px}
+.prompt .whose{display:flex;align-items:center;gap:6px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.prompt.think{color:var(--muted);font-style:italic}
+.prompt.think p{margin:0}
+.hint{color:var(--muted);font-size:13px}
+.opts{display:flex;flex-direction:column;gap:8px}
+.over{border-color:var(--gold);background:linear-gradient(180deg,#3a2c0f,var(--panel))}
+.over h2{font-family:var(--f-display);font-weight:400;font-size:34px;color:var(--gold2)}
+.flash{margin:0;padding:8px 12px;border-radius:8px;background:#4a1f22;color:#ffd0cc;font-size:14px}
+.combat{border-color:#6e2531;background:linear-gradient(180deg,#2a1520,var(--panel))}
+.ctitle{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#f0a0a0;margin-bottom:8px}
+.cgrid{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center}
+.cside{min-width:0}.cside b{font-family:var(--f-card);font-size:16px}
+.cside small{color:var(--muted);display:block;margin-top:3px}
+.vs{color:var(--muted);font-size:12px}
+.pvbar{height:6px;border-radius:3px;background:#0a1120;overflow:hidden;margin-top:4px}
+.pvbar i{display:block;height:100%;background:linear-gradient(90deg,#c9433d,#e07a4c);transition:width .3s}
+.cside.foe .pvbar i{background:linear-gradient(90deg,#7a2a3a,#b23741)}
+
+#sheets{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.sheet{background:var(--parch);color:var(--ink);border-radius:var(--r);padding:12px;border:2px solid transparent;min-width:0;box-shadow:0 2px 0 var(--parch2)}
+.sheet.cur{border-color:var(--gold)}
+.sheet header{display:flex;align-items:center;gap:6px}
+.sheet h3{margin:0;font-family:var(--f-card);font-size:18px;line-height:1.1;overflow-wrap:anywhere}
+.sheet .who{margin-left:auto;font-size:11px;font-weight:700;color:var(--ink2)}
+.sheet .sub{margin:2px 0 6px;font-size:13px;color:var(--ink2)}
+.sheet .pvbar{background:#cdb98c}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:8px}
+.st{background:#f7eed8;border:1px solid var(--parch2);border-radius:6px;padding:4px 2px;text-align:center;font-variant-numeric:tabular-nums}
+.st span{display:block;font-size:10px;font-weight:700;letter-spacing:.06em;color:var(--ink2)}
+.st b{font-family:var(--f-card);font-size:17px}
+.st small{display:block;font-size:10px;color:var(--ink2)}
+.clues{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:700;margin-top:8px;color:var(--ink2)}
+.pip{width:12px;height:12px;transform:rotate(45deg);border:2px solid #a8893f;border-radius:2px}
+.pip.on{background:#d79a26;border-color:#8a5f0e}
+.badges{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.sheet .chip{color:var(--ink2);border-color:#c4ae7c}
+.sheet .chip.gold{color:#7a520a;border-color:#c99733;background:#f7e2a8}
+.sheet .chip.good{color:#25633a;border-color:#7fb48c}
+.sheet .chip.bad{color:#8f2a24;border-color:#d99089}
+.equip{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:8px}
+.slot{font-size:12px;border:1px dashed #c4ae7c;border-radius:6px;padding:3px 6px;min-width:0}
+.slot span{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink2)}
+.slot b{font-weight:700;overflow-wrap:anywhere}.slot i{color:#9c8a66}
+.slot.full{border-style:solid;background:#f7eed8}
+.mini{list-style:none;padding:0;margin:8px 0 0;font-size:12px}
+.mini .h{font-size:10px;text-transform:uppercase;letter-spacing:.06em;font-weight:700;color:var(--ink2)}
+.counts{margin:8px 0 0;font-size:12px;color:var(--ink2)}
+
+.handbox{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:12px;min-width:0}
+.handbox h2{margin:0 0 10px;font-size:14px;font-weight:500;color:var(--muted)}
+.handbox h2 b{color:var(--fg);font-family:var(--f-card);font-size:17px}
+.handbox h2 small{margin-left:8px}
+.hand{display:flex;gap:10px;overflow-x:auto;padding-bottom:6px;scroll-snap-type:x proximity}
+.hand .card{flex:0 0 190px;scroll-snap-align:start}
+.hand.small .card{flex-basis:170px}
+details{margin-top:10px}
+summary{cursor:pointer;color:var(--muted);font-size:13px}
+.empty{color:var(--muted);font-style:italic;margin:0}
+
+.card{background:var(--parch);color:var(--ink);border-radius:9px;padding:0 0 10px;display:flex;flex-direction:column;border:1px solid var(--parch2);overflow:hidden;min-width:0}
+.card .ctop{display:flex;justify-content:space-between;gap:6px;padding:4px 9px;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff}
+.card.t-TI .ctop{background:var(--ti)}.card.t-TE .ctop{background:var(--te)}.card.t-TC .ctop{background:var(--tc)}.card.t-TM .ctop{background:var(--tm)}.card.t-NE .ctop{background:#8a6a2c;color:#fff}
+.card .slotl{font-weight:500;text-transform:none;letter-spacing:0;opacity:.9;text-align:right}
+.card .cname{font-family:var(--f-card);font-weight:800;font-size:16px;line-height:1.15;padding:7px 9px 3px}
+.card .cname small{font-weight:500;font-size:11px;color:var(--ink2)}
+.card .cdeck{font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink2);padding:5px 9px 0}
+.card .cdeck.cl{color:#8f2a24}
+.card .corig{font-size:11.5px;line-height:1.3;color:var(--ink2);margin:6px 9px 0;font-style:italic}
+.clstag{font-size:10px;font-weight:700;color:#f0a0a0;border:1px solid #6e2531;border-radius:4px;padding:0 4px;margin-left:4px}
+.deckhint{color:var(--muted);font-size:13.5px;margin:12px 0 0;font-style:italic}
+.clsinfo{color:var(--muted);font-size:13.5px;margin:6px 0 0}
+.clsinfo b{color:var(--fg)}
+.catbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin:6px 0 16px}
+.catbar .filters{margin:0}
+.catbar select{background:var(--panel2);border:1px solid var(--line2);border-radius:8px;padding:6px 10px;color:var(--fg)}
+#deckcount{color:var(--muted);font-size:13px}
+.card .ctext{font-size:13px;line-height:1.35;padding:0 9px}
+.card .cnote{font-size:12px;line-height:1.3;color:var(--ink2);margin:7px 9px 0;padding-top:6px;border-top:1px dashed #c4ae7c}
+.card .btn{margin:9px 9px 0;text-align:center}
+.card .why{margin:8px 9px 0;font-size:11.5px;color:#8f2a24;line-height:1.25}
+.card.off{opacity:.72}
+
+.logbox{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:12px;min-width:0}
+.logbox h2{margin:0 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}
+#log{list-style:none;margin:0;padding:0;max-height:300px;overflow:auto;font-size:13px;display:flex;flex-direction:column;gap:2px}
+#log li{padding:2px 0;border-bottom:1px solid #ffffff0a}
+#log .turn{color:var(--gold2);font-weight:700;padding-top:6px}
+#log .dice{color:#b9c6e0;font-variant-numeric:tabular-nums}
+#log .good{color:var(--good)}#log .bad{color:var(--bad)}#log .gold{color:var(--gold)}#log .play{color:#c8b6f2}
+
+/* Regole e catalogo */
+.doc{max-width:78ch}
+.doc h2{font-family:var(--f-display);font-weight:400;font-size:32px;color:var(--gold2);margin:8px 0 6px}
+.doc h3{font-family:var(--f-card);font-size:19px;margin:22px 0 6px;color:var(--fg)}
+.doc p,.doc li{color:#d6cfbd}
+.doc ul{padding-left:20px}
+.doc li{margin-bottom:6px}
+.doc .lead{color:var(--muted)}
+.doc table{border-collapse:collapse;width:100%;font-size:14px}
+.doc td,.doc th{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+.doc th{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+.tablewrap{overflow-x:auto}
+.mark{color:var(--gold2);font-weight:700}
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 16px}
+.filters button{background:transparent;border:1px solid var(--line2);border-radius:999px;padding:5px 12px;cursor:pointer;color:var(--muted)}
+.filters button[aria-pressed="true"]{border-color:var(--gold);color:var(--gold2)}
+/* Bilanciamento */
+.simprog{margin:14px 0}.simprog small{color:var(--muted)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:18px 0 10px}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px}
+.tile b{display:block;font-family:var(--f-card);font-size:28px;color:var(--gold2);font-variant-numeric:tabular-nums}
+.tile span{color:var(--muted);font-size:13px}
+.stgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:14px;margin-top:12px}
+.stbox{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;min-width:0;margin-top:14px}
+.stgrid .stbox{margin-top:0}
+.stbox h3{margin:0 0 8px;font-family:var(--f-card);font-size:17px}
+.stbox table{border-collapse:collapse;width:100%;font-size:13.5px}
+.stbox td,.stbox th{border-bottom:1px solid var(--line);padding:5px 6px;text-align:left}
+.stbox th{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.05em;font-weight:700}
+.stbox .num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.stbox td.hi{color:var(--good);font-weight:700}.stbox td.lo{color:var(--bad);font-weight:700}.stbox td.muted{color:var(--muted)}
+#sim-csv{width:100%;margin-top:10px;background:var(--panel2);color:var(--fg);border:1px solid var(--line2);border-radius:8px;padding:8px;font-family:ui-monospace,Menlo,monospace;font-size:12px}
+.opts.row{flex-direction:row;align-items:center;gap:12px}
+.bestbox{border-color:var(--gold);background:linear-gradient(180deg,#2e2510,var(--panel))}.bestbox h3{color:var(--gold2)}.bestbox p{margin:0}
+tr.std td{color:var(--gold2)}
+.distgrid{display:grid;grid-template-columns:minmax(0,2.2fr) minmax(0,1fr);gap:16px;align-items:start;margin-top:10px}
+.chartwrap{overflow-x:auto}
+.dotchart{display:block;width:100%;min-width:520px;height:auto}
+.dotchart .dot{fill:var(--gold)}
+.dotchart .hit{fill:transparent}.dotchart .hit:hover{fill:#ffffff0d}
+.dotchart .curve{fill:none;stroke:var(--p1);stroke-width:2}
+.dotchart .axis{stroke:var(--line2);stroke-width:1}
+.dotchart .meanline{stroke:var(--muted);stroke-width:1;stroke-dasharray:3 4}
+.dotchart .tick{fill:var(--muted);font-size:11px;text-anchor:middle;font-family:var(--f-body)}
+.dotchart .tick.start{text-anchor:start}
+.chartlegend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:12.5px;color:var(--muted);margin-top:6px}
+.chartlegend i{display:inline-block;vertical-align:middle;margin-right:6px}
+.lg-dot{width:9px;height:9px;border-radius:50%;background:var(--gold)}.lg-line{width:18px;height:2px;background:var(--p1)}
+.distfacts{display:grid;gap:8px}
+.fact{border:1px solid var(--line);border-radius:8px;padding:8px 10px}
+.fact b{display:block;font-family:var(--f-card);font-size:20px;color:var(--fg);font-variant-numeric:tabular-nums}.fact span{font-size:12.5px;color:var(--muted)}
+#dist-sel{background:var(--panel2);border:1px solid var(--line2);border-radius:8px;padding:5px 8px;color:var(--fg);margin-left:6px}
+@media (max-width:760px){.distgrid{grid-template-columns:minmax(0,1fr)}}
+#catalog{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+
+@media (max-width: 980px){
+  .game{grid-template-columns:minmax(0,1fr);gap:14px}
+  .leftcol,.side{display:contents}
+  #status{order:0}#action{order:1}.boardbox{order:2}.handbox{order:3}#sheets{order:4}.logbox{order:5}
+  #board{max-height:none}
+}
+@media (max-width: 560px){
+  #sheets{grid-template-columns:minmax(0,1fr)}
+  .cgrid{grid-template-columns:1fr}
+  .vs{display:none}
+  .hand .card{flex-basis:170px}
+}
+@media (prefers-reduced-motion: reduce){ .die{animation:none} .pvbar i{transition:none} }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><h1>Il Tesoro del Goblin</h1><span>Un gioco di Alessandro De Simone · versione giocabile · Carte Trama v2 · regolamento v5</span></div>
+    <nav aria-label="Sezioni">
+      <button data-nav="setup">Preparazione</button>
+      <button data-nav="game" hidden>Partita</button>
+      <button data-nav="rules">Regole adottate</button>
+      <button data-nav="cards">Le carte</button>
+      <button data-nav="sim">Bilanciamento</button>
+    </nav>
+  </header>
+
+  <section id="view-setup">
+    <p class="intro">Geronimo ha perso MIMI, la sua cassa senza fondo. Esplora la mappa esagonale 10 × 10, raccogli <b>2 indizi</b> vincendo gli scontri per individuare il nascondiglio, raggiungilo e sconfiggi il boss che lo custodisce. Da 2 a 4 giocatori sullo stesso schermo, anche contro il computer.</p>
+    <div class="setup-grid" id="setup-players"></div>
+    <div class="setup-opts">
+      <label class="fld"><span>Giocatori</span>
+        <select id="opt-n"><option value="2" selected>2 giocatori</option><option value="3">3 giocatori</option><option value="4">4 giocatori</option></select></label>
+      <label class="fld"><span>Mano iniziale</span>
+        <select id="opt-hand"><option value="random" selected>Pescata casuale: 5 carte di classe + 5 comuni</option><option value="draft">Scelta e draft: 3 carte di classe scelte + 7 comuni draftate</option></select></label>
+      <label class="fld"><span>Velocità del computer</span>
+        <select id="opt-speed"><option value="1100">Lenta</option><option value="650" selected>Normale</option><option value="200">Veloce</option></select></label>
+      <button class="btn" id="start">Inizia la partita</button>
+    </div>
+  </section>
+
+  <section id="view-game" hidden>
+    <div class="game">
+      <div class="leftcol">
+        <div id="status"></div>
+        <div class="boardbox">
+          <svg id="board" role="img" aria-label="Mappa esagonale 10 per 10"></svg>
+          <div class="legend">
+            <span><b>⚔</b>Mostro (tessera rossa)</span><span><b>!</b>Imprevisto (tessera blu)</span><span><b>⌂</b>Locanda</span><span><b>≈</b>Fonte</span><span><b>⚒</b>Fabbro</span><span><b>✕</b>Trappola</span><span><b>?</b>Segnalino da esplorare</span><span><b>◆</b>Tesoro</span><span><b>⚱</b>Cripta</span><span><b style="font-family:var(--f-body)">1–6</b>Punti di partenza</span><span>Caselle senza simbolo: vuote</span>
+          </div>
+        </div>
+        <div class="handbox">
+          <h2 id="handtitle"></h2>
+          <div class="hand" id="hand"></div>
+          <details id="discard"></details>
+        </div>
+      </div>
+      <aside class="side">
+        <div id="action"></div>
+        <div id="sheets"></div>
+        <div class="logbox"><h2>Cronaca</h2><ul id="log"></ul></div>
+      </aside>
+    </div>
+  </section>
+
+  <section id="view-rules" hidden>
+    <div class="doc">
+      <h2>Regole adottate</h2>
+      <p class="lead">Dal 27 ottobre il gioco è costruito sulle <b>Carte Trama v2</b> di Alessandro De Simone, l’autore del gioco: 8 Mappe, 20 Equipaggiamenti, 40 Incantesimi, le 4 carte Classe e 28 carte Nemico. Le regole sono le stesse del regolamento stampato v5. Le voci segnate con <span class="mark">★</span> sono ritocchi di bilanciamento ancora da confermare.</p>
+
+      <h3>Scelte confermate da Daniele il 27 ottobre</h3>
+      <ul>
+        <li><b>Mazzo nuovo</b>: le 72 carte Trama v2 sostituiscono le 108 vecchie. Restano le 4 classi della scatola base e le specie.</li>
+        <li><b>Oracolo al posto del Chierico</b>, con lo stesso potere: quando viene sconfitto torna in vita e continua lo scontro; il potere si ricarica pescando una Locanda dal sacchetto.</li>
+        <li><b>Combattimento in due tiri</b>. Tiro per colpire: D20 + ATT, colpisce con almeno <b>14 + AR</b> del bersaglio, per gli eroi e per i nemici (la sera del 27/10 Daniele ha chiesto di colpire il 20% più difficile: +4 su 20, prima era 10 + AR). Un 20 naturale colpisce sempre e raddoppia il danno, un 1 naturale manca sempre. Tiro per il danno: gli eroi tirano D6 più i bonus di carte ed equipaggiamento; i nemici tirano in base al livello stampato sulla carta: D6 − 1 al LV1, D6 al LV2, D6 + 1 dal LV3.</li>
+        <li><b>Niente D4</b>: nella scatola ci sono solo D20 e D6. Dove le carte dicevano 1D4 si tira il D6 − 1, minimo 1.</li>
+        <li><b>4 slot di equipaggiamento</b>: Elmo, Arma DX o Scudo, Arma SX, Armatura. Un'arma a due mani occupa DX e SX. Quando perdi uno scontro tiri il D6: 1 perdi tutto, 2 l'elmo, 3 l'arma DX o lo scudo, 4 l'arma SX, 5 l'armatura, 6 niente.</li>
+        <li><b>Mappe</b>: quando una Mappa sposta il tesoro, cambia Cripta ma <b>gli Indizi restano</b>. Il tesoro si sposta al massimo 2 volte per partita.</li>
+        <li><b>Punti vita</b>: si parte da <b>5 PV</b> e i PV crescono <b>solo salendo di livello</b>: a ogni livello scegli +1 ad ATT, MOV o AR oppure <b>+2 PV</b>. Il Guerriero mantiene i suoi +2 PV (7 di partenza).</li>
+        <li><b>Tre carte riscritte</b> perché col sacchetto non funzionavano: Occhio dello Stregone (la prossima Trappola che peschi non ha effetto), Elmo sorgisogno (le Trappole che peschi non hanno effetto), Mappa Sussurrata (il prossimo scontro vinto su una casella esplorazione dà 1 Indizio in più).</li>
+      </ul>
+
+      <h3>Indizi, ritmo e bilanciamento v2 <span class="mark">★</span></h3>
+      <p>Senza le vecchie carte Indizio, e con gli Indizi presi solo vincendo scontri, la partita durava 33, 44 e 54 minuti con 2, 3 e 4 giocatori. Con 10.000 partite simulate per formato e per modalità della mano, queste regole (con i nemici a livelli e i 5 PV di partenza) la portano a 22-23, 26-28 e 29-31 minuti, con le 4 classi tra 0,92 e 1,09 dell'atteso (scarti di ±0,04 sono nel margine statistico). Il draft aggiunge circa 2 minuti di preparazione.</p>
+      <ul>
+        <li><b>Indizi solo vincendo uno scontro</b> contro un Mostro di una tessera rossa o in un Duello; nessuno parte con un Indizio; edifici e altre caselle non ne danno (Daniele, 27/10).</li>
+        <li><b>Servono 2 Indizi</b> per individuare il tesoro (scelta di Daniele del 27/10).</li>
+        <li><b>Sacchetto a due colori (Daniele, 2/11)</b>: 25 tessere rosse (Mostro) e 11 blu (Imprevisto). Rossa: si gira la prima carta del mazzetto Mostri del livello dell’eroe che si ferma lì (livello 1-2 → mazzetto 1, livello 3-4 → mazzetto 2, livello 5 → mazzetto 3, i boss). Blu: si gira la prima carta del mazzetto Imprevisti (5 Trappole, 2 Locande, 2 Fonti, 2 Fabbri), che poi va in fondo. Niente mini-boss.</li>
+        <li><b>Mano, due modalità a scelta dei giocatori (Daniele, 27/10)</b>. <i>Pescata casuale</i>: carta Classe + 5 carte a caso della tua classe + 5 comuni a caso (il Mago ha solo 4 carte sue e pesca 6 comuni). <i>Scelta e draft</i>: scegli 3 carte della tua classe, poi ognuno pesca 7 carte comuni, ne tiene una e passa le altre a sinistra finché ognuno ne ha 7. Le carte con due classi (per esempio Guerriero e Oracolo) sono stampate in due copie, una per mazzetto.</li>
+        <li><b>Specie senza PV</b>, perché i PV vengono solo dai livelli: Orco +2 ATT, Sanguar +2 MOV, Yumaniani +1 AR e +1 a scelta; i bonus a scelta valgono per ATT, MOV o AR.</li>
+        <li><b>Con 5 PV e colpi più difficili la partita si allungava</b> (fino a 34-35 minuti in 4): i nemici dei mazzetti I e II e i mini-boss hanno 2 PV in meno rispetto alle carte di partenza (minimo 1), i boss 5 in meno (Guardiano di MIMI 9, Mimic ancestrale 7, Re Goblin Grugno 9).</li>
+        <li><b>Ladro</b> +2 MOV (era +3) e niente vantaggio nel primo round; tiene la fuga. <b>Mago</b> 2 ritiri per turno (era 1). <b>Oracolo</b> torna in vita con 3 PV.</li>
+        <li><b>Sanguar</b> nella scatola base insieme alle altre specie (serve per le carte sui non morti).</li>
+      </ul>
+
+      <h3>Regole della scatola che restano</h3>
+      <ul>
+        <li>Plancia stampata 10 × 10 con 4 Cripte e 36 caselle «?»: quando ci si ferma su una «?» si pesca un segnalino dal sacchetto.</li>
+        <li><b>Locanda, Fonte e Fabbro sono carte Imprevisto</b> (Daniele, 2/11): niente edifici stampati; le loro caselle sono diventate «?». Chi gira la carta ne prende subito l’effetto, una volta sola.</li>
+        <li><b>I nemici sono carte Nemico</b> a valori fissi, divisi in mazzetti per livello (vedi sotto).</li>
+        <li>Movimento D6 + MOV; 6 punti di partenza sui bordi, tirati col D6 a inizio partita e a ogni respawn.</li>
+        <li>Quando qualcuno individua il tesoro, ogni altro eroe ottiene 1 Indizio («la voce si sparge»). Il Presagio del Goblin non c'è più.</li>
+        <li>Il boss custodisce il tesoro; le sue ferite restano.</li>
+        <li><b>Quando si giocano le carte (Daniele, 27/10)</b>: massimo 2 per turno, a inizio turno (prima di muoversi), durante uno scontro o a fine turno; gli equipaggiamenti solo a inizio turno, uno per turno.</li>
+        <li>Nessuno può avere più di 3 Clessidre per colpa degli avversari.</li>
+        <li>Nel PvP chi viene attaccato può rifiutare lo scontro cedendo 1 carta a caso. Chi vince prende 1 PE, Ispirazione, una carta dagli scarti e un Indizio dello sconfitto.</li>
+        <li>Trappola: D6 − 1 PV (minimo 1) e tiro di perdita. Locanda: 1 PE e 2 PV.</li>
+      </ul>
+
+      <h3>Nemici a livelli, ognuno con un effetto (Daniele, 27/10) <span class="mark">★</span></h3>
+      <ul>
+        <li><b>Mazzetto 1, LV 1-2</b> (13 carte, per gli eroi di livello 1-2; danno D6 − 1 o D6): Folletto Ingannatore (Illusione); Ratto gigante (Morso infetto); Pipistrello vampiro (Succhiasangue); Coboldo (Codardo); Gnomo schiavista (Catene); Goblin predone (Saccheggio); Scheletro (Non morto, Si ricompone); Lupo grigio (Inseguitore); Ragno delle grotte (Ragnatela); Orchetto predone (Furia); Melma acida (Acido); Zombi (Non morto, Lento); Bandito della strada (Borseggio). Ricompensa: 1 Indizio e 1 PE.</li>
+        <li><b>Mazzetto 2, LV 3-4</b> (8 carte, per gli eroi di livello 3-4; danno D6 + 1): Gnoll cacciatore (Agguato); Orso delle caverne (Furia); Arpia (Picchiata); Spettro (Non morto, Gelo); Minotauro (Carica); Golem di fango (Coriaceo); Vampiro (Non morto, Succhiasangue); Basilisco (Pietrifica). Ricompensa: 1 Indizio, 1 PE e l'Ispirazione.</li>
+        <li><b>Mini-boss tolti dalla scatola</b> (Daniele, 2/11).</li>
+        <li><b>Mazzetto 3, Boss LV 5</b>: a inizio partita se ne pesca uno tra Guardiano di MIMI (Colpo del custode); Mimic ancestrale (Fauci); Re Goblin Grugno (Furia): custodisce MIMI, e le sue ferite restano tra uno scontro e l'altro. Gli altri 2 sono il mazzetto 3, per gli eroi di livello 5 (ricompensa: 1 Indizio, sali di livello e Ispirazione).</li>
+        <li>Corazza Runica dà +2 AR contro tutti i nemici di LV 3 o più (prima valeva solo contro i mini-boss, che ora sono facoltativi).</li>
+      </ul>
+
+      <h3>Espansioni</h3>
+      <p>L'espansione del Caos (Le Crepe di MIMI) era costruita sul mazzo vecchio: va rifatta sulle Carte Trama v2 e per ora non è attivabile qui.</p>
+    </div>
+  </section>
+
+  <section id="view-sim" hidden>
+    <div class="doc"><h2>Bilanciamento</h2><p class="lead">Fa giocare tra loro solo giocatori computer, a velocità macchina, con classi, specie, bonus, mani, spawn, mappa e ordine di turno estratti a caso in ogni partita. Alla fine mostra chi vince più spesso. Per guardare una singola partita tra IA, imposta tutti i giocatori su «Computer (IA)» nella preparazione. Avviare la simulazione chiude la partita in corso.</p></div>
+    <div class="setup-opts">
+      <label class="fld"><span>Numero di partite</span><input id="sim-n" type="number" min="1" max="20000" step="50" value="3000"></label>
+      <label class="fld"><span>Regole</span><select id="sim-rules"><option value="std" selected>Attuali: 10×10, 6 partenze, D6</option><option value="rand">Casuali: plancia 8-14, spawn 6-12, dado D4-D8</option></select></label>
+      <label class="fld"><span>Giocatori per partita</span><select id="sim-players"><option value="rand" selected>A caso tra 2, 3 e 4</option><option value="2">Sempre 2</option><option value="3">Sempre 3</option><option value="4">Sempre 4</option></select></label>
+      <button class="btn" id="sim-run">Avvia la simulazione</button>
+    </div>
+    <details id="sim-tempo" class="tempobox"></details>
+    <div id="sim-progress" class="simprog" hidden></div>
+    <div id="sim-results"></div>
+  </section>
+
+  <section id="view-cards" hidden>
+    <div class="doc"><h2>Le carte</h2><p class="lead">Le 72 Carte Trama v2 (8 Mappe, 20 Equipaggiamenti, 40 Incantesimi, 4 Classi) le 24 carte Mostro (mazzetti 1, 2 e 3, i boss) e le 11 carte Imprevisto. Per le carte adattate alla scatola (niente D4, PV al posto di PF, sacchetto dei segnalini) sotto il testo nuovo c'è quello originale. Dove il testo lascia dubbi, la voce «Nel gioco» dice come la applica questa versione.</p></div>
+    <div class="catbar">
+      <div class="filters" role="group" aria-label="Filtra per tipo">
+        <button data-filter="tutte">Tutti i tipi</button><button data-filter="TI">Incantesimo</button><button data-filter="TE">Equipaggiamento</button><button data-filter="TC">Classe</button><button data-filter="TM">Mappa</button><button data-filter="NE">Nemico</button>
+      </div>
+      <label>Mazzo <select id="deckfilter"><option value="tutti">Tutti i mazzi</option><option value="Comune">Comune</option><option>Guerriero</option><option>Ladro</option><option>Mago</option><option>Oracolo</option></select></label>
+      <span id="deckcount"></span>
+    </div>
+    <div id="catalog"></div>
+  </section>
+</div>
+
+<script>
+const CARDS = /*CARDS_JSON*/;
+/*GAME_JS*/
+/*UI_JS*/
+</script>

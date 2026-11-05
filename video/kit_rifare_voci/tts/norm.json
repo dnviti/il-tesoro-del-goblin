@@ -1,0 +1,410 @@
+[
+[
+"G",
+"Allora, ragazzi, come si vince a questo gioco?"
+],
+[
+"M",
+"Raccogli 3 Indizi, scopri in quale Cripta è nascosto Mimi, il forziere di Geronimo, e sconfiggi il suo Guardiano. Chi ci riesce per primo vince."
+],
+[
+"L",
+"Gli Indizi li trovi battendo i mostri, sui Càos del Goblin e in altri modi che vedrai giocando."
+],
+[
+"M",
+"Questa è la plancia: dieci per dieci esagoni. I numeri viola sul bordo sono le 6 partenze."
+],
+[
+"L",
+"Le caselle col punto di domanda si esplorano: quando ti fermi lì, peschi un segnalino dal sacchetto."
+],
+[
+"M",
+"Il dado viola è il Càos del Goblin: tiri il di sei e succede qualcosa, nel bene o nel male."
+],
+[
+"L",
+"Locanda, Fonte e Fabbro ti aiutano. Ognuno di noi li può usare una volta sola a partita."
+],
+[
+"G",
+"E i quattro esagoni dorati con i numeri?"
+],
+[
+"M",
+"Sono le Cripte. Mimi è in una di queste, ma si scopre quale solo quando qualcuno arriva a 3 Indizi."
+],
+[
+"L",
+"In alto c'è la Sala del Tesoro, con il Guardiano e i mini-boss. In basso il promemoria e il tracciato dei giri."
+],
+[
+"L",
+"Prepariamo. I 30 segnalini vanno tutti nel sacchetto, mescolati. Sulla mappa non si mette niente."
+],
+[
+"M",
+"Un cubetto giallo va sul giro 1, l'altro sui 14 punti vita del Guardiano."
+],
+[
+"L",
+"Adesso scegli una classe. Nella scatola base ci sono Guerriero, Ladro, Mago e Chierico."
+],
+[
+"G",
+"Prendo il Ladro, mi piace l'idea di poter scappare!"
+],
+[
+"M",
+"Ottima scelta per iniziare: più 3 movimento e più 1 punto vita, fuggire non ti costa niente e nel primo round di ogni scontro hai il vantaggio."
+],
+[
+"L",
+"Poi la razza. Ognuna dà dei bonus da aggiungere subito alla scheda."
+],
+[
+"G",
+"Umana, allora: più 1 movimento e più 1 all'armatura."
+],
+[
+"L",
+"Io gioco il Guerriero orco, Marco il Mago elfo. Ognuno prende la miniatura e il mazzetto del suo colore."
+],
+[
+"M",
+"Questa è la tua scheda. I cubetti mostrano sempre il valore finale: punti vita, attacco, movimento e armatura, oggetti compresi."
+],
+[
+"M",
+"La Difesa è 10 più l'armatura, ed è già stampata sotto la casella. È il numero che i mostri devono raggiungere per colpirti."
+],
+[
+"L",
+"A destra ci sono gli Indizi, le Clessidre, l'Ispirazione e gli edifici che hai già usato. Li vedi anche qui sopra, nelle nostre schede."
+],
+[
+"M",
+"Ognuno tira il di sei per la partenza. Se il posto è occupato o è accanto a un altro eroe, si ritira."
+],
+[
+"L",
+"Ora la mano: 5 carte della tua classe e 5 del mazzo comune, coperte. Guardale solo adesso: per tutta la partita non se ne pescano altre."
+],
+[
+"G",
+"Solo dieci carte? Allora devo usarle bene."
+],
+[
+"M",
+"Esatto. Puoi giocarne fino a 2 per turno, quando vuoi. E prima di cominciare equipaggiamo tutti subito un oggetto."
+],
+[
+"L",
+"La carta si infila sotto il bordo della scheda, nello slot giusto: Elmo, Arma o Corpo. Al massimo un equipaggiamento per turno."
+],
+[
+"M",
+"Chi ha visto per ultimo un goblin prende Geronimo e comincia. Lia?"
+],
+[
+"L",
+"Io! Stamattina, nello specchio."
+],
+[
+"M",
+"Il turno ha sempre 5 passi. Li trovi sulla plancia e sulla Carta Aiuto."
+],
+[
+"L",
+"Uno: se hai una Clessidra, la togli e salti il turno. Due: giochi le carte che vuoi, fino a 2."
+],
+[
+"L",
+"Tre: ti muovi. Quattro: esplori dove ti sei fermata. Cinque: fine, passi i dadi a sinistra."
+],
+[
+"L",
+"Comincio io. Tiro il di sei: 3, più il mio movimento 1. Posso fare fino a 4 esagoni."
+],
+[
+"G",
+"Puoi passare sopra le caselle col punto di domanda?"
+],
+[
+"L",
+"Sì, puoi passare sopra a tutto. Conta solo l'esagono dove ti fermi. Mi fermo qui, dopo 2."
+],
+[
+"L",
+"Casella punto di domanda: pesco un segnalino dal sacchetto,  un Lupo grigio!"
+],
+[
+"M",
+"Lo scontro: tiri il di venti e aggiungi l'ATT. Se arrivi alla Difesa del mostro, lo colpisci e tiri il danno."
+],
+[
+"L",
+"9 più 3 fa 12: almeno 10, colpito! Con l'Arco faccio di sei più uno: 3 danni."
+],
+[
+"M",
+"Il dado rosso tiene il conto dei punti vita del lupo: da 5 scende a 2."
+],
+[
+"G",
+"E per il lupo chi tira?"
+],
+[
+"M",
+"Il giocatore alla destra di chi combatte. Tocca a te, Giulia: di venti più l'ATT del lupo, contro la Difesa di Lia, 11."
+],
+[
+"G",
+"10 più 3, 13,  l'ho presa! Danno: 4 meno 1, 3. Scusa, Lia!"
+],
+[
+"L",
+"Tranquilla! Secondo round: 15 più 3, colpito. 5 più 1 fa 6: il lupo è finito."
+],
+[
+"M",
+"Ricorda: con 20 sul dado colpisci sempre e il danno raddoppia, con 1 manchi sempre."
+],
+[
+"L",
+"Vinto! Prendo 1 Indizio e 1 punto esperienza. Da Guerriero guadagno anche l'Ispirazione. Un solo scontro per turno: ho finito."
+],
+[
+"M",
+"Tocca a me. 2 più 1: mi fermo su un punto di domanda,  Trappola."
+],
+[
+"M",
+"Perdo di sei meno uno punti vita, poi tiro la perdita: 1 perdo tutto, 2 l'elmo, 3 l'arma, 4 il corpo, 5 o 6 niente."
+],
+[
+"G",
+"Il mio turno! 4 più movimento 5,  posso fare 9 esagoni?"
+],
+[
+"L",
+"Sì, il Ladro corre! Prova quel Càos del Goblin al centro."
+],
+[
+"M",
+"Sul Càos tiri il di sei. Ecco cosa può succedere."
+],
+[
+"G",
+"Tiro,  5! Mappa perduta: il mio primo Indizio!"
+],
+[
+"M",
+"E la casella resta lì: chi si ferma dopo di te tira di nuovo."
+],
+[
+"M",
+"Giro 2. Mi fermo su uno Scheletro. Ti faccio vedere come si gioca una carta: Dardo magico."
+],
+[
+"M",
+"Il nemico subisce 2 danni e la sua Difesa scende a 10. La carta poi va nei miei scarti, a faccia in su."
+],
+[
+"L",
+"Per lo Scheletro tiro io, che siedo alla destra di Marco."
+],
+[
+"M",
+"Colpito, ed è già finito: secondo Indizio della partita, il mio primo."
+],
+[
+"G",
+"Mi muovo,  e mi fermo proprio accanto a Marco."
+],
+[
+"L",
+"Allora c'è il Duello! Se finisci accanto a un eroe e non hai avuto altri scontri, lo sfidi."
+],
+[
+"M",
+"Rifiuto: in cambio peschi 1 carta a caso dalla mia mano. Ecco, tienila."
+],
+[
+"L",
+"Giro 3. Che sfortuna: un Mini-boss! Prendo l'Ogre dalla Sala del Tesoro e lo metto qui."
+],
+[
+"L",
+"Uso l'Ispirazione del Guerriero: la sua Difesa scende di 2. Colpito, 6 danni!"
+],
+[
+"G",
+"Tiro io per l'Ogre: 14 più 3, colpita,  5 danni."
+],
+[
+"G",
+"Lia, sei a 5 punti vita. Non conviene scappare?"
+],
+[
+"M",
+"Prima di ogni tuo attacco puoi fuggire: torni da dove sei arrivata, senza ricompensa, e il turno finisce."
+],
+[
+"L",
+"Ci provo lo stesso,  4 più 3, mancato."
+],
+[
+"G",
+"E l'Ogre fa 9 più 3, 12,  colpita di nuovo. 6 danni."
+],
+[
+"L",
+"Zero punti vita: sconfitta. Non sei eliminata: tiri il di sei per ripartire e torni ai punti vita massimi. Gli Indizi restano tuoi."
+],
+[
+"M",
+"Poi tiri la perdita: 3, l'Arco va negli scarti. E l'Ogre resta lì, con tutti i suoi punti vita, per il prossimo che passa."
+],
+[
+"M",
+"Io vado alla Locanda: più 1 punto esperienza e 2 punti vita. Con 2 punti esperienza arrivo alla casella dorata e salgo al livello 2."
+],
+[
+"L",
+"A ogni livello: più 1 ai punti vita massimi e più 1 all'attacco, movimento o armatura, a scelta. Il livello massimo è 5."
+],
+[
+"G",
+"Io trovo un Ragno delle grotte,  e scappo! Il Ladro fugge gratis."
+],
+[
+"M",
+"Il ragno resta scoperto sulla mappa. Chi si ferma lì dopo lo dovrà affrontare."
+],
+[
+"L",
+"Facciamo un salto in avanti. Io passo dal Fabbro e mi riprendo l'Arco, Marco batte un Orchetto e arriva a 2 Indizi."
+],
+[
+"M",
+"Giro 5. Batto un Ratto gigante: è il mio terzo Indizio! E con 4 punti esperienza salgo anche al livello 3."
+],
+[
+"L",
+"Marco ha individuato il tesoro. E allora la voce si sparge: io e Giulia prendiamo subito 1 Indizio a testa."
+],
+[
+"M",
+"Ora il di sei dice dov'è Mimi. Con 5 o 6 si ritira,  5, ritiro. 3! Mimi e il Guardiano vanno sulla Cripta 3."
+],
+[
+"G",
+"Quindi adesso lo sappiamo tutti dov'è il tesoro?"
+],
+[
+"M",
+"Sì, ma solo chi ha 3 Indizi può sfidare il Guardiano. Voi due ne avete 2."
+],
+[
+"M",
+"Giro 6. Raggiungo la Cripta 3 e sfido il Guardiano: 14 punti vita, attacco più 4, Difesa 13, danno di sei più uno."
+],
+[
+"M",
+"4 più 6, mancato. Ma il Mago può ritirare un suo dado una volta per turno,  15: colpito!"
+],
+[
+"L",
+"Tiro io per il Guardiano: 16 più 4, colpito. 6 danni, Marco."
+],
+[
+"G",
+"E adesso scappi?"
+],
+[
+"M",
+"Dal Guardiano può fuggire solo il Ladro. Io devo continuare."
+],
+[
+"M",
+"11 più 6, colpito: lo porto a 8 punti vita,"
+],
+[
+"L",
+", e il Guardiano fa 12 più 4, colpito di nuovo. Marco, sei a terra."
+],
+[
+"M",
+"Però le ferite del Guardiano restano: il cubetto giallo scende a 8. Io riparto da acca uno e tengo i miei 3 Indizi."
+],
+[
+"G",
+"Allora io mi metto qui, accanto alla Cripta, e aspetto il terzo Indizio. Ahi, un Càos: Crollo, meno 2 punti vita."
+],
+[
+"L",
+"Giro 7. Bevo la Pozione del tempo: ogni avversario perde 1 turno."
+],
+[
+"M",
+"Ognuno di noi due mette una Clessidra sulla scheda. Al nostro turno la togliamo e saltiamo tutto, fino al passo 5."
+],
+[
+"L",
+"Per colpa degli avversari non puoi avere più di 3 Clessidre. Quelle in più non si mettono."
+],
+[
+"M",
+"Giro 8. Da qui parte il Presagio del Goblin: a inizio turno, chi non ha 3 Indizi tira il di sei. Con 6 prende un Indizio."
+],
+[
+"L",
+"Più passano i giri, più è facile: dal giro 11 basta un 5, poi un 4,  Io faccio 4: niente."
+],
+[
+"M",
+"Io tiro 1 più 2: la Cripta è troppo lontana."
+],
+[
+"G",
+"Tocca a me, ho 2 Indizi. Presagio,  6! Terzo Indizio!"
+],
+[
+"L",
+"E sei proprio accanto alla Cripta. Il Guardiano ha ancora le ferite di Marco: 8 punti vita."
+],
+[
+"M",
+"Primo round: hai il vantaggio del Ladro. Tira due di venti e tieni il migliore."
+],
+[
+"G",
+"7 e 17: tengo il 17. Più 2, 19: colpito! Con la Daga, 4 danni."
+],
+[
+"M",
+"Tiro io per il Guardiano: 15 più 4. Colpita, 6 danni. Sei a 3 punti vita."
+],
+[
+"G",
+"Secondo round,  9 più 2, mancato. E tu?"
+],
+[
+"M",
+"6 più 4, 10: mancato anch'io. Dai, tira!"
+],
+[
+"G",
+"20! Colpo sicuro e danno doppio: 3 per 2, 6. Il Guardiano è a zero!"
+],
+[
+"L",
+"Giulia riporta Mimi a Geronimo e vince. Alla prima partita!"
+],
+[
+"M",
+"Fortuna del principiante. Rivincita?"
+]
+]

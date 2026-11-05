@@ -1,0 +1,84 @@
+Allineamento al gioco da tavolo, 21/10 pomeriggio. Partite simulate con IA, regole attuali (10x10, 6 partenze, D6, niente D4, 3 slot, plancia stampata, creature fisse).
+
+### morning (configurazione prima del ritocco classi)
+{"secs":122.421,"errors":0,"score":98.5,"mean":7.031,"sd":3.136,"skew":0.28,"kurt":-0.127,"r2":0.988,"first":1.005,"draws":0}
+CLS: Bardo 1.05 | Chierico 1.03 | Warlock 1.03 | Ladro 1.02 | Guerriero 1.00 | Druido 1.00 | Barbaro 1.00 | Paladino 0.98 | Mago 0.95 | Stregone 0.95
+TIME all: 29.8 min (mediana 28.9, 10-90% 15-46) · inizio 4.3 · centro 12.7 · finale 12.7 · giri 7.0
+### once (configurazione prima del ritocco classi)
+{"secs":112.245,"errors":0,"score":96.33,"mean":6.531,"sd":2.979,"skew":0.295,"kurt":-0.226,"r2":0.981,"first":1.018,"draws":0}
+CLS: Guerriero 1.20 | Bardo 1.07 | Chierico 1.01 | Paladino 1.00 | Mago 0.99 | Warlock 0.96 | Barbaro 0.96 | Ladro 0.96 | Stregone 0.95 | Druido 0.90
+TIME all: 27.5 min (mediana 26.6, 10-90% 13-43) · inizio 3.8 · centro 12.1 · finale 11.6 · giri 6.5
+### noboard (configurazione prima del ritocco classi)
+{"secs":95.541,"errors":0,"score":97.174,"mean":6.944,"sd":3.133,"skew":0.307,"kurt":-0.009,"r2":0.99,"first":1.008,"draws":0}
+CLS: Guerriero 1.18 | Bardo 1.07 | Chierico 0.99 | Warlock 0.98 | Druido 0.98 | Mago 0.97 | Ladro 0.96 | Stregone 0.96 | Paladino 0.96 | Barbaro 0.95
+TIME all: 29.1 min (mediana 28.2, 10-90% 14-45) · inizio 4.3 · centro 12.4 · finale 12.4 · giri 6.9
+### s3only (configurazione prima del ritocco classi)
+{"secs":94.56,"errors":0,"score":97.577,"mean":6.972,"sd":3.12,"skew":0.28,"kurt":-0.136,"r2":0.985,"first":0.999,"draws":0}
+CLS: Guerriero 1.15 | Bardo 1.06 | Warlock 0.99 | Chierico 0.99 | Ladro 0.98 | Druido 0.98 | Stregone 0.97 | Mago 0.96 | Barbaro 0.96 | Paladino 0.96
+TIME all: 29.4 min (mediana 28.5, 10-90% 14-45) · inizio 4.3 · centro 12.6 · finale 12.5 · giri 7.0
+### cfonly (configurazione prima del ritocco classi)
+{"secs":95.326,"errors":0,"score":98.408,"mean":7.024,"sd":3.113,"skew":0.283,"kurt":-0.091,"r2":0.987,"first":0.988,"draws":0}
+CLS: Bardo 1.05 | Warlock 1.04 | Druido 1.02 | Paladino 1.01 | Chierico 1.01 | Mago 0.98 | Guerriero 0.98 | Barbaro 0.98 | Ladro 0.97 | Stregone 0.96
+TIME all: 29.6 min (mediana 28.7, 10-90% 15-45) · inizio 4.3 · centro 12.6 · finale 12.6 · giri 7.0
+### boardonly (configurazione prima del ritocco classi)
+{"secs":89.7,"errors":0,"score":97.395,"mean":6.607,"sd":3.013,"skew":0.311,"kurt":-0.182,"r2":0.979,"first":1.021,"draws":0}
+CLS: Bardo 1.09 | Guerriero 1.06 | Chierico 1.03 | Paladino 1.00 | Mago 0.99 | Warlock 0.99 | Barbaro 0.98 | Stregone 0.96 | Ladro 0.96 | Druido 0.94
+TIME all: 28.0 min (mediana 27.2, 10-90% 14-43) · inizio 3.8 · centro 12.3 · finale 11.9 · giri 6.6
+
+### Ritocco finale: scudo nello slot Arma, Guerriero -2 AR, Druido Mutaforma 3 turni e Lupo ATT 3, Bardo +1 MOV
+### f_once
+{"secs":107.679,"errors":0,"score":98.367,"mean":6.571,"sd":3.003,"skew":0.314,"kurt":-0.173,"r2":0.981,"first":1.019,"draws":0}
+CLS: Bardo 1.03 | Chierico 1.02 | Guerriero 1.01 | Paladino 1.01 | Mago 1.00 | Warlock 1.00 | Barbaro 0.99 | Druido 0.99 | Ladro 0.97 | Stregone 0.97
+RACE: Nani 1.04 | Yumaniani 1.03 | Umani 1.02 | Elfi 1.01 | Sanguar 0.98 | Halfling 0.98 | Orchi 0.97 | Tiefling 0.97
+TIME all: 27.8 min (mediana 26.8, 10-90% 14-43) · inizio 3.8 · centro 12.2 · finale 11.8 · giri 6.6
+TIME 2p: 22.6 min (mediana 22.3, 10-90% 12-33) · inizio 3.7 · centro 9.1 · finale 9.8 · giri 6.8
+TIME 3p: 28.4 min (mediana 28.3, 10-90% 14-42) · inizio 3.8 · centro 12.5 · finale 12.1 · giri 6.5
+TIME 4p: 32.6 min (mediana 32.6, 10-90% 16-49) · inizio 4.0 · centro 15.0 · finale 13.6 · giri 6.4
+### f_peonce
+{"secs":106.329,"errors":0,"score":98.173,"mean":6.608,"sd":3.027,"skew":0.319,"kurt":-0.143,"r2":0.981,"first":1.014,"draws":0}
+CLS: Bardo 1.05 | Chierico 1.04 | Mago 1.02 | Guerriero 1.00 | Druido 1.00 | Paladino 1.00 | Warlock 0.99 | Stregone 0.98 | Barbaro 0.97 | Ladro 0.95
+RACE: Yumaniani 1.05 | Umani 1.01 | Nani 1.01 | Tiefling 1.00 | Elfi 1.00 | Halfling 0.98 | Sanguar 0.97 | Orchi 0.97
+TIME all: 27.8 min (mediana 26.9, 10-90% 14-43) · inizio 3.8 · centro 12.2 · finale 11.8 · giri 6.6
+TIME 2p: 22.8 min (mediana 22.5, 10-90% 12-34) · inizio 3.6 · centro 9.2 · finale 10.0 · giri 6.9
+TIME 3p: 28.2 min (mediana 28.1, 10-90% 14-42) · inizio 3.8 · centro 12.5 · finale 12.0 · giri 6.5
+TIME 4p: 32.4 min (mediana 32.3, 10-90% 16-49) · inizio 4.0 · centro 15.0 · finale 13.5 · giri 6.4
+### f_always
+{"secs":106.443,"errors":0,"score":98.37,"mean":6.588,"sd":3.005,"skew":0.324,"kurt":-0.112,"r2":0.985,"first":1.018,"draws":0}
+CLS: Bardo 1.04 | Chierico 1.03 | Guerriero 1.02 | Druido 1.00 | Warlock 1.00 | Stregone 1.00 | Paladino 0.98 | Mago 0.98 | Barbaro 0.97 | Ladro 0.97
+RACE: Yumaniani 1.03 | Umani 1.02 | Nani 1.01 | Orchi 1.00 | Elfi 1.00 | Tiefling 1.00 | Halfling 0.99 | Sanguar 0.97
+TIME all: 27.8 min (mediana 26.9, 10-90% 14-43) · inizio 3.8 · centro 12.2 · finale 11.8 · giri 6.6
+TIME 2p: 22.6 min (mediana 22.4, 10-90% 12-33) · inizio 3.6 · centro 9.1 · finale 9.9 · giri 6.9
+TIME 3p: 28.5 min (mediana 28.3, 10-90% 14-42) · inizio 3.8 · centro 12.5 · finale 12.1 · giri 6.6
+TIME 4p: 32.3 min (mediana 32.3, 10-90% 16-48) · inizio 4.0 · centro 14.9 · finale 13.4 · giri 6.3
+### X2
+{"secs":39.468,"errors":0,"score":98.08,"mean":6.874,"sd":3.136,"skew":0.335,"kurt":-0.076,"r2":0.985,"first":1.039,"draws":0}
+CLS: Chierico 1.02 | Paladino 1.01 | Barbaro 1.01 | Ladro 1.01 | Stregone 1.01 | Bardo 1.00 | Druido 1.00 | Mago 0.99 | Warlock 0.98 | Guerriero 0.97
+RACE: Nani 1.03 | Yumaniani 1.01 | Orchi 1.01 | Umani 1.01 | Halfling 1.00 | Elfi 0.99 | Sanguar 0.98 | Tiefling 0.97
+TIME all: 22.6 min (mediana 22.3, 10-90% 12-34) · inizio 3.7 · centro 9.2 · finale 9.8 · giri 6.9
+TIME 2p: 22.6 min (mediana 22.3, 10-90% 12-34) · inizio 3.7 · centro 9.2 · finale 9.8 · giri 6.9
+### X4
+{"secs":68.603,"errors":0,"score":97.58,"mean":6.424,"sd":2.946,"skew":0.29,"kurt":-0.275,"r2":0.978,"first":0.991,"draws":0}
+CLS: Bardo 1.08 | Guerriero 1.06 | Chierico 1.04 | Mago 1.04 | Druido 0.98 | Ladro 0.98 | Warlock 0.97 | Stregone 0.96 | Barbaro 0.95 | Paladino 0.94
+RACE: Yumaniani 1.04 | Umani 1.04 | Nani 1.02 | Elfi 1.00 | Halfling 0.99 | Tiefling 0.98 | Orchi 0.97 | Sanguar 0.96
+TIME all: 32.7 min (mediana 32.7, 10-90% 16-49) · inizio 4.0 · centro 15.0 · finale 13.6 · giri 6.4
+TIME 4p: 32.7 min (mediana 32.7, 10-90% 16-49) · inizio 4.0 · centro 15.0 · finale 13.6 · giri 6.4
+### b2
+{"secs":36.936,"errors":0,"score":96.788,"mean":5.204,"sd":2.878,"skew":0.526,"kurt":-0.199,"r2":0.929,"first":1.038,"draws":0}
+CLS: Chierico 1.02 | Ladro 1.01 | Guerriero 0.99 | Mago 0.98
+RACE: Yumaniani 1.05 | Elfi 1.03 | Umani 1.02 | Nani 1.00 | Orchi 0.99 | Tiefling 0.99 | Halfling 0.97 | Sanguar 0.97
+TIME all: 18.5 min (mediana 17.8, 10-90% 9-29) · inizio 2.7 · centro 6.2 · finale 9.6 · giri 5.2
+TIME 2p: 18.5 min (mediana 17.8, 10-90% 9-29) · inizio 2.7 · centro 6.2 · finale 9.6 · giri 5.2
+### brand
+{"secs":65.774,"errors":0,"score":97.191,"mean":4.787,"sd":2.663,"skew":0.523,"kurt":-0.087,"r2":0.949,"first":1.014,"draws":0}
+CLS: Guerriero 1.05 | Mago 1.02 | Ladro 0.97 | Chierico 0.96
+RACE: Yumaniani 1.07 | Nani 1.05 | Elfi 1.03 | Umani 1.00 | Halfling 0.99 | Sanguar 0.98 | Tiefling 0.95 | Orchi 0.93
+TIME all: 21.2 min (mediana 20.3, 10-90% 10-34) · inizio 2.8 · centro 7.5 · finale 10.9 · giri 4.8
+TIME 2p: 18.6 min (mediana 17.8, 10-90% 9-29) · inizio 2.7 · centro 6.2 · finale 9.6 · giri 5.2
+TIME 3p: 21.6 min (mediana 20.7, 10-90% 10-34) · inizio 2.8 · centro 7.7 · finale 11.0 · giri 4.7
+TIME 4p: 23.6 min (mediana 22.8, 10-90% 11-37) · inizio 3.0 · centro 8.6 · finale 12.0 · giri 4.5
+### f_base4
+{"secs":79.363,"errors":0,"score":95.402,"mean":4.464,"sd":2.471,"skew":0.426,"kurt":-0.281,"r2":0.958,"first":1.026,"draws":0}
+CLS: Guerriero 1.11 | Mago 1.05 | Chierico 0.92 | Ladro 0.92
+RACE: Yumaniani 1.05 | Nani 1.04 | Elfi 1.02 | Umani 1.01 | Halfling 1.00 | Sanguar 0.99 | Tiefling 0.95 | Orchi 0.92
+TIME all: 23.7 min (mediana 22.9, 10-90% 11-37) · inizio 3.0 · centro 8.6 · finale 12.0 · giri 4.5
+TIME 4p: 23.7 min (mediana 22.9, 10-90% 11-37) · inizio 3.0 · centro 8.6 · finale 12.0 · giri 4.5

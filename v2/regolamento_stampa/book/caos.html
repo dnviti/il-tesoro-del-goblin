@@ -1,0 +1,435 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><title>Il Caos del Goblin – Espansione</title><style>@font-face {
+  font-family: 'Alegreya';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../fonts/Alegreya-italic-400.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Alegreya';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../fonts/Alegreya-normal-400.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Alegreya';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(../fonts/Alegreya-normal-700.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Alegreya Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../fonts/AlegreyaSans-normal-400.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Alegreya Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(../fonts/AlegreyaSans-normal-700.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Alegreya Sans';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url(../fonts/AlegreyaSans-normal-800.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Cinzel';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(../fonts/Cinzel-normal-600.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Cinzel';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url(../fonts/Cinzel-normal-800.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@page { size: 154mm 216mm; margin: 0 }
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:'Alegreya',serif;color:#2a2118;font-size:10.4pt;line-height:1.4;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.page{width:154mm;height:216mm;position:relative;overflow:hidden;background:#f4ead5;page-break-after:always;break-after:page}
+.page::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(255,255,255,.35),rgba(0,0,0,0) 60%),radial-gradient(ellipse at 50% 120%,rgba(107,74,43,.18),rgba(0,0,0,0) 60%);pointer-events:none}
+.frame{position:absolute;left:9mm;right:9mm;top:9mm;bottom:9mm;border:0.5mm solid #b8862b;border-radius:2mm;opacity:.55}
+.in{position:absolute;left:15mm;right:15mm;top:14mm;bottom:15mm}
+.folio{position:absolute;bottom:10.5mm;left:0;right:0;text-align:center;font-family:'Cinzel';font-weight:600;font-size:7.5pt;color:#6b4a2b}
+h1{font-family:'Cinzel';font-weight:800;font-size:17pt;margin:0 0 2.5mm;color:#9c2f24;letter-spacing:.3px;line-height:1.1}
+h2{font-family:'Cinzel';font-weight:800;font-size:11pt;margin:3.5mm 0 1.5mm;color:#6b4a2b}
+p{margin:0 0 2mm}
+.lead{font-size:11.3pt;line-height:1.35;margin-bottom:3mm}
+.sans{font-family:'Alegreya Sans',sans-serif}
+ol,ul{margin:0 0 2mm;padding-left:5mm} li{margin-bottom:1.2mm}
+b{font-weight:700}
+.box{background:#fffaf0;border:0.35mm solid #6b4a2b;border-radius:2mm;padding:2.5mm 3.2mm;margin:2.5mm 0}
+.box.red{border-color:#9c2f24;background:#fbefe6}
+.box h3{font-family:'Cinzel';font-weight:800;font-size:9.5pt;margin:0 0 1.2mm;color:#9c2f24}
+.tip{font-family:'Alegreya Sans';font-size:9.1pt;color:#6b4a2b;font-style:normal}
+table{border-collapse:collapse;width:100%;font-family:'Alegreya Sans';font-size:9.4pt;margin:1.5mm 0 2.5mm}
+th{text-align:left;font-weight:800;color:#6b4a2b;border-bottom:0.4mm solid #6b4a2b;padding:1mm 1.2mm}
+td{border-bottom:0.2mm solid #b9a582;padding:1.05mm 1.2mm;vertical-align:top}
+.ic{width:5mm;height:5mm;vertical-align:-1.3mm;margin-right:1mm}
+.strip{display:flex;gap:1.6mm;margin:2mm 0}
+.step{flex:1;background:#fffaf0;border:0.35mm solid #6b4a2b;border-radius:2mm;padding:2mm 1.4mm 2mm;text-align:center;position:relative}
+.step .num{position:absolute;top:-2.6mm;left:50%;transform:translateX(-50%);width:5.2mm;height:5.2mm;border-radius:50%;background:#9c2f24;color:#fff;font-family:'Cinzel';font-weight:800;font-size:8pt;line-height:5.2mm}
+.step .sic{width:8mm;height:8mm;margin-top:1.4mm}
+.step .st{font-family:'Cinzel';font-weight:800;font-size:8pt;color:#2a2118;margin:.6mm 0 .8mm}
+.step .sd{font-family:'Alegreya Sans';font-size:8pt;line-height:1.25}
+.strip.big .step .sd{font-size:9.2pt} .strip.big .step .st{font-size:10pt} .strip.big .step .sic{width:11mm;height:11mm}
+.cols{display:flex;gap:5mm} .cols>div{flex:1}
+.comp{display:grid;grid-template-columns:1fr 1fr;gap:1.3mm 4mm;font-family:'Alegreya Sans';font-size:9.3pt}
+.comp div{border-bottom:0.2mm solid #b9a582;padding:.6mm 0}
+.comp b{color:#9c2f24;font-family:'Cinzel';font-size:9pt;display:inline-block;min-width:8mm}
+.tokens{display:flex;flex-wrap:wrap;gap:2mm;justify-content:center;align-items:center;margin:2mm 0}
+.tokens .t{text-align:center;font-family:'Alegreya Sans';font-size:7.6pt;color:#6b4a2b}
+.ex td{font-size:9.2pt}
+.hit{color:#3d6b3f}
+.cover{background:#2b1d14}
+.cover::before{background:radial-gradient(ellipse at 50% 42%,rgba(246,214,139,.25),rgba(0,0,0,0) 60%)}
+.cover .t1{position:absolute;top:24mm;left:0;right:0;text-align:center;font-family:'Cinzel';font-weight:600;font-size:12pt;color:#b8862b;letter-spacing:3px}
+.cover .t2{position:absolute;top:31mm;left:0;right:0;text-align:center;font-family:'Cinzel';font-weight:800;font-size:31pt;line-height:1.02;color:#f6d68b;text-shadow:0 1mm 0 #00000088}
+.cover .art{position:absolute;top:80mm;left:22mm;right:22mm}
+.cover .t3{position:absolute;top:162mm;left:0;right:0;text-align:center;font-family:'Alegreya';font-style:italic;font-size:11pt;color:#efe2c2}
+.cover .t4{position:absolute;bottom:22mm;left:0;right:0;text-align:center;font-family:'Cinzel';font-weight:600;font-size:9pt;color:#b8862b;letter-spacing:1px}
+.cover .t5{position:absolute;bottom:15mm;left:0;right:0;text-align:center;font-family:'Alegreya Sans';font-size:8pt;color:#cbb88e}
+.cover .frame{border-color:#b8862b;opacity:.8}
+.cover .t6{position:absolute;bottom:31mm;left:0;right:0;text-align:center;font-family:'Alegreya Sans';font-size:10pt;color:#efe2c2;letter-spacing:.5px}
+.lg{display:inline-flex;align-items:center;gap:1.2mm;margin-right:3mm;font-family:'Alegreya Sans';font-size:9.2pt}
+.fig{text-align:center;margin:2mm 0}
+.fig svg{max-width:100%}
+.cap{font-family:'Alegreya Sans';font-size:7.8pt;color:#6b4a2b;text-align:center;margin-top:1mm}
+.qa b{display:block;font-family:'Alegreya Sans';font-weight:800;color:#9c2f24;font-size:8.8pt}
+.qa p{margin-bottom:2.2mm}
+
+.cover.caos{background:#24142b}
+.cover.caos::before{background:radial-gradient(ellipse at 50% 48%,rgba(186,120,220,.35),rgba(0,0,0,0) 62%)}
+.cover.caos .t2{color:#e9c8f5}
+.box.viola{border-color:#7a3e8e;background:#f6eef8}
+.box.viola h3{color:#7a3e8e}
+h1.v{color:#7a3e8e}
+.d6 td:first-child{width:9mm;text-align:center;font-family:'Cinzel';font-weight:800;font-size:12pt;color:#7a3e8e}
+.d6 td{font-size:9.4pt;padding:1.2mm 1.2mm}
+.lore p{font-size:10.4pt}
+.lore p:first-child::first-letter{font-family:'Cinzel';font-weight:800;font-size:22pt;float:left;line-height:.9;margin:1mm 1.5mm 0 0;color:#7a3e8e}
+.two{display:flex;gap:3mm;margin:2mm 0} .two>div{flex:1}
+.cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2.4mm 2.4mm;justify-items:center}
+.cards .cap{margin-top:.4mm}
+.cob{display:flex;gap:3mm;align-items:flex-start;margin:1.6mm 0} .cob .tx{flex:1;font-size:9.6pt}
+.cob .tx b.n{font-family:'Cinzel';color:#7a3e8e;font-size:10pt}
+</style></head><body><section class="page cover caos"><div class="frame"></div>
+<div class="t1">ESPANSIONE</div><div class="t2">Il Caos<br>del Goblin</div>
+<div class="art" style="top:76mm"><svg viewBox="0 0 300 230" xmlns="http://www.w3.org/2000/svg">
+<defs><radialGradient id="gv" cx="50%" cy="72%" r="55%"><stop offset="0" stop-color="#d9a8f0" stop-opacity="0.95"/><stop offset="1" stop-color="#7a3e8e" stop-opacity="0"/></radialGradient></defs>
+<ellipse cx="150" cy="175" rx="140" ry="70" fill="url(#gv)"/>
+<path d="M60 190 L110 178 L128 186 L150 168 L170 184 L196 176 L240 190 L196 198 L170 192 L150 206 L128 194 L110 200 Z" fill="#1a0d20" stroke="#f6d68b" stroke-width="2.5"/>
+<path d="M118 188 L150 178 L182 188 L150 198 Z" fill="#f6d68b" opacity=".85"/>
+<g fill="#f6d68b"><circle cx="96" cy="150" r="3"/><circle cx="210" cy="140" r="2.5"/><circle cx="132" cy="128" r="2"/><circle cx="178" cy="120" r="2.2"/><circle cx="70" cy="120" r="1.8"/><circle cx="236" cy="112" r="1.6"/></g>
+<g transform="translate(150 78) rotate(-8) scale(.62)">
+<path d="M-80 -10 a80 50 0 0 1 160 0 z" fill="#7a4a24" stroke="#3b2414" stroke-width="3"/>
+<rect x="-80" y="-10" width="160" height="78" rx="6" fill="#8a5428" stroke="#3b2414" stroke-width="3"/>
+<rect x="-80" y="-4" width="160" height="14" fill="#b8862b" stroke="#3b2414" stroke-width="2"/>
+<rect x="-80" y="44" width="160" height="10" fill="#b8862b" stroke="#3b2414" stroke-width="2"/>
+<rect x="-14" y="-12" width="28" height="36" rx="4" fill="#b8862b" stroke="#3b2414" stroke-width="2.5"/>
+<circle cx="-30" cy="-30" r="7" fill="#fff" stroke="#3b2414" stroke-width="2"/><circle cx="30" cy="-30" r="7" fill="#fff" stroke="#3b2414" stroke-width="2"/>
+<circle cx="-27" cy="-28" r="3" fill="#3b2414"/><circle cx="33" cy="-28" r="3" fill="#3b2414"/>
+</g>
+<path d="M150 118 q-10 25 0 50" stroke="#d9a8f0" stroke-width="3" fill="none" stroke-dasharray="4 5"/>
+<g transform="translate(206 176)">
+<path d="M-14 4 q0 -18 14 -18 q14 0 14 18 z" fill="#6f7d3c" stroke="#2c3315" stroke-width="2"/>
+<path d="M-12 -6 l-10 -8 l6 12 z M12 -6 l10 -8 l-6 12 z" fill="#6f7d3c" stroke="#2c3315" stroke-width="2"/>
+<circle cx="-5" cy="-4" r="2.6" fill="#f6d68b"/><circle cx="5" cy="-4" r="2.6" fill="#f6d68b"/>
+</g>
+</svg></div>
+<div class="t3">«Le Crepe di MIMI»</div>
+<div style="position:absolute;bottom:31mm;left:0;right:0;text-align:center;font-family:'Alegreya Sans';font-size:10pt;color:#efe2c2;letter-spacing:.5px">un gioco di <b>Alessandro De Simone</b></div><div class="t4">SERVE LA SCATOLA BASE</div><div class="t5">2–4 giocatori · 10 Crepe · 6 Coboldi di MIMI · 6 carte Caos</div></section><section class="page "><div class="frame"></div><div class="in"><h1 class="v">Le Crepe di MIMI</h1>
+<div class="lore">
+<p>Quando l’incantesimo di Geronimo fece sparire MIMI, il forziere non se ne andò tutto intero. Una cassa senza fondo non si chiude come un cassetto: il suo <b>fondo</b> rimase aperto, strappato in dieci punti delle Terre di Hande. La gente le chiama <b>Crepe</b>.</p>
+<p>Dalle Crepe esce di tutto: le cianfrusaglie che Geronimo ci ha infilato in cent’anni di avventure, le pagine strappate della sua mappa, folate del vento del nulla. E i <b>Coboldi di MIMI</b>, che vivevano là dentro per tenere in ordine il tesoro (senza riuscirci mai) e ora difendono la loro casa a morsi, a sassate o rubando dalle tasche.</p>
+<p>Le Crepe sono nate a coppie: ognuna ha una <b>gemella</b> dall’altra parte delle Terre di Hande, perché il fondo di MIMI è uno solo. Chi ha fegato ci si tuffa e riemerge lontano. Geronimo lo chiama <b>il Caos</b>; i Coboldi lo chiamano casa. Le Crepe si richiuderanno solo quando MIMI tornerà dal suo padrone.</p>
+</div>
+<div class="box viola"><h3>Il Caos in una frase</h3><p style="margin:0">Dieci <b>Crepe</b> si posano sulla plancia: chi si ferma su una Crepa <b>fruga</b> (tira il D6 e succede qualcosa di inatteso) oppure la <b>attraversa</b> e salta sulla sua gemella.</p></div>
+<h2>Cosa c’è nell’espansione</h2>
+<div class="comp">
+<div><b>10</b> Tessere Crepa (5 coppie)</div><div><b>6</b> Segnalini Coboldo di MIMI</div>
+<div><b>6</b> Carte Caos</div><div><b>4</b> Carte Aiuto del Caos</div>
+<div><b>1</b> Questo libretto</div><div></div>
+</div>
+<p class="tip" style="margin-top:2mm">Il Caos si aggiunge alla scatola base e a ogni espansione. Non serve nessun dado nuovo: si usa il D6.</p></div><div class="folio">2</div></section><section class="page "><div class="frame"></div><div class="in"><h1 class="v">Preparazione</h1>
+<p>Prepara la scatola base come al solito, poi:</p>
+<ol>
+<li><b>Posa le 10 Crepe</b> sui loro esagoni, che sulla plancia sono sentieri vuoti. Ogni Crepa porta la lettera della sua coppia (A–E): la gemella è sempre quella opposta, girando la plancia di 180°.</li>
+<li><b>Mescola le 6 carte Caos</b> nel mazzo comune prima di distribuire le carte.</li>
+<li>Metti i <b>6 Coboldi</b> coperti in una pila accanto alla plancia e dai a ognuno una Carta Aiuto del Caos.</li>
+</ol>
+<div class="fig" style="width:66%;margin-left:auto;margin-right:auto"><svg viewBox="0 0 282.0 251.0" xmlns="http://www.w3.org/2000/svg" font-family="Alegreya Sans">
+<rect x="1" y="1" width="280.0" height="249.0" rx="10.0" fill="#efe1c3" stroke="#6b4a2b" stroke-width="2"/>
+<polygon points="46.00,36.35 55.70,41.95 55.70,53.15 46.00,58.75 36.30,53.15 36.30,41.95" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="66.00,36.35 75.70,41.95 75.70,53.15 66.00,58.75 56.30,53.15 56.30,41.95" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="86.00,36.35 95.70,41.95 95.70,53.15 86.00,58.75 76.30,53.15 76.30,41.95" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="106.00,36.35 115.70,41.95 115.70,53.15 106.00,58.75 96.30,53.15 96.30,41.95" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="126.00,36.35 135.70,41.95 135.70,53.15 126.00,58.75 116.30,53.15 116.30,41.95" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="146.00,36.35 155.70,41.95 155.70,53.15 146.00,58.75 136.30,53.15 136.30,41.95" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="166.00,36.35 175.70,41.95 175.70,53.15 166.00,58.75 156.30,53.15 156.30,41.95" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="186.00,36.35 195.70,41.95 195.70,53.15 186.00,58.75 176.30,53.15 176.30,41.95" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="206.00,36.35 215.70,41.95 215.70,53.15 206.00,58.75 196.30,53.15 196.30,41.95" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="226.00,36.35 235.70,41.95 235.70,53.15 226.00,58.75 216.30,53.15 216.30,41.95" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="56.00,53.67 65.70,59.27 65.70,70.47 56.00,76.07 46.30,70.47 46.30,59.27" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="76.00,53.67 85.70,59.27 85.70,70.47 76.00,76.07 66.30,70.47 66.30,59.27" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="96.00,53.67 105.70,59.27 105.70,70.47 96.00,76.07 86.30,70.47 86.30,59.27" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="116.00,53.67 125.70,59.27 125.70,70.47 116.00,76.07 106.30,70.47 106.30,59.27" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="136.00,53.67 145.70,59.27 145.70,70.47 136.00,76.07 126.30,70.47 126.30,59.27" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="156.00,53.67 165.70,59.27 165.70,70.47 156.00,76.07 146.30,70.47 146.30,59.27" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="176.00,53.67 185.70,59.27 185.70,70.47 176.00,76.07 166.30,70.47 166.30,59.27" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="196.00,53.67 205.70,59.27 205.70,70.47 196.00,76.07 186.30,70.47 186.30,59.27" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="216.00,53.67 225.70,59.27 225.70,70.47 216.00,76.07 206.30,70.47 206.30,59.27" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="236.00,53.67 245.70,59.27 245.70,70.47 236.00,76.07 226.30,70.47 226.30,59.27" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="46.00,70.99 55.70,76.59 55.70,87.79 46.00,93.39 36.30,87.79 36.30,76.59" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="66.00,70.99 75.70,76.59 75.70,87.79 66.00,93.39 56.30,87.79 56.30,76.59" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="86.00,70.99 95.70,76.59 95.70,87.79 86.00,93.39 76.30,87.79 76.30,76.59" fill="#e6d6b4" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="106.00,70.99 115.70,76.59 115.70,87.79 106.00,93.39 96.30,87.79 96.30,76.59" fill="#e6d6b4" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="126.00,70.99 135.70,76.59 135.70,87.79 126.00,93.39 116.30,87.79 116.30,76.59" fill="#e6d6b4" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="146.00,70.99 155.70,76.59 155.70,87.79 146.00,93.39 136.30,87.79 136.30,76.59" fill="#e6d6b4" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="166.00,70.99 175.70,76.59 175.70,87.79 166.00,93.39 156.30,87.79 156.30,76.59" fill="#e6d6b4" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="186.00,70.99 195.70,76.59 195.70,87.79 186.00,93.39 176.30,87.79 176.30,76.59" fill="#e6d6b4" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="206.00,70.99 215.70,76.59 215.70,87.79 206.00,93.39 196.30,87.79 196.30,76.59" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="226.00,70.99 235.70,76.59 235.70,87.79 226.00,93.39 216.30,87.79 216.30,76.59" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="56.00,88.31 65.70,93.91 65.70,105.11 56.00,110.71 46.30,105.11 46.30,93.91" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="76.00,88.31 85.70,93.91 85.70,105.11 76.00,110.71 66.30,105.11 66.30,93.91" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="96.00,88.31 105.70,93.91 105.70,105.11 96.00,110.71 86.30,105.11 86.30,93.91" fill="#e6d6b4" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="116.00,88.31 125.70,93.91 125.70,105.11 116.00,110.71 106.30,105.11 106.30,93.91" fill="#e6d6b4" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="136.00,88.31 145.70,93.91 145.70,105.11 136.00,110.71 126.30,105.11 126.30,93.91" fill="#e6d6b4" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="156.00,88.31 165.70,93.91 165.70,105.11 156.00,110.71 146.30,105.11 146.30,93.91" fill="#e6d6b4" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="176.00,88.31 185.70,93.91 185.70,105.11 176.00,110.71 166.30,105.11 166.30,93.91" fill="#e6d6b4" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="196.00,88.31 205.70,93.91 205.70,105.11 196.00,110.71 186.30,105.11 186.30,93.91" fill="#e6d6b4" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="216.00,88.31 225.70,93.91 225.70,105.11 216.00,110.71 206.30,105.11 206.30,93.91" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="236.00,88.31 245.70,93.91 245.70,105.11 236.00,110.71 226.30,105.11 226.30,93.91" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="46.00,105.63 55.70,111.23 55.70,122.43 46.00,128.03 36.30,122.43 36.30,111.23" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="66.00,105.63 75.70,111.23 75.70,122.43 66.00,128.03 56.30,122.43 56.30,111.23" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="86.00,105.63 95.70,111.23 95.70,122.43 86.00,128.03 76.30,122.43 76.30,111.23" fill="#e6d6b4" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="106.00,105.63 115.70,111.23 115.70,122.43 106.00,128.03 96.30,122.43 96.30,111.23" fill="#e6d6b4" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="126.00,105.63 135.70,111.23 135.70,122.43 126.00,128.03 116.30,122.43 116.30,111.23" fill="#e6d6b4" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="146.00,105.63 155.70,111.23 155.70,122.43 146.00,128.03 136.30,122.43 136.30,111.23" fill="#e6d6b4" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="166.00,105.63 175.70,111.23 175.70,122.43 166.00,128.03 156.30,122.43 156.30,111.23" fill="#e6d6b4" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="186.00,105.63 195.70,111.23 195.70,122.43 186.00,128.03 176.30,122.43 176.30,111.23" fill="#e6d6b4" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="206.00,105.63 215.70,111.23 215.70,122.43 206.00,128.03 196.30,122.43 196.30,111.23" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="226.00,105.63 235.70,111.23 235.70,122.43 226.00,128.03 216.30,122.43 216.30,111.23" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="56.00,122.95 65.70,128.55 65.70,139.75 56.00,145.35 46.30,139.75 46.30,128.55" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="76.00,122.95 85.70,128.55 85.70,139.75 76.00,145.35 66.30,139.75 66.30,128.55" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="96.00,122.95 105.70,128.55 105.70,139.75 96.00,145.35 86.30,139.75 86.30,128.55" fill="#e6d6b4" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="116.00,122.95 125.70,128.55 125.70,139.75 116.00,145.35 106.30,139.75 106.30,128.55" fill="#e6d6b4" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="136.00,122.95 145.70,128.55 145.70,139.75 136.00,145.35 126.30,139.75 126.30,128.55" fill="#e6d6b4" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="156.00,122.95 165.70,128.55 165.70,139.75 156.00,145.35 146.30,139.75 146.30,128.55" fill="#e6d6b4" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="176.00,122.95 185.70,128.55 185.70,139.75 176.00,145.35 166.30,139.75 166.30,128.55" fill="#e6d6b4" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="196.00,122.95 205.70,128.55 205.70,139.75 196.00,145.35 186.30,139.75 186.30,128.55" fill="#e6d6b4" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="216.00,122.95 225.70,128.55 225.70,139.75 216.00,145.35 206.30,139.75 206.30,128.55" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="236.00,122.95 245.70,128.55 245.70,139.75 236.00,145.35 226.30,139.75 226.30,128.55" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="46.00,140.27 55.70,145.87 55.70,157.07 46.00,162.67 36.30,157.07 36.30,145.87" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="66.00,140.27 75.70,145.87 75.70,157.07 66.00,162.67 56.30,157.07 56.30,145.87" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="86.00,140.27 95.70,145.87 95.70,157.07 86.00,162.67 76.30,157.07 76.30,145.87" fill="#e6d6b4" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="106.00,140.27 115.70,145.87 115.70,157.07 106.00,162.67 96.30,157.07 96.30,145.87" fill="#e6d6b4" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="126.00,140.27 135.70,145.87 135.70,157.07 126.00,162.67 116.30,157.07 116.30,145.87" fill="#e6d6b4" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="146.00,140.27 155.70,145.87 155.70,157.07 146.00,162.67 136.30,157.07 136.30,145.87" fill="#e6d6b4" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="166.00,140.27 175.70,145.87 175.70,157.07 166.00,162.67 156.30,157.07 156.30,145.87" fill="#e6d6b4" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="186.00,140.27 195.70,145.87 195.70,157.07 186.00,162.67 176.30,157.07 176.30,145.87" fill="#e6d6b4" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="206.00,140.27 215.70,145.87 215.70,157.07 206.00,162.67 196.30,157.07 196.30,145.87" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="226.00,140.27 235.70,145.87 235.70,157.07 226.00,162.67 216.30,157.07 216.30,145.87" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="56.00,157.59 65.70,163.19 65.70,174.39 56.00,179.99 46.30,174.39 46.30,163.19" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="76.00,157.59 85.70,163.19 85.70,174.39 76.00,179.99 66.30,174.39 66.30,163.19" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="96.00,157.59 105.70,163.19 105.70,174.39 96.00,179.99 86.30,174.39 86.30,163.19" fill="#e6d6b4" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="116.00,157.59 125.70,163.19 125.70,174.39 116.00,179.99 106.30,174.39 106.30,163.19" fill="#e6d6b4" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="136.00,157.59 145.70,163.19 145.70,174.39 136.00,179.99 126.30,174.39 126.30,163.19" fill="#e6d6b4" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="156.00,157.59 165.70,163.19 165.70,174.39 156.00,179.99 146.30,174.39 146.30,163.19" fill="#e6d6b4" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="176.00,157.59 185.70,163.19 185.70,174.39 176.00,179.99 166.30,174.39 166.30,163.19" fill="#e6d6b4" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="196.00,157.59 205.70,163.19 205.70,174.39 196.00,179.99 186.30,174.39 186.30,163.19" fill="#e6d6b4" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="216.00,157.59 225.70,163.19 225.70,174.39 216.00,179.99 206.30,174.39 206.30,163.19" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="236.00,157.59 245.70,163.19 245.70,174.39 236.00,179.99 226.30,174.39 226.30,163.19" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="46.00,174.91 55.70,180.51 55.70,191.71 46.00,197.31 36.30,191.71 36.30,180.51" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="66.00,174.91 75.70,180.51 75.70,191.71 66.00,197.31 56.30,191.71 56.30,180.51" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="86.00,174.91 95.70,180.51 95.70,191.71 86.00,197.31 76.30,191.71 76.30,180.51" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="106.00,174.91 115.70,180.51 115.70,191.71 106.00,197.31 96.30,191.71 96.30,180.51" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="126.00,174.91 135.70,180.51 135.70,191.71 126.00,197.31 116.30,191.71 116.30,180.51" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="146.00,174.91 155.70,180.51 155.70,191.71 146.00,197.31 136.30,191.71 136.30,180.51" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="166.00,174.91 175.70,180.51 175.70,191.71 166.00,197.31 156.30,191.71 156.30,180.51" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="186.00,174.91 195.70,180.51 195.70,191.71 186.00,197.31 176.30,191.71 176.30,180.51" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="206.00,174.91 215.70,180.51 215.70,191.71 206.00,197.31 196.30,191.71 196.30,180.51" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="226.00,174.91 235.70,180.51 235.70,191.71 226.00,197.31 216.30,191.71 216.30,180.51" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="56.00,192.23 65.70,197.83 65.70,209.03 56.00,214.63 46.30,209.03 46.30,197.83" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="76.00,192.23 85.70,197.83 85.70,209.03 76.00,214.63 66.30,209.03 66.30,197.83" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="96.00,192.23 105.70,197.83 105.70,209.03 96.00,214.63 86.30,209.03 86.30,197.83" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="116.00,192.23 125.70,197.83 125.70,209.03 116.00,214.63 106.30,209.03 106.30,197.83" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="136.00,192.23 145.70,197.83 145.70,209.03 136.00,214.63 126.30,209.03 126.30,197.83" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="156.00,192.23 165.70,197.83 165.70,209.03 156.00,214.63 146.30,209.03 146.30,197.83" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="176.00,192.23 185.70,197.83 185.70,209.03 176.00,214.63 166.30,209.03 166.30,197.83" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="196.00,192.23 205.70,197.83 205.70,209.03 196.00,214.63 186.30,209.03 186.30,197.83" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="216.00,192.23 225.70,197.83 225.70,209.03 216.00,214.63 206.30,209.03 206.30,197.83" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<polygon points="236.00,192.23 245.70,197.83 245.70,209.03 236.00,214.63 226.30,209.03 226.30,197.83" fill="#f7efdc" stroke="#b9a582" stroke-width="0.8"/>
+<rect x="71.0" y="70.1" width="135.0" height="110.9" rx="6" fill="none" stroke="#b8862b" stroke-width="1.6" stroke-dasharray="5 3"/>
+<polygon points="86.00,36.35 95.70,41.95 95.70,53.15 86.00,58.75 76.30,53.15 76.30,41.95" fill="#7a4f86" fill-opacity="0.75" stroke="#7a4f86" stroke-width="1.2"/>
+<text x="86.0" y="51.4" text-anchor="middle" font-family="Alegreya Sans" font-weight="800" font-size="10.4" fill="#fff">1</text>
+<polygon points="186.00,36.35 195.70,41.95 195.70,53.15 186.00,58.75 176.30,53.15 176.30,41.95" fill="#7a4f86" fill-opacity="0.75" stroke="#7a4f86" stroke-width="1.2"/>
+<text x="186.0" y="51.4" text-anchor="middle" font-family="Alegreya Sans" font-weight="800" font-size="10.4" fill="#fff">2</text>
+<polygon points="226.00,105.63 235.70,111.23 235.70,122.43 226.00,128.03 216.30,122.43 216.30,111.23" fill="#7a4f86" fill-opacity="0.75" stroke="#7a4f86" stroke-width="1.2"/>
+<text x="226.0" y="120.6" text-anchor="middle" font-family="Alegreya Sans" font-weight="800" font-size="10.4" fill="#fff">3</text>
+<polygon points="196.00,192.23 205.70,197.83 205.70,209.03 196.00,214.63 186.30,209.03 186.30,197.83" fill="#7a4f86" fill-opacity="0.75" stroke="#7a4f86" stroke-width="1.2"/>
+<text x="196.0" y="207.2" text-anchor="middle" font-family="Alegreya Sans" font-weight="800" font-size="10.4" fill="#fff">4</text>
+<polygon points="96.00,192.23 105.70,197.83 105.70,209.03 96.00,214.63 86.30,209.03 86.30,197.83" fill="#7a4f86" fill-opacity="0.75" stroke="#7a4f86" stroke-width="1.2"/>
+<text x="96.0" y="207.2" text-anchor="middle" font-family="Alegreya Sans" font-weight="800" font-size="10.4" fill="#fff">5</text>
+<polygon points="56.00,122.95 65.70,128.55 65.70,139.75 56.00,145.35 46.30,139.75 46.30,128.55" fill="#7a4f86" fill-opacity="0.75" stroke="#7a4f86" stroke-width="1.2"/>
+<text x="56.0" y="138.0" text-anchor="middle" font-family="Alegreya Sans" font-weight="800" font-size="10.4" fill="#fff">6</text>
+<polygon points="116.00,88.31 125.70,93.91 125.70,105.11 116.00,110.71 106.30,105.11 106.30,93.91" fill="#b8862b" fill-opacity="0.45" stroke="#b8862b" stroke-width="1.6"/>
+<polygon points="176.00,88.31 185.70,93.91 185.70,105.11 176.00,110.71 166.30,105.11 166.30,93.91" fill="#b8862b" fill-opacity="0.45" stroke="#b8862b" stroke-width="1.6"/>
+<polygon points="106.00,140.27 115.70,145.87 115.70,157.07 106.00,162.67 96.30,157.07 96.30,145.87" fill="#b8862b" fill-opacity="0.45" stroke="#b8862b" stroke-width="1.6"/>
+<polygon points="166.00,140.27 175.70,145.87 175.70,157.07 166.00,162.67 156.30,157.07 156.30,145.87" fill="#b8862b" fill-opacity="0.45" stroke="#b8862b" stroke-width="1.6"/>
+<circle cx="166.0" cy="47.5" r="4.849742261192857" fill="#f4ead5" stroke="#2a2118" stroke-width="1.4"/><text x="166.0" y="50.2" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="7.3" fill="#2a2118">?</text>
+<circle cx="116.0" cy="203.4" r="4.849742261192857" fill="#f4ead5" stroke="#2a2118" stroke-width="1.4"/><text x="116.0" y="206.1" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="7.3" fill="#2a2118">?</text>
+<circle cx="206.0" cy="47.5" r="4.849742261192857" fill="#f4ead5" stroke="#2a2118" stroke-width="1.4"/><text x="206.0" y="50.2" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="7.3" fill="#2a2118">?</text>
+<circle cx="76.0" cy="203.4" r="4.849742261192857" fill="#f4ead5" stroke="#2a2118" stroke-width="1.4"/><text x="76.0" y="206.1" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="7.3" fill="#2a2118">?</text>
+<circle cx="76.0" cy="64.9" r="4.849742261192857" fill="#f4ead5" stroke="#2a2118" stroke-width="1.4"/><text x="76.0" y="67.5" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="7.3" fill="#2a2118">?</text>
+<circle cx="206.0" cy="186.1" r="4.849742261192857" fill="#f4ead5" stroke="#2a2118" stroke-width="1.4"/><text x="206.0" y="188.8" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="7.3" fill="#2a2118">?</text>
+<circle cx="116.0" cy="64.9" r="4.849742261192857" fill="#f4ead5" stroke="#2a2118" stroke-width="1.4"/><text x="116.0" y="67.5" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="7.3" fill="#2a2118">?</text>
+<circle cx="166.0" cy="186.1" r="4.849742261192857" fill="#f4ead5" stroke="#2a2118" stroke-width="1.4"/><text x="166.0" y="188.8" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="7.3" fill="#2a2118">?</text>
+<circle cx="176.0" cy="64.9" r="4.849742261192857" fill="#f4ead5" stroke="#2a2118" stroke-width="1.4"/><text x="176.0" y="67.5" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="7.3" fill="#2a2118">?</text>
+<circle cx="106.0" cy="186.1" r="4.849742261192857" fill="#f4ead5" stroke="#2a2118" stroke-width="1.4"/><text x="106.0" y="188.8" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="7.3" fill="#2a2118">?</text>
+<circle cx="86.0" cy="82.2" r="4.849742261192857" fill="#f4ead5" stroke="#2a2118" stroke-width="1.4"/><text x="86.0" y="84.9" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="7.3" fill="#2a2118">?</text>
+<circle cx="196.0" cy="168.8" r="4.849742261192857" fill="#f4ead5" stroke="#2a2118" stroke-width="1.4"/><text x="196.0" y="171.5" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="7.3" fill="#2a2118">?</text>
+<circle cx="146.0" cy="82.2" r="4.849742261192857" fill="#f4ead5" stroke="#2a2118" stroke-width="1.4"/><text x="146.0" y="84.9" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="7.3" fill="#2a2118">?</text>
+<circle cx="136.0" cy="168.8" r="4.849742261192857" fill="#f4ead5" stroke="#2a2118" stroke-width="1.4"/><text x="136.0" y="171.5" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="7.3" fill="#2a2118">?</text>
+<circle cx="206.0" cy="82.2" r="4.849742261192857" fill="#f4ead5" stroke="#2a2118" stroke-width="1.4"/><text x="206.0" y="84.9" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="7.3" fill="#2a2118">?</text>
+<circle cx="76.0" cy="168.8" r="4.849742261192857" fill="#f4ead5" stroke="#2a2118" stroke-width="1.4"/><text x="76.0" y="171.5" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="7.3" fill="#2a2118">?</text>
+<circle cx="236.0" cy="64.9" r="4.849742261192857" fill="#f4ead5" stroke="#2a2118" stroke-width="1.4"/><text x="236.0" y="67.5" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="7.3" fill="#2a2118">?</text>
+<circle cx="46.0" cy="186.1" r="4.849742261192857" fill="#f4ead5" stroke="#2a2118" stroke-width="1.4"/><text x="46.0" y="188.8" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="7.3" fill="#2a2118">?</text>
+<circle cx="136.0" cy="99.5" r="4.849742261192857" fill="#f4ead5" stroke="#2a2118" stroke-width="1.4"/><text x="136.0" y="102.2" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="7.3" fill="#2a2118">?</text>
+<circle cx="146.0" cy="151.5" r="4.849742261192857" fill="#f4ead5" stroke="#2a2118" stroke-width="1.4"/><text x="146.0" y="154.1" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="7.3" fill="#2a2118">?</text>
+<circle cx="196.0" cy="99.5" r="4.849742261192857" fill="#f4ead5" stroke="#2a2118" stroke-width="1.4"/><text x="196.0" y="102.2" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="7.3" fill="#2a2118">?</text>
+<circle cx="86.0" cy="151.5" r="4.849742261192857" fill="#f4ead5" stroke="#2a2118" stroke-width="1.4"/><text x="86.0" y="154.1" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="7.3" fill="#2a2118">?</text>
+<circle cx="216.0" cy="99.5" r="4.849742261192857" fill="#f4ead5" stroke="#2a2118" stroke-width="1.4"/><text x="216.0" y="102.2" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="7.3" fill="#2a2118">?</text>
+<circle cx="66.0" cy="151.5" r="4.849742261192857" fill="#f4ead5" stroke="#2a2118" stroke-width="1.4"/><text x="66.0" y="154.1" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="7.3" fill="#2a2118">?</text>
+<circle cx="56.0" cy="99.5" r="4.849742261192857" fill="#f4ead5" stroke="#2a2118" stroke-width="1.4"/><text x="56.0" y="102.2" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="7.3" fill="#2a2118">?</text>
+<circle cx="226.0" cy="151.5" r="4.849742261192857" fill="#f4ead5" stroke="#2a2118" stroke-width="1.4"/><text x="226.0" y="154.1" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="7.3" fill="#2a2118">?</text>
+<circle cx="86.0" cy="116.8" r="4.849742261192857" fill="#f4ead5" stroke="#2a2118" stroke-width="1.4"/><text x="86.0" y="119.5" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="7.3" fill="#2a2118">?</text>
+<circle cx="196.0" cy="134.1" r="4.849742261192857" fill="#f4ead5" stroke="#2a2118" stroke-width="1.4"/><text x="196.0" y="136.8" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="7.3" fill="#2a2118">?</text>
+<circle cx="146.0" cy="116.8" r="4.849742261192857" fill="#f4ead5" stroke="#2a2118" stroke-width="1.4"/><text x="146.0" y="119.5" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="7.3" fill="#2a2118">?</text>
+<circle cx="136.0" cy="134.1" r="4.849742261192857" fill="#f4ead5" stroke="#2a2118" stroke-width="1.4"/><text x="136.0" y="136.8" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="7.3" fill="#2a2118">?</text>
+<circle cx="66.0" cy="116.8" r="4.849742261192857" fill="#f4ead5" stroke="#2a2118" stroke-width="1.4"/><text x="66.0" y="119.5" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="7.3" fill="#2a2118">?</text>
+<circle cx="216.0" cy="134.1" r="4.849742261192857" fill="#f4ead5" stroke="#2a2118" stroke-width="1.4"/><text x="216.0" y="136.8" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="7.3" fill="#2a2118">?</text>
+<circle cx="136.0" cy="64.9" r="4.849742261192857" fill="#f4ead5" stroke="#2a2118" stroke-width="1.4"/><text x="136.0" y="67.5" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="7.3" fill="#2a2118">?</text>
+<circle cx="146.0" cy="186.1" r="4.849742261192857" fill="#f4ead5" stroke="#2a2118" stroke-width="1.4"/><text x="146.0" y="188.8" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="7.3" fill="#2a2118">?</text>
+<circle cx="216.0" cy="64.9" r="4.849742261192857" fill="#f4ead5" stroke="#2a2118" stroke-width="1.4"/><text x="216.0" y="67.5" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="7.3" fill="#2a2118">?</text>
+<circle cx="66.0" cy="186.1" r="4.849742261192857" fill="#f4ead5" stroke="#2a2118" stroke-width="1.4"/><text x="66.0" y="188.8" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="7.3" fill="#2a2118">?</text>
+<polygon points="126.00,36.81 135.30,42.18 135.30,52.92 126.00,58.29 116.70,52.92 116.70,42.18" fill="#7a3e8e" stroke="#4b2259" stroke-width="1.2"/><path d="M121.4 39.8 L125.2 45.2 L122.2 48.3 L127.5 55.2 L126.8 49.1 L130.6 46.8 Z" fill="#f6d68b"/>
+<circle cx="132.4" cy="53.3" r="4.8" fill="#fff" stroke="#7a3e8e" stroke-width="0.8"/><text x="132.4" y="55.5" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="6.5" fill="#7a3e8e">A</text>
+<polygon points="156.00,192.69 165.30,198.06 165.30,208.80 156.00,214.17 146.70,208.80 146.70,198.06" fill="#7a3e8e" stroke="#4b2259" stroke-width="1.2"/><path d="M151.4 195.7 L155.2 201.1 L152.2 204.2 L157.5 211.1 L156.8 205.0 L160.6 202.7 Z" fill="#f6d68b"/>
+<circle cx="162.4" cy="209.2" r="4.8" fill="#fff" stroke="#7a3e8e" stroke-width="0.8"/><text x="162.4" y="211.4" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="6.5" fill="#7a3e8e">A</text>
+<polygon points="106.00,71.45 115.30,76.82 115.30,87.56 106.00,92.93 96.70,87.56 96.70,76.82" fill="#7a3e8e" stroke="#4b2259" stroke-width="1.2"/><path d="M101.4 74.5 L105.2 79.9 L102.2 83.0 L107.5 89.9 L106.8 83.7 L110.6 81.4 Z" fill="#f6d68b"/>
+<circle cx="112.4" cy="88.0" r="4.8" fill="#fff" stroke="#7a3e8e" stroke-width="0.8"/><text x="112.4" y="90.2" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="6.5" fill="#7a3e8e">C</text>
+<polygon points="176.00,158.05 185.30,163.42 185.30,174.16 176.00,179.53 166.70,174.16 166.70,163.42" fill="#7a3e8e" stroke="#4b2259" stroke-width="1.2"/><path d="M171.4 161.1 L175.2 166.5 L172.2 169.6 L177.5 176.5 L176.8 170.3 L180.6 168.0 Z" fill="#f6d68b"/>
+<circle cx="182.4" cy="174.6" r="4.8" fill="#fff" stroke="#7a3e8e" stroke-width="0.8"/><text x="182.4" y="176.8" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="6.5" fill="#7a3e8e">C</text>
+<polygon points="186.00,106.09 195.30,111.46 195.30,122.20 186.00,127.57 176.70,122.20 176.70,111.46" fill="#7a3e8e" stroke="#4b2259" stroke-width="1.2"/><path d="M181.4 109.1 L185.2 114.5 L182.2 117.6 L187.5 124.5 L186.8 118.4 L190.6 116.1 Z" fill="#f6d68b"/>
+<circle cx="192.4" cy="122.6" r="4.8" fill="#fff" stroke="#7a3e8e" stroke-width="0.8"/><text x="192.4" y="124.8" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="6.5" fill="#7a3e8e">D</text>
+<polygon points="96.00,123.41 105.30,128.78 105.30,139.52 96.00,144.89 86.70,139.52 86.70,128.78" fill="#7a3e8e" stroke="#4b2259" stroke-width="1.2"/><path d="M91.4 126.5 L95.2 131.8 L92.2 134.9 L97.5 141.8 L96.8 135.7 L100.6 133.4 Z" fill="#f6d68b"/>
+<circle cx="102.4" cy="139.9" r="4.8" fill="#fff" stroke="#7a3e8e" stroke-width="0.8"/><text x="102.4" y="142.1" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="6.5" fill="#7a3e8e">D</text>
+<polygon points="126.00,106.09 135.30,111.46 135.30,122.20 126.00,127.57 116.70,122.20 116.70,111.46" fill="#7a3e8e" stroke="#4b2259" stroke-width="1.2"/><path d="M121.4 109.1 L125.2 114.5 L122.2 117.6 L127.5 124.5 L126.8 118.4 L130.6 116.1 Z" fill="#f6d68b"/>
+<circle cx="132.4" cy="122.6" r="4.8" fill="#fff" stroke="#7a3e8e" stroke-width="0.8"/><text x="132.4" y="124.8" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="6.5" fill="#7a3e8e">E</text>
+<polygon points="156.00,123.41 165.30,128.78 165.30,139.52 156.00,144.89 146.70,139.52 146.70,128.78" fill="#7a3e8e" stroke="#4b2259" stroke-width="1.2"/><path d="M151.4 126.5 L155.2 131.8 L152.2 134.9 L157.5 141.8 L156.8 135.7 L160.6 133.4 Z" fill="#f6d68b"/>
+<circle cx="162.4" cy="139.9" r="4.8" fill="#fff" stroke="#7a3e8e" stroke-width="0.8"/><text x="162.4" y="142.1" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="6.5" fill="#7a3e8e">E</text>
+<polygon points="226.00,71.45 235.30,76.82 235.30,87.56 226.00,92.93 216.70,87.56 216.70,76.82" fill="#7a3e8e" stroke="#4b2259" stroke-width="1.2"/><path d="M221.4 74.5 L225.2 79.9 L222.2 83.0 L227.5 89.9 L226.8 83.7 L230.6 81.4 Z" fill="#f6d68b"/>
+<circle cx="232.4" cy="88.0" r="4.8" fill="#fff" stroke="#7a3e8e" stroke-width="0.8"/><text x="232.4" y="90.2" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="6.5" fill="#7a3e8e">B</text>
+<polygon points="56.00,158.05 65.30,163.42 65.30,174.16 56.00,179.53 46.70,174.16 46.70,163.42" fill="#7a3e8e" stroke="#4b2259" stroke-width="1.2"/><path d="M51.4 161.1 L55.2 166.5 L52.2 169.6 L57.5 176.5 L56.8 170.3 L60.6 168.0 Z" fill="#f6d68b"/>
+<circle cx="62.4" cy="174.6" r="4.8" fill="#fff" stroke="#7a3e8e" stroke-width="0.8"/><text x="62.4" y="176.8" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="6.5" fill="#7a3e8e">B</text>
+<text x="116.0" y="103.5" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="11.0" fill="#2a2118">1</text>
+<text x="176.0" y="103.5" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="11.0" fill="#2a2118">2</text>
+<text x="106.0" y="155.5" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="11.0" fill="#2a2118">3</text>
+<text x="166.0" y="155.5" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="11.0" fill="#2a2118">4</text>
+<text x="41.0" y="32.0" text-anchor="middle" font-size="6.4" fill="#6b4a2b">A</text>
+<text x="61.0" y="32.0" text-anchor="middle" font-size="6.4" fill="#6b4a2b">B</text>
+<text x="81.0" y="32.0" text-anchor="middle" font-size="6.4" fill="#6b4a2b">C</text>
+<text x="101.0" y="32.0" text-anchor="middle" font-size="6.4" fill="#6b4a2b">D</text>
+<text x="121.0" y="32.0" text-anchor="middle" font-size="6.4" fill="#6b4a2b">E</text>
+<text x="141.0" y="32.0" text-anchor="middle" font-size="6.4" fill="#6b4a2b">F</text>
+<text x="161.0" y="32.0" text-anchor="middle" font-size="6.4" fill="#6b4a2b">G</text>
+<text x="181.0" y="32.0" text-anchor="middle" font-size="6.4" fill="#6b4a2b">H</text>
+<text x="201.0" y="32.0" text-anchor="middle" font-size="6.4" fill="#6b4a2b">I</text>
+<text x="221.0" y="32.0" text-anchor="middle" font-size="6.4" fill="#6b4a2b">J</text>
+<text x="30.0" y="50.5" text-anchor="end" font-size="6.4" fill="#6b4a2b">1</text>
+<text x="30.0" y="67.9" text-anchor="end" font-size="6.4" fill="#6b4a2b">2</text>
+<text x="30.0" y="85.2" text-anchor="end" font-size="6.4" fill="#6b4a2b">3</text>
+<text x="30.0" y="102.5" text-anchor="end" font-size="6.4" fill="#6b4a2b">4</text>
+<text x="30.0" y="119.8" text-anchor="end" font-size="6.4" fill="#6b4a2b">5</text>
+<text x="30.0" y="137.1" text-anchor="end" font-size="6.4" fill="#6b4a2b">6</text>
+<text x="30.0" y="154.5" text-anchor="end" font-size="6.4" fill="#6b4a2b">7</text>
+<text x="30.0" y="171.8" text-anchor="end" font-size="6.4" fill="#6b4a2b">8</text>
+<text x="30.0" y="189.1" text-anchor="end" font-size="6.4" fill="#6b4a2b">9</text>
+<text x="30.0" y="206.4" text-anchor="end" font-size="6.4" fill="#6b4a2b">10</text>
+</svg></div>
+<table><tr><th>Coppia</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th></tr>
+<tr><td><b>Crepe</b></td><td>E1 · F10</td><td>J3 · A8</td><td>D3 · G8</td><td>H5 · C6</td><td>E5 · F6</td></tr></table>
+<div class="box viola"><h3>Con una plancia Terreno</h3><p style="margin:0">Il Terreno copre il Cuore: le Crepe del Cuore (coppie C, D ed E) restano nella scatola. Le caselle evento del Terreno usano la tabella del Terreno. Restano le coppie A e B, le 4 Crepe esterne.</p></div></div><div class="folio">3</div></section><section class="page "><div class="frame"></div><div class="in"><h1 class="v">Fermarsi su una Crepa</h1>
+<p class="lead">Quando finisci il movimento su una Crepa scegli una delle due cose.</p>
+<div class="two">
+<div class="box viola" style="margin:0"><h3>Frugare</h3><p style="margin:0">Tira il D6 e guarda la tabella qui sotto (è anche sulla Carta Aiuto).</p></div>
+<div class="box viola" style="margin:0"><h3>Attraversare il fondo</h3><p style="margin:0">Metti subito il tuo eroe sulla <b>Crepa gemella</b>, se non c’è un eroe sopra o accanto. Il turno finisce lì: non si fruga.</p></div>
+</div>
+<table class="d6"><tr><td>1</td><td><b>Crollo</b>: La Crepa si allarga sotto i tuoi piedi: perdi 2 PV.</td></tr><tr><td>2</td><td><b>Imboscata</b>: Gira il primo Coboldo di MIMI della pila e combattilo (pagina 5).</td></tr><tr><td>3</td><td><b>Vento del Goblin</b>: Muovi subito di nuovo di D6 esagoni e risolvi dove ti fermi. Se il Vento ti porta su un’altra Crepa, scegli di nuovo.</td></tr><tr><td>4</td><td><b>Bottega</b>: Qualcosa di tuo cade fuori da MIMI: riprendi 1 carta dai tuoi scarti.</td></tr><tr><td>5</td><td><b>Mappa perduta</b>: Una pagina della mappa di Geronimo: prendi 1 Indizio.</td></tr><tr><td>6</td><td><b>Scambio</b>: Se vuoi, scambiati di posto con un eroe a scelta. Non è un Duello.</td></tr></table>
+<ul>
+<li><b>La Crepa resta</b>: è stampata sulla tessera, non è un segnalino del sacchetto. Vale ogni volta, per tutti.</li>
+<li>Se ti fermi su una Crepa accanto a un altro eroe, prima fai il Duello, poi scegli se frugare o attraversare.</li>
+</ul></div><div class="folio">4</div></section><section class="page "><div class="frame"></div><div class="in"><h1 class="v">I Coboldi di MIMI</h1>
+<p class="lead">Quando frugando esce l’<b>Imboscata</b>, gira il primo Coboldo della pila e combatti come con una creatura. Se vinci prendi 1 PE e <b>peschi 1 carta</b> dal mazzo comune: i Coboldi non hanno pagine della mappa, quindi niente Indizio. Il Coboldo, vinto o no, torna sotto la pila.</p>
+<div class="cob"><div style="flex:none"><svg viewBox="0 0 74 74" width="21mm" xmlns="http://www.w3.org/2000/svg">
+<circle cx="37.0" cy="37.0" r="35.5" fill="#f1e4f5" stroke="#7a3e8e" stroke-width="2.2"/>
+<circle cx="37.0" cy="37.0" r="31.0" fill="none" stroke="#b8862b" stroke-width="0.8"/>
+<text x="37.0" y="19.98" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="7.4" fill="#2a2118">Coboldo</text>
+<g transform="translate(17.40,29.24) scale(0.4)"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" fill="#9c2f24"/></g><text x="22.2" y="49.580000000000005" text-anchor="middle" font-family="Alegreya Sans" font-weight="800" font-size="10.360000000000001" fill="#2a2118">4</text>
+<g transform="translate(32.20,29.24) scale(0.4)" fill="none" stroke="#2a2118" stroke-width="2" stroke-linecap="round"><path d="M4 4l12 12M20 4L8 16M14 18l4 2 2-4M10 18l-4 2-2-4"/></g><text x="37.0" y="49.580000000000005" text-anchor="middle" font-family="Alegreya Sans" font-weight="800" font-size="10.360000000000001" fill="#2a2118">+1</text>
+<g transform="translate(47.00,29.24) scale(0.4)"><path d="M12 2l8 3v6c0 5.5-3.6 9.3-8 11-4.4-1.7-8-5.5-8-11V5z" fill="#2f5d7c"/></g><text x="51.8" y="49.580000000000005" text-anchor="middle" font-family="Alegreya Sans" font-weight="800" font-size="10.360000000000001" fill="#2a2118">10</text>
+<text x="37.0" y="60.68" text-anchor="middle" font-family="Alegreya Sans" font-weight="800" font-size="7.03" fill="#7a3e8e">D6 − 1</text>
+</svg></div><div class="tx"><b class="n">Coboldo di MIMI</b> ×2<br>Il custode del fondo. Nessun trucco: morde e basta.</div></div><div class="cob"><div style="flex:none"><svg viewBox="0 0 74 74" width="21mm" xmlns="http://www.w3.org/2000/svg">
+<circle cx="37.0" cy="37.0" r="35.5" fill="#f1e4f5" stroke="#7a3e8e" stroke-width="2.2"/>
+<circle cx="37.0" cy="37.0" r="31.0" fill="none" stroke="#b8862b" stroke-width="0.8"/>
+<text x="37.0" y="19.98" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="5.55" fill="#2a2118">Fromboliere</text>
+<g transform="translate(17.40,29.24) scale(0.4)"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" fill="#9c2f24"/></g><text x="22.2" y="49.580000000000005" text-anchor="middle" font-family="Alegreya Sans" font-weight="800" font-size="10.360000000000001" fill="#2a2118">3</text>
+<g transform="translate(32.20,29.24) scale(0.4)" fill="none" stroke="#2a2118" stroke-width="2" stroke-linecap="round"><path d="M4 4l12 12M20 4L8 16M14 18l4 2 2-4M10 18l-4 2-2-4"/></g><text x="37.0" y="49.580000000000005" text-anchor="middle" font-family="Alegreya Sans" font-weight="800" font-size="10.360000000000001" fill="#2a2118">+2</text>
+<g transform="translate(47.00,29.24) scale(0.4)"><path d="M12 2l8 3v6c0 5.5-3.6 9.3-8 11-4.4-1.7-8-5.5-8-11V5z" fill="#2f5d7c"/></g><text x="51.8" y="49.580000000000005" text-anchor="middle" font-family="Alegreya Sans" font-weight="800" font-size="10.360000000000001" fill="#2a2118">10</text>
+<text x="37.0" y="60.68" text-anchor="middle" font-family="Alegreya Sans" font-weight="800" font-size="7.03" fill="#7a3e8e">Agguato</text>
+</svg></div><div class="tx"><b class="n">Coboldo fromboliere</b> ×2<br><b>Agguato</b>: nel primo round attacca lui per primo, poi lo scontro va avanti come sempre.</div></div><div class="cob"><div style="flex:none"><svg viewBox="0 0 74 74" width="21mm" xmlns="http://www.w3.org/2000/svg">
+<circle cx="37.0" cy="37.0" r="35.5" fill="#f1e4f5" stroke="#7a3e8e" stroke-width="2.2"/>
+<circle cx="37.0" cy="37.0" r="31.0" fill="none" stroke="#b8862b" stroke-width="0.8"/>
+<text x="37.0" y="19.98" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="5.55" fill="#2a2118">Borseggiatore</text>
+<g transform="translate(17.40,29.24) scale(0.4)"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" fill="#9c2f24"/></g><text x="22.2" y="49.580000000000005" text-anchor="middle" font-family="Alegreya Sans" font-weight="800" font-size="10.360000000000001" fill="#2a2118">4</text>
+<g transform="translate(32.20,29.24) scale(0.4)" fill="none" stroke="#2a2118" stroke-width="2" stroke-linecap="round"><path d="M4 4l12 12M20 4L8 16M14 18l4 2 2-4M10 18l-4 2-2-4"/></g><text x="37.0" y="49.580000000000005" text-anchor="middle" font-family="Alegreya Sans" font-weight="800" font-size="10.360000000000001" fill="#2a2118">+1</text>
+<g transform="translate(47.00,29.24) scale(0.4)"><path d="M12 2l8 3v6c0 5.5-3.6 9.3-8 11-4.4-1.7-8-5.5-8-11V5z" fill="#2f5d7c"/></g><text x="51.8" y="49.580000000000005" text-anchor="middle" font-family="Alegreya Sans" font-weight="800" font-size="10.360000000000001" fill="#2a2118">11</text>
+<text x="37.0" y="60.68" text-anchor="middle" font-family="Alegreya Sans" font-weight="800" font-size="7.03" fill="#7a3e8e">Borseggio</text>
+</svg></div><div class="tx"><b class="n">Coboldo borseggiatore</b> ×2<br><b>Borseggio</b>: la prima volta che ti colpisce scarti 1 carta a caso dalla mano. Se lo sconfiggi peschi 1 carta in più.</div></div>
+<p class="tip">Tutti i Coboldi fanno D6 − 1 danni (minimo 1), come le creature deboli della base. Se in questo turno hai già combattuto, il Coboldo scappa e non succede niente.</p>
+<p class="tip">Minaccia (vedi il framework di design): Coboldo 9, Fromboliere 10, Borseggiatore 11, tutti nella fascia Debole.</p></div><div class="folio">5</div></section><section class="page "><div class="frame"></div><div class="in"><h1 class="v">Le carte Caos</h1>
+<p>Sei carte nuove entrano nel mazzo comune. Si giocano come tutte le altre: fino a 2 carte per turno, al massimo 1 equipaggiamento.</p>
+<div class="cards"><div><svg viewBox="0 0 126 176.0" width="34.0mm" xmlns="http://www.w3.org/2000/svg" font-family="Alegreya Sans"><rect x="1" y="1" width="124" height="174.0" rx="7" fill="#fffaf0" stroke="#7a3e8e" stroke-width="2"/><rect x="5" y="5" width="116" height="26" rx="5" fill="#7a3e8e"/><text x="63.0" y="22.5" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="11" fill="#f6d68b">Biglia del nulla</text><rect x="10" y="36" width="106" height="44" rx="4" fill="#efe2f3"/><polygon points="63.00,44.05 75.08,51.02 75.08,64.97 63.00,71.95 50.92,64.97 50.92,51.02" fill="#7a3e8e" stroke="#4b2259" stroke-width="1.2"/><path d="M57.0 48.0 L62.0 55.0 L58.0 59.0 L65.0 68.0 L64.0 60.0 L69.0 57.0 Z" fill="#f6d68b"/><text x="63.0" y="93" text-anchor="middle" font-size="8.6" font-weight="800" fill="#7a3e8e">Incantesimo</text><text x="63.0" y="107.0" text-anchor="middle" font-size="9.4" fill="#2a2118">Fruga in una Crepa</text><text x="63.0" y="118.2" text-anchor="middle" font-size="9.4" fill="#2a2118">da dove sei: tira il D6</text><text x="63.0" y="129.4" text-anchor="middle" font-size="9.4" fill="#2a2118">sulla tabella del Caos.</text><text x="63.0" y="140.6" text-anchor="middle" font-size="9.4" fill="#2a2118">Mago: tira due D6 e scegli.</text><text x="116" y="168.0" text-anchor="end" font-size="7" fill="#6b4a2b">✷ Caos</text></svg></div><div><svg viewBox="0 0 126 176.0" width="34.0mm" xmlns="http://www.w3.org/2000/svg" font-family="Alegreya Sans"><rect x="1" y="1" width="124" height="174.0" rx="7" fill="#fffaf0" stroke="#7a3e8e" stroke-width="2"/><rect x="5" y="5" width="116" height="26" rx="5" fill="#7a3e8e"/><text x="63.0" y="22.5" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="11" fill="#f6d68b">Pagina strappata</text><rect x="10" y="36" width="106" height="44" rx="4" fill="#efe2f3"/><polygon points="63.00,44.05 75.08,51.02 75.08,64.97 63.00,71.95 50.92,64.97 50.92,51.02" fill="#7a3e8e" stroke="#4b2259" stroke-width="1.2"/><path d="M57.0 48.0 L62.0 55.0 L58.0 59.0 L65.0 68.0 L64.0 60.0 L69.0 57.0 Z" fill="#f6d68b"/><text x="63.0" y="93" text-anchor="middle" font-size="8.6" font-weight="800" fill="#7a3e8e">Incantesimo</text><text x="63.0" y="107.0" text-anchor="middle" font-size="9.4" fill="#2a2118">Tira il D6: con 5 o 6</text><text x="63.0" y="118.2" text-anchor="middle" font-size="9.4" fill="#2a2118">prendi 1 Indizio,</text><text x="63.0" y="129.4" text-anchor="middle" font-size="9.4" fill="#2a2118">altrimenti peschi 1 carta.</text><text x="63.0" y="140.6" text-anchor="middle" font-size="9.4" fill="#2a2118">Mago: basta un 4.</text><text x="116" y="168.0" text-anchor="end" font-size="7" fill="#6b4a2b">✷ Caos</text></svg></div><div><svg viewBox="0 0 126 176.0" width="34.0mm" xmlns="http://www.w3.org/2000/svg" font-family="Alegreya Sans"><rect x="1" y="1" width="124" height="174.0" rx="7" fill="#fffaf0" stroke="#7a3e8e" stroke-width="2"/><rect x="5" y="5" width="116" height="26" rx="5" fill="#7a3e8e"/><text x="63.0" y="22.5" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="11" fill="#f6d68b">Coboldo pentito</text><rect x="10" y="36" width="106" height="44" rx="4" fill="#efe2f3"/><polygon points="63.00,44.05 75.08,51.02 75.08,64.97 63.00,71.95 50.92,64.97 50.92,51.02" fill="#7a3e8e" stroke="#4b2259" stroke-width="1.2"/><path d="M57.0 48.0 L62.0 55.0 L58.0 59.0 L65.0 68.0 L64.0 60.0 L69.0 57.0 Z" fill="#f6d68b"/><text x="63.0" y="93" text-anchor="middle" font-size="8.6" font-weight="800" fill="#7a3e8e">Incantesimo · scontro</text><text x="63.0" y="107.0" text-anchor="middle" font-size="9.4" fill="#2a2118">Un Coboldo di MIMI</text><text x="63.0" y="118.2" text-anchor="middle" font-size="9.4" fill="#2a2118">passa dalla tua parte:</text><text x="63.0" y="129.4" text-anchor="middle" font-size="9.4" fill="#2a2118">infligge 3 danni</text><text x="63.0" y="140.6" text-anchor="middle" font-size="9.4" fill="#2a2118">al nemico.</text><text x="116" y="168.0" text-anchor="end" font-size="7" fill="#6b4a2b">✷ Caos</text></svg></div><div><svg viewBox="0 0 126 176.0" width="34.0mm" xmlns="http://www.w3.org/2000/svg" font-family="Alegreya Sans"><rect x="1" y="1" width="124" height="174.0" rx="7" fill="#fffaf0" stroke="#7a3e8e" stroke-width="2"/><rect x="5" y="5" width="116" height="26" rx="5" fill="#7a3e8e"/><text x="63.0" y="22.5" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="9.6" fill="#f6d68b">Lanterna dei Coboldi</text><rect x="10" y="36" width="106" height="44" rx="4" fill="#efe2f3"/><polygon points="63.00,44.05 75.08,51.02 75.08,64.97 63.00,71.95 50.92,64.97 50.92,51.02" fill="#7a3e8e" stroke="#4b2259" stroke-width="1.2"/><path d="M57.0 48.0 L62.0 55.0 L58.0 59.0 L65.0 68.0 L64.0 60.0 L69.0 57.0 Z" fill="#f6d68b"/><text x="63.0" y="93" text-anchor="middle" font-size="8.6" font-weight="800" fill="#7a3e8e">Equipaggiamento · Elmo</text><text x="63.0" y="107.0" text-anchor="middle" font-size="9.4" fill="#2a2118">+1 AR. Chierico: +1 ATT.</text><text x="63.0" y="118.2" text-anchor="middle" font-size="9.4" fill="#2a2118">Quando frughi in una</text><text x="63.0" y="129.4" text-anchor="middle" font-size="9.4" fill="#2a2118">Crepa tira due D6</text><text x="63.0" y="140.6" text-anchor="middle" font-size="9.4" fill="#2a2118">e scegli quale tenere.</text><text x="116" y="168.0" text-anchor="end" font-size="7" fill="#6b4a2b">✷ Caos</text></svg></div><div><svg viewBox="0 0 126 176.0" width="34.0mm" xmlns="http://www.w3.org/2000/svg" font-family="Alegreya Sans"><rect x="1" y="1" width="124" height="174.0" rx="7" fill="#fffaf0" stroke="#7a3e8e" stroke-width="2"/><rect x="5" y="5" width="116" height="26" rx="5" fill="#7a3e8e"/><text x="63.0" y="22.5" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="11" fill="#f6d68b">Vento di nulla</text><rect x="10" y="36" width="106" height="44" rx="4" fill="#efe2f3"/><polygon points="63.00,44.05 75.08,51.02 75.08,64.97 63.00,71.95 50.92,64.97 50.92,51.02" fill="#7a3e8e" stroke="#4b2259" stroke-width="1.2"/><path d="M57.0 48.0 L62.0 55.0 L58.0 59.0 L65.0 68.0 L64.0 60.0 L69.0 57.0 Z" fill="#f6d68b"/><text x="63.0" y="93" text-anchor="middle" font-size="8.6" font-weight="800" fill="#7a3e8e">Incantesimo</text><text x="63.0" y="107.0" text-anchor="middle" font-size="9.4" fill="#2a2118">Un avversario a scelta,</text><text x="63.0" y="118.2" text-anchor="middle" font-size="9.4" fill="#2a2118">nel suo prossimo turno,</text><text x="63.0" y="129.4" text-anchor="middle" font-size="9.4" fill="#2a2118">muove di 1 esagono</text><text x="63.0" y="140.6" text-anchor="middle" font-size="9.4" fill="#2a2118">soltanto.</text><text x="116" y="168.0" text-anchor="end" font-size="7" fill="#6b4a2b">✷ Caos</text></svg></div><div><svg viewBox="0 0 126 176.0" width="34.0mm" xmlns="http://www.w3.org/2000/svg" font-family="Alegreya Sans"><rect x="1" y="1" width="124" height="174.0" rx="7" fill="#fffaf0" stroke="#7a3e8e" stroke-width="2"/><rect x="5" y="5" width="116" height="26" rx="5" fill="#7a3e8e"/><text x="63.0" y="22.5" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="11" fill="#f6d68b">Risata del Goblin</text><rect x="10" y="36" width="106" height="44" rx="4" fill="#efe2f3"/><polygon points="63.00,44.05 75.08,51.02 75.08,64.97 63.00,71.95 50.92,64.97 50.92,51.02" fill="#7a3e8e" stroke="#4b2259" stroke-width="1.2"/><path d="M57.0 48.0 L62.0 55.0 L58.0 59.0 L65.0 68.0 L64.0 60.0 L69.0 57.0 Z" fill="#f6d68b"/><text x="63.0" y="93" text-anchor="middle" font-size="8.6" font-weight="800" fill="#7a3e8e">Incantesimo</text><text x="63.0" y="107.0" text-anchor="middle" font-size="9.4" fill="#2a2118">Tutti tirano il D6,</text><text x="63.0" y="118.2" text-anchor="middle" font-size="9.4" fill="#2a2118">tu due e tieni il più alto.</text><text x="63.0" y="129.4" text-anchor="middle" font-size="9.4" fill="#2a2118">Il più alto prende</text><text x="63.0" y="140.6" text-anchor="middle" font-size="9.4" fill="#2a2118">1 Indizio (pari: nessuno).</text><text x="116" y="168.0" text-anchor="end" font-size="7" fill="#6b4a2b">✷ Caos</text></svg></div></div>
+<p class="tip" style="margin-top:2mm">Le carte che parlano di Crepe non fanno niente se le Crepe non sono sulla plancia: con una plancia Terreno usate le 4 Crepe esterne.</p></div><div class="folio">6</div></section><section class="page "><div class="frame"></div><div class="in"><h1 class="v">Domande frequenti</h1>
+<div class="qa">
+<p><b>Posso attraversare se sulla gemella c’è un eroe?</b>No: la Crepa gemella deve essere libera, senza eroi sopra o accanto. Allora puoi solo frugare.</p><p><b>Attraversare conta come movimento?</b>Sì, ma non tiri niente e sulla gemella non succede niente: il tuo turno finisce lì. Al prossimo turno riparti da quella Crepa.</p><p><b>Perché battere un Coboldo non dà l’Indizio?</b>I Coboldi non hanno pagine della mappa: tengono in ordine le cianfrusaglie. Per questo dai Coboldi peschi una carta.</p><p><b>Con la Biglia del nulla posso attraversare?</b>No: la Biglia fa solo frugare. Per attraversare devi fermarti su una Crepa.</p><p><b>Ho la Lanterna e uso la Biglia: tiro tre dadi?</b>No, al massimo due: tiri due D6 e scegli.</p><p><b>Il Borseggiatore mi ruba l’ultima carta?</b>Se non hai carte in mano non ti ruba niente.</p>
+</div>
+<div class="cols" style="align-items:center;margin-top:1mm"><div style="flex:none"><svg viewBox="0 0 150 209.5" width="33mm" xmlns="http://www.w3.org/2000/svg" font-family="Alegreya Sans"><rect x="1" y="1" width="148" height="207.5" rx="8" fill="#f6eef8" stroke="#7a3e8e" stroke-width="2"/><rect x="1" y="1" width="148" height="34" rx="8" fill="#7a3e8e"/><text x="75.0" y="23" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="13" fill="#f6d68b">Su una Crepa</text><text x="75.0" y="50" text-anchor="middle" font-size="9" font-weight="800" fill="#2a2118">Fruga (D6) oppure</text><text x="75.0" y="61" text-anchor="middle" font-size="9" font-weight="800" fill="#2a2118">attraversa: vai sulla gemella</text><text x="12" y="82" font-family="Cinzel" font-weight="800" font-size="13" fill="#7a3e8e">1</text><text x="28" y="82" font-size="9.5" font-weight="700" fill="#2a2118">Crollo</text><text x="28" y="91" font-size="8" fill="#6b4a2b">perdi 2 PV</text><text x="12" y="100" font-family="Cinzel" font-weight="800" font-size="13" fill="#7a3e8e">2</text><text x="28" y="100" font-size="9.5" font-weight="700" fill="#2a2118">Imboscata</text><text x="28" y="109" font-size="8" fill="#6b4a2b">gira un Coboldo e combatti</text><text x="12" y="118" font-family="Cinzel" font-weight="800" font-size="13" fill="#7a3e8e">3</text><text x="28" y="118" font-size="9.5" font-weight="700" fill="#2a2118">Vento</text><text x="28" y="127" font-size="8" fill="#6b4a2b">muovi ancora D6</text><text x="12" y="136" font-family="Cinzel" font-weight="800" font-size="13" fill="#7a3e8e">4</text><text x="28" y="136" font-size="9.5" font-weight="700" fill="#2a2118">Bottega</text><text x="28" y="145" font-size="8" fill="#6b4a2b">riprendi 1 carta</text><text x="12" y="154" font-family="Cinzel" font-weight="800" font-size="13" fill="#7a3e8e">5</text><text x="28" y="154" font-size="9.5" font-weight="700" fill="#2a2118">Mappa</text><text x="28" y="163" font-size="8" fill="#6b4a2b">prendi 1 Indizio</text><text x="12" y="172" font-family="Cinzel" font-weight="800" font-size="13" fill="#7a3e8e">6</text><text x="28" y="172" font-size="9.5" font-weight="700" fill="#2a2118">Scambio</text><text x="28" y="181" font-size="8" fill="#6b4a2b">cambia posto con un eroe</text><text x="75.0" y="201.5" text-anchor="middle" font-size="7.5" fill="#6b4a2b">La Crepa resta: vale ogni volta, per tutti</text></svg></div><div><p class="cap" style="text-align:left">La Carta Aiuto del Caos (63 × 88 mm), una per giocatore.</p></div></div></div><div class="folio">7</div></section><section class="page "><div class="frame"></div><div class="in"><h1 class="v">Il Caos in numeri</h1>
+<p>Ogni pezzo di questa espansione è stato provato con il simulatore della scatola fisica, 30.000–40.000 partite per numero di giocatori, con i tempi di un tavolo vero.</p>
+<table><tr><th></th><th>2 giocatori</th><th>3 giocatori</th><th>4 giocatori</th></tr>
+<tr><td><b>Scatola base</b></td><td>26 min</td><td>29,5 min</td><td>30 min</td></tr>
+<tr><td><b>Con il Caos</b></td><td>26 min</td><td>29,5 min</td><td>30,5 min</td></tr></table>
+<p>Le quattro classi della base restano tra 0,96 e 1,05 volte la vittoria attesa (1 = perfetto), ognuna con il suo stile: il Mago trova pagine con la Pagina strappata e fruga meglio con la Biglia, il Chierico si fa luce con la Lanterna, e battere i Coboldi non dà Indizi, così il Guerriero non scappa via a forza di scontri. In quattro il Caos aggiunge circa mezzo minuto; in due la partita resta uguale.</p>
+<div class="box viola"><h3>Perché le Crepe gemelle</h3><p style="margin:0">Abbiamo provato anche a far saltare su una Crepa qualsiasi: il salto era sempre a portata di mano e in 3 e 4 giocatori il Ladro perdeva parte del suo vantaggio di movimento. Con le coppie il salto è una scorciatoia da preparare, e ogni giocatore sa da dove può spuntare un avversario.</p></div>
+<p class="tip" style="text-align:center;margin-top:5mm">Il Tesoro del Goblin · Espansione «Il Caos del Goblin · Le Crepe di MIMI» · v2.0<br>Esce dopo La Cittadella Bianca e funziona con ogni scatola.</p></div><div class="folio">8</div></section></body></html>

@@ -1,0 +1,8 @@
+{"secs":60.881,"errors":0,"score":97.93,"parts":{"classi":0.965,"gauss":0.989,"turno":0.977,"finite":1},"mean":7.095,"sd":3.13,"skew":0.275,"kurt":-0.133,"r2":0.989,"first":0.977,"draws":0}
+CLS: Bardo 1.07 | Barbaro 1.03 | Warlock 1.02 | Chierico 1.01 | Ladro 1.00 | Guerriero 1.00 | Paladino 0.99 | Druido 0.99 | Mago 0.96 | Stregone 0.94
+RACE: Nani 1.05 | Umani 1.03 | Yumaniani 1.02 | Sanguar 1.00 | Halfling 0.99 | Tiefling 0.98 | Elfi 0.98 | Orchi 0.95
+reasons {"beholder":10133,"boss":9867}
+TIME all: 30.1 min (mediana 29.3, 10-90% 15-46) · inizio 4.4 · centro 12.8 · finale 12.9 · giri 7.1
+TIME 2p: 24.8 min (mediana 24.4, 10-90% 13-36) · inizio 4.2 · centro 9.7 · finale 10.9 · giri 7.5
+TIME 3p: 30.7 min (mediana 30.6, 10-90% 16-45) · inizio 4.4 · centro 13.1 · finale 13.2 · giri 7.0
+TIME 4p: 35.0 min (mediana 34.6, 10-90% 18-52) · inizio 4.5 · centro 15.7 · finale 14.7 · giri 6.7

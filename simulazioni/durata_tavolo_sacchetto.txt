@@ -1,0 +1,136 @@
+Sacchetto + 8 sentieri + Guardiano 14, simulatore della versione giocabile (plancia stampata), 30.000 partite per riga. TIME = ritmo «Al tavolo» (turno 25, dado 6, carta 35, movimento 18, casella 12, scontro 20, attacco 12, livello 20, sconfitta 40); DIGITALE = ritmo da app.
+### g2
+{"secs":56.184,"errors":0,"score":96.339,"mean":5.716,"sd":3.084,"skew":0.443,"kurt":-0.302,"r2":0.94,"first":1.005,"draws":0}
+CLS: Ladro 1.08 | Chierico 1.03 | Guerriero 0.97 | Mago 0.93
+TIME all: 30.5 min (mediana 29.4, 10-90% 14-48) · inizio 4.5 · centro 10.4 · finale 15.6 · giri 5.7
+TIME 2p: 30.5 min (mediana 29.4, 10-90% 14-48) · inizio 4.5 · centro 10.4 · finale 15.6 · giri 5.7
+DIGITALE 2p 20.4 min
+### g3
+{"secs":75.291,"errors":0,"score":95.296,"mean":4.418,"sd":2.534,"skew":0.633,"kurt":0.019,"r2":0.931,"first":0.962,"draws":0}
+CLS: Ladro 1.09 | Chierico 1.01 | Mago 0.95 | Guerriero 0.95
+TIME all: 34.0 min (mediana 32.1, 10-90% 15-55) · inizio 4.4 · centro 12.1 · finale 17.5 · giri 4.4
+TIME 3p: 34.0 min (mediana 32.1, 10-90% 15-55) · inizio 4.4 · centro 12.1 · finale 17.5 · giri 4.4
+DIGITALE 3p 22.8 min
+### g4
+{"secs":83.895,"errors":0,"score":93.972,"mean":3.505,"sd":2.133,"skew":0.849,"kurt":0.538,"r2":0.912,"first":0.92,"draws":0}
+CLS: Ladro 1.09 | Mago 0.99 | Chierico 0.97 | Guerriero 0.95
+TIME all: 34.8 min (mediana 32.2, 10-90% 16-58) · inizio 4.5 · centro 11.9 · finale 18.4 · giri 3.5
+TIME 4p: 34.8 min (mediana 32.2, 10-90% 16-58) · inizio 4.5 · centro 11.9 · finale 18.4 · giri 3.5
+DIGITALE 4p 23.3 min
+### gf
+{"secs":94.305,"errors":0,"score":96.89,"mean":6.98,"sd":3.166,"skew":0.237,"kurt":-0.224,"r2":0.982,"first":0.984,"draws":0}
+CLS: Ladro 1.09 | Warlock 1.08 | Chierico 1.06 | Paladino 1.02 | Druido 1.02 | Barbaro 0.99 | Bardo 0.96 | Mago 0.96 | Guerriero 0.94 | Stregone 0.87
+TIME all: 45.7 min (mediana 44.3, 10-90% 23-71) · inizio 6.6 · centro 20.5 · finale 18.6 · giri 7.0
+TIME 2p: 37.6 min (mediana 37.2, 10-90% 20-55) · inizio 6.3 · centro 15.3 · finale 16.0 · giri 7.6
+TIME 3p: 46.6 min (mediana 46.5, 10-90% 24-69) · inizio 6.6 · centro 21.0 · finale 19.0 · giri 6.9
+TIME 4p: 53.0 min (mediana 53.0, 10-90% 26-80) · inizio 6.9 · centro 25.2 · finale 20.9 · giri 6.5
+DIGITALE 2p 25.1 · 3p 31.1 · 4p 35.3 min
+### h2
+{"secs":51.239,"errors":0,"score":96.849,"mean":5.128,"sd":2.841,"skew":0.552,"kurt":-0.089,"r2":0.94,"first":1.016,"draws":0}
+CLS: Ladro 1.05 | Guerriero 1.01 | Chierico 0.99 | Mago 0.95
+TIME all: 27.4 min (mediana 26.2, 10-90% 13-44) · inizio 4.0 · centro 9.2 · finale 14.2 · giri 5.1
+TIME 2p: 27.4 min (mediana 26.2, 10-90% 13-44) · inizio 4.0 · centro 9.2 · finale 14.2 · giri 5.1
+DIGITALE 2p 18.3 min
+### h4
+{"secs":80.756,"errors":0,"score":94.264,"mean":3.26,"sd":2.001,"skew":0.869,"kurt":0.609,"r2":0.918,"first":0.916,"draws":0}
+CLS: Ladro 1.06 | Mago 1.02 | Chierico 0.96 | Guerriero 0.95
+TIME all: 32.3 min (mediana 30.0, 10-90% 14-54) · inizio 4.1 · centro 10.9 · finale 17.3 · giri 3.3
+TIME 4p: 32.3 min (mediana 30.0, 10-90% 14-54) · inizio 4.1 · centro 10.9 · finale 17.3 · giri 3.3
+DIGITALE 4p 21.7 min
+### i4
+{"secs":85.585,"errors":0,"score":94.009,"mean":3.482,"sd":2.146,"skew":0.842,"kurt":0.473,"r2":0.905,"first":0.931,"draws":0}
+CLS: Ladro 1.07 | Mago 1.03 | Chierico 0.99 | Guerriero 0.92
+TIME all: 34.3 min (mediana 31.7, 10-90% 15-58) · inizio 4.6 · centro 12.0 · finale 17.7 · giri 3.5
+TIME 4p: 34.3 min (mediana 31.7, 10-90% 15-58) · inizio 4.6 · centro 12.0 · finale 17.7 · giri 3.5
+DIGITALE 4p 23.0 min
+### j4
+{"secs":81.05,"errors":0,"score":95.644,"mean":3.296,"sd":1.983,"skew":0.86,"kurt":0.623,"r2":0.921,"first":0.958,"draws":0}
+CLS: Ladro 1.06 | Mago 1.00 | Guerriero 0.98 | Chierico 0.96
+TIME all: 32.9 min (mediana 30.7, 10-90% 15-54) · inizio 4.2 · centro 10.8 · finale 17.9 · giri 3.3
+TIME 4p: 32.9 min (mediana 30.7, 10-90% 15-54) · inizio 4.2 · centro 10.8 · finale 17.9 · giri 3.3
+DIGITALE 4p 22.0 min
+(g = scatola base col pacchetto, gf = gioco completo, h = senza sacchetto e Guardiano 12, i = sacchetto con Guardiano 12, j = senza sacchetto con Guardiano 14)
+
+Correzione: la scatola base non ha le carte TM (Terreno, espansioni). base4.js ora le toglie dal mazzo comune.
+### k2 (scatola base senza TM)
+{"secs":47.434,"errors":0,"score":95.532,"mean":4.763,"sd":2.753,"skew":0.622,"kurt":-0.052,"r2":0.922,"first":1.044,"draws":0}
+CLS: Chierico 1.05 | Mago 1.02 | Ladro 0.98 | Guerriero 0.95
+TIME all: 25.7 min (mediana 24.3, 10-90% 12-41) · inizio 4.7 · centro 10.4 · finale 10.7 · giri 4.8
+DIGITALE 2p 17.2 min
+### k3 (scatola base senza TM)
+{"secs":62.276,"errors":0,"score":95.221,"mean":3.793,"sd":2.338,"skew":0.726,"kurt":0.102,"r2":0.896,"first":0.985,"draws":0}
+CLS: Ladro 1.06 | Mago 1.02 | Chierico 1.01 | Guerriero 0.92
+TIME all: 28.8 min (mediana 26.8, 10-90% 13-48) · inizio 4.6 · centro 12.1 · finale 12.1 · giri 3.8
+DIGITALE 3p 19.3 min
+### k4 (scatola base senza TM)
+{"secs":71.054,"errors":0,"score":92.594,"mean":3.096,"sd":2.06,"skew":0.966,"kurt":0.676,"r2":0.869,"first":0.915,"draws":0}
+CLS: Ladro 1.06 | Mago 1.05 | Chierico 0.98 | Guerriero 0.92
+TIME all: 29.8 min (mediana 26.7, 10-90% 13-51) · inizio 4.7 · centro 12.2 · finale 12.9 · giri 3.1
+DIGITALE 4p 20.0 min
+
+Correzioni carte 21/10 (TE-21 4 PV, TM-05 +1 MOV, TE-18 Clessidre, TI-45 dietroPV, Ladro senza +1 PV):
+### p2
+{"secs":50.031,"errors":0,"score":95.223,"mean":4.582,"sd":2.825,"skew":0.682,"kurt":-0.039,"r2":0.878,"first":1.023,"draws":0}
+CLS: Chierico 1.05 | Mago 1.02 | Ladro 0.97 | Guerriero 0.97
+TIME all: 25.9 min (mediana 24.3, 10-90% 12-42) · inizio 4.4 · centro 11.1 · finale 10.4 · giri 4.6
+DIGITALE 2p 17.3 min
+### p3
+{"secs":63.388,"errors":0,"score":94.491,"mean":3.371,"sd":2.298,"skew":0.914,"kurt":0.436,"r2":0.828,"first":0.977,"draws":0}
+CLS: Ladro 1.02 | Chierico 1.01 | Mago 0.98 | Guerriero 0.98
+TIME all: 29.1 min (mediana 26.3, 10-90% 13-50) · inizio 4.2 · centro 13.3 · finale 11.6 · giri 3.4
+DIGITALE 3p 19.5 min
+### p4
+{"secs":71.979,"errors":0,"score":91.589,"mean":2.464,"sd":1.856,"skew":1.292,"kurt":1.508,"r2":0.761,"first":0.934,"draws":0}
+CLS: Ladro 1.04 | Mago 0.99 | Guerriero 0.99 | Chierico 0.98
+TIME all: 29.8 min (mediana 25.9, 10-90% 13-53) · inizio 4.2 · centro 13.4 · finale 12.2 · giri 2.5
+DIGITALE 4p 20.0 min
+### pf
+{"secs":92.363,"errors":0,"score":97.558,"mean":6.684,"sd":3.2,"skew":0.28,"kurt":-0.256,"r2":0.976,"first":1,"draws":0}
+CLS: Warlock 1.07 | Paladino 1.05 | Barbaro 1.05 | Chierico 1.03 | Ladro 1.03 | Druido 0.99 | Guerriero 0.98 | Stregone 0.96 | Bardo 0.94 | Mago 0.90
+TIME all: 46.4 min (mediana 44.9, 10-90% 22-72) · inizio 6.4 · centro 22.0 · finale 18.1 · giri 6.7
+DIGITALE 2p 25.3 · 3p 31.8 · 4p 36.0 min
+
+Caos fuori dal gioco base (21/10 sera), BAL.caos false; qc4 = con l'espansione Caos:
+### q2
+{"secs":37.021,"errors":0,"score":95.259,"mean":4.658,"sd":2.871,"skew":0.684,"kurt":-0.009,"r2":0.883,"first":1.02,"draws":0}
+CLS: Chierico 1.06 | Mago 1.00 | Ladro 0.97 | Guerriero 0.96
+TIME all: 26.4 min (mediana 24.8, 10-90% 12-43) · inizio 4.4 · centro 11.5 · finale 10.5 · giri 4.7
+DIGITALE 2p 17.7 min
+### q3
+{"secs":48.379,"errors":0,"score":93.449,"mean":3.409,"sd":2.329,"skew":0.901,"kurt":0.354,"r2":0.802,"first":0.961,"draws":0}
+CLS: Ladro 1.03 | Chierico 1.00 | Mago 0.99 | Guerriero 0.98
+TIME all: 29.5 min (mediana 26.7, 10-90% 13-51) · inizio 4.2 · centro 13.8 · finale 11.6 · giri 3.4
+DIGITALE 3p 19.9 min
+### q4
+{"secs":55.458,"errors":0,"score":91.047,"mean":2.465,"sd":1.877,"skew":1.306,"kurt":1.544,"r2":0.772,"first":0.913,"draws":0}
+CLS: Ladro 1.04 | Mago 1.01 | Guerriero 0.98 | Chierico 0.96
+TIME all: 30.0 min (mediana 25.9, 10-90% 13-54) · inizio 4.3 · centro 13.6 · finale 12.1 · giri 2.5
+DIGITALE 4p 20.2 min
+### qc4
+{"secs":55.431,"errors":0,"score":91.972,"mean":2.482,"sd":1.877,"skew":1.262,"kurt":1.376,"r2":0.774,"first":0.94,"draws":0}
+CLS: Ladro 1.04 | Chierico 0.99 | Mago 0.99 | Guerriero 0.98
+TIME all: 29.9 min (mediana 25.9, 10-90% 13-53) · inizio 4.2 · centro 13.4 · finale 12.2 · giri 2.5
+DIGITALE 4p 20.1 min
+
+Espansione «Il Caos del Goblin · Le Crepe di MIMI» v2.0 (21/10 sera), scatola base, BALX caos:true; x0 = base senza espansione:
+### x2
+{"secs":34.454,"errors":0,"score":95.939,"mean":4.383,"sd":2.731,"skew":0.785,"kurt":0.257,"r2":0.895,"first":1.027,"draws":0}
+CLS: Mago 1.03 | Chierico 1.01 | Guerriero 0.99 | Ladro 0.97
+TIME all: 26.0 min (mediana 24.4, 10-90% 12-42) · inizio 4.2 · centro 10.8 · finale 11.0 · giri 4.4
+DIGITALE 2p 17.4 min
+### x3
+{"secs":45.667,"errors":0,"score":94.915,"mean":3.259,"sd":2.174,"skew":0.985,"kurt":0.779,"r2":0.855,"first":0.972,"draws":0}
+CLS: Ladro 1.03 | Mago 1.01 | Chierico 1.00 | Guerriero 0.97
+TIME all: 29.6 min (mediana 27.0, 10-90% 13-50) · inizio 4.1 · centro 13.1 · finale 12.4 · giri 3.3
+DIGITALE 3p 19.9 min
+### x4
+{"secs":52.375,"errors":0,"score":93.316,"mean":2.402,"sd":1.728,"skew":1.306,"kurt":1.784,"r2":0.818,"first":0.936,"draws":0}
+CLS: Ladro 1.02 | Mago 1.01 | Guerriero 1.00 | Chierico 0.98
+TIME all: 30.7 min (mediana 27.2, 10-90% 14-53) · inizio 4.2 · centro 13.3 · finale 13.1 · giri 2.4
+DIGITALE 4p 20.7 min
+### x0
+{"secs":41.332,"errors":0,"score":93.442,"mean":3.429,"sd":2.328,"skew":0.893,"kurt":0.36,"r2":0.817,"first":0.954,"draws":0}
+CLS: Ladro 1.04 | Chierico 1.01 | Mago 0.99 | Guerriero 0.97
+TIME all: 29.7 min (mediana 26.9, 10-90% 13-51) · inizio 4.3 · centro 13.8 · finale 11.7 · giri 3.4
+DIGITALE 3p 20.0 min
+Conteggi su 2.000 partite a 4 (cnt.js): frugate 1,86 a partita, attraversamenti 0,13, carte pescate 0,83, agguati 0,08, borseggi 0,03.

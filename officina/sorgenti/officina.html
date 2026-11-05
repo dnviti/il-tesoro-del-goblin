@@ -1,0 +1,1278 @@
+<title>Officina del Goblin</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Alegreya:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@500;700&display=swap">
+<style>
+/* Layout: banco da lavoro a due colonne (modulo a sinistra, carta e verdetto a destra), schede in alto; su telefono una colonna. */
+:root {
+  --bg: #e9ece6;          /* pietra verde chiara */
+  --panel: #f6f7f3;
+  --sunk: #dde2d9;
+  --ink: #1d2520;
+  --ink-2: #4c574f;
+  --line: #c3cbc0;
+  --brass: #8a6418;       /* ottone: accento */
+  --brass-soft: #ecdfc0;
+  --moss: #3f6236;
+  --ok: #2f6b3a; --ok-bg: #d8e8d6;
+  --warn: #8a5a00; --warn-bg: #f3e3bd;
+  --bad: #a1301f; --bad-bg: #f3d6cf;
+  --card: #fbf8ef; --card-ink: #2a2116; --card-edge: #6d5321;
+  --hex-path: #f4f5ef; --hex-q: #e7d6a6; --hex-cry: #6d4f9a; --hex-caos: #c1572f; --hex-block: #3b5a74; --hex-slow: #8fa26a; --hex-out: #d3d8cf; --hex-portal: #0f8a83;
+  --f-display: "Cinzel", "Trajan Pro", Georgia, serif;
+  --f-card: "Alegreya", Georgia, "Times New Roman", serif;
+  --f-ui: "Alegreya Sans", "Gill Sans", "Segoe UI", system-ui, sans-serif;
+  --r: 6px;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #121814; --panel: #1a221d; --sunk: #232d27; --ink: #e3e8df; --ink-2: #a5b0a7; --line: #34413a;
+  --brass: #d6a94c; --brass-soft: #3a3020; --moss: #93b97f;
+  --ok: #8fd09a; --ok-bg: #1f3a25; --warn: #e6b65a; --warn-bg: #3d3018; --bad: #f08f7d; --bad-bg: #44221c;
+  --card: #f3ecd9; --card-ink: #2a2116; --card-edge: #a37f35;
+  --hex-path: #2a352e; --hex-q: #7a6732; --hex-cry: #9b7fd0; --hex-caos: #d9714a; --hex-block: #5b86a8; --hex-slow: #6f8550; --hex-out: #1f2823; --hex-portal: #3cc4bb;
+  color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #121814; --panel: #1a221d; --sunk: #232d27; --ink: #e3e8df; --ink-2: #a5b0a7; --line: #34413a;
+  --brass: #d6a94c; --brass-soft: #3a3020; --moss: #93b97f;
+  --ok: #8fd09a; --ok-bg: #1f3a25; --warn: #e6b65a; --warn-bg: #3d3018; --bad: #f08f7d; --bad-bg: #44221c;
+  --card: #f3ecd9; --card-ink: #2a2116; --card-edge: #a37f35;
+  --hex-path: #2a352e; --hex-q: #7a6732; --hex-cry: #9b7fd0; --hex-caos: #d9714a; --hex-block: #5b86a8; --hex-slow: #6f8550; --hex-out: #1f2823; --hex-portal: #3cc4bb;
+  color-scheme: dark }
+
+* { box-sizing: border-box }
+[hidden] { display: none !important }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-ui); font-size: 16px; line-height: 1.45;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 0 48px; }
+.wrap { max-width: 1180px; margin: 0 auto }
+h1, h2, h3 { text-wrap: balance; margin: 0 }
+h1 { font-family: var(--f-display); font-weight: 700; font-size: 1.9rem; letter-spacing: .04em }
+h2 { font-family: var(--f-display); font-weight: 500; font-size: 1.15rem; letter-spacing: .05em }
+h3 { font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-2) }
+p { margin: 0 }
+a { color: var(--brass) }
+.num { font-variant-numeric: tabular-nums }
+button, select, input, textarea { font: inherit; color: inherit }
+:focus-visible { outline: 2px solid var(--brass); outline-offset: 2px }
+
+header.top { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 8px 24px; padding-block: 28px 14px; border-bottom: 1px solid var(--line) }
+header.top .sub { color: var(--ink-2); max-width: 62ch }
+.legend-units { font-size: .85rem; color: var(--ink-2); display: flex; gap: 14px; flex-wrap: wrap }
+.legend-units b { color: var(--ink) }
+
+nav.tabs { display: flex; gap: 4px; overflow-x: auto; padding-block: 12px; position: sticky; top: env(safe-area-inset-top, 0px); background: var(--bg); z-index: 5 }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg) }
+nav.tabs button { border: 1px solid transparent; background: none; padding: 7px 14px; border-radius: 999px; cursor: pointer; color: var(--ink-2); font-weight: 500; white-space: nowrap }
+nav.tabs button[aria-selected="true"] { background: var(--ink); color: var(--bg) }
+nav.tabs button:hover:not([aria-selected="true"]) { border-color: var(--line); color: var(--ink) }
+nav.tabs .count { font-size: .75rem; opacity: .7; margin-left: 4px }
+
+.bench { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 420px); gap: 28px; align-items: start; padding-top: 8px }
+.bench > * { min-width: 0 }
+.side { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 64px); display: grid; gap: 16px }
+@media (max-width: 900px) { .bench { grid-template-columns: minmax(0, 1fr) } .side { position: static } }
+
+.form { display: grid; gap: 18px }
+fieldset { border: 0; margin: 0; padding: 0; display: grid; gap: 10px }
+legend { padding: 0; margin-bottom: 4px }
+.row { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: end }
+.row > label, .fld { display: grid; gap: 3px; font-size: .85rem; color: var(--ink-2); min-width: 0 }
+.fld.grow { flex: 1 1 200px }
+input[type=text], input[type=number], select, textarea { background: var(--panel); border: 1px solid var(--line); border-radius: var(--r); padding: 7px 9px; color: var(--ink); min-width: 0 }
+input[type=number] { width: 5.2em }
+textarea { width: 100%; resize: vertical; min-height: 4em; font-family: var(--f-card) }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; background: var(--panel); flex-wrap: wrap }
+.seg button { border: 0; background: none; padding: 7px 12px; cursor: pointer; color: var(--ink-2) }
+.seg button + button { border-left: 1px solid var(--line) }
+.seg button[aria-pressed="true"] { background: var(--brass-soft); color: var(--ink); font-weight: 700 }
+.btn { border: 1px solid var(--line); background: var(--panel); padding: 7px 13px; border-radius: var(--r); cursor: pointer }
+.btn:hover { border-color: var(--ink-2) }
+.btn.primary { background: var(--brass); border-color: var(--brass); color: var(--panel); font-weight: 700 }
+:root[data-theme="dark"] .btn.primary { color: #1a1408 }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn.primary { color: #1a1408 } }
+.btn.ghost { border-color: transparent; background: none; color: var(--ink-2) }
+.btn.small { padding: 3px 9px; font-size: .85rem }
+.btn:disabled { opacity: .5; cursor: default }
+.hint { font-size: .85rem; color: var(--ink-2); max-width: 70ch }
+
+.fx-list { display: grid; gap: 8px }
+.fx { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; align-items: center; background: var(--panel); border: 1px solid var(--line); border-radius: var(--r); padding: 8px 10px }
+.fx .ctl { display: flex; flex-wrap: wrap; gap: 6px; align-items: center }
+.fx .ctl select:first-child { flex: 1 1 210px }
+.fx .pp { font-variant-numeric: tabular-nums; font-weight: 700; min-width: 4.2em; text-align: right }
+.fx .x { border: 0; background: none; cursor: pointer; color: var(--ink-2); font-size: 1.1rem; line-height: 1; padding: 2px 6px }
+.fx .free { flex: 1 1 100% }
+
+/* carta fisica 63 × 88 mm */
+.card { width: min(100%, 300px); aspect-ratio: 63 / 88; margin: 0 auto; background: var(--card); color: var(--card-ink); border: 2px solid var(--card-edge); border-radius: 14px; padding: 14px 16px; display: grid; grid-template-rows: auto auto 1fr auto; gap: 8px; box-shadow: 0 1px 0 var(--line), 0 10px 26px -18px rgba(0,0,0,.6); position: relative; max-width: 100% }
+.card .band { display: flex; justify-content: space-between; align-items: center; font-family: var(--f-ui); font-size: .72rem; text-transform: uppercase; letter-spacing: .12em; color: #6a5530 }
+.card .rar { font-size: 1rem; letter-spacing: 0; color: var(--card-edge) }
+.card .name { font-family: var(--f-display); font-weight: 700; font-size: 1.3rem; line-height: 1.15; text-align: center; border-bottom: 1px solid #d8c9a4; padding-bottom: 8px; text-wrap: balance }
+.card .who { text-align: center; font-family: var(--f-card); font-style: italic; color: #6a5530; font-size: .9rem; margin-top: -4px }
+.card .text { font-family: var(--f-card); font-size: 1.02rem; line-height: 1.4; align-self: center; text-align: center; overflow-wrap: anywhere }
+.card .text .race { display: block; margin-top: 8px; font-size: .95rem; border-top: 1px dotted #c9b78c; padding-top: 6px }
+.card .foot { display: flex; justify-content: space-between; align-items: center; font-size: .72rem; color: #6a5530; font-family: var(--f-ui); gap: 8px }
+.card .slot { border: 1px solid #c9b78c; border-radius: 999px; padding: 1px 8px }
+
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; display: grid; gap: 10px }
+.verdict { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap }
+.big { font-family: var(--f-display); font-size: 2.2rem; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums }
+.chip { display: inline-flex; align-items: center; gap: 4px; border-radius: 999px; padding: 2px 10px; font-size: .8rem; font-weight: 700; white-space: nowrap }
+.chip.ok { background: var(--ok-bg); color: var(--ok) }
+.chip.warn { background: var(--warn-bg); color: var(--warn) }
+.chip.bad { background: var(--bad-bg); color: var(--bad) }
+.chip.mute { background: var(--sunk); color: var(--ink-2) }
+
+.scale { position: relative; height: 34px; margin-top: 4px }
+.scale svg { width: 100%; height: 100%; overflow: visible; display: block }
+
+.checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; font-size: .92rem }
+.checks li { display: grid; grid-template-columns: 1.3em minmax(0, 1fr); gap: 6px; align-items: start }
+.checks .i { font-weight: 700; text-align: center }
+.checks .ok .i { color: var(--ok) } .checks .warn .i { color: var(--warn) } .checks .bad .i { color: var(--bad) } .checks .man .i { color: var(--ink-2) }
+.checks .man { color: var(--ink-2) }
+
+table.t { border-collapse: collapse; width: 100%; font-size: .9rem }
+table.t th, table.t td { text-align: left; padding: 5px 8px; border-bottom: 1px solid var(--line); vertical-align: top }
+table.t th { font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-2); font-weight: 700 }
+table.t td.n, table.t th.n { text-align: right; font-variant-numeric: tabular-nums }
+table.t tr.me td { background: var(--brass-soft) }
+.tscroll { overflow-x: auto }
+
+.sim .bar { height: 8px; background: var(--sunk); border-radius: 999px; overflow: hidden }
+.sim .bar i { display: block; height: 100%; width: 0; background: var(--moss); transition: width .2s }
+.sim .res { display: grid; gap: 6px }
+.kv { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; font-size: .92rem }
+.kv dt { color: var(--ink-2) } .kv dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; font-weight: 700 }
+
+/* segnalino nemico */
+.token { width: 220px; max-width: 100%; aspect-ratio: 1; border-radius: 50%; margin: 0 auto; background: var(--card); color: var(--card-ink); border: 3px solid var(--card-edge); display: grid; place-content: center; text-align: center; gap: 4px; padding: 26px; box-shadow: inset 0 0 0 6px var(--card), inset 0 0 0 7px #d8c9a4 }
+.token .tn { font-family: var(--f-display); font-weight: 700; font-size: 1.05rem; line-height: 1.15 }
+.token .ts { font-family: var(--f-ui); font-variant-numeric: tabular-nums; font-size: .95rem; letter-spacing: .02em }
+.token .tt { font-family: var(--f-card); font-style: italic; font-size: .85rem }
+.token.boss { border-color: #7c2a1b }
+
+/* tabella evento stampata */
+.plate { background: var(--card); color: var(--card-ink); border: 2px solid var(--card-edge); border-radius: 10px; padding: 14px 16px; font-family: var(--f-card) }
+.plate .pn { font-family: var(--f-display); font-weight: 700; font-size: 1.1rem; text-align: center; margin-bottom: 8px }
+.plate ol { margin: 0; padding: 0; list-style: none; display: grid; gap: 4px }
+.plate li { display: grid; grid-template-columns: 1.6em minmax(0, 1fr); gap: 6px }
+.plate li b { font-family: var(--f-display); text-align: center; border: 1px solid #c9b78c; border-radius: 4px; height: 1.6em; line-height: 1.5em }
+
+.evrow { display: grid; grid-template-columns: 2.2em minmax(0, 1fr) auto; gap: 8px; align-items: center; background: var(--panel); border: 1px solid var(--line); border-radius: var(--r); padding: 6px 8px }
+.evrow .face { font-family: var(--f-display); font-weight: 700; text-align: center }
+.evrow .ctl { display: flex; flex-wrap: wrap; gap: 6px; min-width: 0 }
+.evrow .ctl select { flex: 1 1 200px } .evrow .ctl input[type=text] { flex: 1 1 220px }
+
+/* plancia */
+.boardwrap { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 10px; overflow-x: auto }
+.boardwrap svg { display: block; width: 100%; max-width: 560px; margin: 0 auto; height: auto; touch-action: manipulation }
+.hex { stroke: var(--line); stroke-width: 1 }
+.hex.edit { cursor: pointer }
+.hex.edit:hover { stroke: var(--brass); stroke-width: 2 }
+.tools { display: flex; flex-wrap: wrap; gap: 6px }
+.tool { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); background: var(--panel); border-radius: 999px; padding: 4px 12px 4px 6px; cursor: pointer; font-size: .9rem }
+.tool i { width: 16px; height: 16px; border-radius: 50%; display: inline-block; border: 1px solid var(--line) }
+.tool[aria-pressed="true"] { border-color: var(--brass); background: var(--brass-soft); font-weight: 700 }
+
+/* collezione */
+.coll { display: grid; gap: 8px }
+.item { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 10px 14px; align-items: center; background: var(--panel); border: 1px solid var(--line); border-radius: var(--r); padding: 10px 12px }
+.item .kind { font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-2); width: 5.5em }
+.item .nm { font-weight: 700 } .item .meta { font-size: .85rem; color: var(--ink-2) }
+.item .acts { display: flex; gap: 4px; flex-wrap: wrap; justify-content: end }
+@media (max-width: 560px) { .item { grid-template-columns: minmax(0, 1fr) } .item .acts { justify-content: start } }
+.empty { border: 1px dashed var(--line); border-radius: 10px; padding: 22px; text-align: center; color: var(--ink-2) }
+.toast { position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--ink); color: var(--bg); padding: 8px 16px; border-radius: 999px; font-size: .92rem; z-index: 20; max-width: calc(100% - 32px) }
+.out { width: 100%; min-height: 10em; font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .8rem }
+.example { font-size: .78rem; color: var(--brass); font-weight: 700; text-transform: uppercase; letter-spacing: .08em }
+.toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>Officina del Goblin</h1>
+      <p class="sub">Qui nascono le carte, i nemici, gli eventi e i Terreni delle espansioni. Ogni pezzo riceve il suo prezzo mentre lo scrivi, con le regole del framework, e si può provare nel simulatore della scatola base.</p>
+    </div>
+    <div class="legend-units">
+      <span><b>1 PP</b> = 1 punto di vittoria su 100 in 2 giocatori</span>
+      <span><b>Minaccia</b> = 2·PV + ATT + 2·(Difesa − 14) + danno</span>
+    </div>
+  </header>
+
+  <nav class="tabs" role="tablist" id="tabs">
+    <button role="tab" data-tab="carte" aria-selected="true">Carte</button>
+    <button role="tab" data-tab="nemici" aria-selected="false">Nemici</button>
+    <button role="tab" data-tab="eventi" aria-selected="false">Eventi</button>
+    <button role="tab" data-tab="terreni" aria-selected="false">Terreni</button>
+    <button role="tab" data-tab="collezione" aria-selected="false">Collezione<span class="count" id="collCount"></span></button>
+  </nav>
+
+  <!-- ===================== CARTE ===================== -->
+  <section id="tab-carte" class="bench" role="tabpanel">
+    <div class="form">
+      <div class="toolbar"><span class="example" id="cardExample">Esempio dal framework</span><button class="btn small ghost" id="cardNew">Carta vuota</button></div>
+      <fieldset>
+        <div class="row">
+          <label class="fld grow">Nome (1–3 parole)<input type="text" id="c-nome"></label>
+          <label class="fld">Codice<input type="text" id="c-id" placeholder="SEL-01" style="width:8em"></label>
+          <label class="fld">Scatola<select id="c-set"></select></label>
+        </div>
+        <div class="row">
+          <div class="fld">Rarità<div class="seg" id="c-rar"></div></div>
+          <label class="fld">Classe<select id="c-cls"></select></label>
+        </div>
+        <div class="row">
+          <div class="fld">Tipo<div class="seg" id="c-kind"></div></div>
+          <label class="fld" id="c-slot-w">Slot<select id="c-slot"></select></label>
+          <label class="fld" id="c-when-w">Quando<select id="c-when"></select></label>
+          <label class="fld">Requisito<select id="c-req"></select></label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend><h3>Effetti</h3></legend>
+        <div class="fx-list" id="c-fx"></div>
+        <div><button class="btn small" id="c-addfx">+ Aggiungi effetto</button></div>
+      </fieldset>
+      <fieldset>
+        <legend><h3>Riga di specie (facoltativa)</h3></legend>
+        <p class="hint">Una riga sola, dopo l'effetto, con «in più». Vale un quarto del suo prezzo, perché capita in una partita su quattro.</p>
+        <div class="row"><label class="fld">Specie<select id="c-race"></select></label></div>
+        <div class="fx-list" id="c-racefx"></div>
+      </fieldset>
+      <fieldset>
+        <legend><h3>Testo e note</h3></legend>
+        <label class="fld">Testo personalizzato (lascia vuoto per usare quello standard)<textarea id="c-text" rows="2"></textarea></label>
+        <label class="fld">Note per il catalogo<input type="text" id="c-note"></label>
+      </fieldset>
+      <div class="toolbar"><button class="btn primary" id="c-save">Salva nella collezione</button><span class="hint" id="c-saved"></span></div>
+    </div>
+    <aside class="side">
+      <div class="card" id="c-card"></div>
+      <div class="panel">
+        <div class="verdict"><span class="big" id="c-pp">0</span><span>PP stimati</span><span id="c-chip"></span></div>
+        <div class="scale" id="c-scale"></div>
+        <div class="tscroll"><table class="t" id="c-break"></table></div>
+      </div>
+      <div class="panel"><h3>Checklist della carta</h3><ul class="checks" id="c-checks"></ul></div>
+      <div class="panel sim" id="c-sim"></div>
+    </aside>
+  </section>
+
+  <!-- ===================== NEMICI ===================== -->
+  <section id="tab-nemici" class="bench" role="tabpanel" hidden>
+    <div class="form">
+      <div class="toolbar"><span class="example" id="foeExample">Esempio dal framework</span><button class="btn small ghost" id="foeNew">Nemico vuoto</button></div>
+      <fieldset>
+        <div class="row">
+          <label class="fld grow">Nome<input type="text" id="f-nome"></label>
+          <label class="fld">Scatola<select id="f-set"></select></label>
+        </div>
+        <div class="row"><div class="fld">Ruolo<div class="seg" id="f-role"></div></div></div>
+        <div class="row">
+          <label class="fld">PV<input type="number" id="f-pv" min="1" max="30"></label>
+          <label class="fld">ATT<input type="number" id="f-att" min="0" max="10"></label>
+          <label class="fld">Difesa<input type="number" id="f-dif" min="12" max="20"></label>
+          <div class="fld">Danno<div class="seg" id="f-dmg"></div></div>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend><h3>Tratti</h3></legend>
+        <p class="hint">Un nemico ne ha al massimo uno, un mini-boss o un boss al massimo due. Ogni tratto aggiunge Minaccia: togli PV o ATT per restare nella fascia.</p>
+        <div class="tools" id="f-traits"></div>
+      </fieldset>
+      <fieldset>
+        <label class="fld">Testo di colore sul segnalino (facoltativo)<input type="text" id="f-flavor"></label>
+      </fieldset>
+      <div class="toolbar"><button class="btn primary" id="f-save">Salva nella collezione</button><span class="hint" id="f-saved"></span></div>
+      <div class="panel"><h3>Dove sta tra i nemici della base</h3><div class="scale" id="f-scale" style="height:64px"></div><div class="tscroll"><table class="t" id="f-table"></table></div></div>
+    </div>
+    <aside class="side">
+      <div class="token" id="f-token"></div>
+      <div class="panel">
+        <div class="verdict"><span class="big" id="f-m">0</span><span>Minaccia</span><span id="f-chip"></span></div>
+        <div class="tscroll"><table class="t" id="f-break"></table></div>
+      </div>
+      <div class="panel"><h3>Scontri simulati (20.000 per eroe)</h3><div class="tscroll"><table class="t" id="f-fight"></table></div><p class="hint" id="f-fightnote"></p></div>
+      <div class="panel"><h3>Controlli</h3><ul class="checks" id="f-checks"></ul></div>
+    </aside>
+  </section>
+
+  <!-- ===================== EVENTI ===================== -->
+  <section id="tab-eventi" class="bench" role="tabpanel" hidden>
+    <div class="form">
+      <div class="toolbar"><span class="example" id="evExample">Esempio dal framework</span><button class="btn small ghost" id="evCaos">Carica il Caos del Goblin</button><button class="btn small ghost" id="evBag">Carica le 36 tessere base</button></div>
+      <fieldset>
+        <div class="row">
+          <label class="fld grow">Nome<input type="text" id="e-nome"></label>
+          <label class="fld">Scatola<select id="e-set"></select></label>
+        </div>
+        <div class="row"><div class="fld">Forma<div class="seg" id="e-mode"></div></div></div>
+        <p class="hint" id="e-modehint"></p>
+      </fieldset>
+      <fieldset>
+        <legend><h3 id="e-rowstitle">Facce del D6</h3></legend>
+        <div class="fx-list" id="e-rows"></div>
+        <div id="e-addw"><button class="btn small" id="e-add">+ Aggiungi tipo di segnalino</button></div>
+      </fieldset>
+      <div class="toolbar"><button class="btn primary" id="e-save">Salva nella collezione</button><span class="hint" id="e-saved"></span></div>
+    </div>
+    <aside class="side">
+      <div class="plate" id="e-plate"></div>
+      <div class="panel">
+        <div class="verdict"><span class="big" id="e-avg">0</span><span>PP medi per fermata</span><span id="e-chip"></span></div>
+        <dl class="kv" id="e-kv"></dl>
+      </div>
+      <div class="panel"><h3>Regole degli eventi</h3><ul class="checks" id="e-checks"></ul></div>
+    </aside>
+  </section>
+
+  <!-- ===================== TERRENI ===================== -->
+  <section id="tab-terreni" class="bench" role="tabpanel" hidden>
+    <div class="form">
+      <div class="toolbar"><span class="example" id="tExample">Esempio dal framework</span>
+        <label class="fld" style="flex-direction:row">Parti da <select id="t-tpl"></select></label>
+        <label class="fld" style="flex-direction:row;align-items:center;gap:6px" title="Espansione: 4 Crepe fuori dal Cuore (quelle del Cuore restano nella scatola sotto un Terreno)"><input type="checkbox" id="t-caos"> Con il Caos del Goblin</label></div>
+      <fieldset>
+        <div class="row">
+          <label class="fld grow">Nome del Terreno<input type="text" id="t-nome"></label>
+          <label class="fld">Scatola<select id="t-set"></select></label>
+        </div>
+        <label class="fld">La regola in una riga (sulla carta e sul bordo della plancia)<input type="text" id="t-rule"></label>
+        <div class="row">
+          <label class="fld grow">Bonus della carta Terreno (facoltativo)<input type="text" id="t-bonus" placeholder="Elfo e Druido: +1 MOV finché la Selva resta"></label>
+          <label class="fld">PP del bonus<input type="number" id="t-bonuspp" step="0.5" min="0" max="10"></label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend><h3>Disegna sul Cuore (colonne C–H, righe 3–8)</h3></legend>
+        <div class="tools" id="t-tools"></div>
+        <label class="hint" style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="t-mirror" checked> Specchia a mezzo giro (consigliato: la regola 1 dei Terreni)</label>
+        <div class="boardwrap"><svg id="t-board" role="img" aria-label="Plancia 10 per 10 con il Terreno"></svg></div>
+        <p class="hint" id="t-toolhint"></p>
+      </fieldset>
+      <div class="toolbar"><button class="btn primary" id="t-save">Salva nella collezione</button><span class="hint" id="t-saved"></span></div>
+    </div>
+    <aside class="side">
+      <div class="panel">
+        <div class="verdict"><span class="big" id="t-spread">0</span><span>esagoni di scarto tra le partenze</span><span id="t-chip"></span></div>
+        <div class="tscroll"><table class="t" id="t-dist"></table></div>
+        <p class="hint">Percorso più breve da ogni partenza alle 4 Cripte, con blocchi, terreno difficile e portali. Nella base le medie vanno da 5,0 a 5,5.</p>
+      </div>
+      <div class="panel"><h3>Regole di bilanciamento</h3><ul class="checks" id="t-checks"></ul></div>
+      <div class="panel sim" id="t-sim"></div>
+    </aside>
+  </section>
+
+  <!-- ===================== COLLEZIONE ===================== -->
+  <section id="tab-collezione" role="tabpanel" hidden style="padding-top:8px">
+    <div class="form">
+      <div class="toolbar">
+        <div class="seg" id="k-filter"></div>
+        <span class="hint" id="k-store"></span>
+      </div>
+      <div class="coll" id="k-list"></div>
+      <div class="panel">
+        <h2>Esporta</h2>
+        <p class="hint">Le carte escono con le colonne del catalogo Excel (CSV con il punto e virgola) o nel formato di cards.json, con gli effetti in un campo «officina» che il simulatore può leggere. Il JSON completo si può reimportare qui.</p>
+        <div class="toolbar">
+          <button class="btn" data-exp="cardsCsv">Carte · CSV catalogo</button>
+          <button class="btn" data-exp="cardsJson">Carte · cards.json</button>
+          <button class="btn" data-exp="foesCsv">Nemici · CSV</button>
+          <button class="btn" data-exp="evCsv">Eventi · CSV</button>
+          <button class="btn" data-exp="allJson">Tutto · JSON</button>
+          <label class="btn">Importa JSON<input type="file" id="k-import" accept=".json,application/json" hidden></label>
+        </div>
+        <div id="k-out" hidden><p class="hint" id="k-outhint"></p><textarea class="out" id="k-outtext" readonly></textarea><div class="toolbar"><button class="btn small" id="k-copy">Copia</button></div></div>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+'use strict';
+// ===================== dati del framework =====================
+const SETS = ['Base', 'Il Caos del Goblin', 'La Selva', 'Il Cimitero', 'La Cittadella Bianca', 'Espansione 4 (Città)', 'Espansione 5 (Catacomba)', 'Altro'];
+const CLASSES = { Guerriero: 'Base', Ladro: 'Base', Mago: 'Base', Oracolo: 'Base', Druido: 'La Selva', Barbaro: 'La Selva', Warlock: 'Il Cimitero', Stregone: 'Il Cimitero', Paladino: 'La Cittadella Bianca', Bardo: 'La Cittadella Bianca' };
+const RACES = ['Umano', 'Elfo', 'Nano', 'Orco', 'Sanguar'];
+const STAT = { att: 'ATT', ar: 'AR', mov: 'MOV', pv: 'PV' };
+const RARITY = {
+  comune: { label: 'Comune', sym: '●', lo: 1, hi: 3 },
+  classe: { label: 'Di classe', sym: '◆', lo: 2, hi: 5 },
+  leggendaria: { label: 'Leggendaria', sym: '★', lo: 4, hi: 6 },
+};
+const KINDS = { incantesimo: 'Incantesimo', equip: 'Equipaggiamento', pozione: 'Pozione' };
+const SLOTS = ['Elmo', 'Arma a una mano', 'Arma a due mani', 'Corpo'];
+const WHENS = { sempre: 'A inizio turno, in scontro o a fine turno', scontro: 'Si gioca in scontro', prima: 'Si gioca prima di muoverti' };
+const REQS = { '': 'Nessuno', pvBassi: 'Solo se hai 3 PV o meno', ...Object.fromEntries(RACES.map(r => ['razza:' + r, 'Solo ' + r])) };
+const fmt = (x, d = 1) => (Math.round(x * 10 ** d) / 10 ** d).toLocaleString('it-IT', { minimumFractionDigits: d, maximumFractionDigits: d });
+const sgn = (x, d = 1) => (x > 0.049 ? '+' : x < -0.049 ? '−' : '') + fmt(Math.abs(x), d);
+const plural = (n, a, b) => n === 1 ? a : b;
+// Listino rimisurato il 27/10 (Difesa 14 + AR, 5 PV iniziali): 8.000 partite per voce, rumore ±0,8 PP
+const attPerm = n => [0, 5, 8.6, 11, 13][n] ?? 13 + (n - 4) * 2;
+
+// Listino del framework (PP in 2 giocatori). tag = leva di classe.
+const EFX = {
+  indizio:      { label: 'Prendi Indizi', f: ['n'], pp: e => 4 * e.n, tag: () => 'indizi',
+                  text: e => `prendi ${e.n} ${plural(e.n, 'Indizio', 'Indizi')}` },
+  rubaIndizio:  { label: 'Prendi 1 Indizio a un avversario', f: [], pp: () => 4.5, tag: () => 'furto',
+                  text: () => 'prendi 1 Indizio a un avversario' },
+  togliIndizio: { label: 'Togli Indizi a un avversario', f: ['t', 'n'], pp: e => 0.5 * e.n, tag: () => 'togliIndizi',
+                  text: e => e.t === 'ogni' ? `ogni avversario perde ${e.n} ${plural(e.n, 'Indizio', 'Indizi')}` : `togli ${e.n} ${plural(e.n, 'Indizio', 'Indizi')} a un avversario` },
+  turnoAvv:     { label: 'Ogni avversario perde turni', f: ['n'], pp: e => 7 * e.n, tag: () => 'turniAltri',
+                  text: e => `ogni avversario perde ${e.n} ${plural(e.n, 'turno', 'turni')}` },
+  turnoExtra:   { label: 'Turno extra', f: ['n'], pp: e => 7.5 * e.n, tag: () => 'turnoExtra',
+                  text: e => e.n === 1 ? 'giochi 1 turno extra' : `giochi ${e.n} turni extra` },
+  statPerm:     { label: 'Statistica fino alla fine della partita', f: ['s', 'n'], tag: e => e.s === 'ar' && e.n >= 2 ? 'arAlta' : e.s,
+                  pp: (e, c) => (e.s === 'att' ? attPerm(e.n) : e.n * { ar: 2.4, mov: 1.7, pv: 1.8 }[e.s]) * (c.kind === 'equip' ? 0.85 : 1),
+                  text: (e, c) => c.kind === 'equip' ? `+${e.n} ${STAT[e.s]}` : `+${e.n} ${STAT[e.s]} fino alla fine della partita` },
+  statScontri:  { label: 'Statistica per uno o più scontri', f: ['s2', 'n', 'd'], tag: e => e.s,
+                  pp: e => e.n * 0.2 * e.d, text: (e, c) => `+${e.n} ${STAT[e.s]} ${durS(e.d, c)}` },
+  vantaggio:    { label: 'Vantaggio per uno o più scontri', f: ['d'], pp: e => 0.5 * e.d, tag: () => 'vantaggio',
+                  text: (e, c) => `vantaggio ${durS(e.d, c)}` },
+  movTurno:     { label: '+MOV fino alla fine del turno', f: ['n'], pp: e => 0.1 * e.n, est: true, tag: () => 'mov',
+                  text: e => `+${e.n} MOV fino alla fine del turno` },
+  riprendi:     { label: 'Riprendi carte dai tuoi scarti', f: ['n'], pp: e => 0.5 * e.n, est: true, tag: () => 'riprendi',
+                  text: e => `riprendi ${e.n} ${plural(e.n, 'carta', 'carte')} dai tuoi scarti, eccetto questa` },
+  scartaAvv:    { label: 'Ogni avversario scarta carte a caso', f: ['n'], pp: e => 0.5 * e.n, tag: () => 'carteAltri',
+                  text: e => `ogni avversario scarta ${e.n} ${plural(e.n, 'carta', 'carte')} a caso` },
+  ispirazione:  { label: 'Prendi l\'Ispirazione', f: [], pp: () => 0.7, tag: () => 'ispirazione', text: () => 'prendi l\'Ispirazione' },
+  pe:           { label: 'Prendi PE', f: ['n'], pp: e => 4 * e.n, tag: () => null, text: e => `prendi ${e.n} PE` },
+  danniAvv:     { label: 'Danni a un avversario fuori scontro', f: ['t', 'n'], pp: e => 1.7 * e.n, tag: e => e.n >= 3 ? 'danniAlti' : 'danniFuori',
+                  text: e => `${e.t === 'ogni' ? 'ogni avversario' : 'un avversario'} subisce ${e.n} ${plural(e.n, 'danno', 'danni')}` },
+  danniNemico:  { label: 'Danni al nemico (in scontro)', f: ['n'], pp: e => 0.5 * e.n, tag: e => e.n >= 3 ? 'danniAlti' : 'danniNemico',
+                  text: e => `il nemico subisce ${e.n} ${plural(e.n, 'danno', 'danni')}` },
+  malusNemico:  { label: '−AR al nemico per questo scontro', f: ['n'], pp: e => 0.3 * e.n, est: true, tag: () => 'malus',
+                  text: e => `il nemico ha −${e.n} AR per questo scontro` },
+  cura:         { label: 'Recuperi PV', f: ['n'], pp: e => 0.15 * e.n, est: true, tag: e => e.n >= 4 ? 'cureGrandi' : 'cure',
+                  text: e => `recuperi ${e.n} PV` },
+  perdiTurno:   { label: 'Costo: perdi turni', f: ['n'], pp: e => e.n === 1 ? -9.5 : e.n === 2 ? -19 : -9.5 * e.n, tag: () => null,
+                  text: e => `perdi ${e.n} ${plural(e.n, 'turno', 'turni')}` },
+  perdiPV:      { label: 'Costo: perdi PV', f: ['n'], pp: e => -1.8 * e.n, tag: () => 'patto', text: e => `perdi ${e.n} PV` },
+  libero:       { label: 'Effetto libero (testo e PP a mano)', f: ['free'], pp: e => +e.pp || 0, tag: () => null, text: e => (e.txt || '').trim() },
+};
+const durS = (d, c) => d === 1 ? (c.when === 'scontro' ? 'per questo scontro' : 'nel prossimo scontro') : `nei prossimi ${d} scontri (⚔ ${d})`;
+
+// Identità delle classi: leve primarie, secondarie, vietate (tag degli effetti)
+const IDENT = {
+  Guerriero: { p: ['att', 'ar', 'arAlta', 'ispirazione', 'danniNemico', 'vantaggio'], s: ['pv', 'turniAltri'], v: ['indizi', 'danniFuori', 'danniAlti'], ruolo: 'Vince gli scontri' },
+  Ladro:     { p: ['mov', 'indizi', 'furto', 'carteAltri', 'togliIndizi'], s: ['vantaggio'], v: ['cureGrandi', 'arAlta'], ruolo: 'Arriva prima e ruba' },
+  Mago:      { p: ['indizi', 'danniFuori', 'danniNemico', 'malus', 'mov'], s: ['turniAltri'], v: ['arAlta', 'cure', 'cureGrandi'], ruolo: 'Piega dadi e mappa' },
+  Oracolo:   { p: ['cure', 'cureGrandi', 'riprendi', 'pv'], s: ['indizi'], v: ['danniAlti', 'furto'], ruolo: 'Torna in vita; si ricarica pescando una Locanda' },
+  Druido:    { p: ['att', 'ar', 'pv', 'vantaggio', 'cure'], s: ['mov'], v: ['indizi', 'furto'], ruolo: 'Combatte con le bestie' },
+  Barbaro:   { p: ['danniAlti', 'danniNemico', 'att'], s: ['mov', 'pv'], v: ['cure', 'cureGrandi'], ruolo: 'Più forte da ferito' },
+  Warlock:   { p: ['patto', 'danniNemico', 'att', 'danniFuori'], s: ['malus', 'togliIndizi'], v: ['cure', 'cureGrandi'], ruolo: 'Paga per il potere' },
+  Stregone:  { p: ['danniFuori', 'danniAlti', 'turniAltri'], s: ['mov'], v: ['ar', 'arAlta'], ruolo: 'Incantesimi su tutti' },
+  Paladino:  { p: ['cure', 'cureGrandi', 'danniNemico', 'danniAlti', 'pv'], s: ['togliIndizi'], v: ['furto', 'turniAltri'], ruolo: 'Abbatte i mostri' },
+  Bardo:     { p: ['riprendi', 'carteAltri', 'ispirazione', 'malus'], s: ['att', 'ar', 'mov', 'pv'], v: ['danniAlti'], ruolo: 'Gioca con le carte degli altri' },
+};
+const TAGNAME = { indizi: 'Indizi diretti', furto: 'furto', togliIndizi: 'togliere Indizi', turniAltri: 'turni agli altri', turnoExtra: 'turni extra', att: 'ATT', ar: 'AR', arAlta: 'AR alta', mov: 'MOV', pv: 'PV', vantaggio: 'vantaggio', riprendi: 'riprendere carte', carteAltri: 'carte degli altri', ispirazione: 'Ispirazione', danniFuori: 'danni fuori scontro', danniAlti: 'danni alti', danniNemico: 'danni al nemico', malus: 'malus al nemico', cure: 'cure', cureGrandi: 'cure grandi', patto: 'patti che costano PV' };
+
+// Nemici
+const DMG = { m1: { label: 'D6 − 1', m: 0 }, d6: { label: 'D6', m: 4 }, p1: { label: 'D6 + 1', m: 8 } };
+const TRAITS = {
+  agguato: { label: 'Agguato', text: 'Vantaggio nel primo round.', m: 2 },
+  veleno:  { label: 'Veleno', text: 'Se lo batti, perdi comunque 1 PV.', m: 2 },
+  pelle:   { label: 'Pelle dura', text: 'Il primo colpo che subisce è dimezzato.', m: 4 },
+  rigenera:{ label: 'Rigenera', text: 'Recupera 1 PV alla fine di ogni round.', m: 4 },
+  pesante: { label: 'Colpo pesante', text: '+1 al danno.', m: 4 },
+  doppio:  { label: 'Doppio attacco', text: 'Attacca due volte a round.', m: 10, bossOnly: true },
+};
+const ROLES = { creatura: 'Nemico', miniboss: 'Mini-boss', guardiano: 'Boss di MIMI' };
+const TIERS = [
+  { k: 'debole', label: 'Mazzetto 1 · LV 1', lo: 4, hi: 11, role: 'creatura', ev: 5.5, reward: '1 Indizio + 1 PE' },
+  { k: 'normale', label: 'Mazzetto 1 · LV 2', lo: 12, hi: 18, role: 'creatura', ev: 4.5, reward: '1 Indizio + 1 PE' },
+  { k: 'forte', label: 'Mazzetto 2 · LV 3–4', lo: 20, hi: 33, role: 'creatura', ev: 3.5, reward: '1 Indizio + 1 PE + Ispirazione' },
+  { k: 'miniboss', label: 'Mini-boss (tolti dalla base il 2/11)', lo: 30, hi: 38, role: 'miniboss', ev: 3, reward: '1 Indizio + livello + Ispirazione' },
+  { k: 'guardiano', label: 'Boss di MIMI', lo: 31, hi: 40, role: 'guardiano', ev: null, reward: 'La partita' },
+];
+// i 28 nemici della scatola base (Carte Trama v2, 27/10): Difesa = 14 + AR
+const BASE_FOES = [
+  ['Folletto Ingannatore', 1, 2, 16, 'm1', [], 'Mazzetto 1'],
+  ['Ratto gigante', 1, 2, 14, 'm1', ["veleno"], 'Mazzetto 1'],
+  ['Pipistrello vampiro', 1, 2, 15, 'm1', [], 'Mazzetto 1'],
+  ['Coboldo', 2, 1, 14, 'm1', [], 'Mazzetto 1'],
+  ['Gnomo schiavista', 2, 2, 16, 'm1', [], 'Mazzetto 1'],
+  ['Goblin predone', 2, 2, 15, 'm1', [], 'Mazzetto 1'],
+  ['Scheletro', 2, 2, 15, 'm1', [], 'Mazzetto 1'],
+  ['Lupo grigio', 3, 3, 14, 'm1', [], 'Mazzetto 1'],
+  ['Ragno delle grotte', 3, 3, 15, 'm1', [], 'Mazzetto 1'],
+  ['Orchetto predone', 4, 2, 15, 'd6', [], 'Mazzetto 1'],
+  ['Melma acida', 5, 1, 14, 'd6', [], 'Mazzetto 1'],
+  ['Zombi', 4, 2, 14, 'd6', [], 'Mazzetto 1'],
+  ['Bandito della strada', 3, 3, 15, 'd6', [], 'Mazzetto 1'],
+  ['Gnoll cacciatore', 5, 3, 15, 'p1', ["agguato"], 'Mazzetto 2'],
+  ['Orso delle caverne', 7, 3, 14, 'p1', [], 'Mazzetto 2'],
+  ['Arpia', 4, 4, 15, 'p1', [], 'Mazzetto 2'],
+  ['Spettro', 4, 3, 16, 'p1', [], 'Mazzetto 2'],
+  ['Minotauro', 8, 4, 15, 'p1', [], 'Mazzetto 2'],
+  ['Golem di fango', 9, 3, 16, 'p1', [], 'Mazzetto 2'],
+  ['Vampiro', 7, 4, 16, 'p1', [], 'Mazzetto 2'],
+  ['Basilisco', 7, 4, 15, 'p1', [], 'Mazzetto 2'],
+  ['Guardiano di MIMI', 9, 4, 17, 'p1', [], 'Boss'],
+  ['Mimic ancestrale', 7, 5, 16, 'p1', ["agguato"], 'Boss'],
+  ['Re Goblin Grugno', 9, 4, 16, 'p1', [], 'Boss']].map(([nome, pv, att, dif, dmg, traits, tipo]) => ({ nome, pv, att, dif, dmg, traits, tipo, role: tipo === 'Mini-boss' ? 'miniboss' : tipo === 'Boss' ? 'guardiano' : 'creatura' }));
+const minaccia = f => 2 * f.pv + f.att + 2 * (f.dif - 14) + DMG[f.dmg].m + f.traits.reduce((a, t) => a + TRAITS[t].m, 0);
+const tierOf = (m, role) => (role && TIERS.find(t => t.role === role && m >= t.lo && m <= t.hi)) || TIERS.find(t => m >= t.lo && m <= t.hi) || null;
+
+// Eventi
+const ESITI = {
+  indizio:  { label: 'Prendi 1 Indizio', pp: 4, s: 5, clue: 'diretto', txt: 'Prendi 1 Indizio.' },
+  debole:   { label: 'Scontro con un Nemico I di livello 1', pp: 5.5, s: 60, clue: 'scontro', est: true, txt: 'Gira un Nemico I di livello 1 e combattilo.' },
+  coboldo:  { label: 'Scontro con un Coboldo di MIMI (vinci: 1 PE e 1 carta, niente Indizio)', pp: 1.5, s: 60, est: true, txt: 'Gira un Coboldo di MIMI e combattilo: se vinci 1 PE e peschi 1 carta.' },
+  normale:  { label: 'Scontro con un Mostro (tessera rossa, mazzetto del livello dell\'eroe)', pp: 5, s: 60, clue: 'scontro', est: true, txt: 'Gira un Mostro del mazzetto del tuo livello e combattilo.' },
+  forte:    { label: 'Scontro con un Nemico II (mazzetto LV 3–4)', pp: 3.5, s: 60, clue: 'scontro', est: true, txt: 'Gira un Nemico II e combattilo.' },
+  miniboss: { label: 'Scontro con un mini-boss', pp: 3, est: true, s: 90, clue: 'scontro', txt: 'Scontro con un mini-boss.' },
+  muovi:    { label: 'Muovi ancora di D6', pp: 2, s: 20, est: true, txt: 'Muovi ancora di D6 esagoni e risolvi dove ti fermi.' },
+  riprendi: { label: 'Riprendi 1 carta dai tuoi scarti', pp: 0.5, s: 15, txt: 'Riprendi 1 carta dai tuoi scarti.' },
+  pe:       { label: 'Prendi 1 PE', pp: 4, s: 5, txt: 'Prendi 1 PE.' },
+  ispir:    { label: 'Prendi l\'Ispirazione', pp: 0.7, s: 5, txt: 'Prendi l\'Ispirazione.' },
+  scambio:  { label: 'Scambiati di posto con un eroe', pp: 0.5, s: 15, txt: 'Se vuoi, scambiati di posto con un eroe.' },
+  cura2:    { label: 'Recuperi 2 PV', pp: 0.3, s: 5, txt: 'Recuperi 2 PV.' },
+  locanda:  { label: 'Locanda: +1 PE e recuperi 2 PV', pp: 4.3, s: 10, txt: 'Locanda: prendi 1 PE e recuperi 2 PV. L\'Oracolo ricarica il suo potere.' },
+  fonte:    { label: 'Fonte: riprendi fino a 2 carte dai tuoi scarti', pp: 1, s: 20, txt: 'Fonte: riprendi fino a 2 carte dai tuoi scarti.' },
+  fabbro:   { label: 'Fabbro: riprendi 1 equipaggiamento dai tuoi scarti', pp: 0.3, s: 15, txt: 'Fabbro: riprendi 1 equipaggiamento dai tuoi scarti.' },
+  niente:   { label: 'Niente (sentiero tranquillo)', pp: 0, s: 0, txt: 'Niente.' },
+  perdi2:   { label: 'Perdi 2 PV', pp: -3.6, s: 5, txt: 'Perdi 2 PV.' },
+  trappola: { label: 'Trappola', pp: -5, est: true, s: 20, txt: 'Trappola: perdi D6 − 1 PV; tira il D6 per l\'equipaggiamento.' },
+  turno:    { label: 'Perdi 1 turno (vietato)', pp: -9.5, s: 0, txt: 'Perdi 1 turno.' },
+  altro:    { label: 'Altro (prezzo a mano)', pp: 0, s: 15, txt: '' },
+};
+const CAOS = [['perdi2', 'Crollo: perdi 2 PV.'], ['coboldo', 'Imboscata: gira un Coboldo di MIMI e combattilo (1 PE e 1 carta).'], ['muovi', 'Vento: muovi ancora di D6 esagoni.'],
+  ['riprendi', 'Bottega: riprendi 1 carta dai tuoi scarti.'], ['indizio', 'Mappa: prendi 1 Indizio.'], ['scambio', 'Scambio: se vuoi, scambiati di posto con un eroe.']];
+const TOMBA = [['normale', 'Uno scheletro si sveglia: scontro con lo Scheletro.'], ['perdi2', 'Aria gelida: perdi 2 PV.'], ['indizio', 'Lapide incisa: prendi 1 Indizio.'],
+  ['riprendi', 'Corredo funebre: riprendi 1 carta dai tuoi scarti.'], ['niente', 'Silenzio: niente.'], ['muovi', 'Fuoco fatuo: muovi ancora di D6 esagoni.']];
+const BAG = [['normale', 25, 'Tessera rossa: Mostro del mazzetto del tuo livello'], ['trappola', 5, 'Tessera blu: Imprevisto Trappola'], ['locanda', 2, 'Tessera blu: Imprevisto Locanda'], ['fonte', 2, 'Tessera blu: Imprevisto Fonte'], ['fabbro', 2, 'Tessera blu: Imprevisto Fabbro']]; // sacchetto a due colori (Daniele, 2/11): 25 rosse = Mostro, 11 blu = mazzetto Imprevisti; niente mini-boss
+
+// Plancia: 10 × 10 esagoni a righe sfalsate (righe dispari spostate a destra), Cuore = colonne 2–7, righe 2–7
+const N = 10, COLS_L = 'ABCDEFGHIJ';
+const SPAWNS = [[2, 0], [7, 0], [9, 4], [7, 9], [2, 9], [0, 5]];
+const mir = ([c, r]) => [9 - c, 9 - r];
+const both = L => L.flatMap(h => [h, mir(h)]);
+const inCuore = ([c, r]) => c >= 2 && c <= 7 && r >= 2 && r <= 7;
+const hk = ([c, r]) => c + ',' + r;
+const hname = ([c, r]) => COLS_L[c] + (r + 1);
+const OUTER = {
+  loc: [], fon: [], fab: [], // Locanda, Fonte e Fabbro sono segnalini del sacchetto (Daniele, 2/11): le loro caselle sono «?»
+  caos: [], // la scatola base non ha Caos: le Crepe sono dell'espansione «Il Caos del Goblin» (CREPE_OUT)
+  qs: both([[6, 0], [8, 0], [1, 1], [3, 1], [6, 1], [8, 2], [9, 1], [8, 3], [0, 3], [1, 4], [4, 1], [8, 1]]),
+};
+const CREPE_OUT = both([[4, 0], [9, 2]]); // le 4 Crepe fuori dal Cuore (le 6 del Cuore restano nella scatola sotto un Terreno)
+let withCaos = false;
+const TPL = {
+  cuore: { nome: 'Cuore base', rule: 'Nessuna regola nuova.', q: both([[2, 2], [5, 2], [4, 3], [7, 3], [2, 4], [5, 4]]), caos: [], cry: both([[3, 3], [6, 3]]) },
+  selva: { nome: 'La Selva', rule: 'Stagno: non ci entri e non ci passi.', bonus: 'Elfo e Druido: +1 MOV finché la Selva resta.', bonuspp: 1,
+    q: both([[2, 2], [5, 2], [4, 3], [7, 3], [2, 4], [6, 4]]), caos: both([[3, 2], [7, 4], [3, 4]]), cry: both([[3, 3], [6, 3]]), block: both([[4, 4], [5, 4]]) },
+  cimitero: { nome: 'Il Cimitero', rule: 'Tombe gemelle: da una Tomba passi alla sua gemella, conta 1 esagono.',
+    q: both([[2, 2], [5, 2], [4, 3], [7, 3], [2, 4], [5, 4]]), caos: both([[3, 2], [7, 4], [4, 4]]), cry: both([[3, 3], [6, 3]]), portals: [[[2, 2], [7, 7]], [[7, 2], [2, 7]]] },
+  vuoto: { nome: 'Terreno nuovo', rule: '', q: [], caos: [], cry: [] },
+};
+const TOOLS = {
+  sentiero: { label: 'Sentiero', color: 'var(--hex-path)', hint: 'Cancella: l\'esagono torna sentiero (toglie anche un portale).' },
+  q: { label: 'Casella «?»', color: 'var(--hex-q)', hint: 'Riceve un segnalino Esplorazione. Il Cuore ne ha 12.' },
+  cripta: { label: 'Cripta', color: 'var(--hex-cry)', hint: 'Il tesoro sta in una delle 4 Cripte.' },
+  caos: { label: 'Evento del Terreno', color: 'var(--hex-caos)', hint: 'Casella stampata che usa la tabella D6 del Terreno (al massimo 6 nel Cuore).' },
+  blocco: { label: 'Bloccato', color: 'var(--hex-block)', hint: 'Stagno, rupi, mura: non ci entri e non ci passi.' },
+  difficile: { label: 'Difficile', color: 'var(--hex-slow)', hint: 'Bosco fitto, vicoli: entrare costa 2 di movimento.' },
+  portale: { label: 'Portale', color: 'var(--hex-portal)', hint: 'Tocca due esagoni per collegarli. Passare dall\'uno all\'altro costa 1 esagono. Tocca un portale per toglierlo.' },
+};
+
+// ===================== utilità =====================
+const $ = s => document.querySelector(s);
+const el = (tag, attrs = {}, ...kids) => { const e = document.createElement(tag); for (const k in attrs) { if (k === 'class') e.className = attrs[k]; else if (k === 'text') e.textContent = attrs[k]; else if (k.startsWith('on')) e.addEventListener(k.slice(2), attrs[k]); else if (attrs[k] !== false && attrs[k] != null) e.setAttribute(k, attrs[k]); } for (const c of kids) if (c != null) e.append(c); return e; };
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const words = s => (s.trim().match(/[^\s]+/g) || []).filter(w => !/^[—–\-·:;,.]$/.test(w)).length;
+const cap = s => s ? s[0].toUpperCase() + s.slice(1) : s;
+const joinIt = L => L.length <= 1 ? (L[0] || '') : L.slice(0, -1).join(', ') + ' e ' + L[L.length - 1];
+const uid = () => 'o' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+const clone = o => JSON.parse(JSON.stringify(o));
+function toast(t) { const e = $('#toast'); e.textContent = t; e.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => e.hidden = true, 2600); }
+const store = { get(k) { try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch { } } };
+function seg(host, opts, cur, onPick) {
+  host.replaceChildren(...Object.entries(opts).map(([v, l]) => el('button', { type: 'button', 'aria-pressed': String(v === cur), onclick: () => onPick(v) }, l)));
+}
+function fillSelect(sel, opts, cur) { sel.replaceChildren(...Object.entries(opts).map(([v, l]) => el('option', { value: v, selected: v === cur ? '' : false }, l))); sel.value = cur; }
+const checkLi = (state, text) => el('li', { class: state }, el('span', { class: 'i', text: { ok: '✓', warn: '!', bad: '✕', man: '○' }[state] }), el('span', { text }));
+const chip = (state, text) => el('span', { class: 'chip ' + state, text });
+
+// scala orizzontale con fasce (SVG)
+function scaleSVG(min, max, bands, marks, opts = {}) {
+  const W = 400, H = opts.h || 34, x = v => 6 + (Math.max(min, Math.min(max, v)) - min) / (max - min) * (W - 12);
+  let s = `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" aria-hidden="true">`;
+  s += `<rect x="6" y="${H - 20}" width="${W - 12}" height="6" rx="3" fill="var(--sunk)"/>`;
+  for (const b of bands) s += `<rect x="${x(b.lo)}" y="${H - 20}" width="${Math.max(2, x(b.hi) - x(b.lo))}" height="6" fill="${b.color || 'var(--ok)'}" opacity="${b.op ?? .55}"/>`;
+  for (const t of opts.ticks || []) s += `<text x="${x(t)}" y="${H - 2}" font-size="10" text-anchor="middle" fill="var(--ink-2)" font-family="Alegreya Sans, sans-serif">${t}</text>`;
+  for (const m of marks) {
+    if (m.me) s += `<path d="M${x(m.v) - 6} ${H - 30} L${x(m.v) + 6} ${H - 30} L${x(m.v)} ${H - 21} Z" fill="var(--brass)"/>`;
+    else s += `<circle cx="${x(m.v)}" cy="${H - 17 - (m.lane || 0) * 0}" r="3.2" fill="var(--ink-2)" opacity=".75"><title>${esc(m.t || '')}</title></circle>`;
+  }
+  return s + '</svg>';
+}
+
+// ===================== simulatore (Web Worker) =====================
+const SIM = { w: null, ready: false, busy: false, onMsg: null, failed: false };
+async function makeWorker() {
+  try { SIM.w = new Worker('motore.js'); }
+  catch (e) {
+    try { const src = await (await fetch('motore.js')).text(); SIM.w = new Worker(URL.createObjectURL(new Blob([src], { type: 'text/javascript' }))); }
+    catch (e2) { SIM.failed = true; renderSims(); return; }
+  }
+  SIM.ready = false;
+  SIM.w.onmessage = ev => { const m = ev.data; if (m.type === 'ready') { SIM.ready = true; renderSims(); return; } SIM.onMsg && SIM.onMsg(m); };
+  SIM.w.onerror = () => { SIM.failed = !SIM.ready; SIM.busy = false; renderSims(); };
+}
+function runSim(msg, host, onResult) {
+  if (!SIM.ready || SIM.busy) return;
+  SIM.busy = true; renderSims();
+  const bar = host.querySelector('.bar i'), lab = host.querySelector('.plabel');
+  SIM.onMsg = m => {
+    if (m.type === 'progress') { bar.style.width = (m.done * 100).toFixed(1) + '%'; lab.textContent = m.label + '…'; }
+    else if (m.type === 'result') { SIM.busy = false; bar.style.width = '100%'; onResult(m); renderSims(); }
+    else if (m.type === 'error') { SIM.busy = false; host.querySelector('.res').replaceChildren(el('p', { class: 'hint', text: 'Il simulatore si è fermato con un errore: ' + m.message })); renderSims(); }
+  };
+  SIM.w.postMessage(msg);
+}
+function stopSim() { if (SIM.w) SIM.w.terminate(); SIM.busy = false; SIM.ready = false; makeWorker(); renderSims(); }
+function simPanel(host, title, intro, sizes, onRun) {
+  if (!host._built) {
+    host._built = true;
+    host.append(el('h3', { text: title }), el('p', { class: 'hint', text: intro }),
+      el('div', { class: 'toolbar' },
+        el('label', { class: 'fld', style: 'flex-direction:row' }, 'Partite ', (() => { const s = el('select', { class: 'nsel', id: host.id + '-n' }); for (const [v, l] of sizes) s.append(el('option', { value: v }, l)); return s; })()),
+        el('button', { class: 'btn primary run', type: 'button', onclick: () => onRun(+host.querySelector('.nsel').value) }, 'Prova nel simulatore'),
+        el('button', { class: 'btn ghost stop', type: 'button', onclick: stopSim }, 'Ferma')),
+      el('div', { class: 'bar' }, el('i')), el('p', { class: 'hint plabel' }), el('div', { class: 'res' }));
+  }
+}
+function renderSims() {
+  for (const h of document.querySelectorAll('.sim')) {
+    if (!h._built) continue;
+    const run = h.querySelector('.run'), stop = h.querySelector('.stop'), lab = h.querySelector('.plabel');
+    run.disabled = !SIM.ready || SIM.busy; stop.hidden = !SIM.busy;
+    if (SIM.failed) lab.textContent = 'Il simulatore non si è avviato in questa vista: i prezzi stimati restano validi.';
+    else if (!SIM.ready && !SIM.busy) lab.textContent = 'Avvio del simulatore…';
+    else if (!SIM.busy && lab.textContent.endsWith('…')) lab.textContent = '';
+  }
+}
+
+// ===================== CARTE =====================
+const CARD0 = { _ex: true, id: 'SEL-01', nome: 'Pelle di corteccia', set: 'La Selva', rar: 'classe', cls: 'Druido', kind: 'incantesimo', slot: 'Corpo', when: 'sempre', req: '',
+  effects: [{ k: 'statScontri', s: 'ar', n: 2, d: 2 }, { k: 'cura', n: 2 }], race: '', raceFx: [], text: '', note: '' };
+const CARD_EMPTY = { id: '', nome: '', set: 'Base', rar: 'comune', cls: '', kind: 'incantesimo', slot: 'Corpo', when: 'sempre', req: '', effects: [{ k: 'indizio', n: 1 }], race: '', raceFx: [], text: '', note: '' };
+let card = store.get('officina-card') || clone(CARD0);
+const newFx = k => ({ k, n: 1, s: 'att', d: 1, t: 'uno', txt: '', pp: 0 });
+
+function cardPP(c) {
+  const ctx = c; const rows = [];
+  for (const e of c.effects) rows.push({ t: EFX[e.k].text(e, ctx) || EFX[e.k].label, v: EFX[e.k].pp(e, ctx), est: EFX[e.k].est });
+  let sum = rows.reduce((a, r) => a + r.v, 0);
+  let mult = 1, multT = '';
+  if (c.req === 'pvBassi') { mult = 0.5; multT = 'Requisito «3 PV o meno»: vale metà'; }
+  else if (c.req.startsWith('razza:')) { mult = 0.25; multT = 'Solo una specie su 5: vale un quarto'; }
+  const raceRows = c.race ? c.raceFx.map(e => ({ t: `${c.race}: in più ${EFX[e.k].text(e, ctx)}`, v: EFX[e.k].pp(e, ctx) * 0.25 })) : [];
+  const total = sum * mult + raceRows.reduce((a, r) => a + r.v, 0);
+  return { rows, mult, multT, raceRows, total };
+}
+function cardText(c) {
+  const parts = [];
+  if (c.rar !== 'comune' && c.cls) parts.push(`Solo ${c.cls}.`);
+  if (c.req === 'pvBassi') parts.push('Solo se hai 3 PV o meno.');
+  else if (c.req.startsWith('razza:')) parts.push(`Solo ${c.req.slice(6)}.`);
+  if (c.kind !== 'equip' && c.when !== 'sempre') parts.push(WHENS[c.when] + '.');
+  const fx = c.effects.map(e => EFX[e.k].text(e, c)).filter(Boolean);
+  const body = fx.length ? cap(joinIt(fx)) + '.' : '';
+  const race = c.race && c.raceFx.length ? `${c.race}: in più ${joinIt(c.raceFx.map(e => EFX[e.k].text(e, c)).filter(Boolean))}.` : '';
+  return { head: parts.join(' '), body, race, full: [parts.join(' '), body, race].filter(Boolean).join(' ') };
+}
+function cardChecks(c, P) {
+  const L = [], R = RARITY[c.rar], v = P.total;
+  if (v >= R.lo && v <= R.hi) L.push(['ok', `Valore ${fmt(v)} PP dentro il budget ${R.label.toLowerCase()} (${R.lo}–${R.hi} PP).`]);
+  else if (v >= R.lo - 1 && v <= R.hi + 1) L.push(['warn', `Valore ${fmt(v)} PP appena fuori dal budget ${R.label.toLowerCase()} (${R.lo}–${R.hi}): dentro la tolleranza di ±1 PP.`]);
+  else L.push(['bad', `Valore ${fmt(v)} PP fuori budget: una carta ${R.label.toLowerCase()} sta tra ${R.lo} e ${R.hi} PP. ${v > R.hi ? 'Togli un effetto o aggiungi un costo.' : 'Aggiungi un effetto o togli un costo.'}`]);
+  const nm = words(c.nome || '');
+  L.push(nm >= 1 && nm <= 3 ? ['ok', 'Nome di 1–3 parole.'] : ['bad', `Il nome ha ${nm} parole: ne servono da 1 a 3.`]);
+  const T = cardText(c), w = words(T.body + ' ' + T.race);
+  L.push(w <= 25 ? ['ok', `${w} parole di effetto (massimo 25).`] : ['bad', `${w} parole di effetto: oltre 25 la carta fa troppe cose.`]);
+  const clues = c.effects.filter(e => e.k === 'indizio').reduce((a, e) => a + e.n, 0) + c.effects.filter(e => e.k === 'rubaIndizio').length;
+  L.push(clues <= 2 ? ['ok', 'Non individua il tesoro e dà al massimo 2 Indizi.'] : ['bad', `Dà ${clues} Indizi: al massimo 2 per carta.`]);
+  const cl = c.effects.filter(e => e.k === 'turnoAvv').reduce((a, e) => a + e.n, 0);
+  if (cl) L.push(cl <= 2 ? ['ok', 'Al massimo 2 Clessidre a ogni avversario.'] : ['bad', `Mette ${cl} Clessidre: al massimo 2.`]);
+  const one = c.effects.filter(e => (e.k === 'togliIndizio' || e.k === 'danniAvv') && e.t !== 'ogni');
+  if (one.length) L.push(['warn', 'Con 3–4 giocatori «un avversario» lo sceglie chi gioca: vale circa un quarto di «ogni avversario» quando rallenta.']);
+  if (c.kind === 'equip' && c.effects.some(e => !['statPerm', 'libero'].includes(e.k))) L.push(['warn', 'Su un equipaggiamento, gli effetti diversi dalle statistiche avvengono una volta sola, quando lo equipaggi.']);
+  if (c.kind !== 'equip' && c.when === 'sempre' && c.effects.some(e => ['danniNemico', 'malusNemico'].includes(e.k))) L.push(['bad', 'Un effetto sul nemico richiede «Si gioca in scontro».']);
+  if (c.effects.some(e => e.k === 'libero')) L.push(['warn', 'L\'effetto libero ha un prezzo scritto a mano e il simulatore non lo prova.']);
+  if (c.text.trim()) L.push(['warn', 'Testo personalizzato: controlla che dica quello che dicono gli effetti, con le parole del glossario.']);
+  // identità di classe
+  if (c.rar !== 'comune' && c.cls && IDENT[c.cls]) {
+    const I = IDENT[c.cls]; const tags = [...new Set(c.effects.map(e => EFX[e.k].tag(e)).filter(Boolean))];
+    const bad = tags.filter(t => I.v.includes(t)), prim = tags.filter(t => I.p.includes(t)), sec = tags.filter(t => I.s.includes(t)), other = tags.filter(t => !I.v.includes(t) && !I.p.includes(t) && !I.s.includes(t));
+    if (bad.length) L.push(['bad', `${c.cls}: ${bad.map(t => TAGNAME[t]).join(', ')} è una leva vietata. La carta va a un'altra classe o al mazzo comune.`]);
+    else if (prim.length) L.push(['ok', `Usa una leva primaria del ${c.cls} (${prim.map(t => TAGNAME[t]).join(', ')}): «${I.ruolo}».`]);
+    else if (sec.length) L.push(['warn', `Usa solo leve secondarie del ${c.cls} (${sec.map(t => TAGNAME[t]).join(', ')}): al massimo 2 carte su 7 così.`]);
+    else if (other.length) L.push(['warn', `${other.map(t => TAGNAME[t]).join(', ')} non è tra le leve del ${c.cls}.`]);
+  }
+  if (c.effects.concat(c.raceFx || []).some(e => e.k === 'statPerm' && e.s === 'pv')) L.push(['bad', 'Niente +PV permanenti: i PV crescono solo salendo di livello (5 PV di partenza, +2 PV o +1 statistica a ogni livello).']);
+  if (c.kind === 'equip') L.push(['man', 'Gli equipaggiamenti si indossano solo a inizio turno, fuori dagli scontri.']);
+  L.push(['man', 'Si risolve con D6, D20 e componenti della scatola; se dura, ha un cubetto Durata.']);
+  L.push(['man', 'Rispetta il turno: 2 carte a inizio turno (1 equipaggiamento), poi in scontro e a fine turno.']);
+  L.push(['man', 'Un giocatore che non l\'ha scritta la capisce alla prima lettura, senza domande.']);
+  return L;
+}
+function fxRow(e, list, onChange, ctx) {
+  const D = EFX[e.k];
+  const kindSel = el('select', { 'aria-label': 'Tipo di effetto' });
+  for (const k in EFX) kindSel.append(el('option', { value: k, selected: k === e.k ? '' : false }, EFX[k].label));
+  kindSel.value = e.k;
+  kindSel.onchange = () => { const i = list.indexOf(e); list[i] = Object.assign(newFx(kindSel.value), { n: e.n }); if (kindSel.value === 'statScontri' && !['att', 'ar'].includes(list[i].s)) list[i].s = 'ar'; onChange(true); };
+  const ctl = el('div', { class: 'ctl' }, kindSel);
+  const num = (key, min, max, lab) => { const i = el('input', { type: 'number', min, max, value: e[key], 'aria-label': lab }); i.oninput = () => { const v = parseFloat(i.value); if (!Number.isFinite(v)) return; e[key] = Math.max(min, Math.min(max, v)); onChange(); }; return el('label', { class: 'fld', style: 'flex-direction:row;align-items:center;gap:4px' }, lab, i); };
+  for (const f of D.f) {
+    if (f === 'n') ctl.append(num('n', 1, 9, e.k === 'statPerm' || e.k === 'statScontri' ? '+' : '×'));
+    if (f === 'd') ctl.append(num('d', 1, 4, 'scontri'));
+    if (f === 's' || f === 's2') { const s = el('select', { 'aria-label': 'Statistica' }); for (const k of f === 's' ? ['att', 'ar', 'mov', 'pv'] : ['att', 'ar']) s.append(el('option', { value: k }, STAT[k])); s.value = e.s; s.onchange = () => { e.s = s.value; onChange(); }; ctl.append(s); }
+    if (f === 't') { const s = el('select', { 'aria-label': 'Bersaglio' }, el('option', { value: 'uno' }, 'un avversario'), el('option', { value: 'ogni' }, 'ogni avversario')); s.value = e.t; s.onchange = () => { e.t = s.value; onChange(); }; ctl.append(s); }
+    if (f === 'free') { const t = el('input', { type: 'text', class: 'free', value: e.txt, placeholder: 'testo dell\'effetto, minuscolo, senza punto finale', 'aria-label': 'Testo dell\'effetto' }); t.oninput = () => { e.txt = t.value; onChange(); }; ctl.append(t, num('pp', -20, 20, 'PP')); ctl.lastChild.querySelector('input').step = '0.5'; }
+  }
+  const pp = el('span', { class: 'pp', text: sgn(D.pp(e, ctx)) });
+  return el('div', { class: 'fx' }, ctl, el('div', { style: 'display:flex;align-items:center;gap:2px' }, pp, el('button', { class: 'x', type: 'button', 'aria-label': 'Togli effetto', onclick: () => { list.splice(list.indexOf(e), 1); onChange(true); } }, '×')));
+}
+function renderCardForm() {
+  const c = card;
+  $('#c-nome').value = c.nome; $('#c-id').value = c.id; fillSelect($('#c-set'), Object.fromEntries(SETS.map(s => [s, s])), c.set);
+  seg($('#c-rar'), Object.fromEntries(Object.entries(RARITY).map(([k, r]) => [k, `${r.sym} ${r.label}`])), c.rar, v => { c.rar = v; if (v !== 'comune' && !c.cls) c.cls = 'Guerriero'; cardChanged(true); });
+  fillSelect($('#c-cls'), c.rar === 'comune' ? { '': 'Mazzo comune' } : Object.fromEntries(Object.entries(CLASSES).map(([k, s]) => [k, `${k} (${s})`])), c.rar === 'comune' ? '' : c.cls);
+  $('#c-cls').disabled = c.rar === 'comune';
+  seg($('#c-kind'), KINDS, c.kind, v => { c.kind = v; cardChanged(true); });
+  fillSelect($('#c-slot'), Object.fromEntries(SLOTS.map(s => [s, s])), c.slot); $('#c-slot-w').hidden = c.kind !== 'equip';
+  fillSelect($('#c-when'), WHENS, c.when); $('#c-when-w').hidden = c.kind === 'equip';
+  fillSelect($('#c-req'), REQS, c.req);
+  fillSelect($('#c-race'), { '': 'Nessuna', ...Object.fromEntries(RACES.map(r => [r, r])) }, c.race);
+  $('#c-text').value = c.text; $('#c-note').value = c.note;
+  renderFxLists();
+}
+function renderFxLists() {
+  const c = card;
+  $('#c-fx').replaceChildren(...c.effects.map(e => fxRow(e, c.effects, cardChanged, c)));
+  if (c.race) { if (!c.raceFx.length) c.raceFx.push(newFx('vantaggio')); $('#c-racefx').replaceChildren(...c.raceFx.map(e => fxRow(e, c.raceFx, cardChanged, c)), el('div', {}, el('button', { class: 'btn small', type: 'button', onclick: () => { c.raceFx.push(newFx('statPerm')); cardChanged(true); } }, '+ Effetto di razza'))); }
+  else $('#c-racefx').replaceChildren();
+}
+function cardChanged(rebuild) {
+  card._ex = false; $('#cardExample').hidden = true;
+  if (rebuild) renderCardForm(); else for (const [i, e] of card.effects.entries()) { const r = $('#c-fx').children[i]; if (r) r.querySelector('.pp').textContent = sgn(EFX[e.k].pp(e, card)); }
+  store.set('officina-card', card); renderCardSide();
+}
+function renderCardSide() {
+  const c = card, P = cardPP(c), T = cardText(c), R = RARITY[c.rar];
+  $('#cardExample').hidden = !c._ex;
+  const txt = c.text.trim();
+  $('#c-card').innerHTML = `<div class="band"><span>${esc(KINDS[c.kind])}</span><span class="rar" title="${esc(R.label)}">${R.sym}</span></div>
+    <div><div class="name">${esc(c.nome || 'Senza nome')}</div></div>
+    <div class="text">${txt ? esc(txt) : `${T.head ? `<i>${esc(T.head)}</i> ` : ''}${esc(T.body) || '<span style="opacity:.5">Aggiungi un effetto</span>'}${T.race ? `<span class="race">${esc(T.race)}</span>` : ''}`}</div>
+    <div class="foot"><span>${esc(c.id || '—')} · ${esc(c.rar === 'comune' ? 'Comune' : c.cls)}</span>${c.kind === 'equip' ? `<span class="slot">${esc(c.slot)}</span>` : c.kind === 'pozione' ? '<span class="slot">Pozione</span>' : '<span></span>'}</div>`;
+  $('#c-card').querySelector('.name').insertAdjacentHTML('afterend', `<div class="who">${esc(c.set)}</div>`);
+  $('#c-pp').textContent = fmt(P.total);
+  const st = P.total >= R.lo && P.total <= R.hi ? 'ok' : P.total >= R.lo - 1 && P.total <= R.hi + 1 ? 'warn' : 'bad';
+  $('#c-chip').replaceChildren(chip(st, st === 'ok' ? `nel budget ${R.label.toLowerCase()}` : st === 'warn' ? 'al limite' : 'fuori budget'));
+  $('#c-scale').innerHTML = scaleSVG(-4, 12, [{ lo: R.lo - 1, hi: R.hi + 1, color: 'var(--warn)', op: .35 }, { lo: R.lo, hi: R.hi }], [{ v: P.total, me: true }], { ticks: [-4, 0, 2, 4, 6, 8, 10, 12] });
+  const tb = $('#c-break'); tb.replaceChildren();
+  for (const r of P.rows) tb.append(el('tr', {}, el('td', { text: cap(r.t) + (r.est ? ' (stima)' : '') }), el('td', { class: 'n', text: sgn(r.v) })));
+  if (P.mult !== 1) tb.append(el('tr', {}, el('td', { text: P.multT }), el('td', { class: 'n', text: '× ' + fmt(P.mult, 2) })));
+  for (const r of P.raceRows) tb.append(el('tr', {}, el('td', { text: r.t + ' (× 0,25)' }), el('td', { class: 'n', text: sgn(r.v) })));
+  tb.append(el('tr', {}, el('th', { text: 'Totale' }), el('th', { class: 'n', text: fmt(P.total) + ' PP' })));
+  $('#c-checks').replaceChildren(...cardChecks(c, P).map(([s, t]) => checkLi(s, t)));
+}
+function workerCard(c) {
+  const P = cardPP(c);
+  return { nome: c.nome, testo: cardText(c).full, kind: c.kind, slot: c.slot, cls: c.rar === 'comune' ? null : c.cls, req: c.req, when: c.kind === 'equip' ? 'sempre' : c.when, pp: P.total,
+    effects: c.effects.map(e => ({ k: e.k, n: e.n, s: e.s, d: e.d, t: e.t })) };
+}
+function bindCard() {
+  $('#c-nome').oninput = e => { card.nome = e.target.value; cardChanged(); };
+  $('#c-id').oninput = e => { card.id = e.target.value.trim(); cardChanged(); };
+  $('#c-set').onchange = e => { card.set = e.target.value; cardChanged(); };
+  $('#c-cls').onchange = e => { card.cls = e.target.value; cardChanged(); };
+  $('#c-slot').onchange = e => { card.slot = e.target.value; cardChanged(); };
+  $('#c-when').onchange = e => { card.when = e.target.value; cardChanged(true); };
+  $('#c-req').onchange = e => { card.req = e.target.value; cardChanged(); };
+  $('#c-race').onchange = e => { card.race = e.target.value; if (!card.race) card.raceFx = []; cardChanged(true); };
+  $('#c-text').oninput = e => { card.text = e.target.value; cardChanged(); };
+  $('#c-note').oninput = e => { card.note = e.target.value; cardChanged(); };
+  $('#c-addfx').onclick = () => { card.effects.push(newFx('statPerm')); cardChanged(true); };
+  $('#cardNew').onclick = () => { card = clone(CARD_EMPTY); delete card._id; cardChanged(true); };
+  $('#c-save').onclick = () => saveItem('carta', card, $('#c-saved'));
+  const host = $('#c-sim');
+  simPanel(host, 'Prova nel simulatore', 'Due serie di partite in 2 giocatori con le 4 classi della base: una senza la carta e una con la carta in mano all\'eroe 1 (della sua classe, se è di una classe della base; una carta di classe di un\'espansione la prova un eroe della base). La differenza è il valore misurato in PP.',
+    [[10000, '10.000 + 10.000 (circa 40 s)'], [5000, '5.000 + 5.000 (circa 20 s)'], [20000, '20.000 + 20.000 (circa 1,5 min)']],
+    n => { const est = cardPP(card).total; runSim({ cmd: 'card', n, card: workerCard(card), caos: card.set === 'Il Caos del Goblin' }, host, m => {
+      const d = m.test.win0 - m.ctrl.win0, se = Math.sqrt(m.ctrl.win0 * (100 - m.ctrl.win0) / m.ctrl.n + m.test.win0 * (100 - m.test.win0) / m.test.n);
+      const agree = Math.abs(d - est) <= 2 * se + 0.5;
+      host.querySelector('.plabel').textContent = '';
+      host.querySelector('.res').replaceChildren(
+        el('div', { class: 'verdict' }, el('span', { class: 'big', text: sgn(d) }), el('span', { text: `PP misurati (± ${fmt(2 * se)})` }), chip(agree ? 'ok' : 'warn', agree ? 'come la stima' : 'diverso dalla stima')),
+        el('dl', { class: 'kv' }, el('dt', { text: 'Vittorie dell\'eroe 1 senza la carta' }), el('dd', { text: fmt(m.ctrl.win0) + '%' }),
+          el('dt', { text: 'Vittorie dell\'eroe 1 con la carta' }), el('dd', { text: fmt(m.test.win0) + '%' }),
+          el('dt', { text: 'Durata media al tavolo' }), el('dd', { text: `${fmt(m.ctrl.min)} → ${fmt(m.test.min)} min` })),
+        el('p', { class: 'hint', text: agree ? 'La misura conferma il prezzo del listino.' : `La misura si scosta dalla stima di ${fmt(est)} PP più del rumore: l'IA può usare la carta meglio o peggio di un giocatore, oppure l'effetto vale diversamente in questa combinazione. Prova con più partite prima di cambiare il testo.` }));
+    }); });
+}
+
+// ===================== NEMICI =====================
+const FOE0 = { _ex: true, nome: 'Cinghiale', set: 'La Selva', role: 'creatura', pv: 3, att: 2, dif: 14, dmg: 'm1', traits: ['agguato'], flavor: 'Carica dal sottobosco.' };
+const FOE_EMPTY = { nome: '', set: 'Base', role: 'creatura', pv: 3, att: 2, dif: 14, dmg: 'm1', traits: [], flavor: '' };
+let foe = store.get('officina-foe') || clone(FOE0);
+const rnd = n => 1 + Math.floor(Math.random() * n);
+const dmgRoll = t => t === 'm1' ? Math.max(1, rnd(6) - 1) : t === 'p1' ? rnd(6) + 1 : rnd(6);
+function fightSim(h, f, Nn = 20000) {
+  const tr = new Set(f.traits);
+  const atk = (att, def, adv) => { let d = rnd(20); if (adv) d = Math.max(d, rnd(20)); return d !== 1 && (d === 20 || d + att >= def) ? (d === 20 ? 2 : 1) : 0; };
+  let win = 0, lost = 0, rounds = 0;
+  for (let i = 0; i < Nn; i++) {
+    let hp = h.pv, cp = f.pv, k = 0, first = true;
+    while (hp > 0 && cp > 0 && k < 60) {
+      k++;
+      let m = atk(h.att, f.dif, false);
+      if (m) { let d = dmgRoll(h.d) * m; if (tr.has('pelle') && first) d = Math.ceil(d / 2); first = false; cp -= d; }
+      if (cp <= 0) break;
+      for (let j = 0; j < (tr.has('doppio') ? 2 : 1) && hp > 0; j++) { m = atk(f.att, 14 + h.ar, tr.has('agguato') && k === 1); if (m) hp -= (dmgRoll(f.dmg) + (tr.has('pesante') ? 1 : 0)) * m; }
+      if (tr.has('rigenera') && cp > 0) cp = Math.min(f.pv, cp + 1);
+    }
+    if (cp <= 0) { if (tr.has('veleno')) hp -= 1; win++; }
+    lost += h.pv - Math.max(0, hp); rounds += k;
+  }
+  return { lose: 1 - win / Nn, lost: lost / Nn, rounds: rounds / Nn };
+}
+const HEROES = [{ k: 'Eroe di livello 1', pv: 6, att: 2, ar: 1, d: 'd6' }, { k: 'Eroe di livello 3', pv: 8, att: 3, ar: 2, d: 'd6' }];
+function renderFoeForm() {
+  const f = foe;
+  $('#f-nome').value = f.nome; fillSelect($('#f-set'), Object.fromEntries(SETS.map(s => [s, s])), f.set);
+  seg($('#f-role'), ROLES, f.role, v => { f.role = v; foeChanged(true); });
+  $('#f-pv').value = f.pv; $('#f-att').value = f.att; $('#f-dif').value = f.dif; $('#f-flavor').value = f.flavor;
+  seg($('#f-dmg'), Object.fromEntries(Object.entries(DMG).map(([k, d]) => [k, d.label])), f.dmg, v => { f.dmg = v; foeChanged(true); });
+  $('#f-traits').replaceChildren(...Object.entries(TRAITS).map(([k, t]) => el('button', { type: 'button', class: 'tool', 'aria-pressed': String(f.traits.includes(k)), title: t.text,
+    onclick: () => { const i = f.traits.indexOf(k); if (i >= 0) f.traits.splice(i, 1); else f.traits.push(k); foeChanged(true); } }, `${t.label} +${t.m}`)));
+}
+let fightTimer = null;
+function foeChanged(rebuild) { foe._ex = false; if (rebuild) renderFoeForm(); store.set('officina-foe', foe); renderFoeSide(); }
+function foeChecks(f, m, tier) {
+  const L = [];
+  const want = TIERS.filter(t => t.role === f.role);
+  if (tier && tier.role === f.role) L.push(['ok', `Minaccia ${m}: ${ROLES[f.role].toLowerCase()} di fascia ${tier.label} (${tier.lo}–${tier.hi}).`]);
+  else L.push(['bad', `Minaccia ${m}: un ${ROLES[f.role].toLowerCase()} sta tra ${want[0].lo} e ${want[want.length - 1].hi}. ${m < want[0].lo ? 'Alza PV o ATT.' : 'Togli PV o ATT.'}`]);
+  if (f.role === 'creatura') L.push(f.pv <= 9 ? ['ok', 'Al massimo 9 PV: lo scontro si chiude in 2–3 round.'] : ['bad', `${f.pv} PV: un nemico del mazzetto ne ha al massimo 9.`]);
+  const maxT = f.role === 'creatura' ? 1 : 2;
+  L.push(f.traits.length <= maxT ? ['ok', `${f.traits.length} ${plural(f.traits.length, 'tratto', 'tratti')} (massimo ${maxT}).`] : ['bad', `${f.traits.length} tratti: ${f.role === 'creatura' ? 'una creatura' : 'un ' + ROLES[f.role].toLowerCase()} ne ha al massimo ${maxT}.`]);
+  if (f.traits.includes('doppio') && f.role === 'creatura') L.push(['bad', 'Doppio attacco è solo per mini-boss e boss.']);
+  if (f.traits.includes('pesante') && f.dmg === 'p1') L.push(['warn', 'Colpo pesante su D6 + 1 porta il danno a D6 + 2, oltre i dadi della scatola: meglio scendere a D6 e tenere il tratto.']);
+  L.push(['man', 'Valori fissi sulla carta: il danno viene dal livello (LV 1 D6 − 1, LV 2 D6, LV 3+ D6 + 1).']);
+  if (f.role === 'creatura') L.push(['man', 'Sostituisce un nemico base dello stesso livello: il mazzetto resta di 13 Nemici I (LV 1–2) e 8 Nemici II (LV 3–4).']);
+  if (f.role === 'miniboss') L.push(['man', 'Un\'espansione porta 1 mini-boss nuovo, che sostituisce uno dei 4 della base.']);
+  const same = COLL.filter(x => x.kind === 'nemico' && x.data.set === f.set && x._id !== f._id);
+  if (f.set !== 'Base') { const cr = same.filter(x => x.data.role === 'creatura').length + (f.role === 'creatura' ? 1 : 0), mb = same.filter(x => x.data.role === 'miniboss').length + (f.role === 'miniboss' ? 1 : 0);
+    L.push([cr <= 4 && mb <= 1 ? 'ok' : 'warn', `Set «${f.set}» con questo nemico: ${cr} ${plural(cr, 'creatura', 'creature')} e ${mb} mini-boss (l'obiettivo è 4 e 1).`]); }
+  return L;
+}
+function renderFoeSide() {
+  const f = foe, m = minaccia(f), tier = tierOf(m, f.role);
+  $('#foeExample').hidden = !f._ex;
+  const boss = f.role !== 'creatura';
+  $('#f-token').className = 'token' + (boss ? ' boss' : '');
+  $('#f-token').innerHTML = `<div class="tn">${esc(f.nome || 'Senza nome')}</div><div class="ts">${f.pv} PV · +${f.att} · ${f.dif} · ${esc(DMG[f.dmg].label)}</div>${f.traits.map(t => `<div class="tt"><b>${esc(TRAITS[t].label)}.</b> ${esc(TRAITS[t].text)}</div>`).join('')}${f.flavor ? `<div class="tt" style="opacity:.75">${esc(f.flavor)}</div>` : ''}`;
+  $('#f-m').textContent = m;
+  const okRole = tier && tier.role === f.role;
+  $('#f-chip').replaceChildren(chip(okRole ? 'ok' : 'bad', tier ? tier.label + (okRole ? '' : ' (ruolo sbagliato)') : 'fuori fascia'));
+  const tb = $('#f-break'); tb.replaceChildren();
+  const rows = [['2 × PV', 2 * f.pv], ['ATT', f.att], ['2 × (Difesa − 14)', 2 * (f.dif - 14)], ['Danno ' + DMG[f.dmg].label, DMG[f.dmg].m], ...f.traits.map(t => [TRAITS[t].label, TRAITS[t].m])];
+  for (const [a, b] of rows) tb.append(el('tr', {}, el('td', { text: a }), el('td', { class: 'n', text: String(b) })));
+  tb.append(el('tr', {}, el('td', { text: 'Ricompensa' }), el('td', { class: 'n', text: tier ? tier.reward : '—' })));
+  if (tier && tier.ev != null) tb.append(el('tr', {}, el('td', { text: 'Valore come esito di un evento' }), el('td', { class: 'n', text: sgn(tier.ev) + ' PP' + (tier.k === 'forte' ? ' (stima)' : '') })));
+  // scala con i nemici base
+  const marks = BASE_FOES.map(b => ({ v: minaccia(b), t: `${b.nome} ${minaccia(b)}` })).concat([{ v: m, me: true }]);
+  $('#f-scale').innerHTML = scaleSVG(0, 50, TIERS.map((t, i) => ({ lo: t.lo, hi: t.hi, color: ['var(--ok)', 'var(--ok)', 'var(--warn)', 'var(--bad)', 'var(--bad)'][i], op: [.35, .55, .5, .45, .7][i] })), marks, { h: 64, ticks: [0, 4, 12, 20, 30, 40, 50] });
+  const ft = $('#f-table'); ft.replaceChildren(el('tr', {}, ...['Nemico', 'PV · ATT · Difesa · danno', 'Minaccia', 'Fascia'].map((h, i) => el('th', { class: i === 2 ? 'n' : '', text: h }))));
+  const all = BASE_FOES.map(b => ({ ...b, me: false })).concat([{ ...f, nome: f.nome || 'Il tuo nemico', me: true }]).sort((a, b) => minaccia(a) - minaccia(b));
+  for (const b of all) { const mm = minaccia(b); ft.append(el('tr', { class: b.me ? 'me' : '' }, el('td', { text: b.nome }), el('td', { class: 'num', text: `${b.pv} · +${b.att} · ${b.dif} · ${DMG[b.dmg].label}${b.traits.length ? ' · ' + b.traits.map(t => TRAITS[t].label).join(', ') : ''}` }), el('td', { class: 'n', text: String(mm) }), el('td', { text: tierOf(mm, b.role)?.label || '—' }))); }
+  $('#f-checks').replaceChildren(...foeChecks(f, m, tier).map(([s, t]) => checkLi(s, t)));
+  clearTimeout(fightTimer);
+  fightTimer = setTimeout(() => {
+    const t = $('#f-fight'); t.replaceChildren(el('tr', {}, el('th', { text: 'Contro' }), el('th', { class: 'n', text: 'Perde' }), el('th', { class: 'n', text: 'PV persi' }), el('th', { class: 'n', text: 'Round' })));
+    for (const h of HEROES) { const r = fightSim(h, foe); t.append(el('tr', {}, el('td', { text: h.k }), el('td', { class: 'n', text: fmt(r.lose * 100, 0) + '%' }), el('td', { class: 'n', text: fmt(r.lost) }), el('td', { class: 'n', text: fmt(r.rounds) }))); }
+    $('#f-fightnote').textContent = 'Livello 1: 6 PV, ATT 2, Difesa 15, danno D6. Livello 3: 8 PV, ATT 3, Difesa 16. Si colpisce con D20 + ATT ≥ Difesa (14 + AR); l\'eroe colpisce per primo; 20 raddoppia il danno, 1 manca sempre.';
+  }, 120);
+}
+function bindFoe() {
+  $('#f-nome').oninput = e => { foe.nome = e.target.value; foeChanged(); };
+  $('#f-set').onchange = e => { foe.set = e.target.value; foeChanged(); };
+  $('#f-flavor').oninput = e => { foe.flavor = e.target.value; foeChanged(); };
+  for (const [id, k, lo, hi] of [['#f-pv', 'pv', 1, 30], ['#f-att', 'att', 0, 10], ['#f-dif', 'dif', 12, 20]]) $(id).oninput = e => { const v = parseInt(e.target.value, 10); if (Number.isFinite(v)) { foe[k] = Math.max(lo, Math.min(hi, v)); foeChanged(); } };
+  $('#foeNew').onclick = () => { foe = clone(FOE_EMPTY); foeChanged(true); };
+  $('#f-save').onclick = () => saveItem('nemico', foe, $('#f-saved'));
+}
+
+// ===================== EVENTI =====================
+const EV0 = { _ex: true, nome: 'Tomba scoperchiata', set: 'Il Cimitero', mode: 'd6', rows: TOMBA.map(([k, t]) => ({ k, t, pp: ESITI[k].pp })) };
+let ev = store.get('officina-ev') || clone(EV0);
+const MODES = { d6: 'Tabella D6 (casella stampata)', bag: 'Set di segnalini «?»' };
+function evStats(e) {
+  const rows = e.rows.map(r => ({ ...r, pp: r.k === 'altro' ? (+r.pp || 0) : ESITI[r.k].pp, s: ESITI[r.k].s, w: e.mode === 'd6' ? 1 : (+r.n || 0) }));
+  const tot = rows.reduce((a, r) => a + r.w, 0) || 1;
+  const avg = rows.reduce((a, r) => a + r.pp * r.w, 0) / tot;
+  const time = rows.reduce((a, r) => a + r.s * r.w, 0) / tot;
+  const clueAny = rows.filter(r => ESITI[r.k].clue).reduce((a, r) => a + r.w, 0);
+  const clueDirect = rows.filter(r => ESITI[r.k].clue === 'diretto').reduce((a, r) => a + r.w, 0);
+  const low = rows.filter(r => r.pp < -2);
+  return { rows, tot, avg, time, clueAny, clueDirect, low, min: Math.min(...rows.map(r => r.pp)) };
+}
+function evChecks(e, S) {
+  const L = [];
+  L.push(S.avg >= 2 && S.avg <= 4 ? ['ok', `Media ${sgn(S.avg)} PP: dentro +2…+4, la casella attira senza diventare obbligata.`] : S.avg < 2 ? ['bad', `Media ${sgn(S.avg)} PP: sotto +2 gli eroi la evitano.`] : ['bad', `Media ${sgn(S.avg)} PP: sopra +4 diventa la strada obbligata.`]);
+  const lowKinds = e.mode === 'd6' ? S.low.length : S.low.length;
+  L.push(lowKinds <= 1 ? ['ok', 'Al massimo un esito sotto −2 PP.'] : ['bad', `${lowKinds} esiti sotto −2 PP: al massimo uno.`]);
+  L.push(S.rows.some(r => r.k === 'turno') ? ['bad', 'Mai «perdi turni»: è un tiro di dado che decide la partita da solo.'] : ['ok', 'Nessun esito fa perdere turni.']);
+  if (e.mode === 'd6') {
+    L.push(S.clueDirect === 1 ? ['ok', 'Dà 1 Indizio su una faccia, come il Caos del Goblin: la riserva di Indizi non cambia.'] : ['warn', `${S.clueDirect} facce danno un Indizio diretto (il Caos del Goblin ne ha 1): cambia la riserva di Indizi e quindi la durata.`]);
+  } else {
+    L.push(S.tot === 36 ? ['ok', '36 segnalini, uno per ogni casella «?» della plancia.'] : ['warn', `${S.tot} segnalini: la plancia ha 36 caselle «?».`]);
+    L.push(Math.abs(S.clueAny - 25) <= 1 ? ['ok', `${S.clueAny} segnalini possono dare un Indizio (25 ± 1, come la base).`] : ['bad', `${S.clueAny} segnalini possono dare un Indizio: restare a 25 ± 1 come la base, perché un Indizio in più a testa all'inizio accorcia la partita di 2,5 minuti.`]);
+  }
+  const long = S.rows.filter(r => words(r.t || '') > 15);
+  L.push(long.length ? ['bad', `${long.length} ${plural(long.length, 'esito supera', 'esiti superano')} le 15 parole.`] : ['ok', 'Ogni esito sta in 15 parole.']);
+  L.push(S.time <= 30 ? ['ok', `In media ${fmt(S.time, 0)} secondi al tavolo per fermata.`] : ['warn', `In media ${fmt(S.time, 0)} secondi per fermata: la base è sui 30.`]);
+  L.push(['man', 'Usa le parole del glossario. Un esito che resta per tutti va stampato; uno che succede una volta è un segnalino.']);
+  return L;
+}
+function renderEvForm() {
+  const e = ev;
+  $('#e-nome').value = e.nome; fillSelect($('#e-set'), Object.fromEntries(SETS.map(s => [s, s])), e.set);
+  seg($('#e-mode'), MODES, e.mode, v => { if (v === e.mode) return; e.mode = v; e.rows = v === 'd6' ? CAOS.map(([k, t]) => ({ k, t, pp: ESITI[k].pp })) : BAG.map(([k, n, t]) => ({ k, n, t, pp: ESITI[k].pp })); evChanged(true); });
+  $('#e-modehint').textContent = e.mode === 'd6' ? 'Una casella stampata che resta: chi si ferma tira il D6. È l\'Evento del Terreno, oppure una tabella come le Crepe del Caos del Goblin.' : 'I segnalini a faccia in giù sulle caselle «?»: si girano e si tolgono. Indica quanti ce ne sono per tipo.';
+  $('#e-rowstitle').textContent = e.mode === 'd6' ? 'Facce del D6' : 'Segnalini';
+  $('#e-addw').hidden = e.mode === 'd6';
+  $('#e-rows').replaceChildren(...e.rows.map((r, i) => {
+    const sel = el('select', { 'aria-label': 'Esito' }); for (const k in ESITI) sel.append(el('option', { value: k }, `${ESITI[k].label} (${k === 'altro' ? 'a mano' : sgn(ESITI[k].pp)})`)); sel.value = r.k;
+    sel.onchange = () => { const old = ESITI[r.k].txt; r.k = sel.value; if (!r.t || r.t === old) r.t = ESITI[r.k].txt; evChanged(true); };
+    const txt = el('input', { type: 'text', value: r.t || '', placeholder: 'Testo stampato (15 parole al massimo)', 'aria-label': 'Testo' }); txt.oninput = () => { r.t = txt.value; evChanged(); };
+    const ctl = el('div', { class: 'ctl' }, sel, txt);
+    if (r.k === 'altro') { const p = el('input', { type: 'number', step: '0.5', value: r.pp, 'aria-label': 'PP' }); p.oninput = () => { r.pp = +p.value || 0; evChanged(); }; ctl.append(el('label', { class: 'fld', style: 'flex-direction:row;align-items:center;gap:4px' }, 'PP', p)); }
+    let face;
+    if (e.mode === 'd6') face = el('span', { class: 'face', text: String(i + 1) });
+    else { const n = el('input', { type: 'number', min: 0, max: 30, value: r.n, 'aria-label': 'Quanti' }); n.style.width = '3.6em'; n.oninput = () => { r.n = Math.max(0, +n.value || 0); evChanged(); }; face = n; }
+    const right = e.mode === 'd6' ? el('span', { class: 'pp num', text: sgn(r.k === 'altro' ? r.pp : ESITI[r.k].pp) }) : el('button', { class: 'x btn ghost small', type: 'button', 'aria-label': 'Togli', onclick: () => { e.rows.splice(i, 1); evChanged(true); } }, '×');
+    return el('div', { class: 'evrow' }, face, ctl, right);
+  }));
+}
+function evChanged(rebuild) { ev._ex = false; if (rebuild) renderEvForm(); store.set('officina-ev', ev); renderEvSide(); }
+function renderEvSide() {
+  const e = ev, S = evStats(e);
+  $('#evExample').hidden = !e._ex;
+  $('#e-plate').innerHTML = `<div class="pn">${esc(e.nome || 'Senza nome')}</div>` + (e.mode === 'd6'
+    ? `<p style="text-align:center;margin-bottom:8px"><i>Tira il D6</i></p><ol>${e.rows.map((r, i) => `<li><b>${i + 1}</b><span>${esc(r.t || ESITI[r.k].txt)}</span></li>`).join('')}</ol>`
+    : `<ol>${e.rows.map(r => `<li><b>${r.n}</b><span>${esc(r.t || ESITI[r.k].label)}</span></li>`).join('')}</ol>`);
+  $('#e-avg').textContent = sgn(S.avg);
+  const st = S.avg >= 2 && S.avg <= 4 ? 'ok' : 'bad';
+  $('#e-chip').replaceChildren(chip(st, st === 'ok' ? 'attira il giusto' : S.avg < 2 ? 'respinge' : 'troppo ricca'));
+  const kv = $('#e-kv'); kv.replaceChildren();
+  const pairs = [['Esito peggiore', sgn(S.min) + ' PP'], [e.mode === 'd6' ? 'Facce con un Indizio diretto' : 'Segnalini che possono dare un Indizio', String(e.mode === 'd6' ? S.clueDirect : S.clueAny)], ['Tempo medio al tavolo', fmt(S.time, 0) + ' s'], ['Riferimento: Crepe del Caos del Goblin (espansione)', '+1,9 PP'], ['Riferimento: tessere «?» base', '+3,1 PP (stima)']];
+  for (const [a, b] of pairs) kv.append(el('dt', { text: a }), el('dd', { text: b }));
+  $('#e-checks').replaceChildren(...evChecks(e, S).map(([s, t]) => checkLi(s, t)));
+}
+function bindEv() {
+  $('#e-nome').oninput = x => { ev.nome = x.target.value; evChanged(); };
+  $('#e-set').onchange = x => { ev.set = x.target.value; evChanged(); };
+  $('#e-add').onclick = () => { ev.rows.push({ k: 'normale', n: 1, t: 'Creatura', pp: 5 }); evChanged(true); };
+  $('#evCaos').onclick = () => { ev = { nome: 'Caos del Goblin', set: 'Il Caos del Goblin', mode: 'd6', rows: CAOS.map(([k, t]) => ({ k, t, pp: ESITI[k].pp })) }; evChanged(true); };
+  $('#evBag').onclick = () => { ev = { nome: 'Segnalini Esplorazione', set: 'Base', mode: 'bag', rows: BAG.map(([k, n, t]) => ({ k, n, t, pp: ESITI[k].pp })) }; evChanged(true); };
+  $('#e-save').onclick = () => saveItem('evento', ev, $('#e-saved'));
+}
+
+// ===================== TERRENI =====================
+function terFromTpl(k) {
+  const T = TPL[k], cells = {};
+  for (const h of T.q || []) cells[hk(h)] = 'q';
+  for (const h of T.caos || []) cells[hk(h)] = 'caos';
+  for (const h of T.cry || []) cells[hk(h)] = 'cripta';
+  for (const h of T.block || []) cells[hk(h)] = 'blocco';
+  for (const h of T.slow || []) cells[hk(h)] = 'difficile';
+  return { _ex: k === 'selva', tpl: k, nome: T.nome, set: k === 'selva' ? 'La Selva' : k === 'cimitero' ? 'Il Cimitero' : 'Base', rule: T.rule, bonus: T.bonus || '', bonuspp: T.bonuspp || 0, cells, portals: clone(T.portals || []) };
+}
+let ter = store.get('officina-ter') || terFromTpl('selva');
+let tool = 'blocco', portalFirst = null;
+const typeAt = (t, h) => inCuore(h) ? (t.cells[hk(h)] || 'sentiero') : null;
+function terBoard(t) {
+  const L = type => Object.entries(t.cells).filter(([, v]) => v === type).map(([k]) => k.split(',').map(Number));
+  return { qs: L('q'), caos: L('caos'), crypts: L('cripta'), block: L('blocco'), slow: L('difficile'), portals: t.portals.map(p => p.map(h => [...h])) };
+}
+const cube = ([c, r]) => { const x = c - (r - (r & 1)) / 2; return [x, -x - r, r]; };
+const hdist = (a, b) => { const A = cube(a), B = cube(b); return Math.max(Math.abs(A[0] - B[0]), Math.abs(A[1] - B[1]), Math.abs(A[2] - B[2])); };
+const ALL = []; for (let r = 0; r < N; r++) for (let c = 0; c < N; c++) ALL.push([c, r]);
+const NB = ALL.map(a => ALL.map((b, j) => hdist(a, b) === 1 ? j : -1).filter(j => j >= 0));
+const IDX = h => h[1] * N + h[0];
+function dijkstra(B, src) {
+  const cost = ALL.map(() => 1); for (const h of B.block) cost[IDX(h)] = Infinity; for (const h of B.slow) cost[IDX(h)] = 2;
+  const nb = NB.map(x => x.slice()); for (const [a, b] of B.portals) { nb[IDX(a)].push(IDX(b)); nb[IDX(b)].push(IDX(a)); }
+  const d = ALL.map(() => Infinity); d[IDX(src)] = 0; const done = new Set(); const q = [IDX(src)];
+  while (q.length) { q.sort((a, b) => d[a] - d[b]); const u = q.shift(); if (done.has(u)) continue; done.add(u);
+    for (const v of nb[u]) { if (cost[v] === Infinity) continue; const nd = d[u] + cost[v]; if (nd < d[v]) { d[v] = nd; q.push(v); } } }
+  return d;
+}
+function terStats(t) {
+  const B = terBoard(t);
+  const sp = SPAWNS.map((s, i) => { const d = dijkstra(B, s); const ds = B.crypts.map(h => d[IDX(h)]); const fin = ds.filter(Number.isFinite);
+    return { i: i + 1, s, near: fin.length ? Math.min(...fin) : Infinity, far: ds.length ? Math.max(...ds) : Infinity, mean: ds.length ? ds.reduce((a, b) => a + b, 0) / ds.length : Infinity, d }; });
+  const means = sp.map(x => x.mean).filter(Number.isFinite);
+  const spread = means.length === 6 ? Math.max(...means) - Math.min(...means) : Infinity;
+  const reachQ = B.qs.filter(h => !Number.isFinite(sp[0].d[IDX(h)])).length;
+  return { B, sp, spread, reachQ };
+}
+function terChecks(t, S) {
+  const L = [], B = S.B;
+  let sym = true; for (const k in t.cells) { const h = k.split(',').map(Number); if ((t.cells[hk(mir(h))] || 'sentiero') !== t.cells[k]) sym = false; }
+  const pk = p => [hk(p[0]), hk(p[1])].sort().join('|');
+  const pset = new Set(t.portals.map(pk)); for (const p of t.portals) if (!pset.has(pk([mir(p[0]), mir(p[1])]))) sym = false;
+  L.push(sym ? ['ok', 'Simmetrico a mezzo giro: ogni coppia di partenze trova lo stesso Terreno.'] : ['bad', 'Non è simmetrico a mezzo giro: le partenze opposte trovano Terreni diversi.']);
+  L.push(B.crypts.length === 4 ? ['ok', '4 Cripte.'] : ['bad', `${B.crypts.length} Cripte: ne servono 4.`]);
+  L.push(B.qs.length === 12 ? ['ok', '12 caselle «?».'] : ['bad', `${B.qs.length} caselle «?»: ne servono 12, per i segnalini rimasti nel Cuore.`]);
+  L.push(B.caos.length <= 6 ? ['ok', `${B.caos.length} caselle Evento del Terreno (al massimo 6).`] : ['bad', `${B.caos.length} caselle Evento del Terreno: al massimo 6.`]);
+  const unreach = S.sp.some(x => !Number.isFinite(x.far));
+  if (unreach) L.push(['bad', 'Una Cripta non si raggiunge da tutte le partenze.']);
+  else {
+    const nearOK = S.sp.every(x => x.near >= 3 && x.near <= 4), farOK = S.sp.every(x => x.far <= 9);
+    L.push(nearOK ? ['ok', 'Da ogni partenza la Cripta più vicina è a 3–4 esagoni.'] : ['warn', `Cripta più vicina: ${S.sp.map(x => x.near).join(', ')} esagoni dalle partenze 1–6 (consigliato 3–4).`]);
+    L.push(farOK ? ['ok', 'La Cripta più lontana è a 9 esagoni o meno.'] : ['bad', 'Da qualche partenza la Cripta più lontana è oltre 9 esagoni.']);
+    L.push(S.spread <= 1 ? ['ok', `Le medie delle partenze stanno entro ${fmt(S.spread)} esagoni l'una dall'altra (massimo 1).`] : ['bad', `Le medie delle partenze differiscono di ${fmt(S.spread)} esagoni: al massimo 1.`]);
+  }
+  if (S.reachQ) L.push(['bad', `${S.reachQ} caselle «?» non si raggiungono.`]);
+  const feats = [B.block.length && 'esagoni bloccati', B.slow.length && 'terreno difficile', B.portals.length && 'portali'].filter(Boolean);
+  L.push(feats.length <= 1 ? ['ok', feats.length ? `Una sola caratteristica nuova (${feats[0]}).` : 'Nessuna caratteristica nuova: va bene per la base.'] : ['warn', `${feats.length} caratteristiche insieme (${feats.join(', ')}): una sola per Terreno.`]);
+  if (feats.length && !t.rule.trim()) L.push(['warn', 'Scrivi la regola in una riga per la carta Terreno.']);
+  else if (t.rule.trim()) L.push(words(t.rule) <= 18 ? ['ok', 'La regola sta in una riga.'] : ['warn', `La regola ha ${words(t.rule)} parole: stringila in una riga.`]);
+  if (t.bonus.trim() || t.bonuspp) L.push((+t.bonuspp || 0) <= 2 ? ['ok', `Bonus della carta ${fmt(+t.bonuspp || 0)} PP (massimo 2, senza malus alle altre specie).`] : ['bad', `Bonus della carta ${fmt(+t.bonuspp)} PP: al massimo 2, senza malus alle altre.`]);
+  L.push(['man', 'Tempo: la durata media non sale di più del 5%. Ladro: il suo indice non si sposta di più di 0,05. Li misura il simulatore qui sotto.']);
+  return L;
+}
+function hexPts(cx, cy, s) { let p = ''; for (let i = 0; i < 6; i++) { const a = Math.PI / 180 * (60 * i - 30); p += `${(cx + s * Math.cos(a)).toFixed(1)},${(cy + s * Math.sin(a)).toFixed(1)} `; } return p; }
+function renderBoard() {
+  const t = ter, S = terStats(t), s = 22, w = Math.sqrt(3) * s, padX = 26, padY = 24;
+  const X = ([c, r]) => padX + w * (c + 0.5 * (r & 1)) + w / 2, Y = ([c, r]) => padY + s + 1.5 * s * r;
+  const W = padX + w * 10.5 + 8, H = padY + s * 2 + 1.5 * s * 9 + 8;
+  const svg = $('#t-board'); svg.setAttribute('viewBox', `0 0 ${W.toFixed(0)} ${H.toFixed(0)}`);
+  const outerType = h => { const k = hk(h); if (withCaos && CREPE_OUT.some(x => hk(x) === k)) return 'caos'; for (const [type, L] of Object.entries(OUTER)) if (L.some(x => hk(x) === k)) return type; return null; };
+  const pIdx = {}; t.portals.forEach((p, i) => { for (const h of p) pIdx[hk(h)] = i; });
+  let g = '';
+  for (let c = 0; c < N; c++) g += `<text x="${X([c, 0])}" y="12" font-size="11" text-anchor="middle" fill="var(--ink-2)" font-family="Alegreya Sans, sans-serif">${COLS_L[c]}</text>`;
+  for (let r = 0; r < N; r++) g += `<text x="10" y="${Y([0, r]) + 4}" font-size="11" text-anchor="middle" fill="var(--ink-2)" font-family="Alegreya Sans, sans-serif">${r + 1}</text>`;
+  for (const h of ALL) {
+    const [c, r] = h, cx = X(h), cy = Y(h), inside = inCuore(h);
+    let fill = 'var(--hex-out)', label = '', lc = 'var(--ink-2)';
+    if (inside) { const ty = typeAt(t, h); fill = TOOLS[ty].color; label = { q: '?', cripta: '✦', caos: '✷', blocco: '', difficile: '≈', sentiero: '' }[ty]; lc = ty === 'q' || ty === 'sentiero' || ty === 'difficile' ? 'var(--ink)' : 'var(--panel)'; }
+    else {
+      const sp = SPAWNS.findIndex(x => x[0] === c && x[1] === r);
+      if (sp >= 0) { label = String(sp + 1); fill = 'var(--brass-soft)'; lc = 'var(--brass)'; }
+      else { const ot = outerType(h); label = { loc: 'L', fon: 'F', fab: 'B', caos: '✷', qs: '?' }[ot] || ''; }
+    }
+    g += `<polygon class="hex${inside ? ' edit' : ''}" data-h="${c},${r}" points="${hexPts(cx, cy, s - 0.6)}" fill="${fill}"${inside ? '' : ' opacity=".9"'}><title>${hname(h)}</title></polygon>`;
+    if (label) g += `<text x="${cx}" y="${cy + 5}" font-size="${/^\d$/.test(label) ? 14 : 15}" font-weight="700" text-anchor="middle" fill="${lc}" pointer-events="none" font-family="Cinzel, Georgia, serif">${label}</text>`;
+    if (pIdx[hk(h)] != null) g += `<circle cx="${cx}" cy="${cy}" r="${s * 0.62}" fill="none" stroke="var(--hex-portal)" stroke-width="3" pointer-events="none"/><text x="${cx + s * 0.55}" y="${cy - s * 0.4}" font-size="10" font-weight="700" fill="var(--hex-portal)" pointer-events="none" font-family="Alegreya Sans, sans-serif">${'ABCDEFGH'[pIdx[hk(h)]]}</text>`;
+    if (portalFirst && hk(portalFirst) === hk(h)) g += `<polygon points="${hexPts(cx, cy, s - 2)}" fill="none" stroke="var(--brass)" stroke-width="3" pointer-events="none"/>`;
+  }
+  // bordo del Cuore
+  g += `<rect x="${X([2, 2]) - w / 2 - 3}" y="${Y([2, 2]) - s - 2}" width="${w * 6.5 + 6}" height="${1.5 * s * 5 + 2 * s + 4}" fill="none" stroke="var(--brass)" stroke-dasharray="4 4" stroke-width="1.2" rx="6" pointer-events="none"/>`;
+  svg.innerHTML = g;
+  // statistiche
+  $('#t-spread').textContent = Number.isFinite(S.spread) ? fmt(S.spread) : '—';
+  $('#t-chip').replaceChildren(Number.isFinite(S.spread) ? chip(S.spread <= 1 ? 'ok' : 'bad', S.spread <= 1 ? 'partenze alla pari' : 'partenze sbilanciate') : chip('bad', 'Cripta irraggiungibile'));
+  const tb = $('#t-dist'); tb.replaceChildren(el('tr', {}, ...['Partenza', 'Vicina', 'Lontana', 'Media'].map((x, i) => el('th', { class: i ? 'n' : '', text: x }))));
+  for (const x of S.sp) tb.append(el('tr', {}, el('td', { text: `${x.i} · ${hname(x.s)}` }), el('td', { class: 'n', text: Number.isFinite(x.near) ? String(x.near) : '—' }), el('td', { class: 'n', text: Number.isFinite(x.far) ? String(x.far) : '—' }), el('td', { class: 'n', text: Number.isFinite(x.mean) ? fmt(x.mean) : '—' })));
+  $('#t-checks').replaceChildren(...terChecks(t, S).map(([a, b]) => checkLi(a, b)));
+  $('#tExample').hidden = !t._ex;
+}
+function paint(h) {
+  const t = ter, mirror = $('#t-mirror').checked, targets = mirror && hk(mir(h)) !== hk(h) ? [h, mir(h)] : [h];
+  const dropPortal = x => { t.portals = t.portals.filter(p => !p.some(y => hk(y) === hk(x))); };
+  if (tool === 'portale') {
+    const ty = typeAt(t, h);
+    if (ty === 'cripta' || ty === 'blocco') { toast('Un portale non va su una Cripta o su un esagono bloccato.'); return; }
+    if (t.portals.some(p => p.some(y => hk(y) === hk(h)))) { for (const x of targets) dropPortal(x); portalFirst = null; }
+    else if (!portalFirst) portalFirst = h;
+    else if (hk(portalFirst) === hk(h)) portalFirst = null;
+    else {
+      const a = portalFirst, b = h; t.portals.push([a, b]);
+      if (mirror && !(hk(mir(a)) === hk(b))) { if (!t.portals.some(p => p.some(y => hk(y) === hk(mir(a)) || hk(y) === hk(mir(b))))) t.portals.push([mir(a), mir(b)]); }
+      portalFirst = null;
+    }
+  } else {
+    for (const x of targets) {
+      if (tool === 'sentiero') { delete t.cells[hk(x)]; dropPortal(x); }
+      else { t.cells[hk(x)] = tool; if (tool === 'cripta' || tool === 'blocco') dropPortal(x); }
+    }
+  }
+  terChanged();
+}
+function terChanged(form) { ter._ex = false; store.set('officina-ter', ter); if (form) renderTerForm(); renderBoard(); }
+function renderTerForm() {
+  const t = ter;
+  $('#t-nome').value = t.nome; fillSelect($('#t-set'), Object.fromEntries(SETS.map(s => [s, s])), t.set);
+  $('#t-rule').value = t.rule; $('#t-bonus').value = t.bonus; $('#t-bonuspp').value = t.bonuspp || 0;
+  fillSelect($('#t-tpl'), { '': 'scegli…', cuore: 'Cuore base', selva: 'La Selva (Stagno)', cimitero: 'Il Cimitero (Tombe gemelle)', vuoto: 'Cuore vuoto' }, '');
+  $('#t-tools').replaceChildren(...Object.entries(TOOLS).map(([k, T]) => el('button', { type: 'button', class: 'tool', 'aria-pressed': String(k === tool), onclick: () => { tool = k; portalFirst = null; renderTerForm(); renderBoard(); } }, el('i', { style: `background:${T.color}` }), T.label)));
+  $('#t-toolhint').textContent = TOOLS[tool].hint;
+}
+function bindTer() {
+  $('#t-board').addEventListener('click', e => { const p = e.target.closest('[data-h]'); if (!p || !p.classList.contains('edit')) return; paint(p.dataset.h.split(',').map(Number)); });
+  $('#t-nome').oninput = e => { ter.nome = e.target.value; terChanged(); };
+  $('#t-set').onchange = e => { ter.set = e.target.value; terChanged(); };
+  $('#t-caos').onchange = e => { withCaos = e.target.checked; renderBoard(); };
+  $('#t-rule').oninput = e => { ter.rule = e.target.value; terChanged(); };
+  $('#t-bonus').oninput = e => { ter.bonus = e.target.value; terChanged(); };
+  $('#t-bonuspp').oninput = e => { ter.bonuspp = +e.target.value || 0; terChanged(); };
+  $('#t-tpl').onchange = e => { if (!e.target.value) return; ter = terFromTpl(e.target.value); portalFirst = null; store.set('officina-ter', ter); renderTerForm(); renderBoard(); };
+  $('#t-save').onclick = () => saveItem('terreno', ter, $('#t-saved'));
+  const host = $('#t-sim');
+  simPanel(host, 'Prova nel simulatore', 'Partite tra IA con le 4 classi della base, sulla plancia stampata e poi con il tuo Terreno, in 2 e in 4 giocatori. Misura durata, equilibrio delle partenze e indice del Ladro.',
+    [[4000, '4.000 per serie (circa 30 s)'], [10000, '10.000 per serie (circa 1,5 min)'], [20000, '20.000 per serie (circa 3 min)']],
+    n => runSim({ cmd: 'board', n, nps: [2, 4], terreno: terBoard(ter), caos: withCaos }, host, m => {
+      host.querySelector('.plabel').textContent = '';
+      const res = host.querySelector('.res'); res.replaceChildren();
+      const t = el('table', { class: 't' }, el('tr', {}, el('th', { text: '' }), el('th', { class: 'n', text: '2 giocatori' }), el('th', { class: 'n', text: '4 giocatori' })));
+      const o2 = m.out[2], o4 = m.out[4];
+      const dt = o => (o.test.min / o.base.min - 1) * 100;
+      const spr = o => { const v = Object.values(o.test.spawn); return `${fmt(Math.min(...v), 2)}–${fmt(Math.max(...v), 2)}`; };
+      const lad = o => (o.test.cls.Ladro || 0) - (o.base.cls.Ladro || 0);
+      const rows = [['Durata, base → Terreno', o => `${fmt(o.base.min)} → ${fmt(o.test.min)} min`], ['Variazione della durata', o => sgn(dt(o)) + '%'], ['Partenze (indice, 1 = alla pari)', spr], ['Ladro: variazione dell\'indice', o => sgn(lad(o), 2)]];
+      for (const [a, f] of rows) t.append(el('tr', {}, el('td', { text: a }), el('td', { class: 'n', text: f(o2) }), el('td', { class: 'n', text: f(o4) })));
+      const timeOK = dt(o2) <= 5 && dt(o4) <= 5, noise = 4.9 / Math.sqrt(n), ladOK = Math.abs(lad(o2)) <= 0.05 + noise && Math.abs(lad(o4)) <= 0.05 + noise;
+      res.append(el('div', { class: 'tscroll' }, t), el('ul', { class: 'checks' },
+        checkLi(timeOK ? 'ok' : 'bad', timeOK ? 'La durata sale meno del 5%.' : 'La durata sale più del 5%: togli ostacoli o accorcia i percorsi.'),
+        checkLi(ladOK ? 'ok' : 'warn', ladOK ? `Il Ladro resta dentro ±0,05 (più ±${fmt(noise, 2)} di rumore della misura).` : 'L\'indice del Ladro si sposta oltre ±0,05: compensa con la carta Terreno.')),
+        el('p', { class: 'hint', text: `Con ${n.toLocaleString('it-IT')} partite per serie l'indice di una partenza oscilla di circa ±${fmt(3.5 / Math.sqrt(n), 2)} per puro caso. I ponti che cambiano a ogni giro non si possono ancora provare qui.` }));
+    }));
+}
+
+// ===================== COLLEZIONE (db del progetto, o questo browser) =====================
+let COLL = [], DB = null, filter = 'tutti';
+const KLABEL = { carta: 'Carta', nemico: 'Nemico', evento: 'Evento', terreno: 'Terreno' };
+function summaryOf(kind, d) {
+  if (kind === 'carta') { const P = cardPP(d), R = RARITY[d.rar]; const st = P.total >= R.lo && P.total <= R.hi ? 'ok' : P.total >= R.lo - 1 && P.total <= R.hi + 1 ? 'warn' : 'bad'; return { meta: `${R.sym} ${R.label}${d.rar !== 'comune' ? ' · ' + d.cls : ''} · ${KINDS[d.kind]} · ${d.set}`, val: fmt(P.total) + ' PP', st }; }
+  if (kind === 'nemico') { const m = minaccia(d), t = tierOf(m, d.role); return { meta: `${ROLES[d.role]} · ${d.pv} PV · +${d.att} · ${d.dif} · ${DMG[d.dmg].label} · ${d.set}`, val: 'Minaccia ' + m, st: t && t.role === d.role ? 'ok' : 'bad' }; }
+  if (kind === 'evento') { const S = evStats(d); return { meta: `${MODES[d.mode]} · ${d.set}`, val: sgn(S.avg) + ' PP', st: S.avg >= 2 && S.avg <= 4 && S.low.length <= 1 ? 'ok' : 'bad' }; }
+  const S = terStats(d); return { meta: `${d.rule || 'Nessuna regola nuova'} · ${d.set}`, val: Number.isFinite(S.spread) ? 'scarto ' + fmt(S.spread) : 'irraggiungibile', st: S.spread <= 1 ? 'ok' : 'bad' };
+}
+async function saveItem(kind, data, note) {
+  const d = clone(data); delete d._ex; const id = data._id || uid(); data._id = id; d._id = id;
+  const doc = { kind, nome: d.nome || 'Senza nome', set: d.set || '', data: d, updatedAt: new Date().toISOString() };
+  try {
+    if (DB) await DB.collection('oggetti').doc(id).set(doc);
+    else { const L = store.get('officina-collezione') || {}; L[id] = doc; store.set('officina-collezione', L); loadLocal(); }
+    note.textContent = `Salvato alle ${new Date().toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' })}.`;
+    toast(`«${doc.nome}» è nella collezione.`);
+  } catch (e) { note.textContent = 'Non salvato: ' + (e && e.message || e) + '. Riprova tra poco.'; }
+}
+function loadLocal() { const L = store.get('officina-collezione') || {}; COLL = Object.entries(L).map(([id, d]) => ({ _id: id, ...d })); renderColl(); }
+async function removeItem(id) {
+  if (DB) await DB.collection('oggetti').doc(id).delete().catch(e => toast('Non eliminato: ' + e.message));
+  else { const L = store.get('officina-collezione') || {}; delete L[id]; store.set('officina-collezione', L); loadLocal(); }
+}
+function openItem(x) {
+  const d = clone(x.data); d._id = x._id;
+  if (x.kind === 'carta') { card = Object.assign(clone(CARD_EMPTY), d); renderCardForm(); renderCardSide(); store.set('officina-card', card); show('carte'); }
+  if (x.kind === 'nemico') { foe = Object.assign(clone(FOE_EMPTY), d); renderFoeForm(); renderFoeSide(); store.set('officina-foe', foe); show('nemici'); }
+  if (x.kind === 'evento') { ev = d; renderEvForm(); renderEvSide(); store.set('officina-ev', ev); show('eventi'); }
+  if (x.kind === 'terreno') { ter = d; renderTerForm(); renderBoard(); store.set('officina-ter', ter); show('terreni'); }
+}
+function renderColl() {
+  $('#collCount').textContent = COLL.length ? String(COLL.length) : '';
+  seg($('#k-filter'), { tutti: 'Tutti', carta: 'Carte', nemico: 'Nemici', evento: 'Eventi', terreno: 'Terreni' }, filter, v => { filter = v; renderColl(); });
+  $('#k-store').textContent = DB ? 'Salvata con la pagina: la vede chi apre questa Officina.' : 'Salvata solo in questo browser. Usa «Tutto · JSON» per tenerne una copia.';
+  const L = COLL.filter(x => filter === 'tutti' || x.kind === filter).sort((a, b) => (a.kind + a.set + a.nome).localeCompare(b.kind + b.set + b.nome, 'it'));
+  const host = $('#k-list');
+  if (!L.length) { host.replaceChildren(el('div', { class: 'empty' }, el('p', { text: COLL.length ? 'Niente in questo filtro.' : 'La collezione è vuota.' }), el('p', { class: 'hint', style: 'margin:6px auto 0', text: 'Prepara una carta, un nemico, un evento o un Terreno nelle altre schede e premi «Salva nella collezione».' }))); return; }
+  host.replaceChildren(...L.map(x => {
+    const s = summaryOf(x.kind, x.data);
+    const acts = el('div', { class: 'acts' }, el('span', { class: 'chip ' + s.st, text: s.val }), el('button', { class: 'btn small', type: 'button', onclick: () => openItem(x) }, 'Apri'),
+      el('button', { class: 'btn small ghost', type: 'button', onclick: () => { const d = clone(x.data); d.nome = (d.nome || '') + ' (copia)'; delete d._id; saveItem(x.kind, d, $('#k-store')); } }, 'Duplica'));
+    const del = el('button', { class: 'btn small ghost', type: 'button' }, 'Elimina');
+    del.onclick = () => { if (del.dataset.armed) { removeItem(x._id); return; } del.dataset.armed = '1'; del.textContent = 'Conferma eliminazione'; del.style.color = 'var(--bad)'; setTimeout(() => { if (del.isConnected) { delete del.dataset.armed; del.textContent = 'Elimina'; del.style.color = ''; } }, 4000); };
+    acts.append(del);
+    return el('div', { class: 'item' }, el('span', { class: 'kind', text: KLABEL[x.kind] }), el('div', {}, el('div', { class: 'nm', text: x.nome }), el('div', { class: 'meta', text: s.meta })), acts);
+  }));
+}
+// esportazioni
+const CSVH = ['ID', 'Nome', 'Tipo', 'Categoria', 'Testo della carta', 'Requisito per giocarla', 'Specie/classi citate', 'Slot (icona)', 'Blocco statistiche', 'Foto', 'Refusi', 'Note di analisi', 'Mazzo', 'Testo in uso (dopo il bilanciamento del 21/10)', 'Bilanciamento 21/10 (motivo)'];
+const csvCell = v => { const s = String(v ?? ''); return /[;"\n\r]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
+const csv = (head, rows) => '﻿' + [head, ...rows].map(r => r.map(csvCell).join(';')).join('\r\n');
+function cardRecord(d, i) {
+  const P = cardPP(d), T = cardText(d), txt = d.text.trim() || T.full;
+  const reqParts = []; if (d.rar !== 'comune' && d.cls) reqParts.push('Classe ' + d.cls); if (d.req === 'pvBassi') reqParts.push('Avere 3 PV o meno'); if (d.req.startsWith('razza:')) reqParts.push('Pedina ' + d.req.slice(6));
+  return { id: d.id || `NUOVA-${String(i + 1).padStart(2, '0')}`, nome: d.nome, tipo: d.kind === 'incantesimo' ? 'TI' : 'TE',
+    categoria: d.rar === 'leggendaria' ? 'Carta Trama (leggendaria, nuova)' : d.kind === 'incantesimo' ? 'Trama Incantesimo' : 'Trama Equipaggiamento',
+    testo: txt, requisito: reqParts.join('; '), specie_classi: [d.rar !== 'comune' ? d.cls : '', d.race, d.req.startsWith('razza:') ? d.req.slice(6) : ''].filter(Boolean).join(', '),
+    slot: d.kind === 'equip' ? d.slot : d.kind === 'pozione' ? 'Nessuno (consumabile)' : '', statistiche: '', foto: '', refusi: '', note: [RARITY[d.rar].label, d.set, d.note].filter(Boolean).join(' · '),
+    mazzo: d.rar === 'comune' ? 'Comune' : 'Classe: ' + d.cls, testo_rimodulato: '', bilanciamento: `${fmt(P.total)} PP stimati con l'Officina (budget ${RARITY[d.rar].label.toLowerCase()} ${RARITY[d.rar].lo}–${RARITY[d.rar].hi})`,
+    officina: workerCard(d) };
+}
+function exportData(kind) {
+  const cards = COLL.filter(x => x.kind === 'carta').map((x, i) => cardRecord(x.data, i));
+  const stamp = new Date().toISOString().slice(0, 10);
+  if (kind === 'cardsCsv') return [`carte_officina_${stamp}.csv`, csv(CSVH, cards.map(c => [c.id, c.nome, c.tipo, c.categoria, c.testo, c.requisito, c.specie_classi, c.slot, c.statistiche, c.foto, c.refusi, c.note, c.mazzo, c.testo_rimodulato, c.bilanciamento])), cards.length];
+  if (kind === 'cardsJson') return [`cards_officina_${stamp}.json`, JSON.stringify(cards, null, 2), cards.length];
+  if (kind === 'foesCsv') { const F = COLL.filter(x => x.kind === 'nemico'); return [`nemici_officina_${stamp}.csv`, csv(['Nome', 'Scatola', 'Ruolo', 'PV', 'ATT', 'Difesa', 'Danno', 'Tratti', 'Minaccia', 'Fascia', 'Testo'], F.map(x => { const d = x.data, m = minaccia(d); return [d.nome, d.set, ROLES[d.role], d.pv, d.att, d.dif, DMG[d.dmg].label, d.traits.map(t => TRAITS[t].label).join(', '), m, tierOf(m, d.role)?.label || '', [...d.traits.map(t => TRAITS[t].label + '. ' + TRAITS[t].text), d.flavor].filter(Boolean).join(' ')]; })), F.length]; }
+  if (kind === 'evCsv') { const E = COLL.filter(x => x.kind === 'evento'); const rows = []; for (const x of E) { const d = x.data; d.rows.forEach((r, i) => rows.push([d.nome, d.set, MODES[d.mode], d.mode === 'd6' ? i + 1 : r.n, ESITI[r.k].label, r.t, fmt(r.k === 'altro' ? +r.pp || 0 : ESITI[r.k].pp)])); } return [`eventi_officina_${stamp}.csv`, csv(['Evento', 'Scatola', 'Forma', 'Faccia o quantità', 'Esito', 'Testo', 'PP'], rows), E.length]; }
+  const all = { versione: 1, esportato: new Date().toISOString(), oggetti: COLL.map(x => ({ kind: x.kind, nome: x.nome, set: x.set, data: x.data, terreno_simulatore: x.kind === 'terreno' ? terBoard(x.data) : undefined, carta_catalogo: x.kind === 'carta' ? cardRecord(x.data, 0) : undefined })) };
+  return [`officina_${stamp}.json`, JSON.stringify(all, null, 2), COLL.length];
+}
+let DL = null;
+async function doExport(kind) {
+  const [filename, text, n] = exportData(kind);
+  if (!n) { toast('Non c\'è niente di questo tipo nella collezione.'); return; }
+  $('#k-out').hidden = false; $('#k-outtext').value = text;
+  if (DL) {
+    try { await DL.save({ filename, data: new Blob([text], { type: filename.endsWith('.csv') ? 'text/csv' : 'application/json' }) }); $('#k-outhint').textContent = `${filename}: scaricato. Qui sotto c'è anche il testo, se preferisci copiarlo.`; return; }
+    catch (e) { $('#k-outhint').textContent = e && e.code === 'declined' ? 'Download annullato. Puoi copiare il testo qui sotto.' : 'Il download non è riuscito: copia il testo qui sotto e salvalo come ' + filename + '.'; return; }
+  }
+  $('#k-outhint').textContent = `Copia il testo e salvalo come ${filename}.`;
+}
+function bindColl() {
+  for (const b of document.querySelectorAll('[data-exp]')) b.onclick = () => doExport(b.dataset.exp);
+  $('#k-copy').onclick = () => { const t = $('#k-outtext'); navigator.clipboard?.writeText(t.value).then(() => toast('Copiato.'), () => { t.select(); toast('Selezionato: premi Copia sulla tastiera.'); }) ?? (t.select()); };
+  $('#k-import').onchange = async e => {
+    const f = e.target.files[0]; if (!f) return;
+    try { const j = JSON.parse(await f.text()); const L = j.oggetti || []; let n = 0;
+      for (const x of L) if (KLABEL[x.kind] && x.data) { const d = clone(x.data); delete d._id; await saveItem(x.kind, d, $('#k-store')); n++; }
+      toast(`${n} oggetti importati.`);
+    } catch (err) { toast('Il file non è un export dell\'Officina.'); }
+    e.target.value = '';
+  };
+}
+
+// ===================== schede e avvio =====================
+function show(tab) {
+  for (const b of document.querySelectorAll('#tabs button')) b.setAttribute('aria-selected', String(b.dataset.tab === tab));
+  for (const s of document.querySelectorAll('[role=tabpanel]')) s.hidden = s.id !== 'tab-' + tab;
+  store.set('officina-tab', tab); if (tab === 'collezione') renderColl();
+}
+for (const b of document.querySelectorAll('#tabs button')) b.onclick = () => show(b.dataset.tab);
+
+bindCard(); bindFoe(); bindEv(); bindTer(); bindColl();
+renderCardForm(); renderCardSide(); renderFoeForm(); renderFoeSide(); renderEvForm(); renderEvSide(); renderTerForm(); renderBoard();
+loadLocal();
+const hashTab = (location.hash || '').slice(1);
+show(['carte', 'nemici', 'eventi', 'terreni', 'collezione'].includes(hashTab) ? hashTab : (store.get('officina-tab') || 'carte'));
+makeWorker(); renderSims();
+
+(async () => {
+  if (!window.claude || !window.claude.use) return;
+  try {
+    const [db, dl] = await Promise.all([window.claude.use('db'), window.claude.use('downloads')]);
+    DL = dl;
+    if (db) {
+      DB = db;
+      DB.collection('oggetti').onSnapshot(snap => { COLL = snap.docs.map(d => ({ _id: d.id, ...d.data() })).filter(x => KLABEL[x.kind] && x.data); renderColl(); renderFoeSide(); },
+        err => { DB = null; loadLocal(); toast('La collezione condivisa non risponde: salvo in questo browser.'); });
+      renderColl();
+    }
+  } catch (e) { }
+})();
+</script>

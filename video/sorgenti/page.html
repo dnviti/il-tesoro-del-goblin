@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="it"><head><meta charset="utf-8"><title>Partita al tavolo</title>
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;width:1920px;height:1080px;overflow:hidden}
+body{background:radial-gradient(ellipse at 30% 40%,#4a3322 0%,#2b1d14 55%,#1d130c 100%);font-family:'Alegreya',serif;color:#2a2118}
+#board{position:absolute;left:36px;top:24px}
+#board svg{position:absolute;left:0;top:0;width:100%;height:100%}
+#board{filter:drop-shadow(0 18px 26px rgba(0,0,0,.55))}
+#right{position:absolute;left:900px;top:24px;width:990px;height:1032px}
+.hdr{position:absolute;left:0;top:0;width:990px;height:104px}
+.ttl{position:absolute;left:0;top:4px;font-family:'Cinzel';font-weight:800;font-size:44px;color:#f6d68b;text-shadow:0 3px 0 #0008;white-space:nowrap}
+.sub{position:absolute;left:2px;top:62px;font-family:'Alegreya Sans';font-size:24px;color:#e7d3a8;white-space:nowrap}
+.clock{position:absolute;right:0;top:0;width:290px;height:104px;background:#f4ead5;border:3px solid #b8862b;border-radius:14px;box-shadow:0 6px 14px #0007;text-align:center}
+.clock .l{font-family:'Alegreya Sans';font-weight:800;font-size:16px;letter-spacing:2px;color:#6b4a2b;margin-top:7px}
+.clock .v{font-family:'Alegreya Sans';font-weight:800;font-size:50px;line-height:50px;color:#2a2118;font-variant-numeric:tabular-nums}
+.clock .g{font-family:'Alegreya Sans';font-size:17px;color:#9c2f24;font-weight:700}
+.phases{position:absolute;left:0;top:118px;width:990px;height:44px;display:flex;gap:8px}
+.ph{flex:1;border-radius:22px;background:#3b2a1c;border:2px solid #6b4a2b;color:#cbb88e;font-family:'Alegreya Sans';font-weight:800;font-size:19px;display:flex;align-items:center;justify-content:center;gap:8px}
+.ph svg{width:24px;height:24px}
+.ph.on{background:#f6d68b;border-color:#f6d68b;color:#2a2118;box-shadow:0 0 18px #f6d68b88}
+.ph .n{display:inline-block;width:24px;height:24px;border-radius:50%;background:#9c2f24;color:#fff;font-size:15px;line-height:24px;text-align:center}
+.heroes{position:absolute;left:0;top:176px;width:990px;height:262px;display:flex;gap:15px}
+.hero{width:320px;height:262px;background:#f4ead5;border-radius:14px;border:3px solid #6b4a2b;position:relative;overflow:hidden;box-shadow:0 6px 14px #0007}
+.hero.act{border-color:#f6d68b;box-shadow:0 0 0 4px #f6d68b,0 0 30px #f6d68baa}
+.hero .band{height:56px;padding:6px 12px;color:#fff;position:relative}
+.hero .nm{font-family:'Cinzel';font-weight:800;font-size:25px;line-height:26px}
+.hero .cl{font-family:'Alegreya Sans';font-size:17px;opacity:.95}
+.hero .lv{position:absolute;right:10px;top:9px;background:#fff;color:#2a2118;border-radius:8px;padding:2px 8px;font-family:'Alegreya Sans';font-weight:800;font-size:17px}
+.hero .stats{display:grid;grid-template-columns:1fr 1fr;gap:3px 10px;padding:8px 12px 2px;font-family:'Alegreya Sans';font-size:21px;font-weight:700}
+.hero .stats div{display:flex;align-items:center;gap:6px}
+.hero .stats svg{width:22px;height:22px}
+.hero .stats .k{font-size:14px;color:#6b4a2b;font-weight:800}
+.row{display:flex;align-items:center;gap:6px;padding:3px 12px;font-family:'Alegreya Sans';font-size:16px;color:#6b4a2b;font-weight:700}
+.box{width:30px;height:30px;border-radius:6px;border:2px solid #6b4a2b;background:#fffaf0;display:flex;align-items:center;justify-content:center}
+.box svg{width:22px;height:22px}
+.box.off svg{opacity:.18}
+.box.new{box-shadow:0 0 0 3px #f6d68b}
+.pe{display:flex;gap:2px}
+.pe span{width:17px;height:17px;border:1.5px solid #6b4a2b;border-radius:3px;background:#fffaf0;font-size:10px;line-height:13px;text-align:center;color:#6b4a2b}
+.pe span.g{border-color:#b8862b;border-width:2.5px}
+.pe span.c{background:#c9a875}
+.small{font-size:15px;color:#2a2118}
+.badge{position:absolute;right:84px;top:13px;background:#2b1d14;color:#f6d68b;font-family:'Cinzel';font-weight:800;font-size:13px;border-radius:8px;padding:3px 8px}
+.hero.hide{opacity:0}
+#stage{position:absolute;left:0;top:452px;width:990px;height:400px;background:rgba(244,234,213,.96);border-radius:16px;border:3px solid #b8862b;box-shadow:0 6px 18px #0008;overflow:hidden}
+#cap{position:absolute;left:0;top:866px;width:990px;height:166px;background:#1d130c;border:3px solid #b8862b;border-radius:16px;color:#fff6df;font-family:'Alegreya Sans';font-size:33px;line-height:1.28;padding:16px 26px;display:flex;align-items:center;box-shadow:0 6px 18px #0008}
+#cap b{color:#f6d68b}
+.it{position:absolute;inset:0}
+.ctr{display:flex;align-items:center;justify-content:center;gap:26px;height:100%;flex-wrap:wrap;padding:10px}
+.card{width:200px;height:290px;border-radius:14px;background:#fffaf0;border:3px solid #6b4a2b;box-shadow:0 8px 16px #0004;overflow:hidden;position:relative;font-family:'Alegreya Sans'}
+.card .h{padding:8px 10px;color:#fff;font-family:'Cinzel';font-weight:800;font-size:19px;line-height:21px;min-height:62px;display:flex;align-items:center}
+.card .s{padding:6px 10px 0;font-size:15px;color:#6b4a2b;font-weight:800;text-transform:uppercase;letter-spacing:1px}
+.card .tx{padding:6px 10px;font-size:19px;line-height:1.25;color:#2a2118}
+.card .ft{position:absolute;bottom:8px;left:10px;right:10px;font-size:14px;color:#6b4a2b;display:flex;justify-content:space-between}
+.back{width:110px;height:160px;border-radius:10px;border:3px solid #2b1d14;box-shadow:0 6px 10px #0004;display:flex;align-items:center;justify-content:center;font-family:'Cinzel';font-weight:800;color:#f6d68b;font-size:40px}
+.lbl{font-family:'Alegreya Sans';font-weight:800;font-size:22px;color:#6b4a2b;text-align:center}
+.big{font-family:'Cinzel';font-weight:800;font-size:40px;color:#9c2f24;text-align:center}
+.die{display:inline-flex;align-items:center;justify-content:center;position:relative;vertical-align:middle}
+.die svg{position:absolute;inset:0}
+.die b{position:relative;font-family:'Alegreya Sans';font-weight:800;color:#2a2118}
+.dielbl{font-family:'Alegreya Sans';font-size:22px;font-weight:800;color:#6b4a2b;text-align:center;margin-top:6px}
+.res{font-family:'Alegreya Sans';font-weight:800;font-size:30px;color:#2a2118;text-align:center}
+.cb{position:absolute;inset:0;padding:12px 18px}
+.cbtop{display:flex;align-items:center;justify-content:space-between;height:112px;border-bottom:2px solid #b9a582}
+.cbside{display:flex;align-items:center;gap:14px;font-family:'Alegreya Sans'}
+.cbside .n{font-family:'Cinzel';font-weight:800;font-size:25px}
+.cbside .d{font-size:18px;color:#6b4a2b;font-weight:700}
+.vs{font-family:'Cinzel';font-weight:800;font-size:34px;color:#9c2f24}
+.lines{margin-top:8px}
+.ln{font-family:'Alegreya Sans';font-size:22px;height:42px;display:flex;align-items:center;gap:7px;white-space:nowrap;color:#2a2118}
+.ln .who{font-weight:800;min-width:96px}
+.ln .rl{color:#6b4a2b;font-size:17px}
+.hit{color:#2f7a3f;font-weight:800}
+.miss{color:#9c2f24;font-weight:800}
+.note{font-weight:800;color:#7a3e8e}
+.strike{opacity:.35;text-decoration:line-through}
+.tok{border-radius:50%;background:#efe1c3;border:4px solid #6b4a2b;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 6px 12px #0005;text-align:center;font-family:'Alegreya Sans'}
+.tok .tn{font-family:'Cinzel';font-weight:800;color:#2a2118;line-height:1.05}
+.tok .ts{display:flex;gap:8px;font-weight:800;color:#2a2118}
+.tok .ts span{display:flex;align-items:center;gap:2px}
+.tok.backside{background:#3b2a1c;border-color:#b8862b;color:#f6d68b;font-family:'Cinzel';font-weight:800}
+#full{position:absolute;inset:0;pointer-events:none}
+.cover{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 42%,#4b3220 0%,#1d130c 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.cover .a{font-family:'Cinzel';font-weight:600;font-size:30px;letter-spacing:6px;color:#b8862b}
+.cover .b{font-family:'Cinzel';font-weight:800;font-size:110px;line-height:1.02;color:#f6d68b;text-shadow:0 6px 0 #0009;margin:10px 0 18px}
+.cover .c{font-family:'Alegreya';font-style:italic;font-size:38px;color:#efe2c2}
+.cover .d{font-family:'Alegreya Sans';font-size:28px;color:#cbb88e;margin-top:26px}
+.banner{position:absolute;left:36px;width:820px;top:470px;height:120px;background:rgba(29,19,12,.86);border-top:3px solid #b8862b;border-bottom:3px solid #b8862b;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.banner .x{font-family:'Cinzel';font-weight:800;font-size:62px;color:#f6d68b;line-height:1}
+.banner .y{font-family:'Alegreya Sans';font-weight:700;font-size:26px;color:#efe2c2;margin-top:6px}
+.strip{display:flex;gap:14px;padding:30px 22px}
+.step{flex:1;background:#fffaf0;border:3px solid #6b4a2b;border-radius:14px;padding:30px 10px 14px;text-align:center;position:relative;height:300px}
+.step .num{position:absolute;top:-2px;left:50%;transform:translate(-50%,-50%);width:40px;height:40px;border-radius:50%;background:#9c2f24;color:#fff;font-family:'Cinzel';font-weight:800;font-size:22px;line-height:40px}
+.step svg{width:64px;height:64px}
+.step .st{font-family:'Cinzel';font-weight:800;font-size:23px;margin:6px 0}
+.step .sd{font-family:'Alegreya Sans';font-size:19px;line-height:1.25}
+.chip{display:inline-flex;align-items:center;gap:10px;background:#fffaf0;border:2px solid #6b4a2b;border-radius:30px;padding:6px 16px;font-family:'Alegreya Sans';font-weight:800;font-size:24px}
+.chip svg{width:28px;height:28px}
+</style></head><body>
+<div id="board"><!--BOARD--><svg id="ov"></svg></div>
+<div id="right">
+  <div class="hdr"><div class="ttl" id="ttl"></div><div class="sub" id="sub"></div>
+    <div class="clock"><div class="l">TEMPO AL TAVOLO</div><div class="v" id="clk">0:00</div><div class="g" id="giro"></div></div></div>
+  <div class="phases" id="phases"></div>
+  <div class="heroes" id="heroes"></div>
+  <div id="stage"></div>
+  <div id="cap"></div>
+</div>
+<div id="full"></div>
+<script>
+/*GEOM*/
+const $=id=>document.getElementById(id);
+const BH=1032, SC=BH/GEOM.bh, BW=GEOM.bw*SC;
+$('board').style.width=BW+'px'; $('board').style.height=BH+'px';
+$('ov').setAttribute('viewBox',`0 0 ${GEOM.bw} ${GEOM.bh}`);
+const hx=(c,r)=>GEOM.X0+GEOM.W*(c+0.5+(r%2)*0.5), hy=(c,r)=>GEOM.Y0+GEOM.R+r*GEOM.step;
+const COLS='ABCDEFGHIJ', nm=(c,r)=>COLS[c]+(r+1);
+const IC=(k,s=22)=>`<svg viewBox="0 0 24 24" width="${s}" height="${s}">${ICONS[k]}</svg>`;
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const ease=x=>x<0?0:x>1?1:x*x*(3-2*x);
+const rnd=s=>{const x=Math.sin(s*12.9898+78.233)*43758.5453;return x-Math.floor(x)};
+const fade=(lt,dur,fi=.25,fo=.25)=>Math.min(fi<=0.02?1:ease(lt/fi),ease((dur-lt)/fo));
+// hex neighbours (odd-r offset)
+function nbrs(c,r){const o=r&1?[[1,0],[-1,0],[0,-1],[1,-1],[0,1],[1,1]]:[[1,0],[-1,0],[-1,-1],[0,-1],[-1,1],[0,1]];return o.map(([dc,dr])=>[c+dc,r+dr]).filter(([a,b])=>a>=0&&a<10&&b>=0&&b<10)}
+function path(a,b){const k=p=>p[0]+','+p[1];const prev={[k(a)]:null};const q=[a];while(q.length){const p=q.shift();if(p[0]===b[0]&&p[1]===b[1])break;for(const n of nbrs(...p)){if(!(k(n) in prev)){prev[k(n)]=p;q.push(n)}}}const out=[];let p=b;while(p){out.unshift(p);p=prev[k(p)]}return out}
+const SPAWN=[[2,0],[7,0],[9,4],[7,9],[2,9],[0,5]], CRIP=[[3,3],[6,3],[3,6],[6,6]];
+const salaPos=i=>[GEOM.sala.xs[i],GEOM.sala.cy];
+
+// ---------------- state ----------------
+const HERO0={on:false,c:null,r:null,pv:5,pvm:5,att:1,mov:1,ar:1,arTmp:0,ind:0,pe:0,lv:1,insp:false,hand:0,arma:'—',cless:0,used:[],newInd:-1,ger:false,down:false};
+const S0={boardOn:0,title:'',sub:'',phase:-1,active:null,giro:0,gpv:0,salaOn:false,
+  sala:{Boss:true,MIMI:true,Ogre:false,Troll:false,Goliath:false,Strega:false},
+  H:{L:{...HERO0,used:[],name:'Lia',cls:'Guerriero',race:'Orco',col:'#a8352a'},M:{...HERO0,used:[],name:'Marco',cls:'Mago',race:'Elfo',col:'#2f5d9c'},S:{...HERO0,used:[],name:'Sara',cls:'Ladro',race:'Umano',col:'#3d7a3f'}},
+  anim:{}, tok:[], foe:null, cubesOn:false};
+let T=0, tableNow=0; const EV=[], ITEMS=[], CAPS=[], CLK=[[0,0]];
+// griglia della musica: le battute finiscono su un battito, i capitoli partono sul tempo forte
+const MG=null;/*MG*/
+function gridNext(x,arr){for(const g of arr) if(g>=x-1e-6) return g; return x}
+function musicEnd(){if(!MG) return; const b=gridNext(T-MG.outro,MG.bars), nT=b+MG.outro;
+  for(const c of CAPS) if(c.t1>=T-1e-6) c.t1=nT; for(const it of ITEMS) if(it.t1>=T-1.0&&it.t1<nT) it.t1=nT;
+  CLK.push([nT,tableNow]); MG.cut=b; T=nT}
+function ev(t,f){EV.push({t,f})}
+function beat(dur,text,fn,adv=0){
+  if(MG&&fn&&/banner\(|les\(b,/.test(fn.toString())){const nb=gridNext(T-0.05,MG.bars);
+    if(nb>T){for(const c of CAPS) if(Math.abs(c.t1-T)<1e-6) c.t1=nb; CLK.push([nb,tableNow]); T=nb}}
+  if(MG) dur=gridNext(T+dur-MG.tol,MG.beats)-T;
+  const t0=T;
+  if(text) CAPS.push({t0,t1:t0+dur,text});
+  const b={t0,dur,at:(dt,f)=>ev(t0+dt,f),item:(dt,d,kind,data)=>ITEMS.push({t0:t0+dt,t1:t0+dt+(d==null?dur-dt:d),kind,data}),cap:(dt,d,text)=>CAPS.push({t0:t0+dt,t1:t0+dt+d,text})};
+  fn&&fn(b);
+  CLK.push([t0,tableNow]); tableNow+=adv; CLK.push([t0+dur,tableNow]);
+  T+=dur; return b}
+// helpers producing events
+function move(b,dt,k,to,dur=1.2){b.at(dt,s=>{const h=s.H[k];const p=path([h.c,h.r],to);s.anim[k]={p,t0:b.t0+dt,dur};h.c=to[0];h.r=to[1]});b.item(dt,dur+1.6,'ring',{c:to[0],r:to[1],col:S0.H[k].col,delay:dur})}
+function place(b,dt,k,c,r){b.at(dt,s=>{const h=s.H[k];h.on=true;h.c=c;h.r=r;s.anim[k]={p:[[c,r]],t0:b.t0+dt,dur:0.01,drop:true}})}
+const set=(b,dt,k,o)=>b.at(dt,s=>Object.assign(s.H[k],o));
+const add=(b,dt,k,o)=>b.at(dt,s=>{for(const [a,v] of Object.entries(o)) s.H[k][a]+=v});
+const st=(b,dt,o)=>b.at(dt,s=>Object.assign(s,o));
+function clue(b,dt,k,n=1){b.at(dt,s=>{s.H[k].ind+=n;s.H[k].newInd=b.t0+dt})}
+function act(b,k,ph){b.at(0,s=>{s.active=k;if(ph!=null)s.phase=ph})}
+const phase=(b,dt,p)=>b.at(dt,s=>s.phase=p);
+function dice(b,dt,list,label,res,d){b.item(dt,d,'dice',{list,label,res})}
+function draw(b,dt,face,d){b.item(dt,d,'draw',face)}
+function banner(b,x,y,d=1.9){b.item(0,d,'banner',{x,y})}
+// combat attack line: returns time needed
+function atk(lines,b,dt,o){const L={...o,dt:b.t0+dt};lines.push(L);
+  const tRoll=o.reroll!=null?1.35:0.55; L.tRoll=tRoll;
+  if(o.hit&&o.dmg){const tot=o.dmg.total;const ap=tRoll+0.65;
+    b.at(dt+ap,s=>{if(o.target==='foe'){s.foe.pv=Math.max(0,s.foe.pv-tot)}else{const h=s.H[o.target];h.pv=Math.max(0,h.pv-tot)}});}
+}
+function combat(b,dt,k,foe,lines,d){b.at(dt,s=>{s.foe={...foe,pv:foe.pv0??foe.pv}});b.item(dt,d,'combat',{k,lines})}
+
+// ---------------- renderers ----------------
+function d20svg(sz,col='#fffaf0',stroke='#2a2118'){const c=sz/2,r=sz*0.47;const P=[...Array(6)].map((_,i)=>{const a=(i*60-90)*Math.PI/180;return [c+r*Math.cos(a),c+r*Math.sin(a)]});
+  const pts=P.map(p=>p.join(',')).join(' ');const ir=r*0.72;const I=[0,1,2].map(i=>{const a=(i*120-90+180)*Math.PI/180;return [c+ir*Math.cos(a),c+ir*Math.sin(a)]});
+  return `<svg viewBox="0 0 ${sz} ${sz}"><polygon points="${pts}" fill="${col}" stroke="${stroke}" stroke-width="${sz*0.045}" stroke-linejoin="round"/><polygon points="${I.map(p=>p.join(',')).join(' ')}" fill="none" stroke="${stroke}" stroke-opacity=".22" stroke-width="${sz*0.025}"/></svg>`}
+function d6svg(sz,col='#fffaf0'){return `<svg viewBox="0 0 ${sz} ${sz}"><rect x="${sz*.06}" y="${sz*.06}" width="${sz*.88}" height="${sz*.88}" rx="${sz*.2}" fill="${col}" stroke="#2a2118" stroke-width="${sz*.045}"/></svg>`}
+const PIPS={1:[[.5,.5]],2:[[.28,.28],[.72,.72]],3:[[.28,.28],[.5,.5],[.72,.72]],4:[[.28,.28],[.72,.28],[.28,.72],[.72,.72]],5:[[.28,.28],[.72,.28],[.5,.5],[.28,.72],[.72,.72]],6:[[.28,.25],[.72,.25],[.28,.5],[.72,.5],[.28,.75],[.72,.75]]};
+function die(type,v,t,t0,dur,sz=48,opt={}){const rolling=t<t0+dur;const shown=rolling?1+Math.floor(rnd(Math.floor(t*16)+t0*7+sz)*(type==='D20'?20:6)):v;
+  const rot=rolling?Math.sin(t*40)*25:0;const sc=rolling?0.9:(t<t0+dur+0.18?1.18:1);
+  const nat=!rolling&&type==='D20'&&(v===20||v===1)&&!opt.red;
+  const inner=type==='D20'?d20svg(sz,opt.red?'#b8322a':(nat?(v===20?'#f6d68b':'#e8b0a8'):'#fffaf0'),opt.red?'#5a120c':'#2a2118'):d6svg(sz);
+  let num=`<b style="font-size:${sz*(type==='D20'?0.42:0.5)}px;${opt.red?'color:#fff':''}">${shown}</b>`;
+  if(type==='D6'&&!opt.num){num=`<svg viewBox="0 0 1 1" style="position:absolute;inset:0">${PIPS[shown].map(([x,y])=>`<circle cx="${x}" cy="${y}" r=".085" fill="#2a2118"/>`).join('')}</svg>`}
+  return `<span class="die" style="width:${sz}px;height:${sz}px;transform:rotate(${rot}deg) scale(${sc});${opt.dim?'opacity:.35':''}">${inner}${num}</span>`}
+function token(f,sz){const s=sz;
+  if(f.back) return `<div class="tok backside" style="width:${s}px;height:${s}px;font-size:${s*.5}px">?</div>`;
+  const st=f.pv!=null?`<div class="ts" style="font-size:${s*.15}px">${'<span>'+IC('cuore',s*.16)+f.pv+'</span><span>'+IC('spade',s*.16)+f.att+'</span><span>'+IC('scudo',s*.16)+f.dif+'</span>'}</div><div style="font-size:${s*.11}px;color:#9c2f24;font-weight:800">danno ${f.dmg}</div>`:'';
+  return `<div class="tok" style="width:${s}px;height:${s}px;${f.ring?'border-color:'+f.ring:''}">${f.icon?IC(f.icon,s*.3):''}<div class="tn" style="font-size:${s*(f.name.length>12?.105:.13)}px;margin:${s*.02}px ${s*.08}px">${f.name}</div>${st}</div>`}
+function bagSVG(){return `<svg viewBox="0 0 120 130" width="170" height="184"><path d="M30 38 C10 70 8 118 60 122 C112 118 110 70 90 38 Z" fill="#7a4a24" stroke="#3b2414" stroke-width="4"/><path d="M34 40 Q60 26 86 40" fill="none" stroke="#3b2414" stroke-width="5"/><path d="M40 30 Q60 18 80 30 L86 40 Q60 30 34 40Z" fill="#8a5428" stroke="#3b2414" stroke-width="3"/><path d="M48 32 q-12 -16 -4 -22 M72 32 q12 -16 4 -22" stroke="#b8862b" stroke-width="4" fill="none"/><text x="60" y="94" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="34" fill="#f6d68b">?</text></svg>`}
+function card(c){return `<div class="card" style="${c.w?'width:'+c.w+'px;':''}"><div class="h" style="background:${c.col||'#6b4a2b'}">${c.name}</div><div class="s">${c.slot||''}</div><div class="tx">${c.text}</div><div class="ft"><span>${c.deck||''}</span><span>${c.who||''}</span></div></div>`}
+const R={
+ dice(d,lt,t,it){const ds=d.list.map((x,i)=>`<div style="text-align:center">${die(x.t,x.v,t,it.t0+(x.dt||0),x.dur||0.7,x.sz||120,{num:x.num,red:x.red,dim:x.dim&&t>it.t0+(x.dt||0)+(x.dur||0.7)})}<div class="dielbl">${x.l||''}</div></div>`).join('');
+   const resT=Math.max(...d.list.map(x=>(x.dt||0)+(x.dur||0.7)));
+   return `<div class="ctr" style="flex-direction:column;gap:14px">${d.label?`<div class="lbl" style="font-size:26px">${d.label}</div>`:''}<div style="display:flex;gap:40px;align-items:flex-end">${ds}</div><div class="res" style="opacity:${ease((lt-resT)/.25)}">${d.res||''}</div></div>`},
+ draw(f,lt){const rise=ease(lt/0.5);const fl=clamp((lt-0.55)/0.35,0,1);const showFace=fl>0.5;const sx=Math.abs(Math.cos(fl*Math.PI));
+   const tk=showFace?token(f,200):token({back:1},200);
+   return `<div class="ctr" style="gap:40px"><div style="position:relative;width:170px;height:240px"><div style="position:absolute;bottom:0">${bagSVG()}</div></div>
+   <div style="transform:translateY(${(1-rise)*120}px) scaleX(${sx});opacity:${rise}">${tk}</div>
+   <div style="width:330px;opacity:${ease((lt-0.9)/.3)}"><div class="lbl" style="text-align:left;font-size:20px;letter-spacing:2px">${f.kind||''}</div><div class="big" style="text-align:left;font-size:36px">${f.title||f.name}</div><div class="lbl" style="text-align:left;font-weight:700;color:#2a2118;margin-top:8px">${f.desc||''}</div></div></div>`},
+ html(d,lt){return `<div class="it" style="opacity:${ease(lt/.3)}">${d.h}</div>`},
+ cards(d,lt){return `<div class="ctr" style="gap:22px">${d.cards.map((c,i)=>`<div style="opacity:${ease((lt-i*(d.stag??.35))/.3)};transform:translateY(${(1-ease((lt-i*(d.stag??.35))/.35))*40}px)">${card(c)}</div>`).join('')}${d.side?`<div style="width:300px">${d.side}</div>`:''}</div>`},
+ combat(d,lt,t,it,s){const h=s.H[d.k],f=s.foe;if(!f)return'';
+   const hd=14+h.ar+(h.arTmp||0);
+   const top=`<div class="cbtop"><div class="cbside"><div style="width:70px;height:70px;border-radius:50%;background:${h.col};border:4px solid #fffaf0;box-shadow:0 0 0 2px ${h.col};display:flex;align-items:center;justify-content:center;color:#fff;font-family:Cinzel;font-weight:800;font-size:34px">${h.name[0]}</div><div><div class="n">${h.name}</div><div class="d">${IC('cuore',18)} ${h.pv}/${h.pvm} · ATT +${h.att} · Difesa ${hd}</div></div></div>
+   <div class="vs">VS</div>
+   <div class="cbside"><div style="text-align:right"><div class="n">${f.name}</div><div class="d">ATT +${f.att} · Difesa ${f.dif}${f.dif0&&f.dif0!==f.dif?' <s>'+f.dif0+'</s>':''} · danno ${f.dmg}</div></div><div style="text-align:center">${die('D20',f.pv,t,-9,0,64,{red:1})}<div style="font-size:12px;color:#6b4a2b;font-weight:800">PV</div></div><div style="filter:${f.pv<=0?'grayscale(1) opacity(.45)':'none'}">${token({name:f.short||f.name,icon:f.icon},96)}</div></div></div>`;
+   const vis=d.lines.filter(L=>t>=L.dt);const show=vis.slice(-6);
+   const body=show.map(L=>{const l=t-L.dt;let h=`<span class="who" style="color:${L.col||'#2a2118'}">${L.who}</span>`;
+     if(L.text) return `<div class="ln" style="opacity:${ease(l/.2)}">${h}<span>${L.text}</span></div>`;
+     if(L.roller) h+=`<span class="rl">(tira ${L.roller})</span>`;
+     const r=L.d20;let dd='';
+     if(L.adv){dd=L.adv.map((v,i)=>die('D20',v,t,L.dt,0.5,40,{dim:v!==r})).join('')+'<span class="rl">vantaggio</span>'}
+     else if(L.reroll!=null){dd=die('D20',r,t,L.dt,0.5,40,{dim:l>0.8})+(l>0.8?`<span class="note">ritira (Mago)</span>`+die('D20',L.reroll,t,L.dt+0.85,0.5,40):'')}
+     else dd=die('D20',r,t,L.dt,0.5,40);
+     h+=`<span>D20</span>${dd}`;
+     const fin=L.reroll!=null?L.reroll:r;
+     if(l>L.tRoll){const nat20=fin===20;h+=`<span>+ ${L.mod} = ${fin+L.mod} ${L.hit?'≥':'<'} ${L.vs}</span><span class="${L.hit?'hit':'miss'}">${nat20?'20! colpo doppio':L.hit?'a segno':'a vuoto'}</span>`;
+       if(L.hit&&L.dmg){h+=`<span>· danno ${L.dmg.die}</span>`+die('D6',L.dmg.v,t,L.dt+L.tRoll+0.1,0.45,36,{num:1});
+         if(l>L.tRoll+0.6) h+=`<span><b>${L.dmg.expr||''}= ${L.dmg.total}</b></span>`}}
+     return `<div class="ln" style="opacity:${ease(l/.2)}">${h}</div>`}).join('');
+   return `<div class="cb">${top}<div class="lines">${body}</div></div>`},
+ ncard(d,lt){const c=d.c;const a=ease(lt/.35);const col=c.tipo==='Boss'?'#7a2a1c':c.tipo==='Nemico II'?'#5a3a6e':'#3b4a2a';
+   const stat=(ic,k,v)=>`<div style="display:flex;flex-direction:column;align-items:center;gap:2px">${IC(ic,24)}<div style="font-size:12px;color:#6b4a2b;font-weight:800">${k}</div><div style="font-family:Cinzel;font-weight:800;font-size:26px;line-height:1">${v}</div></div>`;
+   return `<div class="ctr" style="gap:36px"><div style="width:330px;height:366px;border-radius:16px;background:#fffaf0;border:4px solid ${col};box-shadow:0 10px 30px #0006;display:flex;flex-direction:column;overflow:hidden;transform:translateY(${(1-a)*60}px) rotate(${(1-a)*-6}deg);opacity:${a}">
+   <div style="background:${col};color:#fff;padding:7px 12px;display:flex;align-items:center;gap:10px"><div style="width:44px;height:44px;border-radius:50%;background:#fffaf0;color:${col};font-family:Cinzel;font-weight:800;font-size:26px;display:flex;align-items:center;justify-content:center">${c.letter}</div><div style="font-family:Cinzel;font-weight:800;font-size:${c.name.length>15?19:23}px;line-height:1.05">${c.name}</div></div>
+   <div style="display:flex;justify-content:space-between;padding:3px 14px;font-size:14px;font-weight:800;color:#6b4a2b"><span>${c.tipo||'Nemico I'}</span><span>LV ${String(c.lv).replace('.',',')}</span></div>
+   <div style="display:flex;justify-content:space-around;padding:0 10px 6px;border-bottom:2px solid #e3d3b0">${stat('cuore','PV',c.pv)}${stat('spade','ATT','+'+c.att)}${stat('scudo','DIFESA',14+c.ar)}</div>
+   <div style="padding:5px 14px 3px;font-size:15px;color:#9c2f24;font-weight:800">Danno ${c.dmg}</div>
+   <div style="padding:0 14px;font-size:15px;line-height:1.25;flex:1;color:#2a2118">${c.ab}</div>
+   <div style="background:#f3e6c8;padding:6px 14px;font-size:14px;font-weight:700;color:#2a2118">Ricompensa: ${c.rew.join(' · ')}</div></div>
+   <div style="width:300px;opacity:${ease((lt-0.5)/.3)}"><div class="lbl" style="text-align:left;font-size:18px">Difesa = 14 + AR ${c.ar}</div><div class="lbl" style="text-align:left;font-size:18px;margin-top:8px">Si colpisce con D20 + ATT ≥ Difesa</div></div></div>`},
+ strip(d,lt){const steps=[['clessidra','Clessidre','Ne hai una? Toglila e salta al passo 5.'],['carte','Carte','Fino a 2: a inizio turno, in scontro o a fine turno. Equipaggiamenti solo ora, max 1.'],['piedi','Muovi','D6 + MOV esagoni (almeno 1).'],['occhio','Esplora','Risolvi dove ti fermi. Un solo scontro per turno.'],['bandiera','Fine','Puoi ancora giocare carte. Togli i cubetti Durata, passa i dadi.']];
+   return `<div class="strip">${steps.map((s,i)=>`<div class="step" style="opacity:${ease((lt-i*.3)/.3)}"><div class="num">${i+1}</div>${IC(s[0],64)}<div class="st">${s[1]}</div><div class="sd">${s[2]}</div></div>`).join('')}</div>`},
+};
+const FULL={
+ cover(d,lt,dur){return `<div class="cover" style="opacity:${fade(lt,dur,.01,.6)}"><div class="a">${d.a}</div><div class="b">${d.b}</div><div class="c">${d.c}</div><div class="d">${d.d}</div></div>`},
+ banner(d,lt,dur){return `<div class="banner" style="opacity:${fade(lt,dur,.25,.35)}"><div class="x">${d.x}</div>${d.y?`<div class="y">${d.y}</div>`:''}</div>`},
+};
+
+// ---------------- the game ----------------
+// Partita al tavolo con le regole della scatola base v5 (Carte Trama v2, 27/10/2026)
+const LUPO={name:'Lupo grigio',short:'Lupo',pv:3,att:3,dif:14,dmg:'D6 − 1',kind:'Nemico I'};
+const COB={name:'Coboldo',short:'Coboldo',pv:2,att:1,dif:14,dmg:'D6 − 1'};
+const SCH={name:'Scheletro',short:'Scheletro',pv:2,att:2,dif:15,dmg:'D6 − 1'};
+const ORSO={name:'Orso delle caverne',short:'Orso',pv:7,att:3,dif:14,dmg:'D6 + 1'};
+const RE={name:'Re Goblin Grugno',short:'Re Goblin',pv:9,att:4,dif:16,dmg:'D6 + 1',icon:'forziere'};
+const NOP=()=>{};
+const NC=(o)=>({lv:1,ab:'',rew:['1 Indizio','1 PE'],...o});
+// INTRO
+beat(6,'',b=>{b.item(0,6,'cover',{a:'IL TESORO DEL GOBLIN',b:'Una partita<br>al tavolo',c:'Dalla scatola aperta alla vittoria',d:'Un gioco di Alessandro De Simone · scatola base · 3 giocatori · regolamento v5'})});
+// SETUP
+beat(4.5,'Si apre la <b>plancia</b> al centro del tavolo: 10 × 10 esagoni, identica se la giri di 180°.',b=>{st(b,0,{title:'Preparazione',sub:'circa 5 minuti, una volta sola'});b.at(0,s=>s.boardOn=b.t0)},30);
+beat(5.5,'I <b>30 segnalini Esplorazione</b> vanno tutti nel <b>sacchetto</b>, mescolati. Accanto, coperti, i due mazzetti dei <b>Nemici</b>.',b=>{
+  b.item(0,null,'html',{h:`<div class="ctr" style="gap:40px">${bagSVG()}<div style="display:flex;flex-direction:column;gap:12px;align-items:flex-start"><span class="chip">${IC('spade',28)} 19 Nemico I</span><span class="chip">${IC('teschio',28)} 6 Nemico II</span><span class="chip">${IC('trappola',28)} 5 Trappole</span><span class="lbl" style="text-align:left;margin-top:6px">Mazzetto I: nemici di LV 1-2<br>Mazzetto II: nemici di LV 3-4</span></div></div>`})},35);
+beat(6,'Si pesca uno dei <b>3 Boss</b>: esce il <b>Re Goblin Grugno</b>. Va nella Sala del Tesoro con MIMI, e il cubetto giallo sui suoi <b>9 PV</b>.',b=>{
+  b.item(0,null,'ncard',{c:NC({name:'Re Goblin Grugno',letter:'R',lv:5,pv:9,att:4,ar:2,dmg:'D6 + 1',ab:'Furia: con metà PV o meno ha +2 ATT.',rew:['La partita!'],tipo:'Boss'})});
+  b.at(1.2,s=>{s.salaOn=b.t0+1.2});b.at(2.6,s=>{s.cubesOn=true;s.gpv=9})},25);
+beat(6.5,'Ognuno sceglie <b>classe</b> e <b>specie</b>: Lia gioca il Guerriero (Orco), Marco il Mago (Elfo), Sara il Ladro (Umana).',b=>{
+  set(b,0.2,'L',{on:true,pv:7,pvm:7,att:3});set(b,1.6,'M',{on:true,att:3});set(b,3,'S',{on:true,mov:4,ar:2});
+  b.item(0,null,'cards',{stag:1.4,cards:[{name:'Lia',col:'#a8352a',slot:'Guerriero · Orco',text:'Si parte da 5 PV<br>Orco: +2 ATT<br>Guerriero: +2 PV',w:270},{name:'Marco',col:'#2f5d9c',slot:'Mago · Elfo',text:'Si parte da 5 PV<br>Elfo: +2 a una statistica (sceglie ATT)',w:270},{name:'Sara',col:'#3d7a3f',slot:'Ladro · Umana',text:'Si parte da 5 PV<br>Umana: +1 MOV e +1 AR<br>Ladro: +2 MOV',w:270}]})},50);
+beat(6.5,'La <b>Carta Classe</b> si infila nella scheda e vale per tutta la partita. I PV crescono solo salendo di livello.',b=>{
+  b.item(0,null,'cards',{cards:[{name:'Classe: Guerriero',col:'#a8352a',slot:'Carta Classe',text:'+2 PV. Ogni scontro vinto ti dà l’Ispirazione: spendila per dare −2 AR al nemico.',w:290},{name:'Classe: Mago',col:'#2f5d9c',slot:'Carta Classe',text:'Puoi ritirare i tuoi dadi fino a 2 volte per turno.',w:290},{name:'Classe: Ladro',col:'#3d7a3f',slot:'Carta Classe',text:'+2 MOV. Puoi fuggire da ogni scontro e fuggendo non arretri.',w:290}]})},25);
+beat(6.5,'Ognuno tira il <b>D6</b> per la partenza. Sara fa 1, già presa da Lia: <b>ritira</b> e fa 3.',b=>{
+  dice(b,0,[{t:'D6',v:1,l:'Lia → 1',sz:100},{t:'D6',v:4,l:'Marco → 4',sz:100,dt:0.5},{t:'D6',v:1,l:'Sara → 1 occupata',sz:100,dt:1.6,dim:1},{t:'D6',v:3,l:'Sara ritira → 3',sz:100,dt:3.2}],'Partenze: D6, si ritira se occupata o accanto a un eroe','',null);
+  place(b,0.8,'L',...SPAWN[0]);place(b,1.3,'M',...SPAWN[3]);place(b,4,'S',...SPAWN[2]);
+  b.item(2.4,1.2,'ring',{c:2,r:0,col:'#9c2f24'})},35);
+beat(6.5,'Mano coperta: <b>5 carte della propria classe e 5 comuni</b>. Oppure il <b>draft</b>: 3 carte di classe scelte e 7 comuni passate a sinistra.',b=>{
+  const backs=(col,lab)=>`<div style="text-align:center"><div style="display:flex;gap:0">${[0,1,2,3,4].map(i=>`<div class="back" style="background:${col};margin-left:${i?-62:0}px;transform:rotate(${(i-2)*6}deg) translateY(${Math.abs(i-2)*6}px)">?</div>`).join('')}</div><div class="lbl" style="margin-top:18px">${lab}</div></div>`;
+  b.item(0,null,'html',{h:`<div class="ctr" style="gap:70px">${backs('#7a3a2e','5 dal mazzetto di classe')}${backs('#4a3a2a','5 dal mazzo comune')}</div>`});
+  ['L','M','S'].forEach((k,i)=>set(b,1+i*0.3,k,{hand:10}))},45);
+beat(6.5,'Tutti insieme indossano subito <b>un oggetto</b>: Lia la Spada del Custode, Marco il Bastone del Corvo, Sara il Pugnale Sottile.',b=>{
+  b.item(0,null,'cards',{cards:[{name:'Spada del Custode',slot:'Arma DX / Scudo',text:'+1 ATT',who:'Lia',w:250},{name:'Bastone del Corvo',slot:'Arma DX / Scudo',text:'+1 ATT. Una volta per turno ritiri un D6.',who:'Marco',deck:'Mago',w:250,col:'#2f5d9c'},{name:'Pugnale Sottile',slot:'Arma SX',text:'Se attacchi per primo: +1 ATT.',who:'Sara',deck:'Ladro',w:250,col:'#3d7a3f'}]});
+  set(b,0.4,'L',{arma:'Spada del Custode',hand:9,att:4});set(b,0.75,'M',{arma:'Bastone del Corvo',hand:9,att:4});set(b,1.1,'S',{arma:'Pugnale Sottile',hand:9})},35);
+beat(4.5,'Chi ha visto per ultimo un goblin prende <b>Geronimo</b> e comincia: tocca a Lia. Poi si va in senso orario.',b=>{set(b,0.3,'L',{ger:true});
+  b.item(0,null,'html',{h:`<div class="ctr" style="flex-direction:column"><div class="big">Pronti in circa 5 minuti</div><div class="lbl">Ordine di turno: Lia → Marco → Sara</div></div>`})},25);
+// TURN
+beat(6.5,'Ogni turno ha <b>5 passi</b>. Fino a <b>2 carte</b>: a inizio turno, durante uno scontro o a fine turno. Gli equipaggiamenti solo a inizio turno.',b=>{st(b,0,{title:'Il turno',sub:'stampato sulla plancia e sulla Carta Aiuto'});b.item(0,null,'strip',{})},0);
+// GIRO 1 · LIA
+beat(5,'Lia tira il D6: 3, più MOV 1. Può fare fino a 4 esagoni, ma le basta fermarsi dopo 2, su una casella <b>«?»</b>.',b=>{banner(b,'Giro 1');b.at(0,s=>{s.playing=true;s.giro=1});st(b,0,{title:'Giro 1 · Lia',sub:'Guerriero · parte da C1'});act(b,'L',2);
+  dice(b,0.4,[{t:'D6',v:3,l:'3 + MOV 1 = 4'}],'Movimento','',null);move(b,2.2,'L',[2,2],1)},20);
+beat(5.5,'Pesca dal sacchetto: <b>Nemico I</b>. Gira la prima carta del mazzetto I: un <b>Lupo grigio</b>, 3 PV, ATT +3, Difesa 14.',b=>{phase(b,0,3);draw(b,0,{name:'Nemico I',icon:'spade',kind:'Segnalino',title:'Nemico I',desc:'Gira la prima carta del mazzetto I'},2.4);
+  b.item(2.4,null,'ncard',{c:NC({name:'Lupo grigio',letter:'L',pv:3,att:3,ar:0,dmg:'D6 − 1',ab:'Inseguitore: se fuggi, ti attacca un’ultima volta prima che tu arretri.'})})},15);
+{const lines=[];beat(6,'Lo scontro: <b>D20 + ATT</b> contro la Difesa, cioè <b>14 + AR</b>. Lia attacca per prima; per il lupo tira Sara.',b=>{
+  combat(b,0,'L',LUPO,lines,17.4);
+  atk(lines,b,1.0,{who:'Lia',col:'#a8352a',d20:11,mod:4,vs:14,hit:true,dmg:{die:'D6',v:2,total:2},target:'foe'});
+  atk(lines,b,3.4,{who:'Lupo',roller:'Sara',d20:13,mod:3,vs:15,hit:true,dmg:{die:'D6 − 1',v:4,expr:'4 − 1 ',total:3},target:'L'})},25);
+ beat(5.5,'Il dado rosso tiene il conto dei PV del lupo. Secondo round: 15 + 4 = 19, danno 5. Lupo sconfitto!',b=>{
+  atk(lines,b,0.4,{who:'Lia',col:'#a8352a',d20:15,mod:4,vs:14,hit:true,dmg:{die:'D6',v:5,total:5},target:'foe'})},45);}
+beat(5,'Ricompensa: <b>1 Indizio e 1 PE</b>. Da Guerriero, Lia prende anche l’<b>Ispirazione</b>. Fine del turno.',b=>{phase(b,0,4);clue(b,0.3,'L');add(b,0.6,'L',{pe:1});set(b,0.9,'L',{insp:true})},10);
+// GIRO 1 · MARCO
+beat(5.5,'Marco tira 2 + 1 e si ferma su «?»: è una <b>Trappola</b>. Perde D6 − 1 = 2 PV, poi tira la perdita: 6, niente.',b=>{st(b,0,{title:'Giro 1 · Marco',sub:'Mago · parte da H10'});act(b,'M',2);move(b,0,'M',[7,7],0.9);b.at(1,s=>s.phase=3);
+  draw(b,1,{name:'Trappola',icon:'trappola',kind:'Segnalino',title:'Trappola',desc:'D6 − 1 PV, poi tiro di perdita'},2.6);dice(b,3.6,[{t:'D6',v:3,l:'3 − 1 = 2 PV'},{t:'D6',v:6,l:'perdita: 6, niente',dt:0.5}],'','',null);add(b,4,'M',{pv:-2})},40);
+beat(5.5,'<b>A fine turno</b> Marco gioca <b>Scudo di Cenere</b>: +2 AR fino alla fine del suo prossimo scontro.',b=>{phase(b,0,4);
+  b.item(0,null,'cards',{cards:[{name:'Scudo di Cenere',slot:'Incantesimo',text:'Fino alla fine del tuo prossimo scontro ottieni +2 AR.',who:'Marco',w:280}],side:`<div class="lbl" style="text-align:left;color:#2a2118">Le carte si giocano a inizio turno, in scontro o a fine turno.</div>`});add(b,0.6,'M',{hand:-1,arTmp:2})},20);
+// GIRO 1 · SARA
+beat(5.5,'Sara ha <b>MOV 4</b>: tira 4 e può fare 8 esagoni. Si ferma su un «?»: Nemico I, un <b>Coboldo</b>.',b=>{st(b,0,{title:'Giro 1 · Sara',sub:'Ladro · parte da J5'});act(b,'S',2);dice(b,0,[{t:'D6',v:4,l:'4 + MOV 4 = 8'}],'Movimento','',null);move(b,1.6,'S',[5,4],1.4);
+  b.at(3.1,s=>s.phase=3);b.item(3.1,null,'ncard',{c:NC({name:'Coboldo',letter:'C',pv:2,att:1,ar:0,dmg:'D6 − 1',ab:'Codardo: con metà PV o meno ha −2 ATT.'})})},20);
+{const lines=[];beat(5.5,'Il <b>Pugnale Sottile</b> le dà +1 ATT quando attacca per prima: 16 + 2 = 18, danno 3. Coboldo battuto: 1 Indizio e 1 PE.',b=>{combat(b,0,'S',COB,lines,5.5);
+  atk(lines,b,0.8,{who:'Sara',col:'#3d7a3f',d20:16,mod:2,vs:14,hit:true,dmg:{die:'D6',v:3,total:3},target:'foe'});clue(b,3.6,'S');add(b,3.9,'S',{pe:1})},40);}
+// GIRO 2
+beat(6,'<b>Giro 2.</b> Lia va alla <b>Locanda</b>: +1 PE e +2 PV. Con 2 PE sale al <b>livello 2</b> e sceglie <b>+2 PV</b> (oppure +1 ATT, MOV o AR).',b=>{banner(b,'Giro 2');st(b,0,{title:'Giro 2',sub:''});b.at(0,s=>{s.giro=2});act(b,'L',2);move(b,0.2,'L',[1,4],0.8);
+  b.at(1.1,s=>s.phase=3);add(b,1.3,'L',{pe:1,pv:2});b.at(1.3,s=>s.H.L.used.push('casa'));set(b,2.6,'L',{lv:2,pe:0});add(b,2.6,'L',{pv:2,pvm:2});
+  b.item(1.2,null,'html',{h:`<div class="ctr" style="gap:26px"><span class="chip">${IC('casa',30)} Locanda: +1 PE, +2 PV</span><span class="chip">${IC('stella',30)} Livello 2: +2 PV</span></div>`})},45);
+{const lines=[];beat(5.5,'Marco va su un «?»: Nemico I, uno <b>Scheletro</b>. Con lo Scudo di Cenere la sua Difesa è 17.',b=>{act(b,'M',2);move(b,0,'M',[5,6],0.9);b.at(1,s=>s.phase=3);
+  b.item(1,2.6,'ncard',{c:NC({name:'Scheletro',letter:'S',pv:2,att:2,ar:1,dmg:'D6 − 1',ab:'Non morto. Si ricompone: la prima volta che va a 0 PV torna a 2 PV.'})});combat(b,3.6,'M',SCH,lines,14.2)},10);
+ beat(6,'Marco fa 6 e manca, ma il <b>Mago ritira</b>: 13 + 4 = 17, danno 4. Lo Scheletro va a 0… e <b>si ricompone</b> a 2 PV!',b=>{
+  atk(lines,b,0.2,{who:'Marco',col:'#2f5d9c',d20:6,reroll:13,mod:4,vs:15,hit:true,dmg:{die:'D6',v:4,total:4},target:'foe'});
+  b.at(4,s=>{s.foe.pv=2})},30);
+ beat(5.5,'Lo Scheletro manca la Difesa 17. Secondo round: 11 + 4 = 15, colpito. Questa volta resta giù: 1 Indizio e 1 PE.',b=>{
+  atk(lines,b,0.2,{who:'Scheletro',roller:'Lia',d20:12,mod:2,vs:17,hit:false});
+  atk(lines,b,1.6,{who:'Marco',col:'#2f5d9c',d20:11,mod:4,vs:15,hit:true,dmg:{die:'D6',v:2,total:2},target:'foe'});clue(b,4.2,'M');add(b,4.4,'M',{pe:1,arTmp:-2})},45);}
+beat(6,'Sara pesca un <b>Nemico II</b>: un’<b>Arpia</b> di LV 3, danno D6 + 1. Troppo forte: <b>fugge</b>, e da Ladro non arretra.',b=>{act(b,'S',2);move(b,0,'S',[4,3],0.6);b.at(0.7,s=>s.phase=3);
+  b.item(0.7,null,'ncard',{c:NC({name:'Arpia',letter:'A',lv:3,pv:4,att:4,ar:1,dmg:'D6 + 1',ab:'Picchiata: il tuo primo tiro per colpire si fa con svantaggio.',rew:['1 Indizio','1 PE','Ispirazione'],tipo:'Nemico II'})})},30);
+// GIRO 3
+beat(5.5,'<b>Giro 3.</b> Lia esplora l’esagono accanto: Nemico II, un <b>Orso delle caverne</b>. 7 PV, Difesa 14, danno D6 + 1.',b=>{banner(b,'Giro 3');st(b,0,{title:'Giro 3',sub:''});b.at(0,s=>{s.giro=3});act(b,'L',2);move(b,0.2,'L',[2,4],0.6);
+  b.at(0.9,s=>s.phase=3);b.item(0.9,null,'ncard',{c:NC({name:'Orso delle caverne',letter:'O',lv:3,pv:7,att:3,ar:0,dmg:'D6 + 1',ab:'Furia: con metà PV o meno ha +2 ATT.',rew:['1 Indizio','1 PE','Ispirazione'],tipo:'Nemico II'})})},15);
+{const lines=[];beat(6.5,'<b>Nello scontro</b> Lia gioca <b>Colpo Poderoso</b>: +2 danni. 12 + 4 = 16, danno 4 + 2 = 6. L’Orso, ferito, va in <b>furia</b>: 19, 4 danni.',b=>{combat(b,0,'L',ORSO,lines,13.4);add(b,0.3,'L',{hand:-1});
+  atk(lines,b,0.8,{who:'Lia',col:'#a8352a',d20:12,mod:4,vs:14,hit:true,dmg:{die:'D6',v:4,expr:'4 + 2 ',total:6},target:'foe'});
+  atk(lines,b,3.4,{who:'Orso',roller:'Sara',d20:14,mod:5,vs:15,hit:true,dmg:{die:'D6 + 1',v:3,expr:'3 + 1 ',total:4},target:'L'})},45);
+ beat(6,'Lia spende l’<b>Ispirazione</b> del Guerriero: −2 AR all’Orso, Difesa 12. Fa 9 + 4 = 13: colpito, e l’Orso cade.',b=>{set(b,0.3,'L',{insp:false});b.at(0.3,s=>{s.foe.dif0=14;s.foe.dif=12});
+  atk(lines,b,1.2,{who:'Lia',col:'#a8352a',d20:9,mod:4,vs:12,hit:true,dmg:{die:'D6',v:2,total:2},target:'foe'})},40);}
+beat(6,'Ricompensa del mazzetto II: Indizio, PE e Ispirazione. È il <b>secondo Indizio</b>: Lia ha <b>individuato il tesoro</b>!',b=>{phase(b,0,4);clue(b,0.3,'L');add(b,0.6,'L',{pe:1});set(b,0.9,'L',{insp:true});
+  b.item(0,null,'html',{h:`<div class="ctr" style="flex-direction:column;gap:10px"><div class="big">2 Indizi</div><div class="lbl">Il tesoro è individuato</div></div>`})},10);
+beat(6,'<b>La voce si sparge</b>: ogni altro eroe prende subito 1 Indizio. Anche Marco e Sara arrivano a 2!',b=>{clue(b,0.8,'M');clue(b,1.4,'S')},5);
+beat(6,'Ora il D6 dice dov’è MIMI: 5, si ritira. <b>4!</b> MIMI e il Re Goblin vanno sulla <b>Cripta 4</b>.',b=>{
+  dice(b,0,[{t:'D6',v:5,l:'5 → si ritira',dim:1},{t:'D6',v:4,l:'Cripta 4',dt:1.2}],'Dov’è MIMI?','',null);
+  b.at(2.8,s=>{s.sala.Boss=false;s.sala.MIMI=false;const [x0,y0]=salaPos(0),[x1,y1]=salaPos(1);s.tok.push({kind:'guard',c:6,r:6,from:[x0,y0],t0:b.t0+2.8,dur:1.2},{kind:'mimi',c:6,r:6,from:[x1,y1],t0:b.t0+2.8,dur:1.2})});
+  b.item(4,1.8,'ring',{c:6,r:6,col:'#b8862b'})},20);
+beat(6.5,'Marco, a 3 PV, <b>a inizio turno</b> indossa il Diadema della Veggenza (+1 AR). Poi va alla <b>Locanda</b>: sale al livello 2 e torna a 7 PV.',b=>{act(b,'M',1);
+  b.item(0,2.6,'cards',{cards:[{name:'Diadema della Veggenza',slot:'Elmo',text:'+1 AR. Una volta per turno ritiri un D6 di un incantesimo.',who:'Marco',deck:'Mago',w:280,col:'#2f5d9c'}],side:`<div class="lbl" style="text-align:left;color:#2a2118">Gli equipaggiamenti si indossano solo a inizio turno.</div>`});
+  add(b,0.6,'M',{ar:1,hand:-1});b.at(2.6,s=>s.phase=2);move(b,2.6,'M',[8,5],1);b.at(3.7,s=>{s.phase=3;s.H.M.used.push('casa')});add(b,3.8,'M',{pv:2,pe:1});set(b,4.6,'M',{lv:2,pe:0});add(b,4.6,'M',{pv:2,pvm:2})},45);
+{const lines=[];beat(6,'Sara corre alla Cripta e sfida il <b>Re Goblin</b>: 9 PV, ATT +4, Difesa 16. Prima del primo attacco gioca <b>Lancio di Coltello</b>: 2 danni.',b=>{act(b,'S',2);move(b,0,'S',[6,6],0.9);b.at(1,s=>s.phase=3);
+  combat(b,1.2,'S',RE,lines,11.9);add(b,2.2,'S',{hand:-1});b.at(3,s=>{s.foe.pv=7});
+  b.item(1.6,1.4,'cards',{cards:[{name:'Lancio di Coltello',slot:'Incantesimo · Ladro',text:'All’inizio di uno scontro infliggi 1D6 − 1 danni.',who:'Sara',w:260,col:'#3d7a3f'}]})},40);
+ beat(6.5,'Poi colpisce: 17 + 2 = 19, danno 4. Il Re è a 3 PV e va in <b>furia</b>: +2 ATT. Risponde 12 + 6 = 18, danno 4 + 1 = 5. Sara cade.',b=>{
+  atk(lines,b,0.2,{who:'Sara',col:'#3d7a3f',d20:17,mod:2,vs:16,hit:true,dmg:{die:'D6',v:4,total:4},target:'foe'});
+  atk(lines,b,2.8,{who:'Re Goblin',roller:'Lia',d20:12,mod:6,vs:16,hit:true,dmg:{die:'D6 + 1',v:4,expr:'4 + 1 ',total:5},target:'S'})},50);}
+beat(6.5,'Le <b>ferite del boss restano</b>: il cubetto giallo scende a 3. Sara riparte dal D6 (A6) con i PV pieni e tiene i suoi 2 Indizi.',b=>{
+  b.at(0.4,s=>{s.gpvAnim={from:9,to:3,t0:b.t0+0.4,dur:1.2};s.gpv=3});set(b,1.8,'S',{down:true});
+  dice(b,2,[{t:'D6',v:6,l:'partenza A6'},{t:'D6',v:2,l:'perdita: Elmo (non c’è)',dt:0.5}],'Sconfitta','',null);set(b,3.4,'S',{down:false,pv:5});place(b,3.4,'S',...SPAWN[5])},25);
+// GIRO 4
+beat(5.5,'<b>Giro 4.</b> Lia tira 4 + 1 = 5: proprio la distanza della <b>Cripta 4</b>. Il Re Goblin è ancora ferito: <b>3 PV</b>.',b=>{banner(b,'Giro 4');st(b,0,{title:'Giro 4',sub:''});b.at(0,s=>{s.giro=4});act(b,'L',2);
+  dice(b,0.4,[{t:'D6',v:4,l:'4 + MOV 1 = 5'}],'Movimento','',null);move(b,2.2,'L',[6,6],1.3)},20);
+{const lines=[];beat(6,'Il Re è in furia, ma Lia attacca per prima: 14 + 4 = 18 contro Difesa 16. Danno 3… <b>il Re Goblin cade!</b>',b=>{b.at(0,s=>s.phase=3);combat(b,0,'L',{...RE,pv:3,att:6},lines,6);
+  atk(lines,b,0.9,{who:'Lia',col:'#a8352a',d20:14,mod:4,vs:16,hit:true,dmg:{die:'D6',v:3,total:3},target:'foe'});b.at(3.4,s=>{s.guardDead=true;s.gpv=0})},40);}
+beat(6,'<b>Lia riporta MIMI a Geronimo e vince la partita.</b>',b=>{st(b,0,{title:'Vittoria!',sub:'Lia · Guerriero orco'});b.at(0,s=>{s.phase=-1;s.tok=s.tok.filter(k=>k.kind!=='guard')});
+  b.item(0,null,'html',{h:`<div class="ctr" style="flex-direction:column;gap:14px"><svg viewBox="0 0 24 24" width="130" height="130">${ICONS.forziere}</svg><div class="big">Vince Lia!</div></div>`})},10);
+beat(9,'',b=>{b.item(0,9,'cover',{a:'COM’È ANDATA',b:'Circa 18 minuti<br>al tavolo',c:'5 di preparazione + 13 di gioco: una partita veloce, chiusa al giro 4',d:'In media il simulatore stima 23 minuti in 2, 27 in 3, 31 in 4 · da verificare con una partita cronometrata'})});
+musicEnd();
+const TOTAL=T;
+EV.sort((a,b)=>a.t-b.t);
+
+// ---------------- frame render ----------------
+function stateAt(t){const s=structuredClone(S0);for(const e of EV){if(e.t>t)break;e.f(s)}return s}
+function tableAt(t){let a=CLK[0],b=CLK[CLK.length-1];for(let i=0;i<CLK.length-1;i++){if(CLK[i][0]<=t&&t<=CLK[i+1][0]){a=CLK[i];b=CLK[i+1]}}if(t>=CLK[CLK.length-1][0])return CLK[CLK.length-1][1];const f=b[0]>a[0]?(t-a[0])/(b[0]-a[0]):1;return a[1]+(b[1]-a[1])*f}
+function heroPos(s,k,t){const h=s.H[k],a=s.anim[k];if(!a)return [hx(h.c,h.r),hy(h.c,h.r),1];const f=clamp((t-a.t0)/a.dur,0,1);const n=a.p.length-1;if(n<=0){const d=a.drop?ease((t-a.t0)/.35):1;return [hx(...a.p[0]),hy(...a.p[0])-(1-d)*30,d]}
+  const x=f*n,i=Math.min(Math.floor(x),n-1),u=ease(x-i);const p=a.p[i],q=a.p[i+1];return [hx(...p)+(hx(...q)-hx(...p))*u,hy(...p)+(hy(...q)-hy(...p))*u-Math.sin(u*Math.PI)*6,1]}
+function ovSVG(s,t){let o='';const W=GEOM.W,Rr=GEOM.R;
+  // rings
+  for(const it of ITEMS){if(it.kind!=='ring'||t<it.t0+(it.data.delay||0)||t>it.t1)continue;const l=t-it.t0-(it.data.delay||0);const d=it.data;const pr=Rr*(0.9+0.25*Math.sin(l*6));o+=`<circle cx="${hx(d.c,d.r)}" cy="${hy(d.c,d.r)}" r="${pr}" fill="none" stroke="${d.col}" stroke-width="2.4" opacity="${fade(l,it.t1-it.t0-(d.delay||0),.2,.4)}"/>`}
+  // sala figures
+  if(s.salaOn){const a=ease((t-s.salaOn)/.6);const nms=['Boss','MIMI','Ogre','Troll','Goliath','Strega'];nms.forEach((n,i)=>{if(!s.sala[n])return;const [x,y]=salaPos(i);const r=i===0?W*0.62:W*0.45;
+    o+=`<g opacity="${a}">`+(i===1?`<g transform="translate(${x-r*0.8},${y-r*0.8}) scale(${r*1.6/24})">${ICONS.forziere}</g>`:`<circle cx="${x}" cy="${y}" r="${r}" fill="${i===0?'#b8862b':'#3b2a1c'}" stroke="#1d130c" stroke-width="1.2"/><g transform="translate(${x-r*0.55},${y-r*0.55}) scale(${r*1.1/24})">${i===0?ICONS.forziere.replace(/#b8862b/g,'#3b2414'):ICONS.teschio.replace(/#9c2f24/g,'#e9c9a8')}</g>`)+`</g>`})}
+  // cubes
+  if(s.cubesOn&&s.gpv>0){
+    let pv=s.gpv;if(s.gpvAnim){const A=s.gpvAnim;const f=clamp((t-A.t0)/A.dur,0,1);pv=Math.round(A.from+(A.to-A.from)*f)}
+    const p=GEOM.pvt;const pi=9-pv;o+=`<rect x="${p.x0+pi*p.bx+p.bx*0.15}" y="${p.ty+p.bx*0.15}" width="${p.bx*0.6}" height="${p.bx*0.6}" rx="1.5" fill="#f2c230" stroke="#6b4a2b" stroke-width="0.8"/>`}
+  // tokens
+  for(const k of s.tok){let x=hx(k.c,k.r),y=hy(k.c,k.r);if(k.from){const f=ease((t-k.t0)/k.dur);x=k.from[0]+(x-k.from[0])*f;y=k.from[1]+(y-k.from[1])*f-Math.sin(f*Math.PI)*30}
+    if(k.kind==='crea')o+=`<circle cx="${x}" cy="${y}" r="${Rr*0.72}" fill="#efe1c3" stroke="#6b4a2b" stroke-width="1.4"/><g transform="translate(${x-Rr*0.45},${y-Rr*0.45}) scale(${Rr*0.9/24})">${ICONS.spade}</g>`;
+    if(k.kind==='boss')o+=`<circle cx="${x}" cy="${y}" r="${Rr*0.8}" fill="#3b2a1c" stroke="#1d130c" stroke-width="1.4"/><g transform="translate(${x-Rr*0.5},${y-Rr*0.5}) scale(${Rr/24})">${ICONS.teschio.replace(/#9c2f24/g,'#e9c9a8')}</g>`;
+    if(k.kind==='guard'){const dead=s.guardDead;o+=`<circle cx="${x}" cy="${y-2}" r="${Rr*0.85}" fill="#b8862b" stroke="#1d130c" stroke-width="1.4"/><g transform="translate(${x-Rr*0.55},${y-2-Rr*0.55}) scale(${Rr*1.1/24})">${ICONS.forziere.replace(/#b8862b/g,'#3b2414')}</g>`}
+    if(k.kind==='mimi')o+=`<g transform="translate(${x+Rr*0.2},${y+Rr*0.05}) scale(${Rr*0.8/24})">${ICONS.forziere}</g>`}
+  // path trails + pawns
+  for(const k of ['L','M','S']){const h=s.H[k];if(!h.on||h.c==null)continue;const a=s.anim[k];
+    if(a&&a.p.length>1&&t<a.t0+a.dur+1.2){const op=t>a.t0+a.dur?1-(t-a.t0-a.dur)/1.2:1;o+=`<polyline points="${a.p.map(p=>hx(...p)+','+hy(...p)).join(' ')}" fill="none" stroke="${h.col}" stroke-width="2.6" stroke-dasharray="4 3" stroke-linecap="round" opacity="${op}"/>`}}
+  for(const k of ['L','M','S']){const h=s.H[k];if(!h.on||h.c==null||h.down)continue;const [x,y,op]=heroPos(s,k,t);const act=s.active===k;
+    o+=`<g opacity="${op}">${act?`<circle cx="${x}" cy="${y}" r="${Rr*0.95+Math.sin(t*5)*1.2}" fill="none" stroke="#f6d68b" stroke-width="2.2"/>`:''}<ellipse cx="${x}" cy="${y+Rr*0.5}" rx="${Rr*0.6}" ry="${Rr*0.22}" fill="#0005"/><circle cx="${x}" cy="${y}" r="${Rr*0.66}" fill="${h.col}" stroke="#fffaf0" stroke-width="1.8"/><text x="${x}" y="${y+Rr*0.3}" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="${Rr*0.85}" fill="#fff">${h.name[0]}</text></g>`}
+  return o}
+function heroCard(k,s,t){const h=s.H[k];const lit=(n)=>n;
+  const ind=[0,1].map(i=>`<div class="box ${i<h.ind?'':'off'} ${i===h.ind-1&&t-h.newInd<1.5?'new':''}">${IC('pergamena',22)}</div>`).join('');
+  const pe=[...Array(3)].map((_,i)=>`<span class="${i===2?'g':''} ${i===h.pe?'c':''}">${i}</span>`).join('');
+  const cl=[...Array(3)].map((_,i)=>`<div class="box ${i<h.cless?'':'off'}" style="width:24px;height:24px">${IC('clessidra',16)}</div>`).join('');
+  const used=['casa','goccia','martello'].map(u=>`<div class="box ${h.used.includes(u)?'':'off'}" style="width:24px;height:24px">${IC(u,16)}</div>`).join('');
+  return `<div class="hero ${h.on?'':'hide'} ${s.active===k?'act':''}"><div class="band" style="background:${h.col}"><div class="nm">${h.name}</div><div class="cl">${h.cls} · ${h.race}</div><div class="lv">Liv. ${h.lv}</div></div>
+  <div class="stats"><div>${IC('cuore')}<span class="k">PV</span>${h.pv}/${h.pvm}</div><div>${IC('spade')}<span class="k">ATT</span>+${h.att}</div><div>${IC('stivale')}<span class="k">MOV</span>${h.mov}</div><div>${IC('scudo')}<span class="k">DIFESA</span>${14+h.ar+(h.arTmp||0)}</div></div>
+  <div class="row">Indizi ${ind}<span style="margin-left:8px">Ispir.</span><div class="box ${h.insp?'':'off'}">${IC('stella',22)}</div></div>
+  <div class="row">PE <div class="pe">${pe}</div></div>
+  <div class="row">Clessidre ${cl}<span style="margin-left:8px">Edifici</span> ${used}</div>
+  <div class="row small" style="padding-top:1px">Arma: <b style="margin-left:4px">${h.arma}</b><span style="margin-left:auto;margin-right:84px">mano <b>${h.hand}</b></span></div>
+  ${h.ger?'<div class="badge">GERONIMO</div>':''}</div>`}
+const PH=[['clessidra','Clessidre'],['carte','Carte'],['piedi','Muovi'],['occhio','Esplora'],['bandiera','Fine']];
+function render(t){const s=stateAt(t);
+  // victory flag
+  $('bsvg').style.opacity=s.boardOn?ease((t-s.boardOn)/.8):0;
+  $('ov').innerHTML=ovSVG(s,t);
+  $('ttl').textContent=s.title;$('sub').textContent=s.sub;
+  const ts=Math.round(tableAt(t));$('clk').textContent=Math.floor(ts/60)+':'+String(ts%60).padStart(2,'0');
+  $('giro').textContent=s.playing?`Giro ${s.giro}`:'preparazione';
+  $('phases').innerHTML=PH.map((p,i)=>`<div class="ph ${s.phase===i?'on':''}"><span class="n">${i+1}</span>${IC(p[0],24)}${p[1]}</div>`).join('');
+  $('heroes').innerHTML=['L','M','S'].map(k=>heroCard(k,s,t)).join('');
+  let st='';for(const it of ITEMS){if(t<it.t0||t>=it.t1||!R[it.kind])continue;const lt=t-it.t0;const op=fade(lt,it.t1-it.t0,.2,.2);st+=`<div class="it" style="opacity:${op}">${R[it.kind](it.data,lt,t,it,s)}</div>`}
+  $('stage').innerHTML=st;
+  const c=CAPS.filter(c=>t>=c.t0&&t<c.t1).pop();$('cap').innerHTML=c?`<span style="opacity:${fade(t-c.t0,c.t1-c.t0,.2,.15)}">${c.text}</span>`:'';
+  $('cap').style.opacity=c?1:0.0;
+  let fu='';for(const it of ITEMS){if(t<it.t0||t>=it.t1||!FULL[it.kind])continue;fu+=FULL[it.kind](it.data,t-it.t0,it.t1-it.t0)}$('full').innerHTML=fu;
+}
+window.TOTAL=TOTAL;window.MG=MG;window.render=render;
+const q=new URLSearchParams(location.search);render(parseFloat(q.get('t')||'0'));
+</script></body></html>

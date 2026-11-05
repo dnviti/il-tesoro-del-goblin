@@ -1,0 +1,24 @@
+Scatola base senza Caos del Goblin (21/10 sera) — simulatore fisico, 20.000 partite per numero di giocatori
+FIS=1 BAGDRAW=1, tempi da tavolo, sacchetto con 8 Sentieri. Colonne: minuti al tavolo, [early, mid, late], ...
+Classi = vittorie / atteso.
+
+nocaos40 (10 caselle Caos -> sentiero, 40.000 partite: valori usati nei documenti)
+np2 26.21 min  Gue 0.983  Lad 0.972  Mag 0.990  Chi 1.055
+np3 29.60 min  Gue 0.992  Lad 1.033  Mag 0.981  Chi 0.994
+np4 30.19 min  Gue 1.019  Lad 1.050  Mag 0.987  Chi 0.945
+
+nocaos  (10 caselle Caos -> sentiero, 20.000 partite)
+np2 26.14 min  Gue 0.985  Lad 0.977  Mag 1.001  Chi 1.037
+np3 29.45 min  Gue 0.986  Lad 1.048  Mag 0.975  Chi 0.991
+np4 30.41 min  Gue 1.031  Lad 1.037  Mag 0.977  Chi 0.955
+
+nocaosQ (10 caselle Caos -> caselle «?»)
+np2 26.11 min  Gue 0.999  Lad 0.968  Mag 1.013  Chi 1.020
+np3 29.30 min  Gue 1.010  Lad 1.044  Mag 0.959  Chi 0.986
+np4 30.14 min  Gue 1.039  Lad 1.027  Mag 0.971  Chi 0.964
+
+Con il Caos (espansione): 25,8 / 29,0 / 29,9 min, classi 0,95-1,05.
+Leva opzionale non applicata: 1 Sentiero -> 1 Mappa strappata nel sacchetto = 25,6 / 28,8 / 29,5 min, classi 0,942-1,051.
+Scelta: base senza Caos come sentieri (regolamento v4.1), nessun ritocco.
+Misura della versione HTML (BAL.caos off): 26,4 / 29,5 / 30,0 min, classi 0,96-1,06.
+Riprodurre: cd sorgenti/framework_fisico && NOCAOS=1 N=20000 ./tri.sh nocaos '<BALX>'
