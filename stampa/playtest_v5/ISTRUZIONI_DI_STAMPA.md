@@ -25,6 +25,8 @@ Tutto A4, stampante di casa. Totale: **28 fogli A4** (45 facciate) per il kit + 
 | Cartoncino da 1-2 mm | almeno 36 × 45 cm | per la plancia (355,6 × 447,7 mm, più grande di un A3): il lato di uno scatolone va bene. Facoltativo per le 4 schede eroe |
 | Colla stick o biadesivo, forbici o taglierina, righello metallico, cutter e tappetino | | |
 
+Cubetti, dadi e sacchetto puoi anche stamparli in 3D invece di comprarli (il sacchetto diventa un contenitore con foro per la mano): file e istruzioni in [../3d/LEGGIMI.md](../3d/LEGGIMI.md).
+
 ## 2. Prima di tutto: la prova di stampa
 
 **`00_prova_stampa.pdf` — 1 foglio, fronte-retro lato lungo (2 facciate).** Stampala su carta normale prima del resto.
