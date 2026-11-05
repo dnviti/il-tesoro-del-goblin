@@ -27,7 +27,7 @@ Stampante A3? Lo stesso kit su 17 fogli A3 è in `../playtest_v5_A3/` (istruzion
 | Cartoncino da 1-2 mm | almeno 36 × 45 cm | per la plancia (355,6 × 447,7 mm, più grande di un A3): il lato di uno scatolone va bene. Facoltativo per le 4 schede eroe |
 | Colla stick o biadesivo, forbici o taglierina, righello metallico, cutter e tappetino | | |
 
-Cubetti, dadi e sacchetto puoi anche stamparli in 3D invece di comprarli (il sacchetto diventa un contenitore con foro per la mano): file e istruzioni in [../3d/LEGGIMI.md](../3d/LEGGIMI.md).
+Cubetti e sacchetto puoi anche stamparli in 3D invece di comprarli (il sacchetto diventa un bicchiere con coperchio: per pescare si toglie il coperchio): file e istruzioni in [../3d/LEGGIMI.md](../3d/LEGGIMI.md).
 
 ## 2. Prima di tutto: la prova di stampa
 

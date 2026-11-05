@@ -29,7 +29,7 @@ delle 36 Tessere Esplorazione. Tutti i pezzi entrano in un piano da **180 × 180
 | Cubetto boss | 1 | 7 × 7 × 7 mm | giallo | `piatti/giallo_1_cubetto.3mf` (1 pezzo) | 0,4 g | 5 min |
 | Dado D6 | 8 | 16 mm, spigoli raggiati R 1,5, punti incassati Ø 3 × 0,9 mm | a scelta (chiaro, per dipingere i punti) | `piatti/dadi_8.3mf` (8 pezzi) | 38 g (4,8 g l'uno) | 2,5 h (1,2 h) |
 | Contenitore: bicchiere | 1 | Ø 90 × 85 mm, interno Ø 86 × 83 mm | a scelta, coprente (non trasparente) | `piatti/contenitore_bicchiere.3mf` | 72 g | 4,5 h (2 h) |
-| Contenitore: coperchio | 1 | Ø 94,6 × 32 mm, foro mano Ø 65 mm | stesso del bicchiere | `piatti/contenitore_coperchio.3mf` | 29 g | 2 h (0,8 h) |
+| Contenitore: coperchio | 1 | Ø 94,6 × 12 mm, **pieno** (chiude il bicchiere) | stesso del bicchiere | `piatti/contenitore_coperchio.3mf` | 25 g | 1,5 h (0,6 h) |
 
 Totale circa **165 g** di PLA.
 
@@ -56,13 +56,13 @@ Il cubetto giallo ha un piatto suo, perché ogni piatto è di un colore solo. Co
 - **Cubetti**: una faccia qualsiasi sul piano.
 - **Dadi**: faccia **1** sul piano, **6** in alto. Le facce opposte sommano 7; 1-2-3 attorno allo stesso vertice in senso antiorario, come i dadi occidentali. I punti sui lati sono fori orizzontali di 3 mm profondi 0,9 mm: escono bene senza supporti.
 - **Bicchiere**: fondo sul piano, apertura in alto.
-- **Coperchio**: si stampa **capovolto**, col piano forato sul piatto e gonna e collare verso l'alto. Da usare girato: il piano forato sta in alto, la gonna calza sopra il bordo del bicchiere (0,3 mm di gioco per lato) e il collare (Ø 68,2 esterno, lungo 30 mm) pende dentro il bicchiere e copre la vista delle tessere.
+- **Coperchio**: si stampa **capovolto**, col piano pieno sul piatto e la gonna verso l'alto. La gonna (alta 10 mm) calza sopra il bordo del bicchiere con 0,3 mm di gioco per lato.
 
 ## Dopo la stampa
 
 - Dadi (facoltativo): riempi i punti con colore acrilico (pennello fine o stuzzicadenti) e togli il colore in eccesso dalla faccia con un panno umido o carta abrasiva fine (grana 400) quando è asciutto.
 - Togli eventuali sbavature del primo strato con un cutter.
-- Contenitore: metti dentro le 36 tessere, chiudi, scuoti. Per pescare infila la mano nel foro senza guardare dentro (tieni il contenitore all'altezza del petto). Se il coperchio è troppo lento, aggiungi un giro di nastro adesivo sul bordo del bicchiere o ristampalo con `gioco = 0.2 mm`.
+- Contenitore: metti dentro le 36 tessere, chiudi col coperchio e scuoti. Per pescare togli il coperchio, tieni il bicchiere sopra l'altezza degli occhi e prendi una tessera senza guardare. Se il coperchio è troppo lento, aggiungi un giro di nastro adesivo sul bordo del bicchiere.
 
 ## Prova di misura (cubetto nella casella)
 
@@ -97,12 +97,12 @@ Apri il file in `sorgenti/` con SolidCraft e cambia i parametri (il modello si r
 - `cubetto.solidcraft`: `lato` (7 mm), `smusso` (0,6 mm).
 - `dado.solidcraft`: `lato` (16 mm), `raggio` (1,5 mm), `pip_d` (3 mm), `pip_p` (0,9 mm), `pip_off` (= lato × 0,27).
 - `pedine.solidcraft`: `base_d` (20 mm), `h` (30 mm), `base_h` (3 mm), `ch` (0,5 mm); le 4 pedine sono corpi separati.
-- `contenitore.solidcraft`: `d_int` (86 mm), `parete` (2 mm), `fondo` (2 mm), `h_cup` (85 mm), `gioco` (0,3 mm), `h_gonna` (10 mm), `piano` (2 mm), `foro_mano` (65 mm), `spess_collare` (1,6 mm), `h_collare` (30 mm), `smusso_base` (1 mm).
+- `contenitore.solidcraft`: `d_int` (86 mm), `parete` (2 mm), `fondo` (2 mm), `h_cup` (85 mm), `gioco` (0,3 mm), `h_gonna` (10 mm), `piano` (2 mm), `smusso_base` (1 mm). **Attenzione:** il sorgente contiene ancora il vecchio coperchio con foro e collare; l'STL e i 3MF del coperchio pieno (5/11 sera) sono stati generati a parte con le stesse misure di gonna e piano. Se riesporti dal sorgente, togli prima foro e collare.
 
 Poi esporta di nuovo l'STL (File → Esporta) e rifai il piatto nello slicer.
 
 ## Controlli fatti
 
-- Volumi misurati in SolidCraft uguali a quelli calcolati a mano: cubetto 329,18 mm³, dado 3874,2 mm³, bicchiere 58 469 mm³, coperchio 23 133 mm³.
+- Volumi misurati in SolidCraft uguali a quelli calcolati a mano: cubetto 329,18 mm³, dado 3874,2 mm³, bicchiere 58 469 mm³. Coperchio pieno: 19 726 mm³ (STL chiuso, 0 spigoli difettosi).
 - Tutti gli STL sono chiusi (ogni spigolo condiviso da 2 triangoli, orientamento coerente).
-- Capienza: 36 tessere Ø 24 × 2 mm occupano 32,6 cm³; il bicchiere ha 482 cm³ interni (307 cm³ sotto il collare): circa 9 volte la pila, quindi si mescolano bene.
+- Capienza: 36 tessere Ø 24 × 2 mm occupano 32,6 cm³; il bicchiere ha 482 cm³ interni: circa 15 volte la pila, quindi si mescolano bene.
