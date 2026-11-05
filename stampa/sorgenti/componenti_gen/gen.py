@@ -154,7 +154,8 @@ def esplorazione():
     return counts
 
 # ------------------------------------------------------------------ SEGNALINI
-def segnalini():
+def segnalini(cols=6, at=None):
+    """at=(x0, y0): solo il blocco dei pezzi (senza intestazione/piè né scrittura), per il foglio misto A3."""
     rows = read('segnalini.csv')
     D = 20; R = D / 2
     spec = {'Indizio': ('pergamena', INK, '#efe1c3'), 'Clessidra': ('clessidra', INK, '#efe1c3'), 'Forte Volontà': ('stella', GOLD, '#efe1c3')}
@@ -163,8 +164,7 @@ def segnalini():
         ic, col, fill = spec[r['nome']]
         items += [(r['nome'], ic, col, fill)] * int(r['copie'])
     assert len(items) == 28
-    cols = 6
-    # una riga (6 pezzi) per tipo: 12 = 2 righe, 12 = 2 righe, 4 = 1 riga -> 5 righe
+    # A4: una riga (6 pezzi) per tipo; A3 (cols=10): 16 = 2 righe, 8 = 1, 4 = 1
     pitch = D + 2 * BLEED
     # righe per tipo
     layout = []; row = 0
@@ -175,7 +175,7 @@ def segnalini():
         row += math.ceil(n / cols)
     nrows = row
     gw = (cols - 1) * pitch + D; gh = (nrows - 1) * pitch + D
-    x0 = (210 - gw) / 2; y0 = (297 - gh) / 2
+    x0, y0 = at if at else ((210 - gw) / 2, (297 - gh) / 2)
     b = []; pos = []
     for nome, rr, cc in layout: pos.append((nome, x0 + R + cc * pitch, y0 + R + rr * pitch))
     b += [bleed_disc(x, y, R, spec[nome][2]) for nome, x, y in pos]
@@ -187,23 +187,27 @@ def segnalini():
     xs = sorted({x0 + i * pitch + o for i in range(cols) for o in (0, D)}); ys = sorted({y0 + i * pitch + o for i in range(nrows) for o in (0, D)})
     b.append(edge_ticks(xs, ys, bb))
     cnt = {r['nome']: int(r['copie']) for r in rows}
+    from collections import Counter
+    if at:
+        return b, dict(Counter(n for n, _, _ in pos)), (x0, y0, x0 + gw, y0 + gh)
     b.insert(0, hdr('Segnalini', f"{cnt['Indizio']} Indizi · {cnt['Clessidra']} Clessidre · {cnt['Forte Volontà']} Forte Volontà  ·  Ø {D} mm  ·  solo fronte"))
     b.append(ftr(['Stampa su A4 al 100%. Taglia sul cerchio sottile; l’abbondanza di 3 mm esce dal taglio.',
                   f"Prima {math.ceil(cnt['Indizio'] / cols)} righe di Indizi, poi {math.ceil(cnt['Clessidra'] / cols)} di Clessidre, poi {math.ceil(cnt['Forte Volontà'] / cols)} di Forte Volontà."]))
     write('segnalini', 1, page(fonts('\n'.join(b))))
-    from collections import Counter
+
     return dict(Counter(n for n, _, _ in pos))
 
 # ------------------------------------------------------------------ TESSERE SPECIE
 SPECIE_COL = {'Umano': '#4a5568', 'Elfo': '#2f7a8a', 'Sanguar': '#7a2f4f', 'Yumaniano': '#8a6a1c'}
-def specie():
+def specie(cols=2, at=None):
+    """at=(x0, y0): solo il blocco dei pezzi, per il foglio misto A3."""
     rows = read('tessere_specie.csv'); assert len(rows) == 8
     W, H = 50, 25
     pitchx, pitchy = W + 2 * BLEED + 2, H + 2 * BLEED + 2
-    cols, nr = 2, 4
+    nr = math.ceil(len(rows) / cols)
     gw, gh = (cols - 1) * pitchx + W, (nr - 1) * pitchy + H
-    x0, y0 = (210 - gw) / 2, (297 - gh) / 2
-    b = [hdr('Tessere Specie', f'8 pezzi (2 per specie)  ·  {W} × {H} mm  ·  solo fronte'),]
+    x0, y0 = at if at else ((210 - gw) / 2, (297 - gh) / 2)
+    b = [] if at else [hdr('Tessere Specie', f'8 pezzi (2 per specie)  ·  {W} × {H} mm  ·  solo fronte'),]
     pcs = []
     for i, r in enumerate(rows):
         x = x0 + (i % cols) * pitchx; y = y0 + (i // cols) * pitchy
@@ -233,11 +237,14 @@ def specie():
         b.append(f'<rect x="{x}" y="{y}" width="{W}" height="{H}" rx="2.3" fill="none" stroke="{CUT}" stroke-width="0.12" opacity="0.7"/>')
     xs = sorted({x0 + i * pitchx + o for i in range(cols) for o in (0, W)}); ys = sorted({y0 + i * pitchy + o for i in range(nr) for o in (0, H)})
     b.append(edge_ticks(xs, ys, (x0, y0, x0 + gw, y0 + gh)))
+    from collections import Counter
+    if at:
+        return b, dict(Counter(r['specie'] for r in rows)), (x0, y0, x0 + gw, y0 + gh)
     b.append(ftr(['Stampa su A4 al 100%. Taglia sul bordo sottile; l’abbondanza di 3 mm esce dal taglio.',
                   'La tessera si appoggia nello slot «Tessera Specie» della scheda eroe (slot 52,6 × 26,3 mm; tessera 50 × 25 mm).',
                   'Il bonus dello Yumaniano è PROVVISORIO (la bozza dice «Da decidere»).']))
     write('tessere_specie', 1, page(fonts('\n'.join(b))))
-    from collections import Counter
+
     return dict(Counter(r['specie'] for r in rows))
 
 # ------------------------------------------------------------------ SCHEDE EROE
@@ -317,9 +324,10 @@ PAWNS = {  # nome: (icona, colore, tipo, riga)
     'MIMI': ('forziere', '#6b4a2b', 'forziere', 0), 'Geronimo': ('bandiera', '#4a6a2f', 'primo giocatore', 0),
     'Guardiano di MIMI': ('scudo', '#2b1d14', 'boss', 1), 'Mimic ancestrale': ('forziere', '#2b1d14', 'boss', 1),
     'Re Goblin Grugno': ('teschio', '#2b1d14', 'boss', 1)}
-def pedine():
+def pedine(at=None):
+    """at={riga: (x0, y)}: solo i pezzi, nelle posizioni date (foglio misto A3); ritorna (svg, pezzi)."""
     rows = read('pedine.csv'); assert len(rows) == 9
-    b = [hdr('Pedine e sagome', '4 eroi · MIMI · Geronimo · 3 Boss  ·  pieghevoli fronte/retro  ·  solo fronte, A4 verticale')]
+    b = [] if at else [hdr('Pedine e sagome', '4 eroi · MIMI · Geronimo · 3 Boss  ·  pieghevoli fronte/retro  ·  solo fronte, A4 verticale')]
     geo = {0: dict(w=24.0, ph=34.0, fh=7.0), 1: dict(w=40.0, ph=44.0, fh=8.0)}
     rows_by = {0: [], 1: []}
     for r in rows: rows_by[PAWNS[r['nome']][3]].append(r)
@@ -329,6 +337,7 @@ def pedine():
         g = geo[rr]; w, ph, fh = g['w'], g['ph'], g['fh']; H = 2 * (fh + ph)
         n = len(rows_by[rr]); pitch = w + 2 * BLEED
         gw = (n - 1) * pitch + w; x0 = (210 - gw) / 2
+        if at: x0, y = at[rr]
         for i, r in enumerate(rows_by[rr]):
             ic, col, tipo, _ = PAWNS[r['nome']]
             x = x0 + i * pitch
@@ -371,6 +380,8 @@ def pedine():
         xs = sorted({x0 + i * pitch + o for i in range(n) for o in (0, w)})
         b.append(edge_ticks(xs, [y, y + H], row_box, gap=4, ln=3.5).replace('tacche-di-taglio', f'tacche-riga{rr + 1}'))
         y += H + 2 * BLEED + 8
+    if at:
+        return b, out
     b.append(ftr(['Stampa su A4 al 100%. Ritaglia il rettangolo di ogni pedina. Piega sulla linea tratteggiata bianca (al centro) e incolla fronte e retro.',
                   'Piega le due linguette chiare (tratteggio grigio) una in avanti e una indietro: ottieni un piede a T per far stare in piedi la sagoma.',
                   'Eroi, MIMI e Geronimo: larghezza 24 mm (stanno in un esagono). Boss: 40 mm (stanno nei cerchi della Sala del Tesoro). Colori degli eroi = colori dei dorsi di classe.']))
@@ -434,8 +445,175 @@ def prova():
         b.append(line(cx - 0.8, yy, cx + 0.8, yy, 0.12, K) + line(cx, yy - 0.8, cx, yy + 0.8, 0.12, K))
     write('prova_stampa', 2, page(fonts('\n'.join(b))))
 
+# ================================================================== FORMATO A3 (--formato A3)
+# Stesse regole dell'A4: tutto a >= 6 mm dal bordo, fronte/retro specchiati sul lato lungo (x -> 297 - x).
+A3W, A3H = 297, 420
+def hdr3(title, sub, y=11):
+    return text(A3W / 2, y, title, 4.2, INK, 'middle', True, SERIF) + text(A3W / 2, y + 5, sub, 2.9, BROWN, 'middle')
+def ftr3(lines, y=392):
+    return ''.join(text(A3W / 2, y + i * 3.6, l, 2.8, BROWN, 'middle') for i, l in enumerate(lines))
+
+def plancia_a3():
+    """Plancia su 2 fogli A3 orizzontali (420 x 297 mm): metà alta e metà bassa a tutta larghezza, sovrapposte
+    in una fascia orizzontale con 5 croci di allineamento. Sovrapposizione = 2 x WIN_H - Hb."""
+    S = 0.97
+    bs = board(W=26)
+    m = re.match(r'<svg viewBox="0 0 ([\d.]+) ([\d.]+)"', bs); bw, bh = float(m.group(1)), float(m.group(2))
+    Wb, Hb = bw * S, bh * S
+    PW, PH = 420, 297
+    WIN_W, WIN_H = Wb, 236.0          # finestra per foglio: tutta la larghezza; 236 mm lasciano 38 mm sotto per tacche e note
+    PX, PY = (PW - WIN_W) / 2, 13.0
+    assert PX - 6.5 >= 6.5 and Hb < 2 * WIN_H
+    bd = fonts(inner(bs)).replace('rx="13.0"', 'rx="0"', 1)
+    oy = Hb - WIN_H; ovy = WIN_H - oy
+    my = (oy + WIN_H) / 2              # croci al centro della fascia di sovrapposizione
+    marks_board = [(8, my), (Wb / 4, my), (Wb / 2, my), (3 * Wb / 4, my), (Wb - 8, my)]
+    for r, (num, pos) in enumerate((('1 di 2', 'metà alta'), ('2 di 2', 'metà bassa'))):
+        wy0 = 0 if r == 0 else oy
+        cx0, cx1 = PX - BLEED, PX + WIN_W + BLEED
+        cy0 = PY - (BLEED if r == 0 else 0); cy1 = PY + WIN_H + (BLEED if r == 1 else 0)
+        cid = f'clip{r}'
+        b = [f'<defs><clipPath id="{cid}"><rect x="{cx0}" y="{cy0}" width="{cx1 - cx0}" height="{cy1 - cy0}"/></clipPath></defs>',
+             f'<rect id="abbondanza" x="{cx0}" y="{cy0}" width="{cx1 - cx0}" height="{cy1 - cy0}" fill="#efe1c3"/>',
+             f'<g id="plancia-{r + 1}di2" clip-path="url(#{cid})"><g transform="translate({PX:.3f},{PY - wy0:.3f}) scale({S})" font-family="{SANS}">{bd}</g></g>']
+        for (bx, by) in marks_board:
+            if wy0 <= by <= wy0 + WIN_H:
+                px, py = PX + bx, PY + by - wy0
+                b.append(f'<g id="croce-di-allineamento"><circle cx="{px:.2f}" cy="{py:.2f}" r="1.9" fill="none" stroke="#c0392b" stroke-width="0.2"/>{line(px - 3.5, py, px + 3.5, py, 0.2, "#c0392b")}{line(px, py - 3.5, px, py + 3.5, 0.2, "#c0392b")}</g>')
+        b.append(crop_marks(PX, PY, PX + WIN_W, PY + WIN_H, gap=3.5, ln=3.0))
+        yf = PY + WIN_H + 9
+        b.append(text(PW / 2, yf, f'PLANCIA «Le Terre di Hande» · foglio {num} ({pos}) · A3', 4.0, INK, 'middle', True, SERIF))
+        if r == 0:
+            ins = ['Foglio base: non si taglia (solo il bianco esterno). Il foglio 2 si sovrappone alla sua fascia in basso.']
+        else:
+            ins = [f'Taglia il margine bianco in ALTO lungo le tacche (y = {PY:.0f} mm). Sovrapponi il foglio sulla fascia di {ovy:.1f} mm in basso del foglio 1.',
+                   'Fai coincidere le 5 croci rosse e il disegno; incolla.']
+        for j, l in enumerate(ins): b.append(text(PW / 2, yf + 6 + j * 4.2, l, 2.8, INK, 'middle'))
+        b.append(text(PW / 2, yf + 17, f'A3 orizzontale, stampa al 100%. Plancia finita {Wb:.1f} × {Hb:.1f} mm (1 unità del disegno = {S} mm), esagono {26 * S:.1f} mm.', 2.6, BROWN, 'middle'))
+        b.append(text(PW / 2, yf + 21, f'Sovrapposizione verticale: 2 × {WIN_H:.0f} − {Hb:.1f} = {ovy:.1f} mm (foglio 1: plancia 0–{WIN_H:.0f} mm; foglio 2: {oy:.1f}–{Hb:.1f} mm).', 2.6, BROWN, 'middle'))
+        b.append(text(PW / 2, yf + 25, 'Una plancia stampata in 2 fogli A3; il disegno è un 10 × 10 di esagoni, girato di 180° è identico.', 2.6, BROWN, 'middle'))
+        write('plancia', r + 1, page('\n'.join(b), PW, PH))
+    return dict(W=Wb, H=Hb, win=(WIN_W, WIN_H), oy=oy, ovy=ovy)
+
+def schede_a3():
+    """4 schede eroe (222 x 176,8 mm) su 2 fogli A3 verticali, 2 per foglio."""
+    sv = fonts(inner(scheda()))
+    SW = 222.0; k = SW / 540; SHH = 430 * k
+    x0 = (A3W - SW) / 2
+    for p in range(2):
+        b = []
+        for j in range(2):
+            nome, col = CLASSI[2 * p + j]
+            ty = 14 + j * 202; y0 = ty + 9
+            b += [text(x0, ty, f'Scheda eroe · {nome}', 7.0, col, 'start', True, SERIF),
+                  text(x0 + SW, ty, f'A3 verticale · foglio {p + 1} di 2 · stampa al 100% · solo fronte', 3.0, BROWN, 'end'),
+                  f'<rect x="{x0}" y="{ty + 2}" width="{SW}" height="1.2" fill="{col}"/>',
+                  f'<g id="scheda-{nome}" font-family="{SANS}" transform="translate({x0:.3f},{y0}) scale({k:.5f})">{sv}</g>',
+                  f'<rect x="{x0}" y="{y0}" width="{SW}" height="{SHH:.2f}" fill="none" stroke="{CUT}" stroke-width="0.12" opacity="0.5"/>',
+                  crop_marks(x0, y0, x0 + SW, y0 + SHH, gap=1.5, ln=3.5)]
+            assert y0 + SHH + 5 <= A3H - 6.5
+        write('schede_eroe', p + 1, page('\n'.join(b), A3W, A3H))
+    return len(CLASSI), SW, SHH
+
+def esplorazione_a3():
+    """36 tessere (Ø 24 mm) su un foglio A3 fronte-retro, 6 x 6, retro specchiato sul lato lungo (x -> 297 - x)."""
+    rows = read('tessere_esplorazione.csv'); assert len(rows) == 36
+    D = 24; R = D / 2; cols = 6; pitch = D + 2 * BLEED
+    rws = math.ceil(len(rows) / cols)
+    gw, gh = (cols - 1) * pitch + D, (rws - 1) * pitch + D
+    x0, y0 = (A3W - gw) / 2, (A3H - gh) / 2
+    cs = [(x0 + R + (i % cols) * pitch, y0 + R + (i // cols) * pitch) for i in range(len(rows))]
+    for pn, side in ((1, 'fronte'), (2, 'retro')):
+        pos = cs if side == 'fronte' else [(A3W - x, y) for x, y in cs]
+        b = [bleed_disc(x, y, R, r['colore_esadecimale']) for (x, y), r in zip(pos, rows)]
+        b += [disc_piece(x, y, R, r['colore_esadecimale'], r['icona'], r['etichetta_fronte'], '#ffffff', '#ffffff') for (x, y), r in zip(pos, rows)]
+        b += [cut_disc(x, y, R) for x, y in pos]
+        bb = (A3W - x0 - gw, y0, A3W - x0, y0 + gh) if side == 'retro' else (x0, y0, x0 + gw, y0 + gh)
+        xs = sorted({bb[0] + i * pitch + o for i in range(cols) for o in (0, D)})
+        ys = sorted({bb[1] + i * pitch + o for i in range(rws) for o in (0, D)})
+        b.append(edge_ticks(xs, ys, bb))
+        st = ('FRONTE · foglio 1 di 1. Stampa fronte-retro su A3: ribaltamento sul lato LUNGO (pagina 2 = retro).' if side == 'fronte'
+              else 'RETRO · foglio 1 di 1, già specchiato sul lato lungo: dietro a ogni tessera c’è la stessa tessera.')
+        b.insert(0, hdr3(f'Tessere Esplorazione · 25 rosse (Mostro) + 11 blu (Imprevisto) · Ø {D} mm', st))
+        b.append(ftr3(['Stampa su A3 al 100% (nessun adattamento alla pagina). Taglia sul cerchio sottile; l’abbondanza di 3 mm esce dal taglio.',
+                       'Retro identico al fronte: le tessere escono dal sacchetto e il colore (rosso = Mostro, blu = Imprevisto) si legge da ogni lato.',
+                       'Ordine: le prime 25 (righe 1-4 e la prima della riga 5) sono rosse, le altre 11 blu.']))
+        write('tessere_esplorazione', pn, page(fonts('\n'.join(b)), A3W, A3H))
+    counts = {}
+    for r in rows: counts[r['colore']] = counts.get(r['colore'], 0) + 1
+    return counts
+
+def misti_a3():
+    """Un foglio A3 solo fronte: pedine (eroi in alto; Boss a sinistra), tessere specie (a destra dei Boss), segnalini (sotto)."""
+    pb, pz = pedine(at={0: ((A3W - (5 * 30 + 24)) / 2, 28.0), 1: (18.5, 124.0)})
+    sb, sc, sbox = specie(cols=2, at=(18.5 + 132 + 20, 124.0))
+    gb, gc, gbox = segnalini(cols=10, at=((A3W - (9 * 26 + 20)) / 2, 269.0))
+    assert sbox[2] + 7.5 <= A3W - 6.5 and gbox[3] + 7.5 < 385
+    b = [hdr3('Pedine · Tessere Specie · Segnalini', '9 pedine pieghevoli · 8 tessere specie 50 × 25 mm · 28 segnalini Ø 20 mm  ·  foglio 1 di 1  ·  solo fronte, A3 verticale')]
+    b += pb + sb + gb
+    b.append(ftr3(['Stampa su A3 al 100%. Taglia sul bordo/cerchio sottile; l’abbondanza di 3 mm esce dal taglio.',
+                   'Pedine: piega sulla linea tratteggiata bianca (al centro) e incolla fronte e retro; le linguette chiare fanno da piede a T. Eroi 24 mm, Boss 40 mm.',
+                   'Tessere Specie: nello slot «Tessera Specie» della scheda eroe. Il bonus dello Yumaniano è PROVVISORIO.',
+                   f"Segnalini: prime 2 righe {gc['Indizio']} Indizi, poi 1 riga di {gc['Clessidra']} Clessidre, poi {gc['Forte Volontà']} Forte Volontà."]))
+    write('componenti_misti', 1, page(fonts('\n'.join(b)), A3W, A3H))
+    return dict(pedine=len(pz), specie=sc, segnalini=gc)
+
+def prova_a3():
+    """00_prova_stampa.pdf A3: come l'A4 (righello 100 mm, quadrato 50 mm, riquadro a 6,5 mm, croci/cerchi fronte-retro)."""
+    K = '#000000'; FR = 6.5
+    bersagli = [(25, 250), (272, 250), (148.5, 320), (25, 395), (272, 395)]
+    def par(x, y, s, size=3.5, w=255):
+        ls = wrap(s, size, w, SANS)
+        return ''.join(text(x, y + j * size * 1.25, l, size, K) for j, l in enumerate(ls)), y + len(ls) * size * 1.25
+    def cornice():
+        return (f'<rect x="{FR}" y="{FR}" width="{A3W - 2 * FR}" height="{A3H - 2 * FR}" fill="none" stroke="{K}" stroke-width="0.25"/>'
+                + text(A3W / 2, FR + 4.5, '↑ alto (lato corto di ingresso)', 3.0, BROWN, 'middle'))
+    b = [cornice(), text(A3W / 2, 21, 'Prova di stampa A3 · Il Tesoro del Goblin', 6.0, K, 'middle', True, SERIF),
+         text(A3W / 2, 27, 'FRONTE · un solo foglio A3 stampato fronte-retro (ribaltamento sul LATO LUNGO)', 3.2, BROWN, 'middle')]
+    rx, ry = 20, 58
+    b.append(text(rx, ry - 9, 'Righello: 100 mm esatti tra lo 0 e il 10', 3.2, K, 'start', True))
+    b.append(line(rx, ry, rx + 100, ry, 0.25, K))
+    for i in range(101):
+        ln = 5 if i % 10 == 0 else (3.2 if i % 5 == 0 else 1.8)
+        b.append(line(rx + i, ry, rx + i, ry + ln, 0.2, K))
+        if i % 10 == 0: b.append(text(rx + i, ry + 9, str(i // 10), 3.2, K, 'middle'))
+    b.append(text(rx + 50, ry + 14, 'centimetri', 2.8, BROWN, 'middle'))
+    qx, qy = 225, 35
+    b.append(f'<rect x="{qx}" y="{qy}" width="50" height="50" fill="none" stroke="{K}" stroke-width="0.4"/>')
+    b.append(text(qx + 25, qy + 26, '50 × 50 mm', 3.6, K, 'middle', True))
+    b.append(text(qx + 25, qy + 32, 'misura i lati', 2.8, BROWN, 'middle'))
+    y = 104
+    for p in ['1. Stampa al 100% («Dimensioni effettive», MAI «Adatta alla pagina»), carta A3, fronte-retro con ribaltamento sul LATO LUNGO.',
+              '2. Scala: misura il righello (100 mm tra 0 e 10) e il quadrato (50 mm). Va bene entro ±1 mm. Se no, disattiva «adatta/riduci» e ristampa.',
+              '3. Margini: il riquadro sottile a 6,5 mm dal bordo deve vedersi su tutti e 4 i lati. Se manca un lato la stampante taglia il margine: carte e tacche stanno oltre i 6,5 mm.',
+              '4. Fronte-retro: tieni il foglio controluce. Ogni croce del fronte deve cadere dentro i cerchi concentrici del retro (ogni cerchio = 1 mm di scarto). Fino a 1 mm va bene per le carte; oltre, vedi ../playtest_v5/ISTRUZIONI_DI_STAMPA.md.',
+              'Se tutto torna, stampa il resto del kit A3 nell’ordine di ISTRUZIONI_DI_STAMPA_A3.md.']:
+        t, y = par(20, y, p); b.append(t); y += 2.2
+    b.append(text(A3W / 2, 235, 'Bersagli di allineamento (croci; il retro ha i cerchi)', 3.0, BROWN, 'middle'))
+    for (x, yy) in bersagli:
+        b.append(line(x - 7, yy, x + 7, yy, 0.2, K) + line(x, yy - 7, x, yy + 7, 0.2, K))
+        for i in range(-6, 7):
+            if i: b.append(line(x + i, yy - 0.8, x + i, yy + 0.8, 0.15, K) + line(x - 0.8, yy + i, x + 0.8, yy + i, 0.15, K))
+    write('prova_stampa', 1, page(fonts('\n'.join(b)), A3W, A3H))
+    b = [cornice(), text(A3W / 2, 21, 'RETRO · prova fronte-retro A3', 6.0, K, 'middle', True, SERIF)]
+    t, _ = par(20, 36, 'Tieni il foglio controluce, con il fronte e il retro sovrapposti: la croce del fronte deve cadere al centro dei cerchi (1, 2, 3, 4, 5 mm di raggio). Leggi lo scarto in mm nelle 5 posizioni; se è più di 1 mm, o diverso tra un bersaglio e l’altro, leggi «Fronte-retro non allineato» nelle istruzioni A4.')
+    b.append(t)
+    for (x, yy) in bersagli:
+        cx = A3W - x
+        for r in range(1, 6): b.append(f'<circle cx="{cx}" cy="{yy}" r="{r}" fill="none" stroke="{K}" stroke-width="{0.35 if r % 5 == 0 else 0.15}"/>')
+        b.append(line(cx - 0.8, yy, cx + 0.8, yy, 0.12, K) + line(cx, yy - 0.8, cx, yy + 0.8, 0.12, K))
+    write('prova_stampa', 2, page(fonts('\n'.join(b)), A3W, A3H))
+
 if __name__ == '__main__':
     res = {}
+    if '--formato' in sys.argv and sys.argv[sys.argv.index('--formato') + 1].upper() == 'A3':
+        res['plancia'] = plancia_a3()
+        res['schede'] = schede_a3()
+        res['esplorazione'] = esplorazione_a3()
+        res['misti'] = misti_a3()
+        prova_a3()
+        print(res)
+        sys.exit(0)
     res['esplorazione'] = esplorazione()
     res['segnalini'] = segnalini()
     res['specie'] = specie()

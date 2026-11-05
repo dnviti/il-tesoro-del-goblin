@@ -26,6 +26,8 @@ Altri testi modificati rispetto al PDF v5, segnalati con PROVVISORIO sulle carte
 
 **Come stampare: `playtest_v5/ISTRUZIONI_DI_STAMPA.md`** (elenco in ordine di stampa, carta, copie, taglio, montaggio, cosa comprare, se qualcosa non va). Prima di tutto stampa `playtest_v5/00_prova_stampa.pdf` (righello 100 mm, quadrato 50 mm, margini, allineamento fronte-retro).
 
+**Versione A3:** stesso kit su fogli A3 (17 fogli invece di 28) in `playtest_v5_A3/`, istruzioni in `playtest_v5_A3/ISTRUZIONI_DI_STAMPA_A3.md`.
+
 Tutti A4. Stampa **al 100 % / dimensioni effettive** (niente «adatta alla pagina»). Tutto il contenuto e tutte le tacche di taglio stanno ad almeno 6,5 mm dal bordo del foglio (le stampanti di casa non stampano i primi ~5 mm). I PDF fronte-retro hanno le facciate in ordine **F1, R1, F2, R2, …** (fronte-retro automatico sul **lato lungo**; facciate dispari = fronti, pari = retro).
 
 | File | Contenuto | Pezzi | Facciate | Stampa e montaggio |

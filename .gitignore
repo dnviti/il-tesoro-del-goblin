@@ -32,3 +32,4 @@ clips/
 .~lock.*#
 .DS_Store
 Thumbs.db
+.~*.lock

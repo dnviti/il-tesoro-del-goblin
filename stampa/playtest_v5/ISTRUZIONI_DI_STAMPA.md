@@ -2,6 +2,8 @@
 
 Tutto A4, stampante di casa. Totale: **28 fogli A4** (45 facciate) per il kit + **6 fogli** (11 facciate, fronte-retro) per ogni copia del regolamento = **34 fogli** con una copia del regolamento. Tempo stimato: 1 h di stampa, 1,5-2 h di taglio e montaggio.
 
+Stampante A3? Lo stesso kit su 17 fogli A3 è in `../playtest_v5_A3/` (istruzioni: `../playtest_v5_A3/ISTRUZIONI_DI_STAMPA_A3.md`).
+
 ## 0. Impostazioni valide per TUTTI i PDF
 
 1. **Scala 100 %** («Dimensioni effettive» / «Dimensione reale»). Mai «Adatta alla pagina», «Riduci ai margini», «Ridimensiona». Pagine per foglio: 1.

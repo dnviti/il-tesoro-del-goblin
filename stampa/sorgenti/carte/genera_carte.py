@@ -11,7 +11,10 @@ etichette a >= 6,5 mm dal bordo del foglio (le stampanti domestiche non stampano
 Ordine delle pagine per il fronte-retro automatico: F1, R1, F2, R2, ...; i retro sono specchiati sul lato lungo
 (rilegatura sul lato lungo): la carta in colonna c sul fronte ha il retro in colonna 2 - c.
 
-Uso: python3 genera_carte.py [--solo NOME]   (richiede designcraft-cli)
+Formato A3 (`--formato A3`): 16 carte per foglio A3 verticale (4 x 4), 252 x 352 mm centrati (margini 22,5 / 34 mm),
+stesse regole; PDF in ../../playtest_v5_A3 e progetti in ./A3. Senza opzione: A4, output invariato.
+
+Uso: python3 genera_carte.py [--solo NOME] [--formato A4|A3]   (richiede designcraft-cli)
 """
 import csv
 import json
@@ -22,14 +25,24 @@ import tempfile
 
 QUI = pathlib.Path(__file__).resolve().parent
 DATI = QUI.parent / "dati"
-PDF_DIR = QUI.parent.parent / "playtest_v5"
+FORMATO = sys.argv[sys.argv.index("--formato") + 1].upper() if "--formato" in sys.argv else "A4"
+if FORMATO not in ("A4", "A3"):
+    sys.exit("--formato: A4 o A3")
+PDF_DIR = QUI.parent.parent / ("playtest_v5" if FORMATO == "A4" else "playtest_v5_A3")
+DC_DIR = QUI if FORMATO == "A4" else QUI / "A3"
 
 MM = 72 / 25.4
 CW, CH = 63 * MM, 88 * MM                     # carta (pt)
-PW, PH = 595.276, 841.89                       # A4
-# Griglia 3 x 3 «a battuta»: le carte si toccano e condividono le linee di taglio (4 verticali + 4 orizzontali,
-# tutte a tutta larghezza/altezza), 189 x 264 mm centrati. Margini: 10,5 mm a sinistra/destra, 16,5 mm sopra/sotto.
-X0, Y0 = (PW - 3 * CW) / 2, (PH - 3 * CH) / 2
+if FORMATO == "A4":
+    PW, PH = 595.276, 841.89                   # A4
+    NC, NR = 3, 3
+else:
+    PW, PH = 841.89, 1190.551                  # A3 (297 x 420 mm)
+    NC, NR = 4, 4
+PER_FOGLIO = NC * NR
+# Griglia NC x NR «a battuta»: le carte si toccano e condividono le linee di taglio (NC+1 verticali + NR+1 orizzontali,
+# tutte a tutta larghezza/altezza). A4 3 x 3: 189 x 264 mm, margini 10,5 / 16,5 mm. A3 4 x 4: 252 x 352 mm, 22,5 / 34 mm.
+X0, Y0 = (PW - NC * CW) / 2, (PH - NR * CH) / 2
 SB = 1.0 * MM                                  # abbondanza SOLO sul lato esterno della griglia (1 mm)
 MIN_BORDO = 6.5 * MM                           # segni di taglio ed etichette: mai a meno di 6,5 mm dal bordo foglio
 SAFE = 9.0                                     # bordo colorato: tutto il testo sta oltre 3 mm (8,5 pt)
@@ -145,7 +158,7 @@ def cmyk(nome):
 class Doc:
     def __init__(self, titolo, pagine):
         self.righe = []
-        self.cmd("file.new", preset="A4", pages=pagine, facingPages=False, bleed=0, margins=0, title=titolo, intent="print")
+        self.cmd("file.new", preset=FORMATO, pages=pagine, facingPages=False, bleed=0, margins=0, title=titolo, intent="print")
         for nome in SWATCH:
             self.cmd("swatch.create", name=nome, color=cmyk(nome))
         for nome, chars in CHAR:
@@ -204,9 +217,9 @@ class Doc:
 
 
 def origine(pos, retro):
-    r, c = divmod(pos, 3)
+    r, c = divmod(pos, NC)
     if retro:
-        c = 2 - c
+        c = NC - 1 - c
     return X0 + c * CW, Y0 + r * CH
 
 
@@ -215,31 +228,31 @@ def sangue(ox, oy):
     della griglia (le carte vicine si toccano e si tagliano sulla stessa linea)."""
     e = 0.01
     return [ox - (SB if abs(ox - X0) < e else 0), oy - (SB if abs(oy - Y0) < e else 0),
-            ox + CW + (SB if abs(ox + CW - (X0 + 3 * CW)) < e else 0), oy + CH + (SB if abs(oy + CH - (Y0 + 3 * CH)) < e else 0)]
+            ox + CW + (SB if abs(ox + CW - (X0 + NC * CW)) < e else 0), oy + CH + (SB if abs(oy + CH - (Y0 + NR * CH)) < e else 0)]
 
 
 def segni_taglio(d, sp, nome, foglio, fogli, retro, pagina, pagine):
-    """Segni di taglio (4 + 4 linee, tutte a tutto foglio) ed etichetta della pagina. Tutto a >= 6,5 mm dal bordo
+    """Segni di taglio (NC+1 + NR+1 linee, tutte a tutto foglio) ed etichetta della pagina. Tutto a >= 6,5 mm dal bordo
     del foglio; i segni stanno fuori dalla griglia e dalla sua abbondanza esterna, mai sulle carte."""
     gap = 0.5 * MM
-    xs = [X0 + k * CW for k in range(4)]
-    ys = [Y0 + k * CH for k in range(4)]
+    xs = [X0 + k * CW for k in range(NC + 1)]
+    ys = [Y0 + k * CH for k in range(NR + 1)]
     for x in xs:
         d.linea(sp, (x, MIN_BORDO), (x, Y0 - SB - gap), "[Registration]", 0.5)
-        d.linea(sp, (x, Y0 + 3 * CH + SB + gap), (x, PH - MIN_BORDO), "[Registration]", 0.5)
+        d.linea(sp, (x, Y0 + NR * CH + SB + gap), (x, PH - MIN_BORDO), "[Registration]", 0.5)
     for y in ys:
         d.linea(sp, (MIN_BORDO, y), (X0 - SB - gap, y), "[Registration]", 0.5)
-        d.linea(sp, (X0 + 3 * CW + SB + gap, y), (PW - MIN_BORDO, y), "[Registration]", 0.5)
+        d.linea(sp, (X0 + NC * CW + SB + gap, y), (PW - MIN_BORDO, y), "[Registration]", 0.5)
     # linee guida bianche sottilissime sulle giunzioni interne (si vede dove tagliare; non lasciano traccia sul rifilo)
-    for x in xs[1:3]:
-        d.linea(sp, (x, Y0), (x, Y0 + 3 * CH), "[Paper]", 0.25)
-    for y in ys[1:3]:
-        d.linea(sp, (X0, y), (X0 + 3 * CW, y), "[Paper]", 0.25)
+    for x in xs[1:NC]:
+        d.linea(sp, (x, Y0), (x, Y0 + NR * CH), "[Paper]", 0.25)
+    for y in ys[1:NR]:
+        d.linea(sp, (X0, y), (X0 + NC * CW, y), "[Paper]", 0.25)
     # etichetta fuori dalla griglia (si butta con il bordo), tra i segni di taglio, a >= 8 mm dal bordo
     lato = "RETRO · girare sul lato lungo" if retro else "FRONTE"
     y0, y1 = 8.0 * MM, 11.5 * MM
     d.testo(sp, [X0 + 5, y0, X0 + CW - 5, y1], f"{lato} · foglio {foglio} di {fogli}", "Etichetta")
-    d.testo(sp, [X0 + 2 * CW + 5, y0, X0 + 3 * CW - 5, y1], f"{nome}.pdf · pag. {pagina}/{pagine}", "EtichettaDx")
+    d.testo(sp, [X0 + (NC - 1) * CW + 5, y0, X0 + NC * CW - 5, y1], f"{nome}.pdf · pag. {pagina}/{pagine}", "EtichettaDx")
 
 
 def cornice(d, sp, ox, oy, colore, fondo="Carta"):
@@ -388,15 +401,15 @@ def dorso(d, sp, ox, oy, colore, titolo, sotto="", grande=""):
 
 
 def costruisci(nome, titolo, carte):
-    """carte: lista di (funzione_fronte, funzione_retro); 9 per foglio. Pagine in ordine F1, R1, F2, R2..."""
+    """carte: lista di (funzione_fronte, funzione_retro); PER_FOGLIO per foglio. Pagine in ordine F1, R1, F2, R2..."""
     n = len(carte)
-    fogli = (n + 8) // 9
+    fogli = (n + PER_FOGLIO - 1) // PER_FOGLIO
     d = Doc(titolo, 2 * fogli)
     for k, (fr, rt) in enumerate(carte):
-        ox, oy = origine(k % 9, False)
-        fr(d, 2 * (k // 9), ox, oy)
-        ox, oy = origine(k % 9, True)
-        rt(d, 2 * (k // 9) + 1, ox, oy)
+        ox, oy = origine(k % PER_FOGLIO, False)
+        fr(d, 2 * (k // PER_FOGLIO), ox, oy)
+        ox, oy = origine(k % PER_FOGLIO, True)
+        rt(d, 2 * (k // PER_FOGLIO) + 1, ox, oy)
     d.cmd("layer.new", name="Segni di taglio")
     for sp in range(2 * fogli):
         segni_taglio(d, sp, nome, sp // 2 + 1, fogli, sp % 2 == 1, sp + 1, 2 * fogli)
@@ -404,7 +417,7 @@ def costruisci(nome, titolo, carte):
     with tempfile.TemporaryDirectory(prefix="goblin_carte_") as tmp:
         src = pathlib.Path(tmp) / f"{nome}.dcs"
         src.write_text(d.script(), encoding="utf-8")
-        out = subprocess.run(["designcraft-cli", "script", str(src), "--save", str(QUI / f"{nome}.designcraft")],
+        out = subprocess.run(["designcraft-cli", "script", str(src), "--save", str(DC_DIR / f"{nome}.designcraft")],
                              capture_output=True, text=True)
     if out.returncode != 0:
         sys.exit(f"{nome}: designcraft-cli ha fallito\n{out.stdout[-2000:]}\n{out.stderr[-2000:]}")
@@ -451,6 +464,7 @@ def mazzi():
 if __name__ == "__main__":
     solo = sys.argv[sys.argv.index("--solo") + 1] if "--solo" in sys.argv else None
     PDF_DIR.mkdir(parents=True, exist_ok=True)
+    DC_DIR.mkdir(parents=True, exist_ok=True)
     totale = 0
     for nome, (titolo, carte) in mazzi().items():
         if solo and nome != solo:
