@@ -66,12 +66,26 @@ PV attuali e PV massimi coincidono, il cubetto rosso va sopra il nero.
 Prima di stampare tutti i 32 cubetti bianchi, stampa il piatto giallo (1 cubetto) e appoggialo su una casella
 ATT della scheda stampata: deve starci dentro con un po' d'aria tutto attorno.
 
+## Pedine (4 classi)
+
+Quattro pedine generiche, una per classe, tutte con base tonda **Ø 20 mm × 3 mm** (smusso 0,5 mm sotto, quindi entrano nell'esagono da 25,2 mm della plancia con 2,6 mm di margine per lato) e altezza **30 mm**. Si stampano in piedi, senza supporti.
+
+| Classe | Forma | Colore filamento | Volume | PLA (1,24 g/cm³) |
+|---|---|---|---|---|
+| Assaltatore | pedone classico con testa a sfera (collo Ø 6,4 mm) | rosso `#9c2f24` | 2205 mm³ | ≈ 2,7 g |
+| Stregone | cono alto (Ø 13 mm alla base, Ø 4 mm in punta) | viola `#5b4a9c` | 2610 mm³ | ≈ 3,2 g |
+| Ricercatore | cilindro Ø 10 mm con cima tagliata inclinata | verde `#3b7d4f` | 2859 mm³ | ≈ 3,5 g |
+| Oracolo | torre a prisma esagonale (Ø 11 mm tra gli spigoli) | oro `#b8862b` | 3057 mm³ | ≈ 3,8 g |
+
+File: `stl/pedina_<classe>.stl` (una per file, centrata sull'origine) e `piatti/pedine_4.3mf` (le 4 pedine insieme su un piatto 180 × 180, centrate, distanza tra le basi 10 mm). Totale circa 13,3 g e 1,5-2 h di stampa (0,2 mm, 15 % riempimento; stima, non misurata). Colori: usa quello della classe, oppure un colore per giocatore se due giocatori hanno la stessa classe. Sezione minima 4 mm (punta dello Stregone; collo dell'Assaltatore 6,4 mm).
+
 ## Modificare i pezzi
 
 Apri il file in `sorgenti/` con SolidCraft e cambia i parametri (il modello si ricostruisce):
 
 - `cubetto.solidcraft`: `lato` (7 mm), `smusso` (0,6 mm).
 - `dado.solidcraft`: `lato` (16 mm), `raggio` (1,5 mm), `pip_d` (3 mm), `pip_p` (0,9 mm), `pip_off` (= lato × 0,27).
+- `pedine.solidcraft`: `base_d` (20 mm), `h` (30 mm), `base_h` (3 mm), `ch` (0,5 mm); le 4 pedine sono corpi separati.
 - `contenitore.solidcraft`: `d_int` (86 mm), `parete` (2 mm), `fondo` (2 mm), `h_cup` (85 mm), `gioco` (0,3 mm), `h_gonna` (10 mm), `piano` (2 mm), `foro_mano` (65 mm), `spess_collare` (1,6 mm), `h_collare` (30 mm), `smusso_base` (1 mm).
 
 Poi esporta di nuovo l'STL (File → Esporta) e rifai il piatto nello slicer.
