@@ -15,6 +15,8 @@ Indirizzo pubblico: https://snz82syu.fn.oyd.ovh (pubblicato il 27/10/2026)
 - `risorse/` Catalogo_carte_v2.xlsx, Carte_Trama_Il_Tesoro_del_Goblin_v2.pptx, Carte_Trama_Elenco_v2.xlsx, Carte_Nemico_v2.pptx (da carte/ e carte/originali/)
 - `video/` partita_al_tavolo.mp4, tutorial_come_si_gioca.mp4
 
+Bozze di sito dell'autore non importate: `menu-demo.zip` (1/11, menu animato e prototipo 3D «Partita veloce») e `test_sito_completo_faq_desktop_fix.zip` (2/11, sito vetrina con regole, news, shop, FAQ) sono nell'esportazione del Drive dell'autore del 5/11, non nel repository: usano regole vecchie (D20, regolamento v3 con mappa 8×8).
+
 ## Aggiornare i file
 1. function_preview su tesoro-goblin con env in più: `DUFS_ALLOW_UPLOAD=true`, `DUFS_ALLOW_DELETE=true`,
    `DUFS_AUTH=caricatore:<password nuova casuale>@/:rw|@/`; mostrare l'anteprima a Daniele, poi plan_apply.

@@ -33,8 +33,8 @@ SAFE = 9.0                                     # bordo colorato: tutto il testo 
 SWATCH = {
     "Inchiostro": "#2a2118", "Marrone": "#6b4a2b", "Rosso": "#9c2f24", "Oro": "#b8862b",
     "Blu": "#2f5d7c", "Carta": "#fbf8ef", "Pergamena": "#f1dcae", "OroChiaro": "#f6d68b",
-    # tipi (legenda dell'autore: Mappa rossa, Incantesimo blu, Equipaggiamento verde, Classe viola)
-    "Mappa": "#9c2f24", "Incantesimo": "#2f5d7c", "Equipaggiamento": "#3d6f45", "Classe": "#7a4f86",
+    # tipi (legenda dell'autore: Mappa rossa, Incanto blu, Equipaggiamento verde, Classe viola)
+    "Mappa": "#9c2f24", "Incanto": "#2f5d7c", "Equipaggiamento": "#3d6f45", "Classe": "#7a4f86",
     # nemici (Carte_Nemico_v2.pptx)
     "Notte": "#0b1530", "Medaglione": "#2a1259", "Lettera": "#c9a6ff", "OroNemico": "#d9a93c",
     "PV": "#c62b2b", "Scudo": "#e0a43a",
@@ -45,7 +45,7 @@ SWATCH = {
     # dorsi dei mazzi di classe (concordati con le pedine eroe)
     "Assaltatore": "#9c2f24", "Ricercatore": "#3b7d4f", "Stregone": "#5b4a9c", "Oracolo": "#b8862b",
 }
-TIPO_COLORE = {"TM": "Mappa", "TI": "Incantesimo", "TE": "Equipaggiamento", "TC": "Classe", "NE": "Notte"}
+TIPO_COLORE = {"TM": "Mappa", "TI": "Incanto", "TE": "Equipaggiamento", "TC": "Classe", "NE": "Notte"}
 
 SERIF, SANS = "Noto Serif", "IBM Plex Sans Condensed"
 
@@ -86,7 +86,6 @@ PARA = [
     ("RiepTitolo", {"align": "center"}, {"fontFamily": SERIF, "fontStyle": "Bold", "size": 8.5, "leading": lead(9.5), "fill": "Inchiostro"}),
     ("RiepSez", {"align": "left", "spaceBefore": 1.6}, {"fontFamily": SANS, "fontStyle": "Bold", "size": 6.4, "leading": lead(7), "fill": "Rosso", "tracking": 40}),
     ("RiepRiga", {"align": "left", "hyphenate": False}, {"fontFamily": SANS, "fontStyle": "Regular", "size": 6.1, "leading": lead(6.8), "fill": "Inchiostro"}),
-    ("RiepProvv", {"align": "left", "hyphenate": False}, {"fontFamily": SANS, "fontStyle": "SemiBold", "size": 6.1, "leading": lead(6.8), "fill": "Rosso"}),
     # divisori e dorsi
     ("DivCodice", {"align": "center"}, {"fontFamily": SERIF, "fontStyle": "Bold", "size": 40, "leading": lead(42), "fill": "Carta"}),
     ("DivTitolo", {"align": "center", "hyphenate": False}, {"fontFamily": SERIF, "fontStyle": "Bold", "size": 12.5, "leading": lead(14), "fill": "Carta", "tracking": 20}),
@@ -325,18 +324,16 @@ def carta_aiuto_fronte(d, sp, ox, oy, r):
     d.testo(sp, L(ox, oy, 110, CH - 19, CW - 14, CH - 11.5), r["id"], "Codice")
 
 
-RIEPILOGO = [("Scontro", ["retro_scontro", "retro_pareggio"]), ("Ricompense", ["retro_ricompense"]),
-             ("Tessere «?»", ["retro_tessere"]), ("Sconfitta", ["retro_sconfitta"]), ("Vittoria", ["retro_vittoria"])]
+RIEPILOGO = [("Scontro", "retro_scontro"), ("Ricompense", "retro_ricompense"),
+             ("Tessere «?»", "retro_tessere"), ("Sconfitta", "retro_sconfitta"), ("Vittoria", "retro_vittoria")]
 
 
 def carta_aiuto_retro(d, sp, ox, oy, r):
     cornice(d, sp, ox, oy, "Oro")
     par = [(r["retro_titolo"], "RiepTitolo")]
-    for sez, campi in RIEPILOGO:
+    for sez, campo in RIEPILOGO:
         par.append((sez.upper(), "RiepSez"))
-        for campo in campi:
-            st = "RiepProvv" if campo == "retro_pareggio" else "RiepRiga"
-            par += [(tipografico(riga), st) for riga in r[campo].split("\n")]
+        par += [(tipografico(riga), "RiepRiga") for riga in r[campo].split("\n")]
     d.testo(sp, L(ox, oy, 11.5, 11, CW - 11.5, CH - 10), "", "RiepRiga", paragrafi=par)
 
 

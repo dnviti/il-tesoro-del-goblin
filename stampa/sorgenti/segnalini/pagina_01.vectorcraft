@@ -25,7 +25,7 @@
     "layers": [
       {
         "id": 1,
-        "name": "Stampa A4 (taglio e abbondanza)",
+        "name": "Layer 1",
         "kind": {
           "type": "layer",
           "color": {
@@ -108,7 +108,7 @@
                 ],
                 "runs": [
                   {
-                    "text": "12 Indizi · 12 Clessidre · 4 Ispirazione · Ø 20 mm · solo fronte",
+                    "text": "12 Indizi · 12 Clessidre · 4 Forte Volontà · Ø 20 mm · solo fronte",
                     "style": {
                       "font_family": "Liberation Sans Narrow",
                       "font_style": "Regular",
@@ -14681,11 +14681,11 @@
                 ],
                 "runs": [
                   {
-                    "text": "Ispirazione",
+                    "text": "Forte Volontà",
                     "style": {
                       "font_family": "Liberation Sans Narrow",
                       "font_style": "Bold",
-                      "size": 8.50395,
+                      "size": 7.086625,
                       "tracking": 0.0,
                       "baseline_shift": 0.0,
                       "h_scale": 100.0,
@@ -14934,11 +14934,11 @@
                 ],
                 "runs": [
                   {
-                    "text": "Ispirazione",
+                    "text": "Forte Volontà",
                     "style": {
                       "font_family": "Liberation Sans Narrow",
                       "font_style": "Bold",
-                      "size": 8.50395,
+                      "size": 7.086625,
                       "tracking": 0.0,
                       "baseline_shift": 0.0,
                       "h_scale": 100.0,
@@ -15187,11 +15187,11 @@
                 ],
                 "runs": [
                   {
-                    "text": "Ispirazione",
+                    "text": "Forte Volontà",
                     "style": {
                       "font_family": "Liberation Sans Narrow",
                       "font_style": "Bold",
-                      "size": 8.50395,
+                      "size": 7.086625,
                       "tracking": 0.0,
                       "baseline_shift": 0.0,
                       "h_scale": 100.0,
@@ -15440,11 +15440,11 @@
                 ],
                 "runs": [
                   {
-                    "text": "Ispirazione",
+                    "text": "Forte Volontà",
                     "style": {
                       "font_family": "Liberation Sans Narrow",
                       "font_style": "Bold",
-                      "size": 8.50395,
+                      "size": 7.086625,
                       "tracking": 0.0,
                       "baseline_shift": 0.0,
                       "h_scale": 100.0,
@@ -20704,7 +20704,7 @@
                 ],
                 "runs": [
                   {
-                    "text": "Prima 2 righe di Indizi, poi 2 di Clessidre, poi 1 di Ispirazione.",
+                    "text": "Prima 2 righe di Indizi, poi 2 di Clessidre, poi 1 di Forte Volontà.",
                     "style": {
                       "font_family": "Liberation Sans Narrow",
                       "font_style": "Regular",
@@ -21680,19 +21680,7 @@
     },
     "raster_effects_ppi": 72.0,
     "images": {},
-    "next_id": 335,
-    "metadata": {
-      "author": "",
-      "authorTitle": "",
-      "description": "",
-      "keywords": [],
-      "rating": 0,
-      "copyrightStatus": "unknown",
-      "copyrightNotice": "",
-      "copyrightUrl": "",
-      "created": 1793908342,
-      "modified": 1793908342
-    }
+    "next_id": 335
   },
   "images": {}
 }

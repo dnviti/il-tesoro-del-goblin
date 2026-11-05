@@ -1,30 +1,30 @@
 mazzo,id,tipo,tipo_nome,nome,rarita,slot,classe_riga,testo,copia,nota,fonte
 Assaltatore,TE-01,TE,Equipaggiamento,Elmo sorgisogno,Comune,Elmo,Assaltatore - Oracolo,Finché è equipaggiato ottieni (+1) AR. Quando peschi una Trappola dal sacchetto la vedi in tempo: non ha effetto su di te.,1 di 2,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
-Assaltatore,TI-28,TI,Incantesimo,Colpo Poderoso,,,Assaltatore,Il tuo prossimo attacco infligge (+2) Danni.,1 di 1,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
-Assaltatore,TI-29,TI,Incantesimo,Grido di Battaglia,,,Assaltatore,Ottieni (+2) al prossimo tiro per colpire.,1 di 1,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
-Assaltatore,TI-30,TI,Incantesimo,Parata Perfetta,,,Assaltatore - Oracolo,Annulla i Danni di un attacco subito.,1 di 2,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
-Assaltatore,TI-31,TI,Incantesimo,Carica Impetuosa,,,Assaltatore,Aggiungi (+2) al tiro di Movimento; il tuo primo attacco di questo turno infligge (+1) Danno.,1 di 1,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
-Assaltatore,TI-34,TI,Incantesimo,Egida Sacra,,,Assaltatore - Oracolo,"Se hai uno scudo equipaggiato, ottieni (+2) AR fino alla fine dello scontro.",1 di 2,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
-Assaltatore,TI-35,TI,Incantesimo,Fendente Radioso,,,Assaltatore - Oracolo,"Infliggi 1D6 Danni alla creatura, (+2) se è un non morto.",1 di 2,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
-Assaltatore,TI-36,TI,Incantesimo,Giuramento di Ferro,,,Assaltatore,Il prossimo Danno che subiresti è ridotto di (2).,1 di 1,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
+Assaltatore,TI-28,TI,Incanto,Colpo Poderoso,,,Assaltatore,Il tuo prossimo attacco infligge (+2) Danni.,1 di 1,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
+Assaltatore,TI-29,TI,Incanto,Grido di Battaglia,,,Assaltatore,Ottieni (+2) al prossimo tiro per colpire.,1 di 1,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
+Assaltatore,TI-30,TI,Incanto,Parata Perfetta,,,Assaltatore - Oracolo,Annulla i Danni di un attacco subito.,1 di 2,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
+Assaltatore,TI-31,TI,Incanto,Carica Impetuosa,,,Assaltatore,Aggiungi (+2) al tiro di Movimento; il tuo primo attacco di questo turno infligge (+1) Danno.,1 di 1,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
+Assaltatore,TI-34,TI,Incanto,Egida Sacra,,,Assaltatore - Oracolo,"Se hai uno scudo equipaggiato, ottieni (+2) AR fino alla fine dello scontro.",1 di 2,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
+Assaltatore,TI-35,TI,Incanto,Fendente Radioso,,,Assaltatore - Oracolo,"Infliggi 1D6 Danni alla creatura, (+2) se è un non morto.",1 di 2,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
+Assaltatore,TI-36,TI,Incanto,Giuramento di Ferro,,,Assaltatore,Il prossimo Danno che subiresti è ridotto di (2).,1 di 1,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
 Ricercatore,TE-15,TE,Equipaggiamento,Pugnale Sottile,Comune,Arma SX,Ricercatore,"Finché è equipaggiato, se attacchi per primo ottieni (+1) ATT.",1 di 1,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
-Ricercatore,TI-37,TI,Incantesimo,Colpo alle Spalle,,,Ricercatore,"Se attacchi per primo, il tuo attacco infligge (+2) Danni.",1 di 1,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
-Ricercatore,TI-38,TI,Incantesimo,Fortuna del Furfante,,,Ricercatore,Scarta questa carta per ritirare un tuo tiro per colpire.,1 di 1,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
-Ricercatore,TI-39,TI,Incantesimo,Passo Felpato,,,Ricercatore,Ignori gli effetti della Trappola che peschi in questo turno.,1 di 1,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
-Ricercatore,TI-40,TI,Incantesimo,Lancio di Coltello,,,Ricercatore,"All'inizio di uno scontro, prima del primo attacco, infliggi 1D6 − 1 Danni (minimo 1) alla creatura.",1 di 1,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
+Ricercatore,TI-37,TI,Incanto,Colpo alle Spalle,,,Ricercatore,"Se attacchi per primo, il tuo attacco infligge (+2) Danni.",1 di 1,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
+Ricercatore,TI-38,TI,Incanto,Fortuna del Furfante,,,Ricercatore,Scarta questa carta per ritirare un tuo tiro per colpire.,1 di 1,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
+Ricercatore,TI-39,TI,Incanto,Passo Felpato,,,Ricercatore,Ignori gli effetti della Trappola che peschi in questo turno.,1 di 1,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
+Ricercatore,TI-40,TI,Incanto,Lancio di Coltello,,,Ricercatore,"All'inizio di uno scontro, prima del primo attacco, infliggi 1D6 − 1 Danni (minimo 1) alla creatura.",1 di 1,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
 Stregone,TE-03,TE,Equipaggiamento,Cappello del Taumaturgo,Rara,Elmo,Stregone,"Finché è equipaggiato, la prima volta che sconfiggi una creatura in un turno recuperi (1) carta dalla pila degli scarti.",1 di 1,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
-Stregone,TE-04,TE,Equipaggiamento,Diadema della Veggenza,Comune,Elmo,Stregone - Oracolo,Finché è equipaggiato ottieni (+1) AR e una volta per turno puoi ritirare un D6 di un incantesimo di Danno o di cura.,1 di 2,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
+Stregone,TE-04,TE,Equipaggiamento,Diadema della Veggenza,Comune,Elmo,Stregone - Oracolo,Finché è equipaggiato ottieni (+1) AR e una volta per turno puoi ritirare un D6 di un incanto di Danno o di cura.,1 di 2,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
 Stregone,TE-11,TE,Equipaggiamento,Bastone del Corvo,Comune,Arma DX / Scudo,Stregone,Finché è equipaggiato ottieni (+1) ATT e una volta per turno puoi ritirare un D6.,1 di 1,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
-Stregone,TE-13,TE,Equipaggiamento,Libro di Rune,Rara,Arma SX,Stregone,"Finché è equipaggiato, una volta per turno un tuo incantesimo infligge (+1) Danno.",1 di 1,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
+Stregone,TE-13,TE,Equipaggiamento,Libro di Rune,Rara,Arma SX,Stregone,"Finché è equipaggiato, una volta per turno un tuo incanto infligge (+1) Danno.",1 di 1,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
 Oracolo,TE-01,TE,Equipaggiamento,Elmo sorgisogno,Comune,Elmo,Assaltatore - Oracolo,Finché è equipaggiato ottieni (+1) AR. Quando peschi una Trappola dal sacchetto la vedi in tempo: non ha effetto su di te.,2 di 2,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
-Oracolo,TE-04,TE,Equipaggiamento,Diadema della Veggenza,Comune,Elmo,Stregone - Oracolo,Finché è equipaggiato ottieni (+1) AR e una volta per turno puoi ritirare un D6 di un incantesimo di Danno o di cura.,2 di 2,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
+Oracolo,TE-04,TE,Equipaggiamento,Diadema della Veggenza,Comune,Elmo,Stregone - Oracolo,Finché è equipaggiato ottieni (+1) AR e una volta per turno puoi ritirare un D6 di un incanto di Danno o di cura.,2 di 2,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
 Oracolo,TE-12,TE,Equipaggiamento,Mazza Benedetta,Comune,Arma DX / Scudo,Oracolo,"Finché è equipaggiata ottieni (+1) ATT, e (+1) Danno contro i non morti.",1 di 1,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
-Oracolo,TE-14,TE,Equipaggiamento,Simbolo Sacro,Comune,Arma SX,Oracolo,"Finché è equipaggiato, quando recuperi PV con un incantesimo ne recuperi (1) in più.",1 di 1,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
-Oracolo,TI-25,TI,Incantesimo,Benedizione,,,Oracolo,Recuperi 1D6 − 1 PV (minimo 1).,1 di 1,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
-Oracolo,TI-26,TI,Incantesimo,Mano Guaritrice,,,Oracolo,"Recuperi 1D6 PV, fino ai PV massimi.",1 di 1,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
-Oracolo,TI-27,TI,Incantesimo,Scudo della Fede,,,Oracolo,Ottieni (+1) AR fino al tuo prossimo turno.,1 di 1,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
-Oracolo,TI-30,TI,Incantesimo,Parata Perfetta,,,Assaltatore - Oracolo,Annulla i Danni di un attacco subito.,2 di 2,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
-Oracolo,TI-32,TI,Incantesimo,Preghiera della Fonte,,,Oracolo,Recupera (1) carta dalla tua pila degli scarti e (1) PV.,1 di 1,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
-Oracolo,TI-33,TI,Incantesimo,Sguardo dell'Oracolo,,,Oracolo,Ritira un tiro di dado a tua scelta e tieni il nuovo risultato.,1 di 1,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
-Oracolo,TI-34,TI,Incantesimo,Egida Sacra,,,Assaltatore - Oracolo,"Se hai uno scudo equipaggiato, ottieni (+2) AR fino alla fine dello scontro.",2 di 2,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
-Oracolo,TI-35,TI,Incantesimo,Fendente Radioso,,,Assaltatore - Oracolo,"Infliggi 1D6 Danni alla creatura, (+2) se è un non morto.",2 di 2,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
+Oracolo,TE-14,TE,Equipaggiamento,Simbolo Sacro,Comune,Arma SX,Oracolo,"Finché è equipaggiato, quando recuperi PV con un incanto ne recuperi (1) in più.",1 di 1,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
+Oracolo,TI-25,TI,Incanto,Benedizione,,,Oracolo,Recuperi 1D6 − 1 PV (minimo 1).,1 di 1,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
+Oracolo,TI-26,TI,Incanto,Mano Guaritrice,,,Oracolo,"Recuperi 1D6 PV, fino ai PV massimi.",1 di 1,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
+Oracolo,TI-27,TI,Incanto,Scudo della Fede,,,Oracolo,Ottieni (+1) AR fino al tuo prossimo turno.,1 di 1,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
+Oracolo,TI-30,TI,Incanto,Parata Perfetta,,,Assaltatore - Oracolo,Annulla i Danni di un attacco subito.,2 di 2,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
+Oracolo,TI-32,TI,Incanto,Preghiera della Fonte,,,Oracolo,Recupera (1) carta dalla tua pila degli scarti e (1) PV.,1 di 1,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
+Oracolo,TI-33,TI,Incanto,Sguardo dell'Oracolo,,,Oracolo,Ritira un tiro di dado a tua scelta e tieni il nuovo risultato.,1 di 1,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
+Oracolo,TI-34,TI,Incanto,Egida Sacra,,,Assaltatore - Oracolo,"Se hai uno scudo equipaggiato, ottieni (+2) AR fino alla fine dello scontro.",2 di 2,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
+Oracolo,TI-35,TI,Incanto,Fendente Radioso,,,Assaltatore - Oracolo,"Infliggi 1D6 Danni alla creatura, (+2) se è un non morto.",2 di 2,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo

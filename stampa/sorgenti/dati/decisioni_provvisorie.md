@@ -2,11 +2,13 @@
 
 Regole di riferimento: bozza Word `Regolamento_Tesoro_del_Goblin_bozza.docx` (2/11/2026 22:06), letta dal commit `2aa7f84` (`v2/Regolamento_Tesoro_del_Goblin_bozza.docx`). Le citazioni sono copiate dal documento. Il confronto con il PDF v5 (`v2/Regolamento_base_v5_stampa.pdf`) è stato fatto sul testo del PDF e sullo script `v2/regolamento_stampa/docx/edit_html.py`, che elenca tutte le modifiche applicate al regolamento v5 per ottenere la bozza.
 
-Nella bozza i punti con evidenziatore giallo sono 6 run: i 4 «Da decidere» e due «da confermare» (8 Tessere Specie; Stregone con 1 comune in più). Qui sotto: i 4 «Da decidere» (sezione 1) e tutto il resto che cambia la stampa (sezione 2).
+Aggiornamento: la bozza del **3/11** (stesso corpo del testo, più le note e i 14 commenti dell'autore) sostituisce quella del 2/11 in `regolamento/`. Dal 3/11 il kit adotta solo le regole che l'autore ha deciso: pareggio dell'iniziativa (D-4), mazzetto per livello (D-3), 3 Indizi, Forte Volontà al posto di Ispirazione, Incanto al posto di Incantesimo, niente critici. Tutte le modifiche ai testi stampati sono nella sezione 3. Le altre proposte dell'autore (5 classi, plancia 12 × 12, nuova formula del danno, `carte nuove.xlsx`, bestiario) non sono nel kit.
+
+Nella bozza i punti con evidenziatore giallo sono 6 run: i 4 «Da decidere» e due «da confermare» (8 Tessere Specie; Stregone con 1 comune in più). Qui sotto: i 4 «Da decidere» (sezione 1), tutto il resto che cambia la stampa (sezione 2) e le modifiche ai testi stampati dovute alla bozza del 3/11 (sezione 3).
 
 ## 1. I 4 punti «Da decidere»
 
-Marcatore da stampare dove la scelta compare su un componente: la parola **PROVVISORIO** (maiuscolo, tra parentesi o dopo il testo, come indicato sotto). Nel regolamento si usa lo stesso marcatore; sui componenti serve solo dove il testo è stampato (tessera Yumaniano, Carta Aiuto).
+Marcatore da stampare dove la scelta compare su un componente: la parola **PROVVISORIO** (maiuscolo, tra parentesi o dopo il testo, come indicato sotto). Nel regolamento si usa lo stesso marcatore; sui componenti serve solo dove il testo è stampato (tessera Yumaniano). Dal 3/11 D-3 e D-4 non sono più provvisori: le ha decise l'autore.
 
 ### D-1 Direzione del draft
 
@@ -14,6 +16,7 @@ Marcatore da stampare dove la scelta compare su un componente: la parola **PROVV
 - **Elenco «Punti da decidere»**: «Draft: si passa sempre a destra o si alterna destra e sinistra come in Magic?»
 - **Opzioni offerte dalla bozza**: (a) sempre a destra; (b) alternando destra e sinistra (come in Magic).
 - **Scelta: (a) sempre a destra.** Perché: è già scritto nel testo, non serve un promemoria sul giro dei passaggi.
+- **Bozza del 3/11**: l'autore scrive «le carte generiche vengono scelte in senso orario ogni giocatore vede un pull di 5 carte e ne sceglie 1 passando il mazzetto delle restanti al suo giocatore alla sua destra finché non avranno tutti 10 carte in mano». Conferma una direzione fissa (niente alternanza), ma il testo è ambiguo: nella bozza «in senso orario» vuol dire passare a **sinistra** («Tocca al giocatore a sinistra»), mentre l'autore scrive «alla sua destra». Resta PROVVISORIO «a destra» finché l'autore non chiarisce.
 - **Dove compare in stampa**: solo nel regolamento. Nessuna carta, tessera o Carta Aiuto riporta la direzione.
 - **Testo da stampare** (regolamento, passo 6): «Draft: ognuno riceve 5 comuni, ne tiene 1 e passa le altre a destra finché finiscono. (PROVVISORIO: sempre a destra.)»
 
@@ -28,23 +31,24 @@ Marcatore da stampare dove la scelta compare su un componente: la parola **PROVV
 - **Dove compare in stampa**: 2 Tessere Specie Yumaniano (`tessere_specie.csv`, SP-07 e SP-08) e la tabella «Le specie» del regolamento.
 - **Testo da stampare**: «+1 AR e +1 a una statistica a scelta (PROVVISORIO)».
 
-### D-3 Mazzetto dei mostri: per livello o per Indizi
+### D-3 Mazzetto dei mostri: per livello o per Indizi (DECISO il 3/11)
 
 - **Passo della bozza** (Esplorare, riga «Tessera rossa: Mostro»): «Gira la prima carta del mazzetto del tuo livello (livello 1-2: mazzetto 1; 3-4: mazzetto 2; 5: mazzetto 3, i boss). […] Da decidere: il mazzetto si sceglie dal livello o dagli Indizi (0: mazzetto 1; 1: mazzetto 2; 2: mazzetto 3).»
 - **Elenco «Punti da decidere»**: «Mazzetto dei mostri: si sceglie dal livello dell'eroe (com'è scritto ora) o dagli Indizi che ha (0 Indizi: mazzetto 1; 1: mazzetto 2; 2: mazzetto 3)? Con il livello il mazzetto 2 non esce quasi mai.»
 - **Opzioni offerte dalla bozza**: (a) dal livello dell'eroe (1-2 → mazzetto 1; 3-4 → mazzetto 2; 5 → mazzetto 3); (b) dagli Indizi (0 → 1; 1 → 2; 2 → 3).
 - **Scelta: (a) dal livello, come scritto ora.** Perché: è già il testo di regolamento, Carta Aiuto, tessera «?» e carte Mostro («LV 1-2», «LV 3-4», boss); il problema («il mazzetto 2 non esce quasi mai») si valuta al tavolo senza stampare nulla di diverso.
+- **Bozza del 3/11**: l'autore conferma il livello: «il giocatore che incontra un nemico gira la carta mostro dalla lista dei mostri di fascia 1+livello del giocatore». Non è più PROVVISORIO. La formula «fascia 1+livello» non coincide alla lettera con le fasce 1-2 / 3-4 / 5 della bozza: il kit tiene le fasce stampate.
 - **Dove compare in stampa**: Carta Aiuto (retro, riga «Rossa: mazzetto del tuo livello (1-2 · 3-4 · 5)»), identica alla bozza; nessun'altra modifica. Le 24 carte Mostro restano divise in mazzetto 1 (13), mazzetto 2 (8), boss (3).
-- **Testo da stampare** (regolamento): «Gira la prima carta del mazzetto del tuo livello (livello 1-2: mazzetto 1; 3-4: mazzetto 2; 5: mazzetto 3, i boss). Scontro, oppure fuga (pagina 10). […] (PROVVISORIO: il mazzetto si sceglie dal livello.)»
+- **Testo da stampare** (regolamento): «Gira la prima carta del mazzetto del tuo livello (livello 1-2: mazzetto 1; 3-4: mazzetto 2; 5: mazzetto 3, i boss). Scontro, oppure fuga (pagina 10).» Senza marcatore.
 
-### D-4 Pareggio dell'iniziativa
+### D-4 Pareggio dell'iniziativa (DECISO il 3/11)
 
 - **Passo della bozza** (Lo scontro, punto 1): «Chi attacca per primo. Tu e il nemico tirate 1 D6 a testa: chi fa di più attacca per primo. Per il mostro tira il giocatore alla tua destra. Da decidere: in caso di pareggio (proposta: si ritira).»
 - **Elenco «Punti da decidere»**: «Chi attacca per primo: se il tiro di 1 D6 è pari? Proposta: si ritira.»
-- **Opzioni offerte dalla bozza**: la sola proposta, si ritira (l'alternativa non è scritta; il pareggio si risolve con un nuovo tiro di 1 D6 per parte).
-- **Scelta: si ritira.** Perché: è la proposta della bozza, non richiede regole nuove e si applica uguale al Duello («Chi attacca per primo si decide con 1 D6 a testa, come negli scontri»).
-- **Dove compare in stampa**: regolamento (scontro e Duello) e Carta Aiuto, retro, riga aggiunta sotto «Chi attacca per primo» (campo `retro_pareggio` in `carte_aiuto.csv`; è l'unica riga delle Carte Aiuto non copiata dalla bozza).
-- **Testo da stampare**: «Pareggio: si ritira (PROVVISORIO).» Nel regolamento: «In caso di pareggio si ritira. (PROVVISORIO)».
+- **Scelta fino al 2/11**: si ritira (PROVVISORIO), la sola proposta della bozza.
+- **Decisione dell'autore** (commento alla bozza del 3/11): «in caso di pareggio contro i nemici vince l’attaccante - contro il boss in caso di pareggio il boss avrà priorità contro altro giocatore si veda il valore MOV più alto se anche questo si trovasse in pareggio inizia il giocatore che aveva il turno (l’attaccante)». «Attaccante» = il giocatore che ha il turno (definizione dell'autore nella parte sui giocatori); contro un mostro è quindi l'eroe. Vale anche per il Duello (tra giocatori).
+- **Dove compare in stampa**: regolamento (scontro e Duello) e Carta Aiuto, retro, sezione Scontro: due righe sotto «Per il mostro tira chi ti siede a destra» (campo `retro_scontro` in `carte_aiuto.csv`; il campo separato `retro_pareggio`, stampato in rosso, è stato tolto).
+- **Testo da stampare** (Carta Aiuto): «Pareggio: col mostro vince chi attacca, col boss il boss.» / «Tra giocatori vince il MOV più alto, poi chi ha il turno.» Nel regolamento: «In caso di pareggio: contro un mostro vince chi attacca, contro il boss vince il boss; tra giocatori vince chi ha il MOV più alto e, se anche questo è pari, chi ha il turno.»
 
 ## 2. Altre differenze tra bozza e PDF v5 rilevanti per la stampa
 
@@ -72,5 +76,60 @@ Fonte: `edit_html.py` (elenco completo delle sostituzioni) più confronto del te
 - **Catalogo xlsx v2** (`Catalogo_carte_v2.xlsx`): Leggimi e colonna Difesa sulla scala D20; non usarlo per la stampa.
 - **Carte Imprevisto**: `xlsx_v2.py` dice «L'Oracolo ricarica il ritorno in vita», bozza/PDF v5 «L'Oracolo ricarica il suo potere», e «Riprendi 1 equipaggiamento» contro «Riprendi in mano 1 equipaggiamento». In `carte_imprevisto.csv`: `testo` = `IMP` (come richiesto), `testo_bozza` = versione della bozza. Usarne una sola.
 - **Divisori**: nessun file ne definisce il contenuto (vedi `dati_stampa.md`, sezione 2).
-- **Carte Nemico** `Carte_Nemico_v2.pptx`: le carte Boss riportano solo «MIMI: vinci la partita»; la ricompensa del mazzetto 3 (1 indizio, sali di livello, Ispirazione) è nella colonna `ricompensa_se_mazzetto_3`.
+- **Carte Nemico** `Carte_Nemico_v2.pptx`: le carte Boss riportano solo «MIMI: vinci la partita»; la ricompensa del mazzetto 3 (1 indizio, sali di livello, Ispirazione; dal 3/11 stampata «1 indizio · +1 livello · Forte Volontà») è nella colonna `ricompensa_se_mazzetto_3`.
 - **Nome «Occhio dello Stregone»** (TI-06) coincide con la nuova classe; **«Cimitero dei Maghi»** (TM-05) è un nome di luogo: non rinominare.
+
+## 3. Modifiche dalla bozza del 3/11
+
+Fonte: commenti di «Ale Desi» e blocco «MODIFICHE FATTE DAL DESI» nella bozza del 3/11. Regole adottate:
+
+- **Pareggio dell'iniziativa**: vedi D-4.
+- **Mazzetto per livello**: vedi D-3 (nessun testo stampato cambia).
+- **3 Indizi** per trovare il tesoro («Gli indizi devono essere 3 per poter scoprire e raggiungere il tesoro»). I 12 segnalini Indizio bastano per 4 giocatori.
+- **Forte Volontà** al posto di Ispirazione («Sostituire a ispirazione»): «Non può accumularsi - permette di ritirare 1D6». Il nome cambia ovunque; dove una carta dà un uso diverso (TC-01) il testo della carta resta.
+- **Incanto** al posto di Incantesimo («sostituisce la parola incantesimo»), anche al plurale («Incanti») e in minuscolo dentro i testi. Nessun nome proprio conteneva la parola.
+- **Niente critici** («No niente critici»): tolta la regola del doppio 6 / doppio 1. Le abilità e le carte che parlano di un 6 sul dado (NE-21, NE-26, TI-11) non sono critici e restano.
+
+Testi stampati cambiati (vecchio → nuovo):
+
+| File | Righe | Campo | Vecchio → nuovo |
+|---|---|---|---|
+| `carte_comuni.csv` | 24 (TI-01…24) | `tipo_nome` | «Incantesimo» → «Incanto» |
+| `carte_comuni.csv` | TM-07 | `testo` | «gli Incantesimi che infliggono Danni» → «gli Incanti che infliggono Danni» |
+| `carte_comuni.csv` | TI-01 | `testo` | «con il prossimo incantesimo» → «con il prossimo incanto» |
+| `carte_comuni.csv` | TI-08 | `nome` | «Scintilla d'Ispirazione» → «Scintilla di Volontà» (nome scelto per la stampa: «Scintilla di Forte Volontà» va su due righe e non entra nel titolo) |
+| `carte_comuni.csv` | TI-08 | `testo` | «Se non hai l'Ispirazione, la ottieni.» → «Se non hai la Forte Volontà, la ottieni.» |
+| `carte_comuni.csv` | TI-21 | `testo` | «ottieni (1) Ispirazione» → «ottieni la Forte Volontà» (non si accumula: niente «(1)») |
+| `carte_comuni.csv` | TI-23 | `testo` | «non può giocare carte Incantesimo» → «non può giocare carte Incanto» |
+| `carte_classe.csv` | 19 (TI-25…40, con le doppie) | `tipo_nome` | «Incantesimo» → «Incanto» |
+| `carte_classe.csv` | TE-04 (×2) | `testo` | «un D6 di un incantesimo di Danno o di cura» → «un D6 di un incanto di Danno o di cura» |
+| `carte_classe.csv` | TE-13 | `testo` | «un tuo incantesimo infligge» → «un tuo incanto infligge» |
+| `carte_classe.csv` | TE-14 | `testo` | «con un incantesimo» → «con un incanto» |
+| `carte_classe_ritratto.csv` | TC-01 | `testo` | «ti dà l'Ispirazione» → «ti dà la Forte Volontà» |
+| `carte_mostro.csv` | NE-14…21 (8) | `ricompense` | «1 indizio · 1 punto esperienza · Ispirazione» → «… · Forte Volontà» |
+| `carte_mostro.csv` | NE-26…28 (3) | `ricompensa_se_mazzetto_3` | «1 indizio · sali di livello · Ispirazione» → «1 indizio · +1 livello · Forte Volontà» («sali di livello» accorciato: con «Forte Volontà» la riga andava a capo e usciva dal riquadro) |
+| `carte_aiuto.csv` | AI-01…04 | `retro_scontro` | tolta «Doppio 6 = colpo doppio · doppio 1 = mancato.»; aggiunte, dopo «Per il mostro tira chi ti siede a destra.», «Pareggio: col mostro vince chi attacca, col boss il boss.» e «Tra giocatori vince il MOV più alto, poi chi ha il turno.» |
+| `carte_aiuto.csv` | AI-01…04 | `retro_pareggio` | «Pareggio: si ritira (PROVVISORIO).» → colonna tolta (la regola è in `retro_scontro`) |
+| `carte_aiuto.csv` | AI-01…04 | `retro_ricompense` | «Mazzetto 2: + Ispirazione», «… + livello + Ispirazione», «Duello: … + Ispirazione» → «Forte Volontà» |
+| `carte_aiuto.csv` | AI-01…04 | `retro_vittoria` | «2 Indizi → gli altri prendono 1 Indizio …» → «3 Indizi → gli altri prendono 1 Indizio …» |
+| `divisori.csv` | DV-02 | `titolo`, `contenuto_playtest` | «INCANTESIMO», «Incantesimi comuni» → «INCANTO», «Incanti comuni» |
+| `segnalini.csv` | SG-03 | `nome` | «Ispirazione» → «Forte Volontà» (etichetta dei 4 segnalini) |
+| `segnalini.csv` | SG-01 | `note` | «2 caselle «al 2°: tesoro!»» → «3 caselle «al 3°: tesoro!»» |
+| `componenti_gen/parts_stampa.py` | scheda eroe | caselle | Indizi: 2 caselle «al 2°: tesoro!» → 3 caselle «al 3°: tesoro!»; «Ispirazione» → «Forte Volontà» (1 casella, «una sola») |
+| `componenti_gen/gen.py` | segnalini | intestazione e piè | «4 Ispirazione», «1 di Ispirazione» → «4 Forte Volontà», «1 di Forte Volontà» |
+| `carte/genera_carte.py` | Carta Aiuto | stile | tolto lo stile rosso `RiepProvv` del pareggio; colore del tipo rinominato «Incanto» |
+
+Carta Aiuto, retro: tolta la riga dei critici e la riga rossa «si ritira», aggiunte le due righe del pareggio: il numero di righe resta 7 nella sezione Scontro, il testo resta a 6,1 pt e il preflight di DesignCraft non segnala testo in eccesso.
+
+## 4. Proposte dell'autore non ancora in stampa (5/11)
+
+Fonte: `carte/originali/Carte_nuove_2026-11-05.xlsx`, foglio `Foglio5` («Classi»), aggiunto dall'autore la sera del 5/11 (file «carte nuove_aggiornate sulla base del nuovo regolamento semi ufficiale.xlsx»; gli altri 4 fogli sono identici a «carte nuove.xlsx» del mattino). Testi copiati come sono. Nessuno è stampato: le Carte Classe TC-01…04 restano quelle del kit.
+
+| Classe (Foglio5) | Effetto (testo dell'autore) | Differenza dalla carta stampata |
+|---|---|---|
+| «Assaltatore ( guerriero )» | «La tua pedina è un Assaltatore per il resto della partita  una sola volta per partita morire non ti costa equipaggiamento» | TC-01 dà (+1) PV e la Forte Volontà a ogni scontro vinto, da spendere per (-1) AR al nemico; la proposta toglie entrambe e protegge l'equipaggiamento dal tiro di perdita, una volta per partita. |
+| «Stregone (mago)» | «La tua pedina è uno Stregone per il resto della partita  puoi ritirare  1d6 o scegliere ti farlo ri tirare ad un avversario  in tutta la partita» | TC-03 permette di ritirare i propri dadi fino a (2) volte **per turno**; la proposta è 1 D6, anche di un avversario, e sembra **una volta per partita** («in tutta la partita», formulazione da chiarire). |
+| «Oracolo (chirico / sacerdote )» | «La tua pedina è un Oracolo per il resto della partita  se sconfitto invece di morire resti con 1pv ( si può usare una sola volta per partita )» | TC-04 fa tornare in vita con (3) PV continuando lo scontro e si ricarica con la Locanda; la proposta resta a 1 PV, una sola volta per partita, senza ricarica. |
+| «Ricercatore ( una sorta di artefice )» | «La tua pedina è un Ricercatore  per il resto della partita  puoi rivelare una carta imprevisto sul tabellone visibile solo a te» | TC-02 dà (+2) MOV e la fuga da ogni scontro senza arretrare; la proposta è un potere di informazione. Nel kit gli Imprevisti non stanno sul tabellone (si pescano dopo una tessera blu dal sacchetto): così com'è scritto non si applica. |
+
+Punto aperto: il Ricercatore come «artefice» (anche nel commento alla bozza del 3/11, dove l'Impostore/Fuggiasco «corrisponde al ladro») non corrisponde più al mazzo di classe stampato, che è quello dell'ex Ladro: TE-15 Pugnale Sottile, TI-37 Colpo alle Spalle, TI-38 Fortuna del Furfante, TI-39 Passo Felpato, TI-40 Lancio di Coltello. Da chiarire con l'autore prima di cambiare TC-01…04 o il mazzo del Ricercatore.

@@ -157,7 +157,7 @@ def esplorazione():
 def segnalini():
     rows = read('segnalini.csv')
     D = 20; R = D / 2
-    spec = {'Indizio': ('pergamena', INK, '#efe1c3'), 'Clessidra': ('clessidra', INK, '#efe1c3'), 'Ispirazione': ('stella', GOLD, '#efe1c3')}
+    spec = {'Indizio': ('pergamena', INK, '#efe1c3'), 'Clessidra': ('clessidra', INK, '#efe1c3'), 'Forte Volontà': ('stella', GOLD, '#efe1c3')}
     items = []
     for r in rows:
         ic, col, fill = spec[r['nome']]
@@ -186,9 +186,9 @@ def segnalini():
     bb = (x0, y0, x0 + gw, y0 + gh)
     xs = sorted({x0 + i * pitch + o for i in range(cols) for o in (0, D)}); ys = sorted({y0 + i * pitch + o for i in range(nrows) for o in (0, D)})
     b.append(edge_ticks(xs, ys, bb))
-    b.insert(0, hdr('Segnalini', f'12 Indizi · 12 Clessidre · 4 Ispirazione  ·  Ø {D} mm  ·  solo fronte'))
+    b.insert(0, hdr('Segnalini', f'12 Indizi · 12 Clessidre · 4 Forte Volontà  ·  Ø {D} mm  ·  solo fronte'))
     b.append(ftr(['Stampa su A4 al 100%. Taglia sul cerchio sottile; l’abbondanza di 3 mm esce dal taglio.',
-                  'Prima 2 righe di Indizi, poi 2 di Clessidre, poi 1 di Ispirazione.']))
+                  'Prima 2 righe di Indizi, poi 2 di Clessidre, poi 1 di Forte Volontà.']))
     write('segnalini', 1, page(fonts('\n'.join(b))))
     from collections import Counter
     return dict(Counter(n for n, _, _ in pos))

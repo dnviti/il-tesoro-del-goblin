@@ -5,7 +5,7 @@ Gioco da tavolo fantasy in italiano di **Alessandro De Simone**: un gioco fisico
 ## Versione attuale
 
 - **Regole:** Regolamento **v5** (2/11/2026, Carte Trama v2): per colpire si tira 2D6 + ATT contro la Difesa (8 + AR), sacchetto a due colori (25 tessere rosse Mostro, 11 blu Imprevisto), mostri in 3 mazzetti per livello, mano di 5 carte di classe + 5 comuni.
-- **Testo più recente:** `regolamento/Regolamento_Tesoro_del_Goblin_bozza.docx` (bozza Word del 2/11/2026): classi Assaltatore, Stregone, Ricercatore, Oracolo; specie Umano, Elfo, Sanguar, Yumaniano (8 tessere); iniziativa a 1D6. I punti ancora aperti sono evidenziati in giallo nel documento. Il PDF `Regolamento_base_v5_stampa.pdf` è l'ultima versione impaginata e conserva i nomi precedenti (Guerriero, Mago, Ladro).
+- **Testo più recente:** `regolamento/Regolamento_Tesoro_del_Goblin_bozza.docx` (bozza Word del 3/11/2026: il testo del 2/11 più le note e i commenti dell'autore): classi Assaltatore, Stregone, Ricercatore, Oracolo; specie Umano, Elfo, Sanguar, Yumaniano (8 tessere); iniziativa a 1D6. I punti ancora aperti sono evidenziati in giallo nel documento; le regole decise nei commenti (pareggio, 3 Indizi, Forte Volontà, Incanto, niente critici) sono già nel kit di `stampa/`. Il PDF `Regolamento_base_v5_stampa.pdf` è l'ultima versione impaginata e conserva i nomi precedenti (Guerriero, Mago, Ladro).
 - **Attenzione:** il gioco HTML (`gioco/`) e il motore dell'Officina sono ancora fermi alle regole con il D20: la patch `gioco/sorgenti/patch_2d6.py` non è stata applicata. Lo stesso vale per il foglio «Leggimi» del catalogo carte e per la colonna `difesa` di `nemici_v2.json`. Per le regole fa fede il regolamento, non il gioco HTML.
 - La prima versione (21/10/2026, regole con il D20) è in `archivio/`.
 
@@ -13,8 +13,8 @@ Gioco da tavolo fantasy in italiano di **Alessandro De Simone**: un gioco fisico
 
 | Cartella | Contenuto | Stato |
 |---|---|---|
-| `regolamento/` | Regolamento base v5 e «Inizia subito» v5 in PDF, bozza Word del 2/11. `sorgenti/` = come si generano (book/, docx/, fonts/) | attuale |
-| `carte/` | Catalogo carte v2 (xlsx), Carte Nemico v2 (pptx), `originali/` con i file dell'autore (Carte Trama, elenco, layout Nemico) | attuale |
+| `regolamento/` | Regolamento base v5 e «Inizia subito» v5 in PDF, bozza Word del 3/11. `sorgenti/` = come si generano (book/, docx/, fonts/) | attuale |
+| `carte/` | Catalogo carte v2 (xlsx), Carte Nemico v2 (pptx), `originali/` con i file dell'autore (Carte Trama, elenco, layout Nemico; `Carte_nuove_2026-11-05.xlsx`, nuovo elenco delle carte comuni, aggiornato 5/11 sera: aggiunto foglio poteri di classe; `Bestiario_test_2026-10-28.xlsx`, bestiario di prova sulla scala D20). I due xlsx nuovi sono proposte: non sono nel kit di stampa | attuale |
 | `gioco/` | Gioco giocabile in un solo file HTML (`Il_Tesoro_del_Goblin_gioco_v2.html`). `sorgenti/` = motore, dati delle carte, strumenti | attuale (regole D20, vedi sopra) |
 | `officina/` | «Officina del Goblin», strumento per progettare carte ed espansioni, con il motore del simulatore | attuale |
 | `simulazioni/` | Risultati delle simulazioni di bilanciamento sulle Carte Trama v2 (27/10) | attuale |
