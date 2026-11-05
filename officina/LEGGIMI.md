@@ -15,24 +15,24 @@ Pagina web per creare i pezzi delle espansioni con le regole del framework di de
 - **Eventi**: tabella D6 o set di segnalini «?», media in PP, esito peggiore, Indizi in giro, tempo al tavolo.
 - **Terreni**: editor del Cuore 6×6 con specchio a mezzo giro (?, Cripta, Caos, bloccato, difficile, portali), distanze dalle 6 partenze,
   regole di bilanciamento; prova nel simulatore in 2 e 4 giocatori (durata, partenze, indice del Ladro).
-  I ponti che cambiano a ogni giro non si provano qui: servono phys.js e boards.js in ../sorgenti/framework.
+  I ponti che cambiano a ogni giro non si provano qui: servono phys.js e boards.js in ../archivio/v1_21-10/sorgenti/framework.
 - **Collezione**: salvata nella pagina pubblicata; esporta carte nelle colonne del catalogo (CSV ;) e in formato cards.json
   (con gli effetti nel campo `officina`), nemici ed eventi in CSV, tutto in JSON (reimportabile).
 
 ## Ricostruire il motore
 Dal 27/10 il motore è il gioco **Carte Trama v2**: `sorgenti/build_motore_v2.py` prende game.js, ui.js, cards_v2.json e nemici_v2.json
-da ../v2/sorgenti e aggiunge `sorgenti/tail_v2.js` (plancia con Terreno, carta nuova, API del worker). Se cambiano le regole del gioco:
+da ../gioco/sorgenti e aggiunge `sorgenti/tail_v2.js` (plancia con Terreno, carta nuova, API del worker). Se cambiano le regole del gioco:
 `cd officina/sorgenti && python3 build_motore_v2.py`, poi ripubblicare la pagina con il nuovo motore.js.
 `sorgenti/wrun.js` esegue il motore in node (`node wrun.js '<messaggio JSON>' ../motore.js`), utile per misurare il listino.
-I vecchi build_motore.py e tail.js (gioco del 21/10) restano solo come riferimento.
+I vecchi build_motore.py e tail.js (gioco del 21/10) restano solo come riferimento, in `../archivio/v1_21-10/officina/sorgenti/`.
 
 ## Caos del Goblin come espansione (21/10 sera)
 La plancia base non ha più Crepe. Nella scheda Terreni la casella «Con il Caos del Goblin» mostra le 4 Crepe esterne e le passa al simulatore
-(`caos: true` nel messaggio al worker, `RUN.caos` in tail.js); sotto un Terreno le 6 Crepe del Cuore restano nella scatola.
+(`caos: true` nel messaggio al worker, `RUN.caos` in archivio/v1_21-10/officina/sorgenti/tail.js); sotto un Terreno le 6 Crepe del Cuore restano nella scatola.
 Lo strumento «Caos o evento» ora si chiama «Evento del Terreno». Sacchetto base aggiornato: 13 creature, 4 mini-boss, 5 trappole, 8 sentieri (17 segnalini con Indizio).
 
 ## Il Caos del Goblin v2.0 (21/10 sera, versione 7 della pagina)
-- Con la casella «Con il Caos del Goblin» (Terreni) o con una carta della serie «Il Caos del Goblin» (Carte) il simulatore usa l'espansione completa: Crepe gemelle (frugare o attraversare), 6 Coboldi di MIMI (chi li batte pesca 1 carta, niente Indizio), 6 carte Caos CA-01…CA-06 nel mazzo comune (`setCaos` in tail.js, stesso modello di sorgenti/framework_fisico/caos_add.js).
+- Con la casella «Con il Caos del Goblin» (Terreni) o con una carta della serie «Il Caos del Goblin» (Carte) il simulatore usa l'espansione completa: Crepe gemelle (frugare o attraversare), 6 Coboldi di MIMI (chi li batte pesca 1 carta, niente Indizio), 6 carte Caos CA-01…CA-06 nel mazzo comune (`setCaos` in archivio/v1_21-10/officina/sorgenti/tail.js, stesso modello di archivio/v1_21-10/sorgenti/framework_fisico/caos_add.js).
 - Eventi: esito nuovo «Scontro con un Coboldo di MIMI» (+1,5 PP, stima); riferimento delle Crepe +1,9 PP.
 
 ## Allineamento alle Carte Trama v2 (27/10)

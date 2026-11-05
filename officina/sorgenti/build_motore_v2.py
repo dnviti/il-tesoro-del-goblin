@@ -1,9 +1,9 @@
 # Costruisce ../motore.js (il motore del simulatore che gira nel browser dell'Officina)
-# a partire dal gioco v2 in ../../v2/sorgenti (game.js, ui.js, cards_v2.json, nemici_v2.json) e da tail_v2.js.
+# a partire dal gioco v2 in ../../gioco/sorgenti (game.js, ui.js, cards_v2.json, nemici_v2.json) e da tail_v2.js.
 # Uso: cd officina/sorgenti && python3 build_motore_v2.py [cartella dei sorgenti v2]
 import json, os, sys
 here = os.path.dirname(os.path.abspath(__file__))
-src = sys.argv[1] if len(sys.argv) > 1 else os.path.join(here, '..', '..', 'v2', 'sorgenti')
+src = sys.argv[1] if len(sys.argv) > 1 else os.path.join(here, '..', '..', 'gioco', 'sorgenti')
 g = open(os.path.join(src, 'game.js')).read()
 reps = [  # agganci per i Terreni: movimento su percorso, esagoni bloccati, inizio turno
  ("const hexes = allHexes().filter(h => { const d = hexDist(h, p.pos); return d >= 1 && d <= n; });",

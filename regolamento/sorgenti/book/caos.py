@@ -1,12 +1,12 @@
 # Libretto dell'espansione «Il Caos del Goblin» (A5, 8 pagine con 3 mm di abbondanza, come il regolamento base)
-# Uso: python3 caos.py && ./mkpdf.sh caos.html $PWD/Espansione_Caos_stampa.pdf 154mm 216mm
+# Uso: python3 caos.py && ./mkpdf.sh caos.html $PWD/../../../espansioni/caos/Il_Caos_del_Goblin_stampa.pdf 154mm 216mm
 import os,sys,json
 sys.path.insert(0,os.path.dirname(os.path.abspath(__file__)))
 import build
 from svg import *
 from parts import *
 I=build.I
-# numeri misurati col simulatore fisico (sorgenti/framework/caos_add.js), aggiornati da caos_misure.json
+# numeri misurati col simulatore fisico (archivio/v1_21-10/sorgenti/framework_fisico/caos_add.js), aggiornati da caos_misure.json
 M=json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),'caos_misure.json')))
 VER=M.get('ver','2.0')
 S=build.STYLE+f"""

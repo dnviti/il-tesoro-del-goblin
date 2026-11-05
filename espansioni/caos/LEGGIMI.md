@@ -3,7 +3,7 @@
 Busta senza classi nuove, esce dopo La Cittadella Bianca (scelta di Daniele) e funziona con ogni scatola.
 
 - `Il_Caos_del_Goblin_stampa.pdf`: libretto A5 di 8 pagine con 3 mm di abbondanza (TrimBox impostato): copertina, storia, preparazione con la plancia e le coppie, Frugare o Attraversare con la tabella D6, i Coboldi di MIMI, le 6 carte Caos, domande frequenti con la Carta Aiuto, «Il Caos in numeri».
-- Sorgente: `../../sorgenti/regolamento_stampa/book/caos.py` + `caos_misure.json` (testi delle carte, Coboldi, FAQ e numeri), poi `./mkpdf.sh caos.html $PWD/Espansione_Caos_stampa.pdf 154mm 216mm`.
+- Sorgente: `../../regolamento/sorgenti/book/caos.py` + `caos_misure.json` (testi delle carte, Coboldi, FAQ e numeri), poi, da `regolamento/sorgenti/book/`: `./mkpdf.sh caos.html $PWD/../../../espansioni/caos/Il_Caos_del_Goblin_stampa.pdf 154mm 216mm`.
 
 ## Componenti
 - 10 tessere Crepa in 5 coppie gemelle (simmetriche a mezzo giro): A E1·F10, B J3·A8, C D3·G8, D H5·C6, E E5·F6. Con un Terreno restano solo A e B.
@@ -26,4 +26,4 @@ Busta senza classi nuove, esce dopo La Cittadella Bianca (scelta di Daniele) e f
 ## Misure (simulatore fisico, tempi da tavolo)
 - Base senza Caos: 26,2 / 29,6 / 30,2 min con 2/3/4, classi 0,945–1,055.
 - Con l'espansione: 25,9 / 29,5 / 30,7 min, classi 0,96–1,05 (2p 0,97–1,01; 3p 0,97–1,04; 4p, 70.000 partite, Guerriero 1,05, Ladro 1,02, Mago 0,97, Chierico 0,96).
-- Dettagli e varianti scartate: `../../simulazioni/espansione_caos.txt`. Modello: `../../sorgenti/framework_fisico/caos_add.js` (`./caos.sh`).
+- Dettagli e varianti scartate: `../../archivio/v1_21-10/simulazioni/espansione_caos.txt`. Modello: `../../archivio/v1_21-10/sorgenti/framework_fisico/caos_add.js` (`./caos.sh`).

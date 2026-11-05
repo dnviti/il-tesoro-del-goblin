@@ -1,5 +1,5 @@
 import re,sys
-s=open('reg/book/regolamento.html').read()
+s=open('book/regolamento.html').read()
 DD='<span class="dd">'
 def rep(a,b,n=1):
     global s

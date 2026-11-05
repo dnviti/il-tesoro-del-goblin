@@ -1,5 +1,7 @@
 # Rifare le voci del tutorial
 
+Nota (ristrutturazione): gen.py:2 e gen_tut.py:2 in video/ puntano a `/mnt/project-files/tesoro-goblin/sorgenti/regolamento_stampa/book`, percorso assoluto già rotto. Gli stessi sorgenti ora sono in `archivio/v1_21-10/sorgenti/regolamento_stampa/book` (non corretti).
+
 Le cartelle replicano lo scratchpad del thread "Video partita al tavolo": video/ tts/ music/ suno/ devono stare affiancate (gli script usano ../tts, ../music, ../suno).
 
 1. tts/norm.json = 102 battute [chi, testo] in ordine (L Lia, M Marco, G Giulia), già normalizzate per la lettura (D20 "di venti", PV "pi vu"...). Il testo originale con <b> è in video/tut_script.js (say()).

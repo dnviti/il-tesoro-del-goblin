@@ -8,3 +8,27 @@
 __pycache__/
 *.pyc
 node_modules/
+# uscite rigenerabili
+tesoro_del_goblin.html
+check.js
+hsim*.js
+runs/
+*.tmp.pdf
+video/sorgenti/index.html
+video/sorgenti/tut.html
+video/kit_rifare_voci/video/index.html
+video/kit_rifare_voci/video/tut.html
+sayt.json
+regolamento/sorgenti/docx/blocks.json
+regolamento/sorgenti/docx/img/
+regolamento/sorgenti/docx/reg_docx.html
+archivio/v1_21-10/officina/motore.js
+shot_*.png
+*snap_*.png
+clips/
+*.sf2
+# file temporanei di Office/LibreOffice e di sistema
+~$*
+.~lock.*#
+.DS_Store
+Thumbs.db

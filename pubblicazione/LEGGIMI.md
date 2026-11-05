@@ -9,10 +9,10 @@ Indirizzo pubblico: https://snz82syu.fn.oyd.ovh (pubblicato il 27/10/2026)
 
 ## Struttura
 - `index.html` (pagina d'ingresso, sorgente in questa cartella)
-- `gioco/index.html` = v2/Il_Tesoro_del_Goblin_gioco_v2.html
+- `gioco/index.html` = gioco/Il_Tesoro_del_Goblin_gioco_v2.html
 - `officina/index.html` + `motore.js` = officina/
-- `regolamenti/` Regolamento_base_v5.pdf, Inizia_subito_v5.pdf, Il_Caos_del_Goblin.pdf
-- `risorse/` Catalogo_carte_v2.xlsx, Carte_Trama_Il_Tesoro_del_Goblin_v2.pptx, Carte_Trama_Elenco_v2.xlsx, Carte_Nemico_v2.pptx
+- `regolamenti/` Regolamento_base_v5.pdf, Inizia_subito_v5.pdf (da regolamento/), Il_Caos_del_Goblin.pdf (da espansioni/caos/)
+- `risorse/` Catalogo_carte_v2.xlsx, Carte_Trama_Il_Tesoro_del_Goblin_v2.pptx, Carte_Trama_Elenco_v2.xlsx, Carte_Nemico_v2.pptx (da carte/ e carte/originali/)
 - `video/` partita_al_tavolo.mp4, tutorial_come_si_gioca.mp4
 
 ## Aggiornare i file
