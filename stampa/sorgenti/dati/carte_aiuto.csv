@@ -1,0 +1,69 @@
+id,copia,fronte_titolo,passo1_nome,passo1_icona,passo1_testo,passo2_nome,passo2_icona,passo2_testo,passo3_nome,passo3_icona,passo3_testo,passo4_nome,passo4_icona,passo4_testo,passo5_nome,passo5_icona,passo5_testo,retro_titolo,retro_scontro,retro_pareggio,retro_ricompense,retro_tessere,retro_sconfitta,retro_vittoria,nota,fonte
+AI-01,"1 di 4 (identiche, una per giocatore)",Il turno in 5 passi,Clessidre,clessidra,Ne hai una? Toglila e salta al passo 5.,Carte,carte,"Fino a 2 nel turno: ora, in scontro o alla fine. Equip solo ora.",Muovi,piedi,Tira D6 + MOV. Muovi fino a quel numero (almeno 1).,Esplora,occhio,Dove ti fermi succede qualcosa. Un solo scontro per turno.,Fine,bandiera,Puoi giocare carte. Togli un cubetto dalle clessidre. Tocca a sinistra.,Riepilogo,"1° tiro: colpisci se 2D6 + ATT ≥ 8 + AR.
+2° tiro, il danno: eroe D6 + bonus · nemico LV 1 D6 − 1 · LV 2 D6 · LV 3+ D6 + 1.
+Doppio 6 = colpo doppio · doppio 1 = mancato.
+Chi attacca per primo: 1 D6 a testa, vince il più alto.
+Per il mostro tira chi ti siede a destra.
+Prima di attaccare puoi fuggire.",Pareggio: si ritira (PROVVISORIO).,"Mazzetto 1: 1 Indizio + 1 PE
+Mazzetto 2: + Ispirazione
+Boss del mazzetto 3: 1 Indizio + livello + Ispirazione
+Duello: Indizio + carta + 1 PE + Ispirazione
+Rifiuti il Duello: dai 1 carta a caso","Rossa: mazzetto del tuo livello (1-2 · 3-4 · 5)
+Blu, Imprevisti:
+Locanda: +1 PE, +2 PV
+Fonte: 2 carte dagli scarti
+Fabbro: 1 equipaggiamento dagli scarti
+Trappola: D6 − 1 PV","Tira il D6 per ripartire, PV al massimo.
+D6: 1 tutto · 2 elmo · 3 arma DX · 4 arma SX · 5 armatura · 6 niente","2 Indizi → gli altri prendono 1 Indizio → D6 per la Cripta → batti il boss. Le sue ferite restano.
+Indizi solo vincendo scontri sulle caselle «?» e Duelli.","Passi e retro copiati dalla bozza (tabella «Il turno in 5 passi» e pagina «Riepilogo»). Unica riga NON copiata: retro_pareggio (scelta PROVVISORIA, aggiunta). Titoli fronte/retro e disposizione sono una scelta di impaginazione. Icone dei passi: parts.py turn_strip().",bozza docx 2/11 + parts.py turn_strip()
+AI-02,"2 di 4 (identiche, una per giocatore)",Il turno in 5 passi,Clessidre,clessidra,Ne hai una? Toglila e salta al passo 5.,Carte,carte,"Fino a 2 nel turno: ora, in scontro o alla fine. Equip solo ora.",Muovi,piedi,Tira D6 + MOV. Muovi fino a quel numero (almeno 1).,Esplora,occhio,Dove ti fermi succede qualcosa. Un solo scontro per turno.,Fine,bandiera,Puoi giocare carte. Togli un cubetto dalle clessidre. Tocca a sinistra.,Riepilogo,"1° tiro: colpisci se 2D6 + ATT ≥ 8 + AR.
+2° tiro, il danno: eroe D6 + bonus · nemico LV 1 D6 − 1 · LV 2 D6 · LV 3+ D6 + 1.
+Doppio 6 = colpo doppio · doppio 1 = mancato.
+Chi attacca per primo: 1 D6 a testa, vince il più alto.
+Per il mostro tira chi ti siede a destra.
+Prima di attaccare puoi fuggire.",Pareggio: si ritira (PROVVISORIO).,"Mazzetto 1: 1 Indizio + 1 PE
+Mazzetto 2: + Ispirazione
+Boss del mazzetto 3: 1 Indizio + livello + Ispirazione
+Duello: Indizio + carta + 1 PE + Ispirazione
+Rifiuti il Duello: dai 1 carta a caso","Rossa: mazzetto del tuo livello (1-2 · 3-4 · 5)
+Blu, Imprevisti:
+Locanda: +1 PE, +2 PV
+Fonte: 2 carte dagli scarti
+Fabbro: 1 equipaggiamento dagli scarti
+Trappola: D6 − 1 PV","Tira il D6 per ripartire, PV al massimo.
+D6: 1 tutto · 2 elmo · 3 arma DX · 4 arma SX · 5 armatura · 6 niente","2 Indizi → gli altri prendono 1 Indizio → D6 per la Cripta → batti il boss. Le sue ferite restano.
+Indizi solo vincendo scontri sulle caselle «?» e Duelli.","Passi e retro copiati dalla bozza (tabella «Il turno in 5 passi» e pagina «Riepilogo»). Unica riga NON copiata: retro_pareggio (scelta PROVVISORIA, aggiunta). Titoli fronte/retro e disposizione sono una scelta di impaginazione. Icone dei passi: parts.py turn_strip().",bozza docx 2/11 + parts.py turn_strip()
+AI-03,"3 di 4 (identiche, una per giocatore)",Il turno in 5 passi,Clessidre,clessidra,Ne hai una? Toglila e salta al passo 5.,Carte,carte,"Fino a 2 nel turno: ora, in scontro o alla fine. Equip solo ora.",Muovi,piedi,Tira D6 + MOV. Muovi fino a quel numero (almeno 1).,Esplora,occhio,Dove ti fermi succede qualcosa. Un solo scontro per turno.,Fine,bandiera,Puoi giocare carte. Togli un cubetto dalle clessidre. Tocca a sinistra.,Riepilogo,"1° tiro: colpisci se 2D6 + ATT ≥ 8 + AR.
+2° tiro, il danno: eroe D6 + bonus · nemico LV 1 D6 − 1 · LV 2 D6 · LV 3+ D6 + 1.
+Doppio 6 = colpo doppio · doppio 1 = mancato.
+Chi attacca per primo: 1 D6 a testa, vince il più alto.
+Per il mostro tira chi ti siede a destra.
+Prima di attaccare puoi fuggire.",Pareggio: si ritira (PROVVISORIO).,"Mazzetto 1: 1 Indizio + 1 PE
+Mazzetto 2: + Ispirazione
+Boss del mazzetto 3: 1 Indizio + livello + Ispirazione
+Duello: Indizio + carta + 1 PE + Ispirazione
+Rifiuti il Duello: dai 1 carta a caso","Rossa: mazzetto del tuo livello (1-2 · 3-4 · 5)
+Blu, Imprevisti:
+Locanda: +1 PE, +2 PV
+Fonte: 2 carte dagli scarti
+Fabbro: 1 equipaggiamento dagli scarti
+Trappola: D6 − 1 PV","Tira il D6 per ripartire, PV al massimo.
+D6: 1 tutto · 2 elmo · 3 arma DX · 4 arma SX · 5 armatura · 6 niente","2 Indizi → gli altri prendono 1 Indizio → D6 per la Cripta → batti il boss. Le sue ferite restano.
+Indizi solo vincendo scontri sulle caselle «?» e Duelli.","Passi e retro copiati dalla bozza (tabella «Il turno in 5 passi» e pagina «Riepilogo»). Unica riga NON copiata: retro_pareggio (scelta PROVVISORIA, aggiunta). Titoli fronte/retro e disposizione sono una scelta di impaginazione. Icone dei passi: parts.py turn_strip().",bozza docx 2/11 + parts.py turn_strip()
+AI-04,"4 di 4 (identiche, una per giocatore)",Il turno in 5 passi,Clessidre,clessidra,Ne hai una? Toglila e salta al passo 5.,Carte,carte,"Fino a 2 nel turno: ora, in scontro o alla fine. Equip solo ora.",Muovi,piedi,Tira D6 + MOV. Muovi fino a quel numero (almeno 1).,Esplora,occhio,Dove ti fermi succede qualcosa. Un solo scontro per turno.,Fine,bandiera,Puoi giocare carte. Togli un cubetto dalle clessidre. Tocca a sinistra.,Riepilogo,"1° tiro: colpisci se 2D6 + ATT ≥ 8 + AR.
+2° tiro, il danno: eroe D6 + bonus · nemico LV 1 D6 − 1 · LV 2 D6 · LV 3+ D6 + 1.
+Doppio 6 = colpo doppio · doppio 1 = mancato.
+Chi attacca per primo: 1 D6 a testa, vince il più alto.
+Per il mostro tira chi ti siede a destra.
+Prima di attaccare puoi fuggire.",Pareggio: si ritira (PROVVISORIO).,"Mazzetto 1: 1 Indizio + 1 PE
+Mazzetto 2: + Ispirazione
+Boss del mazzetto 3: 1 Indizio + livello + Ispirazione
+Duello: Indizio + carta + 1 PE + Ispirazione
+Rifiuti il Duello: dai 1 carta a caso","Rossa: mazzetto del tuo livello (1-2 · 3-4 · 5)
+Blu, Imprevisti:
+Locanda: +1 PE, +2 PV
+Fonte: 2 carte dagli scarti
+Fabbro: 1 equipaggiamento dagli scarti
+Trappola: D6 − 1 PV","Tira il D6 per ripartire, PV al massimo.
+D6: 1 tutto · 2 elmo · 3 arma DX · 4 arma SX · 5 armatura · 6 niente","2 Indizi → gli altri prendono 1 Indizio → D6 per la Cripta → batti il boss. Le sue ferite restano.
+Indizi solo vincendo scontri sulle caselle «?» e Duelli.","Passi e retro copiati dalla bozza (tabella «Il turno in 5 passi» e pagina «Riepilogo»). Unica riga NON copiata: retro_pareggio (scelta PROVVISORIA, aggiunta). Titoli fronte/retro e disposizione sono una scelta di impaginazione. Icone dei passi: parts.py turn_strip().",bozza docx 2/11 + parts.py turn_strip()

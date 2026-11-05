@@ -1,0 +1,4 @@
+id,nome,copie,icona,colore_icona,note,fonte
+SG-01,Indizio,12,pergamena,#2a2118 (INK) con freccia #9c2f24,sulla scheda: 2 caselle «al 2°: tesoro!»,"regolamento «Cosa c’è nella scatola»; parts.py scheda() boxes('Indizi',2,'pergamena')"
+SG-02,Clessidra,12,clessidra,#2a2118 (INK),sulla scheda: 3 caselle «mai più di 3»,"regolamento; parts.py scheda() boxes('Clessidre',3,'clessidra')"
+SG-03,Ispirazione,4,stella,#b8862b (GOLD),sulla scheda: 1 casella «una sola»,"regolamento; parts.py scheda() boxes('Ispirazione',1,'stella')"
