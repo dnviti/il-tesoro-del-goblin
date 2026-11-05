@@ -9,6 +9,17 @@ delle 36 Tessere Esplorazione. Tutti i pezzi entrano in un piano da **180 × 180
 - `stl/` — un STL per ogni tipo di pezzo (mm, già orientato per la stampa).
 - `piatti/` — piatti 3MF pronti, raggruppati per colore del filamento (pezzi a ≥ 5 mm di distanza, centrati su un piano 180 × 180).
 
+## Stampa notturna su 2 stampanti (tutto in 2 file)
+
+| File | Contenuto | Piano minimo | Tempo stimato* |
+|---|---|---|---|
+| `piatti/stampante1_cubetti_dadi_pedine.3mf` | 69 pezzi: 57 cubetti (32 Durata + 24 statistiche + 1 boss), 8 dadi D6, 4 pedine | 180 × 180 mm | ~4-5 h |
+| `piatti/stampante2_contenitore.3mf` | bicchiere + coperchio, in diagonale (14,8 mm di spazio tra i due) | 180 × 180 mm | ~6 h |
+
+- **Un solo filamento** per stampante. Su una stampante monocolore stampa il piatto 1 in bianco, poi colora i cubetti delle statistiche e il cubetto del boss con pennarelli indelebili o colore acrilico. Gli oggetti hanno il nome del colore previsto (`cubetto_rosso_PV`, `cubetto_nero_PVmax`, `cubetto_arancio_ATT`, `cubetto_verde_MOV`, `cubetto_blu_AR`, `cubetto_viola_PE`, `cubetto_giallo_boss`, 4 per colore): con un sistema multicolore (AMS/MMU) puoi assegnare il colore a ogni oggetto nello slicer.
+- Riempimento: nello slicer imposta 100 % (o 4 perimetri) per cubetti e dadi; per pedine e contenitore va bene il 15 %. Se lo slicer non permette impostazioni per oggetto, usa 4 perimetri e il 20 % per tutto il piatto 1.
+- I file sono stati scritti dallo script dagli STL di `stl/` (stesse forme dei piatti separati) e non sono ancora stati aperti in uno slicer: aprili, controlla che stiano nel piano e affetta prima di lanciare.
+
 ## Pezzi
 
 | Pezzo | Qtà | Misure | Filamento | Piatto | Peso stimato | Tempo stimato* |
