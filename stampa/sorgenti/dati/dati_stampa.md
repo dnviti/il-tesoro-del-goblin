@@ -6,7 +6,7 @@ Le scelte provvisorie, le correzioni alle carte e le modifiche dovute alla bozza
 ## 0. Convenzioni dei CSV
 
 - UTF-8, riga di intestazione, separatore virgola, campi con virgole tra virgolette, fine riga `\n`.
-- **Una riga per copia fisica** in tutti i file, tranne `segnalini.csv` (colonna `copie`: Indizi 12, Clessidre 12, Forte Volontà 4).
+- **Una riga per copia fisica** in tutti i file, tranne `segnalini.csv` (colonna `copie`: Indizi 16, Clessidre 8, Forte Volontà 4; il collaudo del 5/11 ha portato gli Indizi da 12 a 16 e le Clessidre da 12 a 8).
 - Le Carte Aiuto hanno il testo su più righe: dentro lo stesso campo, le righe sono separate da un a capo (`\n`).
 - Il testo da stampare è nella colonna `testo` (o `bonus`, `passoN_testo`, `retro_*`). La colonna `nota` non va stampata.
 - Classi rinominate ovunque (Guerriero → Assaltatore, Mago → Stregone, Ladro → Ricercatore, Oracolo invariato). Eccezioni volute: il nome di luogo «Cimitero dei Maghi» (TM-05) e il nome carta «Occhio dello Stregone» (TI-06).
@@ -26,7 +26,7 @@ Le scelte provvisorie, le correzioni alle carte e le modifiche dovute alla bozza
 | **Totale carte** | | 44 + 29 + 4 + 24 + 11 + 4 + 5 | **121** |
 | `tessere_specie.csv` | 8 | Umano ×2, Elfo ×2, Sanguar ×2, Yumaniano ×2 (nella bozza: «da confermare») | – |
 | `tessere_esplorazione.csv` | 36 | 25 rosse (TX-01…25) + 11 blu (TX-26…36) | – |
-| `segnalini.csv` | 3 righe, 28 pezzi | 12 Indizi, 12 Clessidre, 4 Forte Volontà | – |
+| `segnalini.csv` | 3 righe, 28 pezzi | 16 Indizi, 8 Clessidre, 4 Forte Volontà | – |
 | `pedine.csv` | 9 | 4 eroi, MIMI, Geronimo + 3 sagome Boss (vedi nota) | – |
 
 Verifiche fatte sullo script `gen.py` (in /tmp, eliminato): 44 + 29 + 4 + 24 + 11 = 112 righe di carta con testo, più 4 Aiuto e 5 Divisori = 121; ogni riga ha lo stesso numero di campi dell'intestazione; nessuna occorrenza residua di Guerriero/Mago/Ladro nei testi.

@@ -64,3 +64,15 @@ node hsim.js 20000 4 std expd.js          # N partite, giocatori, regole, file d
 Gli stessi sorgenti alimentano il motore dell'Officina: `../../officina/sorgenti/build_motore_v2.py` legge game.js, ui.js e i due json da questa cartella.
 
 Note: `exp.js` con la variabile `REP` carica `report.js`, che esiste solo in `../../archivio/v1_21-10/sorgenti/`. `mkharness.js` legge `check.js` e scrive `hsim.js` nella stessa cartella.
+
+## Collaudo del kit di stampa (`sim_playtest.py`)
+
+Il simulatore qui sopra è sulla scala D20. Per il kit fisico del playtest (2D6 + ATT ≥ 8 + AR, tabella dei danni, 3 Indizi) c'è `sim_playtest.py`. È un file solo, con la sola libreria standard, e legge i CSV stampati in `../../stampa/sorgenti/dati/`. Va lanciato dalla radice del repository:
+
+```
+python3 gioco/sorgenti/sim_playtest.py --esatto --partite 10000 --uscita simulazioni/playtest_2026-11-05.txt
+python3 gioco/sorgenti/sim_playtest.py --partite 10000 --senza-carte     # sensibilità: mani vuote
+python3 gioco/sorgenti/sim_playtest.py --partite 10000 --danno autore    # danno D6 + ATT − AR (commento 7 dell'autore)
+```
+
+`--esatto` calcola le probabilità esatte degli scontri delle 4 classi, dal livello 1 al 5, contro i 24 mostri. `--partite N` gioca N partite Monte Carlo a 2, 3 e 4 giocatori. Le regole simulate e le approssimazioni sono stampate in testa al rapporto.

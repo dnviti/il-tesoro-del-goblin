@@ -19,7 +19,7 @@ Gioco da tavolo fantasy in italiano di **Alessandro De Simone**: un gioco fisico
 | `officina/` | «Officina del Goblin», strumento per progettare carte ed espansioni, con il motore del simulatore | attuale |
 | `simulazioni/` | Risultati delle simulazioni di bilanciamento sulle Carte Trama v2 (27/10) | attuale |
 | `espansioni/caos/` | Espansione «Il Caos del Goblin» (Le Crepe di MIMI): libretto PDF e LEGGIMI | pensata sulle regole del 21/10 |
-| `stampa/` | Materiali stampabili per il playtest (vedi `stampa/LEGGIMI.md`) | in lavorazione |
+| `stampa/` | Materiali stampabili per il playtest (vedi `stampa/LEGGIMI.md`; come stampare: `stampa/playtest_v5/ISTRUZIONI_DI_STAMPA.md`; prova di stampa: `stampa/playtest_v5/00_prova_stampa.pdf`) | pronto per la stampa (playtest) |
 | `pubblicazione/` | Pagina d'ingresso e istruzioni del sito pubblicato | attuale |
 | `video/` | Script e pagine per i video (senza audio e video finiti) | misto |
 | `archivio/` | Prima versione (21/10, `v1_21-10/`) e patch già applicate (`patch_applicate/`). Vedi `archivio/LEGGIMI.md` | archivio |
@@ -48,4 +48,4 @@ I file intermedi (`tesoro_del_goblin.html`, `check.js`, `*.tmp.pdf`, ecc.) sono 
 
 ## Formato di stampa
 
-Solo A4 per i materiali di playtest in `stampa/`. Il regolamento impaginato è A5 (154×216 mm con 3 mm di abbondanza, TrimBox impostato) e «Inizia subito» 216×303 mm.
+Solo A4 per i materiali di playtest in `stampa/`, da una stampante di casa: stampa al 100 %, tutto il contenuto e le tacche di taglio a ≥ 6,5 mm dal bordo del foglio, PDF fronte-retro con facciate in ordine F1,R1,F2,R2… (fronte-retro automatico sul lato lungo). Il regolamento impaginato è A5 (154×216 mm con 3 mm di abbondanza, TrimBox impostato) e «Inizia subito» 216×303 mm.

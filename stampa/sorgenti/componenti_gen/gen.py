@@ -186,9 +186,10 @@ def segnalini():
     bb = (x0, y0, x0 + gw, y0 + gh)
     xs = sorted({x0 + i * pitch + o for i in range(cols) for o in (0, D)}); ys = sorted({y0 + i * pitch + o for i in range(nrows) for o in (0, D)})
     b.append(edge_ticks(xs, ys, bb))
-    b.insert(0, hdr('Segnalini', f'12 Indizi · 12 Clessidre · 4 Forte Volontà  ·  Ø {D} mm  ·  solo fronte'))
+    cnt = {r['nome']: int(r['copie']) for r in rows}
+    b.insert(0, hdr('Segnalini', f"{cnt['Indizio']} Indizi · {cnt['Clessidra']} Clessidre · {cnt['Forte Volontà']} Forte Volontà  ·  Ø {D} mm  ·  solo fronte"))
     b.append(ftr(['Stampa su A4 al 100%. Taglia sul cerchio sottile; l’abbondanza di 3 mm esce dal taglio.',
-                  'Prima 2 righe di Indizi, poi 2 di Clessidre, poi 1 di Forte Volontà.']))
+                  f"Prima {math.ceil(cnt['Indizio'] / cols)} righe di Indizi, poi {math.ceil(cnt['Clessidra'] / cols)} di Clessidre, poi {math.ceil(cnt['Forte Volontà'] / cols)} di Forte Volontà."]))
     write('segnalini', 1, page(fonts('\n'.join(b))))
     from collections import Counter
     return dict(Counter(n for n, _, _ in pos))
@@ -244,14 +245,14 @@ CLASSI = [('Assaltatore', '#9c2f24'), ('Ricercatore', '#3b7d4f'), ('Stregone', '
 def schede():
     sv = fonts(inner(scheda()))
     SW = 222.0; k = SW / 540; SHH = 430 * k
-    x0 = (297 - SW) / 2; y0 = 25.0
+    x0 = (297 - SW) / 2; y0 = 21.0
     for i, (nome, col) in enumerate(CLASSI):
-        b = [text(x0, 14, f'Scheda eroe · {nome}', 7.0, col, 'start', True, SERIF),
-             text(x0 + SW, 14, 'A4 orizzontale · stampa al 100% · solo fronte', 3.0, BROWN, 'end'),
-             f'<rect x="{x0}" y="16" width="{SW}" height="1.2" fill="{col}"/>',
+        b = [text(x0, 12, f'Scheda eroe · {nome}', 7.0, col, 'start', True, SERIF),
+             text(x0 + SW, 12, 'A4 orizzontale · stampa al 100% · solo fronte', 3.0, BROWN, 'end'),
+             f'<rect x="{x0}" y="14" width="{SW}" height="1.2" fill="{col}"/>',
              f'<g id="scheda" font-family="{SANS}" transform="translate({x0:.3f},{y0}) scale({k:.5f})">{sv}</g>',
              f'<rect x="{x0}" y="{y0}" width="{SW}" height="{SHH:.2f}" fill="none" stroke="{CUT}" stroke-width="0.12" opacity="0.5"/>',
-             crop_marks(x0, y0, x0 + SW, y0 + SHH, gap=3, ln=3.5)]
+             crop_marks(x0, y0, x0 + SW, y0 + SHH, gap=1.5, ln=3.5)]
         write('schede_eroe', i + 1, page('\n'.join(b), 297, 210))
     return len(CLASSI), SW, SHH
 
@@ -261,8 +262,8 @@ def plancia():
     bs = board(W=26)
     m = re.match(r'<svg viewBox="0 0 ([\d.]+) ([\d.]+)"', bs); bw, bh = float(m.group(1)), float(m.group(2))
     Wb, Hb = bw * S, bh * S
-    WIN_W, WIN_H = 186.0, 232.0
-    PX, PY = 12.0, 12.0
+    WIN_W, WIN_H = 184.0, 230.0   # finestra di stampa per foglio: lascia >= 6,5 mm per le tacche prima del bordo foglio
+    PX, PY = 13.0, 13.0
     bd = fonts(inner(bs)).replace('rx="13.0"', 'rx="0"', 1)
     ox = Wb - WIN_W; oy = Hb - WIN_H      # inizio finestra destra / bassa
     ovx, ovy = WIN_W - ox, WIN_H - oy
@@ -285,7 +286,7 @@ def plancia():
             if wx0 <= bx <= wx0 + WIN_W and wy0 <= by <= wy0 + WIN_H:
                 px, py = PX + bx - wx0, PY + by - wy0
                 b.append(f'<g id="croce-di-allineamento"><circle cx="{px:.2f}" cy="{py:.2f}" r="1.9" fill="none" stroke="#c0392b" stroke-width="0.2"/>{line(px - 3.5, py, px + 3.5, py, 0.2, "#c0392b")}{line(px, py - 3.5, px, py + 3.5, 0.2, "#c0392b")}</g>')
-        b.append(crop_marks(PX, PY, PX + WIN_W, PY + WIN_H, gap=4, ln=3.5))
+        b.append(crop_marks(PX, PY, PX + WIN_W, PY + WIN_H, gap=3.5, ln=3.0))
         # tacche di taglio sui bordi interni
         cut_l = c == 1; cut_t = r == 1
         yf = PY + WIN_H + 9
@@ -376,6 +377,63 @@ def pedine():
     write('pedine', 1, page(fonts('\n'.join(b))))
     return out
 
+# ------------------------------------------------------------------ PROVA DI STAMPA
+def prova():
+    """00_prova_stampa.pdf: foglio unico fronte-retro. Fronte: righello 100 mm, quadrato 50 mm, riquadro a 6,5 mm dal
+    bordo, croci di allineamento. Retro: cerchi concentrici (1 mm l'uno) specchiati sul lato lungo (x -> 210-x)."""
+    K = '#000000'
+    FR = 6.5                                    # riquadro dei margini
+    bersagli = [(25, 190), (185, 190), (105, 232), (25, 274), (185, 274)]
+    def par(x, y, s, size=3.5, w=170, bold=False, gap=1.25):
+        o = []
+        for j, l in enumerate(wrap(s, size, w, SANS, bold)):
+            o.append(text(x, y + j * size * gap, l, size, K, 'start', bold)); 
+        return ''.join(o), y + len(wrap(s, size, w, SANS, bold)) * size * gap
+    def cornice():
+        return (f'<rect x="{FR}" y="{FR}" width="{210 - 2 * FR}" height="{297 - 2 * FR}" fill="none" stroke="{K}" stroke-width="0.25"/>'
+                + text(105, FR + 4.5, '↑ alto (lato corto di ingresso)', 3.0, BROWN, 'middle'))
+    # ---- fronte
+    b = [cornice(), text(105, 21, 'Prova di stampa · Il Tesoro del Goblin', 6.0, K, 'middle', True, SERIF),
+         text(105, 27, 'FRONTE · un solo foglio A4 stampato fronte-retro (ribaltamento sul LATO LUNGO)', 3.2, BROWN, 'middle')]
+    # righello 100 mm
+    rx, ry = 20, 58
+    b.append(text(rx, ry - 9, 'Righello: 100 mm esatti tra lo 0 e il 10', 3.2, K, 'start', True))
+    b.append(line(rx - 0.0, ry, rx + 100, ry, 0.25, K))
+    for i in range(101):
+        ln = 5 if i % 10 == 0 else (3.2 if i % 5 == 0 else 1.8)
+        b.append(line(rx + i, ry, rx + i, ry + ln, 0.2, K))
+        if i % 10 == 0: b.append(text(rx + i, ry + 9, str(i // 10), 3.2, K, 'middle'))
+    b.append(text(rx + 50, ry + 14, 'centimetri', 2.8, BROWN, 'middle'))
+    # quadrato 50 x 50
+    qx, qy = 145, 35
+    b.append(f'<rect x="{qx}" y="{qy}" width="50" height="50" fill="none" stroke="{K}" stroke-width="0.4"/>')
+    b.append(text(qx + 25, qy + 26, '50 × 50 mm', 3.6, K, 'middle', True))
+    b.append(text(qx + 25, qy + 32, 'misura i lati', 2.8, BROWN, 'middle'))
+    # istruzioni
+    y = 104
+    passi = ['1. Stampa al 100% («Dimensioni effettive», MAI «Adatta alla pagina»), carta A4, fronte-retro con ribaltamento sul LATO LUNGO.',
+             '2. Scala: misura il righello (100 mm tra 0 e 10) e il quadrato (50 mm). Va bene entro ±1 mm. Se no, disattiva «adatta/riduci» e ristampa.',
+             '3. Margini: il riquadro sottile a 6,5 mm dal bordo deve vedersi su tutti e 4 i lati. Se manca un lato la stampante taglia il margine: le carte e le tacche sono pensate per stare oltre i 6,5 mm.',
+             '4. Fronte-retro: tieni il foglio controluce. Ogni croce del fronte deve cadere dentro i cerchi concentrici del retro (ogni cerchio = 1 mm di scarto). Fino a 1 mm va bene per le carte; oltre, vedi ISTRUZIONI_DI_STAMPA.md.',
+             'Se tutto torna, stampa il resto del kit nell’ordine di ISTRUZIONI_DI_STAMPA.md.']
+    for p in passi:
+        t, y = par(20, y, p, 3.5, 170); b.append(t); y += 2.2
+    b.append(text(105, 181, 'Bersagli di allineamento (croci; il retro ha i cerchi)', 3.0, BROWN, 'middle'))
+    for (x, yy) in bersagli:
+        b.append(line(x - 7, yy, x + 7, yy, 0.2, K) + line(x, yy - 7, x, yy + 7, 0.2, K))
+        for i in range(-6, 7):
+            if i: b.append(line(x + i, yy - 0.8, x + i, yy + 0.8, 0.15, K) + line(x - 0.8, yy + i, x + 0.8, yy + i, 0.15, K))
+    write('prova_stampa', 1, page(fonts('\n'.join(b))))
+    # ---- retro (già specchiato: il retro del bersaglio (x, y) sta in (210 - x, y))
+    b = [cornice(), text(105, 21, 'RETRO · prova fronte-retro', 6.0, K, 'middle', True, SERIF)]
+    t, _ = par(20, 36, 'Tieni il foglio controluce, con il fronte e il retro sovrapposti: la croce del fronte deve cadere al centro dei cerchi (1, 2, 3, 4, 5 mm di raggio). Leggi lo scarto in mm nelle 5 posizioni; se è più di 1 mm, o diverso tra un bersaglio e l’altro, leggi «Fronte-retro non allineato» in ISTRUZIONI_DI_STAMPA.md.', 3.5, 170)
+    b.append(t)
+    for (x, yy) in bersagli:
+        cx = 210 - x
+        for r in range(1, 6): b.append(f'<circle cx="{cx}" cy="{yy}" r="{r}" fill="none" stroke="{K}" stroke-width="{0.35 if r % 5 == 0 else 0.15}"/>')
+        b.append(line(cx - 0.8, yy, cx + 0.8, yy, 0.12, K) + line(cx, yy - 0.8, cx, yy + 0.8, 0.12, K))
+    write('prova_stampa', 2, page(fonts('\n'.join(b))))
+
 if __name__ == '__main__':
     res = {}
     res['esplorazione'] = esplorazione()
@@ -384,4 +442,5 @@ if __name__ == '__main__':
     res['schede'] = schede()
     res['plancia'] = plancia()
     res['pedine'] = [(n, round(w, 1), round(h, 1)) for n, x, y, w, h in pedine()]
+    prova()
     print(res)

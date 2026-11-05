@@ -71,7 +71,7 @@ Fonte: `edit_html.py` (elenco completo delle sostituzioni) più confronto del te
 
 ### Incoerenze trovate, non risolte (nessuna istruzione nella bozza)
 
-- **TE-18 Veste del Pellegrino** («quando termini il movimento in una Locanda recuperi (1) PV in più») e **TE-20 Tunica del Viandante** («quando termini il movimento in una Fonte recuperi anche (1) PV»): Locanda, Fonte e Fabbro non sono più stampati sulla plancia, sono carte Imprevisto. Il testo è copiato com'è in `carte_comuni.csv` (nota APERTO). Da decidere con l'autore prima della stampa definitiva.
+- **TE-18 Veste del Pellegrino** e **TE-20 Tunica del Viandante**: i testi v2 parlavano di Locanda/Fonte come caselle, ma ora sono carte Imprevisto. Corretti dal collaudo del 5/11 (sezione 5, C-1 e C-2); TE-20 è una scelta di playtest ([PLAYTEST]).
 - **Inizia subito v5** (`Inizia_subito_v5_stampa.pdf`) ha ancora Guerriero/Ladro/Mago, 5 specie e «Guerriero 6» PV: non è allineato alla bozza. Se si distribuisce nel playtest, correggerlo o non darlo.
 - **Catalogo xlsx v2** (`Catalogo_carte_v2.xlsx`): Leggimi e colonna Difesa sulla scala D20; non usarlo per la stampa.
 - **Carte Imprevisto**: `xlsx_v2.py` dice «L'Oracolo ricarica il ritorno in vita», bozza/PDF v5 «L'Oracolo ricarica il suo potere», e «Riprendi 1 equipaggiamento» contro «Riprendi in mano 1 equipaggiamento». In `carte_imprevisto.csv`: `testo` = `IMP` (come richiesto), `testo_bozza` = versione della bozza. Usarne una sola.
@@ -85,7 +85,7 @@ Fonte: commenti di «Ale Desi» e blocco «MODIFICHE FATTE DAL DESI» nella bozz
 
 - **Pareggio dell'iniziativa**: vedi D-4.
 - **Mazzetto per livello**: vedi D-3 (nessun testo stampato cambia).
-- **3 Indizi** per trovare il tesoro («Gli indizi devono essere 3 per poter scoprire e raggiungere il tesoro»). I 12 segnalini Indizio bastano per 4 giocatori.
+- **3 Indizi** per trovare il tesoro («Gli indizi devono essere 3 per poter scoprire e raggiungere il tesoro»). Segnalini Indizio: 16 (erano 12; vedi C-5 nella sezione 5).
 - **Forte Volontà** al posto di Ispirazione («Sostituire a ispirazione»): «Non può accumularsi - permette di ritirare 1D6». Il nome cambia ovunque; dove una carta dà un uso diverso (TC-01) il testo della carta resta.
 - **Incanto** al posto di Incantesimo («sostituisce la parola incantesimo»), anche al plurale («Incanti») e in minuscolo dentro i testi. Nessun nome proprio conteneva la parola.
 - **Niente critici** («No niente critici»): tolta la regola del doppio 6 / doppio 1. Le abilità e le carte che parlano di un 6 sul dado (NE-21, NE-26, TI-11) non sono critici e restano.
@@ -133,3 +133,32 @@ Fonte: `carte/originali/Carte_nuove_2026-11-05.xlsx`, foglio `Foglio5` («Classi
 | «Ricercatore ( una sorta di artefice )» | «La tua pedina è un Ricercatore  per il resto della partita  puoi rivelare una carta imprevisto sul tabellone visibile solo a te» | TC-02 dà (+2) MOV e la fuga da ogni scontro senza arretrare; la proposta è un potere di informazione. Nel kit gli Imprevisti non stanno sul tabellone (si pescano dopo una tessera blu dal sacchetto): così com'è scritto non si applica. |
 
 Punto aperto: il Ricercatore come «artefice» (anche nel commento alla bozza del 3/11, dove l'Impostore/Fuggiasco «corrisponde al ladro») non corrisponde più al mazzo di classe stampato, che è quello dell'ex Ladro: TE-15 Pugnale Sottile, TI-37 Colpo alle Spalle, TI-38 Fortuna del Furfante, TI-39 Passo Felpato, TI-40 Lancio di Coltello. Da chiarire con l'autore prima di cambiare TC-01…04 o il mazzo del Ricercatore.
+
+## 5. Correzioni del collaudo 5/11
+
+Fonte: prova di gioco a tavolino sul kit (agente «Collaudo», `local://collaudo.md`). Le correzioni sono già in `sorgenti/dati/*.csv` e nei PDF rigenerati. Marcate **[PLAYTEST]** le scelte non dedotte da un testo dell'autore.
+
+| ID | File | Carta/campo | Vecchio → nuovo |
+|---|---|---|---|
+| C-1 | `carte_comuni.csv` | TE-18 Veste del Pellegrino, `testo` | «Finché è equipaggiata ottieni (+1) MOV; quando termini il movimento in una Locanda recuperi (1) PV in più.» → «Finché è equipaggiata ottieni (+1) AR e (+1) MOV.» (testo dell'autore, `Carte_nuove_2026-11-05.xlsx`, foglio Equipaggiamento: la Locanda non è più una casella) |
+| C-2 | `carte_comuni.csv` | TE-20 Tunica del Viandante, `testo` | «…; quando termini il movimento in una Fonte recuperi anche (1) PV.» → «Finché è equipaggiata ottieni (+1) AR; quando peschi una Fonte dal sacchetto recuperi anche (1) PV.» **[PLAYTEST]**: stessa formula di TC-04, non è nel file dell'autore; la carta porta il segno PROVVISORIO |
+| C-3 | `carte_comuni.csv` | TI-15 Mappa Sussurrata, `testo` | «…su una casella esplorazione…» → «…su una casella «?»…» («casella esplorazione» non esiste: sulla plancia e sulla Carta Aiuto si chiama «?») |
+| C-4 | `carte_aiuto.csv` | AI-01…04, `passo5_testo` | «Puoi giocare carte. Togli un cubetto dalle clessidre. Tocca a sinistra.» → «Puoi giocare carte, non equipaggiamenti. Tocca a sinistra.» (nessuna carta stampata ha l'icona clessidra della durata, quindi «dalle clessidre» si confondeva con i segnalini Clessidre del passo 1; «non equipaggiamenti» è il testo della bozza) |
+| C-5 | `segnalini.csv` | SG-01 Indizio, SG-02 Clessidra, `copie` | Indizi 12 → 16, Clessidre 12 → 8 (restano 28 pezzi su un foglio; simulazione 30.000 partite: a 4 giocatori il 5,6 % supera 12 Indizi in gioco, massimo 15; le Clessidre in gioco insieme non superano 1 perché le danno solo Gnomo e Basilisco). Aggiornati `LEGGIMI`, `dati_stampa.md`, intestazione e piè del foglio |
+| C-6 | `LEGGIMI.md`, `ISTRUZIONI_DI_STAMPA.md` | «Da procurarsi» | «4 dadi D6» → «4 dadi D6 (meglio 8: 2 per giocatore, come vuole l'autore)» |
+| S-1 | `parts_stampa.py` | scheda eroe, casella Forte Volontà | nota «una sola» → «ritira 1 D6, non cumulabile» (promemoria dell'effetto) |
+
+## 6. Scelte [PLAYTEST] del regolamento per il playtest
+
+Fonte: `regolamento/playtest/Regolamento_playtest.pdf` (agente RegolamentoPlaytest, 5/11); elenco completo e motivazioni in `regolamento/playtest/LEGGIMI.md`, sezione «Regole provvisorie». Dove la bozza tace si è scelta l'opzione più semplice. Nessun testo stampato sulle carte cambia (i testi della Carta Aiuto sono copiati com'erano). Da confermare con l'autore:
+
+1. **[PLAYTEST]** «Attacca per primo» (Agguato, Fauci): niente tiro di iniziativa.
+2. **[PLAYTEST]** Al 3° Indizio gli altri prendono 1 Indizio solo la prima volta, quando compare MIMI.
+3. **[PLAYTEST]** La casella «?» resta e si pesca di nuovo.
+4. **[PLAYTEST]** Dopo una fuga o una sconfitta la tessera rossa resta e la carta Mostro va in fondo al mazzetto.
+5. **[PLAYTEST]** Una Trappola che porta a 0 PV, o una carta avversaria fuori dal Duello: sconfitta normale, nessuna ricompensa.
+6. **[PLAYTEST]** «Creatura» = mostro o boss.
+7. **[PLAYTEST]** I boss del mazzetto 3 non tengono le ferite; al livello 5 il «+1 livello» non dà niente.
+8. **[PLAYTEST]** Il Cuore della plancia non ha effetti; oltre la fine della traccia si conta a mente.
+9. **[PLAYTEST]** Duello: con lo stesso MOV vince lo sfidante.
+10. **[PLAYTEST]** Forte Volontà: nel tiro per colpire si ritira 1 solo dei 2 dadi.

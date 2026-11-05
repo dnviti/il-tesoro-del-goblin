@@ -67,14 +67,14 @@ def scheda(w=460):
     def boxes(y,label,n,ic,col,note):
         s=[f'<text x="{456}" y="{y-8}" font-weight="800" font-size="12" fill="{INK}">{label}</text>']
         for i in range(n): s.append(f'<rect x="{456+i*24}" y="{y}" width="20" height="20" rx="3" fill="#fffaf0" stroke="{BROWN}"/>'+icon(ic,456+i*24+10,y+10,0.6,col+'66'))
-        s.append(f'<text x="456" y="{y+35}" font-size="10" fill="{BROWN}">{note}</text>')
+        s.extend(f'<text x="456" y="{y+35+j*10}" font-size="10" fill="{BROWN}">{t}</text>' for j,t in enumerate(note.split('|')))
         return ''.join(s)
     o.append(boxes(100,'Indizi',3,'pergamena',INK,'al 3°: tesoro!'))
     o.append(boxes(175,'Clessidre',3,'clessidra',INK,'mai più di 3'))
-    o.append(boxes(250,'Forte Volontà',1,'stella',GOLD,'una sola'))
+    o.append(boxes(250,'Forte Volontà',1,'stella',GOLD,'ritira 1 D6,|non cumulabile'))
     # Locanda, Fonte e Fabbro sono segnalini del sacchetto (2/11): non c'è più niente da segnare, resta il promemoria
-    o.append(f'<text x="456" y="308" font-weight="800" font-size="12" fill="{INK}">Dal sacchetto</text>')
-    for i,(ic,col,t) in enumerate([('casa',LOC,'+1 PE, +2 PV'),('goccia',FON,'2 carte'),('martello',FAB,'1 equip.')]): o.append(icon(ic,463,323+i*16,0.55,col)+f'<text x="474" y="{327+i*16}" font-size="10" fill="{BROWN}">{t}</text>')
+    o.append(f'<text x="456" y="318" font-weight="800" font-size="12" fill="{INK}">Dal sacchetto</text>')
+    for i,(ic,col,t) in enumerate([('casa',LOC,'+1 PE, +2 PV'),('goccia',FON,'2 carte'),('martello',FAB,'1 equip.')]): o.append(icon(ic,463,333+i*16,0.55,col)+f'<text x="474" y="{337+i*16}" font-size="10" fill="{BROWN}">{t}</text>')
     o.append(f'<text x="270" y="372" text-anchor="middle" font-size="11.5" font-style="italic" fill="{INK}">I cubetti mostrano sempre il valore finale, equipaggiamento compreso.</text>')
     o.append(f'<rect x="6" y="396" width="340" height="30" rx="6" fill="none" stroke="{BROWN}" stroke-dasharray="5 3"/><text x="18" y="416" font-weight="800" font-size="12" fill="{INK}">Effetti in corso</text><text x="122" y="416" font-size="10.5" fill="{BROWN}">carte con i cubetti Durata</text>')
     o.append(f'<rect x="356" y="396" width="178" height="30" rx="6" fill="none" stroke="{BROWN}" stroke-dasharray="5 3"/><text x="368" y="416" font-weight="800" font-size="12" fill="{INK}">Scarti</text><text x="412" y="416" font-size="10.5" fill="{BROWN}">a faccia in su</text>')

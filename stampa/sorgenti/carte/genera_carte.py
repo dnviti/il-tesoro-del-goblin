@@ -5,10 +5,11 @@ Equivale a un Data Merge: legge i CSV in ../dati, scrive per ogni PDF uno script
 di comandi DesignCraft (carte_*.dcs), lo esegue con `designcraft-cli script`,
 salva il progetto modificabile (carte_*.designcraft) e il PDF in ../../playtest_v5.
 
-Formato: carta 63 x 88 mm, abbondanza 3 mm per carta, 9 carte per foglio A4 (3 x 3),
-segni di taglio nelle fasce di abbondanza e nei margini. Prima i fronti, poi i retro;
-i retro sono specchiati sul lato lungo (fronte-retro con rilegatura sul lato lungo):
-la carta in colonna c sul fronte ha il retro in colonna 2 - c.
+Formato: carta 63 x 88 mm, 9 carte per foglio A4 (3 x 3) a battuta, 189 x 264 mm centrati, linee di taglio
+condivise (si taglia a tutta larghezza), abbondanza di 1 mm solo sul lato esterno della griglia. Segni di taglio ed
+etichette a >= 6,5 mm dal bordo del foglio (le stampanti domestiche non stampano i primi ~5 mm).
+Ordine delle pagine per il fronte-retro automatico: F1, R1, F2, R2, ...; i retro sono specchiati sul lato lungo
+(rilegatura sul lato lungo): la carta in colonna c sul fronte ha il retro in colonna 2 - c.
 
 Uso: python3 genera_carte.py [--solo NOME]   (richiede designcraft-cli)
 """
@@ -24,10 +25,13 @@ DATI = QUI.parent / "dati"
 PDF_DIR = QUI.parent.parent / "playtest_v5"
 
 MM = 72 / 25.4
-CW, CH, B = 63 * MM, 88 * MM, 3 * MM          # carta e abbondanza (pt)
+CW, CH = 63 * MM, 88 * MM                     # carta (pt)
 PW, PH = 595.276, 841.89                       # A4
-CELLW, CELLH = CW + 2 * B, CH + 2 * B
-X0, Y0 = (PW - 3 * CELLW) / 2, (PH - 3 * CELLH) / 2
+# Griglia 3 x 3 «a battuta»: le carte si toccano e condividono le linee di taglio (4 verticali + 4 orizzontali,
+# tutte a tutta larghezza/altezza), 189 x 264 mm centrati. Margini: 10,5 mm a sinistra/destra, 16,5 mm sopra/sotto.
+X0, Y0 = (PW - 3 * CW) / 2, (PH - 3 * CH) / 2
+SB = 1.0 * MM                                  # abbondanza SOLO sul lato esterno della griglia (1 mm)
+MIN_BORDO = 6.5 * MM                           # segni di taglio ed etichette: mai a meno di 6,5 mm dal bordo foglio
 SAFE = 9.0                                     # bordo colorato: tutto il testo sta oltre 3 mm (8,5 pt)
 
 SWATCH = {
@@ -203,26 +207,43 @@ def origine(pos, retro):
     r, c = divmod(pos, 3)
     if retro:
         c = 2 - c
-    return X0 + c * CELLW + B, Y0 + r * CELLH + B
+    return X0 + c * CW, Y0 + r * CH
 
 
-def segni_taglio(d, sp):
-    """Segni di taglio: dal bordo foglio e nelle fasce di abbondanza, mai dentro il rifilo."""
-    xs = [X0 + c * CELLW + B + k * CW for c in range(3) for k in (0, 1)]
-    ys = [Y0 + r * CELLH + B + k * CH for r in range(3) for k in (0, 1)]
-    corti_y = [(2.0, ys[0] - 1.5)] + [(ys[2 * r + 1] + 1.5, ys[2 * r + 2] - 1.5) for r in range(2)] + [(ys[-1] + 1.5, PH - 2.0)]
-    corti_x = [(0.5, xs[0] - 1.5)] + [(xs[2 * c + 1] + 1.5, xs[2 * c + 2] - 1.5) for c in range(2)] + [(xs[-1] + 1.5, PW - 0.5)]
-    for swatch, peso in (("[Paper]", 1.0), ("[Registration]", 0.3)):
-        for x in xs:
-            for a, b in corti_y:
-                d.linea(sp, (x, a), (x, b), swatch, peso)
-        for y in ys:
-            for a, b in corti_x:
-                d.linea(sp, (a, y), (b, y), swatch, peso)
+def sangue(ox, oy):
+    """Rettangolo del fondo colorato: il rifilo della carta, più SB solo sui lati che toccano il bordo
+    della griglia (le carte vicine si toccano e si tagliano sulla stessa linea)."""
+    e = 0.01
+    return [ox - (SB if abs(ox - X0) < e else 0), oy - (SB if abs(oy - Y0) < e else 0),
+            ox + CW + (SB if abs(ox + CW - (X0 + 3 * CW)) < e else 0), oy + CH + (SB if abs(oy + CH - (Y0 + 3 * CH)) < e else 0)]
+
+
+def segni_taglio(d, sp, nome, foglio, fogli, retro, pagina, pagine):
+    """Segni di taglio (4 + 4 linee, tutte a tutto foglio) ed etichetta della pagina. Tutto a >= 6,5 mm dal bordo
+    del foglio; i segni stanno fuori dalla griglia e dalla sua abbondanza esterna, mai sulle carte."""
+    gap = 0.5 * MM
+    xs = [X0 + k * CW for k in range(4)]
+    ys = [Y0 + k * CH for k in range(4)]
+    for x in xs:
+        d.linea(sp, (x, MIN_BORDO), (x, Y0 - SB - gap), "[Registration]", 0.5)
+        d.linea(sp, (x, Y0 + 3 * CH + SB + gap), (x, PH - MIN_BORDO), "[Registration]", 0.5)
+    for y in ys:
+        d.linea(sp, (MIN_BORDO, y), (X0 - SB - gap, y), "[Registration]", 0.5)
+        d.linea(sp, (X0 + 3 * CW + SB + gap, y), (PW - MIN_BORDO, y), "[Registration]", 0.5)
+    # linee guida bianche sottilissime sulle giunzioni interne (si vede dove tagliare; non lasciano traccia sul rifilo)
+    for x in xs[1:3]:
+        d.linea(sp, (x, Y0), (x, Y0 + 3 * CH), "[Paper]", 0.25)
+    for y in ys[1:3]:
+        d.linea(sp, (X0, y), (X0 + 3 * CW, y), "[Paper]", 0.25)
+    # etichetta fuori dalla griglia (si butta con il bordo), tra i segni di taglio, a >= 8 mm dal bordo
+    lato = "RETRO · girare sul lato lungo" if retro else "FRONTE"
+    y0, y1 = 8.0 * MM, 11.5 * MM
+    d.testo(sp, [X0 + 5, y0, X0 + CW - 5, y1], f"{lato} · foglio {foglio} di {fogli}", "Etichetta")
+    d.testo(sp, [X0 + 2 * CW + 5, y0, X0 + 3 * CW - 5, y1], f"{nome}.pdf · pag. {pagina}/{pagine}", "EtichettaDx")
 
 
 def cornice(d, sp, ox, oy, colore, fondo="Carta"):
-    d.rett(sp, [ox - B, oy - B, ox + CW + B, oy + CH + B], fill=colore)
+    d.rett(sp, sangue(ox, oy), fill=colore)
     d.rett(sp, [ox + SAFE, oy + SAFE, ox + CW - SAFE, oy + CH - SAFE], fill=fondo, raggio=4)
 
 
@@ -339,7 +360,7 @@ def carta_aiuto_retro(d, sp, ox, oy, r):
 
 def divisore(d, sp, ox, oy, r):
     col = TIPO_COLORE[r["codice"]]
-    d.rett(sp, [ox - B, oy - B, ox + CW + B, oy + CH + B], fill=col)
+    d.rett(sp, sangue(ox, oy), fill=col)
     d.rett(sp, L(ox, oy, SAFE, SAFE, CW - SAFE, CH - SAFE), stroke="Carta", peso=0.8, raggio=4)
     d.testo(sp, L(ox, oy, 13, 18, CW - 13, 30), "DIVISORE", "DorsoSotto")
     d.testo(sp, L(ox, oy, 13, 60, CW - 13, 110), r["codice"], "DivCodice", vj="center")
@@ -353,7 +374,7 @@ def divisore(d, sp, ox, oy, r):
 def dorso(d, sp, ox, oy, colore, titolo, sotto="", grande=""):
     scuro = colore in DORSO_CHIARO
     inch, suf = ("Retro", "Scuro") if scuro else ("OroChiaro", "")
-    d.rett(sp, [ox - B, oy - B, ox + CW + B, oy + CH + B], fill=colore)
+    d.rett(sp, sangue(ox, oy), fill=colore)
     d.rett(sp, L(ox, oy, SAFE, SAFE, CW - SAFE, CH - SAFE), stroke=inch, peso=1.0, raggio=4)
     d.rett(sp, L(ox, oy, SAFE + 4, SAFE + 4, CW - SAFE - 4, CH - SAFE - 4), stroke=inch, peso=0.4, raggio=2)
     d.testo(sp, L(ox, oy, 16, 24, CW - 16, 34), "IL TESORO DEL GOBLIN", "DorsoMarchio" + suf)
@@ -367,21 +388,18 @@ def dorso(d, sp, ox, oy, colore, titolo, sotto="", grande=""):
 
 
 def costruisci(nome, titolo, carte):
-    """carte: lista di (funzione_fronte, funzione_retro); 9 per pagina, fronti poi retro."""
+    """carte: lista di (funzione_fronte, funzione_retro); 9 per foglio. Pagine in ordine F1, R1, F2, R2..."""
     n = len(carte)
     fogli = (n + 8) // 9
     d = Doc(titolo, 2 * fogli)
-    for k, (fr, _) in enumerate(carte):
-        sp = k // 9
+    for k, (fr, rt) in enumerate(carte):
         ox, oy = origine(k % 9, False)
-        fr(d, sp, ox, oy)
-    for k, (_, rt) in enumerate(carte):
-        sp = fogli + k // 9
+        fr(d, 2 * (k // 9), ox, oy)
         ox, oy = origine(k % 9, True)
-        rt(d, sp, ox, oy)
+        rt(d, 2 * (k // 9) + 1, ox, oy)
     d.cmd("layer.new", name="Segni di taglio")
     for sp in range(2 * fogli):
-        segni_taglio(d, sp)
+        segni_taglio(d, sp, nome, sp // 2 + 1, fogli, sp % 2 == 1, sp + 1, 2 * fogli)
     d.cmd("file.exportPdf", path=str(PDF_DIR / f"{nome}.pdf"), standard="x4", title=titolo, bleed=False, marks=False)
     with tempfile.TemporaryDirectory(prefix="goblin_carte_") as tmp:
         src = pathlib.Path(tmp) / f"{nome}.dcs"

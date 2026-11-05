@@ -25,7 +25,7 @@
     "layers": [
       {
         "id": 1,
-        "name": "Stampa A4 (taglio e abbondanza)",
+        "name": "Layer 1",
         "kind": {
           "type": "layer",
           "color": {
@@ -18444,19 +18444,7 @@
     },
     "raster_effects_ppi": 72.0,
     "images": {},
-    "next_id": 275,
-    "metadata": {
-      "author": "",
-      "authorTitle": "",
-      "description": "",
-      "keywords": [],
-      "rating": 0,
-      "copyrightStatus": "unknown",
-      "copyrightNotice": "",
-      "copyrightUrl": "",
-      "created": 1793908342,
-      "modified": 1793908342
-    }
+    "next_id": 275
   },
   "images": {}
 }

@@ -1,0 +1,526 @@
+Collaudo del kit di playtest - dati: stampa/sorgenti/dati/*.csv
+
+Plancia: distanze partenza -> Cripte (vicina..lontana): P1 [3, 6, 6, 7]; P2 [3, 5, 6, 7]; P3 [3, 4, 6, 7]; P4 [3, 6, 6, 7]; P5 [3, 5, 6, 7]; P6 [3, 4, 6, 7]
+Componenti letti: 24 mostri, 44 comuni, 29 di classe, 11 Imprevisti {'Trappola': 5, 'Locanda': 2, 'Fonte': 2, 'Fabbro': 2}, tessere {'rossa': 25, 'blu': 11}, segnalini {'Indizio': 16, 'Clessidra': 8, 'Forte Volontà': 4}
+
+CALCOLO ESATTO DEGLI SCONTRI (eroe di riferimento: specie +1 ATT +1 AR, nessun equipaggiamento;
+salite: L2 +1 ATT, L3 +2 PV, L4 +1 AR, L5 +2 PV; Stregone 2 rilanci dei tiri per colpire mancati;
+Oracolo 1 rinascita a 3 PV; Assaltatore +1 PV; senza carte e senza Forte Volontà).
+Colonne: P(colpo) eroe->mostro, mostro->eroe al primo tiro; danno atteso per round
+(P(colpo) x danno medio); round attesi; P(vittoria eroe). Fascia: mazzetto 1 = L1-2, mazzetto 2 = L3-4, boss = L5.
+
+== Assaltatore ==
+mostro                   mz  PV ATT DIF |   L1: colpo e/m  dan e/m  round  P(vince)   L3: colpo e/m  dan e/m  round  P(vince)   L5: colpo e/m  dan e/m  round  P(vince)
+Folletto Ingannatore      1   1   2  10 |     42%  42%   1.5  1.1    2.4    84.5%     58%  42%   2.0  1.1    1.8    96.4%     58%  28%   2.0  0.7    1.8    99.4%
+Ratto gigante             1   1   2   8 |     72%  42%   2.5  1.1    1.1    97.9%     83%  42%   2.9  1.1    0.9    99.6%     83%  28%   2.9  0.7    0.9   100.0%
+Pipistrello vampiro       1   1   2   9 |     58%  42%   2.0  1.1    1.4    95.3%     72%  42%   2.5  1.1    1.1    99.1%     72%  28%   2.5  0.7    1.1    99.9%
+Coboldo                   1   2   1   8 |     72%  28%   2.5  0.7    1.3    98.8%     83%  28%   2.9  0.7    1.1    99.8%     83%  17%   2.9  0.4    1.1   100.0%
+Gnomo schiavista          1   2   2  10 |     42%  42%   1.5  1.1    2.2    85.3%     58%  42%   2.0  1.1    1.7    96.3%     58%  28%   2.0  0.7    1.7    99.4%
+Goblin predone            1   2   2   9 |     58%  42%   2.0  1.1    1.6    92.9%     72%  42%   2.5  1.1    1.3    98.3%     72%  28%   2.5  0.7    1.3    99.8%
+Scheletro                 1   2   2   9 |     58%  42%   2.0  1.1    3.2    74.3%     72%  42%   2.5  1.1    2.8    91.1%     72%  28%   2.5  0.7    2.9    98.5%
+Lupo grigio               1   3   3   8 |     72%  58%   2.5  1.6    1.5    90.0%     83%  58%   2.9  1.6    1.3    97.1%     83%  42%   2.9  1.1    1.3    99.5%
+Ragno delle grotte        1   3   3   9 |     58%  58%   2.0  1.6    1.8    83.5%     72%  58%   2.5  1.6    1.5    94.8%     72%  42%   2.5  1.1    1.6    99.0%
+Orchetto predone          1   4   2   9 |     58%  42%   2.0  1.5    1.9    70.5%     72%  42%   2.5  1.5    1.8    88.3%     72%  28%   2.5  1.0    1.9    95.9%
+Melma acida               1   5   1   8 |     72%  42%   2.5  1.5    2.0    78.4%     83%  42%   2.9  1.5    1.9    92.7%     83%  28%   2.9  1.0    1.9    98.3%
+Zombi                     1   4   2   8 |     72%  42%   2.5  1.5    1.7    83.0%     83%  42%   2.9  1.5    1.6    95.0%     83%  28%   2.9  1.0    1.6    98.9%
+Bandito della strada      1   3   3   9 |     58%  58%   2.0  2.0    1.6    73.1%     72%  58%   2.5  2.0    1.5    90.6%     72%  42%   2.5  1.5    1.6    97.1%
+Gnoll cacciatore          2   5   3   9 |     58%  58%   2.0  2.6    1.8    38.8%     72%  58%   2.5  2.6    2.1    64.5%     72%  42%   2.5  1.9    2.3    84.4%
+Orso delle caverne        2   7   3   8 |     72%  58%   2.5  2.6    2.0    31.8%     83%  58%   2.9  2.6    2.2    57.5%     83%  42%   2.9  1.9    2.5    77.9%
+Arpia                     2   4   4   9 |     58%  72%   2.0  3.2    1.6    40.8%     72%  72%   2.5  3.2    1.8    68.0%     72%  58%   2.5  2.6    2.0    82.3%
+Spettro                   2   4   3  10 |     28%  58%   1.0  2.6    2.2    32.1%     42%  58%   1.5  2.6    2.3    57.8%     42%  42%   1.5  1.9    2.9    75.7%
+Minotauro                 2   8   4   9 |     58%  72%   2.0  3.2    1.5    10.1%     72%  72%   2.5  3.2    1.9    25.1%     72%  58%   2.5  2.6    2.7    51.7%
+Golem di fango            2   9   3  10 |     42%  58%   1.1  2.6    2.7     7.1%     58%  58%   1.6  2.6    3.3    21.6%     58%  42%   1.6  1.9    4.5    47.6%
+Vampiro                   2   7   4  10 |     42%  72%   1.5  3.2    2.1    11.2%     58%  72%   2.0  3.2    2.5    29.5%     58%  58%   2.0  2.6    3.2    49.4%
+Basilisco                 2   7   4   9 |     58%  72%   2.0  3.2    1.9    22.2%     72%  72%   2.5  3.2    2.3    46.3%     72%  58%   2.5  2.6    2.7    67.6%
+Guardiano di MIMI         3   9   4  11 |     28%  72%   1.0  3.2    2.1     3.3%     42%  72%   1.5  3.2    2.7    12.0%     42%  58%   1.5  2.6    3.7    26.1%
+Mimic ancestrale          3   7   5  10 |     42%  83%   1.5  3.8    1.6     4.3%     58%  83%   2.0  3.8    2.1    15.4%     58%  72%   2.0  3.2    2.7    33.6%
+Re Goblin Grugno          3   9   4  10 |     42%  72%   1.5  3.2    2.0     4.9%     58%  72%   2.0  3.2    2.5    16.1%     58%  58%   2.0  2.6    3.2    31.9%
+
+== Ricercatore ==
+mostro                   mz  PV ATT DIF |   L1: colpo e/m  dan e/m  round  P(vince)   L3: colpo e/m  dan e/m  round  P(vince)   L5: colpo e/m  dan e/m  round  P(vince)
+Folletto Ingannatore      1   1   2  10 |     42%  42%   1.5  1.1    2.2    75.4%     58%  42%   2.0  1.1    1.8    94.9%     58%  28%   2.0  0.7    1.8    99.0%
+Ratto gigante             1   1   2   8 |     72%  42%   2.5  1.1    1.0    93.2%     83%  42%   2.9  1.1    0.9    99.4%     83%  28%   2.9  0.7    0.9    99.9%
+Pipistrello vampiro       1   1   2   9 |     58%  42%   2.0  1.1    1.3    89.5%     72%  42%   2.5  1.1    1.1    98.6%     72%  28%   2.5  0.7    1.1    99.8%
+Coboldo                   1   2   1   8 |     72%  28%   2.5  0.7    1.3    95.2%     83%  28%   2.9  0.7    1.1    99.7%     83%  17%   2.9  0.4    1.1   100.0%
+Gnomo schiavista          1   2   2  10 |     42%  42%   1.5  1.1    2.0    77.4%     58%  42%   2.0  1.1    1.6    94.9%     58%  28%   2.0  0.7    1.7    98.9%
+Goblin predone            1   2   2   9 |     58%  42%   2.0  1.1    1.5    86.2%     72%  42%   2.5  1.1    1.3    97.5%     72%  28%   2.5  0.7    1.3    99.6%
+Scheletro                 1   2   2   9 |     58%  42%   2.0  1.1    2.9    63.4%     72%  42%   2.5  1.1    2.8    87.7%     72%  28%   2.5  0.7    2.9    97.4%
+Lupo grigio               1   3   3   8 |     72%  58%   2.5  1.6    1.4    81.8%     83%  58%   2.9  1.6    1.3    95.7%     83%  42%   2.9  1.1    1.3    99.1%
+Ragno delle grotte        1   3   3   9 |     58%  58%   2.0  1.6    1.6    74.7%     72%  58%   2.5  1.6    1.5    92.8%     72%  42%   2.5  1.1    1.6    98.2%
+Orchetto predone          1   4   2   9 |     58%  42%   2.0  1.5    1.8    63.1%     72%  42%   2.5  1.5    1.7    85.6%     72%  28%   2.5  1.0    1.8    94.5%
+Melma acida               1   5   1   8 |     72%  42%   2.5  1.5    1.8    70.7%     83%  42%   2.9  1.5    1.8    90.6%     83%  28%   2.9  1.0    1.9    97.5%
+Zombi                     1   4   2   8 |     72%  42%   2.5  1.5    1.6    76.1%     83%  42%   2.9  1.5    1.6    93.5%     83%  28%   2.9  1.0    1.6    98.3%
+Bandito della strada      1   3   3   9 |     58%  58%   2.0  2.0    1.5    65.6%     72%  58%   2.5  2.0    1.5    88.3%     72%  42%   2.5  1.5    1.5    96.0%
+Gnoll cacciatore          2   5   3   9 |     58%  58%   2.0  2.6    1.6    31.9%     72%  58%   2.5  2.6    1.8    54.9%     72%  42%   2.5  1.9    2.3    80.8%
+Orso delle caverne        2   7   3   8 |     72%  58%   2.5  2.6    1.8    24.7%     83%  58%   2.9  2.6    2.0    47.4%     83%  42%   2.9  1.9    2.4    73.2%
+Arpia                     2   4   4   9 |     58%  72%   2.0  3.2    1.5    34.4%     72%  72%   2.5  3.2    1.6    59.4%     72%  58%   2.5  2.6    1.9    78.8%
+Spettro                   2   4   3  10 |     28%  58%   1.0  2.6    1.9    27.8%     42%  58%   1.5  2.6    2.1    50.9%     42%  42%   1.5  1.9    2.8    72.4%
+Minotauro                 2   8   4   9 |     58%  72%   2.0  3.2    1.3     7.2%     72%  72%   2.5  3.2    1.7    19.3%     72%  58%   2.5  2.6    2.4    43.0%
+Golem di fango            2   9   3  10 |     42%  58%   1.1  2.6    2.3     5.3%     58%  58%   1.6  2.6    2.9    17.1%     58%  42%   1.6  1.9    4.3    42.5%
+Vampiro                   2   7   4  10 |     42%  72%   1.5  3.2    1.8     8.7%     58%  72%   2.0  3.2    2.2    24.0%     58%  58%   2.0  2.6    3.0    44.9%
+Basilisco                 2   7   4   9 |     58%  72%   2.0  3.2    1.7    17.1%     72%  72%   2.5  3.2    2.1    37.7%     72%  58%   2.5  2.6    2.6    62.3%
+Guardiano di MIMI         3   9   4  11 |     28%  72%   1.0  3.2    1.8     2.4%     42%  72%   1.5  3.2    2.4     9.3%     42%  58%   1.5  2.6    3.5    22.4%
+Mimic ancestrale          3   7   5  10 |     42%  83%   1.5  3.8    1.3     2.8%     58%  83%   2.0  3.8    1.8    11.1%     58%  72%   2.0  3.2    2.5    27.9%
+Re Goblin Grugno          3   9   4  10 |     42%  72%   1.5  3.2    1.7     3.4%     58%  72%   2.0  3.2    2.2    12.2%     58%  58%   2.0  2.6    3.0    27.2%
+
+== Stregone ==
+mostro                   mz  PV ATT DIF |   L1: colpo e/m  dan e/m  round  P(vince)   L3: colpo e/m  dan e/m  round  P(vince)   L5: colpo e/m  dan e/m  round  P(vince)
+Folletto Ingannatore      1   1   2  10 |     42%  42%   1.5  1.1    1.7    82.3%     58%  42%   2.0  1.1    1.2    97.8%     58%  28%   2.0  0.7    1.2    99.6%
+Ratto gigante             1   1   2   8 |     72%  42%   2.5  1.1    0.7    96.8%     83%  42%   2.9  1.1    0.7   100.0%     83%  28%   2.9  0.7    0.7   100.0%
+Pipistrello vampiro       1   1   2   9 |     58%  42%   2.0  1.1    0.8    95.8%     72%  42%   2.5  1.1    0.7    99.9%     72%  28%   2.5  0.7    0.7   100.0%
+Coboldo                   1   2   1   8 |     72%  28%   2.5  0.7    0.9    97.6%     83%  28%   2.9  0.7    0.9    99.9%     83%  17%   2.9  0.4    0.9   100.0%
+Gnomo schiavista          1   2   2  10 |     42%  42%   1.5  1.1    1.3    88.6%     58%  42%   2.0  1.1    1.0    98.6%     58%  28%   2.0  0.7    1.0    99.7%
+Goblin predone            1   2   2   9 |     58%  42%   2.0  1.1    1.0    93.6%     72%  42%   2.5  1.1    0.9    99.4%     72%  28%   2.5  0.7    0.9    99.9%
+Scheletro                 1   2   2   9 |     58%  42%   2.0  1.1    2.2    77.1%     72%  42%   2.5  1.1    2.1    94.4%     72%  28%   2.5  0.7    2.2    99.0%
+Lupo grigio               1   3   3   8 |     72%  58%   2.5  1.6    1.0    89.7%     83%  58%   2.9  1.6    1.1    98.2%     83%  42%   2.9  1.1    1.1    99.7%
+Ragno delle grotte        1   3   3   9 |     58%  58%   2.0  1.6    1.1    86.9%     72%  58%   2.5  1.6    1.1    97.7%     72%  42%   2.5  1.1    1.1    99.5%
+Orchetto predone          1   4   2   9 |     58%  42%   2.0  1.5    1.3    75.7%     72%  42%   2.5  1.5    1.3    93.4%     72%  28%   2.5  1.0    1.4    97.9%
+Melma acida               1   5   1   8 |     72%  42%   2.5  1.5    1.4    79.7%     83%  42%   2.9  1.5    1.5    94.7%     83%  28%   2.9  1.0    1.6    98.7%
+Zombi                     1   4   2   8 |     72%  42%   2.5  1.5    1.2    84.1%     83%  42%   2.9  1.5    1.3    96.7%     83%  28%   2.9  1.0    1.3    99.2%
+Bandito della strada      1   3   3   9 |     58%  58%   2.0  2.0    1.1    79.8%     72%  58%   2.5  2.0    1.1    95.7%     72%  42%   2.5  1.5    1.1    98.8%
+Gnoll cacciatore          2   5   3   9 |     58%  58%   2.0  2.6    1.4    44.1%     72%  58%   2.5  2.6    1.6    66.4%     72%  42%   2.5  1.9    1.9    89.1%
+Orso delle caverne        2   7   3   8 |     72%  58%   2.5  2.6    1.6    35.4%     83%  58%   2.9  2.6    1.8    57.3%     83%  42%   2.9  1.9    2.1    82.0%
+Arpia                     2   4   4   9 |     58%  72%   2.0  3.2    1.2    50.5%     72%  72%   2.5  3.2    1.3    75.1%     72%  58%   2.5  2.6    1.4    89.9%
+Spettro                   2   4   3  10 |     28%  58%   1.0  2.6    1.6    44.0%     42%  58%   1.5  2.6    1.6    69.5%     42%  42%   1.5  1.9    1.9    85.3%
+Minotauro                 2   8   4   9 |     58%  72%   2.0  3.2    1.3    13.7%     72%  72%   2.5  3.2    1.6    29.1%     72%  58%   2.5  2.6    2.1    57.3%
+Golem di fango            2   9   3  10 |     42%  58%   1.1  2.6    2.2    11.4%     58%  58%   1.6  2.6    2.7    29.4%     58%  42%   1.6  1.9    3.7    58.1%
+Vampiro                   2   7   4  10 |     42%  72%   1.5  3.2    1.7    18.9%     58%  72%   2.0  3.2    2.0    40.7%     58%  58%   2.0  2.6    2.5    63.9%
+Basilisco                 2   7   4   9 |     58%  72%   2.0  3.2    1.5    30.3%     72%  72%   2.5  3.2    1.8    53.1%     72%  58%   2.5  2.6    2.2    77.3%
+Guardiano di MIMI         3   9   4  11 |     28%  72%   1.0  3.2    1.7     6.4%     42%  72%   1.5  3.2    2.2    20.1%     42%  58%   1.5  2.6    3.1    38.5%
+Mimic ancestrale          3   7   5  10 |     42%  83%   1.5  3.8    1.3     7.1%     58%  83%   2.0  3.8    1.7    21.3%     58%  72%   2.0  3.2    2.2    45.8%
+Re Goblin Grugno          3   9   4  10 |     42%  72%   1.5  3.2    1.6     8.5%     58%  72%   2.0  3.2    2.0    23.3%     58%  58%   2.0  2.6    2.6    44.2%
+
+== Oracolo ==
+mostro                   mz  PV ATT DIF |   L1: colpo e/m  dan e/m  round  P(vince)   L3: colpo e/m  dan e/m  round  P(vince)   L5: colpo e/m  dan e/m  round  P(vince)
+Folletto Ingannatore      1   1   2  10 |     42%  42%   1.5  1.1    2.6    93.7%     58%  42%   2.0  1.1    1.8    99.3%     58%  28%   2.0  0.7    1.8    99.9%
+Ratto gigante             1   1   2   8 |     72%  42%   2.5  1.1    1.1    99.5%     83%  42%   2.9  1.1    0.9   100.0%     83%  28%   2.9  0.7    0.9   100.0%
+Pipistrello vampiro       1   1   2   9 |     58%  42%   2.0  1.1    1.4    98.6%     72%  42%   2.5  1.1    1.1    99.9%     72%  28%   2.5  0.7    1.1   100.0%
+Coboldo                   1   2   1   8 |     72%  28%   2.5  0.7    1.3    99.7%     83%  28%   2.9  0.7    1.1   100.0%     83%  17%   2.9  0.4    1.1   100.0%
+Gnomo schiavista          1   2   2  10 |     42%  42%   1.5  1.1    2.4    93.5%     58%  42%   2.0  1.1    1.7    99.1%     58%  28%   2.0  0.7    1.7    99.9%
+Goblin predone            1   2   2   9 |     58%  42%   2.0  1.1    1.7    97.6%     72%  42%   2.5  1.1    1.3    99.8%     72%  28%   2.5  0.7    1.3   100.0%
+Scheletro                 1   2   2   9 |     58%  42%   2.0  1.1    3.5    89.1%     72%  42%   2.5  1.1    2.9    97.9%     72%  28%   2.5  0.7    2.9    99.7%
+Lupo grigio               1   3   3   8 |     72%  58%   2.5  1.6    1.6    96.6%     83%  58%   2.9  1.6    1.3    99.6%     83%  42%   2.9  1.1    1.3    99.9%
+Ragno delle grotte        1   3   3   9 |     58%  58%   2.0  1.6    1.9    93.0%     72%  58%   2.5  1.6    1.6    98.8%     72%  42%   2.5  1.1    1.6    99.8%
+Orchetto predone          1   4   2   9 |     58%  42%   2.0  1.5    2.2    86.6%     72%  42%   2.5  1.5    1.9    96.6%     72%  28%   2.5  1.0    1.9    99.0%
+Melma acida               1   5   1   8 |     72%  42%   2.5  1.5    2.2    92.8%     83%  42%   2.9  1.5    1.9    98.7%     83%  28%   2.9  1.0    1.9    99.8%
+Zombi                     1   4   2   8 |     72%  42%   2.5  1.5    1.8    94.9%     83%  42%   2.9  1.5    1.6    99.2%     83%  28%   2.9  1.0    1.6    99.9%
+Bandito della strada      1   3   3   9 |     58%  58%   2.0  2.0    1.9    88.5%     72%  58%   2.5  2.0    1.6    97.6%     72%  42%   2.5  1.5    1.6    99.4%
+Gnoll cacciatore          2   5   3   9 |     58%  58%   2.0  2.6    2.5    64.3%     72%  58%   2.5  2.6    2.3    83.0%     72%  42%   2.5  1.9    2.5    95.2%
+Orso delle caverne        2   7   3   8 |     72%  58%   2.5  2.6    2.6    59.6%     83%  58%   2.9  2.6    2.5    79.6%     83%  42%   2.9  1.9    2.7    92.8%
+Arpia                     2   4   4   9 |     58%  72%   2.0  3.2    2.2    64.2%     72%  72%   2.5  3.2    2.0    84.0%     72%  58%   2.5  2.6    2.1    93.6%
+Spettro                   2   4   3  10 |     28%  58%   1.0  2.6    3.0    48.6%     42%  58%   1.5  2.6    2.8    72.3%     42%  42%   1.5  1.9    3.2    87.4%
+Minotauro                 2   8   4   9 |     58%  72%   2.0  3.2    2.6    29.9%     72%  72%   2.5  3.2    2.6    50.3%     72%  58%   2.5  2.6    3.1    72.9%
+Golem di fango            2   9   3  10 |     42%  58%   1.1  2.6    4.1    16.8%     58%  58%   1.6  2.6    4.3    39.0%     58%  42%   1.6  1.9    5.3    67.6%
+Vampiro                   2   7   4  10 |     42%  72%   1.5  3.2    3.1    23.1%     58%  72%   2.0  3.2    3.2    46.6%     58%  58%   2.0  2.6    3.8    66.8%
+Basilisco                 2   7   4   9 |     58%  72%   2.0  3.2    2.7    44.6%     72%  72%   2.5  3.2    2.7    68.9%     72%  58%   2.5  2.6    3.0    85.6%
+Guardiano di MIMI         3   9   4  11 |     28%  72%   1.0  3.2    3.3     8.5%     42%  72%   1.5  3.2    3.7    23.9%     42%  58%   1.5  2.6    4.7    42.2%
+Mimic ancestrale          3   7   5  10 |     42%  83%   1.5  3.8    2.6    14.6%     58%  83%   2.0  3.8    2.8    36.4%     58%  72%   2.0  3.2    3.4    56.3%
+Re Goblin Grugno          3   9   4  10 |     42%  72%   1.5  3.2    3.1    13.5%     58%  72%   2.0  3.2    3.3    33.0%     58%  58%   2.0  2.6    3.9    52.0%
+
+P(vittoria eroe) per livello 1..5 (stesso eroe di riferimento):
+mostro                   mz | Assaltatore L1  L2  L3  L4  L5 | Ricercatore L1  L2  L3  L4  L5 |    Stregone L1  L2  L3  L4  L5 |     Oracolo L1  L2  L3  L4  L5
+Folletto Ingannatore      1 |              84  93  96  98  99 |              75  85  95  98  99 |              82  92  98  99 100 |              94  98  99 100 100
+Ratto gigante             1 |              98  99 100 100 100 |              93  95  99 100 100 |              97  97 100 100 100 |              99 100 100 100 100
+Pipistrello vampiro       1 |              95  98  99 100 100 |              89  93  99  99 100 |              96  97 100 100 100 |              99  99 100 100 100
+Coboldo                   1 |              99  99 100 100 100 |              95  97 100 100 100 |              98  98 100 100 100 |             100 100 100 100 100
+Gnomo schiavista          1 |              85  93  96  98  99 |              77  86  95  98  99 |              89  94  99  99 100 |              94  98  99 100 100
+Goblin predone            1 |              93  96  98  99 100 |              86  91  98  99 100 |              94  95  99 100 100 |              98  99 100 100 100
+Scheletro                 1 |              74  83  91  96  98 |              63  72  88  94  97 |              77  82  94  97  99 |              89  94  98  99 100
+Lupo grigio               1 |              90  94  97  98 100 |              82  86  96  98  99 |              90  91  98  99 100 |              97  98 100 100 100
+Ragno delle grotte        1 |              83  90  95  97  99 |              75  82  93  96  98 |              87  90  98  99 100 |              93  97  99 100 100
+Orchetto predone          1 |              71  78  88  93  96 |              63  70  86  91  94 |              76  79  93  96  98 |              87  92  97  98  99
+Melma acida               1 |              78  83  93  97  98 |              71  76  91  95  97 |              80  81  95  98  99 |              93  95  99 100 100
+Zombi                     1 |              83  87  95  98  99 |              76  80  94  97  98 |              84  85  97  98  99 |              95  97  99 100 100
+Bandito della strada      1 |              73  81  91  95  97 |              66  73  88  93  96 |              80  83  96  98  99 |              89  94  98  99  99
+Gnoll cacciatore          2 |              39  46  65  78  84 |              32  38  55  69  81 |              44  47  66  78  89 |              64  74  83  91  95
+Orso delle caverne        2 |              32  38  58  69  78 |              25  30  47  59  73 |              35  37  57  68  82 |              60  68  80  87  93
+Arpia                     2 |              41  52  68  76  82 |              34  44  59  68  79 |              50  60  75  81  90 |              64  76  84  89  94
+Spettro                   2 |              32  45  58  70  76 |              28  39  51  63  72 |              44  57  69  78  85 |              49  65  72  82  87
+Minotauro                 2 |              10  14  25  35  52 |               7  10  19  29  43 |              14  16  29  40  57 |              30  40  50  62  73
+Golem di fango            2 |               7  13  22  38  48 |               5  10  17  32  42 |              11  18  29  46  58 |              17  30  39  58  68
+Vampiro                   2 |              11  19  30  41  49 |               9  15  24  35  45 |              19  27  41  52  64 |              23  37  47  59  67
+Basilisco                 2 |              22  30  46  58  68 |              17  24  38  49  62 |              30  35  53  63  77 |              45  57  69  78  86
+Guardiano di MIMI         3 |               3   7  12  20  26 |               2   5   9  16  22 |               6  12  20  29  39 |               9  17  24  34  42
+Mimic ancestrale          3 |               4   8  15  24  34 |               3   5  11  18  28 |               7  10  21  31  46 |              15  25  36  46  56
+Re Goblin Grugno          3 |               5   9  16  23  32 |               3   6  12  18  27 |               8  13  23  32  44 |              13  24  33  43  52
+
+Segnalazioni di fascia (P(vittoria) < 35 % = troppo forte, > 95 % = banale, ai livelli che pescano quel mazzetto):
+  Folletto Ingannatore   Oracolo      L2:  97.7%  banale
+  Ratto gigante          Assaltatore  L1:  97.9%  banale
+  Ratto gigante          Assaltatore  L2:  99.1%  banale
+  Ratto gigante          Ricercatore  L2:  95.1%  banale
+  Ratto gigante          Stregone     L1:  96.8%  banale
+  Ratto gigante          Stregone     L2:  97.1%  banale
+  Ratto gigante          Oracolo      L1:  99.5%  banale
+  Ratto gigante          Oracolo      L2:  99.8%  banale
+  Pipistrello vampiro    Assaltatore  L1:  95.3%  banale
+  Pipistrello vampiro    Assaltatore  L2:  97.9%  banale
+  Pipistrello vampiro    Stregone     L1:  95.8%  banale
+  Pipistrello vampiro    Stregone     L2:  96.8%  banale
+  Pipistrello vampiro    Oracolo      L1:  98.6%  banale
+  Pipistrello vampiro    Oracolo      L2:  99.5%  banale
+  Coboldo                Assaltatore  L1:  98.8%  banale
+  Coboldo                Assaltatore  L2:  99.4%  banale
+  Coboldo                Ricercatore  L1:  95.2%  banale
+  Coboldo                Ricercatore  L2:  96.5%  banale
+  Coboldo                Stregone     L1:  97.6%  banale
+  Coboldo                Stregone     L2:  97.8%  banale
+  Coboldo                Oracolo      L1:  99.7%  banale
+  Coboldo                Oracolo      L2:  99.9%  banale
+  Gnomo schiavista       Oracolo      L2:  97.6%  banale
+  Goblin predone         Assaltatore  L2:  96.3%  banale
+  Goblin predone         Stregone     L2:  95.1%  banale
+  Goblin predone         Oracolo      L1:  97.6%  banale
+  Goblin predone         Oracolo      L2:  99.0%  banale
+  Lupo grigio            Oracolo      L1:  96.6%  banale
+  Lupo grigio            Oracolo      L2:  98.2%  banale
+  Ragno delle grotte     Oracolo      L2:  96.6%  banale
+  Melma acida            Oracolo      L2:  95.4%  banale
+  Zombi                  Oracolo      L2:  96.9%  banale
+  Minotauro              Assaltatore  L3:  25.1%  troppo forte
+  Minotauro              Ricercatore  L3:  19.3%  troppo forte
+  Minotauro              Ricercatore  L4:  28.6%  troppo forte
+  Minotauro              Stregone     L3:  29.1%  troppo forte
+  Golem di fango         Assaltatore  L3:  21.6%  troppo forte
+  Golem di fango         Ricercatore  L3:  17.1%  troppo forte
+  Golem di fango         Ricercatore  L4:  31.7%  troppo forte
+  Golem di fango         Stregone     L3:  29.4%  troppo forte
+  Vampiro                Assaltatore  L3:  29.5%  troppo forte
+  Vampiro                Ricercatore  L3:  24.0%  troppo forte
+  Vampiro                Ricercatore  L4:  34.5%  troppo forte
+  Guardiano di MIMI      Assaltatore  L5:  26.1%  troppo forte
+  Guardiano di MIMI      Ricercatore  L5:  22.4%  troppo forte
+  Mimic ancestrale       Assaltatore  L5:  33.6%  troppo forte
+  Mimic ancestrale       Ricercatore  L5:  27.9%  troppo forte
+  Re Goblin Grugno       Assaltatore  L5:  31.9%  troppo forte
+  Re Goblin Grugno       Ricercatore  L5:  27.2%  troppo forte
+
+Il boss custode si affronta con 3 Indizi, quindi di solito a livello 2-3 (vedi Monte Carlo):
+boss                classe          L2 nudo  L2 +1/+1   L3 nudo  L3 +1/+1   L4 nudo  L4 +1/+1   L5 nudo  L5 +1/+1
+Guardiano di MIMI   Assaltatore        7.0%     20.6%     12.0%     32.1%     19.6%     50.0%     26.1%     59.3%
+Guardiano di MIMI   Ricercatore        5.1%     16.1%      9.3%     25.9%     15.6%     42.1%     22.4%     54.1%
+Guardiano di MIMI   Stregone          11.9%     27.0%     20.1%     41.2%     28.7%     57.3%     38.5%     69.9%
+Guardiano di MIMI   Oracolo           17.3%     41.6%     23.9%     52.4%     34.5%     69.9%     42.2%     78.1%
+Mimic ancestrale    Assaltatore        7.7%     18.4%     15.4%     31.8%     23.5%     46.0%     33.6%     57.6%
+Mimic ancestrale    Ricercatore        5.1%     13.4%     11.1%     24.5%     18.0%     37.3%     27.9%     51.1%
+Mimic ancestrale    Stregone          10.2%     20.0%     21.3%     35.4%     31.1%     49.5%     45.8%     65.3%
+Mimic ancestrale    Oracolo           25.0%     44.5%     36.4%     58.5%     45.8%     70.5%     56.3%     80.1%
+Re Goblin Grugno    Assaltatore        9.0%     19.6%     16.1%     32.2%     23.5%     46.1%     31.9%     56.6%
+Re Goblin Grugno    Ricercatore        6.4%     14.7%     12.2%     25.4%     18.4%     37.8%     27.2%     50.7%
+Re Goblin Grugno    Stregone          12.6%     22.1%     23.3%     37.1%     31.5%     50.2%     44.2%     64.8%
+Re Goblin Grugno    Oracolo           23.8%     43.1%     33.0%     55.3%     42.5%     68.5%     52.0%     77.7%
+(+1/+1 = con un'arma +1 ATT e uno scudo o armatura +1 AR)
+
+MONTE CARLO: 10000 partite per numero di giocatori, seme 20261105.
+
+Regole simulate (bozza del 3/11 + decisioni dell'autore + D-1/D-2 provvisorie):
+- Eroe: PV 5, ATT 1, MOV 1, AR 1 (scheda). Assaltatore +1 PV e Forte Volontà a ogni scontro vinto,
+  spesa per -1 AR al nemico; Ricercatore +2 MOV; Stregone 2 rilanci dei propri dadi per turno;
+  Oracolo torna in vita con 3 PV, si ricarica con la Locanda.
+- Specie a caso tra le 8 tessere: Umano +1 MOV +1 ATT; Elfo +1 ATT +1 AR; Sanguar +2 MOV;
+  Yumaniano +1 AR +1 ATT (scelte a scelta fatte dall'IA).
+- Livelli a PE 2/4/6/8 (massimo 5): +1 ATT, +2 PV, +1 AR, +2 PV in quest'ordine.
+- Turno: Clessidra (salta) -> carte (max 2, equip solo a inizio turno, max 1) -> D6 + MOV (min 1)
+  -> esplora -> fine. Plancia 10 x 10 di svg.py: 6 partenze, 4 Cripte, 36 caselle «?».
+- «?»: si pesca dal sacchetto (25 rosse, 11 blu); a sacchetto vuoto non succede niente; la casella resta «?».
+  Rossa: mostro del mazzetto del livello (1-2 / 3-4 / 5); se perdi la tessera resta scoperta e chi si
+  ferma lì gira la carta del suo mazzetto; la carta va in fondo. Blu: mazzetto Imprevisti (11 carte).
+- Scontro: iniziativa 1 D6 a testa; pareggio: col mostro vince l'eroe, col boss il boss;
+  Agguato/Fauci = il mostro attacca per primo senza tiro. Colpo se 2D6 + ATT >= 8 + AR, nessun critico.
+  Danni: eroe D6 + bonus; mostro LV1 D6-1 (min 1), LV2 D6, LV3+ D6+1. Abilità dei mostri applicate.
+- Ricompense: mazzetto 1 = 1 Indizio + 1 PE; mazzetto 2 = + Forte Volontà; boss del mazzetto 3 =
+  1 Indizio + livello + Forte Volontà. Forte Volontà (max 1): ritira 1 D6 del tiro per colpire mancato.
+- Al 3° Indizio (solo la prima volta) MIMI va sulla Cripta del D6 (5-6 si ritira) e gli altri prendono
+  1 Indizio. Il boss si sfida con 3 Indizi fermandosi sulla Cripta; le sue ferite restano.
+- Sconfitta: ripartenza D6 (ritira se occupata o accanto a un eroe), PV al massimo, tiro di perdita
+  equipaggiamento; Indizi tenuti.
+- Duello se finisci accanto a un eroe senza aver avuto scontri: lo sfidato può rifiutare dando 1 carta;
+  chi vince prende 1 Indizio, 1 PE e la Forte Volontà; pareggio di iniziativa: MOV più alto, poi lo sfidante.
+
+Approssimazioni del Monte Carlo:
+- Nessuna fuga (morire riporta i PV al massimo e tiene gli Indizi, quindi fuggire non conviene quasi mai).
+- Mappe (TM-01..08), TI-01, TI-05, TI-13, TI-14, TI-18, TI-19, TI-20, TI-21, TI-23 e TI-31 (movimento)
+  restano in mano senza effetto; le Mappe quindi non spostano mai il tesoro.
+- Equipaggiamenti: solo i bonus a ATT/AR/MOV letti dal testo stampato, più Elmo sorgisogno, Mantello
+  delle Braci, Corazza Runica (+2 AR contro LV 3+), Mazza Benedetta, Pugnale Sottile, Bastone del Corvo
+  (1 rilancio), Scudo del Goblin; gli altri effetti degli equipaggiamenti sono ignorati.
+- Incanti giocati dall'IA: danni (TI-02/09/10/11/16/35/40), +colpire (TI-22/29), +danni (TI-28/37),
+  Parata Perfetta, Giuramento di Ferro, +AR (TI-03/27/34), cure (TI-25/26/32), Sguardo Spezzaossa,
+  Metamorfosi in Ratto, Parola di Confusione, carte contro le Trappole (TI-06/17/39), Mappa Sussurrata,
+  Scintilla di Volontà, rilanci (TI-33/38), Richiamo dal Sepolcro. Contro i mostri normali l'IA gioca
+  incanti di danno solo se è in pericolo (PV <= 3) o contro il mazzetto 2; contro il boss gioca tutto.
+- Mano: modalità Casual (5 comuni pescate; lo Stregone 4 di classe + 6 comuni). Draft non simulato.
+- Nei Duelli niente carte; lo sfidato rifiuta se ha Indizi, carte in mano ed è più debole.
+- Tempo reale stimato: 25 s per turno, 15 s per tessera pescata, 30 s per preparare uno scontro,
+  12 s per attacco, 10 s per carta giocata, 40 s per sconfitta (ripartenza e tiro di perdita).
+- Partita interrotta a 120 round (stallo).
+
+=== 2 giocatori ===
+Finite col boss: 100.0%; in stallo a 120 round: 0.0% (nel regolamento non c'è fine per Clessidre o per tempo).
+Round (giro di tavolo) delle partite finite: media 5.0, mediana 5.0, 10°-90° percentile 4-7
+Minuti stimati: media 15, mediana 14, 10°-90° percentile 11-19 (scatola: 25-30 minuti)
+Round in cui qualcuno trova il tesoro (3° Indizio): media 3.6; da lì alla vittoria: media 1.4 round
+Tentativi sul boss per partita: media 1.7, 90° percentile 3; vittorie per tentativo 57.6%
+Eroe medio quando sfida il boss: LIV 2.06, PV 4.40, ATT 3.44, AR 2.82, EQUIP 1.94 (EQUIP = oggetti equipaggiati)
+Vittorie per classe (sulle partite in cui la classe gioca): Assaltatore 55.5%, Ricercatore 44.7%, Stregone 38.8%, Oracolo 61.0% (equo: 50.0%)
+Specie dei vincitori: Yumaniano 26.9%, Elfo 26.0%, Umano 24.1%, Sanguar 23.0%
+Vince chi trova per primo il tesoro (3° Indizio): 52.8%
+Stallo per boss custode: Guardiano di MIMI 0.0%, Mimic ancestrale 0.0%, Re Goblin Grugno 0.0%
+Sconfitte (morti) per partita: media 1.13; per classe: Assaltatore 0.31, Ricercatore 0.83, Stregone 0.78, Oracolo 0.33
+Livello del vincitore: L1 0.5%, L2 91.2%, L3 8.2%, L4 0.0%; livello medio a fine partita 2.03; partite con almeno un eroe a L5: 0.0%
+Scontri per partita 6.7: mazzetto 1 74.2%, mazzetto 2 0.1%, boss (mazzetto 3 e custode) 25.7%
+Duelli per partita 0.01, rifiutati 0.01; turni saltati per Clessidra 0.02; carte giocate 7.2
+Sacchetto svuotato: 0.0% delle partite; sconfitte per Trappola per partita 0.11
+Indizi in gioco contemporaneamente: massimo 9, 99° percentile 7 (segnalini stampati: 16); partite oltre i segnalini: 0.00%
+Clessidre in gioco contemporaneamente: massimo 1 (segnalini stampati: 8)
+
+=== 3 giocatori ===
+Finite col boss: 100.0%; in stallo a 120 round: 0.0% (nel regolamento non c'è fine per Clessidre o per tempo).
+Round (giro di tavolo) delle partite finite: media 4.2, mediana 4.0, 10°-90° percentile 3-5
+Minuti stimati: media 18, mediana 18, 10°-90° percentile 14-23 (scatola: 25-30 minuti)
+Round in cui qualcuno trova il tesoro (3° Indizio): media 3.2; da lì alla vittoria: media 1.0 round
+Tentativi sul boss per partita: media 1.7, 90° percentile 3; vittorie per tentativo 60.2%
+Eroe medio quando sfida il boss: LIV 2.01, PV 4.28, ATT 3.49, AR 2.90, EQUIP 2.07 (EQUIP = oggetti equipaggiati)
+Vittorie per classe (sulle partite in cui la classe gioca): Assaltatore 36.6%, Ricercatore 29.7%, Stregone 23.2%, Oracolo 44.0% (equo: 33.3%)
+Specie dei vincitori: Elfo 26.6%, Umano 25.6%, Yumaniano 25.4%, Sanguar 22.4%
+Vince chi trova per primo il tesoro (3° Indizio): 36.6%
+Stallo per boss custode: Guardiano di MIMI 0.0%, Mimic ancestrale 0.0%, Re Goblin Grugno 0.0%
+Sconfitte (morti) per partita: media 1.18; per classe: Assaltatore 0.23, Ricercatore 0.57, Stregone 0.55, Oracolo 0.22
+Livello del vincitore: L1 1.2%, L2 95.7%, L3 3.0%; livello medio a fine partita 1.93; partite con almeno un eroe a L5: 0.0%
+Scontri per partita 8.4: mazzetto 1 80.2%, mazzetto 2 0.0%, boss (mazzetto 3 e custode) 19.8%
+Duelli per partita 0.03, rifiutati 0.03; turni saltati per Clessidra 0.02; carte giocate 9.4
+Sacchetto svuotato: 0.0% delle partite; sconfitte per Trappola per partita 0.13
+Indizi in gioco contemporaneamente: massimo 11, 99° percentile 10 (segnalini stampati: 16); partite oltre i segnalini: 0.00%
+Clessidre in gioco contemporaneamente: massimo 1 (segnalini stampati: 8)
+
+=== 4 giocatori ===
+Finite col boss: 100.0%; in stallo a 120 round: 0.0% (nel regolamento non c'è fine per Clessidre o per tempo).
+Round (giro di tavolo) delle partite finite: media 3.9, mediana 4.0, 10°-90° percentile 3-5
+Minuti stimati: media 22, mediana 21, 10°-90° percentile 17-27 (scatola: 25-30 minuti)
+Round in cui qualcuno trova il tesoro (3° Indizio): media 3.1; da lì alla vittoria: media 0.8 round
+Tentativi sul boss per partita: media 1.6, 90° percentile 3; vittorie per tentativo 61.0%
+Eroe medio quando sfida il boss: LIV 1.99, PV 4.21, ATT 3.51, AR 2.94, EQUIP 2.13 (EQUIP = oggetti equipaggiati)
+Vittorie per classe (sulle partite in cui la classe gioca): Assaltatore 29.0%, Ricercatore 21.3%, Stregone 16.7%, Oracolo 33.1% (equo: 25.0%)
+Specie dei vincitori: Elfo 26.8%, Yumaniano 25.6%, Umano 24.6%, Sanguar 23.1%
+Vince chi trova per primo il tesoro (3° Indizio): 26.6%
+Stallo per boss custode: Guardiano di MIMI 0.0%, Mimic ancestrale 0.0%, Re Goblin Grugno 0.0%
+Sconfitte (morti) per partita: media 1.28; per classe: Assaltatore 0.17, Ricercatore 0.47, Stregone 0.46, Oracolo 0.18
+Livello del vincitore: L1 1.5%, L2 96.8%, L3 1.7%; livello medio a fine partita 1.86; partite con almeno un eroe a L5: 0.0%
+Scontri per partita 9.9: mazzetto 1 83.5%, mazzetto 2 0.0%, boss (mazzetto 3 e custode) 16.5%
+Duelli per partita 0.03, rifiutati 0.04; turni saltati per Clessidra 0.02; carte giocate 11.5
+Sacchetto svuotato: 0.0% delle partite; sconfitte per Trappola per partita 0.16
+Indizi in gioco contemporaneamente: massimo 15, 99° percentile 13 (segnalini stampati: 16); partite oltre i segnalini: 0.00%
+Clessidre in gioco contemporaneamente: massimo 1 (segnalini stampati: 8)
+
+Collaudo del kit di playtest - dati: stampa/sorgenti/dati/*.csv
+
+Plancia: distanze partenza -> Cripte (vicina..lontana): P1 [3, 6, 6, 7]; P2 [3, 5, 6, 7]; P3 [3, 4, 6, 7]; P4 [3, 6, 6, 7]; P5 [3, 5, 6, 7]; P6 [3, 4, 6, 7]
+Componenti letti: 24 mostri, 44 comuni, 29 di classe, 11 Imprevisti {'Trappola': 5, 'Locanda': 2, 'Fonte': 2, 'Fabbro': 2}, tessere {'rossa': 25, 'blu': 11}, segnalini {'Indizio': 16, 'Clessidra': 8, 'Forte Volontà': 4}
+
+MONTE CARLO: 10000 partite per numero di giocatori, seme 20261105, VARIANTE SENZA CARTE (mani vuote: niente equipaggiamenti né incanti).
+
+Regole simulate (bozza del 3/11 + decisioni dell'autore + D-1/D-2 provvisorie):
+- Eroe: PV 5, ATT 1, MOV 1, AR 1 (scheda). Assaltatore +1 PV e Forte Volontà a ogni scontro vinto,
+  spesa per -1 AR al nemico; Ricercatore +2 MOV; Stregone 2 rilanci dei propri dadi per turno;
+  Oracolo torna in vita con 3 PV, si ricarica con la Locanda.
+- Specie a caso tra le 8 tessere: Umano +1 MOV +1 ATT; Elfo +1 ATT +1 AR; Sanguar +2 MOV;
+  Yumaniano +1 AR +1 ATT (scelte a scelta fatte dall'IA).
+- Livelli a PE 2/4/6/8 (massimo 5): +1 ATT, +2 PV, +1 AR, +2 PV in quest'ordine.
+- Turno: Clessidra (salta) -> carte (max 2, equip solo a inizio turno, max 1) -> D6 + MOV (min 1)
+  -> esplora -> fine. Plancia 10 x 10 di svg.py: 6 partenze, 4 Cripte, 36 caselle «?».
+- «?»: si pesca dal sacchetto (25 rosse, 11 blu); a sacchetto vuoto non succede niente; la casella resta «?».
+  Rossa: mostro del mazzetto del livello (1-2 / 3-4 / 5); se perdi la tessera resta scoperta e chi si
+  ferma lì gira la carta del suo mazzetto; la carta va in fondo. Blu: mazzetto Imprevisti (11 carte).
+- Scontro: iniziativa 1 D6 a testa; pareggio: col mostro vince l'eroe, col boss il boss;
+  Agguato/Fauci = il mostro attacca per primo senza tiro. Colpo se 2D6 + ATT >= 8 + AR, nessun critico.
+  Danni: eroe D6 + bonus; mostro LV1 D6-1 (min 1), LV2 D6, LV3+ D6+1. Abilità dei mostri applicate.
+- Ricompense: mazzetto 1 = 1 Indizio + 1 PE; mazzetto 2 = + Forte Volontà; boss del mazzetto 3 =
+  1 Indizio + livello + Forte Volontà. Forte Volontà (max 1): ritira 1 D6 del tiro per colpire mancato.
+- Al 3° Indizio (solo la prima volta) MIMI va sulla Cripta del D6 (5-6 si ritira) e gli altri prendono
+  1 Indizio. Il boss si sfida con 3 Indizi fermandosi sulla Cripta; le sue ferite restano.
+- Sconfitta: ripartenza D6 (ritira se occupata o accanto a un eroe), PV al massimo, tiro di perdita
+  equipaggiamento; Indizi tenuti.
+- Duello se finisci accanto a un eroe senza aver avuto scontri: lo sfidato può rifiutare dando 1 carta;
+  chi vince prende 1 Indizio, 1 PE e la Forte Volontà; pareggio di iniziativa: MOV più alto, poi lo sfidante.
+
+Approssimazioni del Monte Carlo:
+- Nessuna fuga (morire riporta i PV al massimo e tiene gli Indizi, quindi fuggire non conviene quasi mai).
+- Mappe (TM-01..08), TI-01, TI-05, TI-13, TI-14, TI-18, TI-19, TI-20, TI-21, TI-23 e TI-31 (movimento)
+  restano in mano senza effetto; le Mappe quindi non spostano mai il tesoro.
+- Equipaggiamenti: solo i bonus a ATT/AR/MOV letti dal testo stampato, più Elmo sorgisogno, Mantello
+  delle Braci, Corazza Runica (+2 AR contro LV 3+), Mazza Benedetta, Pugnale Sottile, Bastone del Corvo
+  (1 rilancio), Scudo del Goblin; gli altri effetti degli equipaggiamenti sono ignorati.
+- Incanti giocati dall'IA: danni (TI-02/09/10/11/16/35/40), +colpire (TI-22/29), +danni (TI-28/37),
+  Parata Perfetta, Giuramento di Ferro, +AR (TI-03/27/34), cure (TI-25/26/32), Sguardo Spezzaossa,
+  Metamorfosi in Ratto, Parola di Confusione, carte contro le Trappole (TI-06/17/39), Mappa Sussurrata,
+  Scintilla di Volontà, rilanci (TI-33/38), Richiamo dal Sepolcro. Contro i mostri normali l'IA gioca
+  incanti di danno solo se è in pericolo (PV <= 3) o contro il mazzetto 2; contro il boss gioca tutto.
+- Mano: modalità Casual (5 comuni pescate; lo Stregone 4 di classe + 6 comuni). Draft non simulato.
+- Nei Duelli niente carte; lo sfidato rifiuta se ha Indizi, carte in mano ed è più debole.
+- Tempo reale stimato: 25 s per turno, 15 s per tessera pescata, 30 s per preparare uno scontro,
+  12 s per attacco, 10 s per carta giocata, 40 s per sconfitta (ripartenza e tiro di perdita).
+- Partita interrotta a 120 round (stallo).
+
+=== 2 giocatori ===
+Finite col boss: 100.0%; in stallo a 120 round: 0.0% (nel regolamento non c'è fine per Clessidre o per tempo).
+Round (giro di tavolo) delle partite finite: media 8.3, mediana 8.0, 10°-90° percentile 5-12
+Minuti stimati: media 26, mediana 24, 10°-90° percentile 16-37 (scatola: 25-30 minuti)
+Round in cui qualcuno trova il tesoro (3° Indizio): media 4.4; da lì alla vittoria: media 3.9 round
+Tentativi sul boss per partita: media 5.0, 90° percentile 9; vittorie per tentativo 19.9%
+Eroe medio quando sfida il boss: LIV 2.12, PV 4.85, ATT 2.71, AR 1.46, EQUIP 0.00 (EQUIP = oggetti equipaggiati)
+Vittorie per classe (sulle partite in cui la classe gioca): Assaltatore 50.1%, Ricercatore 46.0%, Stregone 58.2%, Oracolo 45.7% (equo: 50.0%)
+Specie dei vincitori: Elfo 27.1%, Yumaniano 26.9%, Umano 24.8%, Sanguar 21.2%
+Vince chi trova per primo il tesoro (3° Indizio): 57.0%
+Stallo per boss custode: Guardiano di MIMI 0.0%, Mimic ancestrale 0.0%, Re Goblin Grugno 0.0%
+Sconfitte (morti) per partita: media 6.00; per classe: Assaltatore 2.83, Ricercatore 3.72, Stregone 2.58, Oracolo 2.87
+Livello del vincitore: L2 80.7%, L3 19.3%, L4 0.1%; livello medio a fine partita 2.13; partite con almeno un eroe a L5: 0.0%
+Scontri per partita 11.7: mazzetto 1 56.7%, mazzetto 2 0.3%, boss (mazzetto 3 e custode) 43.0%
+Duelli per partita 0.06, rifiutati 0.00; turni saltati per Clessidra 0.12; carte giocate 0.0
+Sacchetto svuotato: 0.0% delle partite; sconfitte per Trappola per partita 0.33
+Indizi in gioco contemporaneamente: massimo 9, 99° percentile 7 (segnalini stampati: 16); partite oltre i segnalini: 0.00%
+Clessidre in gioco contemporaneamente: massimo 2 (segnalini stampati: 8)
+
+=== 3 giocatori ===
+Finite col boss: 100.0%; in stallo a 120 round: 0.0% (nel regolamento non c'è fine per Clessidre o per tempo).
+Round (giro di tavolo) delle partite finite: media 6.9, mediana 7.0, 10°-90° percentile 5-9
+Minuti stimati: media 31, mediana 30, 10°-90° percentile 21-43 (scatola: 25-30 minuti)
+Round in cui qualcuno trova il tesoro (3° Indizio): media 3.9; da lì alla vittoria: media 3.0 round
+Tentativi sul boss per partita: media 5.1, 90° percentile 9; vittorie per tentativo 19.6%
+Eroe medio quando sfida il boss: LIV 2.08, PV 4.58, ATT 2.73, AR 1.47, EQUIP 0.00 (EQUIP = oggetti equipaggiati)
+Vittorie per classe (sulle partite in cui la classe gioca): Assaltatore 32.1%, Ricercatore 28.6%, Stregone 41.0%, Oracolo 31.5% (equo: 33.3%)
+Specie dei vincitori: Elfo 27.5%, Yumaniano 26.9%, Umano 25.8%, Sanguar 19.9%
+Vince chi trova per primo il tesoro (3° Indizio): 40.2%
+Stallo per boss custode: Guardiano di MIMI 0.0%, Mimic ancestrale 0.0%, Re Goblin Grugno 0.0%
+Sconfitte (morti) per partita: media 6.77; per classe: Assaltatore 2.13, Ricercatore 2.74, Stregone 2.03, Oracolo 2.13
+Livello del vincitore: L2 86.9%, L3 13.0%, L4 0.1%; livello medio a fine partita 2.04; partite con almeno un eroe a L5: 0.0%
+Scontri per partita 14.1: mazzetto 1 63.6%, mazzetto 2 0.1%, boss (mazzetto 3 e custode) 36.2%
+Duelli per partita 0.12, rifiutati 0.00; turni saltati per Clessidra 0.16; carte giocate 0.0
+Sacchetto svuotato: 0.0% delle partite; sconfitte per Trappola per partita 0.43
+Indizi in gioco contemporaneamente: massimo 12, 99° percentile 11 (segnalini stampati: 16); partite oltre i segnalini: 0.00%
+Clessidre in gioco contemporaneamente: massimo 2 (segnalini stampati: 8)
+
+=== 4 giocatori ===
+Finite col boss: 100.0%; in stallo a 120 round: 0.0% (nel regolamento non c'è fine per Clessidre o per tempo).
+Round (giro di tavolo) delle partite finite: media 6.1, mediana 6.0, 10°-90° percentile 4-8
+Minuti stimati: media 36, mediana 35, 10°-90° percentile 25-49 (scatola: 25-30 minuti)
+Round in cui qualcuno trova il tesoro (3° Indizio): media 3.6; da lì alla vittoria: media 2.5 round
+Tentativi sul boss per partita: media 5.1, 90° percentile 9; vittorie per tentativo 19.6%
+Eroe medio quando sfida il boss: LIV 2.06, PV 4.41, ATT 2.75, AR 1.49, EQUIP 0.00 (EQUIP = oggetti equipaggiati)
+Vittorie per classe (sulle partite in cui la classe gioca): Assaltatore 22.9%, Ricercatore 21.0%, Stregone 31.3%, Oracolo 24.8% (equo: 25.0%)
+Specie dei vincitori: Yumaniano 28.3%, Elfo 28.0%, Umano 25.0%, Sanguar 18.7%
+Vince chi trova per primo il tesoro (3° Indizio): 31.5%
+Stallo per boss custode: Guardiano di MIMI 0.0%, Mimic ancestrale 0.0%, Re Goblin Grugno 0.0%
+Sconfitte (morti) per partita: media 7.54; per classe: Assaltatore 1.79, Ricercatore 2.26, Stregone 1.75, Oracolo 1.76
+Livello del vincitore: L2 89.7%, L3 10.3%, L4 0.0%; livello medio a fine partita 1.98; partite con almeno un eroe a L5: 0.0%
+Scontri per partita 16.4: mazzetto 1 68.8%, mazzetto 2 0.1%, boss (mazzetto 3 e custode) 31.1%
+Duelli per partita 0.20, rifiutati 0.00; turni saltati per Clessidra 0.20; carte giocate 0.0
+Sacchetto svuotato: 0.0% delle partite; sconfitte per Trappola per partita 0.54
+Indizi in gioco contemporaneamente: massimo 16, 99° percentile 14 (segnalini stampati: 16); partite oltre i segnalini: 0.00%
+Clessidre in gioco contemporaneamente: massimo 1 (segnalini stampati: 8)
+
+Collaudo del kit di playtest - dati: stampa/sorgenti/dati/*.csv
+
+Plancia: distanze partenza -> Cripte (vicina..lontana): P1 [3, 6, 6, 7]; P2 [3, 5, 6, 7]; P3 [3, 4, 6, 7]; P4 [3, 6, 6, 7]; P5 [3, 5, 6, 7]; P6 [3, 4, 6, 7]
+Componenti letti: 24 mostri, 44 comuni, 29 di classe, 11 Imprevisti {'Trappola': 5, 'Locanda': 2, 'Fonte': 2, 'Fabbro': 2}, tessere {'rossa': 25, 'blu': 11}, segnalini {'Indizio': 16, 'Clessidra': 8, 'Forte Volontà': 4}
+
+MONTE CARLO: 10000 partite per numero di giocatori, seme 20261105, DANNO DELL'AUTORE (D6 + ATT - AR del bersaglio, minimo 1, al posto della tabella).
+
+Regole simulate (bozza del 3/11 + decisioni dell'autore + D-1/D-2 provvisorie):
+- Eroe: PV 5, ATT 1, MOV 1, AR 1 (scheda). Assaltatore +1 PV e Forte Volontà a ogni scontro vinto,
+  spesa per -1 AR al nemico; Ricercatore +2 MOV; Stregone 2 rilanci dei propri dadi per turno;
+  Oracolo torna in vita con 3 PV, si ricarica con la Locanda.
+- Specie a caso tra le 8 tessere: Umano +1 MOV +1 ATT; Elfo +1 ATT +1 AR; Sanguar +2 MOV;
+  Yumaniano +1 AR +1 ATT (scelte a scelta fatte dall'IA).
+- Livelli a PE 2/4/6/8 (massimo 5): +1 ATT, +2 PV, +1 AR, +2 PV in quest'ordine.
+- Turno: Clessidra (salta) -> carte (max 2, equip solo a inizio turno, max 1) -> D6 + MOV (min 1)
+  -> esplora -> fine. Plancia 10 x 10 di svg.py: 6 partenze, 4 Cripte, 36 caselle «?».
+- «?»: si pesca dal sacchetto (25 rosse, 11 blu); a sacchetto vuoto non succede niente; la casella resta «?».
+  Rossa: mostro del mazzetto del livello (1-2 / 3-4 / 5); se perdi la tessera resta scoperta e chi si
+  ferma lì gira la carta del suo mazzetto; la carta va in fondo. Blu: mazzetto Imprevisti (11 carte).
+- Scontro: iniziativa 1 D6 a testa; pareggio: col mostro vince l'eroe, col boss il boss;
+  Agguato/Fauci = il mostro attacca per primo senza tiro. Colpo se 2D6 + ATT >= 8 + AR, nessun critico.
+  Danni: eroe D6 + bonus; mostro LV1 D6-1 (min 1), LV2 D6, LV3+ D6+1. Abilità dei mostri applicate.
+- Ricompense: mazzetto 1 = 1 Indizio + 1 PE; mazzetto 2 = + Forte Volontà; boss del mazzetto 3 =
+  1 Indizio + livello + Forte Volontà. Forte Volontà (max 1): ritira 1 D6 del tiro per colpire mancato.
+- Al 3° Indizio (solo la prima volta) MIMI va sulla Cripta del D6 (5-6 si ritira) e gli altri prendono
+  1 Indizio. Il boss si sfida con 3 Indizi fermandosi sulla Cripta; le sue ferite restano.
+- Sconfitta: ripartenza D6 (ritira se occupata o accanto a un eroe), PV al massimo, tiro di perdita
+  equipaggiamento; Indizi tenuti.
+- Duello se finisci accanto a un eroe senza aver avuto scontri: lo sfidato può rifiutare dando 1 carta;
+  chi vince prende 1 Indizio, 1 PE e la Forte Volontà; pareggio di iniziativa: MOV più alto, poi lo sfidante.
+
+Approssimazioni del Monte Carlo:
+- Nessuna fuga (morire riporta i PV al massimo e tiene gli Indizi, quindi fuggire non conviene quasi mai).
+- Mappe (TM-01..08), TI-01, TI-05, TI-13, TI-14, TI-18, TI-19, TI-20, TI-21, TI-23 e TI-31 (movimento)
+  restano in mano senza effetto; le Mappe quindi non spostano mai il tesoro.
+- Equipaggiamenti: solo i bonus a ATT/AR/MOV letti dal testo stampato, più Elmo sorgisogno, Mantello
+  delle Braci, Corazza Runica (+2 AR contro LV 3+), Mazza Benedetta, Pugnale Sottile, Bastone del Corvo
+  (1 rilancio), Scudo del Goblin; gli altri effetti degli equipaggiamenti sono ignorati.
+- Incanti giocati dall'IA: danni (TI-02/09/10/11/16/35/40), +colpire (TI-22/29), +danni (TI-28/37),
+  Parata Perfetta, Giuramento di Ferro, +AR (TI-03/27/34), cure (TI-25/26/32), Sguardo Spezzaossa,
+  Metamorfosi in Ratto, Parola di Confusione, carte contro le Trappole (TI-06/17/39), Mappa Sussurrata,
+  Scintilla di Volontà, rilanci (TI-33/38), Richiamo dal Sepolcro. Contro i mostri normali l'IA gioca
+  incanti di danno solo se è in pericolo (PV <= 3) o contro il mazzetto 2; contro il boss gioca tutto.
+- Mano: modalità Casual (5 comuni pescate; lo Stregone 4 di classe + 6 comuni). Draft non simulato.
+- Nei Duelli niente carte; lo sfidato rifiuta se ha Indizi, carte in mano ed è più debole.
+- Tempo reale stimato: 25 s per turno, 15 s per tessera pescata, 30 s per preparare uno scontro,
+  12 s per attacco, 10 s per carta giocata, 40 s per sconfitta (ripartenza e tiro di perdita).
+- Partita interrotta a 120 round (stallo).
+
+=== 2 giocatori ===
+Finite col boss: 100.0%; in stallo a 120 round: 0.0% (nel regolamento non c'è fine per Clessidre o per tempo).
+Round (giro di tavolo) delle partite finite: media 4.9, mediana 5.0, 10°-90° percentile 4-6
+Minuti stimati: media 14, mediana 13, 10°-90° percentile 10-18 (scatola: 25-30 minuti)
+Round in cui qualcuno trova il tesoro (3° Indizio): media 3.5; da lì alla vittoria: media 1.3 round
+Tentativi sul boss per partita: media 1.7, 90° percentile 3; vittorie per tentativo 60.0%
+Eroe medio quando sfida il boss: LIV 2.05, PV 4.57, ATT 3.43, AR 2.77, EQUIP 1.90 (EQUIP = oggetti equipaggiati)
+Vittorie per classe (sulle partite in cui la classe gioca): Assaltatore 55.8%, Ricercatore 45.3%, Stregone 39.2%, Oracolo 59.7% (equo: 50.0%)
+Specie dei vincitori: Yumaniano 27.6%, Elfo 27.0%, Umano 24.1%, Sanguar 21.2%
+Vince chi trova per primo il tesoro (3° Indizio): 53.4%
+Stallo per boss custode: Guardiano di MIMI 0.0%, Mimic ancestrale 0.0%, Re Goblin Grugno 0.0%
+Sconfitte (morti) per partita: media 1.02; per classe: Assaltatore 0.23, Ricercatore 0.81, Stregone 0.70, Oracolo 0.29
+Livello del vincitore: L1 0.6%, L2 91.5%, L3 7.9%; livello medio a fine partita 2.02; partite con almeno un eroe a L5: 0.0%
+Scontri per partita 6.6: mazzetto 1 74.8%, mazzetto 2 0.1%, boss (mazzetto 3 e custode) 25.2%
+Duelli per partita 0.01, rifiutati 0.01; turni saltati per Clessidra 0.02; carte giocate 6.7
+Sacchetto svuotato: 0.0% delle partite; sconfitte per Trappola per partita 0.09
+Indizi in gioco contemporaneamente: massimo 8, 99° percentile 7 (segnalini stampati: 16); partite oltre i segnalini: 0.00%
+Clessidre in gioco contemporaneamente: massimo 1 (segnalini stampati: 8)
+
+=== 3 giocatori ===
+Finite col boss: 100.0%; in stallo a 120 round: 0.0% (nel regolamento non c'è fine per Clessidre o per tempo).
+Round (giro di tavolo) delle partite finite: media 4.1, mediana 4.0, 10°-90° percentile 3-5
+Minuti stimati: media 17, mediana 16, 10°-90° percentile 13-21 (scatola: 25-30 minuti)
+Round in cui qualcuno trova il tesoro (3° Indizio): media 3.2; da lì alla vittoria: media 0.9 round
+Tentativi sul boss per partita: media 1.5, 90° percentile 2; vittorie per tentativo 66.1%
+Eroe medio quando sfida il boss: LIV 2.01, PV 4.47, ATT 3.51, AR 2.93, EQUIP 2.10 (EQUIP = oggetti equipaggiati)
+Vittorie per classe (sulle partite in cui la classe gioca): Assaltatore 38.4%, Ricercatore 29.1%, Stregone 23.7%, Oracolo 42.2% (equo: 33.3%)
+Specie dei vincitori: Elfo 27.6%, Yumaniano 26.4%, Umano 25.2%, Sanguar 20.8%
+Vince chi trova per primo il tesoro (3° Indizio): 35.5%
+Stallo per boss custode: Guardiano di MIMI 0.0%, Mimic ancestrale 0.0%, Re Goblin Grugno 0.0%
+Sconfitte (morti) per partita: media 0.97; per classe: Assaltatore 0.16, Ricercatore 0.50, Stregone 0.45, Oracolo 0.18
+Livello del vincitore: L1 1.0%, L2 96.0%, L3 3.0%; livello medio a fine partita 1.92; partite con almeno un eroe a L5: 0.0%
+Scontri per partita 8.1: mazzetto 1 81.4%, mazzetto 2 0.0%, boss (mazzetto 3 e custode) 18.6%
+Duelli per partita 0.02, rifiutati 0.03; turni saltati per Clessidra 0.02; carte giocate 8.8
+Sacchetto svuotato: 0.0% delle partite; sconfitte per Trappola per partita 0.12
+Indizi in gioco contemporaneamente: massimo 11, 99° percentile 10 (segnalini stampati: 16); partite oltre i segnalini: 0.00%
+Clessidre in gioco contemporaneamente: massimo 1 (segnalini stampati: 8)
+
+=== 4 giocatori ===
+Finite col boss: 100.0%; in stallo a 120 round: 0.0% (nel regolamento non c'è fine per Clessidre o per tempo).
+Round (giro di tavolo) delle partite finite: media 3.8, mediana 4.0, 10°-90° percentile 3-5
+Minuti stimati: media 20, mediana 20, 10°-90° percentile 16-25 (scatola: 25-30 minuti)
+Round in cui qualcuno trova il tesoro (3° Indizio): media 3.0; da lì alla vittoria: media 0.8 round
+Tentativi sul boss per partita: media 1.5, 90° percentile 2; vittorie per tentativo 67.9%
+Eroe medio quando sfida il boss: LIV 1.99, PV 4.43, ATT 3.53, AR 2.98, EQUIP 2.17 (EQUIP = oggetti equipaggiati)
+Vittorie per classe (sulle partite in cui la classe gioca): Assaltatore 28.6%, Ricercatore 21.4%, Stregone 17.3%, Oracolo 32.6% (equo: 25.0%)
+Specie dei vincitori: Yumaniano 27.7%, Elfo 26.7%, Umano 24.5%, Sanguar 21.1%
+Vince chi trova per primo il tesoro (3° Indizio): 25.4%
+Stallo per boss custode: Guardiano di MIMI 0.0%, Mimic ancestrale 0.0%, Re Goblin Grugno 0.0%
+Sconfitte (morti) per partita: media 1.05; per classe: Assaltatore 0.13, Ricercatore 0.40, Stregone 0.37, Oracolo 0.15
+Livello del vincitore: L1 1.6%, L2 96.9%, L3 1.5%; livello medio a fine partita 1.86; partite con almeno un eroe a L5: 0.0%
+Scontri per partita 9.7: mazzetto 1 84.8%, mazzetto 2 0.0%, boss (mazzetto 3 e custode) 15.2%
+Duelli per partita 0.03, rifiutati 0.04; turni saltati per Clessidra 0.03; carte giocate 10.8
+Sacchetto svuotato: 0.0% delle partite; sconfitte per Trappola per partita 0.15
+Indizi in gioco contemporaneamente: massimo 14, 99° percentile 13 (segnalini stampati: 16); partite oltre i segnalini: 0.00%
+Clessidre in gioco contemporaneamente: massimo 1 (segnalini stampati: 8)
+
