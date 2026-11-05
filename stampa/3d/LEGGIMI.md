@@ -13,7 +13,7 @@ delle 36 Tessere Esplorazione. Tutti i pezzi entrano in un piano da **180 × 180
 
 | File | Contenuto | Piano minimo | Tempo stimato* |
 |---|---|---|---|
-| `piatti/stampante1_cubetti_dadi_pedine.3mf` | 69 pezzi: 57 cubetti (32 Durata + 24 statistiche + 1 boss), 8 dadi D6, 4 pedine | 180 × 180 mm | ~4-5 h |
+| `piatti/stampante1_cubetti_pedine.3mf` | 61 pezzi: 57 cubetti (32 Durata + 24 statistiche + 1 boss), 4 pedine (i dadi non si stampano: si usano dadi comprati) | 180 × 180 mm | ~2-3 h |
 | `piatti/stampante2_contenitore.3mf` | bicchiere + coperchio, in diagonale (14,8 mm di spazio tra i due) | 180 × 180 mm | ~6 h |
 
 - **Un solo filamento** per stampante. Su una stampante monocolore stampa il piatto 1 in bianco, poi colora i cubetti delle statistiche e il cubetto del boss con pennarelli indelebili o colore acrilico. Gli oggetti hanno il nome del colore previsto (`cubetto_rosso_PV`, `cubetto_nero_PVmax`, `cubetto_arancio_ATT`, `cubetto_verde_MOV`, `cubetto_blu_AR`, `cubetto_viola_PE`, `cubetto_giallo_boss`, 4 per colore): con un sistema multicolore (AMS/MMU) puoi assegnare il colore a ogni oggetto nello slicer.
