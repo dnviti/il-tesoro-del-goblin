@@ -11,7 +11,7 @@ Stampante A3? Lo stesso kit su 17 fogli A3 è in `../playtest_v5_A3/` (istruzion
 3. **Qualità alta**, colore, senza «risparmio inchiostro». Se esiste, scegli il tipo carta giusto (carta pesante / cartoncino) per far asciugare bene il colore.
 4. **Fronte-retro = ribaltamento sul LATO LUNGO** («Flip on long edge», «rilegatura lato lungo»). Vale per i PDF fronte-retro dell'elenco; gli altri si stampano solo da un lato.
 5. Le facciate dei PDF fronte-retro sono già in ordine **fronte 1, retro 1, fronte 2, retro 2, …**: lascia il fronte-retro automatico del driver e non riordinare le pagine (le facciate dispari sono i fronti, le pari i retro).
-6. Margini: tutto il contenuto e tutte le tacche di taglio stanno ad almeno 6,5 mm dal bordo del foglio, quindi **non serve** attivare «stampa senza bordi».
+6. Margini: tutto il contenuto e tutte le tacche di taglio stanno ad almeno 6,5 mm dal bordo del foglio, quindi **non serve** attivare «stampa senza bordi». **Eccezione, i fogli delle carte:** ogni carta ha la sua abbondanza di colore (2,5 mm oltre il rifilo) e il blocco di 9 carte arriva a 3 mm dai lati lunghi del foglio; le linee di rifilo restano però a più di 5 mm dal bordo. Se la stampante non stampa i primi 3-5 mm, sul lato esterno delle carte di sinistra e di destra l'abbondanza risulta più sottile (almeno 0,5 mm): niente di grave, vedi «Taglio delle carte».
 7. Se la stampante non fa il fronte-retro, o non lo fa sulla carta pesante: vedi «Fronte-retro non allineato» in fondo.
 
 ## 1. Cosa comprare (non stampabile)
@@ -42,7 +42,7 @@ Cubetti e sacchetto puoi anche stamparli in 3D invece di comprarli (il sacchetto
 | # | File | Facciate | Stampa | Carta | Copie | Taglio e montaggio |
 |---|---|---|---|---|---|---|
 | 0 | `00_prova_stampa.pdf` | 2 (1 foglio) | Fronte-retro, lato lungo | normale 80 g | 1 | Niente: serve solo a controllare scala, margini e allineamento |
-| 1 | `carte_comuni.pdf` | 10 (5 fogli) | Fronte-retro, lato lungo | 160-200 g/m², **oppure** 80 g in bustina con una carta vecchia dietro | 1 | 44 carte da 63×88 mm. Vedi «Taglio delle carte» |
+| 1 | `carte_comuni.pdf` | 10 (5 fogli) | Fronte-retro, lato lungo | 160-200 g/m² opaca, **oppure** 80 g in bustina con una carta vecchia dietro | 1 | 44 carte da 63×88 mm. Vedi «Taglio delle carte» |
 | 2 | `carte_classe.pdf` | 8 (4 fogli) | Fronte-retro, lato lungo | come sopra | 1 | 33 carte (4 mazzi di classe + 4 ritratti) |
 | 3 | `carte_mostro.pdf` | 6 (3 fogli) | Fronte-retro, lato lungo | come sopra | 1 | 24 carte (mazzetto 1: 13, mazzetto 2: 8, boss: 3) |
 | 4 | `carte_imprevisto.pdf` | 4 (2 fogli) | Fronte-retro, lato lungo | come sopra | 1 | 11 carte |
@@ -57,17 +57,24 @@ Cubetti e sacchetto puoi anche stamparli in 3D invece di comprarli (il sacchetto
 
 Fogli del kit: 17 fronte-retro (prova 1 + carte 15 + tessere 1) + 11 solo fronte (plancia 4, schede 4, specie 1, segnalini 1, pedine 1) = **28 fogli** (45 facciate). Regolamento: +6 fogli per copia.
 
-Su ogni foglio di carte, nel margine in alto, c'è l'etichetta «FRONTE/RETRO · foglio N di M» e il nome del file: serve a non confondere i fogli e a rimetterli nell'ordine giusto.
+Su ogni foglio di carte, nel margine in alto c'è l'etichetta «FRONTE/RETRO · foglio N di M» e in basso il nome del file con il numero di pagina: servono a non confondere i fogli e a rimetterli nell'ordine giusto.
 
-## 4. Taglio delle carte (fogli da 9 carte)
+## 4. Taglio delle carte (fogli da 9 carte, con la dima MTG)
 
-Le carte sono 63 × 88 mm, 3 × 3 per foglio, **a contatto**: si taglia lungo 4 linee verticali e 4 orizzontali, ognuna a tutta larghezza, e ogni linea è la giunzione tra due file di carte. Non ci sono spazi da tagliare via, e un taglio che sbaglia di 1 mm si nota appena (il colore del bordo arriva fino al taglio).
+Ogni carta è **separata**: ha il suo bordo di colore in più (**abbondanza**, 2,5 mm per lato) oltre il rifilo 63 × 88 mm, quindi la cella di ogni carta è 68 × 93 mm; le 9 celle (3 × 3, blocco 204 × 279 mm) si toccano ma non si sovrappongono. Il taglio finale lo fa la **dima per carte MTG** (63 × 88 mm), tagliando sul rifilo; prima si separano le carte con un taglio grossolano lungo i bordi dell'abbondanza.
 
-1. Ai margini del foglio (fuori dalle carte) ci sono le **tacche**: 4 in alto e 4 in basso (linee verticali), 4 a sinistra e 4 a destra (linee orizzontali). Una linea di taglio unisce due tacche opposte. Sulle giunzioni tra le carte c'è anche una linea bianca sottilissima che guida il taglio.
-2. Con taglierina a ghigliottina, o righello metallico + cutter + tappetino: **taglia prima le 4 linee verticali** (anche le due esterne, per togliere il bordo bianco), poi le 4 orizzontali. Con le forbici si fa lo stesso, ma serve più pazienza.
-3. Taglia al centro della linea tra due tacche; un errore di 1 mm non si vede (il colore del bordo arriva fino al taglio e sui due lati c'è lo stesso margine).
-4. Controlla un foglio finito: ogni carta deve misurare 63 × 88 mm (±1 mm).
-5. Carta da 80 g: mettila in una bustina con una carta vecchia dietro (altrimenti il retro si vede in trasparenza e la carta è troppo morbida). Carta da 160-200 g: basta così; se la stampante la accetta sul fronte-retro, tienila come prima scelta.
+Cosa c'è sul foglio:
+- **Tacche d'angolo nere** nei margini in alto e in basso, in corrispondenza dei rifili verticali di ogni carta (sui lati lunghi del foglio non c'è posto per le tacche).
+- **Filetti bianchi sottilissimi** in ogni angolo di ogni carta, dentro l'abbondanza: sono il prolungamento dei lati del rifilo e finiscono a 0,3 mm dal rifilo. Segnano dove cade il bordo della dima.
+
+Procedimento:
+1. **Taglio grossolano:** con la taglierina a ghigliottina (o righello + cutter + tappetino, o forbici) separa le 9 carte tagliando lungo i **confini tra le celle**, cioè a 2,5 mm dal rifilo di ciascuna delle due carte vicine. Quando due carte vicine hanno colori diversi il confine si vede; se hanno lo stesso colore (per esempio le Carte Aiuto), cadi a **metà dei segmenti bianchi** che uniscono i filetti di due carte vicine. All'esterno il confine è il bordo del blocco colorato. Non serve precisione (±1 mm va bene): ogni carta tagliata misura circa 68 × 93 mm e ha colore tutt'intorno. Prima le linee verticali, poi le orizzontali. L'abbondanza serve proprio a questo: si taglia fuori dal rifilo, mai sul rifilo.
+2. **Dima:** metti una carta nella dima MTG (63 × 88 mm) in modo che i **filetti bianchi** arrivino fino al bordo della finestra della dima su tutti e 4 i lati (i filetti finiscono a 0,3 mm dal rifilo): il colore in più sporge dai quattro lati.
+3. **Taglio finale:** taglia con il cutter (o la taglierina della dima) lungo il bordo della dima, togliendo l'abbondanza e i filetti. Se il taglio sbaglia di 1-2 mm verso l'esterno, il colore c'è comunque; non tagliare mai all'interno del rifilo.
+4. **Carte di sinistra e di destra (colonne 1 e 3):** se la stampante non ha stampato il bordo esterno, l'abbondanza su quel lato è più sottile (comunque ≥ 0,5 mm per una stampante con zona non stampabile di 5 mm); allinea il filetto con cura e, se serve, appoggia la carta alla dima spingendola sul lato sottile.
+5. Controlla un foglio finito: ogni carta deve misurare 63 × 88 mm (±0,5 mm), con colore fino al bordo su tutti e 4 i lati e senza filetti bianchi.
+
+**Carta.** 160-200 g/m² opaca (o semilucida), liscia, adatta alla stampante: è la prima scelta, più rigida e con meno trasparenza. Con la dima si taglia una carta alla volta, quindi anche la carta spessa si taglia bene, ma servono lame affilate. Carta da 80 g: mettila in una bustina con una carta vecchia dietro (altrimenti il retro si vede in trasparenza e la carta è troppo morbida); la dima funziona anche su carta sottile, ma conviene tagliare 1-2 carte per volta. Carta lucida o fotografica: evitala (il colore pieno di fondo può macchiarsi al tocco e i fronte-retro ne risentono).
 
 ## 5. Montaggio della plancia
 

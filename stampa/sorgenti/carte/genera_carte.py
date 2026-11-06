@@ -5,14 +5,17 @@ Equivale a un Data Merge: legge i CSV in ../dati, scrive per ogni PDF uno script
 di comandi DesignCraft (carte_*.dcs), lo esegue con `designcraft-cli script`,
 salva il progetto modificabile (carte_*.designcraft) e il PDF in ../../playtest_v5.
 
-Formato: carta 63 x 88 mm, 9 carte per foglio A4 (3 x 3) a battuta, 189 x 264 mm centrati, linee di taglio
-condivise (si taglia a tutta larghezza), abbondanza di 1 mm solo sul lato esterno della griglia. Segni di taglio ed
-etichette a >= 6,5 mm dal bordo del foglio (le stampanti domestiche non stampano i primi ~5 mm).
+Formato: carta 63 x 88 mm rifilata, OGNI carta con la sua abbondanza (bleed) su tutti e 4 i lati: fondo/cornice colorati
+si estendono oltre il rifilo di 2,5 mm (A4, cella 68 x 93 mm) o 3 mm (A3, cella 69 x 94 mm). Le celle si toccano ma non si
+sovrappongono. A4: 3 x 3 = 9 carte, blocco 204 x 279 mm centrato (rifilo esterno a >= 5,5 mm dal bordo); l'abbondanza
+esterna può cadere nella zona non stampabile (è solo colore in più). Segni di taglio: tacche d'angolo sul margine esterno
+del foglio dove c'è posto, più un filetto bianco sottilissimo a ogni angolo di rifilo dentro l'abbondanza (si ritaglia
+sul bordo dell'abbondanza e poi si centra la carta nella dima 63 x 88 mm).
 Ordine delle pagine per il fronte-retro automatico: F1, R1, F2, R2, ...; i retro sono specchiati sul lato lungo
-(rilegatura sul lato lungo): la carta in colonna c sul fronte ha il retro in colonna 2 - c.
+(rilegatura sul lato lungo): la carta in colonna c sul fronte ha il retro in colonna NC - 1 - c.
 
-Formato A3 (`--formato A3`): 16 carte per foglio A3 verticale (4 x 4), 252 x 352 mm centrati (margini 22,5 / 34 mm),
-stesse regole; PDF in ../../playtest_v5_A3 e progetti in ./A3. Senza opzione: A4, output invariato.
+Formato A3 (`--formato A3`): 16 carte per foglio A3 verticale (4 x 4), blocco 276 x 376 mm centrato, abbondanza 3 mm,
+stesse regole; PDF in ../../playtest_v5_A3 e progetti in ./A3. Senza opzione: A4.
 
 Uso: python3 genera_carte.py [--solo NOME] [--formato A4|A3]   (richiede designcraft-cli)
 """
@@ -40,12 +43,14 @@ else:
     PW, PH = 841.89, 1190.551                  # A3 (297 x 420 mm)
     NC, NR = 4, 4
 PER_FOGLIO = NC * NR
-# Griglia NC x NR «a battuta»: le carte si toccano e condividono le linee di taglio (NC+1 verticali + NR+1 orizzontali,
-# tutte a tutta larghezza/altezza). A4 3 x 3: 189 x 264 mm, margini 10,5 / 16,5 mm. A3 4 x 4: 252 x 352 mm, 22,5 / 34 mm.
-X0, Y0 = (PW - NC * CW) / 2, (PH - NR * CH) / 2
-SB = 1.0 * MM                                  # abbondanza SOLO sul lato esterno della griglia (1 mm)
-MIN_BORDO = 6.5 * MM                           # segni di taglio ed etichette: mai a meno di 6,5 mm dal bordo foglio
-SAFE = 9.0                                     # bordo colorato: tutto il testo sta oltre 3 mm (8,5 pt)
+B = (2.5 if FORMATO == "A4" else 3.0) * MM     # abbondanza per lato (pt)
+CELLA_W, CELLA_H = CW + 2 * B, CH + 2 * B      # cella = carta + abbondanza; le celle vicine si toccano
+# Griglia NC x NR di celle: A4 3 x 3 = 204 x 279 mm (margini 3 / 9 mm), A3 4 x 4 = 276 x 376 mm (margini 10,5 / 22 mm).
+X0, Y0 = (PW - NC * CELLA_W) / 2, (PH - NR * CELLA_H) / 2   # angolo del blocco (bordo esterno dell'abbondanza)
+SAFE = 9.0                                     # bordo colorato: tutto il testo sta oltre 3 mm (8,5 pt) dal rifilo
+TACCA, TACCA_GAP = 3.0 * MM, 0.5 * MM          # tacche esterne: lunghezza e distanza dal blocco
+TACCA_MIN = 5.0 * MM                           # tacche solo dove il margine esterno e' >= 5 mm
+FILETTO_GAP = 0.3 * MM                         # i filetti interni finiscono 0,3 mm prima del rifilo
 
 SWATCH = {
     "Inchiostro": "#2a2118", "Marrone": "#6b4a2b", "Rosso": "#9c2f24", "Oro": "#b8862b",
@@ -75,6 +80,7 @@ PARA = [
     ("Titolo", {"align": "center"}, {"fontFamily": SERIF, "fontStyle": "Bold", "size": 10.5, "leading": lead(12), "fill": "Inchiostro", "tracking": -5}),
     ("Etichetta", {"align": "left"}, {"fontFamily": SANS, "fontStyle": "SemiBold", "size": 6.5, "leading": lead(7.5), "fill": "Marrone", "tracking": 40}),
     ("EtichettaDx", {"align": "right"}, {"fontFamily": SANS, "fontStyle": "SemiBold", "size": 6.5, "leading": lead(7.5), "fill": "Marrone", "tracking": 40}),
+    ("EtichettaCentro", {"align": "center"}, {"fontFamily": SANS, "fontStyle": "SemiBold", "size": 6.5, "leading": lead(7.5), "fill": "Marrone", "tracking": 40}),
     ("Testo", {"align": "left", "hyphenate": False, "grepStyles": [{"style": "Valore", "pattern": "\\([+\u2011\u2212-]?\\d+\\)"}]},
      {"fontFamily": SERIF, "fontStyle": "Regular", "size": 9.5, "leading": lead(12), "fill": "Inchiostro"}),
     ("TestoCentro", {"align": "center", "hyphenate": False}, {"fontFamily": SERIF, "fontStyle": "Regular", "size": 10.5, "leading": lead(13.5), "fill": "Inchiostro"}),
@@ -217,42 +223,50 @@ class Doc:
 
 
 def origine(pos, retro):
+    """Angolo di rifilo (ox, oy) della carta in posizione pos; il retro e' specchiato sul lato lungo."""
     r, c = divmod(pos, NC)
     if retro:
         c = NC - 1 - c
-    return X0 + c * CW, Y0 + r * CH
+    return X0 + c * CELLA_W + B, Y0 + r * CELLA_H + B
 
 
 def sangue(ox, oy):
-    """Rettangolo del fondo colorato: il rifilo della carta, più SB solo sui lati che toccano il bordo
-    della griglia (le carte vicine si toccano e si tagliano sulla stessa linea)."""
-    e = 0.01
-    return [ox - (SB if abs(ox - X0) < e else 0), oy - (SB if abs(oy - Y0) < e else 0),
-            ox + CW + (SB if abs(ox + CW - (X0 + NC * CW)) < e else 0), oy + CH + (SB if abs(oy + CH - (Y0 + NR * CH)) < e else 0)]
+    """Rettangolo del fondo colorato: il rifilo piu' l'abbondanza B su tutti e 4 i lati (le celle vicine si toccano)."""
+    return [ox - B, oy - B, ox + CW + B, oy + CH + B]
 
 
-def segni_taglio(d, sp, nome, foglio, fogli, retro, pagina, pagine):
-    """Segni di taglio (NC+1 + NR+1 linee, tutte a tutto foglio) ed etichetta della pagina. Tutto a >= 6,5 mm dal bordo
-    del foglio; i segni stanno fuori dalla griglia e dalla sua abbondanza esterna, mai sulle carte."""
-    gap = 0.5 * MM
-    xs = [X0 + k * CW for k in range(NC + 1)]
-    ys = [Y0 + k * CH for k in range(NR + 1)]
-    for x in xs:
-        d.linea(sp, (x, MIN_BORDO), (x, Y0 - SB - gap), "[Registration]", 0.5)
-        d.linea(sp, (x, Y0 + NR * CH + SB + gap), (x, PH - MIN_BORDO), "[Registration]", 0.5)
-    for y in ys:
-        d.linea(sp, (MIN_BORDO, y), (X0 - SB - gap, y), "[Registration]", 0.5)
-        d.linea(sp, (X0 + NC * CW + SB + gap, y), (PW - MIN_BORDO, y), "[Registration]", 0.5)
-    # linee guida bianche sottilissime sulle giunzioni interne (si vede dove tagliare; non lasciano traccia sul rifilo)
-    for x in xs[1:NC]:
-        d.linea(sp, (x, Y0), (x, Y0 + NR * CH), "[Paper]", 0.25)
-    for y in ys[1:NR]:
-        d.linea(sp, (X0, y), (X0 + NC * CW, y), "[Paper]", 0.25)
-    # etichetta fuori dalla griglia (si butta con il bordo), tra i segni di taglio, a >= 8 mm dal bordo
+def segni_taglio(d, sp, nome, foglio, fogli, retro, pagina, pagine, occupate):
+    """Tacche d'angolo sul margine esterno (solo dove ci sono >= 5 mm), filetti bianchi dentro l'abbondanza di ogni carta
+    presente (occupate = angoli di rifilo) ed etichette del foglio, nelle fasce di margine tra le tacche."""
+    xs = [X0 + c * CELLA_W + B + dx for c in range(NC) for dx in (0, CW)]       # linee verticali di rifilo
+    ys = [Y0 + r * CELLA_H + B + dy for r in range(NR) for dy in (0, CH)]      # linee orizzontali di rifilo
+    bx0, by0, bx1, by1 = X0, Y0, X0 + NC * CELLA_W, Y0 + NR * CELLA_H
+    if by0 >= TACCA_MIN:
+        for x in xs:
+            d.linea(sp, (x, by0 - TACCA_GAP - TACCA), (x, by0 - TACCA_GAP), "[Registration]", 0.5)
+            d.linea(sp, (x, by1 + TACCA_GAP), (x, by1 + TACCA_GAP + TACCA), "[Registration]", 0.5)
+    if bx0 >= TACCA_MIN:
+        for y in ys:
+            d.linea(sp, (bx0 - TACCA_GAP - TACCA, y), (bx0 - TACCA_GAP, y), "[Registration]", 0.5)
+            d.linea(sp, (bx1 + TACCA_GAP, y), (bx1 + TACCA_GAP + TACCA, y), "[Registration]", 0.5)
+    # filetti bianchi: a ogni angolo di rifilo, sul prolungamento dei lati, dentro l'abbondanza (si ritagliano via)
+    for ox, oy in occupate:
+        for x, sx in ((ox, -1), (ox + CW, 1)):
+            for y, sy in ((oy, -1), (oy + CH, 1)):
+                a = x + sx * FILETTO_GAP
+                d.linea(sp, (a, y), (x + sx * B, y), "[Paper]", 0.25)
+                b = y + sy * FILETTO_GAP
+                d.linea(sp, (x, b), (x, y + sy * B), "[Paper]", 0.25)
+    # etichette: sopra (fronte/retro) e sotto (file e pagina) il blocco. A4 (3 colonne): nella fascia delle tacche, tra
+    # quelle della colonna centrale (dove non ci sono tacche). Con piu' colonne le tacche attraversano la fascia, quindi
+    # l'etichetta va oltre le tacche (sul margine esterno c'e' posto: sull'A3 22 mm sopra e sotto).
     lato = "RETRO · girare sul lato lungo" if retro else "FRONTE"
-    y0, y1 = 8.0 * MM, 11.5 * MM
-    d.testo(sp, [X0 + 5, y0, X0 + CW - 5, y1], f"{lato} · foglio {foglio} di {fogli}", "Etichetta")
-    d.testo(sp, [X0 + (NC - 1) * CW + 5, y0, X0 + NC * CW - 5, y1], f"{nome}.pdf · pag. {pagina}/{pagine}", "EtichettaDx")
+    if NC <= 3:
+        xa, xb, su = X0 + CELLA_W + B + 2, X0 + (NC - 2) * CELLA_W + B + CW - 2, 0.0
+    else:
+        xa, xb, su = X0 + B, X0 + NC * CELLA_W - B, TACCA + 1.0 * MM
+    d.testo(sp, [xa, by0 - TACCA_GAP - TACCA - su, xb, by0 - TACCA_GAP - su], f"{lato} · foglio {foglio} di {fogli}", "EtichettaCentro", vj="bottom")
+    d.testo(sp, [xa, by1 + TACCA_GAP + su, xb, by1 + TACCA_GAP + TACCA + su], f"{nome}.pdf · pag. {pagina}/{pagine}", "EtichettaCentro", vj="top")
 
 
 def cornice(d, sp, ox, oy, colore, fondo="Carta"):
@@ -405,14 +419,17 @@ def costruisci(nome, titolo, carte):
     n = len(carte)
     fogli = (n + PER_FOGLIO - 1) // PER_FOGLIO
     d = Doc(titolo, 2 * fogli)
+    occupate = [([], []) for _ in range(fogli)]          # per foglio: angoli di rifilo (fronte, retro)
     for k, (fr, rt) in enumerate(carte):
         ox, oy = origine(k % PER_FOGLIO, False)
         fr(d, 2 * (k // PER_FOGLIO), ox, oy)
+        occupate[k // PER_FOGLIO][0].append((ox, oy))
         ox, oy = origine(k % PER_FOGLIO, True)
         rt(d, 2 * (k // PER_FOGLIO) + 1, ox, oy)
+        occupate[k // PER_FOGLIO][1].append((ox, oy))
     d.cmd("layer.new", name="Segni di taglio")
     for sp in range(2 * fogli):
-        segni_taglio(d, sp, nome, sp // 2 + 1, fogli, sp % 2 == 1, sp + 1, 2 * fogli)
+        segni_taglio(d, sp, nome, sp // 2 + 1, fogli, sp % 2 == 1, sp + 1, 2 * fogli, occupate[sp // 2][sp % 2])
     d.cmd("file.exportPdf", path=str(PDF_DIR / f"{nome}.pdf"), standard="x4", title=titolo, bleed=False, marks=False)
     with tempfile.TemporaryDirectory(prefix="goblin_carte_") as tmp:
         src = pathlib.Path(tmp) / f"{nome}.dcs"

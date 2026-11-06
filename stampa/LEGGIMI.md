@@ -28,12 +28,12 @@ Altri testi modificati rispetto al PDF v5, segnalati con PROVVISORIO sulle carte
 
 **Versione A3:** stesso kit su fogli A3 (17 fogli invece di 28) in `playtest_v5_A3/`, istruzioni in `playtest_v5_A3/ISTRUZIONI_DI_STAMPA_A3.md`.
 
-Tutti A4. Stampa **al 100 % / dimensioni effettive** (niente «adatta alla pagina»). Tutto il contenuto e tutte le tacche di taglio stanno ad almeno 6,5 mm dal bordo del foglio (le stampanti di casa non stampano i primi ~5 mm). I PDF fronte-retro hanno le facciate in ordine **F1, R1, F2, R2, …** (fronte-retro automatico sul **lato lungo**; facciate dispari = fronti, pari = retro).
+Tutti A4. Stampa **al 100 % / dimensioni effettive** (niente «adatta alla pagina»). Tutto il contenuto e tutte le tacche di taglio stanno ad almeno 6,5 mm dal bordo del foglio (le stampanti di casa non stampano i primi ~5 mm), **salvo i fogli delle carte**: ogni carta ha la sua abbondanza di 2,5 mm, il blocco colorato arriva a 3 mm dai lati lunghi del foglio (l'abbondanza esterna può cadere nella zona non stampabile: è solo colore in più) e le linee di rifilo stanno a ≥ 5,5 mm dal bordo. I PDF fronte-retro hanno le facciate in ordine **F1, R1, F2, R2, …** (fronte-retro automatico sul **lato lungo**; facciate dispari = fronti, pari = retro).
 
 | File | Contenuto | Pezzi | Facciate | Stampa e montaggio |
 |---|---|---|---|---|
 | `00_prova_stampa.pdf` | Righello 100 mm, quadrato 50 mm, riquadro a 6,5 mm, bersagli fronte-retro | – | 2 (1 foglio) | Fronte-retro, lato lungo. Solo per controllare la stampante. |
-| `carte_comuni.pdf` | 8 Mappe, 12 Equipaggiamenti, 24 Incanti | 44 | 10 (5 fogli) | Fronte-retro, lato lungo. 9 carte da 63×88 mm per foglio, a contatto (189 × 264 mm): 4 tagli verticali e 4 orizzontali a tutta larghezza sulle tacche. |
+| `carte_comuni.pdf` | 8 Mappe, 12 Equipaggiamenti, 24 Incanti | 44 | 10 (5 fogli) | Fronte-retro, lato lungo. 9 carte per foglio (3 × 3), **ognuna separata con 2,5 mm di abbondanza per lato** (celle 68 × 93 mm, blocco 204 × 279 mm; rifilo 63×88 mm). Taglio: grossolano sui confini tra le celle, poi nella **dima MTG** 63×88 mm allineando i filetti bianchi d'angolo. |
 | `carte_classe.pdf` | Mazzi Assaltatore 8, Ricercatore 5, Stregone 4, Oracolo 12 + 4 ritratti TC-01…04 | 33 | 8 (4 fogli) | Come sopra. |
 | `carte_mostro.pdf` | Mazzetto 1 (13), mazzetto 2 (8), boss (3) | 24 | 6 (3 fogli) | Come sopra. |
 | `carte_imprevisto.pdf` | Trappola, Locanda, Fonte, Fabbro | 11 | 4 (2 fogli) | Come sopra. |
@@ -59,9 +59,9 @@ Vedi `playtest_v5/ISTRUZIONI_DI_STAMPA.md`, sezione 1: 32 cubetti Durata bianchi
 
 ## Come rigenerare
 
-- **Carte:** `python3 stampa/sorgenti/carte/genera_carte.py` (legge i CSV in `sorgenti/dati/` e usa `designcraft-cli`). Sorgenti modificabili: `sorgenti/carte/*.designcraft`.
+- **Carte:** `python3 stampa/sorgenti/carte/genera_carte.py` (A4) e `... --formato A3` (legge i CSV in `sorgenti/dati/` e usa `designcraft-cli`). Sorgenti modificabili: `sorgenti/carte/*.designcraft` e `sorgenti/carte/A3/*.designcraft`.
 - **Componenti e prova di stampa:** `stampa/sorgenti/componenti_gen/build.sh stampa/sorgenti stampa/playtest_v5` (usa `vectorcraft-cli`; genera anche `00_prova_stampa.pdf`). Sorgenti modificabili: `sorgenti/<componente>/pagina_NN.vectorcraft` (con gli SVG accanto). I PDF contengono come allegato il `.vectorcraft` di origine (voluto).
-- **Controlli:** `python3 stampa/sorgenti/verifica_pdf.py` (A4, font incorporati, nessun inchiostro nei 6 mm dal bordo del foglio; richiede poppler).
+- **Controlli:** `python3 stampa/sorgenti/verifica_pdf.py` (A4; `--formato A3` per l'A3): font incorporati; nessun inchiostro nei 6 mm dal bordo del foglio per i PDF normali; per `carte_*.pdf` linee di rifilo a ≥ 5 mm dal bordo (`--margine-rifilo`), perché l'abbondanza colorata arriva più vicino al bordo. Richiede poppler.
 - **Dati:** `sorgenti/dati/` (CSV, `dati_stampa.md`, `decisioni_provvisorie.md`; correzioni del collaudo 5/11 nella sezione 5).
 
 ## Limiti e punti aperti
@@ -76,3 +76,4 @@ Vedi `playtest_v5/ISTRUZIONI_DI_STAMPA.md`, sezione 1: 32 cubetti Durata bianchi
 - Nessuna illustrazione: solo aree segnaposto.
 - Colori convertiti in CMYK (PDF/X-4): possibili lievi differenze di resa. La Carta Aiuto (retro) è a 6,1 pt.
 - Rigenerati il 5/11 sera con il nuovo schema di stampa (carte a contatto con linee di taglio comuni, margini ≥ 6,5 mm, facciate F1,R1,F2,R2…): tutti i PDF di `playtest_v5/`, compresi plancia (finestra di stampa 184 × 230 mm, sovrapposizione 12,4 mm), schede eroe e componenti; nuovo `00_prova_stampa.pdf`.
+- Carte (6/11): schema cambiato. Le carte non sono più a battuta con linee di taglio comuni: ognuna ha la **sua abbondanza** (A4 2,5 mm, A3 3 mm; il colore di fondo e di cornice supera il rifilo 63×88 mm su tutti e 4 i lati; le abbondanze vicine si toccano, non si sovrappongono), così si possono ritagliare con la **dima per carte MTG**: taglio grossolano sul bordo dell'abbondanza, poi dima. Rifilo a ≥ 5,5 mm dal bordo del foglio (A4) / 13,5 mm (A3). Tacche d'angolo nere nei margini dove c'è posto (A4: solo in alto e in basso) e filetto bianco in ogni angolo di rifilo dentro l'abbondanza. Testo e contenuti a ≥ 3 mm dal rifilo. Rigenerati i 5 PDF carte A4 e A3.
