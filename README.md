@@ -48,4 +48,4 @@ I file intermedi (`tesoro_del_goblin.html`, `check.js`, `*.tmp.pdf`, ecc.) sono 
 
 ## Formato di stampa
 
-Solo A4 per i materiali di playtest in `stampa/`, da una stampante di casa: stampa al 100 %, tutto il contenuto e le tacche di taglio a ≥ 6,5 mm dal bordo del foglio, PDF fronte-retro con facciate in ordine F1,R1,F2,R2… (fronte-retro automatico sul lato lungo). Il regolamento impaginato è A5 (154×216 mm con 3 mm di abbondanza, TrimBox impostato) e «Inizia subito» 216×303 mm.
+Materiali di playtest in `stampa/` in A4 (`playtest_v5/`) e A3 (`playtest_v5_A3/`), da stampare al 100 %, PDF fronte-retro con facciate in ordine F1,R1,F2,R2… (fronte-retro automatico sul lato lungo). Carte 63×88 mm (formato Magic) separate, ognuna con la sua abbondanza (2,5 mm in A4, 3 mm in A3), per tagliarle con la dima: linee di taglio a ≥ 5,5 mm dal bordo del foglio. Gli altri componenti hanno contenuto e tacche a ≥ 6 mm dal bordo. Il regolamento impaginato è A5 (154×216 mm con 3 mm di abbondanza, TrimBox impostato) e «Inizia subito» 216×303 mm.

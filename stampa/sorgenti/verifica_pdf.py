@@ -2,11 +2,16 @@
 """Controlli di stampa sui PDF di playtest_v5 (richiede poppler: pdfinfo, pdftoppm, pdffonts).
 
 Per ogni PDF: dimensione pagine (A4, o A3 con --formato A3), numero pagine, font non incorporati e distanza minima
-tra qualunque inchiostro e il bordo del foglio (rasterizzazione a 150 dpi; la fascia dei 6 mm
-deve essere bianca: le stampanti domestiche non stampano il bordo esterno).
+dal bordo del foglio (rasterizzazione a 150 dpi).
+- PDF normali: tutto l'inchiostro a >= 6 mm dal bordo (le stampanti domestiche non stampano il bordo esterno).
+- carte_*.pdf (ogni carta ha la sua abbondanza, 2,5 mm su A4, 3 mm su A3): le linee di RIFILO stanno a >= 5 mm dal bordo
+  (--margine-rifilo). Il blocco colorato delle abbondanze arriva piu' vicino al bordo (3 mm su A4): puo' cadere nella zona
+  non stampabile, e' solo colore in piu'. Il bordo del blocco si trova con le righe/colonne quasi interamente colorate
+  (le tacche e le etichette nel margine sono sottili e non contano) e si aggiunge l'abbondanza.
 
-Uso: python3 stampa/sorgenti/verifica_pdf.py [cartella_pdf] [--margine MM] [--formato A4|A3]
-Esce con codice 1 se un PDF non è nel formato atteso, ha font non incorporati o ha inchiostro nella fascia.
+Uso: python3 stampa/sorgenti/verifica_pdf.py [cartella_pdf] [--margine MM] [--margine-rifilo MM] [--formato A4|A3]
+Esce con codice 1 se un PDF non è nel formato atteso, ha font non incorporati o ha inchiostro nella fascia
+(per le carte: rifilo troppo vicino al bordo).
 """
 import pathlib
 import subprocess
@@ -18,6 +23,19 @@ from PIL import Image
 
 DPI = 150
 MM_PX = DPI / 25.4
+ABBONDANZA = {"A4": 2.5, "A3": 3.0}   # mm per lato, come in carte/genera_carte.py
+
+
+def distanza_rifilo(inchiostro, abbondanza):
+    """Distanza minima (mm) tra una linea di rifilo delle carte e il bordo del foglio: bordo del blocco di abbondanze
+    (righe con >= 60 mm di inchiostro, colonne con >= 80 mm) piu' l'abbondanza."""
+    h, w = inchiostro.shape
+    righe = np.nonzero(inchiostro.sum(axis=1) >= 60 * MM_PX)[0]
+    colonne = np.nonzero(inchiostro.sum(axis=0) >= 80 * MM_PX)[0]
+    if len(righe) == 0 or len(colonne) == 0:
+        return 99.0
+    blocco = min(colonne.min(), w - 1 - colonne.max(), righe.min(), h - 1 - righe.max()) / MM_PX
+    return blocco + abbondanza
 
 
 def main():
@@ -27,6 +45,12 @@ def main():
         i = argv.index("--margine")
         margine = float(argv[i + 1])
         del argv[i:i + 2]
+    margine_rifilo = 5.0
+    if "--margine-rifilo" in argv:
+        i = argv.index("--margine-rifilo")
+        margine_rifilo = float(argv[i + 1])
+        del argv[i:i + 2]
+
     formato = "A4"
     if "--formato" in argv:
         i = argv.index("--formato")
@@ -54,13 +78,18 @@ def main():
                 if len(xs) == 0:
                     minimi.append(99.0)
                     continue
+                if pdf.name.startswith("carte_"):
+                    minimi.append(distanza_rifilo(inchiostro, ABBONDANZA[formato]))
+                    continue
                 d = min(xs.min(), w - 1 - xs.max(), ys.min(), h - 1 - ys.max()) / MM_PX
                 minimi.append(d)
         peggiore = min(minimi)
-        stato = "OK" if (formato_ok and not non_inc and peggiore >= margine) else "ERRORE"
+        soglia = margine_rifilo if pdf.name.startswith("carte_") else margine
+        cosa = "min. rifilo-bordo" if pdf.name.startswith("carte_") else "min. inchiostro-bordo"
+        stato = "OK" if (formato_ok and not non_inc and peggiore >= soglia) else "ERRORE"
         ok &= stato == "OK"
         print(f"{stato:7} {pdf.name:28} {pagine:2} pag  {dim.split(':', 1)[1].strip():45} "
-              f"min. inchiostro-bordo {peggiore:5.2f} mm  font non incorporati: {len(non_inc)}")
+              f"{cosa} {peggiore:5.2f} mm  font non incorporati: {len(non_inc)}")
     sys.exit(0 if ok else 1)
 
 
