@@ -1,73 +1,69 @@
-id,copia,fronte_titolo,passo1_nome,passo1_icona,passo1_testo,passo2_nome,passo2_icona,passo2_testo,passo3_nome,passo3_icona,passo3_testo,passo4_nome,passo4_icona,passo4_testo,passo5_nome,passo5_icona,passo5_testo,retro_titolo,retro_scontro,retro_ricompense,retro_tessere,retro_sconfitta,retro_vittoria,nota,fonte
-AI-01,"1 di 4 (identiche, una per giocatore)",Il turno in 5 passi,Clessidre,clessidra,Ne hai una? Toglila e salta al passo 5.,Carte,carte,"Fino a 2 nel turno: ora, in scontro o alla fine. Equip solo ora.",Muovi,piedi,Tira D6 + MOV. Muovi fino a quel numero (almeno 1).,Esplora,occhio,Dove ti fermi succede qualcosa. Un solo scontro per turno.,Fine,bandiera,"Puoi giocare carte, non equipaggiamenti. Tocca a sinistra.",Riepilogo,"1° tiro: colpisci se 2D6 + ATT ≥ 8 + AR.
+id,copia,fronte_titolo,passo1_nome,passo1_icona,passo1_testo,passo2_nome,passo2_icona,passo2_testo,passo3_nome,passo3_icona,passo3_testo,riquadro_carte,retro_titolo,retro_scontro,retro_ricompense,retro_tessere,retro_sconfitta,retro_vittoria,nota,fonte
+AI-01,"1 di 4 (identiche, una per giocatore)",Il turno in 3 passi,Muovi,piedi,Tira D6 + MOV. Muovi fino a quel numero (almeno 1).,Esplora,occhio,Dove ti fermi succede qualcosa. Un solo scontro per turno.,Fine,bandiera,"Togli gli stati dritti, raddrizza quelli di traverso. Carte giocate negli scarti. Tocca a sinistra.","Carte: nel tuo turno, in qualsiasi momento, fino a 2 (anche in risposta); restano davanti a te fino alla Fine. Equipaggiamenti: 1, solo nel tuo turno.",Riepilogo,"1° tiro: colpisci se 2D6 + ATT ≥ AR del bersaglio.
 2° tiro, il danno: eroe D6 + bonus · nemico LV 1 D6 − 1 · LV 2 D6 · LV 3+ D6 + 1.
 Chi attacca per primo: 1 D6 a testa, vince il più alto.
 Per il mostro tira chi ti siede a destra.
 Pareggio: col mostro vince chi attacca, col boss il boss.
 Tra giocatori vince il MOV più alto, poi chi ha il turno.
-Prima di attaccare puoi fuggire.","Mazzetto 1: 1 Indizio + 1 PE
-Mazzetto 2: + Forte Volontà
-Boss del mazzetto 3: 1 Indizio + livello + Forte Volontà
+Prima di attaccare puoi fuggire, mai dal custode.","Mostro vinto: D6 ≤ LV del mostro → 1 Indizio
+Mazzetto 1: 1 PE · Mazzetto 2: 1 PE + Forte Volontà
+Boss del mazzetto 3: livello + Forte Volontà
 Duello: Indizio + carta + 1 PE + Forte Volontà
 Rifiuti il Duello: dai 1 carta a caso","Rossa: mazzetto del tuo livello (1-2 · 3-4 · 5)
 Blu, Imprevisti:
-Locanda: +1 PE, +2 PV
-Fonte: 2 carte dagli scarti
-Fabbro: 1 equipaggiamento dagli scarti
-Trappola: D6 − 1 PV","Tira il D6 per ripartire, PV al massimo.
-D6: 1 tutto · 2 elmo · 3 arma DX · 4 arma SX · 5 armatura · 6 niente","3 Indizi → gli altri prendono 1 Indizio → D6 per la Cripta → batti il boss. Le sue ferite restano.
-Indizi solo vincendo scontri sulle caselle «?» e Duelli.","Passi e retro copiati dalla bozza (tabella «Il turno in 5 passi» e pagina «Riepilogo»), aggiornati con le regole decise dall'autore nella bozza del 3/11: pareggio dell'iniziativa (due righe aggiunte in retro_scontro), niente critici (tolta la riga del doppio 6 / doppio 1), 3 Indizi, Forte Volontà al posto di Ispirazione. Titoli fronte/retro e disposizione sono una scelta di impaginazione. Icone dei passi: parts.py turn_strip().",bozza docx 2/11 + commenti dell'autore nella bozza del 3/11 + parts.py turn_strip()
-AI-02,"2 di 4 (identiche, una per giocatore)",Il turno in 5 passi,Clessidre,clessidra,Ne hai una? Toglila e salta al passo 5.,Carte,carte,"Fino a 2 nel turno: ora, in scontro o alla fine. Equip solo ora.",Muovi,piedi,Tira D6 + MOV. Muovi fino a quel numero (almeno 1).,Esplora,occhio,Dove ti fermi succede qualcosa. Un solo scontro per turno.,Fine,bandiera,"Puoi giocare carte, non equipaggiamenti. Tocca a sinistra.",Riepilogo,"1° tiro: colpisci se 2D6 + ATT ≥ 8 + AR.
+Locanda: +1 PE, +2 PV · Fonte: 2 carte dagli scarti
+Fabbro: 1 equipaggiamento dagli scarti · Trappola: D6 − 1 PV
+Sacchetto vuoto: rimetti dentro le tessere usate.","Tira il D6 per ripartire, PV al massimo.
+D6: 1 tutto · 2 elmo · 3 arma DX · 4 arma SX · 5 armatura · 6 niente","3 Indizi → gli altri prendono 1 Indizio → D6 per la Cripta → batti il boss. Le sue ferite restano sulla Rotella del custode.
+Indizi solo dai mostri (D6 ≤ LV) e dai Duelli.","Ogni riga stampa 2 carte a un lato (v6-bis, stampa solo fronte): «Il turno» (fronte_titolo, passi, riquadro_carte) e «Riepilogo» (retro_*). Passi e Riepilogo copiati dalla bozza e aggiornati: 3/11 pareggio, niente critici, 3 Indizi, Forte Volontà; v6 (8/11) tolto il passo «Carte», Indizio dei mostri con D6 ≤ LV; v6-bis (8/11) tolto il passo «Clessidre» (niente Clessidre), Fine con gli stati, carte giocate davanti fino alla Fine, fuga mai dal custode, sacchetto rifornito con le tessere usate, Rotella del custode. Testi della spec v6-bis §3.1. Icone dei passi: parts_stampa.py turn_strip().",bozza docx 2/11 + commenti dell'autore nella bozza del 3/11 + Regolamento corretto di Desy 6/11 + spec v6-bis §3.1
+AI-02,"2 di 4 (identiche, una per giocatore)",Il turno in 3 passi,Muovi,piedi,Tira D6 + MOV. Muovi fino a quel numero (almeno 1).,Esplora,occhio,Dove ti fermi succede qualcosa. Un solo scontro per turno.,Fine,bandiera,"Togli gli stati dritti, raddrizza quelli di traverso. Carte giocate negli scarti. Tocca a sinistra.","Carte: nel tuo turno, in qualsiasi momento, fino a 2 (anche in risposta); restano davanti a te fino alla Fine. Equipaggiamenti: 1, solo nel tuo turno.",Riepilogo,"1° tiro: colpisci se 2D6 + ATT ≥ AR del bersaglio.
 2° tiro, il danno: eroe D6 + bonus · nemico LV 1 D6 − 1 · LV 2 D6 · LV 3+ D6 + 1.
 Chi attacca per primo: 1 D6 a testa, vince il più alto.
 Per il mostro tira chi ti siede a destra.
 Pareggio: col mostro vince chi attacca, col boss il boss.
 Tra giocatori vince il MOV più alto, poi chi ha il turno.
-Prima di attaccare puoi fuggire.","Mazzetto 1: 1 Indizio + 1 PE
-Mazzetto 2: + Forte Volontà
-Boss del mazzetto 3: 1 Indizio + livello + Forte Volontà
+Prima di attaccare puoi fuggire, mai dal custode.","Mostro vinto: D6 ≤ LV del mostro → 1 Indizio
+Mazzetto 1: 1 PE · Mazzetto 2: 1 PE + Forte Volontà
+Boss del mazzetto 3: livello + Forte Volontà
 Duello: Indizio + carta + 1 PE + Forte Volontà
 Rifiuti il Duello: dai 1 carta a caso","Rossa: mazzetto del tuo livello (1-2 · 3-4 · 5)
 Blu, Imprevisti:
-Locanda: +1 PE, +2 PV
-Fonte: 2 carte dagli scarti
-Fabbro: 1 equipaggiamento dagli scarti
-Trappola: D6 − 1 PV","Tira il D6 per ripartire, PV al massimo.
-D6: 1 tutto · 2 elmo · 3 arma DX · 4 arma SX · 5 armatura · 6 niente","3 Indizi → gli altri prendono 1 Indizio → D6 per la Cripta → batti il boss. Le sue ferite restano.
-Indizi solo vincendo scontri sulle caselle «?» e Duelli.","Passi e retro copiati dalla bozza (tabella «Il turno in 5 passi» e pagina «Riepilogo»), aggiornati con le regole decise dall'autore nella bozza del 3/11: pareggio dell'iniziativa (due righe aggiunte in retro_scontro), niente critici (tolta la riga del doppio 6 / doppio 1), 3 Indizi, Forte Volontà al posto di Ispirazione. Titoli fronte/retro e disposizione sono una scelta di impaginazione. Icone dei passi: parts.py turn_strip().",bozza docx 2/11 + commenti dell'autore nella bozza del 3/11 + parts.py turn_strip()
-AI-03,"3 di 4 (identiche, una per giocatore)",Il turno in 5 passi,Clessidre,clessidra,Ne hai una? Toglila e salta al passo 5.,Carte,carte,"Fino a 2 nel turno: ora, in scontro o alla fine. Equip solo ora.",Muovi,piedi,Tira D6 + MOV. Muovi fino a quel numero (almeno 1).,Esplora,occhio,Dove ti fermi succede qualcosa. Un solo scontro per turno.,Fine,bandiera,"Puoi giocare carte, non equipaggiamenti. Tocca a sinistra.",Riepilogo,"1° tiro: colpisci se 2D6 + ATT ≥ 8 + AR.
+Locanda: +1 PE, +2 PV · Fonte: 2 carte dagli scarti
+Fabbro: 1 equipaggiamento dagli scarti · Trappola: D6 − 1 PV
+Sacchetto vuoto: rimetti dentro le tessere usate.","Tira il D6 per ripartire, PV al massimo.
+D6: 1 tutto · 2 elmo · 3 arma DX · 4 arma SX · 5 armatura · 6 niente","3 Indizi → gli altri prendono 1 Indizio → D6 per la Cripta → batti il boss. Le sue ferite restano sulla Rotella del custode.
+Indizi solo dai mostri (D6 ≤ LV) e dai Duelli.",Vedi AI-01.,bozza docx 2/11 + commenti dell'autore nella bozza del 3/11 + Regolamento corretto di Desy 6/11 + spec v6-bis §3.1
+AI-03,"3 di 4 (identiche, una per giocatore)",Il turno in 3 passi,Muovi,piedi,Tira D6 + MOV. Muovi fino a quel numero (almeno 1).,Esplora,occhio,Dove ti fermi succede qualcosa. Un solo scontro per turno.,Fine,bandiera,"Togli gli stati dritti, raddrizza quelli di traverso. Carte giocate negli scarti. Tocca a sinistra.","Carte: nel tuo turno, in qualsiasi momento, fino a 2 (anche in risposta); restano davanti a te fino alla Fine. Equipaggiamenti: 1, solo nel tuo turno.",Riepilogo,"1° tiro: colpisci se 2D6 + ATT ≥ AR del bersaglio.
 2° tiro, il danno: eroe D6 + bonus · nemico LV 1 D6 − 1 · LV 2 D6 · LV 3+ D6 + 1.
 Chi attacca per primo: 1 D6 a testa, vince il più alto.
 Per il mostro tira chi ti siede a destra.
 Pareggio: col mostro vince chi attacca, col boss il boss.
 Tra giocatori vince il MOV più alto, poi chi ha il turno.
-Prima di attaccare puoi fuggire.","Mazzetto 1: 1 Indizio + 1 PE
-Mazzetto 2: + Forte Volontà
-Boss del mazzetto 3: 1 Indizio + livello + Forte Volontà
+Prima di attaccare puoi fuggire, mai dal custode.","Mostro vinto: D6 ≤ LV del mostro → 1 Indizio
+Mazzetto 1: 1 PE · Mazzetto 2: 1 PE + Forte Volontà
+Boss del mazzetto 3: livello + Forte Volontà
 Duello: Indizio + carta + 1 PE + Forte Volontà
 Rifiuti il Duello: dai 1 carta a caso","Rossa: mazzetto del tuo livello (1-2 · 3-4 · 5)
 Blu, Imprevisti:
-Locanda: +1 PE, +2 PV
-Fonte: 2 carte dagli scarti
-Fabbro: 1 equipaggiamento dagli scarti
-Trappola: D6 − 1 PV","Tira il D6 per ripartire, PV al massimo.
-D6: 1 tutto · 2 elmo · 3 arma DX · 4 arma SX · 5 armatura · 6 niente","3 Indizi → gli altri prendono 1 Indizio → D6 per la Cripta → batti il boss. Le sue ferite restano.
-Indizi solo vincendo scontri sulle caselle «?» e Duelli.","Passi e retro copiati dalla bozza (tabella «Il turno in 5 passi» e pagina «Riepilogo»), aggiornati con le regole decise dall'autore nella bozza del 3/11: pareggio dell'iniziativa (due righe aggiunte in retro_scontro), niente critici (tolta la riga del doppio 6 / doppio 1), 3 Indizi, Forte Volontà al posto di Ispirazione. Titoli fronte/retro e disposizione sono una scelta di impaginazione. Icone dei passi: parts.py turn_strip().",bozza docx 2/11 + commenti dell'autore nella bozza del 3/11 + parts.py turn_strip()
-AI-04,"4 di 4 (identiche, una per giocatore)",Il turno in 5 passi,Clessidre,clessidra,Ne hai una? Toglila e salta al passo 5.,Carte,carte,"Fino a 2 nel turno: ora, in scontro o alla fine. Equip solo ora.",Muovi,piedi,Tira D6 + MOV. Muovi fino a quel numero (almeno 1).,Esplora,occhio,Dove ti fermi succede qualcosa. Un solo scontro per turno.,Fine,bandiera,"Puoi giocare carte, non equipaggiamenti. Tocca a sinistra.",Riepilogo,"1° tiro: colpisci se 2D6 + ATT ≥ 8 + AR.
+Locanda: +1 PE, +2 PV · Fonte: 2 carte dagli scarti
+Fabbro: 1 equipaggiamento dagli scarti · Trappola: D6 − 1 PV
+Sacchetto vuoto: rimetti dentro le tessere usate.","Tira il D6 per ripartire, PV al massimo.
+D6: 1 tutto · 2 elmo · 3 arma DX · 4 arma SX · 5 armatura · 6 niente","3 Indizi → gli altri prendono 1 Indizio → D6 per la Cripta → batti il boss. Le sue ferite restano sulla Rotella del custode.
+Indizi solo dai mostri (D6 ≤ LV) e dai Duelli.",Vedi AI-01.,bozza docx 2/11 + commenti dell'autore nella bozza del 3/11 + Regolamento corretto di Desy 6/11 + spec v6-bis §3.1
+AI-04,"4 di 4 (identiche, una per giocatore)",Il turno in 3 passi,Muovi,piedi,Tira D6 + MOV. Muovi fino a quel numero (almeno 1).,Esplora,occhio,Dove ti fermi succede qualcosa. Un solo scontro per turno.,Fine,bandiera,"Togli gli stati dritti, raddrizza quelli di traverso. Carte giocate negli scarti. Tocca a sinistra.","Carte: nel tuo turno, in qualsiasi momento, fino a 2 (anche in risposta); restano davanti a te fino alla Fine. Equipaggiamenti: 1, solo nel tuo turno.",Riepilogo,"1° tiro: colpisci se 2D6 + ATT ≥ AR del bersaglio.
 2° tiro, il danno: eroe D6 + bonus · nemico LV 1 D6 − 1 · LV 2 D6 · LV 3+ D6 + 1.
 Chi attacca per primo: 1 D6 a testa, vince il più alto.
 Per il mostro tira chi ti siede a destra.
 Pareggio: col mostro vince chi attacca, col boss il boss.
 Tra giocatori vince il MOV più alto, poi chi ha il turno.
-Prima di attaccare puoi fuggire.","Mazzetto 1: 1 Indizio + 1 PE
-Mazzetto 2: + Forte Volontà
-Boss del mazzetto 3: 1 Indizio + livello + Forte Volontà
+Prima di attaccare puoi fuggire, mai dal custode.","Mostro vinto: D6 ≤ LV del mostro → 1 Indizio
+Mazzetto 1: 1 PE · Mazzetto 2: 1 PE + Forte Volontà
+Boss del mazzetto 3: livello + Forte Volontà
 Duello: Indizio + carta + 1 PE + Forte Volontà
 Rifiuti il Duello: dai 1 carta a caso","Rossa: mazzetto del tuo livello (1-2 · 3-4 · 5)
 Blu, Imprevisti:
-Locanda: +1 PE, +2 PV
-Fonte: 2 carte dagli scarti
-Fabbro: 1 equipaggiamento dagli scarti
-Trappola: D6 − 1 PV","Tira il D6 per ripartire, PV al massimo.
-D6: 1 tutto · 2 elmo · 3 arma DX · 4 arma SX · 5 armatura · 6 niente","3 Indizi → gli altri prendono 1 Indizio → D6 per la Cripta → batti il boss. Le sue ferite restano.
-Indizi solo vincendo scontri sulle caselle «?» e Duelli.","Passi e retro copiati dalla bozza (tabella «Il turno in 5 passi» e pagina «Riepilogo»), aggiornati con le regole decise dall'autore nella bozza del 3/11: pareggio dell'iniziativa (due righe aggiunte in retro_scontro), niente critici (tolta la riga del doppio 6 / doppio 1), 3 Indizi, Forte Volontà al posto di Ispirazione. Titoli fronte/retro e disposizione sono una scelta di impaginazione. Icone dei passi: parts.py turn_strip().",bozza docx 2/11 + commenti dell'autore nella bozza del 3/11 + parts.py turn_strip()
+Locanda: +1 PE, +2 PV · Fonte: 2 carte dagli scarti
+Fabbro: 1 equipaggiamento dagli scarti · Trappola: D6 − 1 PV
+Sacchetto vuoto: rimetti dentro le tessere usate.","Tira il D6 per ripartire, PV al massimo.
+D6: 1 tutto · 2 elmo · 3 arma DX · 4 arma SX · 5 armatura · 6 niente","3 Indizi → gli altri prendono 1 Indizio → D6 per la Cripta → batti il boss. Le sue ferite restano sulla Rotella del custode.
+Indizi solo dai mostri (D6 ≤ LV) e dai Duelli.",Vedi AI-01.,bozza docx 2/11 + commenti dell'autore nella bozza del 3/11 + Regolamento corretto di Desy 6/11 + spec v6-bis §3.1

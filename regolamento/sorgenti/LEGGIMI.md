@@ -1,6 +1,6 @@
 # Sorgenti del regolamento (v5, Carte Trama v2)
 
-Risultati, un livello sopra: `../Regolamento_base_v5_stampa.pdf` (A5 154×216 mm, 16 pagine), `../Inizia_subito_v5_stampa.pdf` (216×303 mm, 2 pagine), `../Regolamento_Tesoro_del_Goblin_bozza.docx` (bozza Word del 3/11/2026). Il libretto dell'espansione Caos si genera da qui ma finisce in `../../espansioni/caos/`.
+Risultati, un livello sopra: `../Regolamento_base_v5_stampa_regolamento_errato.pdf` (A5 154×216 mm, 16 pagine; il nome dice che è superato dal regolamento playtest v6 in `../playtest/`), `../Inizia_subito_v5_stampa.pdf` (216×303 mm, 2 pagine), `../Regolamento_Tesoro_del_Goblin_bozza.docx` (bozza Word del 3/11/2026). Il libretto dell'espansione Caos si genera da qui ma finisce in `../../espansioni/caos/`.
 
 Contenuto: `book/` (Python → HTML → PDF), `docx/` (HTML → Word), `fonts/` (Alegreya e Cinzel, con `fonts.css`).
 
@@ -12,7 +12,7 @@ Da `book/`:
 
 ```
 python3 build.py && python3 inizia.py && python3 caos.py     # scrivono regolamento.html, inizia.html, caos.html
-./mkpdf.sh regolamento.html $PWD/../../Regolamento_base_v5_stampa.pdf 154mm 216mm
+./mkpdf.sh regolamento.html $PWD/../../Regolamento_base_v5_stampa_regolamento_errato.pdf 154mm 216mm
 ./mkpdf.sh inizia.html $PWD/../../Inizia_subito_v5_stampa.pdf 216mm 303mm
 ./mkpdf.sh caos.html $PWD/../../../espansioni/caos/Il_Caos_del_Goblin_stampa.pdf 154mm 216mm
 ```

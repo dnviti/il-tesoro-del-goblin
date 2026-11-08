@@ -22,7 +22,7 @@ Oracolo,TE-12,TE,Equipaggiamento,Mazza Benedetta,Comune,Arma DX / Scudo,Oracolo,
 Oracolo,TE-14,TE,Equipaggiamento,Simbolo Sacro,Comune,Arma SX,Oracolo,"Finché è equipaggiato, quando recuperi PV con un incanto ne recuperi (1) in più.",1 di 1,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
 Oracolo,TI-25,TI,Incanto,Benedizione,,,Oracolo,Recuperi 1D6 − 1 PV (minimo 1).,1 di 1,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
 Oracolo,TI-26,TI,Incanto,Mano Guaritrice,,,Oracolo,"Recuperi 1D6 PV, fino ai PV massimi.",1 di 1,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
-Oracolo,TI-27,TI,Incanto,Scudo della Fede,,,Oracolo,Ottieni (+1) AR fino al tuo prossimo turno.,1 di 1,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
+Oracolo,TI-27,TI,Incanto,Scudo della Fede,,,Oracolo,Prendi lo stato Fede: (+1) AR.,1 di 1,v6-bis (8/11): stato Fede al posto di «fino al tuo prossimo turno».,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
 Oracolo,TI-30,TI,Incanto,Parata Perfetta,,,Assaltatore - Oracolo,Annulla i Danni di un attacco subito.,2 di 2,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
 Oracolo,TI-32,TI,Incanto,Preghiera della Fonte,,,Oracolo,Recupera (1) carta dalla tua pila degli scarti e (1) PV.,1 di 1,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo
 Oracolo,TI-33,TI,Incanto,Sguardo dell'Oracolo,,,Oracolo,Ritira un tiro di dado a tua scelta e tieni il nuovo risultato.,1 di 1,,v2/sorgenti/cards_v2.json (commit 2aa7f84) campo testo

@@ -1,7 +1,13 @@
 # Il Tesoro del Goblin — materiali da stampare in 3D
 
-Al posto di comprarli puoi stampare in 3D i cubetti, i dadi e un contenitore che sostituisce il sacchetto
+Al posto di comprarli puoi stampare in 3D i dadi, le 4 pedine degli eroi e un contenitore che sostituisce il sacchetto
 delle 36 Tessere Esplorazione. Tutti i pezzi entrano in un piano da **180 × 180 mm** e si stampano **senza supporti**.
+
+**Dalla v6-bis (8/11) i cubetti non servono più.** Le statistiche degli eroi stanno sulle rotelle di carta delle plance eroe
+(con i fermacampioni), i PV del mostro e del custode sulle due rotelle della plancia di gioco, gli effetti che durano sulle
+tessere Stato e Usato di cartoncino (`stampa/playtest_v6/segnalini.pdf`). I file dei cubetti (`cubetto.*`,
+`piatti/bianco_32_cubetti.3mf`, `colorati_4_cubetti.3mf`, `giallo_1_cubetto.3mf` e i cubetti di
+`stampante1_cubetti_pedine.3mf`) restano nella cartella finché non si decide di toglierli, ma **non vanno stampati**.
 
 ## Cartelle
 
@@ -13,10 +19,10 @@ delle 36 Tessere Esplorazione. Tutti i pezzi entrano in un piano da **180 × 180
 
 | File | Contenuto | Piano minimo | Tempo stimato* |
 |---|---|---|---|
-| `piatti/stampante1_cubetti_pedine.3mf` | 61 pezzi: 57 cubetti (32 Durata + 24 statistiche + 1 boss), 4 pedine (i dadi non si stampano: si usano dadi comprati) | 180 × 180 mm | ~2-3 h |
+| `piatti/stampante1_cubetti_pedine.3mf` | 61 pezzi: 57 cubetti (32 Durata + 24 statistiche + 1 boss), 4 pedine (i dadi non si stampano: si usano dadi comprati). **v6-bis: i cubetti non servono più**: stampa `piatti/pedine_4.3mf`, oppure cancella i 57 cubetti nello slicer prima di affettare | 180 × 180 mm | ~2-3 h (solo pedine 1,5-2 h) |
 | `piatti/stampante2_contenitore.3mf` | bicchiere + coperchio, in diagonale (14,8 mm di spazio tra i due) | 180 × 180 mm | ~6 h |
 
-- **Un solo filamento** per stampante. Su una stampante monocolore stampa il piatto 1 in bianco, poi colora i cubetti delle statistiche e il cubetto del boss con pennarelli indelebili o colore acrilico. Gli oggetti hanno il nome del colore previsto (`cubetto_rosso_PV`, `cubetto_nero_PVmax`, `cubetto_arancio_ATT`, `cubetto_verde_MOV`, `cubetto_blu_AR`, `cubetto_viola_PE`, `cubetto_giallo_boss`, 4 per colore): con un sistema multicolore (AMS/MMU) puoi assegnare il colore a ogni oggetto nello slicer.
+- **Un solo filamento** per stampante. (Fino alla v6) su una stampante monocolore si stampava il piatto 1 in bianco e si coloravano i cubetti delle statistiche e del boss; dalla v6-bis i cubetti non si stampano più.
 - Riempimento: nello slicer imposta 100 % (o 4 perimetri) per cubetti e dadi; per pedine e contenitore va bene il 15 %. Se lo slicer non permette impostazioni per oggetto, usa 4 perimetri e il 20 % per tutto il piatto 1.
 - I file sono stati scritti dallo script dagli STL di `stl/` (stesse forme dei piatti separati) e non sono ancora stati aperti in uno slicer: aprili, controlla che stiano nel piano e affetta prima di lanciare.
 
@@ -24,25 +30,19 @@ delle 36 Tessere Esplorazione. Tutti i pezzi entrano in un piano da **180 × 180
 
 | Pezzo | Qtà | Misure | Filamento | Piatto | Peso stimato | Tempo stimato* |
 |---|---|---|---|---|---|---|
-| Cubetto Durata | 32 | 7 × 7 × 7 mm, smusso 0,6 mm | bianco | `piatti/bianco_32_cubetti.3mf` (32 pezzi) | 13 g | 1 h (0,5 h) |
-| Cubetto statistica | 24 = 6 colori × 4 | 7 × 7 × 7 mm | 6 colori, uno per statistica | `piatti/colorati_4_cubetti.3mf` (4 pezzi): **stampalo 6 volte**, una per colore | 1,6 g a piatto (10 g in tutto) | 10 min a piatto |
-| Cubetto boss | 1 | 7 × 7 × 7 mm | giallo | `piatti/giallo_1_cubetto.3mf` (1 pezzo) | 0,4 g | 5 min |
+| Cubetto Durata (**non serve più dalla v6-bis**) | 32 | 7 × 7 × 7 mm, smusso 0,6 mm | bianco | `piatti/bianco_32_cubetti.3mf` (32 pezzi) | 13 g | 1 h (0,5 h) |
+| Cubetto statistica (**non serve più dalla v6-bis**) | 24 = 6 colori × 4 | 7 × 7 × 7 mm | 6 colori, uno per statistica | `piatti/colorati_4_cubetti.3mf` (4 pezzi) | 1,6 g a piatto (10 g in tutto) | 10 min a piatto |
+| Cubetto boss (**non serve più dalla v6-bis**) | 1 | 7 × 7 × 7 mm | giallo | `piatti/giallo_1_cubetto.3mf` (1 pezzo) | 0,4 g | 5 min |
 | Dado D6 | 8 | 16 mm, spigoli raggiati R 1,5, punti incassati Ø 3 × 0,9 mm | a scelta (chiaro, per dipingere i punti) | `piatti/dadi_8.3mf` (8 pezzi) | 38 g (4,8 g l'uno) | 2,5 h (1,2 h) |
 | Contenitore: bicchiere | 1 | Ø 90 × 85 mm, interno Ø 86 × 83 mm | a scelta, coprente (non trasparente) | `piatti/contenitore_bicchiere.3mf` | 72 g | 4,5 h (2 h) |
 | Contenitore: coperchio | 1 | Ø 94,6 × 12 mm, **pieno** (chiude il bicchiere) | stesso del bicchiere | `piatti/contenitore_coperchio.3mf` | 25 g | 1,5 h (0,6 h) |
 
-Totale circa **165 g** di PLA.
+Totale circa **165 g** di PLA con i cubetti; senza cubetti (dadi, contenitore, 4 pedine) circa **148 g**.
 
 \* Nessuno slicer era installato quando sono stati preparati i file: pesi calcolati dal volume dei modelli
 (PLA 1,24 g/cm³, pieni al 100 %; il contenitore ha pareti da 2 mm, quindi anche al 15 % di riempimento è quasi tutto perimetro).
 I tempi sono stime grezze (±50 %): stampante tipo Prusa MK3/Ender, tra parentesi una stampante veloce (Bambu, Prusa MK4/Core One).
 Lo slicer ti darà i valori veri.
-
-**Colori dei cubetti statistica.** Il regolamento vuole 4 set da 6 cubetti, uno per giocatore, e in ogni set
-un colore per statistica: **PV attuali rosso, PV massimi nero**, poi ATT, MOV, AR e PE. Per questi quattro il regolamento
-non fissa il colore: per esempio ATT arancione, MOV verde, AR blu, PE viola (meglio non giallo, che è il boss).
-Quindi stampa il piatto da 4 cubetti 6 volte, cambiando filamento: alla fine hai 4 cubetti per colore, uno per giocatore.
-Il cubetto giallo ha un piatto suo, perché ogni piatto è di un colore solo. Con una stampante multicolore puoi invece aggiungerlo a un altro piatto e assegnargli il giallo.
 
 ## Impostazioni di stampa
 
@@ -63,19 +63,6 @@ Il cubetto giallo ha un piatto suo, perché ogni piatto è di un colore solo. Co
 - Dadi (facoltativo): riempi i punti con colore acrilico (pennello fine o stuzzicadenti) e togli il colore in eccesso dalla faccia con un panno umido o carta abrasiva fine (grana 400) quando è asciutto.
 - Togli eventuali sbavature del primo strato con un cutter.
 - Contenitore: metti dentro le 36 tessere, chiudi col coperchio e scuoti. Per pescare togli il coperchio, tieni il bicchiere sopra l'altezza degli occhi e prendi una tessera senza guardare. Se il coperchio è troppo lento, aggiungi un giro di nastro adesivo sul bordo del bicchiere.
-
-## Prova di misura (cubetto nella casella)
-
-Le caselle delle statistiche (ATT, MOV, AR, PE) sulla scheda eroe stampata al 100 % sono quadrati di **9,0 mm**
-(22 unità × scala 0,4111 nel file `stampa/sorgenti/schede_eroe/pagina_01.svg`). Il cubetto da **7 mm** ci sta con
-**1,0 mm di margine per lato**. Le caselle PV del boss sulla plancia sono di 14,1 mm: c'è spazio in abbondanza.
-
-Attenzione: le caselle della fila **PV** della scheda eroe sono strette, **4,3 × 9,0 mm** (passo 4,7 mm): lì nessun
-cubetto ci sta dentro. Il cubetto da 7 mm va messo **centrato sulla casella** e copre anche metà delle vicine; quando
-PV attuali e PV massimi coincidono, il cubetto rosso va sopra il nero.
-
-Prima di stampare tutti i 32 cubetti bianchi, stampa il piatto giallo (1 cubetto) e appoggialo su una casella
-ATT della scheda stampata: deve starci dentro con un po' d'aria tutto attorno.
 
 ## Pedine (4 classi)
 

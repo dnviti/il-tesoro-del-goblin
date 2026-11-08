@@ -1,22 +1,38 @@
-# Regolamento per il playtest
+# Regolamento per il playtest (v6, 8/11/2026)
 
-Regolamento breve (10 pagine A4) per giocare con il kit stampato in `stampa/playtest_v5/`. Va stampato insieme al kit.
+Regolamento breve (11 pagine A4) per giocare con il kit stampato in `stampa/playtest_v6/` (A4) o `stampa/playtest_v6_A3/` (A3). Va stampato insieme al kit; come il kit, si stampa solo fronte.
 
 | File | Cosa è |
 |---|---|
-| `Regolamento_playtest.pdf` | Da stampare: A4, solo fronte o fronte-retro, al 100 %. Font incorporati (Noto Serif, IBM Plex Sans Condensed). |
-| `Regolamento_playtest.docx` | Sorgente modificabile (WordCraft / Word). Dopo una modifica riesportare il PDF dallo stesso file. |
+| `Regolamento_playtest_v6.pdf` | Da stampare: A4, solo fronte, al 100 %. 11 pagine, font incorporati (Noto Serif, IBM Plex Sans Condensed). |
+| `Regolamento_playtest_v6.docx` | Sorgente modificabile (WordCraft / Word). Dopo una modifica riesportare il PDF dallo stesso file. |
+| `Partita_rapida_v6.pdf` | Promemoria da tenere sul tavolo: 2 pagine A4, solo fronte, al 100 %. Font incorporati (Noto Serif, IBM Plex Sans Condensed). Solo regole v6: rifà la Partita rapida di Desy del 6/11. |
+| `Partita_rapida_v6.docx` | Sorgente modificabile (WordCraft / Word). Dopo una modifica riesportare il PDF dallo stesso file. |
+
+Versione precedente: il regolamento del 5/11 (fatto per il vecchio kit `playtest_v5`) è in `archivio/v5_05-11/regolamento/Regolamento_playtest.{docx,pdf}`; quel kit è in `archivio/v5_05-11/stampa/`.
+
+## Cosa cambia rispetto al 5/11
+
+La v6 integra il regolamento corretto di Desy del 6/11 (`Il_Tesoro_del_Goblin_Regolamento_corretto.docx`) e le decisioni dell'utente dell'8/11 sui punti aperti (contratto: spec v6-bis dell'8/11).
+
+- **Turno in 3 passi:** Muovi · Esplora · Fine. Niente Clessidre, turni persi o turni extra. Alla Fine si tolgono gli stati dritti, si raddrizzano quelli di traverso e le carte giocate vanno negli scarti.
+- **Carte solo nel proprio turno, in qualsiasi momento:** fino a 2 comprese le risposte, Equipaggiamenti al massimo 1; unica eccezione il difensore nel Duello. Le carte giocate restano davanti al giocatore fino alla Fine; nessun effetto di carta dura oltre il turno.
+- **Niente cubetti:** rotelle di carta sulla plancia eroe (PV, PV massimi, ATT, MOV, AR, PE con livello e mazzetto), Rotella dello scontro e Rotella del custode sulla plancia di gioco. **Stati** (Rallentato, Occhio, Sussurro, Riflesso, Silenzio, Fede) su tessere che durano un turno; **tessere Usato** per i poteri «una volta per partita/turno», le abilità «la prima volta» dei mostri e i 2 spostamenti del tesoro.
+- **Classi e specie:** Carte Classe senza statistiche, con un potere una volta per partita (Assaltatore, Ricercatore, Stregone, Oracolo: testi nuovi, PLAYTEST); Carte Specie al posto delle Tessere Specie. Locanda «+1 PE e recuperi 2 PV». Lo Stregone pesca la 6ª comune dopo il draft.
+- **Regole chiarite:** Indizio dai mostri con D6 ≤ LV (decisione dell'utente 8/11, PLAYTEST); tiro per colpire senza Difesa (decisione dell'utente 8/11 sera): «Colpisci se 2D6 + il tuo ATT è uguale o superiore all'AR del bersaglio», i mostri hanno l'AR stampata sulla carta, gli eroi partono da AR 9; danno con la tabella del kit, ATT serve solo per colpire; fuga da ogni mostro tranne chi la vieta e il boss custode; pila «Tessere usate» che rifornisce il sacchetto vuoto; la Mappa sposta il tesoro in un'altra Cripta, al massimo 2 volte; tolte la variante «In famiglia» e la variante del danno D6 + ATT − AR.
+- **Componenti e ultima pagina:** nuove tabelle (46 segnalini e tessere, 8 Carte Specie, 8 Carte Aiuto «Il turno» e «Riepilogo», 26 fermacampioni, colla o bustine per unire carte e dorsi). In fondo resta il foglio per gli appunti; i punti ancora da rivedere con l'autore sono in `regolamento/da_discutere/Punti_aperti_v6.docx`.
+
+Niente matita né foglio per lo stato del gioco: tutto si segna con rotelle, tessere e segnalini.
 
 ## Contenuto
 
-Componenti (conteggi del kit), Preparazione, Il turno in 5 passi, Movimento ed esplorazione (sacchetto: tessere rosse e blu, Carte Imprevisto), Lo scontro (2D6 + ATT ≥ 8 + AR, tabella dei danni, iniziativa 1 D6 con la regola del pareggio, esempio), Sconfitta e Duello, Le carte (Incanti, Equipaggiamenti, Mappe, carte di classe), Forte Volontà, Indizi, tesoro e vittoria (3 Indizi), Livelli e mazzetti dei mostri (1-2 / 3-4 / 5), Clessidre e turni, Specie, Classi (testi stampati di TC-01…04), Riepilogo (retro della Carta Aiuto). In fondo: «Note per il playtest», con righe per gli appunti e 10 domande aperte per l'autore, e «Proposte dell'autore da provare», che non sono regole del playtest.
+Componenti, Preparazione, La plancia eroe, Il turno in 3 passi (con «Carte»), Movimento ed esplorazione (sacchetto, Tessere usate, Carte Imprevisto), Lo scontro (2D6 + ATT ≥ AR del bersaglio, tabella dei danni, iniziativa, abilità «la prima volta», fuga, ricompense con il D6 dell'Indizio, esempio), Sconfitta e Duello, Le carte (Carte Classe e Specie, Incanti, Equipaggiamenti, Mappe), Stati e Tessera Usato, Forte Volontà, Indizi, tesoro e vittoria, Livelli e mazzetti dei mostri, Specie, Classi, Riepilogo (la Carta Aiuto «Riepilogo»). In fondo: «Note per il playtest», con righe per gli appunti e il rimando ai punti aperti.
 
 ## Fonti
 
-- Corpo della bozza del 3/11: `regolamento/Regolamento_Tesoro_del_Goblin_bozza.docx`. Dei 14 commenti Word dell'autore e del blocco «MODIFICHE FATTE DAL DESI» si veda la tabella qui sotto.
-- Regole decise dall'autore: pareggio dell'iniziativa, 3 Indizi, Forte Volontà al posto di Ispirazione, Incanto al posto di Incantesimo, niente critici, mazzetto dal livello. Dettagli in `stampa/sorgenti/dati/decisioni_provvisorie.md`.
-- Testi e nomi presi dai componenti stampati, così il regolamento e le carte usano le stesse parole: `stampa/sorgenti/dati/*.csv` (Carta Aiuto, Carte Classe, Tessere Specie, Carte Imprevisto, Carte Mostro, segnalini). I conteggi vengono da `stampa/LEGGIMI.md`.
-- Chiarimenti dal collaudo del kit (agente Collaudo, 5/11).
+- Regolamento del 5/11 (archiviato), basato sulla bozza del 3/11 (`regolamento/Regolamento_Tesoro_del_Goblin_bozza.docx`) e sulle regole decise dall'autore (`stampa/sorgenti/dati/decisioni_provvisorie.md`).
+- Regolamento corretto di Desy del 6/11 e decisioni dell'utente dell'8/11.
+- Testi e nomi presi dai componenti stampati, così il regolamento e le carte usano le stesse parole: `stampa/sorgenti/dati/*.csv`.
 
 ## Regole provvisorie (PLAYTEST)
 
@@ -24,40 +40,15 @@ Nel testo sono segnate «(PLAYTEST)»:
 
 - Draft: si passa sempre a destra (D-1).
 - Yumaniano: +1 AR e +1 a una statistica a scelta (D-2).
-- Stregone: le sue 4 carte di classe più 1 comune.
-- TC-01 Assaltatore: valori da confermare. TC-04 Oracolo: si ricarica quando peschi una Locanda.
-- «Attacca per primo» (Agguato, Fauci): il mostro attacca per primo senza tiro di iniziativa.
+- Poteri nuovi delle Carte Classe (TC-01…04).
+- Indizio dai mostri: D6 ≤ livello del mostro (decisione dell'utente 8/11).
 - Al 3° Indizio gli altri prendono 1 Indizio solo la prima volta, quando MIMI compare.
-- La casella «?» resta: chi si ferma di nuovo lì pesca un'altra tessera.
-- Dopo una fuga o una sconfitta la tessera rossa resta scoperta e la carta Mostro va in fondo al mazzetto.
 - Trappola fino a 0 PV: sconfitta normale, un solo tiro di perdita. 0 PV per una carta di un avversario fuori da un Duello: sconfitta normale, nessuna ricompensa.
 - «Creatura» sulle carte = un mostro o un boss, mai un eroe.
-- I boss del mazzetto 3 non tengono le ferite (solo il custode, col cubetto giallo). Al livello 5 il «+1 livello» non dà niente.
-- Il Cuore della plancia non ha effetti. Se una statistica supera la traccia della scheda, tieni il conto a mente.
-- Restano, anche se i commenti dell'autore li mettono in dubbio senza un'alternativa giocabile stasera: il tiro per colpire 2D6 + ATT ≥ 8 + AR, la tabella dei danni per livello e i cubetti della scheda.
-
-Senza marcatore, perché erano solo correzioni: le frasi della bozza con «2 Indizi» diventano 3 Indizi e la variante «Partita lunga» non c'è più. Nel Duello, a parità di iniziativa e di MOV vince lo sfidante, cioè chi ha il turno.
-
-## Commenti dell'autore nella bozza del 3/11
-
-| N. | Commento (citazione breve) | Cosa ne ho fatto |
-|---|---|---|
-| 5 | Pareggio: «contro i nemici vince l'attaccante… il boss avrà priorità… MOV più alto…» | Applicato (scontro, Duello, riepilogo). |
-| 10 | «finché non ha i tre indizi non può raggiungerlo anche vedendo la posizione» | Applicato: con meno di 3 Indizi fermarsi sulla Cripta di MIMI non fa niente. |
-| 12 | «Sostituire a ispirazione» (Forte Volontà) | Applicato. |
-| 4 | «sostituisce la parola incantesimo» (Incanto) | Applicato. |
-| 8, 9 | «No niente critici» | Applicato: niente doppio 6 / doppio 1. |
-| 6 | «Questo punto non ha senso o non l'ho capito io» (attacco del mostro) | Testo riscritto più chiaro; la regola resta (è sulla Carta Aiuto). |
-| 13 | «no» su «(8 + AR)» | Nessuna alternativa data: resta 2D6 + ATT ≥ 8 + AR (PLAYTEST); domanda 4. |
-| 7 | «Se colpito si tira un D6+valore d'attacco − AR del Nemico» | Decisione dell'utente: si stampa con la tabella dei danni (PLAYTEST) e non si ristampa niente. La formula, «D6 + ATT − AR del bersaglio (minimo 1)», è in un riquadro «Variante da provare» nelle Note per il playtest, da giocare in una seconda partita. Con la variante non si usa la riga del danno delle carte Mostro. Collaudo: più letale (eroe di livello 1 contro il mazzetto 1 ucciso in un colpo nel 51 % dei casi invece del 22 %). Vedi anche la domanda 5. |
-| 11 | «funzione a cubetti… per ora consideriamola tolta» | Nessuna alternativa e la scheda stampata è fatta di tracce a cubetti: i cubetti restano (PLAYTEST); domanda 6. |
-| 1, 2 | Mappe: «1 a 2 indizi» «Valutiamo»; bonus «unilaterale» «VALUTIAMO» | Tra le proposte dell'autore. La regola delle Mappe non cambia. |
-| 3 | Impostore/Fuggiasco «me venuto in mente» | Tra le proposte (quinta classe). |
-| 0 | Mount per le espansioni, «per il futuro» | Tra le proposte. |
-
-Dal blocco «MODIFICHE FATTE DAL DESI», senza commento: «PROPOSTA TURNI» (togliere i turni), plancia 12 × 12, 2D6 per giocatore e primo giocatore con 2D6 sono tra le proposte. Non sono giocabili col kit stampato, oppure sono idee per le espansioni.
+- Il Cuore della plancia non ha effetti.
 
 ## NON usare per questo playtest
 
-- `regolamento/Regolamento_base_v5_stampa.pdf` e `regolamento/Inizia_subito_v5_stampa.pdf` sono vecchi e non vanno distribuiti al tavolo. Tutti e due hanno ancora Guerriero, Ladro e Mago, Nano e Orco e il tesoro al 2° Indizio. Il regolamento v5 ha anche l'Ispirazione e il doppio 6.
-- Le 98 «carte nuove» dell'autore e i nuovi poteri di classe del 5/11 non sono in questo regolamento, perché non sono stampati nel kit.
+- `archivio/v5_05-11/regolamento/Regolamento_playtest.{docx,pdf}`: è la versione del 5/11, da tenere solo come riferimento.
+- `regolamento/Regolamento_base_v5_stampa_regolamento_errato.pdf` e `regolamento/Inizia_subito_v5_stampa.pdf` sono vecchi e non vanno distribuiti al tavolo. Tutti e due hanno ancora Guerriero, Ladro e Mago, Nano e Orco e il tesoro al 2° Indizio. Il regolamento v5 ha anche l'Ispirazione e il doppio 6.
+- Il regolamento corretto e la Partita rapida di Desy (cartella principale): la v6 ne riprende le parti decise; la Partita rapida rifatta dalla v6 è `Partita_rapida_v6.pdf`.

@@ -1,9 +1,9 @@
 {
   "format": "vectorcraft",
   "version": 4,
-  "generator": "VectorCraft 0.21.1",
+  "generator": "VectorCraft 0.22.0",
   "document": {
-    "version": 2,
+    "version": 3,
     "title": "pagina_01.svg",
     "units": "Millimeters",
     "rulers": "artboard",

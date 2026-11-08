@@ -189,28 +189,22 @@
 <text x="213.2" y="72.0" text-anchor="middle" font-size="8.8" fill="#2a2118">Boss</text>
 <circle cx="273.0" cy="45.5" r="15.6" fill="#f7efdc" fill-opacity="1" stroke="#6b4a2b" stroke-width="1.2"/>
 <text x="273.0" y="72.0" text-anchor="middle" font-size="8.8" fill="#2a2118">Boss</text>
-<text x="139.4" y="95.5" text-anchor="end" font-size="8.3" font-weight="bold" fill="#2a2118">PV del boss</text>
-<rect x="144.6" y="84.5" width="14.5" height="14.5" rx="2" fill="#f7efdc" stroke="#6b4a2b" stroke-width="0.8"/>
-<text x="151.8" y="94.5" text-anchor="middle" font-size="7.0" fill="#2a2118">9</text>
-<rect x="160.7" y="84.5" width="14.5" height="14.5" rx="2" fill="#f7efdc" stroke="#6b4a2b" stroke-width="0.8"/>
-<text x="167.9" y="94.5" text-anchor="middle" font-size="7.0" fill="#2a2118">8</text>
-<rect x="176.8" y="84.5" width="14.5" height="14.5" rx="2" fill="#f7efdc" stroke="#6b4a2b" stroke-width="0.8"/>
-<text x="184.1" y="94.5" text-anchor="middle" font-size="7.0" fill="#2a2118">7</text>
-<rect x="192.9" y="84.5" width="14.5" height="14.5" rx="2" fill="#f7efdc" stroke="#6b4a2b" stroke-width="0.8"/>
-<text x="200.2" y="94.5" text-anchor="middle" font-size="7.0" fill="#2a2118">6</text>
-<rect x="209.0" y="84.5" width="14.5" height="14.5" rx="2" fill="#f7efdc" stroke="#6b4a2b" stroke-width="0.8"/>
-<text x="216.3" y="94.5" text-anchor="middle" font-size="7.0" fill="#2a2118">5</text>
-<rect x="225.2" y="84.5" width="14.5" height="14.5" rx="2" fill="#e9c9a8" stroke="#6b4a2b" stroke-width="0.8"/>
-<text x="232.4" y="94.5" text-anchor="middle" font-size="7.0" fill="#2a2118">4</text>
-<rect x="241.3" y="84.5" width="14.5" height="14.5" rx="2" fill="#e9c9a8" stroke="#6b4a2b" stroke-width="0.8"/>
-<text x="248.5" y="94.5" text-anchor="middle" font-size="7.0" fill="#2a2118">3</text>
-<rect x="257.4" y="84.5" width="14.5" height="14.5" rx="2" fill="#e9c9a8" stroke="#6b4a2b" stroke-width="0.8"/>
-<text x="264.7" y="94.5" text-anchor="middle" font-size="7.0" fill="#2a2118">2</text>
-<rect x="273.5" y="84.5" width="14.5" height="14.5" rx="2" fill="#e9c9a8" stroke="#6b4a2b" stroke-width="0.8"/>
-<text x="280.8" y="94.5" text-anchor="middle" font-size="7.0" fill="#2a2118">1</text>
+<g transform="translate(41.237,56.701) scale(1.03093)"><circle cx="0" cy="0" r="26.0" fill="none" stroke="#b9a582" stroke-width="0.25" stroke-dasharray="1.2 1"/><text x="0.000" y="-17.750" text-anchor="middle" font-family="Liberation Sans Narrow" font-weight="bold" font-size="6.285" fill="#2a2118">0</text><text x="11.756" y="-13.930" text-anchor="middle" font-family="Liberation Sans Narrow" font-weight="bold" font-size="6.285" fill="#2a2118">1</text><text x="19.021" y="-3.930" text-anchor="middle" font-family="Liberation Sans Narrow" font-weight="bold" font-size="6.285" fill="#2a2118">2</text><text x="19.021" y="8.430" text-anchor="middle" font-family="Liberation Sans Narrow" font-weight="bold" font-size="6.285" fill="#2a2118">3</text><text x="11.756" y="18.430" text-anchor="middle" font-family="Liberation Sans Narrow" font-weight="bold" font-size="6.285" fill="#2a2118">4</text><text x="0.000" y="22.250" text-anchor="middle" font-family="Liberation Sans Narrow" font-weight="bold" font-size="6.285" fill="#2a2118">5</text><text x="-11.756" y="18.430" text-anchor="middle" font-family="Liberation Sans Narrow" font-weight="bold" font-size="6.285" fill="#2a2118">6</text><text x="-19.021" y="8.430" text-anchor="middle" font-family="Liberation Sans Narrow" font-weight="bold" font-size="6.285" fill="#2a2118">7</text><text x="-19.021" y="-3.930" text-anchor="middle" font-family="Liberation Sans Narrow" font-weight="bold" font-size="6.285" fill="#2a2118">8</text><text x="-11.756" y="-13.930" text-anchor="middle" font-family="Liberation Sans Narrow" font-weight="bold" font-size="6.285" fill="#2a2118">9</text><circle cx="0" cy="0" r="1.1" fill="none" stroke="#2a2118" stroke-width="0.25"/><path d="M-2.2 0H2.2M0 -2.2V2.2" stroke="#2a2118" stroke-width="0.2"/></g>
+<text x="41.2" y="88.2" text-anchor="middle" font-weight="bold" font-size="3.71" fill="#2a2118">PV del mostro</text>
+<text x="41.2" y="92.4" text-anchor="middle" font-size="2.99" fill="#6b4a2b">Rotella dello scontro</text>
+<g transform="translate(325.773,56.701) scale(1.03093)"><circle cx="0" cy="0" r="26.0" fill="none" stroke="#b9a582" stroke-width="0.25" stroke-dasharray="1.2 1"/><text x="0.000" y="-17.750" text-anchor="middle" font-family="Liberation Sans Narrow" font-weight="bold" font-size="6.285" fill="#2a2118">0</text><text x="11.756" y="-13.930" text-anchor="middle" font-family="Liberation Sans Narrow" font-weight="bold" font-size="6.285" fill="#2a2118">1</text><text x="19.021" y="-3.930" text-anchor="middle" font-family="Liberation Sans Narrow" font-weight="bold" font-size="6.285" fill="#2a2118">2</text><text x="19.021" y="8.430" text-anchor="middle" font-family="Liberation Sans Narrow" font-weight="bold" font-size="6.285" fill="#2a2118">3</text><text x="11.756" y="18.430" text-anchor="middle" font-family="Liberation Sans Narrow" font-weight="bold" font-size="6.285" fill="#2a2118">4</text><text x="0.000" y="22.250" text-anchor="middle" font-family="Liberation Sans Narrow" font-weight="bold" font-size="6.285" fill="#2a2118">5</text><text x="-11.756" y="18.430" text-anchor="middle" font-family="Liberation Sans Narrow" font-weight="bold" font-size="6.285" fill="#2a2118">6</text><text x="-19.021" y="8.430" text-anchor="middle" font-family="Liberation Sans Narrow" font-weight="bold" font-size="6.285" fill="#2a2118">7</text><text x="-19.021" y="-3.930" text-anchor="middle" font-family="Liberation Sans Narrow" font-weight="bold" font-size="6.285" fill="#2a2118">8</text><text x="-11.756" y="-13.930" text-anchor="middle" font-family="Liberation Sans Narrow" font-weight="bold" font-size="6.285" fill="#2a2118">9</text><circle cx="0" cy="0" r="1.1" fill="none" stroke="#2a2118" stroke-width="0.25"/><path d="M-2.2 0H2.2M0 -2.2V2.2" stroke="#2a2118" stroke-width="0.2"/></g>
+<text x="325.8" y="88.2" text-anchor="middle" font-weight="bold" font-size="3.71" fill="#2a2118">PV del custode</text>
+<text x="325.8" y="92.4" text-anchor="middle" font-size="2.99" fill="#6b4a2b">le ferite restano</text>
+<circle cx="108.2" cy="92.3" r="11.34" fill="#f7efdc" stroke="#6b4a2b" stroke-width="0.36" stroke-dasharray="1.55 1.03"/>
+<circle cx="135.1" cy="92.3" r="11.34" fill="#f7efdc" stroke="#6b4a2b" stroke-width="0.36" stroke-dasharray="1.55 1.03"/>
+<text x="94.3" y="86.2" text-anchor="end" font-weight="bold" font-size="3.51" fill="#2a2118">Spostamenti</text>
+<text x="94.3" y="90.4" text-anchor="end" font-weight="bold" font-size="3.51" fill="#2a2118">del tesoro (max 2)</text>
+<text x="94.3" y="94.6" text-anchor="end" font-size="2.89" fill="#6b4a2b">1 tessera Usato ogni</text>
+<text x="94.3" y="98.9" text-anchor="end" font-size="2.89" fill="#6b4a2b">volta che cambia Cripta</text>
 <text x="183.3" y="373.1" text-anchor="middle" font-family="Liberation Serif" font-weight="bold" font-size="13.0" fill="#6b4a2b">Promemoria</text>
-<text x="183.3" y="392.6" text-anchor="middle" font-size="9.9" fill="#2a2118">Turno: Clessidre · Carte · Muovi · Esplora · Fine</text>
+<text x="183.3" y="392.6" text-anchor="middle" font-size="9.9" fill="#2a2118">Turno: Muovi · Esplora · Fine</text>
 <text x="183.3" y="408.2" text-anchor="middle" font-size="9.9" fill="#2a2118">Perdita D6: 1 tutto · 2 elmo · 3 arma DX · 4 arma SX · 5 armatura · 6 niente</text>
+<text x="183.3" y="423.8" text-anchor="middle" font-size="9.9" fill="#2a2118">Sacchetto vuoto: rimetti dentro le tessere usate (pila «Tessere usate» accanto alla plancia)</text>
 </g></g>
 <g id="croce-di-allineamento"><circle cx="19.20" cy="21.00" r="1.9" fill="none" stroke="#c0392b" stroke-width="0.2"/><line x1="15.70" y1="21.00" x2="22.70" y2="21.00" stroke="#c0392b" stroke-width="0.2"/><line x1="19.20" y1="17.50" x2="19.20" y2="24.50" stroke="#c0392b" stroke-width="0.2"/></g>
 <g id="croce-di-allineamento"><circle cx="189.00" cy="236.83" r="1.9" fill="none" stroke="#c0392b" stroke-width="0.2"/><line x1="185.50" y1="236.83" x2="192.50" y2="236.83" stroke="#c0392b" stroke-width="0.2"/><line x1="189.00" y1="233.33" x2="189.00" y2="240.33" stroke="#c0392b" stroke-width="0.2"/></g>

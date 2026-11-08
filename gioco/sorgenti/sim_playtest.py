@@ -1,16 +1,20 @@
 #!/usr/bin/env python3
-"""Collaudo del kit di playtest del 5/11/2026 («Il Tesoro del Goblin»).
+"""Collaudo del kit di playtest v6-bis («Il Tesoro del Goblin»).
 
 Legge i dati stampati (stampa/sorgenti/dati/*.csv) e fa due cose:
-  --esatto      probabilità esatte degli scontri eroe contro mostro (2D6 + ATT >= 8 + AR,
+  --esatto      probabilità esatte degli scontri eroe contro mostro (2D6 + ATT >= AR del bersaglio,
                 tabella dei danni per LV, iniziativa 1 D6 con i pareggi decisi dall'autore)
   --partite N   Monte Carlo di N partite intere per ogni numero di giocatori (2, 3, 4)
-  --senza-carte / --danno autore   varianti di sensibilità (mani vuote; danno D6 + ATT - AR dell'autore)
+  --senza-carte   variante di sensibilità (mani vuote)
+  --bonus-indizio N   taratura dell'Indizio dei mostri: D6 <= LV + N (0 = regola v6, 1 e 2 = varianti H e I)
 
-Comandi usati per simulazioni/playtest_2026-11-05.txt (dalla radice del repository):
-  python3 gioco/sorgenti/sim_playtest.py --esatto --partite 10000 --uscita simulazioni/playtest_2026-11-05.txt
-  python3 gioco/sorgenti/sim_playtest.py --partite 10000 --senza-carte >> simulazioni/playtest_2026-11-05.txt
-  python3 gioco/sorgenti/sim_playtest.py --partite 10000 --danno autore >> simulazioni/playtest_2026-11-05.txt
+Dalla v6-bis dell'8/11 (REGOLE): mostri con Indizio solo se un D6 è <= al loro LV, poteri di classe una volta per partita,
+stato Rallentato al posto delle Clessidre, sacchetto rifornito dalle tessere usate. I numeri di
+simulazioni/playtest_2026-11-05.txt (regole del kit v5) non si riproducono più con questo file.
+Comandi usati per simulazioni/playtest_v6_2026-11-08.txt (dalla radice del repository):
+  python3 gioco/sorgenti/sim_playtest.py --esatto --partite 10000 --uscita simulazioni/playtest_v6_2026-11-08.txt
+  python3 gioco/sorgenti/sim_playtest.py --partite 10000 --bonus-indizio 1 >> simulazioni/playtest_v6_2026-11-08.txt
+  python3 gioco/sorgenti/sim_playtest.py --partite 10000 --bonus-indizio 2 >> simulazioni/playtest_v6_2026-11-08.txt
 
 Solo libreria standard. Le regole e le approssimazioni sono elencate in REGOLE e APPROSSIMAZIONI.
 """
@@ -27,25 +31,37 @@ from multiprocessing import Pool
 RADICE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 DATI = os.path.join(RADICE, 'stampa', 'sorgenti', 'dati')
 
-VARIANTE = {'senza_carte': False, 'danno': 'tabella'}
+VARIANTE = {'senza_carte': False, 'bonus_indizio': 0}
 
-REGOLE = """Regole simulate (bozza del 3/11 + decisioni dell'autore + D-1/D-2 provvisorie):
-- Eroe: PV 5, ATT 1, MOV 1, AR 1 (scheda). Assaltatore +1 PV e Forte Volontà a ogni scontro vinto,
-  spesa per -1 AR al nemico; Ricercatore +2 MOV; Stregone 2 rilanci dei propri dadi per turno;
-  Oracolo torna in vita con 3 PV, si ricarica con la Locanda.
-- Specie a caso tra le 8 tessere: Umano +1 MOV +1 ATT; Elfo +1 ATT +1 AR; Sanguar +2 MOV;
+REGOLE = """Regole simulate (v6-bis dell'8/11: spec §1-§4 e §9; ricompense D6 <= LV):
+- Eroe: PV 5, ATT 1, MOV 1, AR 9; le Carte Classe non danno statistiche. Poteri di classe, uno per partita (tessera Usato),
+  giocati dall'IA: Assaltatore: alla prima sconfitta con equipaggiamento addosso non tira il D6 della perdita;
+  Ricercatore: al primo turno in cui si ferma su una «?» senza tessera scoperta, prima della pesca, guarda la prima carta
+  Imprevisti e, se è una Trappola, la mette in fondo (guardare consuma il potere); Stregone: sul proprio tiro per colpire
+  mancato contro il boss custode ritira il dado più basso, altrimenti fa ritirare il dado del danno quando un mostro
+  lo porterebbe a 0 PV; Oracolo: a 0 PV resta a 1 PV (anche per Trappola e Duello). Nessuna ricarica.
+- Specie a caso tra le 8 Carte Specie: Umano +1 MOV +1 ATT; Elfo +1 ATT +1 AR; Sanguar +2 MOV;
   Yumaniano +1 AR +1 ATT (scelte a scelta fatte dall'IA).
 - Livelli a PE 2/4/6/8 (massimo 5): +1 ATT, +2 PV, +1 AR, +2 PV in quest'ordine.
-- Turno: Clessidra (salta) -> carte (max 2, equip solo a inizio turno, max 1) -> D6 + MOV (min 1)
-  -> esplora -> fine. Plancia 10 x 10 di svg.py: 6 partenze, 4 Cripte, 36 caselle «?».
-- «?»: si pesca dal sacchetto (25 rosse, 11 blu); a sacchetto vuoto non succede niente; la casella resta «?».
+- Turno in 3 passi: muovi (D6 + MOV, min 1) -> esplora -> fine; carte (max 2, equip solo a inizio turno, max 1).
+  Stati (1 turno intero del portatore): Rallentato (dopo Gnomo schiavista sconfitto e dopo il 6 al danno del Basilisco):
+  nel turno dopo ti muovi di 1 esagono senza dado; Sussurro (Mappa Sussurrata): vale fino alla Fine del turno successivo.
+  Niente Clessidre, niente turni saltati. Plancia 10 x 10 di svg.py: 6 partenze, 4 Cripte, 36 caselle «?».
+- «?»: si pesca dal sacchetto (25 rosse, 11 blu). Le tessere risolte (blu dopo l'Imprevisto, rossa dopo il mostro
+  sconfitto) vanno nella pila «Tessere usate»; a sacchetto vuoto si rimettono dentro tutte, si mescola e si pesca.
   Rossa: mostro del mazzetto del livello (1-2 / 3-4 / 5); se perdi la tessera resta scoperta e chi si
   ferma lì gira la carta del suo mazzetto; la carta va in fondo. Blu: mazzetto Imprevisti (11 carte).
+  Locanda: +1 PE e 2 PV. Trappola: D6-1 PV.
 - Scontro: iniziativa 1 D6 a testa; pareggio: col mostro vince l'eroe, col boss il boss;
-  Agguato/Fauci = il mostro attacca per primo senza tiro. Colpo se 2D6 + ATT >= 8 + AR, nessun critico.
+  Agguato/Fauci = il mostro attacca per primo senza tiro. Colpo se 2D6 + ATT >= AR del bersaglio, nessun critico
+  (dalla sera dell'8/11 niente Difesa: AR dei mostri = la vecchia Difesa stampata, AR base dell'eroe 9).
   Danni: eroe D6 + bonus; mostro LV1 D6-1 (min 1), LV2 D6, LV3+ D6+1. Abilità dei mostri applicate.
-- Ricompense: mazzetto 1 = 1 Indizio + 1 PE; mazzetto 2 = + Forte Volontà; boss del mazzetto 3 =
-  1 Indizio + livello + Forte Volontà. Forte Volontà (max 1): ritira 1 D6 del tiro per colpire mancato.
+  Targa del Custode (TE-08): si scarta per annullare i Danni di un attacco.
+- Ricompense (v6): dopo ogni mostro sconfitto (anche i boss del mazzetto 3 sulle caselle «?») 1 D6: 1 Indizio se
+  il risultato è <= LV della carta (1-5). Mazzetto 1 e 2 = 1 PE, mazzetto 2 anche Forte Volontà; boss del mazzetto 3 =
+  livello + Forte Volontà (+ Indizio col D6); Mappa Sussurrata = +1 Indizio sul prossimo scontro vinto su «?» (mostri
+  dei mazzetti 1-2). Forte Volontà (max 1): ritira 1 D6 del tiro per colpire mancato. L'Assaltatore non la prende più
+  a ogni scontro vinto.
 - Al 3° Indizio (solo la prima volta) MIMI va sulla Cripta del D6 (5-6 si ritira) e gli altri prendono
   1 Indizio. Il boss si sfida con 3 Indizi fermandosi sulla Cripta; le sue ferite restano.
 - Sconfitta: ripartenza D6 (ritira se occupata o accanto a un eroe), PV al massimo, tiro di perdita
@@ -54,7 +70,11 @@ REGOLE = """Regole simulate (bozza del 3/11 + decisioni dell'autore + D-1/D-2 pr
   chi vince prende 1 Indizio, 1 PE e la Forte Volontà; pareggio di iniziativa: MOV più alto, poi lo sfidante."""
 
 APPROSSIMAZIONI = """Approssimazioni del Monte Carlo:
-- Nessuna fuga (morire riporta i PV al massimo e tiene gli Indizi, quindi fuggire non conviene quasi mai).
+- Nessuna fuga (spec §1: si può fuggire da ogni mostro tranne Ragno delle grotte e custode, senza ricompense, tornando
+  dove eri a inizio turno): un tentativo di IA che fugge da ferita non funzionava (non guarisce mai e rifugge in
+  continuazione), quindi la fuga non è simulata; morire riporta i PV al massimo, tiene gli Indizi e costa il tiro di perdita.
+- Stregone: il potere non è usato nei Duelli né fuori dal proprio turno (l'IA lo usa solo nei propri scontri).
+  Assaltatore: il potere si usa alla prima sconfitta in cui ha almeno un equipaggiamento addosso.
 - Mappe (TM-01..08), TI-01, TI-05, TI-13, TI-14, TI-18, TI-19, TI-20, TI-21, TI-23 e TI-31 (movimento)
   restano in mano senza effetto; le Mappe quindi non spostano mai il tesoro.
 - Equipaggiamenti: solo i bonus a ATT/AR/MOV letti dal testo stampato, più Elmo sorgisogno, Mantello
@@ -62,9 +82,10 @@ APPROSSIMAZIONI = """Approssimazioni del Monte Carlo:
   (1 rilancio), Scudo del Goblin; gli altri effetti degli equipaggiamenti sono ignorati.
 - Incanti giocati dall'IA: danni (TI-02/09/10/11/16/35/40), +colpire (TI-22/29), +danni (TI-28/37),
   Parata Perfetta, Giuramento di Ferro, +AR (TI-03/27/34), cure (TI-25/26/32), Sguardo Spezzaossa,
-  Metamorfosi in Ratto, Parola di Confusione, carte contro le Trappole (TI-06/17/39), Mappa Sussurrata,
-  Scintilla di Volontà, rilanci (TI-33/38), Richiamo dal Sepolcro. Contro i mostri normali l'IA gioca
-  incanti di danno solo se è in pericolo (PV <= 3) o contro il mazzetto 2; contro il boss gioca tutto.
+  Metamorfosi in Ratto, Parola di Confusione, carte contro le Trappole (TI-06/17/39: giocate al momento della
+  Trappola, non come stato Occhio in anticipo), Mappa Sussurrata, Scintilla di Volontà, rilanci (TI-33/38),
+  Richiamo dal Sepolcro. Contro i mostri normali l'IA gioca incanti di danno solo se è in pericolo (PV <= 3)
+  o contro il mazzetto 2; contro il boss gioca tutto.
 - Mano: modalità Casual (5 comuni pescate; lo Stregone 4 di classe + 6 comuni). Draft non simulato.
 - Nei Duelli niente carte; lo sfidato rifiuta se ha Indizi, carte in mano ed è più debole.
 - Tempo reale stimato: 25 s per turno, 15 s per tessera pescata, 30 s per preparare uno scontro,
@@ -93,8 +114,6 @@ class Mostro:
         self.id, self.nome = r['id'], r['nome']
         self.mazzetto = int(r['mazzetto'][0])
         self.lv, self.pv, self.att, self.ar = int(r['lv']), int(r['pv']), int(r['att']), int(r['ar'])
-        if int(r['difesa']) != 8 + self.ar:
-            raise ValueError(f"{self.id}: difesa {r['difesa']} diversa da 8 + AR")
         d = r['danno'].replace('−', '-').replace(' ', '')
         self.dmod = 0 if d == 'D6' else int(d[2:])
         self.fx = {k for t, k in ABILITA if t in r['abilita']}
@@ -127,7 +146,7 @@ TESSERE = [r['colore'] for r in leggi('tessere_esplorazione.csv')]
 SEGNALINI = {r['nome']: int(r['copie']) for r in leggi('segnalini.csv')}
 CLASSI = ['Assaltatore', 'Ricercatore', 'Stregone', 'Oracolo']
 SPECIE = {'Umano': (1, 0, 1), 'Elfo': (1, 1, 0), 'Sanguar': (0, 0, 2), 'Yumaniano': (1, 1, 0)}  # ATT, AR, MOV
-SPECIE_TESSERE = [r['specie'] for r in leggi('tessere_specie.csv')]
+SPECIE_TESSERE = [s for s in SPECIE for _ in (1, 2)]  # 4 specie x 2 Carte Specie
 SALITE = ['att', 'pv', 'ar', 'pv']
 # carte di classe scelte dall'IA (le 5 più utili in scontro) quando il mazzo ne ha più di 5
 PREF_CLASSE = {'Assaltatore': ['TI-35', 'TI-30', 'TE-01', 'TI-28', 'TI-29'],
@@ -141,33 +160,28 @@ for _a in range(1, 7):
         P2[_a + _b] += 1 / 36
 
 
-def p_colpo(bonus, difesa):
-    """P(2D6 + bonus >= difesa), senza critici."""
-    return sum(P2[s] for s in range(2, 13) if s + bonus >= difesa)
+def p_colpo(bonus, ar):
+    """P(2D6 + bonus >= AR del bersaglio), senza critici."""
+    return sum(P2[s] for s in range(2, 13) if s + bonus >= ar)
 
 
-def danno_mostro(m, d, att, ar_bersaglio):
-    """Danno del mostro: tabella per LV (kit) oppure D6 + ATT - AR del bersaglio (commento 7 dell'autore), minimo 1."""
-    if VARIANTE['danno'] == 'autore':
-        return max(1, d + att - ar_bersaglio)
+def danno_mostro(m, d):
+    """Danno del mostro: tabella per LV del kit, minimo 1."""
     return max(1, d + m.dmod)
 
 
-def danno_eroe(d, att, ar_bersaglio):
-    """Danno dell'eroe senza bonus delle carte: D6 (kit) oppure D6 + ATT - AR del bersaglio, minimo 1."""
-    if VARIANTE['danno'] == 'autore':
-        return max(1, d + att - ar_bersaglio)
+def danno_eroe(d):
+    """Danno dell'eroe senza bonus delle carte: D6."""
     return d
 
 
 def eroe_tipo(classe, livello, equip_att=0, equip_ar=0):
-    """Eroe di riferimento: specie +1 ATT +1 AR, salite di livello in ordine SALITE."""
-    s = {'pv': 5 + (1 if classe == 'Assaltatore' else 0), 'att': 2, 'ar': 2}
+    """Eroe di riferimento: specie +1 ATT +1 AR (AR base 9), salite di livello in ordine SALITE."""
+    s = {'pv': 5, 'att': 2, 'ar': 10}
     for k in range(livello - 1):
         s[SALITE[k]] += 2 if SALITE[k] == 'pv' else 1
     s['att'] += equip_att
     s['ar'] += equip_ar
-    s['rilanci'] = 2 if classe == 'Stregone' else 0
     s['rinascita'] = 1 if classe == 'Oracolo' else 0
     return s
 
@@ -183,77 +197,70 @@ def scontro_esatto(e, m, passi=600):
         p_primo = 21 / 36
     dist = defaultdict(float)
     if p_primo:
-        dist[(e['pv'], m.pv, 1, 0, 0, 0, e['rilanci'], e['rinascita'])] += p_primo
+        dist[(e['pv'], m.pv, 1, 0, 0, 0, e['rinascita'])] += p_primo
     if p_primo < 1:
-        dist[(e['pv'], m.pv, 0, 0, 0, 0, e['rilanci'], e['rinascita'])] += 1 - p_primo
+        dist[(e['pv'], m.pv, 0, 0, 0, 0, e['rinascita'])] += 1 - p_primo
     vince = muore = att_attesi = 0.0
     for passo in range(1, passi + 1):
         nuovo = defaultdict(float)
-        for (pe, pm, tocca_eroe, primo_fatto, colpo_fatto, ricomposto, ril, rin), p in dist.items():
+        for (pe, pm, tocca_eroe, primo_fatto, colpo_fatto, ricomposto, rin), p in dist.items():
             if tocca_eroe:
-                q = p_colpo(e['att'] - (1 if 'gelo' in m.fx else 0), 8 + m.ar)
+                q = p_colpo(e['att'] - (1 if 'gelo' in m.fx else 0), m.ar)
                 if not primo_fatto and 'svantaggio_primo' in m.fx:
                     q = q * q
-                esiti, manca = [], 1.0
-                for k in range(ril + 1):
-                    esiti.append((manca * q, ril - k))
-                    manca *= 1 - q
-                for pc, ril2 in esiti:
-                    for d in range(1, 7):
-                        dan = danno_eroe(d, e['att'] - (1 if 'gelo' in m.fx else 0), m.ar)
-                        if 'coriaceo' in m.fx:
-                            dan = max(1, dan - 1)
-                        pm2, ric2 = pm - dan, ricomposto
-                        if pm2 <= 0 and 'ricompone' in m.fx and not ricomposto:
-                            pm2, ric2 = 2, 1
-                        pp = p * pc / 6
-                        if pm2 <= 0:
-                            vince += pp
-                            att_attesi += pp * passo
-                        else:
-                            nuovo[(pe, pm2, 0, 1, colpo_fatto, ric2, ril2, rin)] += pp
-                if manca > 0:
-                    nuovo[(pe, pm, 0, 1, colpo_fatto, ricomposto, 0, rin)] += p * manca
+                for d in range(1, 7):
+                    dan = danno_eroe(d)
+                    if 'coriaceo' in m.fx:
+                        dan = max(1, dan - 1)
+                    pm2, ric2 = pm - dan, ricomposto
+                    if pm2 <= 0 and 'ricompone' in m.fx and not ricomposto:
+                        pm2, ric2 = 2, 1
+                    pp = p * q / 6
+                    if pm2 <= 0:
+                        vince += pp
+                        att_attesi += pp * passo
+                    else:
+                        nuovo[(pe, pm2, 0, 1, colpo_fatto, ric2, rin)] += pp
+                nuovo[(pe, pm, 0, 1, colpo_fatto, ricomposto, rin)] += p * (1 - q)
             else:
                 am = m.att
                 if 'furia' in m.fx and 2 * pm <= m.pv:
                     am += 2
                 if 'codardo' in m.fx and 2 * pm <= m.pv:
                     am -= 2
-                q = p_colpo(am, 8 + e['ar'] - (1 if 'acido' in m.fx else 0))
+                q = p_colpo(am, e['ar'] - (1 if 'acido' in m.fx else 0))
                 for d in range(1, 7):
-                    dan = danno_mostro(m, d, am, e['ar'] - (1 if 'acido' in m.fx else 0)) + (2 if 'carica' in m.fx and not colpo_fatto else 0)
+                    dan = danno_mostro(m, d) + (2 if 'carica' in m.fx and not colpo_fatto else 0)
                     pe2, rin2 = pe - dan, rin
                     pm2 = min(m.pv, pm + 1) if 'succhia' in m.fx else pm
                     if pe2 <= 0 and rin:
-                        pe2, rin2 = 3, 0
+                        pe2, rin2 = 1, 0
                     pp = p * q / 6
                     if pe2 <= 0:
                         muore += pp
                         att_attesi += pp * passo
                     else:
-                        nuovo[(pe2, pm2, 1, primo_fatto, 1, ricomposto, ril, rin2)] += pp
-                nuovo[(pe, pm, 1, primo_fatto, colpo_fatto, ricomposto, ril, rin)] += p * (1 - q)
+                        nuovo[(pe2, pm2, 1, primo_fatto, 1, ricomposto, rin2)] += pp
+                nuovo[(pe, pm, 1, primo_fatto, colpo_fatto, ricomposto, rin)] += p * (1 - q)
         dist = nuovo
         if sum(dist.values()) < 1e-12:
             break
-    pe_h = p_colpo(e['att'] - (1 if 'gelo' in m.fx else 0), 8 + m.ar)
-    pe_m = p_colpo(m.att, 8 + e['ar'] - (1 if 'acido' in m.fx else 0))
-    d_eroe = sum(max(1, x - 1) if 'coriaceo' in m.fx else x
-                 for x in (danno_eroe(d, e['att'] - (1 if 'gelo' in m.fx else 0), m.ar) for d in range(1, 7))) / 6
-    d_mostro = sum(danno_mostro(m, d, m.att, e['ar'] - (1 if 'acido' in m.fx else 0)) for d in range(1, 7)) / 6
+    pe_h = p_colpo(e['att'] - (1 if 'gelo' in m.fx else 0), m.ar)
+    pe_m = p_colpo(m.att, e['ar'] - (1 if 'acido' in m.fx else 0))
+    d_eroe = sum(max(1, x - 1) if 'coriaceo' in m.fx else x for x in (danno_eroe(d) for d in range(1, 7))) / 6
+    d_mostro = sum(danno_mostro(m, d) for d in range(1, 7)) / 6
     return vince, muore, att_attesi, pe_h, pe_m, d_eroe, d_mostro
 
 
 def rapporto_esatto():
     righe = ["CALCOLO ESATTO DEGLI SCONTRI (eroe di riferimento: specie +1 ATT +1 AR, nessun equipaggiamento;",
-             "salite: L2 +1 ATT, L3 +2 PV, L4 +1 AR, L5 +2 PV; Stregone 2 rilanci dei tiri per colpire mancati;",
-             "Oracolo 1 rinascita a 3 PV; Assaltatore +1 PV; senza carte e senza Forte Volontà).",
+             "salite: L2 +1 ATT, L3 +2 PV, L4 +1 AR, L5 +2 PV; nessun potere di classe tranne l'Oracolo (a 0 PV resta a",
+             "1 PV, una volta); tutti PV 5; senza carte e senza Forte Volontà).",
              "Colonne: P(colpo) eroe->mostro, mostro->eroe al primo tiro; danno atteso per round",
              "(P(colpo) x danno medio); round attesi; P(vittoria eroe). Fascia: mazzetto 1 = L1-2, mazzetto 2 = L3-4, boss = L5.", ""]
     for classe in CLASSI:
         righe.append(f"== {classe} ==")
-        hdr = f"{'mostro':<24}{'mz':>3}{'PV':>4}{'ATT':>4}{'DIF':>4} |" + ''.join(f"   L{l}: colpo e/m  dan e/m  round  P(vince)" for l in (1, 3, 5))
+        hdr = f"{'mostro':<24}{'mz':>3}{'PV':>4}{'ATT':>4}{'AR':>4} |" + ''.join(f"   L{l}: colpo e/m  dan e/m  round  P(vince)" for l in (1, 3, 5))
         righe.append(hdr)
         for m in MOSTRI:
             cel = []
@@ -261,7 +268,7 @@ def rapporto_esatto():
                 e = eroe_tipo(classe, l)
                 v, mu, at, pe, pm_, de, dm = scontro_esatto(e, m)
                 cel.append(f"   {pe:5.0%} {pm_:4.0%}  {pe*de:4.1f} {pm_*dm:4.1f}  {at/2:5.1f}   {v:6.1%}")
-            righe.append(f"{m.nome:<24}{m.mazzetto:>3}{m.pv:>4}{m.att:>4}{8+m.ar:>4} |" + ''.join(cel))
+            righe.append(f"{m.nome:<24}{m.mazzetto:>3}{m.pv:>4}{m.att:>4}{m.ar:>4} |" + ''.join(cel))
         righe.append("")
     # matrice compatta P(vittoria) per livello e segnalazioni di fascia
     righe.append("P(vittoria eroe) per livello 1..5 (stesso eroe di riferimento):")
@@ -338,19 +345,19 @@ class Eroe:
     def __init__(self, g, classe, specie):
         self.g, self.classe, self.specie = g, classe, specie
         a, r, mv = SPECIE[specie]
-        self.base = {'att': 1 + a, 'ar': 1 + r, 'mov': 1 + mv + (2 if classe == 'Ricercatore' else 0)}
-        self.pvmax = 5 + (1 if classe == 'Assaltatore' else 0)
+        self.base = {'att': 1 + a, 'ar': 9 + r, 'mov': 1 + mv}
+        self.pvmax = 5
         self.pv = self.pvmax
         self.pe = 0
         self.livello = 1
         self.indizi = 0
         self.fv = False
-        self.clessidre = 0
+        self.rallentato = 0
         self.slot = {}
         self.mano = []
         self.scarti = []
-        self.rinascita = classe == 'Oracolo'
-        self.mappa_sussurrata = False
+        self.potere = True  # potere della Carta Classe, una volta per partita (tessera Usato)
+        self.mappa_sussurrata = 0  # stato Sussurro: turni di validità rimasti
         self.trappola_parata = False
         self.pos = None
         self.morti = 0
@@ -398,8 +405,9 @@ def valore_equip(c, eroe):
 
 
 class Partita:
-    def __init__(self, n, rng):
+    def __init__(self, n, rng, dado_indizio):
         self.rng = rng
+        self.dado_indizio = dado_indizio  # D6 delle ricompense, generatore a parte: non altera gli altri dadi della partita
         self.n_carte = 0
         classi = rng.sample(CLASSI, n)
         specie = rng.sample(SPECIE_TESSERE, n)
@@ -430,7 +438,7 @@ class Partita:
             e.pos = self.ripartenza(e)
         self.primo = rng.randrange(n)
         self.max_indizi = 0
-        self.max_clessidre = 0
+        self.usate = []  # tessere risolte: tornano nel sacchetto quando è vuoto
 
     def d6(self):
         return self.rng.randint(1, 6)
@@ -464,7 +472,7 @@ class Partita:
 
     # ---------------- scontri
 
-    def tiro_colpire(self, e, bonus, difesa, svantaggio, ril):
+    def tiro_colpire(self, e, bonus, ar, svantaggio, ril):
         """Tiro per colpire dell'eroe con rilanci (Stregone, Bastone, Forte Volontà, carte)."""
         r = self.rng
         def tira():
@@ -475,22 +483,29 @@ class Partita:
                     a, b = c, d
             return a, b
         a, b = tira()
-        while a + b + bonus < difesa and ril[0] > 0:
+        while a + b + bonus < ar and ril[0] > 0:
             ril[0] -= 1
             a, b = tira()
-        if a + b + bonus < difesa and e.fv and max(a, b) + 6 + bonus >= difesa:
+        if a + b + bonus < ar and e.fv and max(a, b) + 6 + bonus >= ar:
             e.fv = False
             if a < b:
                 a = r.randint(1, 6)
             else:
                 b = r.randint(1, 6)
-        if a + b + bonus < difesa:
+        if a + b + bonus < ar and e.classe == 'Stregone' and e.potere and self.in_custode and max(a, b) + 6 + bonus >= ar:
+            e.potere = False  # potere: ritira il dado più basso contro il boss custode
+            self.stat['potere_Stregone'] += 1
+            if a < b:
+                a = r.randint(1, 6)
+            else:
+                b = r.randint(1, 6)
+        if a + b + bonus < ar:
             for c in ('TI-38', 'TI-33'):
                 if c in e.mano and e.budget > 0 and self.in_boss:
                     e.gioca(c)
                     a, b = tira()
                     break
-        return a + b + bonus >= difesa
+        return a + b + bonus >= ar
 
     def danno_incanto(self, e, m, pm):
         """Gioca il miglior incanto di danno; ritorna i danni."""
@@ -520,13 +535,10 @@ class Partita:
         self.stat['scontri'] += 1
         self.stat[f'scontri_mazzetto_{m.mazzetto}'] += 1
         self.in_boss = m.boss
+        self.in_custode = m is self.custode
         self._fiamma = self._gelido = False
         pm = m.pv if pm_iniziale is None else pm_iniziale
         attacchi = 0
-        ar_meno = 0
-        if e.classe == 'Assaltatore' and e.fv:
-            e.fv = False
-            ar_meno = 1
         ar_extra = 2 if (e.ha('TE-19') and m.lv >= 3) else 0
         att_extra = 0
         ratto = confusione = False
@@ -541,7 +553,7 @@ class Partita:
             if 'TI-24' in e.mano and e.budget > 0:
                 e.gioca('TI-24')
                 ratto = True
-        ril = [(2 if e.classe == 'Stregone' else 0) + (1 if e.ha('TE-11') else 0)]
+        ril = [1 if e.ha('TE-11') else 0]
         if 'primo' in m.fx:
             eroe_primo = False
         else:
@@ -580,10 +592,9 @@ class Partita:
                 bonus = e.stat('att') + att_extra - (1 if 'gelo' in m.fx else 0)
                 if e.ha('TE-15') and eroe_primo:
                     bonus += 1
-                att_val = bonus  # ATT vero, senza i +colpire delle carte (conta per il danno dell'autore)
                 if m.boss:
                     for c, v in (('TI-22', 3), ('TI-29', 2)):
-                        if c in e.mano and e.budget > 0 and p_colpo(bonus, 8 + m.ar - ar_meno) < 0.6:
+                        if c in e.mano and e.budget > 0 and p_colpo(bonus, m.ar) < 0.6:
                             e.gioca(c)
                             bonus += v
                             break
@@ -594,10 +605,10 @@ class Partita:
                 if 'TI-37' in e.mano and e.budget > 0 and eroe_primo and primo_att and (m.boss or pericolo()):
                     e.gioca('TI-37')
                     dbonus_prossimo += 2
-                colpo = self.tiro_colpire(e, bonus, 8 + m.ar - ar_meno, primo_att and 'svantaggio_primo' in m.fx, ril)
+                colpo = self.tiro_colpire(e, bonus, m.ar, primo_att and 'svantaggio_primo' in m.fx, ril)
                 attacchi += 1
                 if colpo:
-                    dan = danno_eroe(self.d6(), att_val, m.ar - ar_meno) + dbonus_prossimo + (1 if e.ha('TE-12') and 'nonmorto' in m.fx else 0)
+                    dan = danno_eroe(self.d6()) + dbonus_prossimo + (1 if e.ha('TE-12') and 'nonmorto' in m.fx else 0)
                     dbonus_prossimo = 0
                     pm -= max(1, dan - 1) if 'coriaceo' in m.fx else dan
                 primo_att = False
@@ -617,9 +628,14 @@ class Partita:
                 else:
                     s = self.d6() + self.d6()
                 attacchi += 1
-                if s + am >= 8 + e.stat('ar') + ar_extra - (1 if 'acido' in m.fx else 0):
+                if s + am >= e.stat('ar') + ar_extra - (1 if 'acido' in m.fx else 0):
                     d = self.d6()
-                    dan = danno_mostro(m, d, am, e.stat('ar') + ar_extra - (1 if 'acido' in m.fx else 0)) + (2 if 'carica' in m.fx and primo_colpo_m else 0)
+                    dan = danno_mostro(m, d) + (2 if 'carica' in m.fx and primo_colpo_m else 0)
+                    if e.classe == 'Stregone' and e.potere and dan >= e.pv:  # potere: ritira il dado del danno
+                        e.potere = False
+                        self.stat['potere_Stregone'] += 1
+                        d = self.d6()
+                        dan = danno_mostro(m, d) + (2 if 'carica' in m.fx and primo_colpo_m else 0)
                     if primo_colpo_m and 'borseggio' in m.fx and e.mano:
                         e.scarti.append(e.mano.pop(self.rng.randrange(len(e.mano))))
                     primo_colpo_m = False
@@ -630,20 +646,18 @@ class Partita:
                                 e.gioca(c)
                                 dan = 0 if c == 'TI-30' else max(0, dan - 2)
                                 break
-                    if dan >= e.pv and e.ha('TE-08') and not getattr(e, 'targa_usata', False):
-                        e.targa_usata = True
+                    if dan >= e.pv and e.ha('TE-08'):  # Targa del Custode: si scarta per annullare i Danni
+                        e.scarti.append(e.slot.pop(next(sl for sl, c in e.slot.items() if c == 'TE-08')))
                         dan = 0
                     if dan > 0 and 'succhia' in m.fx:
                         pm = min(m.pv, pm + 1)
                     e.pv -= dan
                     if dan > 0 and d == 6 and 'pietrifica' in m.fx:
-                        self.clessidra(e)
+                        self.rallenta(e)
                     if dan > 0 and d == 6 and 'custode' in m.fx:
                         self.perdita(e)
-                    if e.pv <= 0 and e.rinascita:
-                        e.rinascita = False
-                        e.pv = 3
-                        self.stat['rinascite'] += 1
+                    if e.pv <= 0:
+                        self.salva_oracolo(e)
                     if e.pv <= 0:
                         self.stat['attacchi'] += attacchi
                         return False, pm
@@ -653,10 +667,15 @@ class Partita:
             e.pv = max(1, e.pv - 1)
         return True, 0
 
-    def clessidra(self, e):
-        if e.clessidre < 3:
-            e.clessidre += 1
-        self.max_clessidre = max(self.max_clessidre, sum(x.clessidre for x in self.eroi))
+    def rallenta(self, e):
+        e.rallentato = 2  # stato Rallentato preso nel proprio turno: vale per il turno successivo
+
+    def salva_oracolo(self, e):
+        """Potere dell'Oracolo (una volta per partita): a 0 PV resta a 1 PV."""
+        if e.classe == 'Oracolo' and e.potere and e.pv <= 0:
+            e.potere = False
+            e.pv = 1
+            self.stat['potere_Oracolo'] += 1
 
     def perdita(self, e):
         d = self.d6()
@@ -678,7 +697,11 @@ class Partita:
         e.pv = e.pvmax
         e.pos = None
         e.pos = self.ripartenza(e)
-        self.perdita(e)
+        if e.classe == 'Assaltatore' and e.potere and e.slot:  # potere: niente tiro di perdita
+            e.potere = False
+            self.stat['potere_Assaltatore'] += 1
+        else:
+            self.perdita(e)
 
     def prendi_indizio(self, e, n=1):
         e.indizi += n
@@ -695,19 +718,21 @@ class Partita:
         self.max_indizi = max(self.max_indizi, sum(x.indizi for x in self.eroi))
 
     def vittoria_mostro(self, e, m):
+        # v6: dopo ogni mostro sconfitto (boss del mazzetto 3 sulle caselle «?» compresi) 1 D6, Indizio se <= LV della carta
+        # (+ bonus_indizio, 0 di default: solo per le varianti di taratura)
+        n = 1 if self.dado_indizio.randint(1, 6) <= m.lv + VARIANTE['bonus_indizio'] else 0
         if m.mazzetto == 3:
-            self.prendi_indizio(e)
             e.prossimo_livello()
             e.fv = True
         else:
-            n = 1 + (1 if e.mappa_sussurrata else 0)
-            e.mappa_sussurrata = False
-            self.prendi_indizio(e, n)
+            if e.mappa_sussurrata:
+                n += 1
+                e.mappa_sussurrata = 0
             e.guadagna_pe()
             if m.mazzetto == 2:
                 e.fv = True
-        if e.classe == 'Assaltatore':
-            e.fv = True
+        if n:
+            self.prendi_indizio(e, n)
 
     def mostro_su_casella(self, e, cella):
         mz = 1 if e.livello <= 2 else (2 if e.livello <= 4 else 3)
@@ -717,12 +742,13 @@ class Partita:
         vinto, _ = self.scontro(e, m)
         if vinto:
             self.scoperte.discard(cella)
+            self.usate.append('rossa')
             self.stat['vittorie_mostri'] += 1
             self.vittoria_mostro(e, m)
         else:
             self.scoperte.add(cella)
             if 'catene' in m.fx:
-                self.clessidra(e)
+                self.rallenta(e)
             if 'saccheggio' in m.fx and e.mano:
                 e.scarti.append(e.mano.pop(self.rng.randrange(len(e.mano))))
             self.sconfitta(e)
@@ -746,13 +772,13 @@ class Partita:
             e.pv -= max(0, dan)
             self.perdita(e)
             if e.pv <= 0:
+                self.salva_oracolo(e)
+            if e.pv <= 0:
                 self.stat['morti_trappola'] += 1
                 self.sconfitta(e)
         elif c == 'Locanda':
             e.guadagna_pe()
             e.pv = min(e.pvmax, e.pv + 2)
-            if e.classe == 'Oracolo':
-                e.rinascita = True
         elif c == 'Fonte':
             for _ in range(2):
                 buone = [x for x in e.scarti if x not in EQUIP]
@@ -770,7 +796,7 @@ class Partita:
                 e.mano.append(x)
 
     def forza(self, e, x):
-        return p_colpo(e.stat('att'), 8 + x.stat('ar')) * 3.5 / max(1, x.pv)
+        return p_colpo(e.stat('att'), x.stat('ar')) * 3.5 / max(1, x.pv)
 
     def duello(self, e, t):
         if t.indizi and t.mano and self.forza(t, e) < self.forza(e, t):
@@ -783,14 +809,12 @@ class Partita:
         if a == b and t.stat('mov') > e.stat('mov'):
             primo = t
         att, dif = primo, (t if primo is e else e)
-        ril = {id(e): [2 if e.classe == 'Stregone' else 0], id(t): [2 if t.classe == 'Stregone' else 0]}
-        self.in_boss = False
+        self.in_boss = self.in_custode = False
         while True:
-            if self.tiro_colpire(att, att.stat('att'), 8 + dif.stat('ar'), False, ril[id(att)]):
-                dif.pv -= danno_eroe(self.d6(), att.stat('att'), dif.stat('ar'))
-                if dif.pv <= 0 and dif.rinascita:
-                    dif.rinascita = False
-                    dif.pv = 3
+            if self.tiro_colpire(att, att.stat('att'), dif.stat('ar'), False, [0]):
+                dif.pv -= danno_eroe(self.d6())
+                if dif.pv <= 0:
+                    self.salva_oracolo(dif)
                 if dif.pv <= 0:
                     break
             att, dif = dif, att
@@ -810,7 +834,7 @@ class Partita:
             if self.mimi in cand:
                 return self.mimi
             return min(cand, key=lambda c: (DIST[c][self.mimi], c in CASELLE_Q, vicino_altri(c)))
-        utili = [c for c in CASELLE_Q if (self.sacchetto or c in self.scoperte) and c not in occ]
+        utili = [c for c in CASELLE_Q if (self.sacchetto or self.usate or c in self.scoperte) and c not in occ]
         q = [c for c in cand if c in utili]
         if q:
             return min(q, key=lambda c: (vicino_altri(c), self.rng.random()))
@@ -826,17 +850,17 @@ class Partita:
 
     def turno(self, e):
         self.stat['turni'] += 1
-        if e.clessidre:
-            e.clessidre -= 1
-            self.stat['turni_saltati'] += 1
-            return
         e.budget = 2
         e.scontro_turno = False
         self.equipaggia(e)
-        if 'TI-15' in e.mano and e.budget > 1 and e.indizi < 3 and self.sacchetto:
+        if 'TI-15' in e.mano and e.budget > 1 and e.indizi < 3 and (self.sacchetto or self.usate):
             e.gioca('TI-15')
-            e.mappa_sussurrata = True
-        r = max(1, self.d6() + e.stat('mov'))
+            e.mappa_sussurrata = 2  # stato Sussurro: vale fino alla Fine del turno successivo
+        if e.rallentato == 1:  # stato Rallentato: solo 1 esagono, senza dado
+            self.stat['turni_rallentato'] += 1
+            r = 1
+        else:
+            r = max(1, self.d6() + e.stat('mov'))
         e.pos = self.scegli_meta(e, r)
         if e.pos == self.mimi and e.indizi >= 3:
             self.stat['tentativi_boss'] += 1
@@ -852,16 +876,31 @@ class Partita:
         elif e.pos in CASELLE_Q:
             if e.pos in self.scoperte:
                 self.mostro_su_casella(e, e.pos)
-            elif self.sacchetto:
+            elif self.sacchetto or self.usate:
+                if not self.sacchetto:  # sacchetto vuoto: dentro tutte le tessere usate, si mescola
+                    self.sacchetto, self.usate = self.usate, []
+                    self.rng.shuffle(self.sacchetto)
+                    self.stat['rifornimenti'] += 1
+                if e.classe == 'Ricercatore' and e.potere:  # guarda la prima carta Imprevisti, la Trappola va in fondo
+                    e.potere = False
+                    self.stat['potere_Ricercatore'] += 1
+                    if self.imprevisti[0] == 'Trappola':
+                        self.imprevisti.append(self.imprevisti.pop(0))
+                        self.stat['potere_Ricercatore_trappola'] += 1
                 self.stat['tessere_pescate'] += 1
                 if self.sacchetto.pop() == 'rossa':
                     self.mostro_su_casella(e, e.pos)
                 else:
                     self.imprevisto(e)
+                    self.usate.append('blu')
         if not e.scontro_turno and e.pos is not None:
             vicini = [x for x in self.eroi if x is not e and x.pos in ADIAC[e.pos]]
             if vicini:
                 self.duello(e, vicini[0])
+        if e.rallentato:
+            e.rallentato -= 1
+        if e.mappa_sussurrata:
+            e.mappa_sussurrata -= 1
         # fine turno: cure e carte utili
         if e.pv <= e.pvmax - 3 or (e.pv <= 2):
             for c, mod in (('TI-26', 0), ('TI-25', -1), ('TI-32', None)):
@@ -895,7 +934,7 @@ def una_partita(arg):
     n, seme, variante = arg
     VARIANTE.update(variante)  # i processi figli (forkserver) non ereditano il globale
     rng = random.Random(seme)
-    g = Partita(n, rng)
+    g = Partita(n, rng, random.Random(seme ^ 0xD6D6))
     v = g.gioca()
     s = g.stat
     minuti = (25 * s['turni'] + 15 * s['tessere_pescate'] + 30 * s['scontri'] + 12 * s['attacchi'] + 10 * g.n_carte
@@ -907,14 +946,15 @@ def una_partita(arg):
         'morti_classe': {e.classe: e.morti for e in g.eroi},
         'liv_vinc': v.livello if v else None, 'liv_medio': sum(e.livello for e in g.eroi) / n,
         'liv_max': max(e.livello for e in g.eroi),
-        'max_indizi': g.max_indizi, 'max_clessidre': g.max_clessidre,
-        'sacchetto_vuoto': not g.sacchetto, 'tentativi_boss': s['tentativi_boss'],
+        'max_indizi': g.max_indizi,
+        'rifornimenti': s['rifornimenti'], 'tentativi_boss': s['tentativi_boss'],
         'round_tesoro': s.get('round_tesoro'), 'custode': g.custode.nome,
         'scontri': s['scontri'], 'mz1': s['scontri_mazzetto_1'], 'mz2': s['scontri_mazzetto_2'], 'mz3': s['scontri_mazzetto_3'],
-        'duelli': s['duelli'], 'rifiuti': s['duelli_rifiutati'], 'turni_saltati': s['turni_saltati'],
+        'duelli': s['duelli'], 'rifiuti': s['duelli_rifiutati'], 'turni_rallentato': s['turni_rallentato'],
         'carte': g.n_carte, 'morti_trappola': s['morti_trappola'],
         'boss_eroe': {k: s['boss_' + k] for k in ('att', 'ar', 'liv', 'equip', 'pv')},
         'vince_chi_trova': v is not None and v is g.primo_tesoro,
+        'poteri': {k[7:]: x for k, x in s.items() if k.startswith('potere_')},
     }
 
 
@@ -926,7 +966,8 @@ def pct(xs, p):
 def rapporto_partite(n_partite, seme, processi):
     righe = [f"MONTE CARLO: {n_partite} partite per numero di giocatori, seme {seme}"
              + (", VARIANTE SENZA CARTE (mani vuote: niente equipaggiamenti né incanti)" if VARIANTE['senza_carte'] else "")
-             + (", DANNO DELL'AUTORE (D6 + ATT - AR del bersaglio, minimo 1, al posto della tabella)." if VARIANTE['danno'] == 'autore' else "."),
+             + (f", TARATURA INDIZI: D6 <= LV + {VARIANTE['bonus_indizio']}" if VARIANTE['bonus_indizio'] else "")
+             + ".",
              "", REGOLE, "", APPROSSIMAZIONI, ""]
     sintesi = {}
     with Pool(processi) as pool:
@@ -938,7 +979,7 @@ def rapporto_partite(n_partite, seme, processi):
             mm = [r['minuti'] for r in fin]
             righe.append(f"=== {n} giocatori ===")
             righe.append(f"Finite col boss: {len(fin)/len(ris):.1%}; in stallo a 120 round: {1-len(fin)/len(ris):.1%} "
-                         "(nel regolamento non c'è fine per Clessidre o per tempo).")
+                         "(nel regolamento non c'è fine per tempo).")
             if fin:
                 righe.append(f"Round (giro di tavolo) delle partite finite: media {statistics.mean(rr):.1f}, mediana {statistics.median(rr)}, "
                              f"10°-90° percentile {pct(rr, .1)}-{pct(rr, .9)}")
@@ -973,14 +1014,17 @@ def rapporto_partite(n_partite, seme, processi):
             righe.append(f"Scontri per partita {tot/len(ris):.1f}: mazzetto 1 {sum(r['mz1'] for r in ris)/tot:.1%}, "
                          f"mazzetto 2 {sum(r['mz2'] for r in ris)/tot:.1%}, boss (mazzetto 3 e custode) {sum(r['mz3'] for r in ris)/tot:.1%}")
             righe.append(f"Duelli per partita {statistics.mean(r['duelli'] for r in ris):.2f}, rifiutati {statistics.mean(r['rifiuti'] for r in ris):.2f}; "
-                         f"turni saltati per Clessidra {statistics.mean(r['turni_saltati'] for r in ris):.2f}; carte giocate {statistics.mean(r['carte'] for r in ris):.1f}")
-            righe.append(f"Sacchetto svuotato: {sum(r['sacchetto_vuoto'] for r in ris)/len(ris):.1%} delle partite; "
+                         f"turni con Rallentato {statistics.mean(r['turni_rallentato'] for r in ris):.2f}; "
+                         f"carte giocate {statistics.mean(r['carte'] for r in ris):.1f}")
+            righe.append(f"Sacchetto rifornito con le tessere usate: almeno una volta nel {sum(r['rifornimenti'] > 0 for r in ris)/len(ris):.1%} delle partite, "
+                         f"{statistics.mean(r['rifornimenti'] for r in ris):.2f} rifornimenti per partita; "
                          f"sconfitte per Trappola per partita {statistics.mean(r['morti_trappola'] for r in ris):.2f}")
             mi = [r['max_indizi'] for r in ris]
             righe.append(f"Indizi in gioco contemporaneamente: massimo {max(mi)}, 99° percentile {pct(mi, .99)} "
                          f"(segnalini stampati: {SEGNALINI['Indizio']}); partite oltre i segnalini: {sum(x > SEGNALINI['Indizio'] for x in mi)/len(mi):.2%}")
-            mc = [r['max_clessidre'] for r in ris]
-            righe.append(f"Clessidre in gioco contemporaneamente: massimo {max(mc)} (segnalini stampati: {SEGNALINI['Clessidra']})")
+            righe.append("Poteri di classe usati per partita in cui la classe gioca (uno per partita al massimo): " + ', '.join(
+                f"{c} {sum(r['poteri'].get(c, 0) for r in ris)/pres[c]:.2f}" for c in CLASSI)
+                         + f"; Ricercatore: Trappola rimandata in fondo {sum(r['poteri'].get('Ricercatore_trappola', 0) for r in ris)/pres['Ricercatore']:.2f}")
             righe.append("")
             sintesi[n] = {'fin': len(fin) / len(ris), 'round': statistics.mean(rr) if rr else None,
                           'minuti': statistics.mean(mm) if mm else None}
@@ -995,11 +1039,11 @@ def main():
     ap.add_argument('--processi', type=int, default=max(1, (os.cpu_count() or 2) // 2))
     ap.add_argument('--uscita')
     ap.add_argument('--senza-carte', action='store_true', help='mani vuote (sensibilità: quanto contano le carte)')
-    ap.add_argument('--danno', choices=('tabella', 'autore'), default='tabella',
-                    help="tabella = danni per LV (kit); autore = D6 + ATT - AR del bersaglio (commento 7 alla bozza del 3/11)")
+    ap.add_argument('--bonus-indizio', type=int, default=0, choices=(0, 1, 2),
+                    help="taratura: 1 Indizio se D6 <= LV + N (0 = regola v6; 1 e 2 = varianti H e I del 8/11)")
     a = ap.parse_args()
     VARIANTE['senza_carte'] = a.senza_carte
-    VARIANTE['danno'] = a.danno
+    VARIANTE['bonus_indizio'] = a.bonus_indizio
     parti = [f"Collaudo del kit di playtest - dati: {os.path.relpath(DATI, RADICE)}/*.csv", ""]
     # controllo della plancia contro il regolamento («Cripta più vicina a 3 esagoni, la più lontana a 7»)
     dd = [sorted(DIST[p][c] for c in CRIPTE) for p in PARTENZE]

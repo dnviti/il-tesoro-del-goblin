@@ -1,0 +1,296 @@
+RICOMPENSE DEI MOSTRI DEL «REGOLAMENTO CORRETTO» DI DESY: EFFETTO SUL RITMO (8/11/2026)
+=======================================================================================
+
+DOMANDA
+Le ricompense proposte da Desy (Il_Tesoro_del_Goblin_Regolamento_corretto.docx) rallentano la partita rispetto al kit
+di playtest v5? Si resta nei 25-30 minuti di scatola?
+
+STRUMENTO E LIMITI
+Simulatore: gioco/sorgenti/sim_playtest.py (Monte Carlo di partite intere, dati da stampa/sorgenti/dati/*.csv).
+Il simulatore NON è stato modificato nel repository: le varianti sono su una copia in directory temporanea (poi cancellata).
+Cosa modella (vedi REGOLE e APPROSSIMAZIONI nel file originale):
+- vittoria = 3 Indizi + stare sulla Cripta di MIMI (3° Indizio: MIMI va su una Cripta del D6, gli altri eroi prendono 1
+  Indizio ciascuno) + battere il boss custode (2D6 + ATT >= 8 + AR, ferite del boss che restano tra i tentativi);
+- altre fonti di Indizio oltre ai mostri: bonus del 3° Indizio agli altri eroi, Mappa Sussurrata (+1 Indizio sul prossimo
+  scontro vinto su «?»), boss del mazzetto 3 (non custode), Duello (il perdente cede 1 Indizio);
+- PE/livelli a 2/4/6/8 PE (max L5); mazzetto del mostro dal livello dell'eroe (L1-2 = mazzetto 1, L3-4 = 2, L5 = 3);
+- sacchetto di 36 tessere (25 rosse, 11 blu), plancia 10x10, Imprevisti (Locanda dà 1 PE), carte Casual, 4 classi, 8 specie;
+- round = un giro di tavolo (ogni eroe un turno); tetto 120 round; minuti stimati con il modello a costi fissi del
+  simulatore (25 s/turno, 15 s/tessera, 30 s/scontro, 12 s/attacco, 10 s/carta, 40 s/sconfitta, 30 s/duello).
+Limiti:
+- l'IA gioca sempre allo stesso modo: non cambia strategia se i mostri del mazzetto 1 non danno Indizi (non cerca altre
+  fonti, non evita il mazzetto 1, non punta ai Duelli); un umano si adatterebbe e potrebbe rallentare meno o più;
+- i minuti sono un modello a costi fissi, non misure: già nel baseline danno 15-22 min contro i 25-30 di scatola,
+  quindi vanno letti come rapporti tra varianti, non come durata assoluta;
+- se il sacchetto si svuota «non succede niente» e la casella resta «?»: in B/C a 4 giocatori questo succede spesso
+  (vedi tabella) e nel gioco reale sarebbe un possibile stallo; qui la partita prosegue comunque (nessuna partita ha
+  toccato il tetto di 120 round);
+- «--esatto» (probabilità esatte degli scontri) non dipende dalle ricompense e non è stato rieseguito; qui contano solo
+  le partite intere (10000 per variante per numero di giocatori, 2/3/4 giocatori, seme 20261105; stesse partite di
+  partenza per tutte le varianti: stesso seme per partita);
+- la fedeltà alle regole di Desy è ristretta a ciò che la consegna chiedeva: ricompense dei mostri. Non sono simulate
+  altre sue modifiche (Forte Volontà del boss, Duelli, ecc.).
+
+VARIANTI (cosa dà vincere contro un mostro; boss mazzetto 3 e Duello restano come da kit: 1 Indizio + livello + FV)
+A  baseline kit v5: mazzetto 1 e 2 = 1 Indizio + 1 PE; mazzetto 2 anche Forte Volontà (FV).
+B  Desy: mazzetto 1 = solo 1 PE, nessun Indizio; mazzetto 2 = 1 PE + Indizio su 6 carte su 8 (le 2 carte senza Indizio
+   sono estratte a caso, diverse a ogni partita), nessuna FV.
+C  come B ma tutte e 8 le carte del mazzetto 2 danno Indizio.
+D  come B ma i mostri LV2 del mazzetto 1 (NE-10..13, 4 carte su 13) danno 1 Indizio; i LV1 (9 carte) no.
+Scelta di modellazione: la Mappa Sussurrata dà il suo +1 Indizio anche se il mostro vinto non darebbe Indizio.
+Variante di controllo E (A ma senza FV nel mazzetto 2): risultati IDENTICI ad A, perché nel baseline il mazzetto 2 non
+viene quasi mai giocato (0,0 scontri a partita, vedi A).
+
+Controllo del baseline: A ricalcola il report di simulazioni/playtest_2026-11-05.txt con lo stesso seme: round medi
+4,95 / 4,25 / 3,90 (originale 5,0 / 4,2 / 3,9), sconfitte 1,13 / 1,18 / 1,28 (identiche).
+
+RISULTATI (10000 partite per cella; round = giri di tavolo; statistiche su partite finite col boss)
+Partite senza vincitore entro il tetto di 120 round: 0,0% in tutte le varianti e per tutti i numeri di giocatori.
+
+Round alla vittoria (media / mediana / 90° percentile) e minuti stimati (media / mediana / p90)
+Var  Giocatori   Round media  mediana  p90   Minuti media  mediana  p90
+A    2               4,95       5       7         15       14      19
+A    3               4,25       4       5         18       18      23
+A    4               3,90       4       5         22       21      27
+A    tutti (30000)   4,37       4       6         18       18      24
+B    2              13,12      13      17         43       40      59
+B    3              11,54      11      14         55       53      71
+B    4              10,93      11      13         67       65      82
+B    tutti          11,86      11      15         55       54      75
+C    2              11,69      11      15         37       35      50
+C    3              10,46      10      13         49       47      61
+C    4               9,76      10      11         60       59      73
+C    tutti          10,63      10      13         49       48      66
+D    2               9,88       9      14         31       29      44
+D    3               8,42       8      11         38       37      51
+D    4               7,63       8      10         45       44      59
+D    tutti           8,64       8      12         38       37      54
+
+Rapporto sul baseline (tutti i numeri di giocatori): round B x2,7, C x2,4, D x2,0; minuti B x3,0, C x2,7, D x2,1.
+
+Livello dell'eroe che vince, sconfitte, round del 3° Indizio
+Var  Livello vincitore  % vincitori a L5  Livello medio eroi a fine  Sconfitte/partita  Round 1° tesoro (3° Indizio)  Tentativi sul boss
+A         2,03                0%                 1,94                    1,19                  3,3                       1,68
+B         4,32               37%                 4,00                    5,64                 10,3                       1,79
+C         4,04               11%                 3,74                    4,57                  9,1                       1,78
+D         3,33                4%                 3,21                    3,12                  7,1                       1,81
+(Per numero di giocatori, 2 / 3 / 4: livello vincitore A 2,08/2,02/2,00; B 4,45/4,30/4,22; C 4,10/4,04/3,99; D 3,56/3,29/3,13.
+ Sconfitte/partita: A 1,13/1,18/1,28; B 4,97/5,59/6,35; C 3,98/4,56/5,18; D 3,04/3,09/3,22.)
+
+Fonti di Indizio: Indizi guadagnati per partita (somma di tutti gli eroi), media su tutti i numeri di giocatori
+Var  Mostri mazz.1  Mostri mazz.2  Mappa Sussurrata  Boss mazz.3  Duello  3° Indizio (MIMI, agli altri)  Totale
+A        6,32           0,00            0,31            0,00      0,02            2,00                      8,65
+B        0,00           4,91            0,45            0,18      0,07            2,00                      7,60
+C        0,00           5,29            0,44            0,01      0,02            2,00                      7,76
+D        3,14           2,16            0,40            0,01      0,03            2,00                      7,75
+Per 2 / 3 / 4 giocatori (mostri mazz.1 | mazz.2 | Mappa | Boss mazz.3 | Duello | MIMI):
+A  4,73|0,00|0,22|0,00|0,01|1  6,35|0,00|0,31|0,00|0,03|2  7,86|0,00|0,39|0,00|0,03|3
+B  0,00|3,88|0,31|0,25|0,01|1  0,00|5,00|0,45|0,18|0,02|2  0,00|5,84|0,59|0,10|0,18|3
+C  0,00|4,21|0,30|0,02|0,01|1  0,00|5,35|0,44|0,01|0,02|2  0,00|6,32|0,58|0,00|0,04|3
+D  2,13|2,08|0,27|0,03|0,01|1  3,17|2,20|0,40|0,01|0,02|2  4,12|2,21|0,53|0,00|0,04|3
+
+Scontri per partita e sacchetto (media su tutti i numeri di giocatori; scontri = mostri + boss)
+Var  Scontri totali  Mazzetto 1  Mazzetto 2  Boss (mazz.3 e custode)  Partite col sacchetto svuotato (2 / 3 / 4 giocatori)
+A        8,35           6,67        0,00            1,68                    0% / 0% / 0%
+B       23,80          11,78        9,89            2,13                    2% / 13% / 64%
+C       21,43          11,74        7,90            1,79                    0% / 3% / 34%
+D       17,13          11,24        4,05            1,84                    0% / 1% / 3%
+
+INTERPRETAZIONE
+1. B (proposta di Desy) rompe il ritmo: 11,9 round contro 4,4 del baseline (x2,7), 5,6 sconfitte a partita contro 1,2,
+   vincitore al livello 4,3 contro 2,0. Con il modello a minuti del simulatore la partita passa da 18 a 55 minuti (x3,0;
+   67 minuti a 4 giocatori); se il baseline corrispondesse ai 25-30 di scatola, B sarebbe intorno a 70-90 minuti
+   [INFERENZA: scala lineare, non misurata].
+2. Il motivo è strutturale, non il numero di carte con Indizio nel mazzetto 2: senza Indizio nel mazzetto 1 gli eroi
+   fanno ~12 scontri a partita senza avvicinarsi al tesoro, devono arrivare a L3 (4 PE) per entrare nel mazzetto 2 e
+   solo lì cominciano a raccogliere Indizi (~10 scontri di mazzetto 2 a partita per ~5 Indizi, con 5,6 sconfitte).
+   Passare da 6/8 (B) a 8/8 (C) Indizi nel mazzetto 2 toglie solo ~1,2 round su 11,9 (circa 10%): il collo di
+   bottiglia resta il mazzetto 1.
+3. Nessuna variante tiene il passo del baseline. D è la più vicina (8,6 round, x2,0; 38 min, x2,1) ma mette solo 4 carte
+   su 13 con Indizio nel mazzetto 1 e il tempo resta oltre il doppio. A 4 giocatori B e C svuotano spesso il sacchetto
+   (64% / 34% delle partite): rischio di stallo reale non visto dal simulatore.
+4. La leva è l'Indizio nel mazzetto 1: la variante di controllo E (mazzetto 1 con Indizio, mazzetto 2 senza FV) coincide
+   con A al decimale, perché nel baseline il mazzetto 2 non si gioca quasi mai (0,0 scontri a partita). Quindi togliere
+   la FV dal mazzetto 2 o dare Indizio solo a 6 carte su 8 non cambia nulla finché il mazzetto 1 dà Indizi; è
+   quando il mazzetto 1 smette di darli che il resto pesa. Una versione intermedia (Indizio sulla maggior parte delle
+   carte del mazzetto 1, solo PE sulle altre) non è stata simulata e sarebbe il passo successivo.
+5. Avvertenza: IA non adattiva e minuti a costi fissi (vedi LIMITI); i rapporti tra varianti sono più affidabili dei valori assoluti.
+
+METODO (riproducibile)
+- Copia del simulatore e dei CSV in una cartella temporanea mantenendo la struttura (gioco/sorgenti, stampa/sorgenti/dati);
+  patch alla copia:
+  a) RICOMPENSE = tabella per variante (mz1: tutti/nessuno/solo LV2; mz2: tutti/sei_su_otto; FV mz2 sì/no);
+  b) Partita.vittoria_mostro legge la tabella e chiama prendi_indizio solo se il mostro dà Indizio; la Mappa
+     Sussurrata dà il suo +1 comunque; il PE resta sempre 1;
+  c) prendi_indizio(e, n, fonte) conta gli Indizi per fonte (mostro mz1/mz2, Mappa, boss mz3, Duello, MIMI);
+  d) una_partita estrae a caso 2 carte del mazzetto 2 senza Indizio per partita (generatore indipendente dal seme del
+     gioco: random.Random(seme ^ 0x5EED)), usate solo da B e D.
+- Pilota: 5 varianti x 3 numeri di giocatori x 10000 partite, seme 20261105 * 1000003 + n * 100000 + i come nel
+  simulatore originale; statistiche su partite finite col boss (0 scartate: tutte finite entro 120 round).
+- Controlli: A rifà il report originale (round e sconfitte identici); E identica ad A; stallo = 0 in 150000 partite.
+
+
+SEZIONE 2 - REGOLA «TIRA 1 D6 DOPO OGNI MOSTRO SCONFITTO: 1 INDIZIO SE IL RISULTATO È <= AL LIVELLO DEL MOSTRO» (8/11/2026)
+=======================================================================================================================
+
+REGOLA SIMULATA (stesso simulatore, stessa copia patchata, 10000 partite x 2/3/4 giocatori, seme 20261105 come sopra)
+Dopo aver vinto uno scontro con un mostro si tira 1 D6: 1 Indizio se risultato <= LV stampato sulla carta (1-5).
+PE, Forte Volontà, livello del boss e Duello restano come nel baseline A; Mappa Sussurrata e il bonus del 3° Indizio (MIMI)
+restano invariati (la Mappa dà il suo +1 anche se il D6 fallisce, come nella sezione 1).
+Probabilità per carta: LV1 1/6 (17%), LV2 2/6 (33%), LV3 3/6 (50%), LV4 4/6 (67%), LV5 5/6 (83%).
+Con il mix di carte: mazzetto 1 (9 carte LV1 + 4 LV2) = 17/78 = 21,8%; mazzetto 2 (4 carte LV3 + 4 LV4) = 58,3%.
+F  la regola vale per tutti i mostri, compresi i boss del mazzetto 3 sulle caselle rosse (LV5: 83%).
+G  come F ma i boss del mazzetto 3 sulle caselle rosse danno Indizio automatico (come in A).
+Il D6 usa un generatore indipendente (random.Random(seme ^ 0xD6D6)) per non alterare il flusso dei dadi del resto della partita.
+Per confronto riporto di nuovo A (identico alla sezione 1). Stallo oltre 120 round: 0,0% in A, F e G a 2/3/4 giocatori.
+
+Round alla vittoria (media / mediana / p90) e minuti stimati (media / mediana / p90)
+Var  Giocatori   Round media  mediana  p90   Minuti media  mediana  p90
+A    2               4,95       5       7         15       14      19
+A    3               4,25       4       5         18       18      23
+A    4               3,90       4       5         22       21      27
+A    tutti (30000)   4,37       4       6         18       18      24
+F    2              11,86      11      17         38       35      58
+F    3              10,00      10      14         46       44      67
+F    4               9,19       9      12         54       53      76
+F    tutti          10,35      10      15         46       44      69
+G    2              11,74      11      17         38       35      57
+G    3               9,96      10      14         46       44      66
+G    4               9,16       9      12         54       53      75
+G    tutti          10,29      10      15         46       44      69
+Rapporto sul baseline (tutti): F round x2,4, minuti x2,5; G round x2,4, minuti x2,5.
+Per confronto (sezione 1): B 11,9 round / 55 min; C 10,6 / 49; D 8,6 / 38.
+
+Livello del vincitore, sconfitte, round del 3° Indizio, sacchetto svuotato
+Var  Livello vincitore  % vincitori a L5  Sconfitte/partita  Round 1° tesoro  Sacchetto svuotato (2 / 3 / 4 giocatori)
+A         2,03                0%               1,19               3,3            0% / 0% / 0%
+F         3,77               21%               4,38               8,8            2,6% / 9,3% / 28,2%
+G         3,77               21%               4,31               8,7            2,1% / 8,7% / 28,1%
+(Per 2 / 3 / 4 giocatori: livello vincitore F 4,00/3,75/3,55, G 4,00/3,76/3,55; sconfitte F 4,24/4,34/4,56, G 4,12/4,28/4,53.)
+
+Indizi attesi per mostro sconfitto (Indizi da D6 / mostri vinti, esclusi Mappa Sussurrata, MIMI e Duello)
+Var  Mazzetto 1  Mazzetto 2  Boss mazz.3  Tutti i mostri   Mostri sconfitti per partita   Indizi da mostri per partita
+A      1,000       1,000        -             1,000               6,3                          6,3
+F      0,216       0,576       0,833          0,331              15,5                          5,1
+G      0,216       0,575       1,000          0,332              15,5                          5,1
+(Per 2 / 3 / 4 giocatori, tutti i mostri: F 0,358 / 0,332 / 0,314; G 0,360 / 0,333 / 0,314. Valori teorici: 0,218 e 0,583 per i mazzetti 1 e 2.)
+
+Fonti di Indizio per partita (somma di tutti gli eroi, media su tutti i numeri di giocatori)
+Var  Mostri mazz.1  Mostri mazz.2  Boss mazz.3  Mappa Sussurrata  Duello  3° Indizio (MIMI, agli altri)  Totale
+A        6,32           0,00          0,00           0,31         0,02            2,00                     8,65
+F        2,31           2,64          0,19           0,42         0,07            2,00                     7,64
+G        2,31           2,63          0,20           0,42         0,07            2,00                     7,63
+
+INTERPRETAZIONE
+1. La regola D6 <= livello rallenta molto: 10,3 round contro 4,4 (x2,4), circa 46 minuti contro 18 (x2,5; stima a costi fissi,
+   da leggere come rapporto), vincitore al livello 3,8 contro 2,0 e 4,4 sconfitte a partita contro 1,2.
+2. Ogni mostro dà in media solo 0,33 Indizi (mazzetto 1: 0,22; mazzetto 2: 0,58). Gli eroi battono 15,5 mostri a partita
+   contro 6,3 del baseline per arrivare a ~5 Indizi da mostri (6,3 in A): prendono più PE, salgono di livello e passano al
+   mazzetto 2, quindi più scontri duri e più sconfitte.
+3. È solo un po' meglio di B (11,9 round) e vicina a C (10,6); peggio di D (8,6). Non tiene il passo di A.
+4. F e G sono indistinguibili (10,35 contro 10,29 round): i boss del mazzetto 3 sulle caselle rosse compaiono solo a L5 e
+   vengono affrontati 0,2 volte a partita. Il tiro D6 <= 5 sul boss (83%) è già quasi automatico.
+5. A 4 giocatori il sacchetto si svuota nel 28% delle partite (A: 0%): con questa regola le partite consumano ~24 scontri
+   (A: ~10) su 36 tessere; nel gioco reale sarebbe un rischio di stallo che il simulatore non registra.
+Limiti come nella sezione 1 (IA non adattiva: con Indizi aleatori un giocatore umano potrebbe scegliere diversamente le
+caselle; minuti a costi fissi; Mappa Sussurrata sempre +1).
+
+METODO DELLA SEZIONE 2
+- Copia nuova del simulatore e dei CSV in una cartella temporanea (poi cancellata); patch: Partita.vittoria_mostro legge la
+  regola (A / F / G) e chiama prendi_indizio solo se riesce il tiro D6 <= m.lv (boss mazz.3 sempre in G); PE, FV e livello
+  invariati; contatori di mostri vinti per mazzetto e di Indizi per fonte (mostro mz1/mz2/mz3, Mappa, Duello, MIMI).
+- Controllo: A ricalcola le stesse cifre della sezione 1 (4,95 / 4,25 / 3,90 round; 1,13 / 1,18 / 1,28 sconfitte);
+  Indizi per mostro coerenti con le probabilità teoriche (0,216 contro 0,218; 0,576 contro 0,583; 0,833 per LV5 = 5/6).
+
+
+SEZIONE 3 - VARIANTI DI TARATURA DELLA REGOLA D6 (8/11/2026)
+==========================================================
+
+VARIANTI SIMULATE (stessa copia patchata, 10000 partite x 2/3/4 giocatori, seme 20261105; PE, Forte Volontà, livello del boss,
+Duello, Mappa Sussurrata e bonus del 3° Indizio invariati; i boss del mazzetto 3 sulle rosse seguono la stessa formula)
+F  (riferimento, sezione 2) 1 Indizio se D6 <= LV; tesoro con 3 Indizi.
+H  1 Indizio se D6 <= LV + 1 (LV1 33%, LV2 50%, LV3 67%, LV4 83%, LV5 automatico).
+   Con il mix di carte: mazzetto 1 = 30/78 = 38,5%; mazzetto 2 = 75%.
+I  1 Indizio se D6 <= LV + 2 (LV1 50%, LV2 67%, LV3 83%, LV4+ automatico).
+   Con il mix di carte: mazzetto 1 = 43/78 = 55,1%; mazzetto 2 = 91,7%.
+J  1 Indizio se D6 <= LV (come F) ma per il tesoro bastano 2 Indizi invece di 3.
+   Il simulatore la supporta: la soglia «3» compariva in 4 punti del codice (rivelare MIMI, scegliere la meta verso MIMI,
+   giocare la Mappa Sussurrata, sfidare il boss) ed è stata resa un parametro. In J a 2 Indizi MIMI va sulla Cripta
+   (D6, 5-6 si ritira), gli altri eroi prendono 1 Indizio ciascuno (come con il 3° Indizio) e il boss si sfida con 2 Indizi.
+Per confronto A (baseline) e F ricalcolati nella stessa corsa (identici alla sezione 2). Stallo oltre 120 round: 0,0%
+in tutte le varianti e per tutti i numeri di giocatori.
+
+Round alla vittoria (media / mediana / p90) e minuti stimati (media / mediana / p90)
+Var  Giocatori   Round media  mediana  p90   Minuti media  mediana  p90
+A    2               4,95       5       7         15       14      19
+A    3               4,25       4       5         18       18      23
+A    4               3,90       4       5         22       21      27
+A    tutti (30000)   4,37       4       6         18       18      24
+F    2              11,86      11      17         38       35      58
+F    3              10,00      10      14         46       44      67
+F    4               9,19       9      12         54       53      76
+F    tutti          10,35      10      15         46       44      69
+H    2               9,04       9      13         28       26      41
+H    3               7,64       7      10         34       33      48
+H    4               6,88       7       9         40       39      56
+H    tutti           7,85       8      11         34       32      50
+I    2               7,32       7      10         22       21      32
+I    3               6,19       6       8         27       26      37
+I    4               5,56       5       7         32       31      43
+I    tutti           6,36       6       9         27       26      39
+J    2               8,34       8      13         26       24      40
+J    3               6,77       7      10         30       29      46
+J    4               5,91       6       9         34       33      51
+J    tutti           7,01       7      11         30       28      46
+Rapporto sul baseline A (tutti): F round x2,4 / minuti x2,5; H x1,8 / x1,9; I x1,5 / x1,5; J x1,6 / x1,6.
+
+Livello del vincitore, sconfitte, round del 3° Indizio (in J: del 2°), sacchetto svuotato
+Var  Livello vincitore  % vincitori a L5  Sconfitte/partita  Round tesoro  Sacchetto svuotato (2 / 3 / 4 giocatori)
+A         2,03                0%               1,19            3,3          0% / 0% / 0%
+F         3,77               21%               4,38            8,8          2,6% / 9,3% / 28,2%
+H         3,10                4%               2,63            6,4          0,2% / 0,8% / 3,4%
+I         2,64                0,3%             1,84            5,0          0,0% / 0,0% / 0,1%
+J         2,78                3%               2,30            5,7          0,2% / 0,8% / 2,3%
+(Per 2 / 3 / 4 giocatori: livello vincitore H 3,34/3,06/2,90, I 2,84/2,61/2,47, J 3,07/2,74/2,52; sconfitte H 2,58/2,58/2,71,
+ I 1,81/1,80/1,90, J 2,38/2,25/2,26.)
+
+Indizi attesi per mostro sconfitto (Indizi da D6 / mostri vinti, esclusi Mappa Sussurrata, MIMI e Duello)
+Var  Mazzetto 1  Mazzetto 2  Boss mazz.3  Tutti i mostri   Mostri sconfitti per partita   Indizi da mostri per partita
+A      1,000       1,000        -             1,000               6,3                          6,3
+F      0,216       0,576       0,833          0,331              15,5                          5,1
+H      0,382       0,743       1,000          0,446              12,2                          5,4
+I      0,549       0,910       1,000          0,578               9,8                          5,7
+J      0,217       0,576       0,833          0,272              10,6                          2,9
+(Per 2 / 3 / 4 giocatori, tutti i mostri: H 0,469 / 0,446 / 0,433; I 0,594 / 0,579 / 0,569; J 0,297 / 0,271 / 0,256.
+ Valori teorici verificati: H 0,385 e 0,750; I 0,551 e 0,917.)
+
+Fonti di Indizio per partita (somma di tutti gli eroi, media su tutti i numeri di giocatori)
+Var  Mostri mazz.1  Mostri mazz.2  Boss mazz.3  Mappa Sussurrata  Duello  3° Indizio (MIMI, agli altri)  Totale
+A        6,32           0,00          0,00           0,31         0,02            2,00                     8,65
+F        2,31           2,64          0,19           0,42         0,07            2,00                     7,64
+H        3,83           1,58          0,02           0,39         0,03            2,00                     7,85
+I        4,96           0,72          0,00           0,36         0,03            2,00                     8,07
+J        1,95           0,91          0,02           0,36         0,03            2,00 (al 2° Indizio)      5,27
+(In J il totale è più basso perché ne servono meno: 2 per eroe invece di 3, non è un confronto diretto.)
+
+INTERPRETAZIONE
+1. Nessuna di queste taratura riporta la partita ai 4,4 round di A, ma tutte e tre migliorano F (10,3 round): I è la più
+   veloce (6,4 round, x1,5; 27 minuti stimati), poi J (7,0 round, x1,6; 30 minuti), poi H (7,9 round, x1,8; 34 minuti).
+2. Misura contro i 25-30 minuti di scatola, con la solita avvertenza: il modello a costi fissi dà già al baseline solo 18
+   minuti, quindi il valore assoluto è incerto. Nella scala del simulatore I sta nella fascia (27; 2 giocatori 22,
+   4 giocatori 32), J è al bordo (30), H la supera (34; 4 giocatori 40). Se il baseline reale è più vicino ai 25-30,
+   tutte e tre scalerebbero oltre la fascia [INFERENZA: scala lineare, non misurata].
+3. I: LV4+ automatico (nessun tiro per i mostri duri), mazzetto 1 al 55% e mazzetto 2 al 92%: ogni mostro dà in media
+   0,58 Indizi, sconfitte 1,8 a partita (A: 1,2), vincitore a L2,6. È l'unica che resta vicina al baseline per livello e
+   rischi; il tiro conta davvero solo nel mazzetto 1.
+4. J (tesoro con 2 Indizi, D6 <= LV): senza ritoccare le probabilità il tempo scende da 10,3 a 7,0 round, ma lo fa
+   cambiando l'obiettivo del gioco (meno Indizi da trovare, round tesoro 5,7), non il numero di mostri affrontati
+   (10,6 a partita contro 6,3 di A) né le sconfitte (2,3).
+5. Sacchetto: il rischio di svuotarlo a 4 giocatori scende al 3,4% (H), 2,3% (J) e 0,1% (I), contro il 28% di F.
+Limiti come nelle sezioni 1 e 2 (IA non adattiva, minuti a costi fissi, Mappa Sussurrata sempre +1).
+
+METODO DELLA SEZIONE 3
+- Nuova copia del simulatore in cartella temporanea (poi cancellata). Patch: tiro D6 <= m.lv + bonus (bonus 0 / 1 / 2 per
+  F / H / I, D6 indipendente seed ^ 0xD6D6), valido per tutti i mostri compresi i boss mazz.3; soglia del tesoro letta da
+  VARIANTE['soglia'] (3, o 2 per J) nei 4 punti in cui il codice originale ha «3»; contatori per fonte.
+- Controlli: A e F identici alla sezione 2; Indizi per mostro coerenti con la teoria; stallo 0 in 150000 partite.

@@ -67,12 +67,12 @@ Note: `exp.js` con la variabile `REP` carica `report.js`, che esiste solo in `..
 
 ## Collaudo del kit di stampa (`sim_playtest.py`)
 
-Il simulatore qui sopra è sulla scala D20. Per il kit fisico del playtest (2D6 + ATT ≥ 8 + AR, tabella dei danni, 3 Indizi) c'è `sim_playtest.py`. È un file solo, con la sola libreria standard, e legge i CSV stampati in `../../stampa/sorgenti/dati/`. Va lanciato dalla radice del repository:
+Il simulatore qui sopra è sulla scala D20. Per il kit fisico del playtest (2D6 + ATT ≥ AR del bersaglio, tabella dei danni, 3 Indizi) c'è `sim_playtest.py`. È un file solo, con la sola libreria standard, e legge i CSV stampati in `../../stampa/sorgenti/dati/`. Va lanciato dalla radice del repository:
 
 ```
-python3 gioco/sorgenti/sim_playtest.py --esatto --partite 10000 --uscita simulazioni/playtest_2026-11-05.txt
-python3 gioco/sorgenti/sim_playtest.py --partite 10000 --senza-carte     # sensibilità: mani vuote
-python3 gioco/sorgenti/sim_playtest.py --partite 10000 --danno autore    # danno D6 + ATT − AR (commento 7 dell'autore)
+python3 gioco/sorgenti/sim_playtest.py --esatto --partite 10000 --uscita simulazioni/playtest_v6_2026-11-08.txt
+python3 gioco/sorgenti/sim_playtest.py --partite 10000 --bonus-indizio 1  # taratura Indizi: D6 ≤ LV + 1 (2 = LV + 2)
+python3 gioco/sorgenti/sim_playtest.py --partite 10000 --senza-carte      # sensibilità: mani vuote
 ```
 
 `--esatto` calcola le probabilità esatte degli scontri delle 4 classi, dal livello 1 al 5, contro i 24 mostri. `--partite N` gioca N partite Monte Carlo a 2, 3 e 4 giocatori. Le regole simulate e le approssimazioni sono stampate in testa al rapporto.

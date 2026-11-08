@@ -1,7 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="210mm" height="297mm" viewBox="0 0 210 297" font-family="Liberation Sans Narrow">
-<rect x="6.5" y="6.5" width="197.0" height="284.0" fill="none" stroke="#000000" stroke-width="0.25"/><text x="105.00" y="11.00" font-family="Liberation Sans Narrow" font-size="3.00" fill="#6b4a2b" text-anchor="middle" >↑ alto (lato corto di ingresso)</text>
-<text x="105.00" y="21.00" font-family="Liberation Serif" font-size="6.00" fill="#000000" text-anchor="middle" font-weight="bold" >Prova di stampa · Il Tesoro del Goblin</text>
-<text x="105.00" y="27.00" font-family="Liberation Sans Narrow" font-size="3.20" fill="#6b4a2b" text-anchor="middle" >FRONTE · un solo foglio A4 stampato fronte-retro (ribaltamento sul LATO LUNGO)</text>
+<rect x="6.5" y="6.5" width="197.0" height="284.0" fill="none" stroke="#000000" stroke-width="0.25"/>
+<text x="105.00" y="11.00" font-family="Liberation Sans Narrow" font-size="3.00" fill="#6b4a2b" text-anchor="middle" >↑ alto (lato corto di ingresso)</text>
+<text x="105.00" y="21.00" font-family="Liberation Serif" font-size="6.00" fill="#000000" text-anchor="middle" font-weight="bold" >Prova di stampa A4 · Il Tesoro del Goblin</text>
+<text x="105.00" y="27.00" font-family="Liberation Sans Narrow" font-size="3.20" fill="#6b4a2b" text-anchor="middle" >Un solo foglio A4, SOLO FRONTE: tutto il kit v6 si stampa solo fronte</text>
 <text x="20.00" y="49.00" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="start" font-weight="bold" >Righello: 100 mm esatti tra lo 0 e il 10</text>
 <line x1="20.00" y1="58.00" x2="120.00" y2="58.00" stroke="#000000" stroke-width="0.25"/>
 <line x1="20.00" y1="58.00" x2="20.00" y2="63.00" stroke="#000000" stroke-width="0.2"/>
@@ -120,75 +121,36 @@
 <rect x="145" y="35" width="50" height="50" fill="none" stroke="#000000" stroke-width="0.4"/>
 <text x="170.00" y="61.00" font-family="Liberation Sans Narrow" font-size="3.60" fill="#000000" text-anchor="middle" font-weight="bold" >50 × 50 mm</text>
 <text x="170.00" y="67.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#6b4a2b" text-anchor="middle" >misura i lati</text>
-<text x="20.00" y="104.00" font-family="Liberation Sans Narrow" font-size="3.50" fill="#000000" text-anchor="start" >1. Stampa al 100% («Dimensioni effettive», MAI «Adatta alla pagina»), carta A4, fronte-retro con ribaltamento sul LATO LUNGO.</text>
-<text x="20.00" y="110.58" font-family="Liberation Sans Narrow" font-size="3.50" fill="#000000" text-anchor="start" >2. Scala: misura il righello (100 mm tra 0 e 10) e il quadrato (50 mm). Va bene entro ±1 mm. Se no, disattiva «adatta/riduci» e</text><text x="20.00" y="114.95" font-family="Liberation Sans Narrow" font-size="3.50" fill="#000000" text-anchor="start" >ristampa.</text>
-<text x="20.00" y="121.53" font-family="Liberation Sans Narrow" font-size="3.50" fill="#000000" text-anchor="start" >3. Margini: il riquadro sottile a 6,5 mm dal bordo deve vedersi su tutti e 4 i lati. Se manca un lato la stampante taglia il margine: le</text><text x="20.00" y="125.90" font-family="Liberation Sans Narrow" font-size="3.50" fill="#000000" text-anchor="start" >carte e le tacche sono pensate per stare oltre i 6,5 mm.</text>
-<text x="20.00" y="132.47" font-family="Liberation Sans Narrow" font-size="3.50" fill="#000000" text-anchor="start" >4. Fronte-retro: tieni il foglio controluce. Ogni croce del fronte deve cadere dentro i cerchi concentrici del retro (ogni cerchio = 1 mm di</text><text x="20.00" y="136.85" font-family="Liberation Sans Narrow" font-size="3.50" fill="#000000" text-anchor="start" >scarto). Fino a 1 mm va bene per le carte; oltre, vedi ISTRUZIONI_DI_STAMPA.md.</text>
-<text x="20.00" y="143.42" font-family="Liberation Sans Narrow" font-size="3.50" fill="#000000" text-anchor="start" >Se tutto torna, stampa il resto del kit nell’ordine di ISTRUZIONI_DI_STAMPA.md.</text>
-<text x="105.00" y="181.00" font-family="Liberation Sans Narrow" font-size="3.00" fill="#6b4a2b" text-anchor="middle" >Bersagli di allineamento (croci; il retro ha i cerchi)</text>
-<line x1="18.00" y1="190.00" x2="32.00" y2="190.00" stroke="#000000" stroke-width="0.2"/><line x1="25.00" y1="183.00" x2="25.00" y2="197.00" stroke="#000000" stroke-width="0.2"/>
-<line x1="19.00" y1="189.20" x2="19.00" y2="190.80" stroke="#000000" stroke-width="0.15"/><line x1="24.20" y1="184.00" x2="25.80" y2="184.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="20.00" y1="189.20" x2="20.00" y2="190.80" stroke="#000000" stroke-width="0.15"/><line x1="24.20" y1="185.00" x2="25.80" y2="185.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="21.00" y1="189.20" x2="21.00" y2="190.80" stroke="#000000" stroke-width="0.15"/><line x1="24.20" y1="186.00" x2="25.80" y2="186.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="22.00" y1="189.20" x2="22.00" y2="190.80" stroke="#000000" stroke-width="0.15"/><line x1="24.20" y1="187.00" x2="25.80" y2="187.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="23.00" y1="189.20" x2="23.00" y2="190.80" stroke="#000000" stroke-width="0.15"/><line x1="24.20" y1="188.00" x2="25.80" y2="188.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="24.00" y1="189.20" x2="24.00" y2="190.80" stroke="#000000" stroke-width="0.15"/><line x1="24.20" y1="189.00" x2="25.80" y2="189.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="26.00" y1="189.20" x2="26.00" y2="190.80" stroke="#000000" stroke-width="0.15"/><line x1="24.20" y1="191.00" x2="25.80" y2="191.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="27.00" y1="189.20" x2="27.00" y2="190.80" stroke="#000000" stroke-width="0.15"/><line x1="24.20" y1="192.00" x2="25.80" y2="192.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="28.00" y1="189.20" x2="28.00" y2="190.80" stroke="#000000" stroke-width="0.15"/><line x1="24.20" y1="193.00" x2="25.80" y2="193.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="29.00" y1="189.20" x2="29.00" y2="190.80" stroke="#000000" stroke-width="0.15"/><line x1="24.20" y1="194.00" x2="25.80" y2="194.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="30.00" y1="189.20" x2="30.00" y2="190.80" stroke="#000000" stroke-width="0.15"/><line x1="24.20" y1="195.00" x2="25.80" y2="195.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="31.00" y1="189.20" x2="31.00" y2="190.80" stroke="#000000" stroke-width="0.15"/><line x1="24.20" y1="196.00" x2="25.80" y2="196.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="178.00" y1="190.00" x2="192.00" y2="190.00" stroke="#000000" stroke-width="0.2"/><line x1="185.00" y1="183.00" x2="185.00" y2="197.00" stroke="#000000" stroke-width="0.2"/>
-<line x1="179.00" y1="189.20" x2="179.00" y2="190.80" stroke="#000000" stroke-width="0.15"/><line x1="184.20" y1="184.00" x2="185.80" y2="184.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="180.00" y1="189.20" x2="180.00" y2="190.80" stroke="#000000" stroke-width="0.15"/><line x1="184.20" y1="185.00" x2="185.80" y2="185.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="181.00" y1="189.20" x2="181.00" y2="190.80" stroke="#000000" stroke-width="0.15"/><line x1="184.20" y1="186.00" x2="185.80" y2="186.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="182.00" y1="189.20" x2="182.00" y2="190.80" stroke="#000000" stroke-width="0.15"/><line x1="184.20" y1="187.00" x2="185.80" y2="187.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="183.00" y1="189.20" x2="183.00" y2="190.80" stroke="#000000" stroke-width="0.15"/><line x1="184.20" y1="188.00" x2="185.80" y2="188.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="184.00" y1="189.20" x2="184.00" y2="190.80" stroke="#000000" stroke-width="0.15"/><line x1="184.20" y1="189.00" x2="185.80" y2="189.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="186.00" y1="189.20" x2="186.00" y2="190.80" stroke="#000000" stroke-width="0.15"/><line x1="184.20" y1="191.00" x2="185.80" y2="191.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="187.00" y1="189.20" x2="187.00" y2="190.80" stroke="#000000" stroke-width="0.15"/><line x1="184.20" y1="192.00" x2="185.80" y2="192.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="188.00" y1="189.20" x2="188.00" y2="190.80" stroke="#000000" stroke-width="0.15"/><line x1="184.20" y1="193.00" x2="185.80" y2="193.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="189.00" y1="189.20" x2="189.00" y2="190.80" stroke="#000000" stroke-width="0.15"/><line x1="184.20" y1="194.00" x2="185.80" y2="194.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="190.00" y1="189.20" x2="190.00" y2="190.80" stroke="#000000" stroke-width="0.15"/><line x1="184.20" y1="195.00" x2="185.80" y2="195.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="191.00" y1="189.20" x2="191.00" y2="190.80" stroke="#000000" stroke-width="0.15"/><line x1="184.20" y1="196.00" x2="185.80" y2="196.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="98.00" y1="232.00" x2="112.00" y2="232.00" stroke="#000000" stroke-width="0.2"/><line x1="105.00" y1="225.00" x2="105.00" y2="239.00" stroke="#000000" stroke-width="0.2"/>
-<line x1="99.00" y1="231.20" x2="99.00" y2="232.80" stroke="#000000" stroke-width="0.15"/><line x1="104.20" y1="226.00" x2="105.80" y2="226.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="100.00" y1="231.20" x2="100.00" y2="232.80" stroke="#000000" stroke-width="0.15"/><line x1="104.20" y1="227.00" x2="105.80" y2="227.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="101.00" y1="231.20" x2="101.00" y2="232.80" stroke="#000000" stroke-width="0.15"/><line x1="104.20" y1="228.00" x2="105.80" y2="228.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="102.00" y1="231.20" x2="102.00" y2="232.80" stroke="#000000" stroke-width="0.15"/><line x1="104.20" y1="229.00" x2="105.80" y2="229.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="103.00" y1="231.20" x2="103.00" y2="232.80" stroke="#000000" stroke-width="0.15"/><line x1="104.20" y1="230.00" x2="105.80" y2="230.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="104.00" y1="231.20" x2="104.00" y2="232.80" stroke="#000000" stroke-width="0.15"/><line x1="104.20" y1="231.00" x2="105.80" y2="231.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="106.00" y1="231.20" x2="106.00" y2="232.80" stroke="#000000" stroke-width="0.15"/><line x1="104.20" y1="233.00" x2="105.80" y2="233.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="107.00" y1="231.20" x2="107.00" y2="232.80" stroke="#000000" stroke-width="0.15"/><line x1="104.20" y1="234.00" x2="105.80" y2="234.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="108.00" y1="231.20" x2="108.00" y2="232.80" stroke="#000000" stroke-width="0.15"/><line x1="104.20" y1="235.00" x2="105.80" y2="235.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="109.00" y1="231.20" x2="109.00" y2="232.80" stroke="#000000" stroke-width="0.15"/><line x1="104.20" y1="236.00" x2="105.80" y2="236.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="110.00" y1="231.20" x2="110.00" y2="232.80" stroke="#000000" stroke-width="0.15"/><line x1="104.20" y1="237.00" x2="105.80" y2="237.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="111.00" y1="231.20" x2="111.00" y2="232.80" stroke="#000000" stroke-width="0.15"/><line x1="104.20" y1="238.00" x2="105.80" y2="238.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="18.00" y1="274.00" x2="32.00" y2="274.00" stroke="#000000" stroke-width="0.2"/><line x1="25.00" y1="267.00" x2="25.00" y2="281.00" stroke="#000000" stroke-width="0.2"/>
-<line x1="19.00" y1="273.20" x2="19.00" y2="274.80" stroke="#000000" stroke-width="0.15"/><line x1="24.20" y1="268.00" x2="25.80" y2="268.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="20.00" y1="273.20" x2="20.00" y2="274.80" stroke="#000000" stroke-width="0.15"/><line x1="24.20" y1="269.00" x2="25.80" y2="269.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="21.00" y1="273.20" x2="21.00" y2="274.80" stroke="#000000" stroke-width="0.15"/><line x1="24.20" y1="270.00" x2="25.80" y2="270.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="22.00" y1="273.20" x2="22.00" y2="274.80" stroke="#000000" stroke-width="0.15"/><line x1="24.20" y1="271.00" x2="25.80" y2="271.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="23.00" y1="273.20" x2="23.00" y2="274.80" stroke="#000000" stroke-width="0.15"/><line x1="24.20" y1="272.00" x2="25.80" y2="272.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="24.00" y1="273.20" x2="24.00" y2="274.80" stroke="#000000" stroke-width="0.15"/><line x1="24.20" y1="273.00" x2="25.80" y2="273.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="26.00" y1="273.20" x2="26.00" y2="274.80" stroke="#000000" stroke-width="0.15"/><line x1="24.20" y1="275.00" x2="25.80" y2="275.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="27.00" y1="273.20" x2="27.00" y2="274.80" stroke="#000000" stroke-width="0.15"/><line x1="24.20" y1="276.00" x2="25.80" y2="276.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="28.00" y1="273.20" x2="28.00" y2="274.80" stroke="#000000" stroke-width="0.15"/><line x1="24.20" y1="277.00" x2="25.80" y2="277.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="29.00" y1="273.20" x2="29.00" y2="274.80" stroke="#000000" stroke-width="0.15"/><line x1="24.20" y1="278.00" x2="25.80" y2="278.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="30.00" y1="273.20" x2="30.00" y2="274.80" stroke="#000000" stroke-width="0.15"/><line x1="24.20" y1="279.00" x2="25.80" y2="279.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="31.00" y1="273.20" x2="31.00" y2="274.80" stroke="#000000" stroke-width="0.15"/><line x1="24.20" y1="280.00" x2="25.80" y2="280.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="178.00" y1="274.00" x2="192.00" y2="274.00" stroke="#000000" stroke-width="0.2"/><line x1="185.00" y1="267.00" x2="185.00" y2="281.00" stroke="#000000" stroke-width="0.2"/>
-<line x1="179.00" y1="273.20" x2="179.00" y2="274.80" stroke="#000000" stroke-width="0.15"/><line x1="184.20" y1="268.00" x2="185.80" y2="268.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="180.00" y1="273.20" x2="180.00" y2="274.80" stroke="#000000" stroke-width="0.15"/><line x1="184.20" y1="269.00" x2="185.80" y2="269.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="181.00" y1="273.20" x2="181.00" y2="274.80" stroke="#000000" stroke-width="0.15"/><line x1="184.20" y1="270.00" x2="185.80" y2="270.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="182.00" y1="273.20" x2="182.00" y2="274.80" stroke="#000000" stroke-width="0.15"/><line x1="184.20" y1="271.00" x2="185.80" y2="271.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="183.00" y1="273.20" x2="183.00" y2="274.80" stroke="#000000" stroke-width="0.15"/><line x1="184.20" y1="272.00" x2="185.80" y2="272.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="184.00" y1="273.20" x2="184.00" y2="274.80" stroke="#000000" stroke-width="0.15"/><line x1="184.20" y1="273.00" x2="185.80" y2="273.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="186.00" y1="273.20" x2="186.00" y2="274.80" stroke="#000000" stroke-width="0.15"/><line x1="184.20" y1="275.00" x2="185.80" y2="275.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="187.00" y1="273.20" x2="187.00" y2="274.80" stroke="#000000" stroke-width="0.15"/><line x1="184.20" y1="276.00" x2="185.80" y2="276.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="188.00" y1="273.20" x2="188.00" y2="274.80" stroke="#000000" stroke-width="0.15"/><line x1="184.20" y1="277.00" x2="185.80" y2="277.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="189.00" y1="273.20" x2="189.00" y2="274.80" stroke="#000000" stroke-width="0.15"/><line x1="184.20" y1="278.00" x2="185.80" y2="278.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="190.00" y1="273.20" x2="190.00" y2="274.80" stroke="#000000" stroke-width="0.15"/><line x1="184.20" y1="279.00" x2="185.80" y2="279.00" stroke="#000000" stroke-width="0.15"/>
-<line x1="191.00" y1="273.20" x2="191.00" y2="274.80" stroke="#000000" stroke-width="0.15"/><line x1="184.20" y1="280.00" x2="185.80" y2="280.00" stroke="#000000" stroke-width="0.15"/>
+<text x="20.00" y="104.00" font-family="Liberation Sans Narrow" font-size="3.50" fill="#000000" text-anchor="start" >1. Stampa al 100% («Dimensioni effettive», MAI «Adatta alla pagina»), carta A4, SOLO FRONTE (niente fronte-retro, nemmeno</text><text x="20.00" y="108.38" font-family="Liberation Sans Narrow" font-size="3.50" fill="#000000" text-anchor="start" >manuale).</text>
+<text x="20.00" y="114.95" font-family="Liberation Sans Narrow" font-size="3.50" fill="#000000" text-anchor="start" >2. Scala: misura il righello (100 mm tra 0 e 10) e il quadrato (50 mm). Va bene entro ±1 mm. Se no, disattiva «adatta/riduci» e</text><text x="20.00" y="119.33" font-family="Liberation Sans Narrow" font-size="3.50" fill="#000000" text-anchor="start" >ristampa.</text>
+<text x="20.00" y="125.90" font-family="Liberation Sans Narrow" font-size="3.50" fill="#000000" text-anchor="start" >3. Margini: il riquadro sottile a 6,5 mm dal bordo deve vedersi su tutti e 4 i lati. Se manca un lato la stampante taglia il margine: carte,</text><text x="20.00" y="130.28" font-family="Liberation Sans Narrow" font-size="3.50" fill="#000000" text-anchor="start" >plance e tacche stanno oltre i 6,5 mm.</text>
+<text x="20.00" y="136.85" font-family="Liberation Sans Narrow" font-size="3.50" fill="#000000" text-anchor="start" >Se tutto torna, stampa il resto del kit nell’ordine di ISTRUZIONI_DI_STAMPA.md. Le carte e i loro dorsi sono su fogli separati: si</text><text x="20.00" y="141.22" font-family="Liberation Sans Narrow" font-size="3.50" fill="#000000" text-anchor="start" >uniscono a mano (colla stick o bustina).</text>
+<text x="20.00" y="153.80" font-family="Liberation Sans Narrow" font-size="3.40" fill="#000000" text-anchor="start" font-weight="bold" >File del kit A4 (fogli, tutti solo fronte)</text>
+<text x="24.00" y="159.80" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="start" >00_prova_stampa.pdf</text><text x="186.00" y="159.80" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="end" >1</text>
+<line x1="24.00" y1="161.10" x2="186.00" y2="161.10" stroke="#999999" stroke-width="0.1"/>
+<text x="24.00" y="165.00" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="start" >carte_comuni.pdf + carte_comuni_retri.pdf</text><text x="186.00" y="165.00" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="end" >5 + 5</text>
+<line x1="24.00" y1="166.30" x2="186.00" y2="166.30" stroke="#999999" stroke-width="0.1"/>
+<text x="24.00" y="170.20" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="start" >carte_classe.pdf + carte_classe_retri.pdf</text><text x="186.00" y="170.20" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="end" >4 + 4</text>
+<line x1="24.00" y1="171.50" x2="186.00" y2="171.50" stroke="#999999" stroke-width="0.1"/>
+<text x="24.00" y="175.40" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="start" >carte_specie.pdf</text><text x="186.00" y="175.40" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="end" >1</text>
+<line x1="24.00" y1="176.70" x2="186.00" y2="176.70" stroke="#999999" stroke-width="0.1"/>
+<text x="24.00" y="180.60" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="start" >carte_mostro.pdf + carte_mostro_retri.pdf</text><text x="186.00" y="180.60" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="end" >3 + 3</text>
+<line x1="24.00" y1="181.90" x2="186.00" y2="181.90" stroke="#999999" stroke-width="0.1"/>
+<text x="24.00" y="185.80" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="start" >carte_imprevisto.pdf + carte_imprevisto_retri.pdf</text><text x="186.00" y="185.80" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="end" >2 + 2</text>
+<line x1="24.00" y1="187.10" x2="186.00" y2="187.10" stroke="#999999" stroke-width="0.1"/>
+<text x="24.00" y="191.00" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="start" >carte_aiuto_divisori.pdf</text><text x="186.00" y="191.00" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="end" >2</text>
+<line x1="24.00" y1="192.30" x2="186.00" y2="192.30" stroke="#999999" stroke-width="0.1"/>
+<text x="24.00" y="196.20" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="start" >tessere_esplorazione.pdf</text><text x="186.00" y="196.20" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="end" >1</text>
+<line x1="24.00" y1="197.50" x2="186.00" y2="197.50" stroke="#999999" stroke-width="0.1"/>
+<text x="24.00" y="201.40" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="start" >segnalini.pdf (segnalini, Stati, dischi del tavolo)</text><text x="186.00" y="201.40" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="end" >2</text>
+<line x1="24.00" y1="202.70" x2="186.00" y2="202.70" stroke="#999999" stroke-width="0.1"/>
+<text x="24.00" y="206.60" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="start" >rotelle_eroe.pdf (24 dischi)</text><text x="186.00" y="206.60" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="end" >2</text>
+<line x1="24.00" y1="207.90" x2="186.00" y2="207.90" stroke="#999999" stroke-width="0.1"/>
+<text x="24.00" y="211.80" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="start" >plance_eroe.pdf (A4 orizzontale)</text><text x="186.00" y="211.80" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="end" >4</text>
+<line x1="24.00" y1="213.10" x2="186.00" y2="213.10" stroke="#999999" stroke-width="0.1"/>
+<text x="24.00" y="217.00" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="start" >pedine.pdf</text><text x="186.00" y="217.00" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="end" >1</text>
+<line x1="24.00" y1="218.30" x2="186.00" y2="218.30" stroke="#999999" stroke-width="0.1"/>
+<text x="24.00" y="222.20" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="start" >plancia.pdf (4 fogli da unire)</text><text x="186.00" y="222.20" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="end" >4</text>
+<line x1="24.00" y1="223.50" x2="186.00" y2="223.50" stroke="#999999" stroke-width="0.1"/>
+<text x="186.00" y="228.90" font-family="Liberation Sans Narrow" font-size="3.40" fill="#000000" text-anchor="end" font-weight="bold" >Totale: 46 fogli A4</text>
 </svg>

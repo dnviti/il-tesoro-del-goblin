@@ -31,11 +31,46 @@ def icon(name,x,y,k=1,col=INK):
     'bandiera':f'<g {t}><rect x="5" y="3" width="2" height="18" fill="{col}"/><path d="M7 4h12l-3 4 3 4H7z" fill="{col}"/></g>',
     'elmo':f'<g {t}><path d="M4 14a8 8 0 0 1 16 0v6h-5v-4H9v4H4z" fill="{col}"/><rect x="11" y="2" width="2" height="5" fill="{col}"/></g>',
     'cripta':f'<g {t}><path d="M4 21V10a8 8 0 0 1 16 0v11z" fill="{GOLD}"/><path d="M9 21v-7a3 3 0 0 1 6 0v7z" fill="{PAPER}"/></g>',
+    'spunta':f'<g {t} fill="none" stroke="{col}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></g>',
     }[name]
     return s
 
 def q_mark(x,y,r=6):
     return f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{r}" fill="{PAPER}" stroke="{INK}" stroke-width="1.4"/><text x="{x:.1f}" y="{y+r*0.55:.1f}" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="{r*1.5:.1f}" fill="{INK}">?</text>'
+
+# ---------- rotelle (volvelle): corona di valori stampata sotto un disco Ø 52 mm con una finestra ----------
+# Misure in mm. La corona sta a RING_R dal centro (rr per rotella); il disco (pezzo a parte, fermacampioni al centro)
+# la copre e mostra un solo valore nella finestra. Le etichette restano dritte: la finestra le contiene a ogni angolo.
+CAP=0.716            # altezza delle cifre / corpo (Liberation Sans Narrow)
+RING_R=20.0; DISC_R=26.0
+def dial_block(main, smalls=(), mh=4.5, sf=2.0, gap=0.6):
+    """righe di un'etichetta centrata in (0,0): [(testo, corpo, baseline, grassetto)] e altezza del blocco."""
+    h=mh+len(smalls)*(gap+sf*CAP)
+    y=-h/2+mh; out=[(main,mh/CAP,y,True)]
+    for s in smalls:
+        y+=gap+sf*CAP; out.append((s,sf,y,False))
+    return out,h
+
+def dial_angle(i,n): return i*360.0/n   # gradi, 0 = in alto, senso orario
+
+def dial_ring(cx,cy,vals,k=1.0,mh=4.5,sf=2.0,gap=0.6,gold=(),red=(),col=INK,hole=True,footprint=True,rr=RING_R):
+    """corona di N valori (il primo in alto, poi in senso orario) a rr mm da (cx, cy); k = unità del disegno per mm.
+    vals: [(testo grande, (righe piccole...))]; gold: indici con il cerchio dorato; red: indici in rosso."""
+    o=[f'<g transform="translate({cx:.3f},{cy:.3f}) scale({k:.5f})">']
+    if footprint:
+        o.append(f'<circle cx="0" cy="0" r="{DISC_R}" fill="none" stroke="{LINE}" stroke-width="0.25" stroke-dasharray="1.2 1"/>')
+    n=len(vals)
+    for i,(main,smalls) in enumerate(vals):
+        a=math.radians(dial_angle(i,n)); x=rr*math.sin(a); y=-rr*math.cos(a)
+        if i in gold: o.append(f'<circle cx="{x:.3f}" cy="{y:.3f}" r="4.8" fill="#ecd7a6"/>')
+        rows,_=dial_block(main,smalls,mh,sf,gap)
+        for t,fs,by,b in rows:
+            c=RED if i in red else col
+            o.append(f'<text x="{x:.3f}" y="{y+by:.3f}" text-anchor="middle" font-family="Alegreya Sans"{" font-weight=\"800\"" if b else ""} font-size="{fs:.3f}" fill="{c}">{t}</text>')
+    if hole:
+        o.append(f'<circle cx="0" cy="0" r="1.1" fill="none" stroke="{INK}" stroke-width="0.25"/><path d="M-2.2 0H2.2M0 -2.2V2.2" stroke="{INK}" stroke-width="0.2"/>')
+    o.append('</g>')
+    return ''.join(o)
 
 # ---------- Crepe del Caos (espansione) ----------
 CAOS='#7a3e8e'
@@ -47,7 +82,8 @@ def crepa_tile(x,y,R):
             f'<path d="M{x-6*k:.1f} {y-10*k:.1f} L{x-1*k:.1f} {y-3*k:.1f} L{x-5*k:.1f} {y+1*k:.1f} L{x+2*k:.1f} {y+10*k:.1f} L{x+1*k:.1f} {y+2*k:.1f} L{x+6*k:.1f} {y-1*k:.1f} Z" fill="#f6d68b"/>')
 
 # ---------- board ----------
-def board(W=26, full=True, show_bands=True, label=True, heroes=None, scale_note=False, caos_tiles=False):
+def board(W=26, full=True, show_bands=True, label=True, heroes=None, scale_note=False, caos_tiles=False, mm=0.97):
+    # mm = millimetri stampati per unità del disegno (la plancia si stampa in scala 0,97): rotelle e cerchi in mm veri
     R=W/math.sqrt(3); step=1.5*R
     mapw=W*10.5; maph=9*step+2*R
     pad=W*1.8
@@ -104,17 +140,23 @@ def board(W=26, full=True, show_bands=True, label=True, heroes=None, scale_note=
         for (nm,rad,big),x in zip(spots,xs):
             o.append(f'<circle cx="{x:.1f}" cy="{cy:.1f}" r="{rad:.1f}" fill="{GOLD if big else "#f7efdc"}" fill-opacity="{0.5 if big else 1}" stroke="{BROWN}" stroke-width="1.2"/>')
             o.append(f'<text x="{x:.1f}" y="{cy+rad+W*0.42:.1f}" text-anchor="middle" font-size="{W*0.34:.1f}" fill="{INK}">{nm}</text>')
-        # tracciato PV del Guardiano
-        bx=W*0.62; ty=W*3.25; x0=bw/2-4.5*bx+W*1.3
-        o.append(f'<text x="{x0-W*0.2:.1f}" y="{ty+bx*0.68:.1f}" text-anchor="end" font-size="{W*0.32:.1f}" font-weight="700" fill="{INK}">PV del boss</text>')
-        for i in range(9):
-            v=9-i
-            o.append(f'<rect x="{x0+i*bx:.1f}" y="{ty:.1f}" width="{bx*0.9:.1f}" height="{bx*0.9:.1f}" rx="2" fill="{"#e9c9a8" if v<=4 else "#f7efdc"}" stroke="{BROWN}" stroke-width="0.8"/>')
-            o.append(f'<text x="{x0+i*bx+bx*0.45:.1f}" y="{ty+bx*0.62:.1f}" text-anchor="middle" font-size="{W*0.27:.1f}" fill="{INK}">{v}</text>')
+        # Rotella dello scontro (sinistra) e Rotella del custode (destra): corona 0-9 sotto un disco Ø 52 col fermacampioni
+        u=1/mm; ry=55*u
+        for rx,t1,t2 in ((40*u,'PV del mostro','Rotella dello scontro'),(316*u,'PV del custode','le ferite restano')):
+            o.append(dial_ring(rx,ry,[(str(v),()) for v in range(10)],k=u))
+            o.append(f'<text x="{rx:.1f}" y="{ry+(DISC_R+4.6)*u:.1f}" text-anchor="middle" font-weight="800" font-size="{3.6*u:.2f}" fill="{INK}">{t1}</text>')
+            o.append(f'<text x="{rx:.1f}" y="{ry+(DISC_R+8.6)*u:.1f}" text-anchor="middle" font-size="{2.9*u:.2f}" fill="{BROWN}">{t2}</text>')
+        # Spostamenti del tesoro: 2 cerchi Ø 22 per le tessere Usato, sotto Custode e MIMI
+        sy=89.5*u
+        for sx in (105*u,131*u):
+            o.append(f'<circle cx="{sx:.1f}" cy="{sy:.1f}" r="{11*u:.2f}" fill="#f7efdc" stroke="{BROWN}" stroke-width="{0.35*u:.2f}" stroke-dasharray="{1.5*u:.2f} {1*u:.2f}"/>')
+        for j,(t,fs,wt,col) in enumerate((('Spostamenti',3.4,' font-weight="800"',INK),('del tesoro (max 2)',3.4,' font-weight="800"',INK),('1 tessera Usato ogni',2.8,'',BROWN),('volta che cambia Cripta',2.8,'',BROWN))):
+            o.append(f'<text x="{91.5*u:.1f}" y="{(83.6+j*4.1)*u:.1f}" text-anchor="end"{wt} font-size="{fs*u:.2f}" fill="{col}">{t}</text>')
         yb=Y0+maph+W*0.9
         o.append(f'<text x="{bw/2:.1f}" y="{yb:.1f}" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="{W*0.5:.1f}" fill="{BROWN}">Promemoria</text>')
-        o.append(f'<text x="{bw/2:.1f}" y="{yb+W*0.75:.1f}" text-anchor="middle" font-size="{W*0.38:.1f}" fill="{INK}">Turno: Clessidre · Carte · Muovi · Esplora · Fine</text>')
+        o.append(f'<text x="{bw/2:.1f}" y="{yb+W*0.75:.1f}" text-anchor="middle" font-size="{W*0.38:.1f}" fill="{INK}">Turno: Muovi · Esplora · Fine</text>')
         o.append(f'<text x="{bw/2:.1f}" y="{yb+W*1.35:.1f}" text-anchor="middle" font-size="{W*0.38:.1f}" fill="{INK}">Perdita D6: 1 tutto · 2 elmo · 3 arma DX · 4 arma SX · 5 armatura · 6 niente</text>')
+        o.append(f'<text x="{bw/2:.1f}" y="{yb+W*1.95:.1f}" text-anchor="middle" font-size="{W*0.38:.1f}" fill="{INK}">Sacchetto vuoto: rimetti dentro le tessere usate (pila «Tessere usate» accanto alla plancia)</text>')
         # tracciato dei giri e Presagio (tolto il 27/10: Indizi solo dagli scontri)
         if False:
             gx=W*0.6; gy=yb+W*1.85; g0=bw/2-10*gx+W*0.6

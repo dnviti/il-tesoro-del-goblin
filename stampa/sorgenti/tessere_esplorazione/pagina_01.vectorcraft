@@ -1,9 +1,9 @@
 {
   "format": "vectorcraft",
   "version": 4,
-  "generator": "VectorCraft 0.21.1",
+  "generator": "VectorCraft 0.22.0",
   "document": {
-    "version": 2,
+    "version": 3,
     "title": "pagina_01.svg",
     "units": "Millimeters",
     "rulers": "artboard",
@@ -108,7 +108,7 @@
                 ],
                 "runs": [
                   {
-                    "text": "FRONTE. Stampa fronte-retro: ribaltamento sul lato LUNGO (pagina 2 = retro).",
+                    "text": "Solo fronte: un foglio, retro bianco.",
                     "style": {
                       "font_family": "Liberation Sans Narrow",
                       "font_style": "Regular",
@@ -25348,7 +25348,7 @@
                 ],
                 "runs": [
                   {
-                    "text": "Stampa su A4 al 100% (nessun adattamento alla pagina). Taglia sul cerchio sottile; l’abbondanza di 3 mm esce dal taglio.",
+                    "text": "Stampa su A4 al 100% (nessun adattamento alla pagina), solo fronte. Taglia sul cerchio sottile; l’abbondanza di 3 mm esce dal taglio.",
                     "style": {
                       "font_family": "Liberation Sans Narrow",
                       "font_style": "Regular",
@@ -25405,7 +25405,7 @@
                 ],
                 "runs": [
                   {
-                    "text": "Retro identico al fronte: le tessere escono dal sacchetto e il colore (rosso = Mostro, blu = Imprevisto) si legge da ogni lato.",
+                    "text": "Retro bianco: le tessere si pescano a caso dal sacchetto; la tessera rossa rimasta sulla plancia sta a faccia in su.",
                     "style": {
                       "font_family": "Liberation Sans Narrow",
                       "font_style": "Regular",

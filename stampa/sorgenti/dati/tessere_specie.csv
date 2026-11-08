@@ -1,9 +1,0 @@
-id,specie,copia,bonus,nota_a_piè,provvisorio,nota,fonte
-SP-01,Umano,1 di 2,+1 MOV e +1 a una statistica a scelta,"Bonus a scelta: ATT, MOV o AR. I PV crescono solo con i livelli.",,Bonus copiato dalla bozza,"bozza docx 2/11, tabella «Le specie»"
-SP-02,Umano,2 di 2,+1 MOV e +1 a una statistica a scelta,"Bonus a scelta: ATT, MOV o AR. I PV crescono solo con i livelli.",,Bonus copiato dalla bozza,"bozza docx 2/11, tabella «Le specie»"
-SP-03,Elfo,1 di 2,+2 a una statistica a scelta,"Bonus a scelta: ATT, MOV o AR. I PV crescono solo con i livelli.",,Bonus copiato dalla bozza,"bozza docx 2/11, tabella «Le specie»"
-SP-04,Elfo,2 di 2,+2 a una statistica a scelta,"Bonus a scelta: ATT, MOV o AR. I PV crescono solo con i livelli.",,Bonus copiato dalla bozza,"bozza docx 2/11, tabella «Le specie»"
-SP-05,Sanguar,1 di 2,+2 MOV (sono non morti),"Bonus a scelta: ATT, MOV o AR. I PV crescono solo con i livelli.",,Bonus copiato dalla bozza,"bozza docx 2/11, tabella «Le specie»"
-SP-06,Sanguar,2 di 2,+2 MOV (sono non morti),"Bonus a scelta: ATT, MOV o AR. I PV crescono solo con i livelli.",,Bonus copiato dalla bozza,"bozza docx 2/11, tabella «Le specie»"
-SP-07,Yumaniano,1 di 2,+1 AR e +1 a una statistica a scelta (PROVVISORIO),"Bonus a scelta: ATT, MOV o AR. I PV crescono solo con i livelli.",PROVVISORIO,Bonus PROVVISORIO: la bozza dice «Da decidere: bonus della specie»; valore preso da v2/Il_Tesoro_del_Goblin_gioco_v2.html (riga ~438) e officina/motore.js riga 21 (+1 AR e +1 a scelta),"bozza docx 2/11, tabella «Le specie»"
-SP-08,Yumaniano,2 di 2,+1 AR e +1 a una statistica a scelta (PROVVISORIO),"Bonus a scelta: ATT, MOV o AR. I PV crescono solo con i livelli.",PROVVISORIO,Bonus PROVVISORIO: la bozza dice «Da decidere: bonus della specie»; valore preso da v2/Il_Tesoro_del_Goblin_gioco_v2.html (riga ~438) e officina/motore.js riga 21 (+1 AR e +1 a scelta),"bozza docx 2/11, tabella «Le specie»"
