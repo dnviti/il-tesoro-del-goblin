@@ -1,0 +1,30 @@
+[00:49, 09/11/2026] Alessandro De Simone: Dobbiamo ragionare  sul sacchetto capire come semplificare la produzione
+[00:49, 09/11/2026] Alessandro De Simone: Contro i mob inizi sempre tu per primo
+Pvp si tkra il d6
+[00:49, 09/11/2026] Alessandro De Simone: Le stat dei nemici
+Vanno alterate
+[00:49, 09/11/2026] Alessandro De Simone: La difesa è un problema
+[00:49, 09/11/2026] Alessandro De Simone: Abbassare AR nemica del 20/25%
+[00:49, 09/11/2026] Alessandro De Simone: Strade "bloccate" trovare una soluzione per il percorso
+[00:49, 09/11/2026] Alessandro De Simone: Opzione
+Punto interrogativo consumable + rimozione sacchetto
+[00:49, 09/11/2026] Alessandro De Simone: Ostacoli mostro
+[00:49, 09/11/2026] Alessandro De Simone: Controllo del fight
+Valutare se usare solo il tiro per colpire dei mostri contro i giocatori e il danno è il loro valore attacco
+[00:49, 09/11/2026] Alessandro De Simone: Per i mob i danni si calcolano sempre SE colpiti (anche viceversa)
+Su Pvp si applica regola precedente ossia I dadi per colpire e per i danni
+[00:49, 09/11/2026] Alessandro De Simone: Cambiare regola indizio
+D6 <= lvl mostro +1
+[00:49, 09/11/2026] Alessandro De Simone: Al lv up non si aggiungono +2
+Ma solo +1
+[00:49, 09/11/2026] Alessandro De Simone: Ricercatore effetti classe scry
+[00:49, 09/11/2026] Alessandro De Simone: Oracolo
+Diventa giullare con un flevor di mill
+Ossia scarta una carta pesca uan carta
+[00:49, 09/11/2026] Alessandro De Simone: Assaltatore
+Sacrifica armatura per potenziare attacco
+Stregone ha N  carte che permettono al lancio di un Incanto d'attacco ti permettono di lanciare un dado extra
+
+[01:21, 09/11/2026] Daniele Viti: Calcoliamo il livello del giocatore con il Power level delle carte, invece che con il livello e il giocatore non deve potersi aumentare le statistiche con l'aumento di livello, ma soltanto aumentando le statistiche con le carte che ha giocato, ad esempio equipaggiamenti o incanti che aumentano le statistiche in modo temporaneo
+[01:21, 09/11/2026] Daniele Viti: Questo livello Power level giocatore ci servirà per selezionare quali mostri. Il giocatore può affrontare questo perché così si evita di mandare il giocatore fuori dal gioco, se viene ucciso e perde tutti i potenziamenti ad un livello alto e così si evita anche il minmax del giocatore che aumenta una sola statistica e rompe il gioco
+[01:22, 09/11/2026] Daniele Viti: Per fare questo dobbiamo però anche far ciclare più vero più spesso le carte, quindi aumentare il riciclo dalla pila degli scarti e lame e la pescata più frequente dal mazzo delle carte generiche
