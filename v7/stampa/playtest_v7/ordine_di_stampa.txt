@@ -1,0 +1,29 @@
+Il Tesoro del Goblin - kit di playtest v7 (10/11/2026) - ordine di stampa A4
+Tutto SOLO FRONTE, scala 100 %, carta A4, 1 pagina = 1 foglio. Percorsi relativi a v7/stampa/playtest_v7/.
+Carta: "comune" = 80 g; "cartoncino" = 160-200 g.
+Regole: v7/regolamento/Spec_v7.md. Il regolamento per i giocatori (v7/regolamento/Regolamento_playtest_v7.docx)
+si esporta in PDF solo dopo l'approvazione: non è in questo elenco.
+Ogni carte_*_retri.pdf va col suo carte_*.pdf: il dorso nella cella p del foglio k va col fronte nella cella p del
+foglio k (dorsi non specchiati). Fronti e dorsi si ritagliano separati con la dima 63 x 88 mm e si incollano dorso
+contro dorso.
+
+ #  File                                 Pagine  Carta
+ 1  00_prova_stampa.pdf                       1  comune (controlla scala e margini prima di continuare)
+ 2  carte_comuni.pdf                          7  cartoncino
+ 3  carte_comuni_retri.pdf                    7  cartoncino
+ 4  carte_classe.pdf                          7  cartoncino
+ 5  carte_classe_retri.pdf                    6  cartoncino (il foglio 7 delle carte di classe ha solo Carte Classe: niente dorsi)
+ 6  carte_specie.pdf                          1  cartoncino
+ 7  carte_mostro.pdf                          6  cartoncino (48 Mostri: mazzetto 1 26, mazzetto 2 16, boss 6)
+ 8  carte_mostro_retri.pdf                    6  cartoncino
+ 9  carte_imprevisto.pdf                      2  cartoncino
+10  carte_imprevisto_retri.pdf                2  cartoncino
+11  carte_aiuto_divisori.pdf                  2  cartoncino
+12  plance_eroe.pdf                           4  cartoncino (A4 orizzontale)
+13  rotelle_eroe.pdf                          2  cartoncino
+14  segnalini.pdf                             2  cartoncino (segnalini; 24 tessere Stato e dischi del tavolo)
+15  tessere_esplorazione.pdf                  1  cartoncino
+16  pedine.pdf                                2  cartoncino (eroi, MIMI, Geronimo, 6 Boss; Rotella della Profezia sul foglio 2)
+17  plancia.pdf                               4  comune (poi incollata su cartoncino 1-2 mm)
+
+Fogli da stampare: 62, tutte le pagine dei PDF (comune 5 = prova 1 + plancia 4; cartoncino 57).

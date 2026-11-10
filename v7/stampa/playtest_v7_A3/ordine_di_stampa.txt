@@ -1,0 +1,28 @@
+Il Tesoro del Goblin - kit di playtest v7 (10/11/2026) - ordine di stampa A3
+Tutto SOLO FRONTE, scala 100 %, carta A3 (297 x 420 mm), 1 pagina = 1 foglio. Percorsi relativi a v7/stampa/playtest_v7_A3/.
+Carta: "comune" = 80 g; "cartoncino" = 160-200 g.
+Regole: v7/regolamento/Spec_v7.md. Il regolamento per i giocatori (v7/regolamento/Regolamento_playtest_v7.docx)
+si esporta in PDF solo dopo l'approvazione: non è in questo elenco.
+Ogni carte_*_retri.pdf va col suo carte_*.pdf: il dorso nella cella p del foglio k va col fronte nella cella p del
+foglio k (dorsi non specchiati). Fronti e dorsi si ritagliano separati con la dima 63 x 88 mm e si incollano dorso
+contro dorso.
+
+ #  File                                 Pagine  Carta
+ 1  00_prova_stampa.pdf                       1  comune (controlla scala e margini prima di continuare)
+ 2  carte_comuni.pdf                          4  cartoncino
+ 3  carte_comuni_retri.pdf                    4  cartoncino
+ 4  carte_classe.pdf                          4  cartoncino
+ 5  carte_classe_retri.pdf                    4  cartoncino
+ 6  carte_specie.pdf                          1  cartoncino
+ 7  carte_mostro.pdf                          3  cartoncino (48 Mostri: mazzetto 1 26, mazzetto 2 16, boss 6)
+ 8  carte_mostro_retri.pdf                    3  cartoncino
+ 9  carte_imprevisto.pdf                      1  cartoncino
+10  carte_imprevisto_retri.pdf                1  cartoncino
+11  carte_aiuto_divisori.pdf                  1  cartoncino
+12  plance_eroe.pdf                           2  cartoncino (2 plance per foglio)
+13  rotelle_eroe.pdf                          1  cartoncino (24 dischi eroe + 2 del tavolo)
+14  componenti_misti.pdf                      1  cartoncino (pedine con 6 Boss, segnalini)
+15  tessere_esplorazione.pdf                  1  cartoncino (con le 24 tessere Stato e la Rotella della Profezia)
+16  plancia.pdf                               2  comune (A3 orizzontale; poi incollata su cartoncino 1-2 mm)
+
+Fogli da stampare: 34 (comune 3 = prova 1 + plancia 2; cartoncino 31).

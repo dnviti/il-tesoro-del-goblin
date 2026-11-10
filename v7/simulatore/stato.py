@@ -1,0 +1,280 @@
+"""Stato della partita: eroi, mano (D8), scarti, slot e PL, Stati, Indizi e tesoro, danni, sconfitta (D7)."""
+from collections import Counter
+
+import carte as K
+import mappa as M
+import catena
+import ia
+import tiri
+
+STATI_PIU = {'Occhio', 'Sussurro', 'Riflesso', 'Fede', 'Vantaggio'}
+
+
+class Eroe:
+    def __init__(self, idx, classe, specie, direzione):
+        self.idx, self.classe, self.specie, self.direzione = idx, classe, specie, direzione
+        self.base = {'att': 1, 'mov': 1, 'ar': 9, 'pvmax': 5}
+        for k, v in K.BONUS_SPECIE[specie].items():
+            self.base[k] += v
+        self.slot = {}                      # nome slot -> id carta
+        self.mano, self.pila, self.scarti, self.zona = [], [], [], []
+        self.pv = 5
+        self.fv = False
+        self.indizi = 0
+        self.pos = self.partenza = self.pos_inizio = None
+        self.stati = {}                     # nome -> True se di traverso (R 9.1)
+        self.potere = True                  # Carta Classe: una volta per partita
+        self.giocate = 0                    # carte giocate dalla propria ultima Fine (D9)
+        self.equip_turno = False
+        self.usati = set()                  # «una volta per turno» (R 4.15)
+        self.tmp = Counter()                # effetti «in questo turno»
+        self.mosso = False
+        self.scontri = 0
+        self.morti = 0
+
+    def __repr__(self):
+        return f"{self.classe}{self.idx}"
+
+    def equip(self):
+        return [K.CARTE[c] for c in self.slot.values()]
+
+    def ha(self, chiave):
+        return any(chiave in c.p for c in self.equip())
+
+    def pl(self):
+        return sum(c.pl for c in self.equip())
+
+    def stat(self, g, k):
+        v = self.base[k] + sum(c.p.get(k, 0) for c in self.equip()) + self.tmp[k]
+        if k == 'ar' and 'Fede' in self.stati:
+            v += 1
+        if g.mappa and k in ('att', 'ar', 'mov'):
+            p = K.CARTE[g.mappa].p
+            v += p.get(k, 0)
+            if k == 'mov' and g.mappa_mov_avv and g.mappa_di is not self:
+                v += p.get('mov_avv', 0)
+        return v
+
+    def pvmax(self, g):
+        return self.stat(g, 'pvmax')
+
+
+def giro(g, da, compreso=True):
+    """Ordine orario (a sinistra) a partire da `da`."""
+    n = len(g.eroi)
+    return [g.eroi[(da + i) % n] for i in range(0 if compreso else 1, n)]
+
+
+def avversari(g, e):
+    return [x for x in g.eroi if x is not e]
+
+
+def leader(g, e):
+    """L'avversario più vicino alla vittoria (per le scelte «un avversario» dell'IA)."""
+    return max(avversari(g, e), key=lambda x: (x.indizi, x.pl(), len(x.mano)))
+
+
+# --- mano, pesca, scarti (R 12.3-12.6) --------------------------------------------------------------
+
+def _prendi_in_mano(g, e, cid):
+    if len(e.mano) >= g.opz.mano_max:       # D8: prima scarti, poi prendi
+        scarta(g, e, ia.da_scartare(g, e))
+        g.st['scarti_mano_max'] += 1
+    e.mano.append(cid)
+
+
+def pesca(g, e, dalla_pila=False):
+    if dalla_pila and e.pila:
+        _prendi_in_mano(g, e, e.pila.pop())
+        return True
+    if not g.mazzo:
+        for x in g.eroi:                    # riciclo: solo le carte comuni degli scarti di tutti
+            com = [c for c in x.scarti if not K.CARTE[c].classe]
+            x.scarti = [c for c in x.scarti if K.CARTE[c].classe]
+            g.mazzo += com
+        g.rng.shuffle(g.mazzo)
+        g.st['ricicli'] += 1
+    if not g.mazzo:
+        return False
+    _prendi_in_mano(g, e, g.mazzo.pop())
+    return True
+
+
+def scarta(g, e, cid):
+    e.mano.remove(cid)
+    e.scarti.append(cid)
+
+
+def riprendi(g, e, n=1, filtro=None, escludi=()):
+    for _ in range(n):
+        ok = [c for c in e.scarti if c not in escludi and (filtro is None or filtro(K.CARTE[c]))]
+        if not ok:
+            return
+        cid = max(ok, key=K.valore)
+        e.scarti.remove(cid)
+        _prendi_in_mano(g, e, cid)
+        g.st['riprese'] += 1
+
+
+def ricevi(g, e, cid):
+    _prendi_in_mano(g, e, cid)
+
+
+# --- Stati (§9) ---------------------------------------------------------------------------------------
+
+def dai_stato(g, e, s):
+    e.stati[s] = g.eroi[g.attivo] is e      # nel proprio turno di traverso, altrimenti dritto
+    g.st['stati_' + s] += 1
+
+
+def togli_stati_piu(e):
+    for s in [s for s in e.stati if s in STATI_PIU]:
+        del e.stati[s]
+
+
+# --- Equipaggiamenti (R 4.2, R 11.1, §14.5) ---------------------------------------------------------
+
+def equipaggia(g, e, cid):
+    c = K.CARTE[cid]
+    if c.slot in e.slot:
+        lascia_slot(g, e, c.slot)
+    e.slot[c.slot] = cid
+    p = c.p
+    if 'fv_entra' in p:
+        if e.fv and 'fv_gia_stato' in p:
+            dai_stato(g, e, p['fv_gia_stato'])
+        e.fv = True
+    if 'cura_entra' in p:
+        cura(g, e, tiri.dado(g, p['cura_entra']), carta=False)
+    if 'recupera_entra_indizi2' in p and e.indizi >= 2:
+        riprendi(g, e, 1)
+    if 'scry_mostri_entra' in p:
+        ia.scry_mostri(g, e, p['scry_mostri_entra'])
+    if 'distruggi_entra' in p:
+        bersagli = [(x, s) for x in avversari(g, e) for s in ('Arma DX / Scudo', 'Arma SX')
+                    if s in x.slot and 'mai_perso' not in K.CARTE[x.slot[s]].p]
+        if bersagli:
+            x, s = max(bersagli, key=lambda t: (K.CARTE[t[0].slot[t[1]]].pl, t[0].indizi))
+            lascia_slot(g, x, s)
+            g.st['distrutti'] += 1
+    if 'ruba_entra' in p:
+        ruba(g, e, leader(g, e))
+    e.pv = min(e.pv, e.pvmax(g))
+
+
+def lascia_slot(g, e, s):
+    cid = e.slot.pop(s)
+    e.scarti.append(cid)
+    p = K.CARTE[cid].p
+    if 'lascia_stato' in p:
+        dai_stato(g, e, p['lascia_stato'])
+    if 'lascia_recupera' in p:
+        riprendi(g, e, p['lascia_recupera'], escludi=(cid,))
+    e.pv = min(e.pv, e.pvmax(g))
+
+
+def sacrifica(g, e, s):
+    lascia_slot(g, e, s)
+    g.st['sacrifici'] += 1
+
+
+def perdita(g, e):
+    """D6 della perdita (R 11.1): tiro che apre una catena."""
+    t = tiri.Tiro(g, e, 'perdita', 1)
+    catena.catena_tiro(g, t)
+    r = t.valore()
+    persi = []
+    if r == 1:
+        persi = [s for s, c in e.slot.items() if 'mai_perso' not in K.CARTE[c].p]
+    elif r <= 5:
+        s = K.SLOT[r - 2]
+        if s in e.slot and 'mai_perso' not in K.CARTE[e.slot[s]].p:
+            persi = [s]
+    for s in persi:
+        lascia_slot(g, e, s)
+    g.st['oggetti_persi'] += len(persi)
+
+
+# --- PV, danni, sconfitta (§11) -----------------------------------------------------------------------
+
+def cura(g, e, n, carta=True):
+    if carta:
+        n += sum(c.p.get('cura_carte', 0) for c in e.equip())
+        if g.mappa and 'cura_carte' in K.CARTE[g.mappa].p:
+            n += 1
+    e.pv = min(e.pvmax(g), e.pv + n)
+
+
+def danneggia(g, e, n, fonte=None):
+    """Danni a un eroe. `fonte`: Eroe, creatura o None. Riflesso: chi fa Danni ne subisce 1."""
+    if n <= 0 or e.pv <= 0:
+        return
+    e.pv -= n
+    e.tmp['ferito'] += n
+    if 'Riflesso' in e.stati and fonte is not None and fonte is not e:
+        ferisci(g, fonte, 1, None)
+    if e.pv <= 0:
+        sconfitta(g, e)
+
+
+def ferisci(g, bersaglio, n, fonte):
+    """Danni a un eroe o alla creatura dello scontro."""
+    if isinstance(bersaglio, Eroe):
+        danneggia(g, bersaglio, n, fonte)
+    elif g.scontro and bersaglio is g.scontro.nemico:
+        g.scontro.danni_creatura(n)
+
+
+def sconfitta(g, e):
+    e.morti += 1
+    g.st['morti'] += 1
+    if e.classe == 'Assaltatore' and e.potere and e.pl() >= 2:
+        e.potere = False                    # TC-01: non tira il D6 della perdita
+        g.st['potere_Assaltatore'] += 1
+    else:
+        perdita(g, e)
+    occ = {x.pos for x in g.eroi if x is not e}
+    if e.partenza in occ:
+        liberi = [h for h in M.VICINI[e.partenza] if h not in occ]
+        e.pos = g.rng.choice(liberi) if liberi else e.partenza
+    else:
+        e.pos = e.partenza
+    e.pv = e.pvmax(g)
+    pesca(g, e)
+    if g.scontro and e in g.scontro.lati():
+        g.scontro.finito = True
+    if g.eroi[g.attivo] is e:
+        g.turno_finito = True
+
+
+# --- Indizi e tesoro (§10) ----------------------------------------------------------------------------
+
+def prendi_indizio(g, e, fonte):
+    e.indizi += 1
+    g.st['indizi_' + fonte] += 1
+    if e.indizi >= 3 and not g.tesoro_trovato:
+        g.tesoro_trovato = True
+        g.round_tesoro = g.round
+        for x in avversari(g, e):           # «la voce si sparge» (R 10.6)
+            x.indizi += 1
+            g.st['indizi_voce'] += 1
+        if g.mimi is None:
+            g.mimi = M.CRIPTE[tiri.d6_tra(g, (1, 2, 3, 4))]
+    g.max_indizi = max(g.max_indizi, sum(x.indizi for x in g.eroi))
+
+
+def ruba(g, e, x):
+    if x.mano:
+        cid = g.rng.choice(x.mano)
+        x.mano.remove(cid)
+        ricevi(g, e, cid)
+
+
+def sposta_tesoro(g):
+    if g.mimi is None or g.spostamenti >= 2:
+        return False
+    att = [k for k, h in M.CRIPTE.items() if h != g.mimi]
+    g.mimi = M.CRIPTE[tiri.d6_tra(g, att)]
+    g.spostamenti += 1
+    g.st['tesoro_spostato'] += 1
+    return True

@@ -1,0 +1,49 @@
+id,codice,parametri,nota
+NE-01,svant_primo,,il tuo primo tiro per colpire con svantaggio
+NE-02,morso,n=1,se ti ha colpito: a fine scontro perdi 1 PV (minimo 1)
+NE-03,succhia,n=1,ogni colpo recupera 1 PV
+NE-04,meta_pv_att,n=-2,con metà PV o meno (-2) ATT
+NE-05,sconfigge_stato,s=Rallentato,
+NE-06,sconfigge_scarta,n=1,a caso
+NE-07,ricompone,n=2,
+NE-08,inseguitore,,se fuggi ti attacca un'ultima volta
+NE-09,nofuga,,
+NE-10,primo_colpo_slot,s=Elmo,la prima volta che ti colpisce l'Elmo va negli scarti
+NE-11,ar_eroe_attacco,n=-1,
+NE-12,lento,,se fuggi non arretri
+NE-13,galante,n=2,IA: scarta la carta peggiore se vale 3 o meno o se i (+2) Danni la sconfiggerebbero
+NE-29,scappa,n=1,a 1 PV scappa: fuga senza ricompense; resti sul tuo esagono; tessera scoperta
+NE-30,fuga_scarta,n=1,se fuggi scarti 1 carta (la peggiore)
+NE-31,imitazione,,ATT = max(suo ATT; ATT dell'eroe)
+NE-32,sconfigge_stato_avv,s=Sussurro,il giocatore alla destra dell'eroe (in 2: l'avversario)
+NE-33,primo_colpo_togli_fv,,
+NE-34,fine_stato,s=Fermo,a fine scontro chiunque vinca (anche se l'eroe è sconfitto)
+NE-35,sconfigge_tesoro,,il tesoro cambia Cripta; «ogni avversario guarda la tua mano» = info
+NE-36,primo_colpo_ruba,,chi tira per lui ruba 1 carta a caso
+NE-37,manca_stato,s=Silenzio,ogni tuo tiro per colpire mancato
+NE-38,marca_bollo,n=1,IA: scarta 1 carta per tirare l'Indizio se ne ha una
+NE-39,coro,max=2,(+1) ATT per ogni altra tessera rossa scoperta
+NE-40,elemosina,n=2,IA: scarta 2 carte di valore 2 o meno; sconfitto senza Indizio
+NE-41,letargo,n=1,primo tiro per colpire con vantaggio; se manca (+1) ATT
+NE-14,primo,,attacca per primo
+NE-15,svegliato,,la prima volta a metà PV o meno attacca subito una volta in più
+NE-16,picchiata,n=2,se attacchi per primo tu: il suo primo attacco (+2) ATT
+NE-17,att_eroe,n=-1,
+NE-18,primo_colpo_danni,n=2,
+NE-19,coriaceo,n=1,
+NE-20,nebbia,,annulla i Danni del primo attacco che lo colpisce
+NE-21,sei_stato,s=Rallentato,
+NE-42,inizio_togli_piu,,a inizio scontro togli i tuoi Stati (+)
+NE-43,mira,n=3,dado del danno 1-2 vale 3
+NE-44,permaloso,,se fuggi la carta va in cima al mazzetto
+NE-45,colpo_stato,s=Svantaggio,
+NE-46,guscio,n=2,(+2) AR finché ha tutti i PV
+NE-47,nessun_ritiro,,nessun ritiro nello scontro (carte né Forte Volontà)
+NE-48,botto,n=2,a 0 PV subisci 2 Danni (non scendi sotto 1)
+NE-49,nessun_incanto,,nessuno gioca Incanti nello scontro
+NE-26,sei_perdita,,
+NE-27,manca_danno,n=1,ogni tuo tiro per colpire mancato: subisci 1 Danno
+NE-28,pedaggio_reale,n=2,IA: scarta 1 carta se la peggiore vale 4 o meno; altrimenti (+2) ATT
+NE-50,primo_colpo_stato,s=Silenzio,
+NE-51,televoto,,D6 a inizio scontro: 1-2 subisci 2; 3-4 subisci 1; 5-6 2 Danni a lui
+NE-52,monologo,n=1,attacchi sempre per primo tu; i suoi attacchi (+1) Danni

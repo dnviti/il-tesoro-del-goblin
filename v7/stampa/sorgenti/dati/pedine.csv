@@ -1,0 +1,14 @@
+id,tipo,nome,classe,forma,colore,nota,fonte
+PD-01,eroe,Assaltatore,Assaltatore,miniatura/sagoma,NON DEFINITO nel repo (miniatura e mazzetto di classe hanno lo stesso colore),ex Guerriero (bozza),"bozza docx, «Cosa c’è nella scatola»"
+PD-02,eroe,Ricercatore,Ricercatore,miniatura/sagoma,NON DEFINITO nel repo,ex Ladro (bozza),bozza docx
+PD-03,eroe,Stregone,Stregone,miniatura/sagoma,NON DEFINITO nel repo,ex Mago (bozza),bozza docx
+PD-04,eroe,Oracolo,Oracolo,miniatura/sagoma,NON DEFINITO nel repo,invariato,bozza docx
+PD-10,eroe,Giullare,Giullare,miniatura/sagoma,#a8407e (v7: colore del dorso del mazzo Giullare),"nuova classe v7 (D3); ID nuovo per non rinumerare le altre pedine",piano v7 §6.6-6.7
+PD-05,forziere,MIMI,,sagoma/miniatura,"oro/marrone (icona forziere parts.py: #6b4a2b corpo, #b8862b dettagli)","«MIMI, il forziere»; sta sulla Cripta scelta",bozza docx; parts.py icon('forziere')
+PD-06,primo giocatore,Geronimo,,miniatura/segnalino,NON DEFINITO nel repo,«Geronimo (primo giocatore)»,bozza docx
+PD-07,boss (sagoma),Buttafuori di MIMI,,sagoma,NON DEFINITO,"la bozza elenca «3 Boss» tra i componenti ed «I boss e MIMI sulle sagome»: sagome su Sala del Tesoro/Cripta. Righe extra rispetto alla richiesta (4+2). v7 10/11 (D20, mostri raddoppiati): 6 boss, nome della carta NE-26 (era Guardiano di MIMI).",bozza docx; carte_mostro.csv NE-26
+PD-08,boss (sagoma),Mimic della Bisnonna,,sagoma,NON DEFINITO,idem; nome della carta NE-27 (era Mimic ancestrale),carte_mostro.csv NE-27
+PD-09,boss (sagoma),Re Goblin Grugno,,sagoma,NON DEFINITO,idem,carte_mostro.csv NE-28
+PD-11,boss (sagoma),Soprano Stonata,,sagoma,NON DEFINITO,"v7 10/11 (D20): nuovo boss; 1 dei 6 boss fa da custode (R 3.2)",carte_mostro.csv NE-50
+PD-12,boss (sagoma),Presentatore del Sabato,,sagoma,NON DEFINITO,v7 10/11 (D20): nuovo boss,carte_mostro.csv NE-51
+PD-13,boss (sagoma),Lord Spiegone,,sagoma,NON DEFINITO,v7 10/11 (D20): nuovo boss,carte_mostro.csv NE-52
