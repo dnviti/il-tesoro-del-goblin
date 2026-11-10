@@ -1,0 +1,22 @@
+Il Tesoro del Goblin - kit di playtest v6 - RISTAMPA dopo la regola AR (8/11/2026 sera)
+Regola nuova: colpisci se 2D6 + ATT >= AR del bersaglio; la Difesa non esiste più.
+Ristampa SOLO questi fogli (tutto solo fronte, scala 100 %, A4). Percorsi relativi a v6_08-11/stampa/playtest_v6/.
+Se non hai ancora stampato niente, usa ordine_di_stampa.txt (il kit intero è già aggiornato).
+
+ #  File                                                    Pagine da ristampare   Carta        Cosa cambia
+ 1  ../../regolamento/Regolamento_playtest_v6.pdf           1-11 (11 fogli)        comune       regola del tiro per colpire, AR di partenza 9
+ 2  ../../regolamento/Partita_rapida_v6.pdf                 1-2  (2 fogli)         comune       come sopra
+ 3  carte_mostro.pdf                                        1-3  (3 fogli)         cartoncino   24 carte Mostro: 3 riquadri PV/ATT/AR, AR = la vecchia Difesa
+ 4  carte_aiuto_divisori.pdf                                1    (1 foglio)        cartoncino   le 4 carte «Riepilogo»: «colpisci se 2D6 + ATT >= AR del bersaglio»
+ 5  plance_eroe.pdf                                         1-4  (4 fogli)         cartoncino   anello AR 9-20, niente riga della Difesa, AR di partenza 9
+ 6  rotelle_eroe.pdf                                        1-2  (2 fogli)         cartoncino   dischi AR: finestra 11 x 9 mm
+
+Totale: 23 fogli (regolamento e partita rapida 13, kit 10).
+Kit A3 (../playtest_v6_A3/): carte_mostro.pdf pag. 1-2, carte_aiuto_divisori.pdf pag. 1, plance_eroe.pdf pag. 1-2,
+rotelle_eroe.pdf pag. 1 (6 fogli A3), più regolamento e partita rapida in A4.
+
+Da NON ristampare: carte_mostro_retri.pdf (dorsi uguali: i nuovi fronti vanno con i dorsi già stampati), pagina 2 di
+carte_aiuto_divisori.pdf (Divisori DV-02...05, invariati), tutte le altre carte e i loro dorsi, segnalini, plancia,
+tessere esplorazione, pedine, prova di stampa.
+Dopo la ristampa: butta le vecchie carte Mostro e «Riepilogo», le 4 plance eroe e i 4 dischi AR (le altre rotelle si
+possono riusare: PV, PV massimi, ATT, MOV e PE non cambiano).

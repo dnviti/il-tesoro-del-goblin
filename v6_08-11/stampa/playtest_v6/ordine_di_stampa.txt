@@ -1,0 +1,28 @@
+Il Tesoro del Goblin - kit di playtest v6 (8/11/2026, aggiornato alla regola AR della sera) - ordine di stampa A4
+Tutto SOLO FRONTE, scala 100 %, carta A4, 1 pagina = 1 foglio. Percorsi relativi a v6_08-11/stampa/playtest_v6/.
+Carta: "comune" = 80 g; "cartoncino" = 160-200 g (vedi ISTRUZIONI_DI_STAMPA.md).
+Tutti i file qui sotto hanno già la regola «colpisci se 2D6 + ATT >= AR» (niente Difesa). Se avevi già stampato il kit
+prima della sera dell'8/11, ristampa solo i fogli elencati in ristampa_AR.txt.
+
+ #  File                                                    Pagine  Carta
+ 1  00_prova_stampa.pdf                                          1  comune (controlla scala e margini prima di continuare)
+ 2  ../../regolamento/Regolamento_playtest_v6.pdf               11  comune
+ 3  ../../regolamento/Partita_rapida_v6.pdf                      2  comune
+ 4  carte_comuni.pdf                                             5  cartoncino
+ 5  carte_comuni_retri.pdf                                       5  cartoncino
+ 6  carte_classe.pdf                                             4  cartoncino
+ 7  carte_classe_retri.pdf                                       4  cartoncino
+ 8  carte_specie.pdf                                             1  cartoncino
+ 9  carte_mostro.pdf                                             3  cartoncino
+10  carte_mostro_retri.pdf                                       3  cartoncino
+11  carte_imprevisto.pdf                                         2  cartoncino
+12  carte_imprevisto_retri.pdf                                   2  cartoncino
+13  carte_aiuto_divisori.pdf                                     2  cartoncino
+14  plance_eroe.pdf                                              4  cartoncino (A4 orizzontale)
+15  rotelle_eroe.pdf                                             2  cartoncino
+16  segnalini.pdf                                                2  cartoncino
+17  tessere_esplorazione.pdf                                     1  cartoncino
+18  pedine.pdf                                                   1  cartoncino
+19  plancia.pdf                                                  4  comune (poi incollata su cartoncino 1-2 mm)
+
+Per tipo di carta: comune 18 fogli (prova 1 + regolamento 11 + partita rapida 2 + plancia 4), cartoncino 41 fogli.
