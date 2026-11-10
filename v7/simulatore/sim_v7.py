@@ -111,6 +111,11 @@ def rapporto_n(n, ris):
     r.append(f"Duelli {st['duelli'] / N:.2f} a partita, rifiutati {st['duelli_rifiutati'] / N:.2f}; rifornimenti «?» "
              f"{st['rifornimenti'] / N:.2f}; tesoro spostato {st['tesoro_spostato'] / N:.2f}; Profezie "
              f"{st['profezie'] / N:.2f} (indovinate {st['profezie_indovinate'] / max(1, st['profezie']):.0%})")
+    cambi = [x['st']['cambi_plancia'] + x['st']['cambi_plancia_base'] for x in ris]
+    r.append(f"Cambi di plancia (R 8.12) {_media(cambi):.2f} a partita (verso una Mappa {st['cambi_plancia'] / N:.2f}, "
+             f"ritorni alla base con TI-22/TI-33/CR-15 {st['cambi_plancia_base'] / N:.2f}); partite con almeno un cambio "
+             f"{sum(c > 0 for c in cambi) / N:.0%}; scontri annullati {st['scontri_annullati'] / N:.2f} "
+             f"(col custode {st['custode_annullato'] / N:.2f}), Duelli annullati {st['duelli_annullati'] / N:.2f}")
     r.append("Poteri usati per partita in cui la classe gioca: " + ', '.join(
         f"{c} {st['potere_' + c] / pres[c]:.2f}" for c in K.CLASSI if pres[c]))
     r.append(f"Giocate di carte con effetto non modellato (info): {st['info'] / N:.2f} a partita "

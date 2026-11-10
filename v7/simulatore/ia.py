@@ -19,10 +19,23 @@ def da_scartare(g, e):
     return min(e.mano, key=lambda c: _val_mano(e, c))
 
 
+MAZZETTO = 10          # D22: mazzetto di classe = 10 carte scelte tra quelle della classe (le altre in scatola)
+DA_DIREZIONE = 7       # quante ne prende al massimo dalla propria direzione; il resto dall'altra
+
+
 def mazzetto_classe(g, e):
-    mie = [c for c in K.CARTE_CLASSE[e.classe] if K.CARTE[c].direzione == e.direzione]
-    altre = [c for c in K.CARTE_CLASSE[e.classe] if c not in mie]
-    return mie + [max(altre, key=lambda c: (K.valore(c), g.rng.random()))]
+    tutte = K.CARTE_CLASSE[e.classe]
+    if len(tutte) <= MAZZETTO:
+        return list(tutte)
+
+    def ordina(cs):       # per valore, a parità a caso
+        return sorted(cs, key=lambda c: (-K.valore(c), g.rng.random()))
+    mie = ordina(c for c in tutte if K.CARTE[c].direzione == e.direzione)
+    altre = ordina(c for c in tutte if K.CARTE[c].direzione != e.direzione)
+    scelte = mie[:DA_DIREZIONE]
+    scelte += altre[:MAZZETTO - len(scelte)]
+    resto = ordina(c for c in tutte if c not in scelte)      # se un lato è corto, completa con l'altro
+    return scelte + resto[:MAZZETTO - len(scelte)]
 
 
 def mano_iniziale(g, e, mazzetto):
@@ -82,7 +95,7 @@ def destinazione(g, e, mete):
         if g.mimi in mete and pronto:
             return g.mimi
         if pronto or g.mimi not in mete:
-            return min(mete, key=lambda h: (M.DIST[h][g.mimi], g.tessere.get(h) not in ('rossa', 'blu'),
+            return min(mete, key=lambda h: (g.plancia.dist[h][g.mimi], g.tessere.get(h) not in ('rossa', 'blu'),
                                             g.rng.random()))
     coperte = [q for q, t in g.tessere.items() if t in ('rossa', 'blu')]
     scoperte = [q for q, t in g.tessere.items() if t == 'scoperta']
@@ -93,11 +106,11 @@ def destinazione(g, e, mete):
             return 10 if e.pv >= 3 else 3
         if t == 'scoperta':
             return 8 if e.pv >= 4 else -5
-        if e.pv >= 4 and any(M.accanto(h, x.pos) and x.indizi and p_duello(g, e, x) >= 0.6
+        if e.pv >= 4 and any(g.plancia.accanto(h, x.pos) and x.indizi and p_duello(g, e, x) >= 0.6
                              for x in S.avversari(g, e)):
             return 6
         mete_lontane = coperte or scoperte
-        return -min((M.DIST[h][q] for q in mete_lontane), default=0)
+        return -min((g.plancia.dist[h][q] for q in mete_lontane), default=0)
     return max(mete, key=lambda h: (punti(h), g.rng.random()))
 
 
@@ -163,7 +176,12 @@ def automatici(g, t):
         if not (not t.ok() if mio else t.ok()):
             continue
         verso = mio != t.basso            # True = si ritira il dado più basso per alzare
-        if mio and p.fv and t.tipo in ('colpo', 'indizio'):
+        if mio and t.tipo == 'colpo' and p.ha('archibugio') and 'CA-15' not in p.usati \
+                and t.soglia - t.valore() <= 3:
+            p.usati.add('CA-15')                # CA-15: (-2) AR in questo turno e (+3) al tiro per colpire
+            p.tmp['ar'] -= 2
+            t.mod += 3
+        elif mio and p.fv and t.tipo in ('colpo', 'indizio'):
             p.fv = False
             g.st['fv_usate'] += 1
             t.ritira(un_dado=True, alza=verso)
@@ -176,6 +194,11 @@ def automatici(g, t):
             p.potere = False
             g.st['potere_Stregone'] += 1
             t.ritira(un_dado=True, alza=verso)
+        elif mio and (g.scontro and g.scontro.custode or t.tipo == 'indizio') and p.ha('sac_ritira'):
+            s = next(s for s, c in p.slot.items() if 'sac_ritira' in K.CARTE[c].p)
+            S.sacrifica(g, p, s)                # TE-27: ritira, poi ottieni la Forte Volontà
+            t.ritira(alza=verso)
+            p.fv = True
         elif p.ha('ritira_turno') and 'CS-10' not in p.usati and isinstance(t.chi, S.Eroe):
             p.usati.add('CS-10')
             t.ritira(un_dado=True, alza=verso)
@@ -217,6 +240,25 @@ def poteri(g, p, momento):
                     x, k = max(pool, key=lambda t: K.valore(t[1]))
                     x.scarti.remove(k)
                     S.ricevi(g, p, k)
+            elif junk and 'scarta_riprendi_equip' in c.p:    # TE-29
+                if any(K.CARTE[k].equip and K.valore(k) >= 6 for k in p.scarti):
+                    S.scarta(g, p, junk[0])
+                    S.riprendi(g, p, 1, filtro=lambda x: x.equip)
+            elif junk and 'scambia_turno' in c.p:             # CG-16: la carta presa è a caso (o la migliore)
+                x = max(S.avversari(g, p), key=lambda x: len(x.mano))
+                if x.mano:
+                    sua = max(x.mano, key=K.valore) if len(x.mano) > len(p.mano) else g.rng.choice(x.mano)
+                    p.mano.remove(junk[0])
+                    x.mano.remove(sua)
+                    p.mano.append(sua)
+                    x.mano.append(junk[0])
+                    g.st['scambi'] += 1
+    elif momento == 'M1':
+        for c in p.equip():
+            junk = [k for k in p.mano if _val_mano(p, k) <= 2]
+            if junk and 'jetpack' in c.p and not p.mosso:              # CG-18: (+2) MOV, poi scarta 1
+                p.tmp['mov'] += c.p['jetpack']
+                S.scarta(g, p, junk[0])
     elif momento == 'M2':
         t = g.tessere.get(p.pos)
         if t in ('rossa', 'blu', 'scoperta'):
@@ -227,8 +269,27 @@ def poteri(g, p, momento):
             for c in p.equip():
                 if 'scry_imp_turno' in c.p:
                     scry_imprevisti(g, p, c.p['scry_imp_turno'])
-    elif momento == 'M4' and g.scontro and g.scontro.custode and g.scontro.eroe is p:
+                if 'scry_mostri_turno' in c.p and t != 'blu':       # CR-12
+                    scry_mostri(g, p, c.p['scry_mostri_turno'])
+    elif momento == 'M4' and g.scontro and g.scontro.eroe is p and not g.scontro.duello:
+        sc = g.scontro
         for s, cid in list(p.slot.items()):
-            if 'sacrifica_att' in K.CARTE[cid].p:
+            if sc.custode and 'sacrifica_att' in K.CARTE[cid].p:
                 S.sacrifica(g, p, s)
                 p.tmp['att'] += K.CARTE[cid].p['sacrifica_att']
+        for c in p.equip():                 # CS-12: una volta per turno scarta 1 carta: 1 Danno
+            junk = [k for k in p.mano if _val_mano(p, k) <= 2]
+            if 'cartucciera' in c.p and c.id not in p.usati and junk and sc.nemico.pv > 0:
+                p.usati.add(c.id)
+                S.scarta(g, p, junk[0])
+                sc.danni_creatura(c.p['cartucciera'])
+    elif momento == 'M6':
+        x = S.leader(g, p)
+        for s, cid in list(p.slot.items()):     # CG-17: sacrifica, Silenzio e scarti a caso al leader
+            if 'sac_silenzio' in K.CARTE[cid].p and x.indizi >= 2 and x.mano:
+                n = 2 if len(x.mano) > len(p.mano) else 1
+                S.sacrifica(g, p, s)
+                S.dai_stato(g, x, 'Silenzio')
+                for _ in range(min(n, len(x.mano))):
+                    S.scarta(g, x, g.rng.choice(x.mano))
+                g.st['scarti_mill'] += n

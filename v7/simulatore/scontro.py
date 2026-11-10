@@ -27,6 +27,7 @@ class Scontro:
         self.custode, self.duello = custode, duello
         self.boss = not duello and (custode or nemico.tier == 3)
         self.finito = self.fuga_sul_posto = self.ferita = self.colpito = False
+        self.annullato = self.sparito = False   # R 8.12 cambio di plancia; TI-41 il mostro sparisce
         self.mod_att = self.mod_ar = 0
         self.att_fisso = None
         self.svant_next = False
@@ -82,6 +83,11 @@ def _danno_finale(g, td, x, extra=0):
     if td.annulla_danni:
         return 0
     d = max(0, d)
+    for c in x.equip():                     # CA-16, CA-18: una volta per turno (-N) ai Danni di un attacco
+        if d and 'rid_turno' in c.p and c.id not in x.usati:
+            x.usati.add(c.id)
+            d = max(0, d - c.p['rid_turno'])
+            x.tmp['ar'] += c.p.get('rid_turno_ar', 0)
     if d and ia.para_con_equip(g, x, d):
         return 0
     return d
@@ -93,6 +99,16 @@ def attacco_eroe(g, sc, x, y):
     sc.primo_tiro = sc.primo_tiro and x is not sc.eroe
     base = x.stat(g, 'att') + x.tmp.pop('colpo_next', 0) + (sc.ab('att_eroe') or {}).get('n', 0)
     soglia = y.stat(g, 'ar') if sc.duello else sc.ar_nemico()
+    sicuro = [c.p['colpo_sicuro'] for c in x.equip() if 'colpo_sicuro' in c.p]
+    if sicuro and 'TE-26' not in x.usati and soglia - base >= 8:     # TE-26: 2 Danni senza tiro se si colpisce poco
+        x.usati.add('TE-26')
+        x.tmp['ar'] -= 1
+        g.st['colpi_sicuri'] += 1
+        if isinstance(y, S.Eroe):
+            S.danneggia(g, y, sicuro[0], x)
+        else:
+            sc.danni_creatura(sicuro[0])
+        return
     t = C.catena_tiro(g, tiri.Tiro(g, x, 'colpo', 2, base, soglia, vant=_vant_eroe(g, x, sc, primo), bersaglio=y))
     g.st['attacchi_eroe'] += 1
     if sc.finito:
@@ -108,8 +124,20 @@ def attacco_eroe(g, sc, x, y):
     if sc.finito:
         return
     extra = t.danni_extra + (sum(c.p.get('dmg_sei', 0) for c in x.equip()) if td.facce[0] == 6 else 0)
+    for c in x.equip():
+        if 'pistola' in c.p:                # CA-14: D6, 1-2 subisci 1 Danno, 3-4 (+1), 5-6 (+2)
+            r = tiri.dado(g, 'D6', x)
+            if r <= 2:
+                S.danneggia(g, x, 1)
+            else:
+                extra += 1 if r <= 4 else 2
+    if sc.finito:
+        return
     if isinstance(y, S.Eroe):
-        S.danneggia(g, y, _danno_finale(g, td, y, extra), x)
+        d = _danno_finale(g, td, y, extra)
+        S.danneggia(g, y, d, x)
+        if d and y.ha('molla') and x.pv > 0:
+            S.danneggia(g, x, 1, y)         # CA-17
     else:
         d = 0 if td.annulla_danni else max(0, td.valore() + extra - td.riduzione)
         sc.danni_creatura(d, attacco=True)
@@ -161,6 +189,8 @@ def attacco_mostro(g, sc):
     if e.morti > morti:
         AB.sconfigge(g, sc, e)
     elif d:
+        if e.ha('molla'):
+            sc.danni_creatura(1)            # CA-17: l'attaccante subisce 1 Danno
         AB.dopo_colpo(g, sc, d, faccia == 6)
 
 
@@ -179,6 +209,8 @@ def _iniziativa(g, sc):
 def tiro_indizio(g, e, lv):
     """R 10.2 con D18: Indizio se D6 <= LV + 1 (opzione --indizio-lv: D6 <= LV, v6)."""
     soglia = lv if g.opz.indizio_lv else lv + 1
+    if g.mappa:
+        soglia += K.CARTE[g.mappa].p.get('indizio', 0)     # TM-09: D6 <= LV + 2
     t = C.catena_tiro(g, tiri.Tiro(g, e, 'indizio', 1, soglia=soglia, basso=True))
     g.st['tiri_indizio'] += 1
     if t.ok() and not t.no_indizio:
@@ -188,7 +220,7 @@ def tiro_indizio(g, e, lv):
 
 
 def scontro(g, e, mid=None, custode=False):
-    """Scontro con una creatura. Ritorna 'vinto', 'perso' o 'fuga'."""
+    """Scontro con una creatura. Ritorna 'vinto', 'perso', 'fuga' o 'annullato' (cambio di plancia, R 8.12)."""
     nemico = g.custode if custode else Creatura(g, mid)
     sc = Scontro(g, e, nemico, custode=custode)
     g.scontro = sc
@@ -228,12 +260,15 @@ def scontro(g, e, mid=None, custode=False):
             attacco_mostro(g, sc)
         turno_eroe = not turno_eroe
     if esito is None:
-        if sc.scappato:
+        if sc.annullato:
+            esito = 'sparito' if sc.sparito else 'annullato'    # nessun vincitore, nessuna ricompensa
+        elif sc.scappato:
             esito = 'fuga'                  # NE-29: come una fuga, resti sul tuo esagono
         else:
             esito = 'vinto' if nemico.pv <= 0 and not sc.finito else 'perso'
     sc.finito = True
-    AB.fine(g, sc, e, esito)
+    if esito not in ('annullato', 'sparito'):
+        AB.fine(g, sc, e, esito)
     g.st['esito_' + esito] += 1
     g.st['mx_n:' + nemico.id] += 1
     if esito == 'perso':
@@ -245,6 +280,9 @@ def scontro(g, e, mid=None, custode=False):
         else:
             if nemico.tier == 2:
                 e.fv = True                 # D11
+            if e.ha('motosega') and e.mano and ia._val_mano(e, ia.da_scartare(g, e)) <= 3:
+                S.scarta(g, e, ia.da_scartare(g, e))      # CR-17: scarta 1, ruba 1 carta a un avversario
+                S.ruba(g, e, S.leader(g, e))
             if not senza_indizio and AB.tira_indizio(g, sc, e):
                 tiro_indizio(g, e, nemico.lv)
             if 'Sussurro' in e.stati and not senza_indizio:     # Mostro vinto su «?»
@@ -286,7 +324,7 @@ def duello(g, a, b):
         x, y = y, x
     g.scontro = None
     perde = a if a.morti > morti[a.idx] else (b if b.morti > morti[b.idx] else None)
-    if perde is None:
+    if perde is None or sc.annullato:
         return
     vince = b if perde is a else a
     g.st['duelli_vinti_sfidante' if vince is a else 'duelli_vinti_sfidato'] += 1

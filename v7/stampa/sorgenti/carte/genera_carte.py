@@ -30,19 +30,30 @@ sul bordo dell'abbondanza e poi si centra la carta nella dima 63 x 88 mm).
 Formato A3 (`--formato A3`): 16 carte per foglio A3 verticale (4 x 4), blocco 276 x 376 mm centrato, abbondanza 3 mm,
 stesse regole; PDF in ../../playtest_v7_A3 e progetti in ./A3. Senza opzione: A4.
 
-Uso: python3 genera_carte.py [--solo NOME] [--formato A4|A3] [--dati CARTELLA] [--uscita CARTELLA]   (richiede designcraft-cli)
+Uso: python3 genera_carte.py [--solo NOME] [--formato A4|A3] [--dati CARTELLA] [--uscita CARTELLA] [--arte CARTELLA] [--senza-arte]
+(richiede designcraft-cli)
 --dati legge i CSV da un'altra cartella (per provare dati nuovi); --uscita scrive PDF e progetti .designcraft in un'altra
 cartella, senza toccare playtest_v7*.
 
+Illustrazioni: se esiste ../arte/png/<id>.png (--arte legge da un'altra cartella), l'immagine riempie il riquadro
+dell'illustrazione (proporzionale, centrata, ritagliata, angoli arrotondati) al posto del riquadro tinto e del codice
+segnaposto; il PL resta sopra, le etichette (SEGNAPOSTO/PLAYTEST/PROVVISORIO/BOSS, MAZZO) su un cartellino pergamena. Carte
+Aiuto, Divisori e dorsi non hanno illustrazione. --senza-arte stampa sempre il riquadro tinto (come senza immagini).
+Le carte con più copie (colonna `copia` «n di m»: Specie, Imprevisti) prendono prima <id>-<n>.png, poi <id>.png.
+
 Colonna facoltativa `battuta` (ultima colonna di ogni CSV di carte): una riga di colore, al massimo 70 caratteri e 2 righe,
-in corsivo piccolo nel riquadro dell'illustrazione (al posto del codice segnaposto). Vuota o assente: non si stampa niente.
+in corsivo piccolo nel riquadro dell'illustrazione: senza immagine al posto del codice segnaposto, con l'immagine su una
+fascetta pergamena (85 %) in basso nel riquadro (sui Mostri in corpo 6: 1 riga se entra, se no 2). Vuota o assente: niente.
 """
 import csv
+import functools
 import json
 import pathlib
 import subprocess
 import sys
 import tempfile
+
+from PIL import ImageFont
 
 QUI = pathlib.Path(__file__).resolve().parent
 
@@ -57,6 +68,8 @@ if FORMATO not in ("A4", "A3"):
     sys.exit("--formato: A4 o A3")
 PDF_DIR = opzione("--uscita", QUI.parent.parent / ("playtest_v7" if FORMATO == "A4" else "playtest_v7_A3"))
 DC_DIR = PDF_DIR / "designcraft" if "--uscita" in sys.argv else (QUI if FORMATO == "A4" else QUI / "A3")
+ARTE_DIR = opzione("--arte", QUI.parent / "arte" / "png")
+SENZA_ARTE = "--senza-arte" in sys.argv
 
 MM = 72 / 25.4
 CW, CH = 63 * MM, 88 * MM                     # carta (pt)
@@ -136,6 +149,8 @@ PARA = [
     ("Segnaposto", {"align": "center"}, {"fontFamily": SERIF, "fontStyle": "Bold", "size": 26, "leading": lead(28), "fill": "Carta"}),
     # v7: battuta (colonna facoltativa `battuta`) nel riquadro dell'illustrazione, al massimo 2 righe
     ("Battuta", {"align": "center", "hyphenate": False}, {"fontFamily": SERIF, "fontStyle": "Italic", "size": 7.2, "leading": lead(8.6), "fill": "Inchiostro"}),
+    # v7: battuta sulla fascetta dei mostri con l'illustrazione (riquadro alto solo 29 pt): 1 riga, 2 se non entra
+    ("BattutaPiccola", {"align": "center", "hyphenate": False}, {"fontFamily": SERIF, "fontStyle": "Italic", "size": 6, "leading": lead(7), "fill": "Inchiostro"}),
     # v7: lettera della direzione nel tondo della riga del tipo e PL nel riquadro dell'illustrazione
     ("DirLettera", {"align": "center"}, {"fontFamily": SERIF, "fontStyle": "Bold", "size": 6.5, "leading": lead(7.5), "fill": "Carta"}),
     ("PL", {"align": "center"}, {"fontFamily": SANS, "fontStyle": "Bold", "size": 7.5, "leading": lead(8.5), "fill": "Carta", "tracking": 40}),
@@ -271,6 +286,15 @@ class Doc:
         self.cmd("object.label", label=f"testo:{stile}", ids=[f"${i}.id"])
         return i
 
+    def immagine(self, sp, r, percorso, raggio=0.0):
+        """Immagine raster nel riquadro r: riempie proporzionalmente, centrata, ritagliata dal riquadro (anche negli angoli
+        arrotondati). Nel progetto .designcraft l'immagine resta collegata al file (pannello Collegamenti)."""
+        i = self.rett(sp, r, raggio=raggio)
+        self.cmd("object.fittingOptions", fitting="fillProportionally", align=4, ids=[f"${i}.id"])
+        self.cmd("file.place", path=str(percorso), frame=f"${i}.id")
+        self.cmd("object.fit", mode="fillProportionally", ids=[f"${i}.id"])
+        return i
+
     def linea(self, sp, a, b, swatch, peso):
         self.cmd("path.create", spread=sp, anchors=[{"p": [round(a[0], 3), round(a[1], 3)]}, {"p": [round(b[0], 3), round(b[1], 3)]}])
         self.cmd("object.stroke", swatch=swatch, weight=peso)
@@ -335,25 +359,104 @@ def L(ox, oy, x0, y0, x1, y1):
 # ---------------------------------------------------------------- fronti
 
 BATTUTA_MAX = 70   # caratteri (local v7_tono.md); le 2 righe le controlla il preflight
+BANDA_H = 20       # fascetta pergamena della battuta sull'illustrazione: 2 righe di Battuta (interlinea 8,6)
+BANDA_STRETTA_H = (10, 15)   # mostri: fascetta di 1 riga di BattutaPiccola, o di 2 se la battuta non entra in una
+
+
+def testo_battuta(r):
+    """Battuta della carta (colonna facoltativa `battuta`), tipografica; "" se manca. Si ferma oltre BATTUTA_MAX caratteri."""
+    t = (r.get("battuta") or "").strip()
+    if len(t) > BATTUTA_MAX:
+        sys.exit(f"{r['id']}: battuta di {len(t)} caratteri (massimo {BATTUTA_MAX}): «{t}»")
+    return tipografico(t)
 
 
 def battuta(d, sp, ox, oy, r, y0, y1):
-    """Stampa la battuta della carta (colonna facoltativa `battuta`) centrata tra y0 e y1 nel riquadro dell'illustrazione.
+    """Stampa la battuta della carta centrata tra y0 e y1 nel riquadro dell'illustrazione.
     Il riquadro alto ~21 pt regge 2 righe: una terza va in overset e ferma lo script. Ritorna True se c'era una battuta."""
-    t = (r.get("battuta") or "").strip()
+    t = testo_battuta(r)
     if not t:
         return False
-    if len(t) > BATTUTA_MAX:
-        sys.exit(f"{r['id']}: battuta di {len(t)} caratteri (massimo {BATTUTA_MAX}): «{t}»")
-    d.testo(sp, L(ox, oy, 17, y0, CW - 17, y1), tipografico(t), "Battuta", vj="center")
+    d.testo(sp, L(ox, oy, 17, y0, CW - 17, y1), t, "Battuta", vj="center")
     return True
+
+
+def arte(r):
+    """File dell'illustrazione della carta, o None se manca o con --senza-arte. Le carte con più copie (colonna `copia`
+    «n di m»: Specie, Imprevisti) cercano prima ARTE_DIR/<id>-<n>.png, poi ARTE_DIR/<id>.png."""
+    if SENZA_ARTE:
+        return None
+    n = (r.get("copia") or "").split(" ")[0]
+    for nome in ([f"{r['id']}-{n}.png"] if n.isdigit() else []) + [f"{r['id']}.png"]:
+        if (ARTE_DIR / nome).is_file():
+            return ARTE_DIR / nome
+    return None
+
+
+@functools.lru_cache(maxsize=None)
+def _font(famiglia, stile):
+    file = subprocess.run(["fc-match", "-f", "%{file}", f"{famiglia}:{stile.lower()}"], capture_output=True, text=True, check=True).stdout
+    return ImageFont.truetype(file, 100)
+
+
+def in_una_riga(t, stile, larghezza):
+    """True se il testo t nello stile di paragrafo `stile` (senza spaziatura) entra in una riga larga `larghezza` pt.
+    Misura con il file del font di fontconfig (stesse larghezze di DesignCraft), con l'1,5 % di margine: se sbaglia, la
+    riga in più va in overset e il preflight ferma lo script."""
+    c = next(ch for nome, _, ch in PARA if nome == stile)
+    return _font(c["fontFamily"], c["fontStyle"]).getlength(t) * c["size"] / 100 * 1.015 <= larghezza
+
+
+def riquadro_arte(d, sp, ox, oy, r, box, col, tint, y_battuta, segnaposto=None, stretta=False):
+    """Riquadro dell'illustrazione box = (x0, y0, x1, y1) in coordinate della carta. Con l'immagine (arte()): l'immagine
+    riempie il riquadro e la battuta sta su una fascetta Pergamena all'85 % in fondo al riquadro, alta BANDA_H (2 righe di
+    Battuta; una terza va in overset) o, con stretta (mostri), BANDA_STRETTA_H in BattutaPiccola (1 riga se entra, se no 2).
+    Senza: riquadro tinto (col, tint), battuta centrata tra y_battuta = (y0, y1) o, se non c'è, segnaposto =
+    (rettangolo, testo) in grande. Ritorna True se c'era una battuta."""
+    img = arte(r)
+    if img is None:
+        d.rett(sp, L(ox, oy, *box), fill=col, tint=tint, raggio=2)
+        if battuta(d, sp, ox, oy, r, *y_battuta):
+            return True
+        if segnaposto:
+            d.testo(sp, L(ox, oy, *segnaposto[0]), segnaposto[1], "Segnaposto", vj="center")
+        return False
+    x0, _, x1, y1 = box
+    d.immagine(sp, L(ox, oy, *box), img, raggio=2)
+    t = testo_battuta(r)
+    if not t:
+        return False
+    stile, h = "Battuta", BANDA_H
+    if stretta:
+        stile = "BattutaPiccola"
+        h = BANDA_STRETTA_H[0] if in_una_riga(t, stile, x1 - x0 - 6) else BANDA_STRETTA_H[1]
+    d.rett(sp, L(ox, oy, x0, y1 - h, x1, y1), fill="Pergamena")
+    d.cmd("object.cornerOptions", corners=[{"shape": "none", "size": 0}, {"shape": "none", "size": 0},
+                                           {"shape": "rounded", "size": 2}, {"shape": "rounded", "size": 2}])
+    d.cmd("object.opacity", opacity=0.85)
+    d.testo(sp, L(ox, oy, x0 + 3, y1 - h, x1 - 3, y1), t, stile, vj="center")
+    return True
+
+
+def etichetta(d, sp, ox, oy, r, box, txt, stile):
+    """Etichetta nel riquadro dell'illustrazione (SEGNAPOSTO/PLAYTEST/PROVVISORIO/BOSS rosse, MAZZO). Sull'immagine sta su
+    un cartellino Pergamena largo quanto il testo (autoSize del riquadro di testo), altrimenti si legge male."""
+    if arte(r) is None:
+        d.testo(sp, L(ox, oy, *box), txt, stile)
+        return
+    x0, y0, x1, y1 = box
+    i = d.testo(sp, L(ox, oy, x0 - 1.5, y0 - 0.5, x1 + 1.5, y1), txt, stile)
+    rif = "topRight" if stile == "EtichettaDx" else "topLeft"
+    d.cmd("object.textFrameOptions", inset=[0.5, 1.5, 0.5, 1.5], autoSize="widthOnly", autoSizeReference=rif, ids=[f"${i}.id"])
+    d.cmd("object.fill", swatch="Pergamena", ids=[f"${i}.id"])
+    # niente angoli arrotondati: object.cornerOptions su un riquadro di testo con autoSize lo stringe a 3 pt (overset)
 
 
 def carta_trama(d, sp, ox, oy, r, mazzo=None):
     """Fronte di Mappe, Incanti, Equipaggiamenti e Carte Classe. r: dizionario di carta_v7() o carta_ritratto().
     Riga del tipo (Spec v7 §14.1): per le carte di classe comincia con la direzione, lettera nel tondo del colore della
-    classe e nome, poi tipo e slot. Riquadro dell'illustrazione: in alto l'etichetta rossa (SEGNAPOSTO/PLAYTEST) e il
-    mazzo, in basso a destra il PL. Testo: effetto base e riga «Se…» (corsivo), ~9 righe."""
+    classe e nome, poi tipo e slot. Riquadro dell'illustrazione (riquadro_arte): in alto l'etichetta rossa
+    (SEGNAPOSTO/PLAYTEST) e il mazzo, in basso a destra il PL. Testo: effetto base e riga «Se…» (corsivo), ~9 righe."""
     tipo = r["tipo"]
     col = TIPO_COLORE[tipo]
     cornice(d, sp, ox, oy, col)
@@ -369,13 +472,11 @@ def carta_trama(d, sp, ox, oy, r, mazzo=None):
             sx = sx.replace("EQUIPAGGIAMENTO", "EQUIP.")
     d.testo(sp, L(ox, oy, x_tipo, 32, CW - 14, 40), sx, "Etichetta" if len(sx) <= 34 else "EtichettaStretta", vj="center")
     d.linea(sp, (ox + 14, oy + 42), (ox + CW - 14, oy + 42), col, 0.6)
-    d.rett(sp, L(ox, oy, 14, 46, CW - 14, 96), fill=col, tint=0.14, raggio=2)
-    if not battuta(d, sp, ox, oy, r, 57, 79):
-        d.testo(sp, L(ox, oy, 14, 52, CW - 14, 80), tipo, "Segnaposto", vj="center")
+    riquadro_arte(d, sp, ox, oy, r, (14, 46, CW - 14, 96), col, 0.14, (57, 79), ((14, 52, CW - 14, 80), tipo))
     if r.get("etichetta"):
-        d.testo(sp, L(ox, oy, 17, 48, CW - 17, 56), r["etichetta"], "Provvisorio")
+        etichetta(d, sp, ox, oy, r, (17, 48, CW - 17, 56), r["etichetta"], "Provvisorio")
     if mazzo:
-        d.testo(sp, L(ox, oy, 60, 48, CW - 17, 56), "MAZZO " + mazzo.upper(), "EtichettaDx")
+        etichetta(d, sp, ox, oy, r, (60, 48, CW - 17, 56), "MAZZO " + mazzo.upper(), "EtichettaDx")
     if r.get("pl"):
         d.rett(sp, L(ox, oy, CW - 47, 81, CW - 17, 93), fill="Oro", raggio=2)
         d.testo(sp, L(ox, oy, CW - 47, 81, CW - 17, 93), f"PL {r['pl']}", "PL", vj="center")
@@ -434,11 +535,9 @@ def carta_specie(d, sp, ox, oy, r):
     d.testo(sp, L(ox, oy, 13, 13, CW - 13, 31), r["nome"], "Titolo", vj="center")
     d.testo(sp, L(ox, oy, 14, 32, CW - 14, 40), "CARTA SPECIE", "Etichetta")
     d.linea(sp, (ox + 14, oy + 42), (ox + CW - 14, oy + 42), col, 0.6)
-    d.rett(sp, L(ox, oy, 14, 46, CW - 14, 96), fill=col, tint=0.14, raggio=2)
-    if not battuta(d, sp, ox, oy, r, 57, 79):
-        d.testo(sp, L(ox, oy, 14, 57, CW - 14, 87), "TS", "Segnaposto", vj="center")
+    riquadro_arte(d, sp, ox, oy, r, (14, 46, CW - 14, 96), col, 0.14, (57, 79), ((14, 57, CW - 14, 87), "TS"))
     if r["provvisorio"].strip():
-        d.testo(sp, L(ox, oy, 17, 48, CW - 17, 56), "PROVVISORIO", "Provvisorio")
+        etichetta(d, sp, ox, oy, r, (17, 48, CW - 17, 56), "PROVVISORIO", "Provvisorio")
     d.testo(sp, L(ox, oy, 15, 101, CW - 15, 140), tipografico(r["bonus"]), "Testo")
     d.testo(sp, L(ox, oy, 15, 140, CW - 15, CH - 22), tipografico(r["nota"]), "Nota")
     d.testo(sp, L(ox, oy, 14, CH - 19, 110, CH - 11.5), r["copia"], "Piede")
@@ -446,8 +545,9 @@ def carta_specie(d, sp, ox, oy, r):
 
 
 def carta_mostro(d, sp, ox, oy, r):
-    """Carta Mostro. Riquadro dell'illustrazione 49-78 pt (battuta o «BOSS»), statistiche, danno, abilità (~200 caratteri:
-    7 righe sui mostri, 6 sui boss, che hanno 3 righe di ricompense) e ricompense."""
+    """Carta Mostro. Riquadro dell'illustrazione 49-78 pt (battuta o «BOSS»; con l'immagine «BOSS» è sempre l'etichetta
+    rossa), statistiche, danno, abilità (~200 caratteri: 7 righe sui mostri, 6 sui boss, che hanno 3 righe di ricompense)
+    e ricompense."""
     cornice(d, sp, ox, oy, "Notte", fondo="Pergamena")
     boss = r["mazzetto"].startswith("3")
     d.rett(sp, L(ox, oy, 13, 13, 39, 39), fill="Medaglione", stroke="OroNemico", peso=1.2, forma="ellipse")
@@ -456,10 +556,9 @@ def carta_mostro(d, sp, ox, oy, r):
     mz = "MAZZETTO " + r["mazzetto"].upper().replace(" / ", " · ")
     d.testo(sp, L(ox, oy, 43, 31, CW - 13, 39), f"LV {r['lv']} · {mz}", "Etichetta")
     d.testo(sp, L(ox, oy, 100, 41, CW - 14, 48), r["id"], "Codice")
-    d.rett(sp, L(ox, oy, 14, 49, CW - 14, 78), fill="Notte", tint=0.12, raggio=2)
-    con_battuta = battuta(d, sp, ox, oy, r, 57, 77)
-    if boss and con_battuta:
-        d.testo(sp, L(ox, oy, 17, 49.5, CW - 17, 57), "BOSS", "Provvisorio")
+    con_battuta = riquadro_arte(d, sp, ox, oy, r, (14, 49, CW - 14, 78), "Notte", 0.12, (57, 77), stretta=True)
+    if boss and (con_battuta or arte(r)):
+        etichetta(d, sp, ox, oy, r, (17, 49.5, CW - 17, 57), "BOSS", "Provvisorio")
     elif boss:
         d.testo(sp, L(ox, oy, 14, 49, CW - 14, 78), "BOSS", "Segnaposto", vj="center")
     # dalla sera dell'8/11 niente Difesa: si colpisce con 2D6 + ATT ≥ AR del bersaglio (3 riquadri)
@@ -498,9 +597,7 @@ def carta_imprevisto(d, sp, ox, oy, r):
     d.rett(sp, L(ox, oy, SAFE, SAFE, CW - SAFE, 40), fill=col, raggio=4)
     d.testo(sp, L(ox, oy, 13, 13, CW - 13, 36), r["nome"], "TitoloChiaro", vj="center")
     d.testo(sp, L(ox, oy, 14, 43, CW - 14, 51), "IMPREVISTO", "Etichetta")
-    d.rett(sp, L(ox, oy, 14, 54, CW - 14, 110), fill=col, tint=0.14, raggio=2)
-    if not battuta(d, sp, ox, oy, r, 71, 93):
-        d.testo(sp, L(ox, oy, 14, 64, CW - 14, 100), "?", "Segnaposto", vj="center")
+    riquadro_arte(d, sp, ox, oy, r, (14, 54, CW - 14, 110), col, 0.14, (71, 93), ((14, 64, CW - 14, 100), "?"))
     testo = (r.get("testo_bozza") or "").strip() or r["testo"]
     d.testo(sp, L(ox, oy, 16, 118, CW - 16, CH - 30), tipografico(testo), "TestoCentro", vj="center")
     d.linea(sp, (ox + 14, oy + CH - 27), (ox + CW - 14, oy + CH - 27), "Imprevisto", 0.6)

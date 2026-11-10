@@ -11,7 +11,7 @@ DANNOSI = {'danno', 'stato_avv', 'malus', 'mill', 'maledizione', 'ruba', 'torna_
 
 def _minaccia(g, x):
     sc = g.scontro
-    return (x.indizi >= 3 and g.mimi is not None and M.DIST[x.pos][g.mimi] <= 7) or \
+    return (x.indizi >= 3 and g.mimi is not None and g.plancia.dist[x.pos][g.mimi] <= 7) or \
         (sc is not None and sc.custode and sc.eroe is x and not sc.finito)
 
 
@@ -36,32 +36,37 @@ def _punti(g, p, cid, mom, mio, mio_sc):
             return 10 + c.pl, {}
         return (8 + c.pl, {}) if K.CARTE[old].pl < c.pl else None
     if k == 'mappa':
+        if custode_altrui:
+            return 9, {}                    # R 8.12: il cambio di plancia chiude lo scontro col custode
         if not mio:
-            if mom == 'M2' and att.pos == g.mimi and att.indizi >= 3 and g.spostamenti < 2:
-                return 9, {}
+            if mom == 'M2' and att.pos == g.mimi and att.indizi >= 3:
+                return 9, {}                # R 8.12: torna sulla Partenza prima del custode
             return None
-        if p.indizi >= 3 and g.mimi:
-            return None
+        if p.indizi >= 3 and g.mimi or (sc is not None and not sc.finito):
+            return None                     # R 8.12: il cambio chiuderebbe il proprio scontro senza ricompense
         v = 2
         if 'fv' in q and not p.fv:
             v = 4
         if 'pesca_tutti' in q or ('recupera' in q and p.scarti) or ('cura' in q and p.pv <= p.pvmax(g) - 3):
             v = 5
-        if vivo and mom == 'M3' and ('creature_ar' in q or 'creature_svant' in q or 'att' in q):
-            v = 6
-        if ld.indizi >= 3 and g.mimi and g.spostamenti < 2:
-            v = max(v, 6)
+        if ld.indizi >= 3 and g.mimi:
+            v = max(v, 6)                   # il tesoro cambia Cripta e il leader torna sulla Partenza
         return v, {}
+    if k == 'annulla' and 'TM' in q['tipo'].split('|') and g.mappa and custode_altrui:
+        return 9, {'togli_mappa': True}     # TI-22: torna la plancia base e lo scontro col custode finisce
     if k == 'danno':
         if vivo and mom in ('M3', 'M4'):
             ctx = {'bers': 'creatura'}
+            j = _junk(p, cid)
+            if 'scarta_dmg' in q and j and ia._val_mano(p, j) <= 2:
+                ctx['scarta'] = j
             if 'sacrifica_pl2' in q and sc.boss:
                 s = [s for s, x in p.slot.items() if K.CARTE[x].pl >= 2]
                 if s:
                     ctx['sac'] = s[0]
             return 7, ctx
         if 'avv' in q:
-            bers = [x for x in S.avversari(g, p) if M.accanto(p.pos, x.pos)]
+            bers = [x for x in S.avversari(g, p) if g.plancia.accanto(p.pos, x.pos)]
             if bers:
                 x = max(bers, key=lambda x: x.indizi)
                 if _minaccia(g, x):
@@ -79,7 +84,7 @@ def _punti(g, p, cid, mom, mio, mio_sc):
             return 6, ctx
         return None
     if k == 'malus':
-        if vivo and mom in ('M3', 'M4'):
+        if vivo and mom in ('M3', 'M4') and not ('non_boss' in q and sc.boss):
             return (8 if sc.boss else 6), {'bers': 'creatura'}
         if custode_altrui and mom in ('M3', 'M4'):
             return 8, {'bers': sc.eroe}
@@ -92,9 +97,9 @@ def _punti(g, p, cid, mom, mio, mio_sc):
             return 9, {'bers': sc.eroe, 'scarta': j}
         return None
     if k == 'velo':
-        if vivo and mom == 'M4' and not sc.boss and ia.fuggire(g, p, sc):
+        if vivo and mom == 'M4' and 'parkour' not in q and not sc.boss and ia.fuggire(g, p, sc):
             return 7, {'fuga': True}
-        if mio and mom == 'M1' and p.indizi >= 3 and g.mimi and M.DIST[p.pos][g.mimi] > 3 + p.stat(g, 'mov'):
+        if mio and mom == 'M1' and p.indizi >= 3 and g.mimi and g.plancia.dist[p.pos][g.mimi] > 3 + p.stat(g, 'mov'):
             return 4, {}
         return None
     if k == 'stato':
@@ -107,6 +112,8 @@ def _punti(g, p, cid, mom, mio, mio_sc):
             return 6, {}
         return (4, {}) if mio and mom == 'M6' and s not in p.stati else None
     if k == 'stato_avv':
+        if 'schiocco' in q and vivo and mom == 'M4' and not sc.custode and ia.fuggire(g, p, sc):
+            return 7, {'bers': ld}          # TI-41: il mostro sparisce invece della fuga
         if 'tutti' in q:
             return (3, {}) if mio and mom == 'M6' else None
         if not mio and mom in ('M0', 'M1') and att is not p and _minaccia(g, att) and q['s'] == 'Rallentato':
@@ -152,6 +159,31 @@ def _punti(g, p, cid, mom, mio, mio_sc):
     if k == 'torna_partenza':
         bers = [x for x in S.avversari(g, p) if _minaccia(g, x) and x.pos != x.partenza]
         return (7, {'bers': bers[0]}) if bers and not (mio_sc or (sc and sc.eroe is p)) else None
+    if k == 'prendi_scarti':
+        ok = [c for x in S.avversari(g, p) for c in x.scarti if K.CARTE[c].equip or 'equip' not in q]
+        return (4, {}) if mio and mom in ('M1', 'M6') and ok and max(map(K.valore, ok)) >= 5 else None
+    if k == 'ricambia':
+        if 'scontro_att' in q and vivo and mom == 'M3':
+            return 6, {}
+        junk = [c for c in p.mano if c != cid and ia._val_mano(p, c) <= 2]
+        return (3, {}) if mio and mom in ('M1', 'M6') and len(junk) >= 2 else None
+    if k == 'tributo':
+        return (4, {}) if mio and mom == 'M6' and sum(len(x.mano) for x in S.avversari(g, p)) >= 3 else None
+    if k == 'togli_mappa':
+        if custode_altrui and g.mappa:
+            return 9, {}
+        return (5 if g.mappa and ld.indizi >= 3 else 2, {}) if mio and mom == 'M6' and g.mimi else None
+    if k == 'dirigibile':
+        if vivo and mom in ('M3', 'M4') and p.pv >= 6:
+            return 5, {}
+        return (3, {}) if mio and mom == 'M6' and p.pv >= 5 and ld.pv <= 3 else None
+    if k == 'passa':
+        junk = [c for c in p.mano if c != cid and ia._val_mano(p, c) <= 2]
+        return (2, {}) if mio and mom == 'M6' and len(junk) >= 2 else None
+    if k == 'gamba':
+        return (3, {}) if mio and mom == 'M1' else None
+    if k == 'pietraluce':
+        return (3, {'bers': ld}) if mio and mom == 'M6' and ld.indizi >= 2 else None
     if k in ('amisal', 'scry_imp'):
         return (3, {}) if mio and mom == 'M1' else None
     if mio and mom == 'M6' and len(p.mano) >= 8:     # risposte giocate per il ripiego
@@ -160,7 +192,7 @@ def _punti(g, p, cid, mom, mio, mio_sc):
             return 2, {}
         if rip == 'Fede':
             return 2, {}
-        if rip == 'Rallentato':
+        if rip in ('Rallentato', 'Silenzio'):
             return 2, {'bers': ld}
     return None
 
@@ -219,8 +251,19 @@ def _risposta_carta(g, p, pila):
         if not _dannosa(g, p, v):
             continue
         tipo = K.CARTE[v.cid].tipo
-        cid = _in_mano(p, lambda c: c.codice == 'annulla' and c.p['tipo'] == tipo)
+        cid = _in_mano(p, lambda c: c.codice == 'annulla' and tipo in c.p['tipo'].split('|'))
         if cid:
+            return cid, {'voce': v}
+        if tipo == 'TI' and v.ctx.get('bers') is p:
+            for s, x in list(p.slot.items()):          # CG-17 / CS-16: sacrifica e annulla l'Incanto
+                if 'sac_annulla_ti' in K.CARTE[x].p:
+                    S.sacrifica(g, p, s)
+                    S.annulla(g, v)
+                    S.dai_stato(g, v.eroe, 'Silenzio')
+                    g.st['annullate_da_equip'] += 1
+                    return None
+        cid = _in_mano(p, lambda c: c.codice == 'devia')
+        if cid and v.ctx.get('bers') is p:
             return cid, {'voce': v}
         if K.CARTE[v.cid].codice == 'danno':
             cid = _in_mano(p, lambda c: c.codice == 'parata' and c.p['tipo'] == 'trappola_incanto')

@@ -5,10 +5,10 @@ Bozza del 10/11/2026. Destinazione nel repo: `v7/regolamento/Spec_v7.md`.
 È il contratto interno per quattro lavori: chi scrive le carte (fase 3), il simulatore v7 (fase 4, `v7/simulatore/`), i generatori del kit (fase 5, `v7/stampa/`) e chi scrive il regolamento v7 per i giocatori (fase 6). Non è il regolamento: il testo per i giocatori sarà più corto e più semplice (D17).
 
 Fonti, in ordine di precedenza:
-1. le decisioni D1–D21 del 9-10/11 (§1);
+1. le decisioni D1–D22 del 9-10/11 (§1);
 2. il piano `v7/idee/v7_piano_TEMP.docx` aggiornato il 10/11, con i commenti di Desy e le risposte di Daniele;
 3. per tutto quello che la v7 non cambia, il regolamento playtest v6 (`v6_08-11/regolamento/Regolamento_playtest_v6.pdf`) e i CSV v6 (`v6_08-11/stampa/sorgenti/dati/`);
-4. le carte di Desy (`v7/desy/Carte_nuove_2026-11-05.xlsx`), solo per sapere quali meccaniche esistono.
+4. le carte di Desy (`v7/desy/Carte_nuove_2026-11-05.xlsx`), solo per sapere quali meccaniche esistono; per le carte di classe nuove anche `v7/desy/Idee desi carte classi.ods` (D22).
 
 ## 0. Convenzioni
 
@@ -19,7 +19,7 @@ Fonti, in ordine di precedenza:
 - **N-n**: punto aperto nato scrivendo questa spec. I punti aperti, con il default scelto, sono nel §19, l'ultima sezione.
 - I numeri tra parentesi sulle carte sono valori: «(+1) AR» vuol dire 1 in più di AR (v6).
 
-## 1. Decisioni D1–D21 e dove stanno
+## 1. Decisioni D1–D22 e dove stanno
 
 | # | Decisione (testo) | Regole |
 |---|---|---|
@@ -44,14 +44,16 @@ Fonti, in ordine di precedenza:
 | D19 | AR di tutti i mostri (mazzetti 1–3, boss e custode) ridotta del 25 % e arrotondata per eccesso: AR nuova = ⌈AR × 0,75⌉, cioè 8 → 6, 9 → 7, 10 → 8, 11 → 9. L'AR degli eroi non cambia (parte da 9). Era OP-3: regola di base dal 10/11. | R 6.8, R 7.3 |
 | D20 | Mostri raddoppiati: ogni mostro ha un effetto unico, bilanciato sul suo livello. | §7, §15 |
 | D21 | Tono goliardico alla Munchkin nei nomi delle carte e nelle battute (colonna `battuta`); il testo delle regole resta fatto di formule esatte. | §14.1 |
+| D22 | Le carte di classe passano da 10 a 20 per classe: 10 per direzione. Id nuovi: 11–15 direzione A, 16–20 direzione B; gli id esistenti non cambiano. Le carte nuove vengono dalle idee di Desy (`v7/desy/Idee desi carte classi.ods`: 34 Equipaggiamenti e 43 Incanti, quasi tutti di classe), riscritte con il tono di D21. L'Oracolo non ha carte di Desy: ne riceve 10 tutte nuove. Le carte di Desy «tutti» (senza classe) vanno nel mazzo comune. Il mazzetto di classe è di 10 carte su 20 [PLAYTEST]: 3 in mano e 7 nella pila di classe. Gli Equipaggiamenti di Desy sono diversificati: niente riga fissa «+1 AR / +1 AT finché resta equipaggiato», l'effetto nasce dal secondo effetto (quello di colore) della carta di Desy. Il numero di carte non ha un tetto: si aggiungono quante servono. | R 3.6, R 3.7, R 13.1, §14 |
 
 ### 1.1 Cosa cambia rispetto alla v6, in breve
 
 - Le carte si giocano anche nel turno degli altri, con il limite di 2 tra le proprie Fini; catena e pila LIFO (D4, D9). Sparisce l'eccezione del Duello: chi si difende non ha più bisogno di una regola speciale.
 - Non ci sono più PE, livelli, tabella dei livelli né «+1 al livello»: il PL degli Equipaggiamenti sceglie il mazzetto (D2).
-- La mano non è più fissa: mazzetto di classe di 6 carte, mano iniziale 3 + 3, pesca 1 a inizio turno, massimo 10 (D8).
+- La mano non è più fissa: mazzetto di classe di 10 carte su 20, mano iniziale 3 + 3, pesca 1 a inizio turno, massimo 10 (D8, D22).
 - Muori → torni sulla tua Partenza iniziale e peschi 1 carta comune (D7).
-- 5 classi con 10 carte ciascuna (5 + 5 direzioni); nuove TC-02, TC-04, TC-05 (D3, D12, D13).
+- 5 classi con 20 carte ciascuna (10 + 10 direzioni, D22); nuove TC-02, TC-04, TC-05 (D3, D12, D13).
+- Carte di classe nuove da Desy, con tono goliardico e senza la riga fissa «+1 AR / +1 AT finché resta equipaggiato»; Oracolo con 10 carte nuove (D22).
 - Nuova plancia: strada, ostacoli e muri; «?» consumabili; niente sacchetto [PLAYTEST] (D6, D16).
 - Ritiri con penalità (D1). Ricompense senza PE (D11). Plance eroe neutre (D14).
 - Mostri più facili: AR −25 %, da 8–11 a 6–9 (D19); Indizio con D6 ≤ LV + 1, garantito con LV 5 (D18).
@@ -86,8 +88,8 @@ Fonti, in ordine di precedenza:
 | Rotella della Profezia | 1 | Nuova, per l'Oracolo (R 13.5): corona e disco, da tenere davanti all'Oracolo |
 | Pedine | 13 | 5 eroi (nuova: Giullare), MIMI, Geronimo, 6 sagome dei boss (D20: una per boss, R 3.2) |
 | Carte Classe | 5 | TC-01…TC-05 (§13) |
-| Carte di classe | 50 | 5 classi × 10 (5 + 5 direzioni) |
-| Mazzo comune | circa 25 Equipaggiamenti, 30 Incanti, 8 Mappe [PLAYTEST] | Catalogo della fase 2 (piano §7) |
+| Carte di classe | 100 | 5 classi × 20 (10 + 10 direzioni, D22): id 01–10 esistenti, 11–20 nuovi |
+| Mazzo comune | 81 [PLAYTEST]: 31 Equipaggiamenti (TE-01…31), 41 Incanti (TI-01…41), 9 Mappe (TM-01…09) | Catalogo della fase 2 (piano §7) più le carte comuni nuove di D22 (63 prima di D22). Una plancia per ogni Mappa (R 8.12) |
 | Carte Mostro | 48 (D20) | Mazzetto 1 (26), mazzetto 2 (16), boss (6): R 6.8. AR −25 % (D19), riga delle ricompense (R 10.2–10.3, D18) |
 | Carte Imprevisto | 11 | 5 Trappole, 2 Locande, 2 Fonti, 2 Fabbri. Cambia il testo della Locanda (R 8.10) |
 | Carte Specie | 8 | TS-01…04, 2 copie per specie (v6) |
@@ -95,7 +97,7 @@ Fonti, in ordine di precedenza:
 | Tessere Esplorazione | 36 (25 rosse, 11 blu) | Retro bianco, nessun sacchetto (R 8.11) |
 | Indizi, Forte Volontà | 16, 4 | v6 |
 | Tessere Usato | 20 [PLAYTEST] | v6: 12. In più ora servono come segnaposto (R 4.4) |
-| Tessere Stato | 24 [PLAYTEST] | Una copia per fonte (carte e mostri), al massimo 4 (gli eroi): Rallentato 4, Silenzio 4, Svantaggio 3, Fermo 3, gli altri 2 (`stati.csv`, R 9.7) |
+| Tessere Stato | 31 [PLAYTEST] | Una copia per fonte (carte e mostri), al massimo 4 (gli eroi): Rallentato 4, Silenzio 4, Fede 4, Vantaggio 4, Fermo 4, Occhio 3, Riflesso 3, Svantaggio 3, Sussurro 2 (`stati.csv`, R 9.7) |
 | Dadi | 4 D6 (meglio 8) | v6. Solo dadi a 6 facce |
 | Fermacampioni | 27 | 24 eroe + 2 tavolo + 1 Profezia |
 
@@ -113,9 +115,9 @@ Fonti, in ordine di precedenza:
 
 **R 3.5 Eroe.** Ognuno sceglie una classe diversa e prende una plancia eroe, la pedina e la Carta Classe della sua classe, poi sceglie una Carta Specie. Infila le due carte negli angoli della plancia. Gira le rotelle su PV 5, PV massimi 5, ATT 1, MOV 1, AR 9, PL 0, poi aggiungi il bonus della Carta Specie (v6). Le Carte Classe non danno statistiche (v6).
 
-**R 3.6 Mazzetto di classe [PLAYTEST].** Scegli 6 delle tue 10 carte di classe, mescolando come vuoi le due direzioni. Le altre 4 tornano nella scatola e restano fuori dalla partita.
+**R 3.6 Mazzetto di classe [PLAYTEST] (D22).** Scegli 10 delle tue 20 carte di classe, mescolando come vuoi le due direzioni. Le altre 10 tornano nella scatola e restano fuori dalla partita.
 
-**R 3.7 Mano iniziale [PLAYTEST].** Prendi in mano 3 carte del tuo mazzetto di classe, a scelta, e 3 carte del mazzo comune, a caso. Le altre 3 carte di classe, mescolate e coperte, sono la tua pila di classe. Niente draft.
+**R 3.7 Mano iniziale [PLAYTEST].** Prendi in mano 3 carte del tuo mazzetto di classe, a scelta, e 3 carte del mazzo comune, a caso. Le altre 7 carte di classe, mescolate e coperte, sono la tua pila di classe. Niente draft.
 
 **R 3.8 Equipaggiamento iniziale (v6) [PLAYTEST] (N8).** Tutti insieme potete equipaggiare subito 1 Equipaggiamento dalla mano. Non conta per il limite di carte. Gira le rotelle, PL compreso.
 
@@ -320,16 +322,16 @@ Il danno degli eroi resta comunque quello della v6. Nel Duello restano i dadi pe
 
 ## 8. Mappa, movimento ed esplorazione (D6, D16)
 
-**R 8.1 Plancia del playtest (D16).**
-- Per il playtest v7 la plancia è la bozza `v7/idee/v7_bozza_mappa.svg`, usata come esempio.
-- Le linee di strada restano come semplice aiuto visivo. Il regolamento non dipende mai dalle linee: dove si passa lo dicono il tipo di esagono e i muri.
-- La mappa definitiva (ostacoli in posizioni riviste, senza linee) si progetta in un lavoro separato. Prima si fa un giro di simulazione su questa bozza.
+**R 8.1 Plance del playtest (D16, 10/11).**
+- La plancia base è «Strettoie» (§17), scelta il 10/11 tra tre proposte con gli ostacoli spostati dai bordi verso l'interno. I dati stanno in `v7/simulatore/mappa.py`; la bozza disegnata è `v7/idee/v7_bozza_mappa.svg` (`python3 v7/idee/genera_bozza_mappa.py`).
+- Ogni Mappa ha la sua plancia (R 8.12): 9 plance in `v7/simulatore/plance/`, con la stessa griglia e le stesse parti fisse.
+- Nella bozza le linee di strada restano come semplice aiuto visivo. Il regolamento non dipende mai dalle linee: dove si passa lo dicono il tipo di esagono e i muri. Desy chiede di toglierle (10/11): le plance si leggono anche senza.
 
 **R 8.2 Geometria.**
-- 10 × 10 esagoni con la punta in alto: colonne A–J, righe 1–10. Esagono di 25,2 mm, plancia di 355,6 × 447,7 mm. Girata di 180° è identica.
+- 10 × 10 esagoni con la punta in alto: colonne A–J, righe 1–10. Esagono di 25,2 mm, plancia di 355,6 × 447,7 mm. Ogni plancia, girata di 180°, è identica.
 - 64 esagoni di strada: 6 Partenze, 4 Cripte, 20 «?», 4 caselle di guado o ponte e 30 di strada semplice.
-- 36 ostacoli: 12 bosco, 6 case, 10 rocce, 8 acqua.
-- 16 muri sui lati tra due esagoni. Ogni Cripta ha 3 ingressi.
+- 36 ostacoli: 12 bosco, 6 case, 10 rocce, 8 acqua. Le plance delle Mappe cambiano bosco, case e rocce, sempre 28 in tutto (R 8.12).
+- 16 muri sui lati tra due esagoni: 10 chiudono le Cripte, 6 sono mura libere. Ogni Cripta ha 3 ingressi.
 - Il fiume divide la plancia in metà nord e metà sud. Si attraversa in 3 punti: Guado ovest D5, Ponte del lago F5–E6, Guado est G6.
 - Elenco completo nel §17.
 
@@ -381,7 +383,13 @@ La mano massima vale per Locanda, Fonte e Fabbro (R 12.4). Nessun testo v7 parla
 - Una tessera blu, dopo l'Imprevisto, va tra le usate. Una tessera rossa va tra le usate se l'eroe vince. Se l'eroe fugge o perde, resta scoperta sulla «?» e sbarra la strada (R 8.5).
 - Rifornimento, alla Fine di ogni turno: se sulla plancia restano 6 tessere coperte o meno [PLAYTEST: soglia 6], metti una tessera coperta su ogni «?» vuota. Le tessere scoperte non contano come vuote. Prendi prima dalla riserva, poi dalle usate mescolate a faccia in giù. Se finiscono, le «?» restanti restano vuote.
 
-**R 8.12 Cuore e terreno [PLAYTEST] (piano §11).** Il Cuore della v6 non c'è più. Le Mappe cambiano MOV ed effetti, mai la geometria (l'idea «Tundra: acqua ghiacciata» resta fuori).
+**R 8.12 Plance delle Mappe [PLAYTEST] (10/11).**
+- Il Cuore della v6 non c'è più (R 2.6).
+- Ogni Mappa ha la sua plancia (§17). Quando una Mappa si risolve, prima fai il suo testo (R 10.11), poi la sua plancia prende il posto di quella in uso. Quando una Mappa lascia il gioco e nessun'altra la sostituisce (TI-22), torna la plancia base.
+- A ogni cambio di plancia ogni eroe, anche chi ha giocato la carta, torna sulla sua Partenza iniziale (R 3.9). Non è una sconfitta: niente D6 della perdita; PV, mano, Indizi, Stati ed Equipaggiamenti restano.
+- Se la plancia cambia durante uno scontro o un Duello, questo finisce subito senza vincitore e senza ricompense: la tessera resta scoperta, la carta Mostro va in fondo al suo mazzetto e il custode tiene le ferite.
+- Restano dove sono le tessere sulle «?», coperte o scoperte, le Cripte e MIMI con il custode (salvo lo spostamento del tesoro di R 10.11).
+- Sono uguali su tutte le plance: griglia, Partenze, Cripte con i 10 muri che le chiudono e i 12 esagoni d'ingresso, il fiume (8 acqua, Guado ovest D5, Ponte del lago F5–E6, Guado est G6) e le 20 «?». Cambiano i 28 ostacoli di terra (bosco, case e rocce secondo il tema della Mappa) e le 6 mura libere.
 
 ## 9. Stati e tessere
 
@@ -462,7 +470,7 @@ Nessuna ricompensa fa pescare carte: ogni premio che fa pescare va prima pesato 
 - Una Mappa cambia il tabellone per tutti. Resta accanto alla plancia finché un'altra Mappa la sostituisce; quella vecchia va negli scarti di chi l'aveva giocata.
 - Se MIMI è sulla plancia, il tesoro cambia Cripta: tira il D6 finché esce un'altra Cripta (5, 6 e la Cripta attuale si ritirano). MIMI e il custode si spostano con le ferite. Gli Indizi restano a tutti. Prima che qualcuno abbia individuato il tesoro, il tesoro non si sposta.
 - Il tesoro si sposta al massimo 2 volte per partita: ogni volta una tessera Usato su «Spostamenti del tesoro». Dopo 2 spostamenti la Mappa cambia comunque il tabellone.
-- Le Mappe si giocano anche in risposta (D10), anche per spostare il tesoro mentre un eroe arriva sulla Cripta: nel momento M2 (R 4.16), prima che l'eroe esplori. Se il tesoro si sposta, l'eroe è su una Cripta senza MIMI e non succede niente.
+- Le Mappe si giocano anche in risposta (D10), anche per spostare il tesoro mentre un eroe arriva sulla Cripta: nel momento M2 (R 4.16), prima che l'eroe esplori. La plancia cambia e ogni eroe torna sulla sua Partenza iniziale (R 8.12): l'eroe non è più sulla Cripta, non esplora e non affronta il custode, anche se il tesoro non si è spostato.
 - Il MOV di una Mappa vale per tutti finché è in gioco.
 
 **R 10.12 Vittoria (D11).** La partita finisce solo quando un eroe sconfigge il custode di MIMI: quell'eroe riporta il forziere a Geronimo e vince. Nessun altro effetto fa vincere o perdere la partita.
@@ -497,7 +505,7 @@ Con 2–5, se lo slot è vuoto non perdi niente. Le carte perse vanno nei tuoi s
 
 ## 12. Mano, pesca e riciclo (D8)
 
-**R 12.1 Mazzetto di classe:** 6 carte su 10 (R 3.6) [PLAYTEST].
+**R 12.1 Mazzetto di classe:** 10 carte su 20 (R 3.6) [PLAYTEST].
 
 **R 12.2 Mano iniziale:** 3 carte di classe a scelta + 3 comuni a caso (R 3.7) [PLAYTEST].
 
@@ -531,8 +539,8 @@ Con 2–5, se lo slot è vuoto non perdi niente. Le carte perse vanno nei tuoi s
 - Il «potere» è l'effetto della Carta Classe, che si usa una volta per partita (D12). Dopo l'uso ci metti sopra una tessera Usato.
 - È un effetto automatico (R 4.12): non è una carta, non conta per il limite e nessuno risponde.
 - Le Carte Classe non danno statistiche (v6).
-- Ogni classe ha esattamente 10 carte di classe: 5 verso la direzione A e 5 verso la direzione B.
-- In fondo alla Carta Classe, al posto della riga «Mano» della v6, si stampa «Mazzetto: 6 delle 10 carte di classe · Mano: 3 + 3» [PLAYTEST].
+- Ogni classe ha esattamente 20 carte di classe: 10 verso la direzione A e 10 verso la direzione B (D22).
+- In fondo alla Carta Classe, al posto della riga «Mano» della v6, si stampa «Mazzetto: 10 delle 20 carte di classe · Mano: 3 + 3» [PLAYTEST].
 
 | Classe | Carta Classe (testo) | Meccanica | Direzione A | Direzione B |
 |---|---|---|---|---|
@@ -587,7 +595,7 @@ I testi delle Carte Classe vanno da 176 a 264 caratteri; TC-03 è già stampata 
 
 ## 14. Contratto per le carte
 
-Vale per le 50 carte di classe (`v7/stampa/sorgenti/dati/classi/<classe>.csv`, un file per classe) e per le 63 carte del mazzo comune (`v7/stampa/sorgenti/dati/carte_comuni.csv`). Il simulatore (`v7/simulatore/effetti.csv`) e i generatori leggono solo questi campi. Le Carte Classe (TC), le Specie (TS), i Mostri (NE), gli Imprevisti (IM) e gli Stati (ST) restano nei loro CSV.
+Vale per le 100 carte di classe (`v7/stampa/sorgenti/dati/classi/<classe>.csv`, un file per classe) e per le 81 carte del mazzo comune (`v7/stampa/sorgenti/dati/carte_comuni.csv`: 31 TE, 41 TI, 9 TM; 63 prima di D22). Il simulatore (`v7/simulatore/effetti.csv`) e i generatori leggono solo questi campi. Le Carte Classe (TC), le Specie (TS), i Mostri (NE), gli Imprevisti (IM) e gli Stati (ST) restano nei loro CSV.
 
 ### 14.1 Campi (una riga CSV per carta)
 
@@ -595,7 +603,7 @@ Intestazione, uguale in tutti i file: `id,tipo,nome,classe,direzione,pl,rarita,s
 
 | Campo | Valori ammessi | Note |
 |---|---|---|
-| `id` | Mazzo comune: `TE-nn` Equipaggiamento, `TI-nn` Incanto, `TM-nn` Mappa. Carte di classe: `CA-nn` Assaltatore, `CR-nn` Ricercatore, `CS-nn` Stregone, `CO-nn` Oracolo, `CG-nn` Giullare, da 01 a 10 (01–05 direzione A, 06–10 direzione B). | Gli id sono stabili: il simulatore e il regolamento li citano. Non si rinumera: si cambiano testo, rarità e PL. Il mazzo comune è numerato da 01 per tipo (10/11); l'id v6 da cui viene una carta sta in `nota`. |
+| `id` | Mazzo comune: `TE-nn` Equipaggiamento, `TI-nn` Incanto, `TM-nn` Mappa. Carte di classe: `CA-nn` Assaltatore, `CR-nn` Ricercatore, `CS-nn` Stregone, `CO-nn` Oracolo, `CG-nn` Giullare, da 01 a 20 (01–05 e 11–15 direzione A; 06–10 e 16–20 direzione B, D22). | Gli id sono stabili: il simulatore e il regolamento li citano. Non si rinumera: si cambiano testo, rarità e PL. Il mazzo comune è numerato da 01 per tipo (10/11); l'id v6 da cui viene una carta sta in `nota`. |
 | `tipo` | `TE`, `TI`, `TM` | `genera_carte.py` accetta anche `Equipaggiamento`, `Incanto`, `Mappa`. Nel mazzo comune il prefisso dell'`id` è il `tipo`. |
 | `nome` | testo | Una riga sola: al massimo circa 26 caratteri [INFERENZA: titolo a 10,5 pt su circa 152 pt in `genera_carte.py`; i nomi più lunghi si controllano col generatore]. |
 | `classe` | `Tutte le classi` nel mazzo comune; `Assaltatore`, `Ricercatore`, `Stregone`, `Oracolo`, `Giullare` nei file di classe | Una sola, uguale al file. Niente carte con due classi (piano §7). Il generatore accetta anche `Comune` al posto di `Tutte le classi`. |
@@ -613,7 +621,7 @@ Intestazione, uguale in tutti i file: `id,tipo,nome,classe,direzione,pl,rarita,s
 ### 14.2 Controlli (validazione meccanica)
 
 - **V1** `id` unico in tutti i file del §14.1. Il prefisso corrisponde al `tipo` nel mazzo comune (TE, TI, TM) e alla classe nei file di classe (CA, CR, CS, CO, CG).
-- **V2** Per ogni classe: esattamente 10 carte, 5 con `direzione` A e 5 con B (vincolo). Nel mazzo comune `direzione` è vuota.
+- **V2** Per ogni classe: esattamente 20 carte, 10 con `direzione` A e 10 con B (vincolo, D22). Nel mazzo comune `direzione` è vuota.
 - **V3** `pl` è pieno solo per gli Equipaggiamenti ed è uguale al valore della rarità.
 - **V4** `slot` è pieno se e solo se il `tipo` è TE.
 - **V5** `testo` non è vuoto e non comincia con «Se», «Giocabile solo» o «Solo se». Deve fare qualcosa in ogni situazione (vincolo: effetto generico sempre usabile).
@@ -626,7 +634,7 @@ Intestazione, uguale in tutti i file: `id,tipo,nome,classe,direzione,pl,rarita,s
 - **V12** Vietati «vinci la partita» e «perdi la partita» (D11), boss nuovi, alleati e pedine nuove nelle carte comuni e di classe: Ombra deforme e Discesa Yumaniana sono fuori dalla v7 (D15); Ristom e Ammondius! sono state ripensate (TI-30, TI-26). I 3 boss nuovi del mazzo Mostri (NE-50…52) vengono da D20 e hanno la loro sagoma (R 2.5).
 - **V13** Ogni Profezia ha: effetto base in `testo`; in `testo_situazionale` il bonus piccolo (Pari/Dispari/Alto/Basso) e il bonus grande (valore esatto).
 - **V14** Mappe solo nel mazzo comune [PLAYTEST]. Il testo di ogni Mappa comincia con «Il tesoro cambia Cripta.», come le Mappe v6 e quelle di Desy.
-- **V15** Composizione consigliata di ogni classe [PLAYTEST]: da 3 a 5 Equipaggiamenti, almeno 1 per direzione; al massimo 1 Leggendaria per direzione.
+- **V15** Composizione consigliata di ogni direzione (10 carte) [PLAYTEST, D22]: da 4 a 8 Equipaggiamenti e almeno 2 Incanti; al massimo 2 Leggendarie. Per i nuovi id 11–20, in ogni gruppo di 5 carte (11–15 o 16–20): da 2 a 4 Equipaggiamenti, almeno 1 Incanto, al massimo 1 Leggendaria.
 - **V16** Ogni carta usa solo le formule e le condizioni del §14.5. Una formula nuova va aggiunta prima al §14.5, perché il simulatore deve implementarla.
 
 ### 14.3 Regole di scrittura (piano §6.1)
@@ -672,10 +680,12 @@ Ogni effetto delle carte usa una di queste formule (V16). Tra parentesi, per le 
 | «(+N) a un tiro» / «(+N) a un tuo tiro» / «(+N) o (-N) a un tiro» | Modificatore su un tiro aperto: si gioca nella sua catena (R 4.7). «Un tiro» è di chiunque, anche di una creatura. |
 | «(+N) al tuo prossimo tiro per colpire» | Vale per il prossimo tiro di quel tipo, entro la Fine del turno in corso. |
 | «(+N) ATT / AR / MOV in questo turno» | Bonus temporaneo; non gira le rotelle. |
-| «Ritira il tiro» / «Ritira un tuo tiro» / «Fai ritirare 1 D6 di un tiro aperto» | Ritiro con la penalità di D1 (§5). |
+| «Ritira il tiro» / «Ritira un tuo tiro» / «Fai ritirare 1 D6 di un tiro aperto» / «puoi ritirare il tuo tiro di movimento» | Ritiro con la penalità di D1 (§5). Nessuna carta toglie la penalità. (TE-27, TE-30, CO-14) |
+| «Gira 1 D6 di un tiro aperto sulla faccia che vuoi. Conta come un ritiro, con la sua penalità» | Il dado mostra la faccia scelta (vale anche per le Profezie, R 5.6); per il resto è un ritiro: penalità di R 5.1 e divieti dei ritiri (NE-47). (CS-19) |
 | «Con vantaggio» / «con svantaggio» | R 7.6. «Le creature tirano per colpire con svantaggio»: ogni loro tiro per colpire, per la durata scritta (CS-09, TM-05). |
 | «Dado in più» | R 13.4; al massimo 1 per tiro (§15). |
-| «Tira 1 D6. Con 1–2: …; con 3–4: …; con 5–6: …» | Tiro fatto mentre la carta si risolve: non apre una catena (R 4.9). (TI-20) |
+| «Tira 1 D6. Con 1–2: …; con 3–4: …; con 5–6: …» / «Poi tira 1 D6. Con 6: …» | Tiro fatto mentre la carta si risolve: non apre una catena (R 4.9). Le fasce che non sono scritte non fanno niente. (TI-20, CA-12, CA-14, CG-12, CR-13, CR-19) |
+| «Il tiro per l'Indizio riesce con D6 ≤ LV + N» | Cambia la soglia di R 10.2 finché la carta è in gioco; con LV 5 l'Indizio resta garantito. (TM-09) |
 
 **Danni e cure**
 
@@ -683,8 +693,10 @@ Ogni effetto delle carte usa una di queste formule (V16). Tra parentesi, per le 
 |---|---|
 | «(+N) Danni» / «(+N) Danni ai tuoi attacchi» / «(+N) Danni al tuo prossimo attacco» | Si somma al danno se il tiro colpisce. «Al tuo prossimo attacco»: il prossimo entro la Fine del turno; se manca, il bonus è perso. |
 | «(-N) ai Danni del prossimo attacco che subisci» / «… di ogni attacco che subisci in questo turno» / «(-N) ai Danni di un attacco contro di te» | Riduzione del danno di quel colpo, dopo il tiro: minimo 0, entro la Fine del turno. La stessa formula vale per le creature: «(-1) ai Danni che subisce (minimo 1)» (NE-19). (CA-07, CA-06) |
-| «Infliggi N Danni / D6 Danni a una creatura / a un avversario accanto» | Danno diretto, senza tiro per colpire. |
-| «Subisci N Danni» / «l'attaccante subisce N Danni» / «chi ha tirato subisce N Danni» | Danno diretto senza tiro a chi dice la carta, anche se non è accanto. (CA-06, TE-09, Oracolo direzione B) |
+| «Infliggi N Danni / D6 Danni a una creatura / a un avversario accanto» / «… anche a un altro bersaglio» / «… a ogni altro avversario accanto» | Danno diretto, senza tiro per colpire. «Un altro bersaglio»: diverso dal primo. (CS-11, CS-12, CS-14, CA-12) |
+| «Invece di tirare per colpire puoi infliggere N Danni a chi stai attaccando» | Al posto del tiro per colpire di quell'attacco: niente tiro, niente catena del tiro, niente «(+N) Danni ai tuoi attacchi»; poi lo scontro prosegue. (TE-26) |
+| «Ogni eroe, tu compreso, …» | Ogni eroe al tavolo, anche chi gioca la carta; con un solo tiro per tutti se la carta lo dice. (TI-32, TI-38) |
+| «Subisci N Danni» / «l'attaccante subisce N Danni» / «chi ha tirato subisce N Danni» | Danno diretto senza tiro a chi dice la carta, anche se non è accanto. (CA-06, CA-17, TE-09, Oracolo direzione B) |
 | «Annulla i Danni di un attacco contro di te / di una Trappola / di un Incanto» | Parata: quel danno diventa 0. Per la Trappola: niente PV persi, il D6 della perdita si tira lo stesso. |
 | «Recuperi N PV» | PV su, mai oltre i PV massimi. |
 | «Perdi N PV» | La rotella PV scende di N. Non sono Danni di un attacco: niente parata, niente Riflesso. (TI-20) |
@@ -698,21 +710,23 @@ Ogni effetto delle carte usa una di queste formule (V16). Tra parentesi, per le 
 | «Pesca N carte» / «Pesca 1 carta dalla tua pila di classe» | R 12.4–12.5. |
 | «Scarta N carte» / «Scarta 1 carta: …» | Dalla tua mano, a scelta (oppure «a caso»); come costo si paga quando giochi la carta. |
 | «Un avversario / ogni avversario scarta N carte» (a sua scelta, «a caso») | Dalla sua mano: sceglie lui, salvo «a caso». «Un avversario sceglie: A oppure B»: sceglie lui. (TI-29, CO-07, CO-08, CG-10) |
-| «Riprendi N carte dai tuoi scarti» | In mano; vale R 12.4. |
-| «Prendi in mano 1 carta a scelta dagli scarti di un avversario» | Come il premio del Duello (R 10.10); vale R 12.4. (CG-08) |
-| «Ruba 1 carta a caso dalla mano di un avversario» / «… prima guarda la sua mano e scegli tu la carta» | Va nella tua mano; vale R 12.4. (CR-07, CR-09) |
-| «Guarda la mano di un avversario» / «Guarda N carte a caso della mano di un avversario» | Solo informazione: le vedi solo tu e restano nella sua mano. (CR-06, CR-09, CG-09) |
-| «Scambia N carte della tua mano con N carte (a caso / a scelta) della mano di un avversario» | Prima scegli le tue, poi prendi le sue; il numero di carte in mano non cambia (R 13.6). (CG-06, CG-09) |
-| «Scarta tutte le carte comuni che hai in mano e pescane altrettante» | Le carte di classe restano in mano. (CG-07) |
+| «Riprendi N carte [N Incanti / N Equipaggiamenti] dai tuoi scarti» | In mano; vale R 12.4. Con il tipo scritto, solo carte di quel tipo. (CS-18, TE-29) |
+| «Prendi in mano 1 carta [1 Equipaggiamento] a scelta dagli scarti di un avversario» | Come il premio del Duello (R 10.10); vale R 12.4. (CG-08, TI-39, CA-20) |
+| «Ruba 1 carta a caso dalla mano di un avversario» / «… prima guarda la sua mano e scegli tu la carta» | Va nella tua mano; vale R 12.4. (CR-07, CR-09, CR-17) |
+| «Guarda la mano di un avversario / di ogni avversario» / «Guarda N carte a caso della mano di un avversario» | Solo informazione: le vedi solo tu e restano nella sua mano. (CR-06, CR-09, CG-09, CR-18, CR-19, CR-20) |
+| «Scambia N carte della tua mano con N carte (a caso / a scelta / di quelle N) della mano di un avversario» | Prima scegli le tue, poi prendi le sue; il numero di carte in mano non cambia (R 13.6). (CG-06, CG-09, CG-16, CR-18, TI-35) |
+| «Dai N carte della tua mano a un avversario / al giocatore alla tua destra» / «un avversario ti dà 1 carta a sua scelta dalla sua mano» | Sceglie chi dà; chi riceve segue R 12.4. Se tutti danno insieme, prima ognuno sceglie le sue, poi si passano. (CG-18, CG-20, TI-38) |
+| «Scarta fino a N carte e pescane altrettante» / «Scarta tutte le carte comuni che hai in mano e pescane altrettante» | Prima scarti, poi peschi una alla volta (R 12.4). Con «tutte le carte comuni» le carte di classe restano in mano. (CG-07, CG-14, TI-35) |
 | «Prendi in mano N carte a caso tra le carte di classe rimaste nella scatola di una classe che non è la tua» | Carte fuori dalla partita (R 3.6): le giochi come le altre, poi vanno nei tuoi scarti. (TI-28) |
-| «Guarda le prime N carte di un mazzo e rimettile nell'ordine che vuoi» | Scry (R 13.3). |
+| «Guarda le prime N carte di un mazzo e rimettile nell'ordine che vuoi» / «guarda la prima carta e lasciala in cima oppure mettila in fondo al mazzo» | Scry (R 13.3). «Quando una tua carta Incanto o Equipaggiamento ti fa guardare le prime N carte … ne guardi N + 1»: vale solo per lo scry delle carte, non per il potere TC-02. (CG-11, CR-11, CR-12, CR-14, CR-16, CS-17) |
+| «Guarda N tessere coperte su N «?» e rimettile coperte: al loro posto oppure scambiate tra loro» | Le vedi solo tu (R 8.9); nessuna tessera si gira. (CR-14) |
 
 **Stati e segnalini**
 
 | Formula sulla carta | Significato |
 |---|---|
-| «Prendi lo Stato X» / «Un avversario / ogni avversario prende lo Stato X» | §9. Gli Stati sono quelli di `stati.csv`. |
-| «Toglie i suoi Stati (+)» | Rimette nella riserva le sue tessere Stato col segno +. (CO-06) |
+| «Prendi lo Stato X» / «Un avversario / ogni avversario [accanto] prende lo Stato X» | §9. Gli Stati sono quelli di `stati.csv`. (CG-14, CR-19, CS-15 e altre) |
+| «Toglie i suoi Stati (+)» / «Togli i tuoi Stati (−)» | Rimette nella riserva le tessere Stato con quel segno. (CO-06, CO-19, CR-20) |
 | «Ottieni la Forte Volontà» | Se non ce l'hai già (R 5.8). |
 
 **Equipaggiamenti**
@@ -723,9 +737,10 @@ Ogni effetto delle carte usa una di queste formule (V16). Tra parentesi, per le 
 | «Quando lo equipaggi: …» | Una volta, quando l'Equipaggiamento si risolve ed entra nello slot. (TE-01…05, TE-17, CR-07) |
 | «Una volta per turno: …» | R 4.15. |
 | «Quando lascia il tuo slot: …» | Effetto automatico (R 4.12) quando l'Equipaggiamento va negli scarti per qualsiasi motivo: sostituito, perso (D6 della perdita, sconfitta), sacrificato o distrutto. (TE-18, TE-25, CG-02) |
-| «Quando colpisci…», «quando un attacco contro di te fallisce…», «ogni volta che infliggi Danni con un attacco…», «quando usi la Forte Volontà…», «se indovini una Profezia…» | Inneschi degli Equipaggiamenti in gioco: effetti automatici (R 4.12) al momento dell'evento. |
-| «Sacrifica un tuo Equipaggiamento [con PL N o più] / la tua Armatura / il tuo Elmo: …» | Costo della carta (R 13.2). (CA-03 con PL 2 o più) |
-| «Sacrifica questo Scudo / questa Targa / questo Cesto: …» | Effetto automatico dell'Equipaggiamento in gioco (R 4.12), anche nel turno degli altri e mentre la pila si risolve; il costo è metterlo nei tuoi scarti. (CA-04, CA-05, CA-10, TE-08) |
+| «Quando colpisci…», «quando un attacco contro di te fallisce…», «ogni volta che infliggi Danni con un attacco…», «ogni volta che un attacco contro di te ti fa Danni…», «quando usi la Forte Volontà…», «se indovini una Profezia…», «quando sbagli una Profezia…», «quando giochi un Incanto [nel tuo turno]…», «quando un tuo Incanto infligge Danni…», «quando un tuo Incanto viene annullato…», «quando scarti una carta…», «quando sconfiggi una creatura…», «quando sacrifichi un altro tuo Equipaggiamento…», «quando inizi uno scontro con un mostro, prima di girarne la carta…» | Inneschi degli Equipaggiamenti in gioco: effetti automatici (R 4.12) al momento dell'evento; con «una volta per turno», R 4.15. «Quando giochi un Incanto»: appena entra nella catena, anche se poi viene annullato. (CA-13, CA-14, CA-17, CG-11, CG-12, CO-14, CO-15, CO-20, CR-12, CR-17, CS-11, CS-13, CS-17, CS-18, TE-28) |
+| «Alla Fine di ogni tuo turno in cui non hai giocato carte Incanto: …» | Al punto (a) della tua Fine (§4.0), se in quel turno non hai giocato Incanti, nemmeno annullati. (TE-31) |
+| «Sacrifica un tuo Equipaggiamento [con PL N o più] / la tua Armatura / il tuo Elmo: …» | Costo della carta (R 13.2). (CA-03 con PL 2 o più, CA-20) |
+| «Sacrifica questo Scudo / questa Targa / questo Cesto / questo Gilet …: …» | Effetto automatico dell'Equipaggiamento in gioco (R 4.12), anche nel turno degli altri e mentre la pila si risolve; il costo è metterlo nei tuoi scarti. «Oppure N se sacrifichi questo X»: il sacrificio alza il numero (tetto di R 13.2). (CA-04, CA-05, CA-10, TE-08, TE-27, TE-30, CA-15, CA-17, CG-17, CS-12, CS-16) |
 | «Tira il D6 della perdita» / «perdi l'equipaggiamento» | D6 della perdita (R 11.1). |
 | «Non lo perdi mai per il D6 della perdita né per gli effetti degli avversari» | Il D6 della perdita lo salta, anche con 1; le carte degli avversari non lo toccano. Tu puoi sempre sacrificarlo o sostituirlo. (TE-14, CA-09) |
 | «Un avversario mette nei suoi scarti un Equipaggiamento a tua scelta dai suoi slot …» | Distruzione (R 11.3), non è il D6 della perdita. (TE-17) |
@@ -734,17 +749,20 @@ Ogni effetto delle carte usa una di queste formule (V16). Tra parentesi, per le 
 
 | Formula sulla carta | Significato |
 |---|---|
-| «Il tesoro cambia Cripta» | R 10.11. |
+| «Il tesoro cambia Cripta» | R 10.11. Su una Mappa la plancia cambia anche se il tesoro non si sposta (R 8.12). Fuori da una Mappa non cambia plancia. (CR-15, CG-10) |
 | «Finché è in gioco: …» (Mappe) | Vale finché la Mappa resta in gioco (R 10.11) e non gira le rotelle. «Tutti» = tutti gli eroi; «le creature» = mostri e boss; «ogni avversario» = gli avversari di chi l'ha giocata. |
 | «Gli Elfi / i Sanguar tirano per colpire con vantaggio» | Gli eroi con quella Carta Specie (v6). |
-| «Metti negli scarti di chi l'ha giocata la Mappa in gioco» | Il tabellone torna senza Mappa; il tesoro non si sposta. (TI-22) |
+| «Metti negli scarti di chi l'ha giocata la Mappa in gioco» | Torna la plancia base e ogni eroe torna sulla sua Partenza iniziale (R 8.12); il tesoro non si sposta, salvo che la carta lo dica. (TI-22, CR-15) |
 | «Un avversario torna sulla sua Partenza iniziale» | Sposti la sua pedina sulla sua Partenza iniziale (R 3.9; se è occupata, R 11.4 punto 2). Non è una sconfitta. (TI-25) |
+| «In questo turno i mostri scoperti non ti sbarrano la strada» | Passi sulle tessere rosse scoperte senza fermarti (R 8.5); la Cripta con MIMI sbarra ancora. (TI-40) |
+| «Se è in gioco la Mappa X» | Condizione della riga «Se»: vale se quella Mappa è la Mappa in gioco. (CS-15) |
 
 **Catena, scelte e durate**
 
 | Formula sulla carta | Significato |
 |---|---|
-| «Annulla una carta / un Incanto / una Mappa nella catena» | R 4.11; serve il ripiego (V6). |
+| «Annulla una carta / un Incanto / una Mappa nella catena» / «Annulla ogni Incanto nella catena» | R 4.11; serve il ripiego (V6). «Ogni»: tutti gli Incanti nella pila sotto questa carta, anche i tuoi. (TI-33, TI-34, CR-20) |
+| «… un Incanto nella catena che ha come bersaglio solo te» / «una carta nella catena che ha come bersaglio un solo eroe cambia bersaglio: ora è l'eroe alla sinistra di quello» | Solo carte con un bersaglio scelto, che è un eroe; non le carte su «ogni avversario», su più eroi o sulle creature. Il nuovo bersaglio vale anche se non è accanto. (CS-16, TI-36) |
 | «Scegli: A, oppure B» | Scegli quando la carta si risolve. |
 | «In questo turno» / «in questo scontro» / «fino alla fine dello scontro» | R 4.14: finiscono alla Fine del turno in corso; quelle dello scontro anche prima, quando lo scontro finisce. |
 
@@ -754,7 +772,8 @@ Ogni effetto delle carte usa una di queste formule (V16). Tra parentesi, per le 
 |---|---|
 | «La creatura ha (±N) ATT / AR …» / «le creature hanno (-N) AR» / «una creatura ha ATT N» | Cambia le statistiche della creatura per la durata scritta; «ha ATT N»: l'ATT diventa N. (CR-03, TI-04, TI-30, TM-02) |
 | «È sconfitta» (mai un boss né il custode) | La creatura va a 0 PV: lo scontro finisce come una vittoria dell'eroe che combatte (R 4.13, R 7.9). (TI-03) |
-| «Invece fuggi e resti sul tuo esagono, senza ricompense» | Fuga (R 7.8) senza arretrare. (TI-08) |
+| «Invece fuggi e resti sul tuo esagono, senza ricompense» / «così fuggi e resti sul tuo esagono, senza ricompense» | Fuga (R 7.8) senza arretrare. (TI-08, TE-30) |
+| «Sparisce, senza ricompense; la sua tessera va tra le usate e la carta in fondo al suo mazzetto» (mai il custode) | Lo scontro finisce come una fuga, ma la tessera rossa lascia la «?» (R 8.11) e tu resti dove sei. (TI-41) |
 | «Non prende l'Indizio» | Il tiro per l'Indizio non dà l'Indizio, qualunque sia il risultato. (TI-19, CO-07) |
 | «Alla Fine del turno …» | Si fa al punto (a) della Fine del turno in corso (§4.0). (TI-26) |
 
@@ -789,13 +808,17 @@ Ogni effetto delle carte usa una di queste formule (V16). Tra parentesi, per le 
 | «Profezia: se indovini un tuo tiro / un tiro altrui, … (Pari/Dispari/Alto/Basso) oppure … (valore esatto)» | R 13.5. «Tuo tiro» e «tiro altrui»: §15. Con vantaggio o svantaggio si verifica il tiro tenuto (§15). |
 | «Chi ha tirato subisce / scarta / tira il D6 della perdita / non prende l'Indizio» | «Chi ha tirato» è l'avversario o la creatura del tiro altrui. Una creatura applica solo i Danni (§15), salvo che la carta dica cosa fa (CO-10). |
 | «Scegli la Profezia, poi …» | Eccezione scritta sulla carta (CO-01): la Profezia si sceglie prima dell'effetto base e verifica il tiro ritirato. |
+| «Considerala indovinata, solo per il premio piccolo (Pari/Dispari/Alto/Basso)» | Dai il premio piccolo della Profezia sbagliata, mai quello del valore esatto. Il potere TC-04 dà invece il premio che hai scelto. (CO-15) |
+| «La Profezia vale sul nuovo tiro» / «la Profezia non scade: verifica anche il prossimo tiro altrui in questo turno» | Eccezioni scritte sulla carta alla scadenza di R 13.5; resta una sola Profezia attiva. (CO-14, CO-20) |
+| «Il 7 su 2D6, e il 3 o il 4 su un D6, contano sia Alto sia Basso» | Allarga le soglie di R 13.5 solo per chi porta la carta. (CO-18) |
 
 **Condizioni della riga «Se»** (`testo_situazionale`). Si controllano quando la carta si risolve; per un Equipaggiamento, quando succede l'evento. Sono ammesse:
 - Indizi: «se hai N Indizi o più», «se quell'avversario ha N Indizi o più»;
 - PV: «se hai N PV o meno»;
-- carte: «se quell'avversario ha più carte di te» (R 12.7), «se nei tuoi scarti ci sono N carte o più»;
+- carte: «se quell'avversario ha più carte di te» / «se un avversario ha più carte di te» (R 12.7), «se nei tuoi scarti ci sono N carte o più»;
 - slot: «se hai N Equipaggiamenti o più negli slot», «se lo slot … è vuoto», «se sacrifichi …», «se hai 2 Indizi o più quando lo equipaggi»;
-- scontro: «se sei in uno scontro / in un Duello», «se combatti un boss / una creatura di LV N o più», «se il bersaglio ha già subito Danni in questo scontro / in questo turno», «se dopo i Danni ha N PV o meno e non è un boss», «se sta affrontando il custode di MIMI», «se il tiro è contro un avversario»;
+- scontro: «se sei in uno scontro / in un Duello / in uno scontro con un mostro [che non è il custode]», «se combatti un boss / una creatura di LV N o più», «se il bersaglio ha già subito Danni in questo scontro / in questo turno», «se dopo i Danni [il bersaglio] ha N PV o meno [e non è un boss]», «se sta affrontando il custode di MIMI», «se il tiro è contro un avversario»;
+- Mappe: «se è in gioco la Mappa X»;
 - tempo: «se è il tuo turno e non ti sei ancora mosso», «se lo giochi in risposta a un Incanto di quell'avversario», «se poi giochi un Incanto d'attacco in questo turno»;
 - tiri: «se è il tiro per l'Indizio di un avversario»;
 - «se l'avevi già» (la Forte Volontà).
@@ -823,7 +846,7 @@ TE-10,TE,Scudo del Goblin,Tutte le classi,,2,Rara,Arma DX / Scudo,"Finché è eq
 | Tiro aperto | Un tiro la cui catena non si è ancora risolta. |
 | Tuo tiro | Un tiro per il tuo eroe: movimento, iniziativa, per colpire, danno, Indizio, D6 della perdita, D6 della Trappola. |
 | Tiro altrui | Un tiro di un avversario per il suo eroe, oppure un tiro fatto per una creatura, anche se i dadi li tiri tu. Mai un tiro per il tuo eroe. «Chi ha tirato» è quell'avversario o quella creatura. Una Profezia «su un tuo tiro» o «su un tiro altrui» dà il premio solo se il tiro che la verifica (R 13.5) è di quel tipo [PLAYTEST]. |
-| Ritiro / penalità | Nuovo tiro degli stessi dadi; il ritiro n ha penalità n (D1). |
+| Ritiro / penalità | Nuovo tiro degli stessi dadi; il ritiro n ha penalità n (D1). Anche girare un dado sulla faccia scelta (CS-19) conta come un ritiro. Nessuna carta toglie la penalità. |
 | Dado in più | Tiri 1 D6 in più e tieni il migliore (R 13.4). Al massimo 1 dado in più per tiro: due fonti (per esempio CS-05 Rune per principianti e CS-01 Dardo di fuoco (o quasi)) non si sommano [PLAYTEST]. |
 | PL | Power level: somma dei PL degli Equipaggiamenti negli slot (0–12). |
 | Mazzetto | Mazzo Mostri del tuo PL: 1 (PL 0–3), 2 (PL 4–7), 3 (PL 8+). |
@@ -867,7 +890,7 @@ Il simulatore va in `v7/simulatore/` (piano §9). Prende le regole da questa spe
 | Limite di carte tra due proprie Fini / per catena | 2 / 1 (D9) |
 | Equipaggiamenti per turno | 1 (v6, N3) |
 | Mano massima | 10 (D8) |
-| Mazzetto di classe | 6 su 10 |
+| Mazzetto di classe | 10 su 20 (D22) |
 | Mano iniziale | 3 di classe + 3 comuni |
 | Pesca a inizio turno | 1, dal comune o dalla pila di classe |
 | PL per rarità | 1 / 2 / 3 |
@@ -875,7 +898,7 @@ Il simulatore va in `v7/simulatore/` (piano §9). Prende le regole da questa spe
 | Ricompense | mazzetto 1 tiro per l'Indizio; mazzetto 2 Forte Volontà + tiro per l'Indizio; mazzetto 3 Indizio garantito |
 | Locanda | 2 PV + 1 carta dagli scarti |
 | Soglia di rifornimento delle «?» | 6 |
-| Composizione del mazzo comune | circa 25 E / 30 I / 8 M |
+| Composizione del mazzo comune | circa 25 E / 30 I / 8 M, più le carte comuni nuove di Desy (D22) |
 | AR dei mostri | AR v6 −25 % per eccesso: da 6 a 9 (D19) |
 | Indizio | D6 ≤ LV + 1; con LV 5 garantito (D18) |
 
@@ -894,43 +917,74 @@ Il simulatore va in `v7/simulatore/` (piano §9). Prende le regole da questa spe
 - durata della partita (v6: circa 10,6 round);
 - rifornimenti delle «?», sconfitte, Indizi da mostri e da Duelli.
 
-## 17. Plancia del playtest (bozza v7)
+## 17. Plance del playtest (base e Mappe)
 
-Ricavata da `v7/idee/v7_bozza_mappa.svg` il 10/11. Coordinate: colonna A–J, riga 1–10. Le righe dispari sono spostate a sinistra di mezzo esagono rispetto alle pari.
+Plancia base «Strettoie», scelta il 10/11: dati in `v7/simulatore/mappa.py`, disegno in `v7/idee/v7_bozza_mappa.svg`. Coordinate: colonna A–J, riga 1–10. Le righe dispari sono spostate a sinistra di mezzo esagono rispetto alle pari.
 
 **Vicini dell'esagono (c, r):**
 - nella stessa riga: (c−1, r) e (c+1, r);
 - riga dispari: (c−1, r±1) e (c, r±1);
 - riga pari: (c, r±1) e (c+1, r±1).
 
-**Terreno:**
-- **Strada** (60 esagoni, comprese Partenze, Cripte e «?»): C1 D1 G1 H1 I1 · B2 C2 D2 F2 H2 · B3 C3 D3 E3 G3 H3 I3 · B4 C4 D4 E4 F4 G4 H4 I4 J4 · G5 H5 I5 J5 · A6 B6 C6 D6 · A7 B7 C7 D7 E7 F7 G7 H7 I7 · B8 C8 D8 F8 G8 H8 I8 · C9 E9 G9 H9 I9 · B10 C10 D10 G10 H10
+**Terreno della plancia base:**
+- **Strada** (60 esagoni, comprese Partenze, Cripte e «?»): A1 B1 C1 H1 I1 J1 · A2 C2 H2 I2 J2 · A3 D3 E3 G3 H3 J3 · A4 B4 C4 D4 E4 F4 G4 H4 J4 · G5 H5 I5 J5 · A6 B6 C6 D6 · A7 C7 D7 E7 F7 G7 H7 I7 J7 · A8 C8 D8 F8 G8 J8 · A9 B9 C9 H9 J9 · A10 B10 C10 H10 I10 J10
 - **Guado e ponte** (4, sono strada): D5, F5, E6, G6
-- **Bosco** (12): A1 B1 A2 G2 A3 A4 J7 J8 D9 J9 I10 J10
-- **Case** (6): E1 F1 E2 F9 E10 F10
-- **Rocce** (10): J1 I2 J2 F3 J3 A8 E8 A9 B9 A10
+- **Bosco** (12): F1 G1 F2 G2 I3 I4 B7 B8 D9 E9 D10 E10
+- **Case** (6): D1 E1 D2 G9 F10 G10
+- **Rocce** (10): B2 E2 B3 C3 F3 E8 H8 I8 F9 I9
 - **Acqua** (8): A5 B5 C5 E5 F6 H6 I6 J6
 
-**Caselle speciali:**
+**Caselle speciali** (uguali su tutte le plance):
 - **Partenze:** 1 C1 · 2 H1 · 3 J5 · 4 H10 · 5 C10 · 6 A6
 - **Cripte:** 1 D4 · 2 G4 · 3 D7 · 4 G7
-- **«?» (20):** B3 B7 C4 C6 C8 C9 D1 E3 E7 E9 F2 F4 F8 G10 H2 H3 H5 H7 I4 I8
+- **«?» (20):** A1 A9 B6 B9 B10 C2 C7 D3 D6 E3 F8 G5 G8 H4 H9 I1 I2 I5 J2 J10
 
 **Muri (16 lati tra due esagoni):**
-- che chiudono le Cripte (10): D3|D4, D4|E3, G4|H3, G4|H4, G4|H5, C6|D7, C7|D7, C8|D7, F8|G7, G7|G8;
-- mura (6): C8|C9, D2|D3, D2|E3, F8|G9, G8|G9, H2|H3.
+- che chiudono le Cripte (10, uguali su tutte le plance): D3|D4, D4|E3, G4|H3, G4|H4, G4|H5, C6|D7, C7|D7, C8|D7, F8|G7, G7|G8;
+- mura (6): A9|B9, B6|C7, C6|D6, G5|H5, H4|I5, I2|J2.
 
-**Controlli** (rifatti il 10/11 con uno script usa e getta, sul grafo strada + muri):
-- 64 esagoni percorribili, 115 collegamenti. Le 115 linee disegnate sono esattamente questi collegamenti.
-- Ogni esagono ha almeno 2 uscite e nessun esagono, se bloccato, taglia fuori una zona.
-- Dalla Partenza alla Cripta: da 4 a 8 passi, in media 5,75 (v6: da 3 a 7, media 5,25).
+**Controlli della plancia base** (10/11, con uno script usa e getta sul grafo strada + muri; `python3 v7/simulatore/mappa.py` ricontrolla esagoni, collegamenti e distanze):
+- 64 esagoni percorribili, 93 collegamenti. Le 93 linee della bozza disegnata sono esattamente questi collegamenti.
+- Ogni esagono ha almeno 2 uscite e nessun esagono, se bloccato, taglia fuori una zona. Nessuna coppia di «?», con due mostri scoperti, chiude una zona (la bozza precedente ne aveva 4).
+- Dalla Partenza alla Cripta: da 4 a 8 passi, in media 5,92 (bozza precedente: 5,75; v6: 5,25). Da ogni Partenza la Cripta più vicina è a 4 passi.
 - Ogni Partenza ha 1 «?» a un passo e 4 «?» entro 3 passi.
+- Ostacoli di terra: 8 sul bordo, 16 nel secondo anello, 4 nel centro 6 × 6 (bozza precedente: 20, 6, 2).
+- Un mostro scoperto su una «?» allunga almeno un percorso tra Partenza e Cripta o tra due Cripte in 12 «?» su 20: in 8 di 2 passi o più, al massimo di 5. Chiudere il Guado ovest D5 o il Guado est G6 costa in tutto 15 passi in più sui percorsi Partenza→Cripta, il Ponte del lago 2.
+
+**Plance delle Mappe (R 8.12).** Uguali alla base: griglia, Partenze, Cripte con i 10 muri e i 12 esagoni d'ingresso (C4 E4 D5 · F4 G3 G5 · D6 E7 D8 · F7 G6 H7), fiume e 20 «?». Cambiano i 28 ostacoli di terra e le 6 mura; la strada è tutto il resto (64 esagoni). I dati stanno in `v7/simulatore/plance/`, con gli stessi campi di `mappa.py`; il disegno si fa con `python3 v7/idee/genera_bozza_mappa.py --dati <file> --out <svg>`.
+
+| Mappa | File | Bosco | Case | Rocce | Mura (6) |
+|---|---|---|---|---|---|
+| TM-01 Il Forziere Fa Ciao Ciao | `plance/forziere.py` | F1 G1 E2 F2 G2 F3 E8 D9 E9 F9 D10 E10 | B3 A4 B4 I7 J7 I8 | E1 D2 A3 I3 I4 B7 B8 J8 G9 F10 | B2\|C1 C2\|C3 C6\|D6 G5\|H5 H8\|H9 H10\|I9 |
+| TM-02 Città Avanzata | `plance/citta.py` | J1 H2 I3 B8 C9 A10 | D1 F1 G1 B2 D2 B3 C3 H8 I8 G9 I9 D10 E10 G10 | E1 E2 F2 F3 E8 E9 F9 F10 | A6\|B7 C6\|D6 D8\|D9 G2\|G3 G5\|H5 I4\|J5 |
+| TM-03 Foresta Antica | `plance/foresta.py` | E1 F1 G1 D2 E2 F2 H2 F3 I3 B8 E8 C9 E9 F9 G9 D10 E10 F10 | J4 A7 | B2 A3 A4 B4 I7 J7 J8 I9 | C2\|C3 C6\|D6 D8\|D9 G2\|G3 G5\|H5 H8\|H9 |
+| TM-04 Tundra Invernale | `plance/tundra.py` | D1 E1 D2 E2 F9 G9 F10 G10 | H2 I3 B8 C9 | F1 G1 F2 A3 B3 F3 A4 B4 I7 J7 E8 I8 J8 E9 D10 E10 | B2\|C1 C6\|D6 D8\|D9 G2\|G3 G5\|H5 H10\|I9 |
+| TM-05 Sottovelo | `plance/sottovelo.py` | D1 E1 F1 G1 J1 A10 D10 E10 F10 G10 | B2 B3 C3 I3 B8 H8 I8 I9 | D2 E2 F2 G2 J4 A7 D9 E9 F9 G9 | C6\|D6 E3\|E4 E4\|F4 E7\|F7 F7\|F8 G5\|H5 |
+| TM-06 Miniera di Uhul | `plance/miniera.py` | J1 I4 B7 A10 | F1 E2 F3 E8 F9 E10 | D1 E1 D2 G2 A3 B3 H3 A4 B4 I7 J7 C8 I8 J8 D9 G9 F10 G10 | B2\|C1 C2\|C3 C6\|D6 G5\|H5 H8\|H9 H10\|I9 |
+| TM-07 Yuma – Pozzo di Luce | `plance/yuma.py` | G1 F2 G2 A3 I3 A4 I4 B7 J7 B8 J8 D9 E9 D10 | E1 F1 D2 G9 E10 F10 | B2 E2 C3 F3 E8 H8 F9 I9 | B6\|C7 C6\|D6 D6\|E7 F4\|G5 G5\|H5 H4\|I5 |
+| TM-08 Flegias | `plance/flegias.py` | B2 C3 J3 J4 A7 A8 H8 I9 | F1 G1 E2 F2 G2 F3 E8 D9 E9 F9 D10 E10 | D1 E1 D2 B3 I8 G9 F10 G10 | B7\|C7 B9\|C9 D6\|E7 F4\|G5 H2\|I2 H4\|I4 |
+| TM-09 Alla ricerca di MIMI | `plance/mimi.py` | D1 E1 F1 D2 E2 F2 E9 F9 G9 E10 F10 G10 | J1 B2 F3 E8 I9 A10 | A3 H3 A4 B4 I4 B7 I7 J7 C8 J8 | C2\|C3 C6\|D6 C10\|D9 G2\|H1 G5\|H5 H8\|H9 |
+
+| Plancia | Carattere | Bosco/case/rocce | Terra su bordo/2° anello/centro | Partenza→Cripta | Collegamenti | «?» che sbarrano (di 2 passi o più), massimo | Chiudere D5/ponte/G6 |
+|---|---|---|---|---|---|---|---|
+| Base «Strettoie» | Strettoie davanti alle Cripte; i guadi laterali sono da contendersi | 12/6/10 | 8/16/4 | 4–8 (5,92) | 93 | 12 (8), +5 | +15/+2/+15 |
+| TM-01 Forziere | Oasi del miraggio: un palmeto al centro nord e al centro sud divide le Partenze 1-2 e 4-5; il tappo vero è sulla riva, in B6 e I5 | 12/6/10 | 10/16/2 | 4–8 (5,92) | 105 | 12 (8), +5 | +11/+2/+11 |
+| TM-02 Città | Quartieri: tre isolati di case e una fila di officine (rocce E1-F3); i vicoli C2-D3 e G8-H9 sono i tappi | 6/14/8 | 10/14/4 | 4–8 (5,92) | 95 | 12 (8), +4 | +11/+2/+11 |
+| TM-03 Foresta | Bosco fitto tra le Partenze 1 e 2 (e 4 e 5), ma tanti sentieri: si combatte più che girare | 18/2/8 | 12/14/2 | 4–8 (5,92) | 101 | 12 (6), +3 | +11/+2/+11 |
+| TM-04 Tundra | Distesa aperta con due ghiacciai per metà: gli sbarramenti costano poco, vince chi corre | 8/4/16 | 12/14/2 | 4–8 (5,92) | 109 | 12 (4), +2 | +11/+2/+11 |
+| TM-05 Sottovelo | Viali del cimitero: una fila di cipressi e una di lapidi chiudono il nord (e il sud); si passa dai vialetti C2-D3 e G8-H9 | 10/8/10 | 12/14/2 | 4–8 (6,00) | 99 | 12 (8), +5 | +11/+2/+11 |
+| TM-06 Miniera | Ammassi di roccia ai lati e al centro: senza i guadi laterali si gira lontano | 4/6/18 | 12/12/4 | 4–8 (5,92) | 103 | 12 (8), +4 | +27/+2/+27 |
+| TM-07 Yuma | Il lago è il cuore: contano tutte e tre le traversate | 14/6/8 | 10/14/4 | 4–8 (5,92) | 95 | 12 (8), +5 | +15/+6/+15 |
+| TM-08 Flegias | Villaggio in fiamme al centro nord e al centro sud; strade dirette e tre attraversamenti quasi uguali | 8/12/8 | 12/12/4 | 4–8 (5,75) | 101 | 12 (8), +4 | +7/+6/+7 |
+| TM-09 MIMI | Caccia: case sparse e un solo bosco al centro; sbarramenti leggeri, guadi laterali che contano | 12/6/10 | 12/12/4 | 4–8 (5,92) | 101 | 12 (8), +3 | +19/+2/+19 |
+
+**Controlli delle plance delle Mappe** (10/11, stesso script): tutte identiche girate di 180°, strada collegata, almeno 2 uscite per esagono, nessun esagono che se bloccato taglia fuori una zona, 3 ingressi per Cripta, 3 attraversamenti del fiume; da ogni Partenza la Cripta più vicina è a 4 passi, 1 «?» a un passo e 4 entro 3. Nessuna coppia di «?» chiude una zona, tranne 2 su Flegias che chiudono un angolo senza Partenze (I1 + I2 chiudono J1 J2; B9 + B10 chiudono A9 A10).
 
 ## 18. Valori [PLAYTEST]
 
 | Tema | Valore di partenza | Regola |
 |---|---|---|
-| Mazzetto di classe | 6 su 10 | R 3.6 |
+| Mazzetto di classe | 10 su 20 (D22; prima 6 su 10) | R 3.6 |
 | Mano iniziale | 3 di classe + 3 comuni | R 3.7 |
 | Pesca | 1 a inizio turno (comune o classe), anche nel primo turno | R 12.3 |
 | PL per rarità | 1 / 2 / 3 | R 6.1 |
@@ -943,7 +997,7 @@ Ricavata da `v7/idee/v7_bozza_mappa.svg` il 10/11. Coordinate: colonna A–J, ri
 | Tessere | opzione A, rifornimento con 6 coperte o meno | R 3.3, R 8.11 |
 | Movimento | solo strada; fermata sul mostro scoperto | R 8.4, R 8.5 |
 | Accanto | lato in comune senza muro | R 8.7 |
-| Cuore e terreno | Cuore tolto; le Mappe non cambiano il terreno | R 8.12 |
+| Cuore e terreno | Cuore tolto; ogni Mappa ha la sua plancia e cambia bosco, case, rocce e mura; a ogni cambio di plancia tutti tornano sulla Partenza iniziale | R 8.12 |
 | Partenza occupata alla morte | esagono libero accanto, a scelta | R 11.4 |
 | Costi scelti, oggetti precisi | seguono il testo della carta | R 11.3 |
 | Penalità | verso peggiorativo (+n dove serve un numero basso); minimo 1; i modificatori restano | R 5.3–5.5 |
@@ -956,12 +1010,12 @@ Ricavata da `v7/idee/v7_bozza_mappa.svg` il 10/11. Coordinate: colonna A–J, ri
 | Ricercatore | in segreto, mazzetto a scelta, in qualsiasi momento senza catena aperta | R 13.3 |
 | Stregone | dado in più: tieni il migliore; al massimo 1 dado in più per tiro, le fonti non si sommano | R 13.4, §15 |
 | Mano pubblica | il numero di carte in mano è pubblico | R 12.7 |
-| Stati nuovi e tessere | Vantaggio, Svantaggio, Fermo; 24 tessere Stato in tutto, una per fonte (carte e mostri) e al massimo 4: Rallentato 4, Silenzio 4 (Fermi tutti in 4 giocatori + NE-37, NE-50), Svantaggio 3, Fermo 3, gli altri 2 | R 9.7, R 2.5, `stati.csv` |
-| Riga in fondo alla Carta Classe | «Mazzetto: 6 delle 10 carte di classe · Mano: 3 + 3» | R 13.1 |
+| Stati nuovi e tessere | Vantaggio, Svantaggio, Fermo; 31 tessere Stato in tutto, una per fonte (carte e mostri) e al massimo 4: Rallentato, Silenzio, Fede, Vantaggio e Fermo 4; Occhio, Riflesso e Svantaggio 3; Sussurro 2 | R 9.7, R 2.5, `stati.csv` |
+| Riga in fondo alla Carta Classe | «Mazzetto: 10 delle 20 carte di classe · Mano: 3 + 3» | R 13.1 |
 | Riscalatura e tetti | tabella §14.4; tetto 2 / 2 / 3; vantaggio di carte +1 / +1 / +2 | §14.4, V9 |
 | Sacrificio | il bonus pagato con un sacrificio arriva a +3 anche su Comune e Rara | R 13.2, §14.4 |
-| Composizione delle classi | da 3 a 5 Equipaggiamenti, almeno 1 per direzione; massimo 1 Leggendaria per direzione; niente Mappe | V14, V15 |
-| Mazzo comune | 25 Equipaggiamenti, 30 Incanti, 8 Mappe (63 carte) | R 2.5 |
+| Composizione delle classi | per direzione (10 carte): da 4 a 8 Equipaggiamenti, almeno 2 Incanti, massimo 2 Leggendarie; niente Mappe (D22) | V14, V15 |
+| Mazzo comune | 81 carte: 31 Equipaggiamenti, 41 Incanti, 9 Mappe (63 prima di D22) | R 2.5 |
 | Dalla v6 restano provvisorie | Trappola a 0 PV con un solo tiro di perdita; «la voce si sparge» (+1 Indizio agli altri); niente ricompense a chi sconfigge un eroe con una carta; «creatura»; bonus dello Yumaniano | R 11.5, R 10.6, R 10.4, §14.3 |
 | Ripieghi delle risposte | mai la pesca: Forte Volontà, uno Stato, (+N) a un prossimo tiro o uno scry | V6 |
 | Riduzione dei Danni | dopo il tiro del danno, minimo 0 | §14.5 |
@@ -979,14 +1033,14 @@ Da definire con Desy al telefono o su Discord (commento 10). Intanto il playtest
 |---|---|---|
 | 1 | Le Profezie si verificano sulle facce dei dadi o sul risultato con la penalità? | Sulle facce (R 5.6, R 13.5) |
 | 2 | Mappe in risposta | Deciso (D10) |
-| 3 | Costruzione 6 su 10, mano 3 + 3, pesca 1 a turno | Sì (R 3.6, R 3.7, R 12.3) |
+| 3 | Costruzione 10 su 20 (D22; era 6 su 10), mano 3 + 3, pesca 1 a turno | Sì (R 3.6, R 3.7, R 12.3) |
 | 4 | Soglie PL 0–3, 4–7, 8+ e PL 1/2/3 per rarità | Sì (R 6.1, R 6.4) |
 | 5 | Potere dell'Oracolo: le Profezie al posto di «resti a 1 PV» | Sì, TC-04 nuova (R 13.1) |
 | 6 | Plance eroe neutre | Deciso (D14) |
 | 7 | Movimento solo su strada e fermata sul mostro scoperto | Sì (R 8.4, R 8.5) |
 | 8 | Sacchetto: A, B o C; soglia di rifornimento | A, soglia 6 (R 8.11) |
 | 9 | «A una casella di distanza» e Duello attraverso muri e acqua | Accanto = lato in comune senza muro; l'acqua non conta (R 8.7) |
-| 10 | Togliere il Cuore; Mappe che cambiano il terreno | Cuore tolto; le Mappe non cambiano il terreno (R 8.12) |
+| 10 | Togliere il Cuore; Mappe che cambiano il terreno | Cuore tolto; ogni Mappa cambia il terreno con la sua plancia e riporta tutti alla Partenza iniziale (R 8.12) |
 | 11 | Simulazione prima della plancia definitiva | Sì, sulla bozza; la mappa definitiva si fa a parte (D16, R 8.1) |
 | 12 | Morte: D6 della perdita, propria Partenza, 1 carta comune | Deciso (D7) |
 | 13 | Partenza occupata alla morte | Esagono di strada libero accanto, a scelta (R 11.4) |
@@ -1020,7 +1074,9 @@ Da definire con Desy al telefono o su Discord (commento 10). Intanto il playtest
 | N19 | Monologo (NE-52) contro la regola del pareggio dei boss e OP-1 | Vince la carta: l'eroe attacca per primo senza tiro, anche col custode (R 7.2). Con OP-1 resta solo il (+1) Danni |
 | N20 | Televoto (NE-51) da custode: con 5–6 i 2 Danni possono finire il custode prima di ogni attacco | Sì: se arriva a 0 PV vinci la partita (R 7.9, R 10.12) |
 | N21 | Divieti di scontro di NE-47 (ritiri) e NE-49 (Incanti): valgono anche per i giocatori che non combattono e per carte che non riguardano lo scontro? | Sì, per tutti e per tutto lo scontro (§14.5) |
-| N22 | Tessere Stato finite (24 tessere, una per fonte): può servirne una in più in casi rari a 4 giocatori | Lo Stato non si prende; se succede al tavolo, annotarlo per il conteggio delle copie |
+| N22 | Tessere Stato finite (31 tessere, una per fonte, al massimo 4): può servirne una in più in casi rari a 4 giocatori | Lo Stato non si prende; se succede al tavolo, annotarlo per il conteggio delle copie |
+| N23 | Mazzetto di 10 carte su 20 (D22): con la pila di classe di 7 carte invece di 3, la pesca dalla pila (R 12.3) e la scelta delle carte pesano di più; con 20 carte per classe l'equilibrio tra le classi e tra le direzioni può cambiare. | Default 10 su 20 (R 3.6). Da misurare col simulatore, che oggi costruisce il mazzetto con le 5 carte della propria direzione più 1 (`ia.mazzetto_classe`) e va aggiornato |
+| N24 | Totale del mazzo comune dopo D22 (63 prima): le carte di Desy «tutti» e quelle che le classi non assorbono (overflow) vanno nel mazzo comune. | Fissato il 10/11: 81 carte (31 TE, 41 TI, 9 TM), R 2.5 e §18 |
 
 **Decisi nella revisione delle carte del 10/11, da misurare col simulatore:**
 - CA-09 Elmo a prova di testata non torna più in mano quando lo sacrifichi (con CA-08 dava carte oltre V9 e un sacrificio gratis ogni turno): ora (+1) AR e non si perde.
@@ -1030,3 +1086,4 @@ Da definire con Desy al telefono o su Discord (commento 10). Intanto il playtest
 - Ripieghi senza pesca (V6): TM-01, TI-10, TI-22, CS-06, CS-07, CS-08, CO-01; CS-01 non ha più ripiego.
 - La parata degli attacchi è dell'Assaltatore (CA-06 senza costo, CA-10) e della Targa «Vietato Colpire» (TE-08); TI-06 Barriera Antisfiga para Trappole e Incanti.
 - Da misurare: il sacrificio abbassa il PL e porta a mazzetti più facili; la pesca che resta (TM-06, CG-01, CG-07, il premio grande di CO-02); TI-03 Uccisi molto male e gli altri danni diretti contro il mazzetto 1.
+- Carte nuove di D22 (revisione del 10/11 sera): TM-09 ora rende più facile il tiro per l'Indizio (il ritorno alla Partenza lo fa già R 8.12); CS-19 Il Dado è Truccato conta come un ritiro (penalità, e NE-47 la ferma); TI-34 NO! come ripiego dà Silenzio a un solo avversario; CO-15 dà solo il premio piccolo; CR-11 non potenzia il potere TC-02; TE-27 non toglie più la penalità del ritiro; CG-14 e CG-17 non sono più doppioni (di TC-05/TI-35 e di CS-16); CO-12 non riduce più i Danni (resta all'Assaltatore, CA-07) ma dà AR; CA-19 non costa più (-2) AR (era peggiore di TI-12). Da misurare: i danni diretti ripetibili (TE-26, CS-12), la pesca di TI-37 e CG-13, CO-15 contro il potere TC-04.

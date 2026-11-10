@@ -120,6 +120,8 @@ VALORE_CODICE = {
     'annulla': 3, 'malus': 3, 'fv': 3, 'riduzione': 3, 'stato': 2, 'recupera': 2, 'nani': 3, 'velo': 2,
     'stato_avv': 2, 'mill': 2, 'ruba': 2, 'scambia': 1, 'speziale': 2, 'torna_partenza': 2, 'perdita_tutti': 1,
     'vera_volonta': 3, 'tempo_scaduto': 1, 'ristom': 2, 'maledizione': 2, 'amisal': 1, 'scry_imp': 1, 'info': 0,
+    'prendi_scarti': 2, 'ricambia': 1, 'tributo': 2, 'togli_mappa': 2, 'devia': 3, 'gamba': 1, 'pietraluce': 2,
+    'dirigibile': 2, 'passa': 1,
 }
 
 

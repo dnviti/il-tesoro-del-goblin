@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """Genera le pagine (SVG in mm) dei componenti non-carta del playtest v7, tutti SOLO FRONTE.
 
-Uso: python3 gen.py <cartella_uscita> [--formato A3]
+Uso: python3 gen.py <cartella_uscita> [--formato A3] [--dati CARTELLA] [--plancia FILE.svg]
 Scrive <cartella_uscita>/<componente>/pagina_NN.svg (poi importate in VectorCraft e esportate in PDF da build.sh).
+--plancia: mappa da un altro SVG di v7/idee/genera_bozza_mappa.py (default la bozza v7, vedi svg.board()); le tessere
+illustrate (--tema) sono collegate con percorsi relativi a <cartella_uscita>/plancia.
 A4: plancia (4 fogli), plance_eroe (4, A4 orizzontale), rotelle_eroe (2), tessere_esplorazione (1), segnalini (2),
 pedine (2), prova_stampa (1). A3: plancia (2), plance_eroe (2), rotelle_eroe (1), tessere_esplorazione (1, con le
 tessere Stato e la Rotella della Profezia), componenti_misti (1, pedine e segnalini), prova_stampa (1).
@@ -22,6 +24,7 @@ from parts_stampa import *   # icon, board, dial_ring, colori INK/BROWN/RED/GOLD
 OUT = sys.argv[1]
 # --dati CARTELLA: CSV da un'altra cartella (vale anche per genera_carte.py, che la prova di stampa importa per contare i fogli)
 DATI = sys.argv[sys.argv.index('--dati') + 1] if '--dati' in sys.argv else os.path.join(HERE, '..', 'dati')
+PLANCIA = sys.argv[sys.argv.index('--plancia') + 1] if '--plancia' in sys.argv else BOZZA_V7
 SERIF = 'Liberation Serif'          # al posto di Cinzel (titoli): ha >= e -> e pesi veri
 SANS = 'Liberation Sans Narrow'     # al posto di Alegreya Sans (etichette)
 FDIR = {'Liberation Serif': '/usr/share/fonts/liberation-serif-fonts/LiberationSerif-%s.ttf',
@@ -498,7 +501,7 @@ def segnalini():
 # ------------------------------------------------------------------ PLANCIA
 def plancia():
     S = 0.97
-    bs = board(W=26)
+    bs = board(W=26, bozza=PLANCIA, cartella=os.path.join(OUT, 'plancia'))
     m = re.match(r'<svg viewBox="0 0 ([\d.]+) ([\d.]+)"', bs); bw, bh = float(m.group(1)), float(m.group(2))
     Wb, Hb = bw * S, bh * S
     WIN_W, WIN_H = 184.0, 230.0   # finestra di stampa per foglio: lascia >= 6,5 mm per le tacche prima del bordo foglio
@@ -710,7 +713,7 @@ def plancia_a3():
     """Plancia su 2 fogli A3 orizzontali (420 x 297 mm): metà alta e metà bassa a tutta larghezza, sovrapposte
     in una fascia orizzontale con 5 croci di allineamento. Sovrapposizione = 2 x WIN_H - Hb."""
     S = 0.97
-    bs = board(W=26)
+    bs = board(W=26, bozza=PLANCIA, cartella=os.path.join(OUT, 'plancia'))
     m = re.match(r'<svg viewBox="0 0 ([\d.]+) ([\d.]+)"', bs); bw, bh = float(m.group(1)), float(m.group(2))
     Wb, Hb = bw * S, bh * S
     PW, PH = 420, 297

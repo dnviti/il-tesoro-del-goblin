@@ -7,6 +7,7 @@ TM-05,mappa,creature_svant;vant_specie=Sanguar,
 TM-06,mappa,pesca_tutti=1;pesca_tu=1,
 TM-07,mappa,cura=D6+2;cura_carte=1,
 TM-08,mappa,att=1;ar=-1;trappola=1,
+TM-09,mappa,indizio=1,Indizio con D6 ≤ LV + 2 finché è in gioco
 TE-01,equip,ar=1;fv_entra;fv_gia_stato=Riflesso,
 TE-02,equip,ar=1;recupera_entra_indizi2=1,
 TE-03,equip,ar=1;scry_mostri_entra=3,
@@ -32,6 +33,12 @@ TE-22,equip,ar=2;ar_lv3=1,
 TE-23,equip,ar=2;pvmax=1,
 TE-24,equip,ar=1;vant,
 TE-25,equip,ar=2;mov=1;lascia_recupera=1,
+TE-26,equip,colpo_sicuro=2,l'IA lo usa al posto del tiro quando per colpire le serve 8 o più su 2D6
+TE-27,equip,sac_ritira,sacrificato solo sul tiro d'Indizio o contro il custode
+TE-28,equip,incanto_danno_next=1,
+TE-29,equip,scarta_riprendi_equip,a M0 se negli scarti c'è un Equipaggiamento che vale 6 o più
+TE-30,equip,ritira_mov,ritira il movimento con 1-2; il sacrificio per fuggire (situazionale) non è modellato
+TE-31,equip,pigiama,
 TI-01,danno,n=D6-1;avv,
 TI-02,danno,n=D6;se_ferito=1,
 TI-03,danno,n=2;uccidi=2,
@@ -62,6 +69,17 @@ TI-27,buff,att=1;ar=1;dmg=1;equip3=2,
 TI-28,vera_volonta,n=2,
 TI-29,mill,n=1;tutti,riga Duello non modellata (info)
 TI-30,ristom,,
+TI-31,buff,att=2;ar=-2;mov=-2;fv,
+TI-32,dirigibile,n=D6,
+TI-33,annulla,tipo=TI|TE|TM;ripiego=fv,contro la Mappa in gioco come TI-22 (togli_mappa) durante lo scontro di un avversario col custode
+TI-34,annulla,tipo=TI;ogni;ripiego=Silenzio,annulla gli Incanti sotto di lei nella catena
+TI-35,ricambia,max=3;avv_uno,scarta le carte di poco valore; la variante «scambia 2 carte» (situazionale) non è usata
+TI-36,devia,s=Riflesso,risposta a una carta che ha te come bersaglio
+TI-37,buff,ar=-2;stato=Vantaggio;pesca_senza_armatura,
+TI-38,passa,n=2,ognuno dà le sue 2 carte peggiori
+TI-39,prendi_scarti,n=1,
+TI-40,velo,mov=2;parkour,i mostri scoperti non sbarrano (R 8.5) in questo turno; non serve per fuggire
+TI-41,stato_avv,s=Fermo;schiocco,l'IA usa lo «sparisce» quando vorrebbe fuggire da un mostro (non custode)
 CA-01,mod_tiro,n=1;sacrifica=Armatura;n_sac=3;danni_sac=2,
 CA-02,buff,mov=2;danno_next=1;sacrifica=Elmo;att_sac=3,
 CA-03,danno,n=1;avv;sacrifica_pl2=3,
@@ -72,6 +90,16 @@ CA-07,riduzione,n=2;sacrifica_tutti,
 CA-08,recupera,n=1;sacrifica_equip=1,
 CA-09,equip,ar=1;mai_perso,
 CA-10,equip,ar=1;parata_sacrifica,
+CA-11,buff,att=2;ar=-2;equip3_danno=1,
+CA-12,danno,n=2;avv;ar_turno=-2;stato_bers=Rallentato;sei=2,
+CA-13,equip,sac_danno=2,(+2) Danni al prossimo attacco solo in questo turno (danno_next)
+CA-14,equip,pistola,
+CA-15,equip,archibugio,l'IA usa il (+3) quando basta a colpire; il sacrificio per 3 Danni non è modellato
+CA-16,equip,rid_turno=1;lascia_stato=Fede,«una volta per turno» = fino alla propria Fine
+CA-17,equip,molla,il sacrificio per 3 Danni non è modellato
+CA-18,equip,rid_turno=2;rid_turno_ar=-1,il (-1) AR si paga quando para (dopo il colpo)
+CA-19,cura,n=D6;basso3=D6+2;s=Fede,
+CA-20,prendi_scarti,n=1;equip;n_sac=2;ripiego=fv,l'IA non sacrifica per prenderne 2
 CG-01,equip,mov=2;scarta_pesca,
 CG-02,equip,ar=1;lascia_recupera=2,
 CG-03,recupera,n=1;scarti5=2,
@@ -82,6 +110,16 @@ CG-07,tempo_scaduto,,
 CG-08,equip,ar=1;scarta_prendi_avv,
 CG-09,scambia,n=1;piu_carte_stato=Silenzio,«guarda la mano» non modellato: la scelta della carta presa è a caso
 CG-10,mill,n=2;caso;indizi3=D6+2;indizi3_tesoro,scarta 2 carte a caso
+CG-11,equip,info_turno,scry del mazzo comune quando scarti: info
+CG-12,equip,palline,l'IA tira solo con 3 PV o più e un bersaglio (creatura del proprio scontro o avversario accanto)
+CG-13,danno,n=D6;scarta_dmg=2;uccisa_pesca,
+CG-14,ricambia,max=2;accanto_stato=Rallentato;scontro_att=-2,scarta e ripesca le carte di poco valore
+CG-15,buff,att=2;costo_pv_o_scarta=2;scarti5_danno=1,scarta se ha una carta di poco valore o 2 PV o meno
+CG-16,equip,scambia_turno,a M0 con una carta di poco valore; la carta presa è a caso (la migliore se l'avversario ha più carte)
+CG-17,equip,sac_silenzio,sacrificato a M6 contro il leader con 2 Indizi o più
+CG-18,equip,jetpack=2,paga sempre scartando (mai «dai 1 carta»)
+CG-19,mill,n=2;pesca_dopo,la parte «fai lo stesso anche tu» non è usata
+CG-20,tributo,n=2;n2=3,l'avversario scarta solo se ha 6 carte o più; altrimenti ti dà la sua carta peggiore
 CO-01,ritira,proprio;prof=mod;ripiego=fv,
 CO-02,cura,n=2;prof=cura,
 CO-03,danno,n=2;avv;prof=cura_fede,
@@ -92,6 +130,16 @@ CO-07,mill,n=1;prof=scarta_altrui,
 CO-08,maledizione,prof=danno_perdita_altrui,
 CO-09,equip,att=1;prof_danno=1,
 CO-10,equip,ar=2;prof_scarta=1,
+CO-11,cura,n=1;fv;prof=cura2_pila,
+CO-12,buff,ar=1;prof=ar_fede,
+CO-13,buff,att=1;prof=dmg_turno,
+CO-14,equip,prof_riprova,il D6 ritirato vale solo per la Profezia: il tiro resta com'era (approssimato)
+CO-15,equip,prof_paga,usato se restano più di 3 PV; vale solo il premio piccolo
+CO-16,mod_tiro,n=1;qualsiasi;prof=meno_altrui,
+CO-17,stato_avv,s=Rallentato;prof=scarta_fermo_altrui,
+CO-18,equip,prof_largo,
+CO-19,equip,prof_stati,
+CO-20,equip,prof_resta,
 CR-01,amisal,mov=2,scelta: (+2) MOV oppure scry (scry sul mazzo comune = info)
 CR-02,scry_imp,n=3;s=Occhio;mov_fermo=2,
 CR-03,mod_tiro,n=1;scontro_creatura=-1,
@@ -102,6 +150,16 @@ CR-07,equip,att=1;ruba_entra,
 CR-08,ritira,proprio;avv_bonus=1;ripiego=info,ripiego (scry del mazzo comune): info
 CR-09,ruba,n=1,
 CR-10,danno,n=2;avv;indizi3=D6+2,
+CR-11,equip,scry_mostri_entra=2,lo scry N + 1 non è modellato
+CR-12,equip,scry_mostri_turno=2,guarda il proprio mazzetto quando si ferma su una «?» rossa o scoperta
+CR-13,gamba,,
+CR-14,scry_imp,n=2,guardare e scambiare le 2 tessere coperte: info
+CR-15,togli_mappa,s=Vantaggio,
+CR-16,equip,info_turno,scry del mazzo comune: info
+CR-17,equip,motosega,scarta una carta che vale 3 o meno
+CR-18,scambia,n=1,«guarda 2 carte a caso / tutta la mano»: la carta presa è a caso
+CR-19,pietraluce,,«guarda la mano di ogni avversario»: info
+CR-20,annulla,tipo=TI;togli_meno;ripiego=fv,«guarda la mano di un avversario»: info
 CS-01,danno,n=D6;avv;dado_in_piu;ferito_turno=1,
 CS-02,mod_tiro,n=1;incanto_dopo=2,
 CS-03,equip,att=1;danni_incanto_turno=1,
@@ -112,3 +170,13 @@ CS-07,ritira,qualsiasi;un_dado;ripiego=fv,
 CS-08,stato_avv,s=Silenzio;risposta_fv,
 CS-09,malus,creature_svant_turno;avv_stato=Svantaggio,
 CS-10,equip,att=1;ritira_turno,
+CS-11,equip,incanto_extra=1,l'altro bersaglio è la creatura o l'avversario accanto con più Indizi
+CS-12,equip,cartucciera=1,a M4 nel proprio scontro; il sacrificio per D6 + 2 Danni non è modellato
+CS-13,equip,fv_entra;incanto_fv,
+CS-14,danno,n=D6+2;avv;dado_in_piu;splash=1;uccisa_mill,
+CS-15,danno,n=D6-1;avv;dado_in_piu;tutti_stato=Rallentato;se_mappa=TM-04;se_mappa_dmg=2,
+CS-16,equip,sac_annulla_ti,come CG-17: sacrificato contro un Incanto che ha te come bersaglio
+CS-17,equip,incanto_ricambia,scry del mazzo comune: info; scarta e pesca se ha una carta di poco valore
+CS-18,equip,recupera_incanto_entra;incanto_annullato_fv,
+CS-19,ritira,qualsiasi;scegli=2;ripiego=fv,l'IA lo gioca come un ritiro: mette 6 (o 1) sul dado peggiore
+CS-20,malus,creatura_att1;creatura_ar=-2;non_boss;avv_stato=Silenzio;avv_stato2=Rallentato,

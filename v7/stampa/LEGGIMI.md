@@ -20,6 +20,8 @@ Servono `designcraft-cli`, `vectorcraft-cli`, `pdfcraft-cli` e poppler. `genera_
 
 **Provare dati nuovi senza toccare il kit:** `genera_carte.py --dati CARTELLA --uscita CARTELLA` legge i CSV da un'altra cartella e scrive PDF e progetti altrove; `build.sh <sorgenti_tmp> <pdf_tmp> A4 --dati CARTELLA` fa lo stesso per i componenti (anche A3); poi `verifica_pdf.py <pdf_tmp>`. Nessun numero di carte è fisso nel codice (mostri, fogli, divisori, prova di stampa).
 
+**Illustrazioni:** `genera_carte.py` mette `sorgenti/arte/png/<id>.png` (stile e misure in `sorgenti/arte/STILE.md`; per le carte con più copie, Specie e Imprevisti, prima `<id>-<n>.png` della copia «n di m») nel riquadro dell'illustrazione di carte comuni, di classe, Carte Classe, Specie, Mostri e Imprevisti: riempie il riquadro centrata e ritagliata, la battuta va su una fascetta pergamena in fondo al riquadro (sui Mostri più piccola: 1 riga se entra, se no 2), le etichette rosse (PLAYTEST, PROVVISORIO, BOSS) e MAZZO su un cartellino pergamena, il PL resta sopra. Senza immagine per quella carta resta come prima (riquadro tinto). `--arte CARTELLA` legge le immagini da un'altra cartella, `--senza-arte` le ignora tutte. Carte Aiuto, Divisori e dorsi non hanno illustrazione.
+
 ## Dati delle carte (Spec v7 §14)
 
 - **Carte comuni:** `sorgenti/dati/carte_comuni.csv`.

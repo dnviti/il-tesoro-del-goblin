@@ -103,6 +103,26 @@ def pesca(g, e, dalla_pila=False):
 def scarta(g, e, cid):
     e.mano.remove(cid)
     e.scarti.append(cid)
+    for c in e.equip():
+        if 'palline' in c.p and c.id not in e.usati:
+            _palline(g, e, c)
+
+
+def _palline(g, e, c):
+    """CG-12: una volta per turno, quando scarti, puoi tirare 1 D6 (l'IA tira con 3 PV o più e un bersaglio)."""
+    sc = g.scontro
+    creatura = sc is not None and not sc.finito and not sc.duello and sc.eroe is e and sc.nemico.pv > 0
+    vicini = [x for x in avversari(g, e) if x.pv > 0 and g.plancia.accanto(e.pos, x.pos)]
+    if e.pv < 3 or not (creatura or vicini):
+        return
+    e.usati.add(c.id)
+    d = tiri.dado(g, 'D6', e)
+    if d <= 2:
+        danneggia(g, e, 1)
+    elif creatura:
+        sc.danni_creatura(1 if d <= 4 else 2)
+    elif d >= 5:
+        danneggia(g, max(vicini, key=lambda x: x.indizi), 2, e)
 
 
 def riprendi(g, e, n=1, filtro=None, escludi=()):
@@ -132,6 +152,18 @@ def togli_stati_piu(e):
         del e.stati[s]
 
 
+def annulla(g, v):
+    """Una carta nella catena è annullata (R 4.11). CS-18: una volta per turno, Forte Volontà a chi ha giocato
+    l'Incanto annullato."""
+    v.annullata = True
+    x = v.eroe
+    if K.CARTE[v.cid].tipo == 'TI':
+        for c in x.equip():
+            if 'incanto_annullato_fv' in c.p and c.id not in x.usati:
+                x.usati.add(c.id)
+                x.fv = True
+
+
 # --- Equipaggiamenti (R 4.2, R 11.1, §14.5) ---------------------------------------------------------
 
 def equipaggia(g, e, cid):
@@ -148,6 +180,8 @@ def equipaggia(g, e, cid):
         cura(g, e, tiri.dado(g, p['cura_entra']), carta=False)
     if 'recupera_entra_indizi2' in p and e.indizi >= 2:
         riprendi(g, e, 1)
+    if 'recupera_incanto_entra' in p:
+        riprendi(g, e, 1, filtro=lambda x: x.tipo == 'TI')
     if 'scry_mostri_entra' in p:
         ia.scry_mostri(g, e, p['scry_mostri_entra'])
     if 'distruggi_entra' in p:
@@ -176,6 +210,8 @@ def lascia_slot(g, e, s):
 def sacrifica(g, e, s):
     lascia_slot(g, e, s)
     g.st['sacrifici'] += 1
+    for c in e.equip():                     # CA-13: quando sacrifichi un altro tuo Equipaggiamento
+        e.tmp['danno_next'] += c.p.get('sac_danno', 0)
 
 
 def perdita(g, e):
@@ -235,7 +271,7 @@ def sconfitta(g, e):
         perdita(g, e)
     occ = {x.pos for x in g.eroi if x is not e}
     if e.partenza in occ:
-        liberi = [h for h in M.VICINI[e.partenza] if h not in occ]
+        liberi = [h for h in g.plancia.vicini[e.partenza] if h not in occ]
         e.pos = g.rng.choice(liberi) if liberi else e.partenza
     else:
         e.pos = e.partenza
@@ -245,6 +281,23 @@ def sconfitta(g, e):
         g.scontro.finito = True
     if g.eroi[g.attivo] is e:
         g.turno_finito = True
+
+
+def cambia_plancia(g, mappa):
+    """R 8.12: la plancia della Mappa `mappa` (None = plancia base) prende il posto di quella in uso. Ogni eroe torna
+    sulla sua Partenza iniziale (non è una sconfitta); uno scontro o un Duello in corso finisce senza vincitore."""
+    nuova = M.PLANCE[mappa] if mappa else M.BASE
+    if nuova is g.plancia:
+        return
+    g.plancia = nuova
+    g.st['cambi_plancia' if mappa else 'cambi_plancia_base'] += 1
+    sc = g.scontro
+    if sc is not None and not sc.finito:
+        sc.finito = sc.annullato = True
+        g.st['duelli_annullati' if sc.duello else 'scontri_annullati'] += 1
+        g.st['custode_annullato'] += sc.custode
+    for x in g.eroi:
+        x.pos = x.pos_inizio = x.partenza
 
 
 # --- Indizi e tesoro (§10) ----------------------------------------------------------------------------

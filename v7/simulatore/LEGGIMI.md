@@ -44,12 +44,27 @@ Se `carte_mostro.csv` avesse ancora le AR v6, il simulatore applica D19 da sé e
 | `effetti.csv` | id carta → codice effetto + parametri (`k=v;k2`) |
 | `abilita_mostri.csv` | id mostro → codice abilità + parametri; un mostro senza riga è `info` (contato nel rapporto) |
 | `carte.py` | lettura dei CSV, valore delle carte per l'IA |
-| `mappa.py` | plancia §17 (`python3 mappa.py` ricontrolla 64 esagoni, 115 collegamenti, Partenza→Cripta 4–8 passi) |
+| `mappa.py` | plancia base §17 e plance delle 9 Mappe (`plance/<tema>.py`, R 8.12): grafo, muri, distanze. `python3 mappa.py` ricontrolla ogni plancia: 64 esagoni, collegamenti (base 93, Mappe 95–109), Partenza→Cripta 4–8 passi |
 | `ia.py`, `ia_carte.py` | IA: preparazione, movimento, fuga, Duello, effetti automatici, poteri; carte da aprire e risposte |
 
 Una carta nuova si aggiunge con una riga in `effetti.csv` usando un codice esistente; un codice nuovo va scritto in
 `effetti.py` (funzione `f_<codice>`). Le carte senza riga valgono `info`: si giocano ma non fanno niente e si contano.
 Lo stesso per i mostri con `abilita_mostri.csv` e `mostri.py`.
+
+## Plance delle Mappe (R 8.12)
+
+La plancia in uso è `g.plancia` (`mappa.BASE` all'inizio). Ogni Mappa ha la sua plancia (`mappa.TEMI`: TM-01
+`forziere`, TM-02 `citta`, TM-03 `foresta`, TM-04 `tundra`, TM-05 `sottovelo`, TM-06 `miniera`, TM-07 `yuma`, TM-08
+`flegias`, TM-09 `mimi`). Quando una Mappa si risolve, prima il suo testo, poi `stato.cambia_plancia`: cambiano
+strade, muri e distanze, e ogni eroe torna sulla sua Partenza iniziale (niente D6 della perdita). Se TI-22 (o TI-33,
+CR-15) toglie la Mappa in gioco torna la plancia base. Uno scontro o un Duello in corso finisce subito senza vincitore
+né ricompense (esito `annullato`: la tessera resta scoperta, la carta Mostro va in fondo, il custode tiene le ferite).
+Partenze, Cripte, «?» e tessere sono uguali su tutte le plance e restano dove sono.
+
+IA: non gioca una Mappa durante il proprio scontro; la gioca (o toglie quella in gioco con TI-22/TI-33/CR-15) per
+chiudere lo scontro di un avversario col custode, oppure a M2 se l'avversario di turno con 3 Indizi è sulla Cripta di
+MIMI. Per il resto gioca le Mappe come prima (anche alla Fine, senza pesare il ritorno di tutti sulla Partenza).
+Il rapporto conta i cambi di plancia, i ritorni alla base e gli scontri annullati.
 
 Revisione a occhio della mappatura (id, nome, testo stampato, codice usato), poi esce:
 
@@ -82,3 +97,17 @@ python3 v7/simulatore/sim_v7.py --verifica-carte
   dà Fermo anche all'eroe sconfitto. «Ogni avversario guarda la tua mano» (NE-35) è `info`. Il 1° attacco che
   colpisce il Conte Nebbiolo (NE-20) è quello di un eroe, non le carte di danno. Il rapporto segnala i codici che il
   motore non conosce.
+- Carte nuove del 10/11 (D22: classi XX-11..20, TM-09, TE-26..31, TI-31..41), approssimazioni (dettaglio nella
+  colonna `nota` di `effetti.csv`):
+  - «Guarda la mano / il mazzo comune / le tessere» è informativo: CG-11, CR-11 (N + 1), CR-14 (tessere), CR-16,
+    CR-18 (la carta presa è a caso), CR-19, CR-20, CS-17.
+  - Sacrifici non usati dall'IA: CA-15 (3 Danni), CA-17 (3 Danni), CA-20 (prenderne 2), CS-12 (D6 + 2 Danni), TE-30
+    (fuga). TE-27 si sacrifica solo sul tiro d'Indizio o contro il custode; CG-17 a M6 contro il leader con 2 Indizi;
+    CS-16 solo contro un Incanto che ha te come bersaglio.
+  - Scelte fisse: CG-15 scarta se ha una carta di poco valore (altrimenti perde 2 PV); CG-18 scarta sempre; CG-19
+    non rifà su di sé; CG-20 l'avversario scarta solo con 6 carte o più, altrimenti dà la peggiore; TI-35 senza
+    lo scambio; TI-38 ognuno passa le sue 2 carte peggiori; CS-19 mette 6 (o 1) sul dado peggiore.
+  - Equipaggiamenti «quando…»: CG-12 tira solo con 3 PV o più e un bersaglio; CO-14 il D6 ritirato vale solo per la
+    Profezia (il tiro resta); TE-26 al posto del tiro solo se per colpire serve 8 o più su 2D6; CA-18 paga (−1) AR
+    dopo il colpo; CA-13 e TE-28 mettono i Danni sul prossimo attacco del turno.
+  - Effetti «una volta per turno» degli Equipaggiamenti valgono fino alla propria Fine (come CS-10).

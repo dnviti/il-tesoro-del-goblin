@@ -44,6 +44,7 @@ class Partita:
         self.round_tesoro = None
         self.creature_svant = False
         self.mappa = self.mappa_di = None
+        self.plancia = M.BASE               # R 8.12: plancia in uso (cambia con la Mappa in gioco)
         self.mappa_mov_avv = False
         self.mimi, self.spostamenti, self.tesoro_trovato = None, 0, False
         r = self.rng
@@ -66,6 +67,7 @@ class Partita:
         self.riserva, self.usate = tessere, []
         self.scatola = {c: K.CARTE_CLASSE[c][:] for c in K.CLASSI if c not in classi}
         for e in self.eroi:
+            # D22: mazzetto = 10 carte scelte tra le (20) di classe; le altre vanno in scatola; mano 3 + pila = resto
             mazzetto = ia.mazzetto_classe(self, e)
             self.scatola[e.classe] = [c for c in K.CARTE_CLASSE[e.classe] if c not in mazzetto]
             mano = ia.mano_iniziale(self, e, mazzetto)
@@ -80,7 +82,7 @@ class Partita:
         for e in self.eroi:                       # R 3.9
             while True:
                 h = M.PARTENZE[r.randint(1, 6)]
-                if all(x.pos != h and not M.accanto(x.pos, h) for x in self.eroi if x.pos):
+                if all(x.pos != h and not self.plancia.accanto(x.pos, h) for x in self.eroi if x.pos):
                     break
             e.pos = e.partenza = h
         self.attivo = r.randrange(n)              # R 3.10
@@ -113,7 +115,7 @@ def turno(g, e):
     if not g.turno_finito:
         esplora(g, e)
     if not (g.turno_finito or g.finita) and e.scontri == 0:
-        vicini = [x for x in S.avversari(g, e) if M.accanto(e.pos, x.pos)]
+        vicini = [x for x in S.avversari(g, e) if g.plancia.accanto(e.pos, x.pos)]
         x = ia.sfida(g, e, vicini)
         if x is not None:
             if ia.rifiuta(g, x, e):
@@ -134,12 +136,15 @@ def muovi(g, e):
         g.st['turni_rallentato'] += 1
     else:
         t = C.catena_tiro(g, tiri.Tiro(g, e, 'mov', 1, e.stat(g, 'mov')))
+        if t.facce[0] <= 2 and e.ha('ritira_mov') and 'TE-30' not in e.usati:
+            e.usati.add('TE-30')                    # TE-30: una volta per turno ritira il movimento
+            t.ritira()
         passi = max(1, t.valore())
-    bloccati = {h for h, t in g.tessere.items() if t == 'scoperta'}
+    bloccati = {h for h, t in g.tessere.items() if t == 'scoperta' and not e.tmp['parkour']}     # TI-40
     if g.mimi:
         bloccati.add(g.mimi)
     occupati = {x.pos for x in g.eroi if x is not e}
-    mete = M.raggiungibili(e.pos, passi, bloccati, occupati) if passi else {e.pos: 0}
+    mete = g.plancia.raggiungibili(e.pos, passi, bloccati, occupati) if passi else {e.pos: 0}
     e.pos = ia.destinazione(g, e, mete)
     e.mosso = True
 
@@ -169,7 +174,7 @@ def esplora(g, e):
             mz.insert(0, mid)                        # NE-44 Permaloso: in cima
         else:
             mz.append(mid)                           # in fondo al suo mazzetto
-        if esito == 'vinto' and not g.finita:
+        if esito in ('vinto', 'sparito') and not g.finita:      # TI-41: la tessera va tra le usate
             g.tessere[h] = None
             g.usate.append('rossa')
     if not g.finita:
@@ -207,6 +212,8 @@ def fine(g, e):
     """§4.0 Fine: (a) è il momento M6 già giocato; poi (b)-(f)."""
     if e.tmp['perdita_fine']:                        # TI-26: «Alla Fine del turno» = punto (a)
         S.perdita(g, e)
+    if e.ha('pigiama') and not e.tmp['incanti']:     # TE-31: nessun Incanto giocato in questo turno
+        S.cura(g, e, 1, carta=False)
     for x in g.eroi:                                 # (b) effetti «in questo turno» di tutti, Profezie
         x.tmp.clear()
     g.profezie.clear()

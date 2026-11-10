@@ -123,14 +123,33 @@ def verifica_profezie(g, t):
             g.st['profezie_tipo_sbagliato'] += 1
             continue
         giusta = indovina(pr['scelta'], t.facce)
+        grande = isinstance(pr['scelta'], int)
+        if not giusta and pr['tipo'] == 'altrui' and pr['scelta'] in ('Alto', 'Basso') and o.ha('prof_largo'):
+            giusta = sum(t.facce) in ((7,) if len(t.facce) == 2 else (3, 4))      # CO-18
+        if not giusta and pr['tipo'] == 'mio':
+            for c in o.equip():
+                if c.id in o.usati:
+                    continue
+                if 'prof_riprova' in c.p:       # CO-14: il nuovo D6 vale solo per la Profezia (approssimato)
+                    o.usati.add(c.id)
+                    giusta = indovina(pr['scelta'], [g.rng.randint(1, 6)] + list(t.facce[1:]))
+                    break
+                if 'prof_paga' in c.p and o.pv > 3:      # CO-15: perdi 2 PV, indovinata solo per il premio piccolo
+                    o.usati.add(c.id)
+                    S.danneggia(g, o, 2)
+                    giusta, grande = True, False
+                    break
         if not giusta and o.classe == 'Oracolo' and o.potere:
             o.potere = False                # TC-04: una volta per partita
             g.st['potere_Oracolo'] += 1
             giusta = True
         if not giusta:
+            if pr['tipo'] == 'altrui' and not pr.get('resta') and o.ha('prof_resta'):
+                pr['resta'] = True          # CO-20: vale anche sul prossimo tiro altrui in questo turno
+                g.profezie.setdefault(idx, pr)
             continue
         g.st['profezie_indovinate'] += 1
-        _premio(g, o, pr['chiave'], isinstance(pr['scelta'], int), t)
+        _premio(g, o, pr['chiave'], grande, t)
         for c in o.equip():
             if pr['tipo'] == 'mio' and 'prof_cura' in c.p:
                 S.cura(g, o, 1, carta=False)
@@ -141,6 +160,12 @@ def verifica_profezie(g, t):
                     _scarta_peggiore(g, t.chi, 1)
                 else:
                     S.ferisci(g, t.chi, 1, o)
+            if pr['tipo'] == 'altrui' and 'prof_stati' in c.p and c.id not in o.usati:     # CO-19
+                o.usati.add(c.id)
+                if isinstance(t.chi, S.Eroe):
+                    S.togli_stati_piu(t.chi)
+                elif g.scontro is not None and not g.scontro.finito:
+                    g.scontro.mod_ar -= 1
 
 
 def _scarta_peggiore(g, x, n):
@@ -177,3 +202,27 @@ def _premio(g, o, k, grande, t):
         S.ferisci(g, t.chi, 3 if grande else 2, o)
         if grande and isinstance(t.chi, S.Eroe):
             S.perdita(g, t.chi)
+    elif k == 'cura2_pila':                 # CO-11
+        if grande:
+            S.pesca(g, o, dalla_pila=True)
+        else:
+            S.cura(g, o, 2)
+    elif k == 'ar_fede':                    # CO-12: Stato Fede; valore esatto anche (+2) AR in questo turno
+        S.dai_stato(g, o, 'Fede')
+        if grande:
+            o.tmp['ar'] += 2
+    elif k == 'dmg_turno':                  # CO-13
+        o.tmp['dmg'] += 2 if grande else 1
+        if grande:
+            S.cura(g, o, 1)
+    elif k == 'meno_altrui':                # CO-16
+        t.mod -= 2 if grande else 1
+        if grande:
+            S.ferisci(g, t.chi, 1, o)
+    elif k == 'scarta_fermo_altrui':        # CO-17
+        if grande:
+            S.ferisci(g, t.chi, 2, o)
+            if isinstance(t.chi, S.Eroe):
+                S.dai_stato(g, t.chi, 'Fermo')
+        elif isinstance(t.chi, S.Eroe):
+            _scarta_peggiore(g, t.chi, 1)
