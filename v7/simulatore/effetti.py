@@ -133,9 +133,12 @@ def f_danno(g, e, c, p, ctx, pila, tiro, voce):
 def f_parata(g, e, c, p, ctx, pila, tiro, voce):
     tipo = p['tipo']
     if tipo == 'attacco' and tiro is not None and tiro.tipo == 'danno' and tiro.bersaglio is e:
+        if 'solo_sac' in p and not ctx.get('sacrificato'):     # CA-06: senza sacrificio solo (-N) ai Danni
+            tiro.riduzione += p['rid']
+            return
         tiro.annulla_danni = True
         g.st['parate'] += 1
-        if ctx.get('sacrificato'):
+        if ctx.get('sacrificato') and 'sacrifica_danni' in p:
             S.ferisci(g, tiro.chi, p['sacrifica_danni'], e)
         return
     if tipo == 'trappola_incanto':

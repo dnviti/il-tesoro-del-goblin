@@ -682,9 +682,9 @@ Ogni effetto delle carte usa una di queste formule (V16). Tra parentesi, per le 
 | Formula sulla carta | Significato |
 |---|---|
 | «(+N) Danni» / «(+N) Danni ai tuoi attacchi» / «(+N) Danni al tuo prossimo attacco» | Si somma al danno se il tiro colpisce. «Al tuo prossimo attacco»: il prossimo entro la Fine del turno; se manca, il bonus è perso. |
-| «(-N) ai Danni del prossimo attacco che subisci» / «… di ogni attacco che subisci in questo turno» | Riduzione del danno di quel colpo, dopo il tiro: minimo 0, entro la Fine del turno. La stessa formula vale per le creature: «(-1) ai Danni che subisce (minimo 1)» (NE-19). (CA-07) |
+| «(-N) ai Danni del prossimo attacco che subisci» / «… di ogni attacco che subisci in questo turno» / «(-N) ai Danni di un attacco contro di te» | Riduzione del danno di quel colpo, dopo il tiro: minimo 0, entro la Fine del turno. La stessa formula vale per le creature: «(-1) ai Danni che subisce (minimo 1)» (NE-19). (CA-07, CA-06) |
 | «Infliggi N Danni / D6 Danni a una creatura / a un avversario accanto» | Danno diretto, senza tiro per colpire. |
-| «Subisci N Danni» / «l'attaccante subisce N Danni» / «chi ha tirato subisce N Danni» | Danno diretto senza tiro a chi dice la carta, anche se non è accanto. (CA-05, CA-06, TE-09, Oracolo direzione B) |
+| «Subisci N Danni» / «l'attaccante subisce N Danni» / «chi ha tirato subisce N Danni» | Danno diretto senza tiro a chi dice la carta, anche se non è accanto. (CA-06, TE-09, Oracolo direzione B) |
 | «Annulla i Danni di un attacco contro di te / di una Trappola / di un Incanto» | Parata: quel danno diventa 0. Per la Trappola: niente PV persi, il D6 della perdita si tira lo stesso. |
 | «Recuperi N PV» | PV su, mai oltre i PV massimi. |
 | «Perdi N PV» | La rotella PV scende di N. Non sono Danni di un attacco: niente parata, niente Riflesso. (TI-20) |
@@ -725,7 +725,7 @@ Ogni effetto delle carte usa una di queste formule (V16). Tra parentesi, per le 
 | «Quando lascia il tuo slot: …» | Effetto automatico (R 4.12) quando l'Equipaggiamento va negli scarti per qualsiasi motivo: sostituito, perso (D6 della perdita, sconfitta), sacrificato o distrutto. (TE-18, TE-25, CG-02) |
 | «Quando colpisci…», «quando un attacco contro di te fallisce…», «ogni volta che infliggi Danni con un attacco…», «quando usi la Forte Volontà…», «se indovini una Profezia…» | Inneschi degli Equipaggiamenti in gioco: effetti automatici (R 4.12) al momento dell'evento. |
 | «Sacrifica un tuo Equipaggiamento [con PL N o più] / la tua Armatura / il tuo Elmo: …» | Costo della carta (R 13.2). (CA-03 con PL 2 o più) |
-| «Sacrifica questo Scudo / questa Targa: …» | Effetto automatico dell'Equipaggiamento in gioco (R 4.12), anche nel turno degli altri e mentre la pila si risolve; il costo è metterlo nei tuoi scarti. (CA-04, CA-10, TE-08) |
+| «Sacrifica questo Scudo / questa Targa / questo Cesto: …» | Effetto automatico dell'Equipaggiamento in gioco (R 4.12), anche nel turno degli altri e mentre la pila si risolve; il costo è metterlo nei tuoi scarti. (CA-04, CA-05, CA-10, TE-08) |
 | «Tira il D6 della perdita» / «perdi l'equipaggiamento» | D6 della perdita (R 11.1). |
 | «Non lo perdi mai per il D6 della perdita né per gli effetti degli avversari» | Il D6 della perdita lo salta, anche con 1; le carte degli avversari non lo toccano. Tu puoi sempre sacrificarlo o sostituirlo. (TE-14, CA-09) |
 | «Un avversario mette nei suoi scarti un Equipaggiamento a tua scelta dai suoi slot …» | Distruzione (R 11.3), non è il D6 della perdita. (TE-17) |
@@ -1023,7 +1023,8 @@ Da definire con Desy al telefono o su Discord (commento 10). Intanto il playtest
 | N22 | Tessere Stato finite (24 tessere, una per fonte): può servirne una in più in casi rari a 4 giocatori | Lo Stato non si prende; se succede al tavolo, annotarlo per il conteggio delle copie |
 
 **Decisi nella revisione delle carte del 10/11, da misurare col simulatore:**
-- CA-09 Elmo a prova di testata non torna più in mano quando lo sacrifichi (con CA-08 dava carte oltre V9 e un sacrificio gratis ogni turno): ora (+2) AR e non si perde.
+- CA-09 Elmo a prova di testata non torna più in mano quando lo sacrifichi (con CA-08 dava carte oltre V9 e un sacrificio gratis ogni turno): ora (+1) AR e non si perde.
+- Bilanciamento col simulatore (10/11, 4 giocatori: Assaltatore B 41 % → 28–29,5 %, Stregone 17,5–18 % → 24–25 %): CA-09 e CA-10 da (+2) a (+1) AR; CA-06 para gratis solo (-1) ai Danni, annulla tutto e rimanda 2 Danni solo col sacrificio; CA-05 Cesto (+1) ATT e «Sacrifica questo Cesto: (+3) ATT in questo turno»; CS-05 Rune per principianti dà anche (+1) AR.
 - CR-07 Tagliacarte impiccione ruba 1 carta una volta sola, quando lo equipaggi (prima: ogni turno in cui colpivi un avversario).
 - CA-03 Te lo tiro in testa!: i 3 Danni senza tiro chiedono il sacrificio di un Equipaggiamento con PL 2 o più.
 - Ripieghi senza pesca (V6): TM-01, TI-10, TI-22, CS-06, CS-07, CS-08, CO-01; CS-01 non ha più ripiego.
