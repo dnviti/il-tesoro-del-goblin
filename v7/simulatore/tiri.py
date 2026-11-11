@@ -134,9 +134,9 @@ def verifica_profezie(g, t):
                     o.usati.add(c.id)
                     giusta = indovina(pr['scelta'], [g.rng.randint(1, 6)] + list(t.facce[1:]))
                     break
-                if 'prof_paga' in c.p and o.pv > 3:      # CO-15: perdi 2 PV, indovinata solo per il premio piccolo
+                if 'prof_paga' in c.p and o.pv > c.p['prof_paga'] + 1:     # CO-15: perdi N PV, solo premio piccolo
                     o.usati.add(c.id)
-                    S.danneggia(g, o, 2)
+                    S.danneggia(g, o, c.p['prof_paga'])
                     giusta, grande = True, False
                     break
         if not giusta and o.classe == 'Oracolo' and o.potere:

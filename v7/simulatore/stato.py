@@ -48,6 +48,8 @@ class Eroe:
         v = self.base[k] + sum(c.p.get(k, 0) for c in self.equip()) + self.tmp[k]
         if k == 'ar' and 'Fede' in self.stati:
             v += 1
+        if k == 'ar' and self.pv <= 2:      # «Se hai 2 PV o meno: (+N) AR»
+            v += sum(c.p.get('ar_pv2', 0) for c in self.equip())
         if g.mappa and k in ('att', 'ar', 'mov'):
             p = K.CARTE[g.mappa].p
             v += p.get(k, 0)

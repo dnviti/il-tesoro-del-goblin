@@ -128,9 +128,9 @@
 <text x="20.00" y="153.80" font-family="Liberation Sans Narrow" font-size="3.40" fill="#000000" text-anchor="start" font-weight="bold" >File del kit A4 (fogli, tutti solo fronte)</text>
 <text x="24.00" y="159.80" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="start" >00_prova_stampa.pdf</text><text x="186.00" y="159.80" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="end" >1</text>
 <line x1="24.00" y1="161.10" x2="186.00" y2="161.10" stroke="#999999" stroke-width="0.1"/>
-<text x="24.00" y="165.00" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="start" >carte_comuni.pdf + carte_comuni_retri.pdf</text><text x="186.00" y="165.00" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="end" >7 + 7</text>
+<text x="24.00" y="165.00" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="start" >carte_comuni.pdf + carte_comuni_retri.pdf</text><text x="186.00" y="165.00" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="end" >9 + 9</text>
 <line x1="24.00" y1="166.30" x2="186.00" y2="166.30" stroke="#999999" stroke-width="0.1"/>
-<text x="24.00" y="170.20" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="start" >carte_classe.pdf + carte_classe_retri.pdf</text><text x="186.00" y="170.20" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="end" >7 + 6</text>
+<text x="24.00" y="170.20" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="start" >carte_classe.pdf + carte_classe_retri.pdf</text><text x="186.00" y="170.20" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="end" >12 + 12</text>
 <line x1="24.00" y1="171.50" x2="186.00" y2="171.50" stroke="#999999" stroke-width="0.1"/>
 <text x="24.00" y="175.40" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="start" >carte_specie.pdf</text><text x="186.00" y="175.40" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="end" >1</text>
 <line x1="24.00" y1="176.70" x2="186.00" y2="176.70" stroke="#999999" stroke-width="0.1"/>
@@ -150,7 +150,11 @@
 <line x1="24.00" y1="213.10" x2="186.00" y2="213.10" stroke="#999999" stroke-width="0.1"/>
 <text x="24.00" y="217.00" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="start" >pedine.pdf (6 Boss, Profezia)</text><text x="186.00" y="217.00" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="end" >2</text>
 <line x1="24.00" y1="218.30" x2="186.00" y2="218.30" stroke="#999999" stroke-width="0.1"/>
-<text x="24.00" y="222.20" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="start" >plancia.pdf (4 fogli da unire)</text><text x="186.00" y="222.20" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="end" >4</text>
+<text x="24.00" y="222.20" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="start" >tessere_mappa.pdf (162 esagoni)</text><text x="186.00" y="222.20" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="end" >3</text>
 <line x1="24.00" y1="223.50" x2="186.00" y2="223.50" stroke="#999999" stroke-width="0.1"/>
-<text x="186.00" y="228.90" font-family="Liberation Sans Narrow" font-size="3.40" fill="#000000" text-anchor="end" font-weight="bold" >Totale: 62 fogli A4</text>
+<text x="24.00" y="227.40" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="start" >sala_tesoro.pdf (Sala del Tesoro in 2 pezzi, 24 muri)</text><text x="186.00" y="227.40" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="end" >1</text>
+<line x1="24.00" y1="228.70" x2="186.00" y2="228.70" stroke="#999999" stroke-width="0.1"/>
+<text x="24.00" y="232.60" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="start" >preset_mappa.pdf (10 schemi, carta comune)</text><text x="186.00" y="232.60" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="end" >10</text>
+<line x1="24.00" y1="233.90" x2="186.00" y2="233.90" stroke="#999999" stroke-width="0.1"/>
+<text x="186.00" y="239.30" font-family="Liberation Sans Narrow" font-size="3.40" fill="#000000" text-anchor="end" font-weight="bold" >Totale: 87 fogli A4</text>
 </svg>

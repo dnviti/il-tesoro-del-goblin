@@ -178,8 +178,8 @@ def automatici(g, t):
         verso = mio != t.basso            # True = si ritira il dado più basso per alzare
         if mio and t.tipo == 'colpo' and p.ha('archibugio') and 'CA-15' not in p.usati \
                 and t.soglia - t.valore() <= 3:
-            p.usati.add('CA-15')                # CA-15: (-2) AR in questo turno e (+3) al tiro per colpire
-            p.tmp['ar'] -= 2
+            p.usati.add('CA-15')                # CA-15: (-N) AR in questo turno e (+3) al tiro per colpire
+            p.tmp['ar'] -= next(c.p['archibugio'] for c in p.equip() if 'archibugio' in c.p)
             t.mod += 3
         elif mio and p.fv and t.tipo in ('colpo', 'indizio'):
             p.fv = False

@@ -1,4 +1,4 @@
-Il Tesoro del Goblin - kit di playtest v7 (10/11/2026) - ordine di stampa A4
+Il Tesoro del Goblin - kit di playtest v7 (11/11/2026) - ordine di stampa A4
 Tutto SOLO FRONTE, scala 100 %, carta A4, 1 pagina = 1 foglio. Percorsi relativi a v7/stampa/playtest_v7/.
 Carta: "comune" = 80 g; "cartoncino" = 160-200 g.
 Regole: v7/regolamento/Spec_v7.md. Il regolamento per i giocatori (v7/regolamento/Regolamento_playtest_v7.docx)
@@ -8,22 +8,27 @@ foglio k (dorsi non specchiati). Fronti e dorsi si ritagliano separati con la di
 contro dorso.
 
  #  File                                 Pagine  Carta
- 1  00_prova_stampa.pdf                       1  comune (controlla scala e margini prima di continuare)
- 2  carte_comuni.pdf                          7  cartoncino
- 3  carte_comuni_retri.pdf                    7  cartoncino
- 4  carte_classe.pdf                          7  cartoncino
- 5  carte_classe_retri.pdf                    6  cartoncino (il foglio 7 delle carte di classe ha solo Carte Classe: niente dorsi)
- 6  carte_specie.pdf                          1  cartoncino
- 7  carte_mostro.pdf                          6  cartoncino (48 Mostri: mazzetto 1 26, mazzetto 2 16, boss 6)
- 8  carte_mostro_retri.pdf                    6  cartoncino
- 9  carte_imprevisto.pdf                      2  cartoncino
-10  carte_imprevisto_retri.pdf                2  cartoncino
-11  carte_aiuto_divisori.pdf                  2  cartoncino
-12  plance_eroe.pdf                           4  cartoncino (A4 orizzontale)
-13  rotelle_eroe.pdf                          2  cartoncino
-14  segnalini.pdf                             2  cartoncino (segnalini; 24 tessere Stato e dischi del tavolo)
-15  tessere_esplorazione.pdf                  1  cartoncino
-16  pedine.pdf                                2  cartoncino (eroi, MIMI, Geronimo, 6 Boss; Rotella della Profezia sul foglio 2)
-17  plancia.pdf                               4  comune (poi incollata su cartoncino 1-2 mm)
+ 1  00_prova_stampa.pdf                      1  comune (controlla scala e margini prima di continuare)
+ 2  carte_comuni.pdf                         9  cartoncino
+ 3  carte_comuni_retri.pdf                   9  cartoncino
+ 4  carte_classe.pdf                        12  cartoncino
+ 5  carte_classe_retri.pdf                  12  cartoncino
+ 6  carte_specie.pdf                         1  cartoncino
+ 7  carte_mostro.pdf                         6  cartoncino (48 Mostri: mazzetto 1 26, mazzetto 2 16, boss 6)
+ 8  carte_mostro_retri.pdf                   6  cartoncino
+ 9  carte_imprevisto.pdf                     2  cartoncino
+10  carte_imprevisto_retri.pdf               2  cartoncino
+11  carte_aiuto_divisori.pdf                 2  cartoncino
+12  plance_eroe.pdf                          4  cartoncino (A4 orizzontale)
+13  rotelle_eroe.pdf                         2  cartoncino
+14  segnalini.pdf                            2  cartoncino (segnalini; 31 tessere Stato e dischi del tavolo)
+15  tessere_esplorazione.pdf                 1  cartoncino
+16  pedine.pdf                               2  cartoncino (eroi, MIMI, Geronimo, 6 Boss; Rotella della Profezia sul foglio 2)
+17  tessere_mappa.pdf                        3  cartoncino (162 tessere esagonali della mappa, 54 per foglio)
+18  sala_tesoro.pdf                          1  cartoncino (Sala del Tesoro in 2 pezzi da unire; 24 muri)
+19  preset_mappa.pdf                        10  comune (10 schemi: plancia base «Strettoie» e TM-01...TM-09)
 
-Fogli da stampare: 62, tutte le pagine dei PDF (comune 5 = prova 1 + plancia 4; cartoncino 57).
+Fogli da stampare: 87, tutte le pagine dei PDF (comune 11 = prova 1 + 10 schemi dei preset; cartoncino 76).
+La mappa si compone con le tessere esagonali (11/11): ogni foglio di preset_mappa.pdf e' lo schema di una plancia (la base
+e una per carta Mappa, R 8.12) con le tessere che servono e i passi di montaggio; in playtest le tessere si compongono
+anche liberamente. Le plance intere non si stampano piu' (si rifanno con build.sh ... --plance, vedi ../LEGGIMI.md).

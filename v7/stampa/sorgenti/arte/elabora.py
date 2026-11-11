@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Rifinitura delle illustrazioni v7 con PhotoCraft: grezze/<id>.png -> pcraft/<id>.pcraft + png/<id>.png.
+"""Rifinitura delle illustrazioni v7 con PhotoCraft: grezze/<id>.webp (o .png) -> pcraft/<id>.pcraft + png/<id>.png.
 
 Per ogni illustrazione (tutto con `photocraft-cli`, nessun pixel ritoccato a mano):
   1. `convert` della grezza in un progetto .pcraft (livello «Immagine grezza»);
@@ -12,19 +12,21 @@ I due file sono scritti in una cartella temporanea e spostati solo a lavoro fini
 Uso (da qualsiasi cartella):
   python3 elabora.py <id> --tipo <tipo>      un'illustrazione; --tipo si puo' omettere se il prefisso dell'id lo dice
   python3 elabora.py <id> [<id> ...]          piu' illustrazioni
-  python3 elabora.py --tutti [--forza]        ogni grezze/*.png il cui tipo e' noto; salta quelle gia' fatte (pcraft e png
+  python3 elabora.py --tutti [--forza]        ogni grezze/*.webp (o .png) il cui tipo e' noto; salta quelle gia' fatte (pcraft e png
                                               presenti) salvo --forza; quelle senza tipo sono elencate e saltate
   python3 elabora.py --elenco-tipi            tipi e misure da formati.csv
   python3 elabora.py --pulisci-png            toglie l'ICC dai png/*.png gia' esportati (senza rifare i progetti)
 
-Ritaglio verticale/orizzontale: di norma centrato. Per un id solo: --alto / --basso / --sinistra / --destra (o
---posizione-x/--posizione-y con un numero 0..1; 0 = bordo alto/sinistro, 1 = basso/destro). Per tutti gli id:
-ritagli.csv (colonne `id,tipo,orizzontale,verticale`; i valori sono sinistra|centro|destra, alto|centro|basso o un numero
-0..1; `tipo` forza il tipo di un id senza prefisso noto; colonne vuote = centrato). Priorita': riga di comando, ritagli.csv, centro.
+Ritaglio verticale/orizzontale: di norma centrato e il piu' grande possibile. Per un id solo: --alto / --basso /
+--sinistra / --destra (o --posizione-x/--posizione-y con un numero 0..1; 0 = bordo alto/sinistro, 1 = basso/destro) e
+--zoom Z (>= 1: il ritaglio e' quello massimo diviso Z, per togliere per esempio la fascia pergamena vuota in fondo alle
+grezze fatte per la fascetta della battuta). Per tutti gli id: ritagli.csv (colonne `id,tipo,orizzontale,verticale,zoom`;
+i valori sono sinistra|centro|destra, alto|centro|basso o un numero 0..1, zoom un numero >= 1; `tipo` forza il tipo di
+un id senza prefisso noto; colonne vuote = centrato, zoom 1). Priorita': riga di comando, ritagli.csv, centro.
 
-Tipo dall'id (prefisso): TM TI TE CA CG CO CR CS TC -> carta; TS -> specie; NE -> mostro; IM -> imprevisto;
-PD -> pedina_boss o pedina_eroe secondo dati/pedine.csv (tipo «boss…»); PB -> plancia_eroe; PG -> plancia; PT -> terreno;
-PS -> sala.
+Tipo dall'id (prefisso): TM TI TE CA CG CO CR CS TC -> carta; TS -> specie; NE -> boss (mazzetto 3 in
+dati/carte_mostro.csv) o mostro; IM -> imprevisto; PD -> pedina_boss o pedina_eroe secondo dati/pedine.csv (tipo
+«boss…»); PB -> plancia_eroe; PG -> plancia; PT -> terreno; PS -> sala.
 Misure: formati.csv. Richiede photocraft-cli (0.22).
 """
 import argparse
@@ -41,7 +43,7 @@ import time
 QUI = pathlib.Path(__file__).resolve().parent
 GREZZE, PCRAFT, PNG = QUI / "grezze", QUI / "pcraft", QUI / "png"
 FORMATI, RITAGLI = QUI / "formati.csv", QUI / "ritagli.csv"
-PEDINE = QUI.parent / "dati" / "pedine.csv"
+PEDINE, MOSTRI = QUI.parent / "dati" / "pedine.csv", QUI.parent / "dati" / "carte_mostro.csv"
 PPI = 300
 
 PREFISSI = {"TM": "carta", "TI": "carta", "TE": "carta", "CA": "carta", "CG": "carta", "CO": "carta", "CR": "carta",
@@ -92,6 +94,10 @@ def tipo_da_id(i):
             if r["id"] == i:
                 return "pedina_boss" if r["tipo"].startswith("boss") else "pedina_eroe"
         return None
+    if pref == "NE":
+        for r in leggi(MOSTRI):
+            if r["id"] == i:
+                return "boss" if r["mazzetto"].startswith("3") else "mostro"
     return PREFISSI.get(pref)
 
 
@@ -121,11 +127,11 @@ def photocraft(*args):
     return p.stdout
 
 
-def elabora(i, fmt, fx, fy):
+def elabora(i, fmt, fx, fy, zoom=1.0):
     """Una illustrazione. Ritorna (ingrandimento, dimensioni pcraft, dimensioni png)."""
-    grezza = GREZZE / f"{i}.png"
-    if not grezza.is_file():
-        sys.exit(f"{i}: manca {grezza}")
+    grezza = next((p for p in (GREZZE / f"{i}.webp", GREZZE / f"{i}.png") if p.is_file()), None)
+    if grezza is None:
+        sys.exit(f"{i}: manca grezze/{i}.webp (o .png)")
     W, H = int(fmt["larghezza_px"]), int(fmt["altezza_px"])
     with tempfile.TemporaryDirectory(prefix="goblin_arte_") as tmp:
         tmp = pathlib.Path(tmp)
@@ -133,11 +139,12 @@ def elabora(i, fmt, fx, fy):
         photocraft("convert", grezza, pc)
         info = json.loads(photocraft("info", pc))
         sw, sh = info["width"], info["height"]
-        # ritaglio al rapporto del riquadro, il piu' grande possibile, posizionato da fx/fy (0..1)
+        # ritaglio al rapporto del riquadro, il piu' grande possibile diviso zoom, posizionato da fx/fy (0..1)
         if sw * H >= sh * W:
-            ch, cw = sh, round(sh * W / H)
+            ch, cw = sh, sh * W / H
         else:
-            cw, ch = sw, round(sw * H / W)
+            cw, ch = sw, sw * H / W
+        cw, ch = round(cw / zoom), round(ch / zoom)
         x, y = round((sw - cw) * fx), round((sh - ch) * fy)
         ingrandimento = W / cw
         photocraft(
@@ -159,10 +166,10 @@ def elabora(i, fmt, fx, fy):
 
 
 def main():
-    ap = argparse.ArgumentParser(description="grezze/<id>.png -> pcraft/<id>.pcraft + png/<id>.png (PhotoCraft)")
-    ap.add_argument("id", nargs="*", help="id delle illustrazioni (nome del file in grezze/ senza .png)")
+    ap = argparse.ArgumentParser(description="grezze/<id>.webp -> pcraft/<id>.pcraft + png/<id>.png (PhotoCraft)")
+    ap.add_argument("id", nargs="*", help="id delle illustrazioni (nome del file in grezze/ senza estensione)")
     ap.add_argument("--tipo", help="tipo di formati.csv (vale per tutti gli id dati)")
-    ap.add_argument("--tutti", action="store_true", help="ogni grezze/*.png con tipo noto, salta le gia' fatte")
+    ap.add_argument("--tutti", action="store_true", help="ogni grezza (.webp/.png) con tipo noto, salta le gia' fatte")
     ap.add_argument("--forza", action="store_true", help="con --tutti: rifa' anche le gia' fatte")
     ap.add_argument("--elenco-tipi", action="store_true", help="stampa i tipi e le misure")
     ap.add_argument("--pulisci-png", action="store_true", help="toglie il profilo ICC dai png/*.png gia' esportati")
@@ -172,6 +179,7 @@ def main():
     ap.add_argument("--destra", action="store_true")
     ap.add_argument("--posizione-x", help="0..1 (0 sinistra, 1 destra)")
     ap.add_argument("--posizione-y", help="0..1 (0 alto, 1 basso)")
+    ap.add_argument("--zoom", help=">= 1: ritaglio massimo diviso zoom")
     a = ap.parse_args()
 
     fm = formati()
@@ -193,7 +201,7 @@ def main():
     cli_y = posizione(a.posizione_y, Y_PAROLE) if a.posizione_y else (0.0 if a.alto else 1.0 if a.basso else None)
 
     ritagli = {r["id"]: r for r in leggi(RITAGLI)} if RITAGLI.is_file() else {}
-    ids = sorted(p.stem for p in GREZZE.glob("*.png")) if a.tutti else a.id
+    ids = sorted({p.stem for p in GREZZE.iterdir() if p.suffix in (".webp", ".png")}) if a.tutti else a.id
     fatte = saltate = 0
     senza_tipo = []
     for i in ids:
@@ -209,8 +217,11 @@ def main():
             continue
         fx = cli_x if cli_x is not None else posizione(r.get("orizzontale"), X_PAROLE)
         fy = cli_y if cli_y is not None else posizione(r.get("verticale"), Y_PAROLE)
+        zoom = float((a.zoom or r.get("zoom") or "1").replace(",", "."))
+        if zoom < 1:
+            sys.exit(f"{i}: zoom {zoom} < 1")
         t0 = time.monotonic()
-        ingr, sp, sg = elabora(i, fm[tipo], 0.5 if fx is None else fx, 0.5 if fy is None else fy)
+        ingr, sp, sg = elabora(i, fm[tipo], 0.5 if fx is None else fx, 0.5 if fy is None else fy, zoom)
         avviso = f"  ATTENZIONE: ingrandita x{ingr:.2f}" if ingr > 1.0 else ""
         print(f"{i} [{tipo}] {fm[tipo]['larghezza_px']}x{fm[tipo]['altezza_px']} px  pcraft {sp / 1024:.0f} KB  "
               f"png {sg / 1024:.0f} KB  {time.monotonic() - t0:.2f} s{avviso}")

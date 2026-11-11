@@ -1,18 +1,21 @@
 #!/bin/bash
 # Rigenera i PDF dei componenti non-carta e la pagina di prova (tutti solo fronte): gen.py (SVG in mm) -> VectorCraft (.vectorcraft + PDF) -> PdfCraft (combine).
-# uso: build.sh <cartella_sorgenti> <cartella_pdf> [A4|A3] [--dati CARTELLA]   (A4: build.sh v7/stampa/sorgenti v7/stampa/playtest_v7; A3: build.sh v7/stampa/sorgenti/A3 v7/stampa/playtest_v7_A3 A3)
-# Le opzioni dopo il formato passano a gen.py (--dati: CSV da un'altra cartella, per provare dati nuovi).
+# uso: build.sh <cartella_sorgenti> <cartella_pdf> [A4|A3] [--dati CARTELLA] [--plance | --plancia F.svg]   (A4: build.sh v7/stampa/sorgenti v7/stampa/playtest_v7; A3: build.sh v7/stampa/sorgenti/A3 v7/stampa/playtest_v7_A3 A3)
+# Le opzioni dopo il formato passano a gen.py (--dati: CSV da un'altra cartella, per provare dati nuovi; --plance/--plancia:
+# anche le plance intere, fuori dal kit dall'11/11 perché la mappa si compone con le tessere).
 set -e
 HERE="$(cd "$(dirname "$0")" && pwd)"
 SRC="$1"; PDF="$2"; FORMATO="${3:-A4}"; TMP="$(mktemp -d)"; shift $(( $# < 3 ? $# : 3 ))
 mkdir -p "$PDF"
 if [ "$FORMATO" = A3 ]; then
   python3 "$HERE/gen.py" "$SRC" --formato A3 "$@" >/dev/null
-  COMPONENTI="plancia plance_eroe rotelle_eroe tessere_esplorazione componenti_misti prova_stampa"
+  COMPONENTI="tessere_mappa preset_mappa plance_eroe rotelle_eroe tessere_esplorazione componenti_misti prova_stampa"
 else
   python3 "$HERE/gen.py" "$SRC" "$@" >/dev/null
-  COMPONENTI="plancia plance_eroe rotelle_eroe tessere_esplorazione segnalini pedine prova_stampa"
+  COMPONENTI="tessere_mappa sala_tesoro preset_mappa plance_eroe rotelle_eroe tessere_esplorazione segnalini pedine prova_stampa"
 fi
+# plance intere solo su richiesta: gen.py ha scritto una cartella plancia_<nome> per ognuna -> plancia_<nome>.pdf
+case " $* " in *" --plance "*|*" --plancia "*) COMPONENTI="$(cd "$SRC" && ls -d plancia_*/ | tr -d /) $COMPONENTI" ;; esac
 for c in $COMPONENTI; do
   d="$SRC/$c/"
   out="$c"; [ "$c" = prova_stampa ] && out="00_prova_stampa"

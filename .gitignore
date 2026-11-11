@@ -13,6 +13,9 @@ tesoro_del_goblin.html
 check.js
 hsim*.js
 runs/
+# v7: progetti VectorCraft delle plance del kit (6-18 MB a pagina con le tessere illustrate), rigenerati da build.sh
+v7/stampa/sorgenti/plancia_*/*.vectorcraft
+v7/stampa/sorgenti/A3/plancia_*/*.vectorcraft
 *.tmp.pdf
 v1_21-10/video/sorgenti/index.html
 v1_21-10/video/sorgenti/tut.html
@@ -33,3 +36,10 @@ clips/
 .DS_Store
 Thumbs.db
 .~*.lock
+# componenti con l'arte incorporata: li rigenera build.sh
+v7/stampa/sorgenti/tessere_mappa/*.vectorcraft
+v7/stampa/sorgenti/sala_tesoro/*.vectorcraft
+v7/stampa/sorgenti/A3/tessere_mappa/*.vectorcraft
+v7/stampa/sorgenti/A3/sala_tesoro/*.vectorcraft
+# v7: progetti PhotoCraft delle illustrazioni, rigenerabili con arte/elabora.py --tutti --forza
+v7/stampa/sorgenti/arte/pcraft/

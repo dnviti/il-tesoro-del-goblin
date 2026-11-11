@@ -5,7 +5,7 @@ Bozza del 10/11/2026. Destinazione nel repo: `v7/regolamento/Spec_v7.md`.
 È il contratto interno per quattro lavori: chi scrive le carte (fase 3), il simulatore v7 (fase 4, `v7/simulatore/`), i generatori del kit (fase 5, `v7/stampa/`) e chi scrive il regolamento v7 per i giocatori (fase 6). Non è il regolamento: il testo per i giocatori sarà più corto e più semplice (D17).
 
 Fonti, in ordine di precedenza:
-1. le decisioni D1–D22 del 9-10/11 (§1);
+1. le decisioni D1–D23 del 9-11/11 (§1);
 2. il piano `v7/idee/v7_piano_TEMP.docx` aggiornato il 10/11, con i commenti di Desy e le risposte di Daniele;
 3. per tutto quello che la v7 non cambia, il regolamento playtest v6 (`v6_08-11/regolamento/Regolamento_playtest_v6.pdf`) e i CSV v6 (`v6_08-11/stampa/sorgenti/dati/`);
 4. le carte di Desy (`v7/desy/Carte_nuove_2026-11-05.xlsx`), solo per sapere quali meccaniche esistono; per le carte di classe nuove anche `v7/desy/Idee desi carte classi.ods` (D22).
@@ -19,7 +19,7 @@ Fonti, in ordine di precedenza:
 - **N-n**: punto aperto nato scrivendo questa spec. I punti aperti, con il default scelto, sono nel §19, l'ultima sezione.
 - I numeri tra parentesi sulle carte sono valori: «(+1) AR» vuol dire 1 in più di AR (v6).
 
-## 1. Decisioni D1–D22 e dove stanno
+## 1. Decisioni D1–D23 e dove stanno
 
 | # | Decisione (testo) | Regole |
 |---|---|---|
@@ -45,6 +45,7 @@ Fonti, in ordine di precedenza:
 | D20 | Mostri raddoppiati: ogni mostro ha un effetto unico, bilanciato sul suo livello. | §7, §15 |
 | D21 | Tono goliardico alla Munchkin nei nomi delle carte e nelle battute (colonna `battuta`); il testo delle regole resta fatto di formule esatte. | §14.1 |
 | D22 | Le carte di classe passano da 10 a 20 per classe: 10 per direzione. Id nuovi: 11–15 direzione A, 16–20 direzione B; gli id esistenti non cambiano. Le carte nuove vengono dalle idee di Desy (`v7/desy/Idee desi carte classi.ods`: 34 Equipaggiamenti e 43 Incanti, quasi tutti di classe), riscritte con il tono di D21. L'Oracolo non ha carte di Desy: ne riceve 10 tutte nuove. Le carte di Desy «tutti» (senza classe) vanno nel mazzo comune. Il mazzetto di classe è di 10 carte su 20 [PLAYTEST]: 3 in mano e 7 nella pila di classe. Gli Equipaggiamenti di Desy sono diversificati: niente riga fissa «+1 AR / +1 AT finché resta equipaggiato», l'effetto nasce dal secondo effetto (quello di colore) della carta di Desy. Il numero di carte non ha un tetto: si aggiungono quante servono. | R 3.6, R 3.7, R 13.1, §14 |
+| D23 | [PLAYTEST] La mappa si compone con tile esagonali generiche, stampate separatamente, per costruirla dal vivo durante i playtest e provare molti casi senza stampare la plancia intera (richiesta di Daniele, 11/11). La tile ha le misure dell'esagono di prima (25,2 mm da lato a lato, punta in alto) e la sua linea di taglio; i tipi sono Strada, «?», Guado, Ponte, Partenza 1–6, Cripta 1–4, Bosco, Case, Rocce, Acqua. I muri sono listelli a parte, uno per lato (compresi i 10 che chiudono le Cripte). La Sala del Tesoro è un pezzo a parte. Le 10 configurazioni del §17 (base «Strettoie» e una per Mappa TM-01…09) sono preset di costruzione, ognuno con il suo foglio di istruzioni. In playtest la mappa si può anche comporre liberamente, per provare casi diversi: i controlli che i preset rispettano restano come consiglio, non come obbligo. Se comporre la mappa in partita diventi una regola ufficiale è un punto aperto (§19, N25). | R 2.5, R 8.1, R 8.2, R 8.12, §17 |
 
 ### 1.1 Cosa cambia rispetto alla v6, in breve
 
@@ -54,7 +55,7 @@ Fonti, in ordine di precedenza:
 - Muori → torni sulla tua Partenza iniziale e peschi 1 carta comune (D7).
 - 5 classi con 20 carte ciascuna (10 + 10 direzioni, D22); nuove TC-02, TC-04, TC-05 (D3, D12, D13).
 - Carte di classe nuove da Desy, con tono goliardico e senza la riga fissa «+1 AR / +1 AT finché resta equipaggiato»; Oracolo con 10 carte nuove (D22).
-- Nuova plancia: strada, ostacoli e muri; «?» consumabili; niente sacchetto [PLAYTEST] (D6, D16).
+- Nuova mappa, composta con tile esagonali stampate a parte: strada, ostacoli e muri; «?» consumabili; niente sacchetto [PLAYTEST] (D6, D16, D23).
 - Ritiri con penalità (D1). Ricompense senza PE (D11). Plance eroe neutre (D14).
 - Mostri più facili: AR −25 %, da 8–11 a 6–9 (D19); Indizio con D6 ≤ LV + 1, garantito con LV 5 (D18).
 - Mostri raddoppiati: 48 carte (26 nel mazzetto 1, 16 nel mazzetto 2, 6 boss), ognuna con un'abilità che nessun altro mostro ha (D20).
@@ -81,7 +82,10 @@ Fonti, in ordine di precedenza:
 
 | Componente | v7 | Note |
 |---|---|---|
-| Plancia «Le Terre di Hande» | 1 (4 fogli A4 o 2 A3) | Bozza v7 (§8, §17). Sala del Tesoro come nella v6 |
+| Tile esagonali | set generico, solo fronte, 25,2 mm da lato a lato con punta in alto; ognuna ha la sua linea di taglio | D23. Tipi: Strada, «?» (strada con il cerchio dove va la Tessera Esplorazione), Guado, Ponte, Partenza 1–6, Cripta 1–4, Bosco, Case, Rocce, Acqua. Per ogni tipo, quante ne chiede il preset che ne usa di più (§17) più circa il 25 % di scorta per la composizione libera, arrotondate per riempire i fogli di stampa |
+| Muri | listelli da ritagliare, lungo un lato dell'esagono (circa 14,5 mm) e larghi circa 3 mm | D23. I 16 del preset (10 che chiudono le Cripte e 6 mura libere) più 8 di scorta: 24 |
+| Sala del Tesoro | 1 pezzo a parte | D23. Rotelle del custode e dello scontro, cerchi di custode, MIMI e boss, 2 caselle «Spostamenti del tesoro» (v6): prima era la fascia in alto della plancia |
+| Fogli dei preset | 10 (A4 verticale; vanno bene anche in A3) | D23. Base «Strettoie» e TM-01…09, al posto delle 10 plance intere: diagramma 10 × 10 con coordinate, tile necessarie per tipo, passi di costruzione (§17) |
 | Plance eroe | 4 neutre | D14 |
 | Rotelle eroe | 24 dischi (6 per eroe) | PL al posto di PE |
 | Rotelle del tavolo | 2 | Scontro e custode (v6) |
@@ -105,7 +109,7 @@ Fonti, in ordine di precedenza:
 
 ## 3. Preparazione
 
-**R 3.1** Metti la plancia al centro (§8). In alto c'è la Sala del Tesoro, con la Rotella del custode, la Rotella dello scontro e le 2 caselle «Spostamenti del tesoro».
+**R 3.1** Monta la mappa al centro con le tile (§8): segui il foglio di un preset (§17), di solito la base «Strettoie», oppure componila liberamente (R 8.1). Accanto metti il pezzo della Sala del Tesoro, con la Rotella del custode, la Rotella dello scontro e le 2 caselle «Spostamenti del tesoro».
 
 **R 3.2 Mostri e boss (v6; 6 boss dal 10/11, D20).** Mescola i mazzetti Mostro 1 e 2. Pesca a caso 1 dei 6 boss: è il custode di MIMI. Gli altri 5, mescolati, formano il mazzetto 3. Metti custode e MIMI nella Sala del Tesoro e gira la Rotella del custode sui PV del custode.
 
@@ -121,7 +125,7 @@ Fonti, in ordine di precedenza:
 
 **R 3.8 Equipaggiamento iniziale (v6) [PLAYTEST] (N8).** Tutti insieme potete equipaggiare subito 1 Equipaggiamento dalla mano. Non conta per il limite di carte. Gira le rotelle, PL compreso.
 
-**R 3.9 Partenza (v6).** Tira il D6 e metti la pedina sulla Partenza con quel numero. Se è occupata o accanto a un altro eroe, ritira. Quella è la tua **Partenza iniziale** per tutta la partita (D7). Nella bozza le Partenze sono: 1 = C1, 2 = H1, 3 = J5, 4 = H10, 5 = C10, 6 = A6.
+**R 3.9 Partenza (v6).** Tira il D6 e metti la pedina sulla Partenza con quel numero. Se è occupata o accanto a un altro eroe, ritira. Quella è la tua **Partenza iniziale** per tutta la partita (D7). Nei preset le Partenze sono: 1 = C1, 2 = H1, 3 = J5, 4 = H10, 5 = C10, 6 = A6.
 
 **R 3.10 Primo giocatore (v6).** Chi ha visto per ultimo un goblin prende la pedina di Geronimo e gioca per primo. Poi si va in senso orario (tocca a sinistra).
 
@@ -322,17 +326,18 @@ Il danno degli eroi resta comunque quello della v6. Nel Duello restano i dadi pe
 
 ## 8. Mappa, movimento ed esplorazione (D6, D16)
 
-**R 8.1 Plance del playtest (D16, 10/11).**
-- La plancia base è «Strettoie» (§17), scelta il 10/11 tra tre proposte con gli ostacoli spostati dai bordi verso l'interno. I dati stanno in `v7/simulatore/mappa.py`; la bozza disegnata è `v7/idee/v7_bozza_mappa.svg` (`python3 v7/idee/genera_bozza_mappa.py`).
-- Ogni Mappa ha la sua plancia (R 8.12): 9 plance in `v7/simulatore/plance/`, con la stessa griglia e le stesse parti fisse.
-- Nella bozza le linee di strada restano come semplice aiuto visivo. Il regolamento non dipende mai dalle linee: dove si passa lo dicono il tipo di esagono e i muri. Desy chiede di toglierle (10/11): le plance si leggono anche senza.
+**R 8.1 Mappa a tile del playtest (D16, D23).**
+- La mappa si compone con le tile esagonali generiche stampate a parte (R 2.5), sulla griglia di R 8.2. Le tile non appartengono a un tema: lo stesso set serve a tutte le mappe.
+- I **preset** sono le 10 configurazioni del §17: la base «Strettoie» (scelta il 10/11 tra tre proposte con gli ostacoli spostati dai bordi verso l'interno) e una per ogni Mappa TM-01…09 (R 8.12). Ognuno ha il suo foglio di istruzioni. I dati stanno in `v7/simulatore/mappa.py` e `v7/simulatore/plance/`; il disegno si fa con `python3 v7/idee/genera_bozza_mappa.py`.
+- **Composizione libera [PLAYTEST]:** in playtest si possono anche mettere le tile come si vuole, per provare casi che i preset non coprono. Il consiglio è di rispettare i controlli dei preset (§17): strada collegata, ogni esagono con almeno 2 uscite, nessun esagono che da solo isola una zona, 6 Partenze, 4 Cripte con 3 ingressi, 20 «?», distanze Partenza→Cripta simili tra loro. Non sono obblighi. Se comporre la mappa diventi regola ufficiale è aperto (§19, N25).
+- Il regolamento non dipende mai da linee di strada disegnate: dove si passa lo dicono il tipo di esagono e i muri (Desy le ha chieste tolte, 10/11).
 
 **R 8.2 Geometria.**
-- 10 × 10 esagoni con la punta in alto: colonne A–J, righe 1–10. Esagono di 25,2 mm, plancia di 355,6 × 447,7 mm. Ogni plancia, girata di 180°, è identica.
+- 10 × 10 esagoni con la punta in alto: colonne A–J, righe 1–10; le righe dispari sono spostate a sinistra di mezzo esagono. Esagono di 25,2 mm da lato a lato (circa 29,1 mm da punta a punta): ci stanno le Tessere Esplorazione da Ø 24 mm e le pedine. Montata, la mappa è larga circa 265 mm e alta circa 226 mm. Ogni preset, girato di 180°, è identico.
 - 64 esagoni di strada: 6 Partenze, 4 Cripte, 20 «?», 4 caselle di guado o ponte e 30 di strada semplice.
-- 36 ostacoli: 12 bosco, 6 case, 10 rocce, 8 acqua. Le plance delle Mappe cambiano bosco, case e rocce, sempre 28 in tutto (R 8.12).
-- 16 muri sui lati tra due esagoni: 10 chiudono le Cripte, 6 sono mura libere. Ogni Cripta ha 3 ingressi.
-- Il fiume divide la plancia in metà nord e metà sud. Si attraversa in 3 punti: Guado ovest D5, Ponte del lago F5–E6, Guado est G6.
+- 36 ostacoli: 12 bosco, 6 case, 10 rocce, 8 acqua. I preset delle Mappe cambiano bosco, case e rocce, sempre 28 in tutto (R 8.12).
+- 16 muri sui lati tra due esagoni, listelli a parte: 10 chiudono le Cripte, 6 sono mura libere. Ogni Cripta ha 3 ingressi.
+- Il fiume divide la mappa in metà nord e metà sud. Si attraversa in 3 punti: Guado ovest D5, Ponte del lago F5–E6, Guado est G6.
 - Elenco completo nel §17.
 
 **R 8.3 Tipi di esagono.** La strada (guado e ponte compresi) è percorribile. Bosco, case, rocce e acqua sono impraticabili: non ci entri e non li attraversi. Un muro chiude il lato su cui sta. Non c'è un costo diverso per terreno.
@@ -383,13 +388,14 @@ La mano massima vale per Locanda, Fonte e Fabbro (R 12.4). Nessun testo v7 parla
 - Una tessera blu, dopo l'Imprevisto, va tra le usate. Una tessera rossa va tra le usate se l'eroe vince. Se l'eroe fugge o perde, resta scoperta sulla «?» e sbarra la strada (R 8.5).
 - Rifornimento, alla Fine di ogni turno: se sulla plancia restano 6 tessere coperte o meno [PLAYTEST: soglia 6], metti una tessera coperta su ogni «?» vuota. Le tessere scoperte non contano come vuote. Prendi prima dalla riserva, poi dalle usate mescolate a faccia in giù. Se finiscono, le «?» restanti restano vuote.
 
-**R 8.12 Plance delle Mappe [PLAYTEST] (10/11).**
+**R 8.12 Preset delle Mappe [PLAYTEST] (10/11, D23).**
 - Il Cuore della v6 non c'è più (R 2.6).
-- Ogni Mappa ha la sua plancia (§17). Quando una Mappa si risolve, prima fai il suo testo (R 10.11), poi la sua plancia prende il posto di quella in uso. Quando una Mappa lascia il gioco e nessun'altra la sostituisce (TI-22), torna la plancia base.
-- A ogni cambio di plancia ogni eroe, anche chi ha giocato la carta, torna sulla sua Partenza iniziale (R 3.9). Non è una sconfitta: niente D6 della perdita; PV, mano, Indizi, Stati ed Equipaggiamenti restano.
-- Se la plancia cambia durante uno scontro o un Duello, questo finisce subito senza vincitore e senza ricompense: la tessera resta scoperta, la carta Mostro va in fondo al suo mazzetto e il custode tiene le ferite.
+- Ogni Mappa ha il suo preset (§17). Quando una Mappa si risolve, prima fai il suo testo (R 10.11), poi la mappa diventa quella del suo preset. Quando una Mappa lascia il gioco e nessun'altra la sostituisce (TI-22), torna il preset base.
+- In playtest il cambio si fa ricostruendo la mappa con il preset della Mappa. Per fare presto si sostituiscono solo le tile che differiscono da quelle in uso: i preset condividono Partenze, Cripte, fiume e «?», quindi quelle tile non si toccano; si cambiano i 28 ostacoli di terra e le 6 mura libere. Si alzano prima le pedine degli eroi. È un punto aperto se il cambio a metà partita sia praticabile al tavolo (§19, N26).
+- A ogni cambio di mappa ogni eroe, anche chi ha giocato la carta, torna sulla sua Partenza iniziale (R 3.9). Non è una sconfitta: niente D6 della perdita; PV, mano, Indizi, Stati ed Equipaggiamenti restano.
+- Se la mappa cambia durante uno scontro o un Duello, questo finisce subito senza vincitore e senza ricompense: la tessera resta scoperta, la carta Mostro va in fondo al suo mazzetto e il custode tiene le ferite.
 - Restano dove sono le tessere sulle «?», coperte o scoperte, le Cripte e MIMI con il custode (salvo lo spostamento del tesoro di R 10.11).
-- Sono uguali su tutte le plance: griglia, Partenze, Cripte con i 10 muri che le chiudono e i 12 esagoni d'ingresso, il fiume (8 acqua, Guado ovest D5, Ponte del lago F5–E6, Guado est G6) e le 20 «?». Cambiano i 28 ostacoli di terra (bosco, case e rocce secondo il tema della Mappa) e le 6 mura libere.
+- Sono uguali su tutti i preset: griglia, Partenze, Cripte con i 10 muri che le chiudono e i 12 esagoni d'ingresso, il fiume (8 acqua, Guado ovest D5, Ponte del lago F5–E6, Guado est G6) e le 20 «?». Cambiano i 28 ostacoli di terra (bosco, case e rocce secondo il tema della Mappa) e le 6 mura libere.
 
 ## 9. Stati e tessere
 
@@ -692,7 +698,7 @@ Ogni effetto delle carte usa una di queste formule (V16). Tra parentesi, per le 
 | Formula sulla carta | Significato |
 |---|---|
 | «(+N) Danni» / «(+N) Danni ai tuoi attacchi» / «(+N) Danni al tuo prossimo attacco» | Si somma al danno se il tiro colpisce. «Al tuo prossimo attacco»: il prossimo entro la Fine del turno; se manca, il bonus è perso. |
-| «(-N) ai Danni del prossimo attacco che subisci» / «… di ogni attacco che subisci in questo turno» / «(-N) ai Danni di un attacco contro di te» | Riduzione del danno di quel colpo, dopo il tiro: minimo 0, entro la Fine del turno. La stessa formula vale per le creature: «(-1) ai Danni che subisce (minimo 1)» (NE-19). (CA-07, CA-06) |
+| «(-N) ai Danni del prossimo attacco che subisci» / «… di ogni attacco che subisci in questo turno» / «(-N) ai Danni di un attacco contro di te» | Riduzione del danno di quel colpo, dopo il tiro: minimo 0, entro la Fine del turno. La stessa formula vale per le creature: «(-1) ai Danni che subisce (minimo 1)» (NE-19). (CA-07, CA-06, CA-16, CA-17, CA-18) |
 | «Infliggi N Danni / D6 Danni a una creatura / a un avversario accanto» / «… anche a un altro bersaglio» / «… a ogni altro avversario accanto» | Danno diretto, senza tiro per colpire. «Un altro bersaglio»: diverso dal primo. (CS-11, CS-12, CS-14, CA-12) |
 | «Invece di tirare per colpire puoi infliggere N Danni a chi stai attaccando» | Al posto del tiro per colpire di quell'attacco: niente tiro, niente catena del tiro, niente «(+N) Danni ai tuoi attacchi»; poi lo scontro prosegue. (TE-26) |
 | «Ogni eroe, tu compreso, …» | Ogni eroe al tavolo, anche chi gioca la carta; con un solo tiro per tutti se la carta lo dice. (TI-32, TI-38) |
@@ -752,7 +758,7 @@ Ogni effetto delle carte usa una di queste formule (V16). Tra parentesi, per le 
 | «Il tesoro cambia Cripta» | R 10.11. Su una Mappa la plancia cambia anche se il tesoro non si sposta (R 8.12). Fuori da una Mappa non cambia plancia. (CR-15, CG-10) |
 | «Finché è in gioco: …» (Mappe) | Vale finché la Mappa resta in gioco (R 10.11) e non gira le rotelle. «Tutti» = tutti gli eroi; «le creature» = mostri e boss; «ogni avversario» = gli avversari di chi l'ha giocata. |
 | «Gli Elfi / i Sanguar tirano per colpire con vantaggio» | Gli eroi con quella Carta Specie (v6). |
-| «Metti negli scarti di chi l'ha giocata la Mappa in gioco» | Torna la plancia base e ogni eroe torna sulla sua Partenza iniziale (R 8.12); il tesoro non si sposta, salvo che la carta lo dica. (TI-22, CR-15) |
+| «Metti negli scarti di chi l'ha giocata la Mappa in gioco» | Torna il preset base e ogni eroe torna sulla sua Partenza iniziale (R 8.12); il tesoro non si sposta, salvo che la carta lo dica. (TI-22, CR-15) |
 | «Un avversario torna sulla sua Partenza iniziale» | Sposti la sua pedina sulla sua Partenza iniziale (R 3.9; se è occupata, R 11.4 punto 2). Non è una sconfitta. (TI-25) |
 | «In questo turno i mostri scoperti non ti sbarrano la strada» | Passi sulle tessere rosse scoperte senza fermarti (R 8.5); la Cripta con MIMI sbarra ancora. (TI-40) |
 | «Se è in gioco la Mappa X» | Condizione della riga «Se»: vale se quella Mappa è la Mappa in gioco. (CS-15) |
@@ -822,6 +828,8 @@ Ogni effetto delle carte usa una di queste formule (V16). Tra parentesi, per le 
 - tempo: «se è il tuo turno e non ti sei ancora mosso», «se lo giochi in risposta a un Incanto di quell'avversario», «se poi giochi un Incanto d'attacco in questo turno»;
 - tiri: «se è il tiro per l'Indizio di un avversario»;
 - «se l'avevi già» (la Forte Volontà).
+
+Su un Equipaggiamento, una riga «Se» che dà una statistica vale finché è equipaggiato, quando la condizione è vera (TE-22). Bilanciamento dell'11/11 degli Equipaggiamenti di classe nuovi: «se combatti una creatura di LV 3 o più: (+N) AR» (CA-13, CA-15, CO-14, CO-15, CO-18, CO-20, CR-12, CS-11, CS-12, CS-17, CS-18) e «… (+1) Danni ai tuoi attacchi» (CR-17); «se combatti un boss: (+2) AR», custode compreso (CO-19, CR-16, CS-16); «se hai 2 PV o meno: (+2) AR» (CG-18).
 
 ### 14.6 Esempio di righe
 
@@ -917,16 +925,18 @@ Il simulatore va in `v7/simulatore/` (piano §9). Prende le regole da questa spe
 - durata della partita (v6: circa 10,6 round);
 - rifornimenti delle «?», sconfitte, Indizi da mostri e da Duelli.
 
-## 17. Plance del playtest (base e Mappe)
+## 17. Preset di mappa del playtest (base e Mappe)
 
-Plancia base «Strettoie», scelta il 10/11: dati in `v7/simulatore/mappa.py`, disegno in `v7/idee/v7_bozza_mappa.svg`. Coordinate: colonna A–J, riga 1–10. Le righe dispari sono spostate a sinistra di mezzo esagono rispetto alle pari.
+Preset base «Strettoie», scelto il 10/11: dati in `v7/simulatore/mappa.py`, disegno in `v7/idee/v7_bozza_mappa.svg`. Coordinate: colonna A–J, riga 1–10. Le righe dispari sono spostate a sinistra di mezzo esagono rispetto alle pari.
+
+**Preset (D23).** Le 10 configurazioni di questo paragrafo, la base e le 9 delle Mappe, sono preset di costruzione: ognuno ha un foglio di istruzioni (A4 verticale, anche in A3) con il diagramma 10 × 10 a colori, le coordinate, i numeri di Partenze e Cripte, le «?», i muri, l'elenco delle tile per tipo e 4–5 passi di costruzione. Il foglio si chiama come la carta Mappa (TM-01…09); la base si chiama «Strettoie». Le tile sono le stesse per tutti (R 2.5): quello che cambia è dove si mettono.
 
 **Vicini dell'esagono (c, r):**
 - nella stessa riga: (c−1, r) e (c+1, r);
 - riga dispari: (c−1, r±1) e (c, r±1);
 - riga pari: (c, r±1) e (c+1, r±1).
 
-**Terreno della plancia base:**
+**Terreno del preset base:**
 - **Strada** (60 esagoni, comprese Partenze, Cripte e «?»): A1 B1 C1 H1 I1 J1 · A2 C2 H2 I2 J2 · A3 D3 E3 G3 H3 J3 · A4 B4 C4 D4 E4 F4 G4 H4 J4 · G5 H5 I5 J5 · A6 B6 C6 D6 · A7 C7 D7 E7 F7 G7 H7 I7 J7 · A8 C8 D8 F8 G8 J8 · A9 B9 C9 H9 J9 · A10 B10 C10 H10 I10 J10
 - **Guado e ponte** (4, sono strada): D5, F5, E6, G6
 - **Bosco** (12): F1 G1 F2 G2 I3 I4 B7 B8 D9 E9 D10 E10
@@ -934,16 +944,16 @@ Plancia base «Strettoie», scelta il 10/11: dati in `v7/simulatore/mappa.py`, d
 - **Rocce** (10): B2 E2 B3 C3 F3 E8 H8 I8 F9 I9
 - **Acqua** (8): A5 B5 C5 E5 F6 H6 I6 J6
 
-**Caselle speciali** (uguali su tutte le plance):
+**Caselle speciali** (uguali su tutti i preset):
 - **Partenze:** 1 C1 · 2 H1 · 3 J5 · 4 H10 · 5 C10 · 6 A6
 - **Cripte:** 1 D4 · 2 G4 · 3 D7 · 4 G7
 - **«?» (20):** A1 A9 B6 B9 B10 C2 C7 D3 D6 E3 F8 G5 G8 H4 H9 I1 I2 I5 J2 J10
 
 **Muri (16 lati tra due esagoni):**
-- che chiudono le Cripte (10, uguali su tutte le plance): D3|D4, D4|E3, G4|H3, G4|H4, G4|H5, C6|D7, C7|D7, C8|D7, F8|G7, G7|G8;
+- che chiudono le Cripte (10, uguali su tutti i preset): D3|D4, D4|E3, G4|H3, G4|H4, G4|H5, C6|D7, C7|D7, C8|D7, F8|G7, G7|G8;
 - mura (6): A9|B9, B6|C7, C6|D6, G5|H5, H4|I5, I2|J2.
 
-**Controlli della plancia base** (10/11, con uno script usa e getta sul grafo strada + muri; `python3 v7/simulatore/mappa.py` ricontrolla esagoni, collegamenti e distanze):
+**Controlli del preset base** (10/11, con uno script usa e getta sul grafo strada + muri; `python3 v7/simulatore/mappa.py` ricontrolla esagoni, collegamenti e distanze):
 - 64 esagoni percorribili, 93 collegamenti. Le 93 linee della bozza disegnata sono esattamente questi collegamenti.
 - Ogni esagono ha almeno 2 uscite e nessun esagono, se bloccato, taglia fuori una zona. Nessuna coppia di «?», con due mostri scoperti, chiude una zona (la bozza precedente ne aveva 4).
 - Dalla Partenza alla Cripta: da 4 a 8 passi, in media 5,92 (bozza precedente: 5,75; v6: 5,25). Da ogni Partenza la Cripta più vicina è a 4 passi.
@@ -951,7 +961,7 @@ Plancia base «Strettoie», scelta il 10/11: dati in `v7/simulatore/mappa.py`, d
 - Ostacoli di terra: 8 sul bordo, 16 nel secondo anello, 4 nel centro 6 × 6 (bozza precedente: 20, 6, 2).
 - Un mostro scoperto su una «?» allunga almeno un percorso tra Partenza e Cripta o tra due Cripte in 12 «?» su 20: in 8 di 2 passi o più, al massimo di 5. Chiudere il Guado ovest D5 o il Guado est G6 costa in tutto 15 passi in più sui percorsi Partenza→Cripta, il Ponte del lago 2.
 
-**Plance delle Mappe (R 8.12).** Uguali alla base: griglia, Partenze, Cripte con i 10 muri e i 12 esagoni d'ingresso (C4 E4 D5 · F4 G3 G5 · D6 E7 D8 · F7 G6 H7), fiume e 20 «?». Cambiano i 28 ostacoli di terra e le 6 mura; la strada è tutto il resto (64 esagoni). I dati stanno in `v7/simulatore/plance/`, con gli stessi campi di `mappa.py`; il disegno si fa con `python3 v7/idee/genera_bozza_mappa.py --dati <file> --out <svg>`.
+**Preset delle Mappe (R 8.12).** Uguali alla base: griglia, Partenze, Cripte con i 10 muri e i 12 esagoni d'ingresso (C4 E4 D5 · F4 G3 G5 · D6 E7 D8 · F7 G6 H7), fiume e 20 «?». Cambiano i 28 ostacoli di terra e le 6 mura; la strada è tutto il resto (64 esagoni). I dati stanno in `v7/simulatore/plance/`, con gli stessi campi di `mappa.py`; il disegno si fa con `python3 v7/idee/genera_bozza_mappa.py --dati <file> --out <svg>`.
 
 | Mappa | File | Bosco | Case | Rocce | Mura (6) |
 |---|---|---|---|---|---|
@@ -965,7 +975,7 @@ Plancia base «Strettoie», scelta il 10/11: dati in `v7/simulatore/mappa.py`, d
 | TM-08 Flegias | `plance/flegias.py` | B2 C3 J3 J4 A7 A8 H8 I9 | F1 G1 E2 F2 G2 F3 E8 D9 E9 F9 D10 E10 | D1 E1 D2 B3 I8 G9 F10 G10 | B7\|C7 B9\|C9 D6\|E7 F4\|G5 H2\|I2 H4\|I4 |
 | TM-09 Alla ricerca di MIMI | `plance/mimi.py` | D1 E1 F1 D2 E2 F2 E9 F9 G9 E10 F10 G10 | J1 B2 F3 E8 I9 A10 | A3 H3 A4 B4 I4 B7 I7 J7 C8 J8 | C2\|C3 C6\|D6 C10\|D9 G2\|H1 G5\|H5 H8\|H9 |
 
-| Plancia | Carattere | Bosco/case/rocce | Terra su bordo/2° anello/centro | Partenza→Cripta | Collegamenti | «?» che sbarrano (di 2 passi o più), massimo | Chiudere D5/ponte/G6 |
+| Preset | Carattere | Bosco/case/rocce | Terra su bordo/2° anello/centro | Partenza→Cripta | Collegamenti | «?» che sbarrano (di 2 passi o più), massimo | Chiudere D5/ponte/G6 |
 |---|---|---|---|---|---|---|---|
 | Base «Strettoie» | Strettoie davanti alle Cripte; i guadi laterali sono da contendersi | 12/6/10 | 8/16/4 | 4–8 (5,92) | 93 | 12 (8), +5 | +15/+2/+15 |
 | TM-01 Forziere | Oasi del miraggio: un palmeto al centro nord e al centro sud divide le Partenze 1-2 e 4-5; il tappo vero è sulla riva, in B6 e I5 | 12/6/10 | 10/16/2 | 4–8 (5,92) | 105 | 12 (8), +5 | +11/+2/+11 |
@@ -978,7 +988,9 @@ Plancia base «Strettoie», scelta il 10/11: dati in `v7/simulatore/mappa.py`, d
 | TM-08 Flegias | Villaggio in fiamme al centro nord e al centro sud; strade dirette e tre attraversamenti quasi uguali | 8/12/8 | 12/12/4 | 4–8 (5,75) | 101 | 12 (8), +4 | +7/+6/+7 |
 | TM-09 MIMI | Caccia: case sparse e un solo bosco al centro; sbarramenti leggeri, guadi laterali che contano | 12/6/10 | 12/12/4 | 4–8 (5,92) | 101 | 12 (8), +3 | +19/+2/+19 |
 
-**Controlli delle plance delle Mappe** (10/11, stesso script): tutte identiche girate di 180°, strada collegata, almeno 2 uscite per esagono, nessun esagono che se bloccato taglia fuori una zona, 3 ingressi per Cripta, 3 attraversamenti del fiume; da ogni Partenza la Cripta più vicina è a 4 passi, 1 «?» a un passo e 4 entro 3. Nessuna coppia di «?» chiude una zona, tranne 2 su Flegias che chiudono un angolo senza Partenze (I1 + I2 chiudono J1 J2; B9 + B10 chiudono A9 A10).
+**Controlli dei preset delle Mappe** (10/11, stesso script): tutti identici girati di 180°, strada collegata, almeno 2 uscite per esagono, nessun esagono che se bloccato taglia fuori una zona, 3 ingressi per Cripta, 3 attraversamenti del fiume; da ogni Partenza la Cripta più vicina è a 4 passi, 1 «?» a un passo e 4 entro 3. Nessuna coppia di «?» chiude una zona, tranne 2 su Flegias che chiudono un angolo senza Partenze (I1 + I2 chiudono J1 J2; B9 + B10 chiudono A9 A10).
+
+**Composizione libera [PLAYTEST] (D23).** Questi controlli sono il consiglio per chi compone la mappa a mano: strada collegata; ogni esagono di strada con almeno 2 uscite; nessun esagono che, bloccato, taglia fuori una zona; 6 Partenze; 4 Cripte con 3 ingressi ciascuna; 20 «?»; distanze Partenza→Cripta simili tra loro (nei preset da 4 a 8 passi, con la Cripta più vicina a 4). Non sono obblighi: in playtest si prova anche a romperli, e si annota che cosa succede.
 
 ## 18. Valori [PLAYTEST]
 
@@ -997,7 +1009,8 @@ Plancia base «Strettoie», scelta il 10/11: dati in `v7/simulatore/mappa.py`, d
 | Tessere | opzione A, rifornimento con 6 coperte o meno | R 3.3, R 8.11 |
 | Movimento | solo strada; fermata sul mostro scoperto | R 8.4, R 8.5 |
 | Accanto | lato in comune senza muro | R 8.7 |
-| Cuore e terreno | Cuore tolto; ogni Mappa ha la sua plancia e cambia bosco, case, rocce e mura; a ogni cambio di plancia tutti tornano sulla Partenza iniziale | R 8.12 |
+| Mappa a tile | tile esagonali generiche stampate a parte; 10 preset (base «Strettoie» + TM-01…09) con foglio di istruzioni; composizione libera ammessa, con i controlli dei preset come consiglio | D23, R 8.1, §17 |
+| Cuore e terreno | Cuore tolto; ogni Mappa ha il suo preset e cambia bosco, case, rocce e mura; a ogni cambio di mappa tutti tornano sulla Partenza iniziale; il cambio si fa sostituendo solo le tile che differiscono | R 8.12 |
 | Partenza occupata alla morte | esagono libero accanto, a scelta | R 11.4 |
 | Costi scelti, oggetti precisi | seguono il testo della carta | R 11.3 |
 | Penalità | verso peggiorativo (+n dove serve un numero basso); minimo 1; i modificatori restano | R 5.3–5.5 |
@@ -1022,6 +1035,7 @@ Plancia base «Strettoie», scelta il 10/11: dati in `v7/simulatore/mappa.py`, d
 | Creature ed effetti per eroi | applicano solo i Danni | §15 |
 | «Quando lascia il tuo slot» | scatta anche quando lo sostituisci tu | §14.5 |
 | Effetti ripetibili | niente vantaggio di carte netto per uso | V9 |
+| Equipaggiamenti di classe nuovi (XX-11…20) | niente bonus fisso di serie; per difendersi una riga «Se» con (+1)/(+2) AR (creature di LV 3 o più, boss, 2 PV o meno) o una parata dell'Assaltatore; CG-16 e CG-17 Comuni (PL 1) (11/11) | §14.5 |
 
 ## 19. Punti aperti
 
@@ -1040,7 +1054,7 @@ Da definire con Desy al telefono o su Discord (commento 10). Intanto il playtest
 | 7 | Movimento solo su strada e fermata sul mostro scoperto | Sì (R 8.4, R 8.5) |
 | 8 | Sacchetto: A, B o C; soglia di rifornimento | A, soglia 6 (R 8.11) |
 | 9 | «A una casella di distanza» e Duello attraverso muri e acqua | Accanto = lato in comune senza muro; l'acqua non conta (R 8.7) |
-| 10 | Togliere il Cuore; Mappe che cambiano il terreno | Cuore tolto; ogni Mappa cambia il terreno con la sua plancia e riporta tutti alla Partenza iniziale (R 8.12) |
+| 10 | Togliere il Cuore; Mappe che cambiano il terreno | Cuore tolto; ogni Mappa cambia il terreno con il suo preset e riporta tutti alla Partenza iniziale (R 8.12) |
 | 11 | Simulazione prima della plancia definitiva | Sì, sulla bozza; la mappa definitiva si fa a parte (D16, R 8.1) |
 | 12 | Morte: D6 della perdita, propria Partenza, 1 carta comune | Deciso (D7) |
 | 13 | Partenza occupata alla morte | Esagono di strada libero accanto, a scelta (R 11.4) |
@@ -1077,6 +1091,8 @@ Da definire con Desy al telefono o su Discord (commento 10). Intanto il playtest
 | N22 | Tessere Stato finite (31 tessere, una per fonte, al massimo 4): può servirne una in più in casi rari a 4 giocatori | Lo Stato non si prende; se succede al tavolo, annotarlo per il conteggio delle copie |
 | N23 | Mazzetto di 10 carte su 20 (D22): con la pila di classe di 7 carte invece di 3, la pesca dalla pila (R 12.3) e la scelta delle carte pesano di più; con 20 carte per classe l'equilibrio tra le classi e tra le direzioni può cambiare. | Default 10 su 20 (R 3.6). Da misurare col simulatore, che oggi costruisce il mazzetto con le 5 carte della propria direzione più 1 (`ia.mazzetto_classe`) e va aggiornato |
 | N24 | Totale del mazzo comune dopo D22 (63 prima): le carte di Desy «tutti» e quelle che le classi non assorbono (overflow) vanno nel mazzo comune. | Fissato il 10/11: 81 carte (31 TE, 41 TI, 9 TM), R 2.5 e §18 |
+| N25 | Comporre la mappa a tile in partita (D23): resta solo uno strumento da playtest o diventa regola ufficiale? Chi la compone, con quali vincoli, e quanto cambia l'equilibrio? | Per ora solo playtest: preset o composizione libera, con i controlli del §17 come consiglio (R 8.1). Da decidere dopo i playtest |
+| N26 | Cambio di mappa a metà partita (R 8.12): ricostruire con il preset della Mappa, sostituendo solo le tile che differiscono, è praticabile al tavolo? Dopo una mappa composta liberamente, il cambio ricostruisce tutto? | Si prova nei playtest. Intanto: si alzano le pedine, si sostituiscono le tile diverse (R 8.12). Se pesa troppo, si valuta un altro modo per rappresentare il cambio |
 
 **Decisi nella revisione delle carte del 10/11, da misurare col simulatore:**
 - CA-09 Elmo a prova di testata non torna più in mano quando lo sacrifichi (con CA-08 dava carte oltre V9 e un sacrificio gratis ogni turno): ora (+1) AR e non si perde.
@@ -1087,3 +1103,4 @@ Da definire con Desy al telefono o su Discord (commento 10). Intanto il playtest
 - La parata degli attacchi è dell'Assaltatore (CA-06 senza costo, CA-10) e della Targa «Vietato Colpire» (TE-08); TI-06 Barriera Antisfiga para Trappole e Incanti.
 - Da misurare: il sacrificio abbassa il PL e porta a mazzetti più facili; la pesca che resta (TM-06, CG-01, CG-07, il premio grande di CO-02); TI-03 Uccisi molto male e gli altri danni diretti contro il mazzetto 1.
 - Carte nuove di D22 (revisione del 10/11 sera): TM-09 ora rende più facile il tiro per l'Indizio (il ritorno alla Partenza lo fa già R 8.12); CS-19 Il Dado è Truccato conta come un ritiro (penalità, e NE-47 la ferma); TI-34 NO! come ripiego dà Silenzio a un solo avversario; CO-15 dà solo il premio piccolo; CR-11 non potenzia il potere TC-02; TE-27 non toglie più la penalità del ritiro; CG-14 e CG-17 non sono più doppioni (di TC-05/TI-35 e di CS-16); CO-12 non riduce più i Danni (resta all'Assaltatore, CA-07) ma dà AR; CA-19 non costa più (-2) AR (era peggiore di TI-12). Da misurare: i danni diretti ripetibili (TE-26, CS-12), la pesca di TI-37 e CG-13, CO-15 contro il potere TC-04.
+- Bilanciamento dell'11/11 degli Equipaggiamenti di classe nuovi (decisione di Daniele: sistemare gli effetti, non le regole del PL). Con le carte di D22 la partita durava 14,6/13,9/14,1 round (2/3/4 giocatori, 500 partite, seme 1), perché questi oggetti alzavano il PL senza dare difese: mazzetto 3 nel 23 % degli scontri e scontri persi nel 32 %. Ora 11,1/10,5/10,2 round, scontri persi 23,5/22,3/22,8 %, mazzetto 3 nel 20 %; vittorie per classe tra 0,89 e 1,11 della quota equa (2000 partite; prima tra 0,75 e 1,15). Cambi: riga «Se» con AR (§14.5) su 15 oggetti e (+1) Danni su CR-17; CA-15 (-1) AR invece di (-2); CO-15 costa 1 PV invece di 2; CA-17 para (-1) una volta per turno; CA-18 non costa più AR; CG-16 e CG-17 da Rare a Comuni. Da misurare al tavolo: se le righe «Se» contro LV 3 o più rendono troppo sicuro il mazzetto 2–3.

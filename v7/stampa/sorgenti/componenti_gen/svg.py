@@ -2,6 +2,50 @@ import math, os, re
 INK='#2a2118'; BROWN='#6b4a2b'; RED='#9c2f24'; GOLD='#b8862b'; BLUE='#2f5d7c'
 LINE='#b9a582'; PAPER='#f4ead5'
 
+# ---------- kit dei motivi (Daniele, 11/11: «leggero flavour steampunk medieval high magic, minimale, bordo leggero») ----------
+# Lo stesso delle carte (carte/genera_carte.py, «kit dei motivi»), descritto in stampa/LEGGIMI.md: ottone scuro sui fondi
+# chiari, ottone chiaro sui fondi colorati, rame per gli accenti; filetto doppio, piccoli ingranaggi agli angoli, rivetti,
+# losanghe e stelle arcane. Solo tratti sottili sui bordi: le misure dei contenuti non cambiano.
+BRASS='#a8823a'; BRASS_L='#e8cd8f'; COPPER='#a65a32'; PLATE='#f7eedb'
+
+def cog_pts(cx,cy,r,n,prof=0.28):
+    """punti di un ingranaggio di raggio esterno r: n denti trapezi profondi prof*r, il primo in alto."""
+    ri=r*(1-prof); s=2*math.pi/n; p=[]
+    for k in range(n):
+        a=k*s-math.pi/2
+        for da,rr in ((-0.27,ri),(-0.15,r),(0.15,r),(0.27,ri)):
+            p.append(f'{cx+rr*math.cos(a+da*s):.3f},{cy+rr*math.sin(a+da*s):.3f}')
+    return ' '.join(p)
+
+def cog(cx,cy,r,n=8,fill=BRASS_L,hole=None,prof=0.28,stroke=None,sw=0.2):
+    """ingranaggio pieno; hole: colore del tondo al centro (quello del fondo)."""
+    st=f' stroke="{stroke}" stroke-width="{sw}" stroke-linejoin="round"' if stroke else ''
+    o=f'<polygon points="{cog_pts(cx,cy,r,n,prof)}" fill="{fill}"{st}/>'
+    if hole: o+=f'<circle cx="{cx:.3f}" cy="{cy:.3f}" r="{0.3*r:.3f}" fill="{hole}"/>'
+    return o
+
+def rivet(cx,cy,r,fill=BRASS_L,edge=BRASS,sw=0.1):
+    st=f' stroke="{edge}" stroke-width="{sw}"' if edge else ''
+    return f'<circle cx="{cx:.3f}" cy="{cy:.3f}" r="{r:.3f}" fill="{fill}"{st}/>'
+
+def lozenge(cx,cy,w,h,fill=COPPER,edge=None,sw=0.1):
+    st=f' stroke="{edge}" stroke-width="{sw}" stroke-linejoin="round"' if edge else ''
+    return f'<polygon points="{cx:.3f},{cy-h/2:.3f} {cx+w/2:.3f},{cy:.3f} {cx:.3f},{cy+h/2:.3f} {cx-w/2:.3f},{cy:.3f}" fill="{fill}"{st}/>'
+
+def star(cx,cy,r,n=4,ratio=0.4,fill=COPPER):
+    """stella arcana a n punte, la prima in alto."""
+    p=' '.join(f'{cx+(r if k%2==0 else r*ratio)*math.cos(math.pi*k/n-math.pi/2):.3f},{cy+(r if k%2==0 else r*ratio)*math.sin(math.pi*k/n-math.pi/2):.3f}' for k in range(2*n))
+    return f'<polygon points="{p}" fill="{fill}"/>'
+
+def brass_frame(x0,y0,x1,y1,gap=0.8,sw=0.35,sw2=0.15,col=BRASS,cog_r=2.0,holes=('#ffffff',)*4,rx=1.0):
+    """filetto doppio d'ottone (esterno sw sul rettangolo, interno sw2 a gap dentro) e un ingranaggio su ogni angolo
+    dell'esterno; holes: colore del foro dei 4 ingranaggi (alto-sinistra, alto-destra, basso-sinistra, basso-destra)."""
+    o=[f'<rect x="{x0:.3f}" y="{y0:.3f}" width="{x1-x0:.3f}" height="{y1-y0:.3f}" rx="{rx}" fill="none" stroke="{col}" stroke-width="{sw}"/>',
+       f'<rect x="{x0+gap:.3f}" y="{y0+gap:.3f}" width="{x1-x0-2*gap:.3f}" height="{y1-y0-2*gap:.3f}" rx="{max(rx-gap,0.2):.3f}" fill="none" stroke="{col}" stroke-width="{sw2}"/>']
+    for (x,y),h in zip(((x0,y0),(x1,y0),(x0,y1),(x1,y1)),holes):
+        o.append(cog(x,y,cog_r,8,BRASS_L,h,stroke=col,sw=0.12))
+    return ''.join(o)
+
 def hexpts(x,y,s):
     return ' '.join(f'{x+s*math.cos(math.radians(a)):.2f},{y+s*math.sin(math.radians(a)):.2f}' for a in (-90,-30,30,90,150,210))
 
@@ -56,8 +100,8 @@ def dial_ring(cx,cy,vals,k=1.0,mh=4.5,sf=2.0,gap=0.6,gold=(),red=(),col=INK,hole
     """corona di N valori (il primo in alto, poi in senso orario) a rr mm da (cx, cy); k = unità del disegno per mm.
     vals: [(testo grande, (righe piccole...))]; gold: indici con il cerchio dorato; red: indici in rosso."""
     o=[f'<g transform="translate({cx:.3f},{cy:.3f}) scale({k:.5f})">']
-    if footprint:
-        o.append(f'<circle cx="0" cy="0" r="{DISC_R}" fill="none" stroke="{LINE}" stroke-width="0.25" stroke-dasharray="1.2 1"/>')
+    if footprint:   # kit dei motivi: piatto chiaro col bordo a ingranaggio (36 denti) che sporge di 0,9 mm dal disco
+        o.append(cog(0,0,DISC_R+0.9,36,PLATE,prof=0.026,stroke=BRASS,sw=0.25))
     n=len(vals)
     for i,(main,smalls) in enumerate(vals):
         a=math.radians(dial_angle(i,n)); x=rr*math.sin(a); y=-rr*math.cos(a)
@@ -116,7 +160,15 @@ def board(W=26, mm=0.97, bozza=BOZZA_V7, cartella=None):
     o=[f'<svg viewBox="0 0 {bw:.1f} {bh:.1f}" xmlns="http://www.w3.org/2000/svg" font-family="Alegreya Sans">']
     o.append(f'<rect x="1" y="1" width="{bw-2:.1f}" height="{bh-2:.1f}" rx="{W*0.5}" fill="#efe1c3" stroke="{BROWN}" stroke-width="2"/>')
     o.append(mappa_bozza(bozza, cartella))
-    # sala del tesoro
+    o += sala_tesoro(bw, W, mm)
+    o.append('</svg>')
+    return '\n'.join(o)
+
+def sala_tesoro(bw, W=26, mm=0.97):
+    """elementi della fascia della Sala del Tesoro (larga bw unità del disegno, alta SALA_Y): titolo, cerchi di Custode,
+    MIMI e Boss, corone 0-9 delle rotelle del tavolo e cerchi «Spostamenti del tesoro». La disegnano board() (plancia
+    intera) e gen.py sala() (la Sala come pezzo a parte, per la mappa a tessere)."""
+    o=[]
     o.append(f'<text x="{bw/2:.1f}" y="{W*0.95:.1f}" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="{W*0.55:.1f}" fill="{BROWN}">Sala del Tesoro</text>')
     cy=W*1.75
     # niente mini-boss (Daniele, 2/11): il boss custode, MIMI e i 2 boss del mazzetto 3
@@ -137,8 +189,7 @@ def board(W=26, mm=0.97, bozza=BOZZA_V7, cartella=None):
         o.append(f'<circle cx="{sx:.1f}" cy="{sy:.1f}" r="{11*u:.2f}" fill="#f7efdc" stroke="{BROWN}" stroke-width="{0.35*u:.2f}" stroke-dasharray="{1.5*u:.2f} {1*u:.2f}"/>')
     for j,(t,fs,wt,col) in enumerate((('Spostamenti',3.4,' font-weight="800"',INK),('del tesoro (max 2)',3.4,' font-weight="800"',INK),('1 tessera Usato ogni',2.8,'',BROWN),('volta che cambia Cripta',2.8,'',BROWN))):
         o.append(f'<text x="{91.5*u:.1f}" y="{(83.6+j*4.1)*u:.1f}" text-anchor="end"{wt} font-size="{fs*u:.2f}" fill="{col}">{t}</text>')
-    o.append('</svg>')
-    return '\n'.join(o)
+    return o
 
 def legend_item(ic,label,col=INK):
     return f'<div class="lg"><svg viewBox="0 0 24 24" width="16" height="16">{ic}</svg><span>{label}</span></div>'

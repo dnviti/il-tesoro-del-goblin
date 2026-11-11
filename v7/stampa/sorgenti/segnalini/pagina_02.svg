@@ -1,199 +1,285 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="210mm" height="297mm" viewBox="0 0 210 297" font-family="Liberation Sans Narrow">
-<text x="105.00" y="11.00" font-family="Liberation Serif" font-size="4.20" fill="#2a2118" text-anchor="middle" font-weight="bold" >Tessere Stato e rotelle del tavolo · foglio 2 di 2</text><text x="105.00" y="16.00" font-family="Liberation Sans Narrow" font-size="2.90" fill="#6b4a2b" text-anchor="middle" >24 tessere Stato 26 × 18 mm · 2 dischi Ø 52 mm · solo fronte</text>
-<rect x="25.00" y="25.00" width="32.0" height="24.0" fill="#f1e2e0"/>
-<rect x="25.00" y="25.00" width="32.0" height="9.2" fill="#9c2f24"/>
-<text x="30.40" y="32.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
-<text x="41.00" y="32.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Rallentato</text>
-<path d="M51.60 33.30V29.30M50.40 30.60L51.60 29.20L52.80 30.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="41.00" y="37.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Muovi: solo 1</text>
-<text x="41.00" y="41.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >esagono, senza dado.</text>
-<rect x="28.00" y="28.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
-<rect x="57.00" y="25.00" width="32.0" height="24.0" fill="#f1e2e0"/>
-<rect x="57.00" y="25.00" width="32.0" height="9.2" fill="#9c2f24"/>
-<text x="62.40" y="32.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
-<text x="73.00" y="32.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Rallentato</text>
-<path d="M83.60 33.30V29.30M82.40 30.60L83.60 29.20L84.80 30.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="73.00" y="37.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Muovi: solo 1</text>
-<text x="73.00" y="41.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >esagono, senza dado.</text>
-<rect x="60.00" y="28.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
-<rect x="89.00" y="25.00" width="32.0" height="24.0" fill="#f1e2e0"/>
-<rect x="89.00" y="25.00" width="32.0" height="9.2" fill="#9c2f24"/>
-<text x="94.40" y="32.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
-<text x="105.00" y="32.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Rallentato</text>
-<path d="M115.60 33.30V29.30M114.40 30.60L115.60 29.20L116.80 30.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="105.00" y="37.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Muovi: solo 1</text>
-<text x="105.00" y="41.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >esagono, senza dado.</text>
-<rect x="92.00" y="28.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
-<rect x="121.00" y="25.00" width="32.0" height="24.0" fill="#f1e2e0"/>
-<rect x="121.00" y="25.00" width="32.0" height="9.2" fill="#9c2f24"/>
-<text x="126.40" y="32.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
-<text x="137.00" y="32.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Rallentato</text>
-<path d="M147.60 33.30V29.30M146.40 30.60L147.60 29.20L148.80 30.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="137.00" y="37.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Muovi: solo 1</text>
-<text x="137.00" y="41.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >esagono, senza dado.</text>
-<rect x="124.00" y="28.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
-<rect x="153.00" y="25.00" width="32.0" height="24.0" fill="#e4ede6"/>
-<rect x="153.00" y="25.00" width="32.0" height="9.2" fill="#3b7d4f"/>
-<text x="158.40" y="32.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
-<text x="169.00" y="32.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Occhio</text>
-<path d="M179.60 33.30V29.30M178.40 30.60L179.60 29.20L180.80 30.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="169.00" y="37.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Prossima Trappola:</text>
-<text x="169.00" y="41.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >nessun effetto. Poi</text>
-<text x="169.00" y="44.31" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >toglilo.</text>
-<rect x="156.00" y="28.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
-<rect x="25.00" y="49.00" width="32.0" height="24.0" fill="#e4ede6"/>
-<rect x="25.00" y="49.00" width="32.0" height="9.2" fill="#3b7d4f"/>
-<text x="30.40" y="56.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
-<text x="41.00" y="56.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Occhio</text>
-<path d="M51.60 57.30V53.30M50.40 54.60L51.60 53.20L52.80 54.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="41.00" y="61.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Prossima Trappola:</text>
-<text x="41.00" y="65.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >nessun effetto. Poi</text>
-<text x="41.00" y="68.31" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >toglilo.</text>
-<rect x="28.00" y="52.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
-<rect x="57.00" y="49.00" width="32.0" height="24.0" fill="#e4ede6"/>
-<rect x="57.00" y="49.00" width="32.0" height="9.2" fill="#3b7d4f"/>
-<text x="62.40" y="56.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
-<text x="73.00" y="56.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Sussurro</text>
-<path d="M83.60 57.30V53.30M82.40 54.60L83.60 53.20L84.80 54.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="73.00" y="61.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Mostro vinto su «?»:</text>
-<text x="73.00" y="65.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >+1 Indizio, poi toglilo.</text>
-<rect x="60.00" y="52.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
-<rect x="89.00" y="49.00" width="32.0" height="24.0" fill="#e4ede6"/>
-<rect x="89.00" y="49.00" width="32.0" height="9.2" fill="#3b7d4f"/>
-<text x="94.40" y="56.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
-<text x="105.00" y="56.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Sussurro</text>
-<path d="M115.60 57.30V53.30M114.40 54.60L115.60 53.20L116.80 54.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="105.00" y="61.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Mostro vinto su «?»:</text>
-<text x="105.00" y="65.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >+1 Indizio, poi toglilo.</text>
-<rect x="92.00" y="52.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
-<rect x="121.00" y="49.00" width="32.0" height="24.0" fill="#e4ede6"/>
-<rect x="121.00" y="49.00" width="32.0" height="9.2" fill="#3b7d4f"/>
-<text x="126.40" y="56.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
-<text x="137.00" y="56.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Riflesso</text>
-<path d="M147.60 57.30V53.30M146.40 54.60L147.60 53.20L148.80 54.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="137.00" y="61.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Chi ti fa Danni ne</text>
-<text x="137.00" y="65.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >subisce 1.</text>
-<rect x="124.00" y="52.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
-<rect x="153.00" y="49.00" width="32.0" height="24.0" fill="#e4ede6"/>
-<rect x="153.00" y="49.00" width="32.0" height="9.2" fill="#3b7d4f"/>
-<text x="158.40" y="56.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
-<text x="169.00" y="56.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Riflesso</text>
-<path d="M179.60 57.30V53.30M178.40 54.60L179.60 53.20L180.80 54.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="169.00" y="61.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Chi ti fa Danni ne</text>
-<text x="169.00" y="65.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >subisce 1.</text>
-<rect x="156.00" y="52.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
-<rect x="25.00" y="73.00" width="32.0" height="24.0" fill="#f1e2e0"/>
-<rect x="25.00" y="73.00" width="32.0" height="9.2" fill="#9c2f24"/>
-<text x="30.40" y="80.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
-<text x="41.00" y="80.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Silenzio</text>
-<path d="M51.60 81.30V77.30M50.40 78.60L51.60 77.20L52.80 78.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="41.00" y="85.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Non puoi giocare carte</text>
-<text x="41.00" y="89.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Incanto.</text>
-<rect x="28.00" y="76.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
-<rect x="57.00" y="73.00" width="32.0" height="24.0" fill="#f1e2e0"/>
-<rect x="57.00" y="73.00" width="32.0" height="9.2" fill="#9c2f24"/>
-<text x="62.40" y="80.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
-<text x="73.00" y="80.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Silenzio</text>
-<path d="M83.60 81.30V77.30M82.40 78.60L83.60 77.20L84.80 78.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="73.00" y="85.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Non puoi giocare carte</text>
-<text x="73.00" y="89.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Incanto.</text>
-<rect x="60.00" y="76.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
-<rect x="89.00" y="73.00" width="32.0" height="24.0" fill="#f1e2e0"/>
-<rect x="89.00" y="73.00" width="32.0" height="9.2" fill="#9c2f24"/>
-<text x="94.40" y="80.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
-<text x="105.00" y="80.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Silenzio</text>
-<path d="M115.60 81.30V77.30M114.40 78.60L115.60 77.20L116.80 78.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="105.00" y="85.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Non puoi giocare carte</text>
-<text x="105.00" y="89.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Incanto.</text>
-<rect x="92.00" y="76.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
-<rect x="121.00" y="73.00" width="32.0" height="24.0" fill="#f1e2e0"/>
-<rect x="121.00" y="73.00" width="32.0" height="9.2" fill="#9c2f24"/>
-<text x="126.40" y="80.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
-<text x="137.00" y="80.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Silenzio</text>
-<path d="M147.60 81.30V77.30M146.40 78.60L147.60 77.20L148.80 78.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="137.00" y="85.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Non puoi giocare carte</text>
-<text x="137.00" y="89.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Incanto.</text>
-<rect x="124.00" y="76.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
-<rect x="153.00" y="73.00" width="32.0" height="24.0" fill="#e4ede6"/>
-<rect x="153.00" y="73.00" width="32.0" height="9.2" fill="#3b7d4f"/>
-<text x="158.40" y="80.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
-<text x="169.00" y="80.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Fede</text>
-<path d="M179.60 81.30V77.30M178.40 78.60L179.60 77.20L180.80 78.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="169.00" y="85.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >(+1) AR.</text>
-<rect x="156.00" y="76.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
-<rect x="25.00" y="97.00" width="32.0" height="24.0" fill="#e4ede6"/>
-<rect x="25.00" y="97.00" width="32.0" height="9.2" fill="#3b7d4f"/>
-<text x="30.40" y="104.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
-<text x="41.00" y="104.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Fede</text>
-<path d="M51.60 105.30V101.30M50.40 102.60L51.60 101.20L52.80 102.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="41.00" y="109.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >(+1) AR.</text>
-<rect x="28.00" y="100.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
-<rect x="57.00" y="97.00" width="32.0" height="24.0" fill="#e4ede6"/>
-<rect x="57.00" y="97.00" width="32.0" height="9.2" fill="#3b7d4f"/>
-<text x="62.40" y="104.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
-<text x="73.00" y="104.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Vantaggio</text>
-<path d="M83.60 105.30V101.30M82.40 102.60L83.60 101.20L84.80 102.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="73.00" y="109.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >I tuoi tiri per colpire si</text>
-<text x="73.00" y="113.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >fanno con vantaggio.</text>
-<rect x="60.00" y="100.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
-<rect x="89.00" y="97.00" width="32.0" height="24.0" fill="#e4ede6"/>
-<rect x="89.00" y="97.00" width="32.0" height="9.2" fill="#3b7d4f"/>
-<text x="94.40" y="104.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
-<text x="105.00" y="104.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Vantaggio</text>
-<path d="M115.60 105.30V101.30M114.40 102.60L115.60 101.20L116.80 102.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="105.00" y="109.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >I tuoi tiri per colpire si</text>
-<text x="105.00" y="113.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >fanno con vantaggio.</text>
-<rect x="92.00" y="100.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
-<rect x="121.00" y="97.00" width="32.0" height="24.0" fill="#f1e2e0"/>
-<rect x="121.00" y="97.00" width="32.0" height="9.2" fill="#9c2f24"/>
-<text x="126.40" y="104.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
-<text x="137.00" y="104.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Svantaggio</text>
-<path d="M147.60 105.30V101.30M146.40 102.60L147.60 101.20L148.80 102.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="137.00" y="109.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >I tuoi tiri per colpire si</text>
-<text x="137.00" y="113.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >fanno con svantaggio.</text>
-<rect x="124.00" y="100.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
-<rect x="153.00" y="97.00" width="32.0" height="24.0" fill="#f1e2e0"/>
-<rect x="153.00" y="97.00" width="32.0" height="9.2" fill="#9c2f24"/>
-<text x="158.40" y="104.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
-<text x="169.00" y="104.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Svantaggio</text>
-<path d="M179.60 105.30V101.30M178.40 102.60L179.60 101.20L180.80 102.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="169.00" y="109.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >I tuoi tiri per colpire si</text>
-<text x="169.00" y="113.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >fanno con svantaggio.</text>
-<rect x="156.00" y="100.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
-<rect x="25.00" y="121.00" width="32.0" height="24.0" fill="#f1e2e0"/>
-<rect x="25.00" y="121.00" width="32.0" height="9.2" fill="#9c2f24"/>
-<text x="30.40" y="128.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
-<text x="41.00" y="128.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Svantaggio</text>
-<path d="M51.60 129.30V125.30M50.40 126.60L51.60 125.20L52.80 126.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="41.00" y="133.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >I tuoi tiri per colpire si</text>
-<text x="41.00" y="137.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >fanno con svantaggio.</text>
-<rect x="28.00" y="124.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
-<rect x="57.00" y="121.00" width="32.0" height="24.0" fill="#f1e2e0"/>
-<rect x="57.00" y="121.00" width="32.0" height="9.2" fill="#9c2f24"/>
-<text x="62.40" y="128.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
-<text x="73.00" y="128.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Fermo</text>
-<path d="M83.60 129.30V125.30M82.40 126.60L83.60 125.20L84.80 126.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="73.00" y="133.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Muovi: non ti muovi;</text>
-<text x="73.00" y="137.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >esplori dove sei.</text>
-<rect x="60.00" y="124.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
-<rect x="89.00" y="121.00" width="32.0" height="24.0" fill="#f1e2e0"/>
-<rect x="89.00" y="121.00" width="32.0" height="9.2" fill="#9c2f24"/>
-<text x="94.40" y="128.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
-<text x="105.00" y="128.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Fermo</text>
-<path d="M115.60 129.30V125.30M114.40 126.60L115.60 125.20L116.80 126.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="105.00" y="133.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Muovi: non ti muovi;</text>
-<text x="105.00" y="137.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >esplori dove sei.</text>
-<rect x="92.00" y="124.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
-<rect x="121.00" y="121.00" width="32.0" height="24.0" fill="#f1e2e0"/>
-<rect x="121.00" y="121.00" width="32.0" height="9.2" fill="#9c2f24"/>
-<text x="126.40" y="128.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
-<text x="137.00" y="128.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Fermo</text>
-<path d="M147.60 129.30V125.30M146.40 126.60L147.60 125.20L148.80 126.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="137.00" y="133.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Muovi: non ti muovi;</text>
-<text x="137.00" y="137.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >esplori dove sei.</text>
-<rect x="124.00" y="124.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
-<g id="tacche-stati"><line x1="28.00" y1="20.50" x2="28.00" y2="24.00" stroke="#000" stroke-width="0.15"/><line x1="28.00" y1="146.00" x2="28.00" y2="149.50" stroke="#000" stroke-width="0.15"/><line x1="54.00" y1="20.50" x2="54.00" y2="24.00" stroke="#000" stroke-width="0.15"/><line x1="54.00" y1="146.00" x2="54.00" y2="149.50" stroke="#000" stroke-width="0.15"/><line x1="60.00" y1="20.50" x2="60.00" y2="24.00" stroke="#000" stroke-width="0.15"/><line x1="60.00" y1="146.00" x2="60.00" y2="149.50" stroke="#000" stroke-width="0.15"/><line x1="86.00" y1="20.50" x2="86.00" y2="24.00" stroke="#000" stroke-width="0.15"/><line x1="86.00" y1="146.00" x2="86.00" y2="149.50" stroke="#000" stroke-width="0.15"/><line x1="92.00" y1="20.50" x2="92.00" y2="24.00" stroke="#000" stroke-width="0.15"/><line x1="92.00" y1="146.00" x2="92.00" y2="149.50" stroke="#000" stroke-width="0.15"/><line x1="118.00" y1="20.50" x2="118.00" y2="24.00" stroke="#000" stroke-width="0.15"/><line x1="118.00" y1="146.00" x2="118.00" y2="149.50" stroke="#000" stroke-width="0.15"/><line x1="124.00" y1="20.50" x2="124.00" y2="24.00" stroke="#000" stroke-width="0.15"/><line x1="124.00" y1="146.00" x2="124.00" y2="149.50" stroke="#000" stroke-width="0.15"/><line x1="150.00" y1="20.50" x2="150.00" y2="24.00" stroke="#000" stroke-width="0.15"/><line x1="150.00" y1="146.00" x2="150.00" y2="149.50" stroke="#000" stroke-width="0.15"/><line x1="156.00" y1="20.50" x2="156.00" y2="24.00" stroke="#000" stroke-width="0.15"/><line x1="156.00" y1="146.00" x2="156.00" y2="149.50" stroke="#000" stroke-width="0.15"/><line x1="182.00" y1="20.50" x2="182.00" y2="24.00" stroke="#000" stroke-width="0.15"/><line x1="182.00" y1="146.00" x2="182.00" y2="149.50" stroke="#000" stroke-width="0.15"/><line x1="20.50" y1="28.00" x2="24.00" y2="28.00" stroke="#000" stroke-width="0.15"/><line x1="186.00" y1="28.00" x2="189.50" y2="28.00" stroke="#000" stroke-width="0.15"/><line x1="20.50" y1="46.00" x2="24.00" y2="46.00" stroke="#000" stroke-width="0.15"/><line x1="186.00" y1="46.00" x2="189.50" y2="46.00" stroke="#000" stroke-width="0.15"/><line x1="20.50" y1="52.00" x2="24.00" y2="52.00" stroke="#000" stroke-width="0.15"/><line x1="186.00" y1="52.00" x2="189.50" y2="52.00" stroke="#000" stroke-width="0.15"/><line x1="20.50" y1="70.00" x2="24.00" y2="70.00" stroke="#000" stroke-width="0.15"/><line x1="186.00" y1="70.00" x2="189.50" y2="70.00" stroke="#000" stroke-width="0.15"/><line x1="20.50" y1="76.00" x2="24.00" y2="76.00" stroke="#000" stroke-width="0.15"/><line x1="186.00" y1="76.00" x2="189.50" y2="76.00" stroke="#000" stroke-width="0.15"/><line x1="20.50" y1="94.00" x2="24.00" y2="94.00" stroke="#000" stroke-width="0.15"/><line x1="186.00" y1="94.00" x2="189.50" y2="94.00" stroke="#000" stroke-width="0.15"/><line x1="20.50" y1="100.00" x2="24.00" y2="100.00" stroke="#000" stroke-width="0.15"/><line x1="186.00" y1="100.00" x2="189.50" y2="100.00" stroke="#000" stroke-width="0.15"/><line x1="20.50" y1="118.00" x2="24.00" y2="118.00" stroke="#000" stroke-width="0.15"/><line x1="186.00" y1="118.00" x2="189.50" y2="118.00" stroke="#000" stroke-width="0.15"/><line x1="20.50" y1="124.00" x2="24.00" y2="124.00" stroke="#000" stroke-width="0.15"/><line x1="186.00" y1="124.00" x2="189.50" y2="124.00" stroke="#000" stroke-width="0.15"/><line x1="20.50" y1="142.00" x2="24.00" y2="142.00" stroke="#000" stroke-width="0.15"/><line x1="186.00" y1="142.00" x2="189.50" y2="142.00" stroke="#000" stroke-width="0.15"/></g>
-<circle cx="76.00" cy="186.00" r="29.00" fill="#cf908a"/><circle cx="76.00" cy="186.00" r="26.00" fill="#a8352a"/><circle cx="76.00" cy="186.00" r="24.60" fill="none" stroke="#ffffff" stroke-width="0.3" opacity="0.55"/><rect x="70.50" y="161.50" width="11.0" height="9.0" fill="#ffffff" stroke="#222222" stroke-width="0.25"/><line x1="71.70" y1="162.70" x2="80.30" y2="169.30" stroke="#bbbbbb" stroke-width="0.15"/><line x1="80.30" y1="162.70" x2="71.70" y2="169.30" stroke="#bbbbbb" stroke-width="0.15"/><path d="M69.80 166.00L67.40 164.60L67.40 167.40Z" fill="#ffffff"/><path d="M82.20 166.00L84.60 164.60L84.60 167.40Z" fill="#ffffff"/><path d="M62.72 167.72A22.6 22.6 0 0 0 54.28 179.77" fill="none" stroke="#ffffff" stroke-width="0.55" stroke-linecap="round"/><path d="M53.71 177.74L54.28 179.77L55.83 178.34" fill="none" stroke="#ffffff" stroke-width="0.55" stroke-linecap="round" stroke-linejoin="round"/><text x="62.40" y="177.28" font-family="Liberation Sans Narrow" font-size="2.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >gira</text><path d="M89.28 167.72A22.6 22.6 0 0 1 97.72 179.77" fill="none" stroke="#ffffff" stroke-width="0.55" stroke-linecap="round"/><path d="M98.29 177.74L97.72 179.77L96.17 178.34" fill="none" stroke="#ffffff" stroke-width="0.55" stroke-linecap="round" stroke-linejoin="round"/><text x="89.60" y="177.28" font-family="Liberation Sans Narrow" font-size="2.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >gira</text><circle cx="76.00" cy="186.00" r="5" fill="none" stroke="#ffffff" stroke-width="0.25" stroke-dasharray="0.9 0.7"/><circle cx="76.00" cy="186.00" r="1.1" fill="#ffffff"/><line x1="74.40" y1="186.00" x2="77.60" y2="186.00" stroke="#2a2118" stroke-width="0.18"/><line x1="76.00" y1="184.40" x2="76.00" y2="187.60" stroke="#2a2118" stroke-width="0.18"/><text x="76.00" y="178.40" font-family="Liberation Sans Narrow" font-size="2.30" fill="#ffffff" text-anchor="middle" >plancia di gioco</text><text x="76.00" y="197.20" font-family="Liberation Sans Narrow" font-size="5.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >PV del mostro</text><text x="76.00" y="201.40" font-family="Liberation Sans Narrow" font-size="2.60" fill="#ffffff" text-anchor="middle" >Rotella dello scontro</text><g transform="translate(74.00,204.40) scale(0.16666666666666666)"><path d="M12 3a8 8 0 0 0-8 8c0 3 1.5 4.5 3 5.5V20h10v-3.5c1.5-1 3-2.5 3-5.5a8 8 0 0 0-8-8z" fill="#ffffff"/><circle cx="9" cy="11" r="2" fill="#f4ead5"/><circle cx="15" cy="11" r="2" fill="#f4ead5"/></g>
-<circle cx="134.00" cy="186.00" r="29.00" fill="#ae9b8a"/><circle cx="134.00" cy="186.00" r="26.00" fill="#6b4a2b"/><circle cx="134.00" cy="186.00" r="24.60" fill="none" stroke="#ffffff" stroke-width="0.3" opacity="0.55"/><rect x="128.50" y="161.50" width="11.0" height="9.0" fill="#ffffff" stroke="#222222" stroke-width="0.25"/><line x1="129.70" y1="162.70" x2="138.30" y2="169.30" stroke="#bbbbbb" stroke-width="0.15"/><line x1="138.30" y1="162.70" x2="129.70" y2="169.30" stroke="#bbbbbb" stroke-width="0.15"/><path d="M127.80 166.00L125.40 164.60L125.40 167.40Z" fill="#ffffff"/><path d="M140.20 166.00L142.60 164.60L142.60 167.40Z" fill="#ffffff"/><path d="M120.72 167.72A22.6 22.6 0 0 0 112.28 179.77" fill="none" stroke="#ffffff" stroke-width="0.55" stroke-linecap="round"/><path d="M111.71 177.74L112.28 179.77L113.83 178.34" fill="none" stroke="#ffffff" stroke-width="0.55" stroke-linecap="round" stroke-linejoin="round"/><text x="120.40" y="177.28" font-family="Liberation Sans Narrow" font-size="2.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >gira</text><path d="M147.28 167.72A22.6 22.6 0 0 1 155.72 179.77" fill="none" stroke="#ffffff" stroke-width="0.55" stroke-linecap="round"/><path d="M156.29 177.74L155.72 179.77L154.17 178.34" fill="none" stroke="#ffffff" stroke-width="0.55" stroke-linecap="round" stroke-linejoin="round"/><text x="147.60" y="177.28" font-family="Liberation Sans Narrow" font-size="2.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >gira</text><circle cx="134.00" cy="186.00" r="5" fill="none" stroke="#ffffff" stroke-width="0.25" stroke-dasharray="0.9 0.7"/><circle cx="134.00" cy="186.00" r="1.1" fill="#ffffff"/><line x1="132.40" y1="186.00" x2="135.60" y2="186.00" stroke="#2a2118" stroke-width="0.18"/><line x1="134.00" y1="184.40" x2="134.00" y2="187.60" stroke="#2a2118" stroke-width="0.18"/><text x="134.00" y="178.40" font-family="Liberation Sans Narrow" font-size="2.30" fill="#ffffff" text-anchor="middle" >plancia di gioco</text><text x="134.00" y="197.20" font-family="Liberation Sans Narrow" font-size="5.10" fill="#ffffff" text-anchor="middle" font-weight="bold" >PV del custode</text><text x="134.00" y="201.40" font-family="Liberation Sans Narrow" font-size="2.60" fill="#ffffff" text-anchor="middle" >le ferite restano</text><g transform="translate(132.00,204.40) scale(0.16666666666666666)"><path d="M12 2l8 3v6c0 5.5-3.6 9.3-8 11-4.4-1.7-8-5.5-8-11V5z" fill="#ffffff"/></g>
-<text x="105.00" y="266.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#6b4a2b" text-anchor="middle" >Stampa su A4 al 100%, solo fronte. Tessere Stato: taglia sul bordo sottile (3 mm di abbondanza).</text><text x="105.00" y="269.60" font-family="Liberation Sans Narrow" font-size="2.80" fill="#6b4a2b" text-anchor="middle" >Righe: 4 Rallentato · 2 Occhio · 2 Sussurro · 2 Riflesso · 4 Silenzio · 2 Fede · 2 Vantaggio · 3 Svantaggio · 3 Fermo.</text><text x="105.00" y="273.20" font-family="Liberation Sans Narrow" font-size="2.80" fill="#6b4a2b" text-anchor="middle" >Uno stato vale un turno: preso nel tuo turno va di traverso, nel turno di un altro dritto (freccia ↑ in alto).</text><text x="105.00" y="276.80" font-family="Liberation Sans Narrow" font-size="2.80" fill="#6b4a2b" text-anchor="middle" >Dischi: ritaglia dove cambia il colore e la finestra bianca, fora il centro. «PV del mostro» e «PV del custode» vanno sulle corone 0-9</text><text x="105.00" y="280.40" font-family="Liberation Sans Narrow" font-size="2.80" fill="#6b4a2b" text-anchor="middle" >della Sala del Tesoro, con un fermacampioni. La Rotella della Profezia è sul foglio 2 delle pedine (pedine.pdf).</text>
+<text x="105.00" y="11.00" font-family="Liberation Serif" font-size="4.20" fill="#2a2118" text-anchor="middle" font-weight="bold" >Tessere Stato e rotelle del tavolo · foglio 2 di 2</text><line x1="60.43" y1="9.57" x2="42.43" y2="9.57" stroke="#a8823a" stroke-width="0.25"/><polygon points="40.930,8.822 42.430,9.572 40.930,10.322 39.430,9.572" fill="#a65a32"/><line x1="149.57" y1="9.57" x2="167.57" y2="9.57" stroke="#a8823a" stroke-width="0.25"/><polygon points="169.070,8.822 170.570,9.572 169.070,10.322 167.570,9.572" fill="#a65a32"/><text x="105.00" y="16.00" font-family="Liberation Sans Narrow" font-size="2.90" fill="#6b4a2b" text-anchor="middle" >31 tessere Stato 26 × 18 mm · 2 dischi Ø 52 mm · solo fronte</text>
+<rect x="25.00" y="23.00" width="32.0" height="24.0" fill="#f1e2e0"/>
+<rect x="25.00" y="23.00" width="32.0" height="9.2" fill="#9c2f24"/>
+<line x1="25.00" y1="32.20" x2="57.00" y2="32.20" stroke="#a8823a" stroke-width="0.35"/><line x1="25.00" y1="32.85" x2="57.00" y2="32.85" stroke="#a8823a" stroke-width="0.12"/>
+<text x="30.40" y="30.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
+<text x="41.00" y="30.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Rallentato</text>
+<path d="M51.60 31.30V27.30M50.40 28.60L51.60 27.20L52.80 28.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="41.00" y="35.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Muovi: solo 1</text>
+<text x="41.00" y="39.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >esagono, senza dado.</text>
+<rect x="28.00" y="26.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
+<rect x="57.00" y="23.00" width="32.0" height="24.0" fill="#f1e2e0"/>
+<rect x="57.00" y="23.00" width="32.0" height="9.2" fill="#9c2f24"/>
+<line x1="57.00" y1="32.20" x2="89.00" y2="32.20" stroke="#a8823a" stroke-width="0.35"/><line x1="57.00" y1="32.85" x2="89.00" y2="32.85" stroke="#a8823a" stroke-width="0.12"/>
+<text x="62.40" y="30.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
+<text x="73.00" y="30.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Rallentato</text>
+<path d="M83.60 31.30V27.30M82.40 28.60L83.60 27.20L84.80 28.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="73.00" y="35.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Muovi: solo 1</text>
+<text x="73.00" y="39.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >esagono, senza dado.</text>
+<rect x="60.00" y="26.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
+<rect x="89.00" y="23.00" width="32.0" height="24.0" fill="#f1e2e0"/>
+<rect x="89.00" y="23.00" width="32.0" height="9.2" fill="#9c2f24"/>
+<line x1="89.00" y1="32.20" x2="121.00" y2="32.20" stroke="#a8823a" stroke-width="0.35"/><line x1="89.00" y1="32.85" x2="121.00" y2="32.85" stroke="#a8823a" stroke-width="0.12"/>
+<text x="94.40" y="30.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
+<text x="105.00" y="30.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Rallentato</text>
+<path d="M115.60 31.30V27.30M114.40 28.60L115.60 27.20L116.80 28.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="105.00" y="35.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Muovi: solo 1</text>
+<text x="105.00" y="39.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >esagono, senza dado.</text>
+<rect x="92.00" y="26.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
+<rect x="121.00" y="23.00" width="32.0" height="24.0" fill="#f1e2e0"/>
+<rect x="121.00" y="23.00" width="32.0" height="9.2" fill="#9c2f24"/>
+<line x1="121.00" y1="32.20" x2="153.00" y2="32.20" stroke="#a8823a" stroke-width="0.35"/><line x1="121.00" y1="32.85" x2="153.00" y2="32.85" stroke="#a8823a" stroke-width="0.12"/>
+<text x="126.40" y="30.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
+<text x="137.00" y="30.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Rallentato</text>
+<path d="M147.60 31.30V27.30M146.40 28.60L147.60 27.20L148.80 28.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="137.00" y="35.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Muovi: solo 1</text>
+<text x="137.00" y="39.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >esagono, senza dado.</text>
+<rect x="124.00" y="26.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
+<rect x="153.00" y="23.00" width="32.0" height="24.0" fill="#e4ede6"/>
+<rect x="153.00" y="23.00" width="32.0" height="9.2" fill="#3b7d4f"/>
+<line x1="153.00" y1="32.20" x2="185.00" y2="32.20" stroke="#a8823a" stroke-width="0.35"/><line x1="153.00" y1="32.85" x2="185.00" y2="32.85" stroke="#a8823a" stroke-width="0.12"/>
+<text x="158.40" y="30.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
+<text x="169.00" y="30.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Occhio</text>
+<path d="M179.60 31.30V27.30M178.40 28.60L179.60 27.20L180.80 28.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="169.00" y="35.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Prossima Trappola:</text>
+<text x="169.00" y="39.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >nessun effetto. Poi</text>
+<text x="169.00" y="42.31" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >toglilo.</text>
+<rect x="156.00" y="26.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
+<rect x="25.00" y="47.00" width="32.0" height="24.0" fill="#e4ede6"/>
+<rect x="25.00" y="47.00" width="32.0" height="9.2" fill="#3b7d4f"/>
+<line x1="25.00" y1="56.20" x2="57.00" y2="56.20" stroke="#a8823a" stroke-width="0.35"/><line x1="25.00" y1="56.85" x2="57.00" y2="56.85" stroke="#a8823a" stroke-width="0.12"/>
+<text x="30.40" y="54.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
+<text x="41.00" y="54.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Occhio</text>
+<path d="M51.60 55.30V51.30M50.40 52.60L51.60 51.20L52.80 52.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="41.00" y="59.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Prossima Trappola:</text>
+<text x="41.00" y="63.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >nessun effetto. Poi</text>
+<text x="41.00" y="66.31" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >toglilo.</text>
+<rect x="28.00" y="50.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
+<rect x="57.00" y="47.00" width="32.0" height="24.0" fill="#e4ede6"/>
+<rect x="57.00" y="47.00" width="32.0" height="9.2" fill="#3b7d4f"/>
+<line x1="57.00" y1="56.20" x2="89.00" y2="56.20" stroke="#a8823a" stroke-width="0.35"/><line x1="57.00" y1="56.85" x2="89.00" y2="56.85" stroke="#a8823a" stroke-width="0.12"/>
+<text x="62.40" y="54.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
+<text x="73.00" y="54.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Occhio</text>
+<path d="M83.60 55.30V51.30M82.40 52.60L83.60 51.20L84.80 52.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="73.00" y="59.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Prossima Trappola:</text>
+<text x="73.00" y="63.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >nessun effetto. Poi</text>
+<text x="73.00" y="66.31" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >toglilo.</text>
+<rect x="60.00" y="50.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
+<rect x="89.00" y="47.00" width="32.0" height="24.0" fill="#e4ede6"/>
+<rect x="89.00" y="47.00" width="32.0" height="9.2" fill="#3b7d4f"/>
+<line x1="89.00" y1="56.20" x2="121.00" y2="56.20" stroke="#a8823a" stroke-width="0.35"/><line x1="89.00" y1="56.85" x2="121.00" y2="56.85" stroke="#a8823a" stroke-width="0.12"/>
+<text x="94.40" y="54.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
+<text x="105.00" y="54.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Sussurro</text>
+<path d="M115.60 55.30V51.30M114.40 52.60L115.60 51.20L116.80 52.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="105.00" y="59.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Mostro vinto su «?»:</text>
+<text x="105.00" y="63.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >+1 Indizio, poi toglilo.</text>
+<rect x="92.00" y="50.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
+<rect x="121.00" y="47.00" width="32.0" height="24.0" fill="#e4ede6"/>
+<rect x="121.00" y="47.00" width="32.0" height="9.2" fill="#3b7d4f"/>
+<line x1="121.00" y1="56.20" x2="153.00" y2="56.20" stroke="#a8823a" stroke-width="0.35"/><line x1="121.00" y1="56.85" x2="153.00" y2="56.85" stroke="#a8823a" stroke-width="0.12"/>
+<text x="126.40" y="54.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
+<text x="137.00" y="54.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Sussurro</text>
+<path d="M147.60 55.30V51.30M146.40 52.60L147.60 51.20L148.80 52.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="137.00" y="59.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Mostro vinto su «?»:</text>
+<text x="137.00" y="63.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >+1 Indizio, poi toglilo.</text>
+<rect x="124.00" y="50.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
+<rect x="153.00" y="47.00" width="32.0" height="24.0" fill="#e4ede6"/>
+<rect x="153.00" y="47.00" width="32.0" height="9.2" fill="#3b7d4f"/>
+<line x1="153.00" y1="56.20" x2="185.00" y2="56.20" stroke="#a8823a" stroke-width="0.35"/><line x1="153.00" y1="56.85" x2="185.00" y2="56.85" stroke="#a8823a" stroke-width="0.12"/>
+<text x="158.40" y="54.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
+<text x="169.00" y="54.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Riflesso</text>
+<path d="M179.60 55.30V51.30M178.40 52.60L179.60 51.20L180.80 52.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="169.00" y="59.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Chi ti fa Danni ne</text>
+<text x="169.00" y="63.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >subisce 1.</text>
+<rect x="156.00" y="50.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
+<rect x="25.00" y="71.00" width="32.0" height="24.0" fill="#e4ede6"/>
+<rect x="25.00" y="71.00" width="32.0" height="9.2" fill="#3b7d4f"/>
+<line x1="25.00" y1="80.20" x2="57.00" y2="80.20" stroke="#a8823a" stroke-width="0.35"/><line x1="25.00" y1="80.85" x2="57.00" y2="80.85" stroke="#a8823a" stroke-width="0.12"/>
+<text x="30.40" y="78.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
+<text x="41.00" y="78.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Riflesso</text>
+<path d="M51.60 79.30V75.30M50.40 76.60L51.60 75.20L52.80 76.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="41.00" y="83.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Chi ti fa Danni ne</text>
+<text x="41.00" y="87.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >subisce 1.</text>
+<rect x="28.00" y="74.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
+<rect x="57.00" y="71.00" width="32.0" height="24.0" fill="#e4ede6"/>
+<rect x="57.00" y="71.00" width="32.0" height="9.2" fill="#3b7d4f"/>
+<line x1="57.00" y1="80.20" x2="89.00" y2="80.20" stroke="#a8823a" stroke-width="0.35"/><line x1="57.00" y1="80.85" x2="89.00" y2="80.85" stroke="#a8823a" stroke-width="0.12"/>
+<text x="62.40" y="78.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
+<text x="73.00" y="78.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Riflesso</text>
+<path d="M83.60 79.30V75.30M82.40 76.60L83.60 75.20L84.80 76.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="73.00" y="83.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Chi ti fa Danni ne</text>
+<text x="73.00" y="87.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >subisce 1.</text>
+<rect x="60.00" y="74.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
+<rect x="89.00" y="71.00" width="32.0" height="24.0" fill="#f1e2e0"/>
+<rect x="89.00" y="71.00" width="32.0" height="9.2" fill="#9c2f24"/>
+<line x1="89.00" y1="80.20" x2="121.00" y2="80.20" stroke="#a8823a" stroke-width="0.35"/><line x1="89.00" y1="80.85" x2="121.00" y2="80.85" stroke="#a8823a" stroke-width="0.12"/>
+<text x="94.40" y="78.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
+<text x="105.00" y="78.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Silenzio</text>
+<path d="M115.60 79.30V75.30M114.40 76.60L115.60 75.20L116.80 76.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="105.00" y="83.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Non puoi giocare carte</text>
+<text x="105.00" y="87.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Incanto.</text>
+<rect x="92.00" y="74.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
+<rect x="121.00" y="71.00" width="32.0" height="24.0" fill="#f1e2e0"/>
+<rect x="121.00" y="71.00" width="32.0" height="9.2" fill="#9c2f24"/>
+<line x1="121.00" y1="80.20" x2="153.00" y2="80.20" stroke="#a8823a" stroke-width="0.35"/><line x1="121.00" y1="80.85" x2="153.00" y2="80.85" stroke="#a8823a" stroke-width="0.12"/>
+<text x="126.40" y="78.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
+<text x="137.00" y="78.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Silenzio</text>
+<path d="M147.60 79.30V75.30M146.40 76.60L147.60 75.20L148.80 76.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="137.00" y="83.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Non puoi giocare carte</text>
+<text x="137.00" y="87.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Incanto.</text>
+<rect x="124.00" y="74.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
+<rect x="153.00" y="71.00" width="32.0" height="24.0" fill="#f1e2e0"/>
+<rect x="153.00" y="71.00" width="32.0" height="9.2" fill="#9c2f24"/>
+<line x1="153.00" y1="80.20" x2="185.00" y2="80.20" stroke="#a8823a" stroke-width="0.35"/><line x1="153.00" y1="80.85" x2="185.00" y2="80.85" stroke="#a8823a" stroke-width="0.12"/>
+<text x="158.40" y="78.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
+<text x="169.00" y="78.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Silenzio</text>
+<path d="M179.60 79.30V75.30M178.40 76.60L179.60 75.20L180.80 76.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="169.00" y="83.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Non puoi giocare carte</text>
+<text x="169.00" y="87.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Incanto.</text>
+<rect x="156.00" y="74.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
+<rect x="25.00" y="95.00" width="32.0" height="24.0" fill="#f1e2e0"/>
+<rect x="25.00" y="95.00" width="32.0" height="9.2" fill="#9c2f24"/>
+<line x1="25.00" y1="104.20" x2="57.00" y2="104.20" stroke="#a8823a" stroke-width="0.35"/><line x1="25.00" y1="104.85" x2="57.00" y2="104.85" stroke="#a8823a" stroke-width="0.12"/>
+<text x="30.40" y="102.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
+<text x="41.00" y="102.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Silenzio</text>
+<path d="M51.60 103.30V99.30M50.40 100.60L51.60 99.20L52.80 100.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="41.00" y="107.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Non puoi giocare carte</text>
+<text x="41.00" y="111.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Incanto.</text>
+<rect x="28.00" y="98.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
+<rect x="57.00" y="95.00" width="32.0" height="24.0" fill="#e4ede6"/>
+<rect x="57.00" y="95.00" width="32.0" height="9.2" fill="#3b7d4f"/>
+<line x1="57.00" y1="104.20" x2="89.00" y2="104.20" stroke="#a8823a" stroke-width="0.35"/><line x1="57.00" y1="104.85" x2="89.00" y2="104.85" stroke="#a8823a" stroke-width="0.12"/>
+<text x="62.40" y="102.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
+<text x="73.00" y="102.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Fede</text>
+<path d="M83.60 103.30V99.30M82.40 100.60L83.60 99.20L84.80 100.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="73.00" y="107.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >(+1) AR.</text>
+<rect x="60.00" y="98.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
+<rect x="89.00" y="95.00" width="32.0" height="24.0" fill="#e4ede6"/>
+<rect x="89.00" y="95.00" width="32.0" height="9.2" fill="#3b7d4f"/>
+<line x1="89.00" y1="104.20" x2="121.00" y2="104.20" stroke="#a8823a" stroke-width="0.35"/><line x1="89.00" y1="104.85" x2="121.00" y2="104.85" stroke="#a8823a" stroke-width="0.12"/>
+<text x="94.40" y="102.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
+<text x="105.00" y="102.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Fede</text>
+<path d="M115.60 103.30V99.30M114.40 100.60L115.60 99.20L116.80 100.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="105.00" y="107.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >(+1) AR.</text>
+<rect x="92.00" y="98.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
+<rect x="121.00" y="95.00" width="32.0" height="24.0" fill="#e4ede6"/>
+<rect x="121.00" y="95.00" width="32.0" height="9.2" fill="#3b7d4f"/>
+<line x1="121.00" y1="104.20" x2="153.00" y2="104.20" stroke="#a8823a" stroke-width="0.35"/><line x1="121.00" y1="104.85" x2="153.00" y2="104.85" stroke="#a8823a" stroke-width="0.12"/>
+<text x="126.40" y="102.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
+<text x="137.00" y="102.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Fede</text>
+<path d="M147.60 103.30V99.30M146.40 100.60L147.60 99.20L148.80 100.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="137.00" y="107.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >(+1) AR.</text>
+<rect x="124.00" y="98.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
+<rect x="153.00" y="95.00" width="32.0" height="24.0" fill="#e4ede6"/>
+<rect x="153.00" y="95.00" width="32.0" height="9.2" fill="#3b7d4f"/>
+<line x1="153.00" y1="104.20" x2="185.00" y2="104.20" stroke="#a8823a" stroke-width="0.35"/><line x1="153.00" y1="104.85" x2="185.00" y2="104.85" stroke="#a8823a" stroke-width="0.12"/>
+<text x="158.40" y="102.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
+<text x="169.00" y="102.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Fede</text>
+<path d="M179.60 103.30V99.30M178.40 100.60L179.60 99.20L180.80 100.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="169.00" y="107.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >(+1) AR.</text>
+<rect x="156.00" y="98.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
+<rect x="25.00" y="119.00" width="32.0" height="24.0" fill="#e4ede6"/>
+<rect x="25.00" y="119.00" width="32.0" height="9.2" fill="#3b7d4f"/>
+<line x1="25.00" y1="128.20" x2="57.00" y2="128.20" stroke="#a8823a" stroke-width="0.35"/><line x1="25.00" y1="128.85" x2="57.00" y2="128.85" stroke="#a8823a" stroke-width="0.12"/>
+<text x="30.40" y="126.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
+<text x="41.00" y="126.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Vantaggio</text>
+<path d="M51.60 127.30V123.30M50.40 124.60L51.60 123.20L52.80 124.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="41.00" y="131.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >I tuoi tiri per colpire si</text>
+<text x="41.00" y="135.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >fanno con vantaggio.</text>
+<rect x="28.00" y="122.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
+<rect x="57.00" y="119.00" width="32.0" height="24.0" fill="#e4ede6"/>
+<rect x="57.00" y="119.00" width="32.0" height="9.2" fill="#3b7d4f"/>
+<line x1="57.00" y1="128.20" x2="89.00" y2="128.20" stroke="#a8823a" stroke-width="0.35"/><line x1="57.00" y1="128.85" x2="89.00" y2="128.85" stroke="#a8823a" stroke-width="0.12"/>
+<text x="62.40" y="126.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
+<text x="73.00" y="126.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Vantaggio</text>
+<path d="M83.60 127.30V123.30M82.40 124.60L83.60 123.20L84.80 124.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="73.00" y="131.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >I tuoi tiri per colpire si</text>
+<text x="73.00" y="135.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >fanno con vantaggio.</text>
+<rect x="60.00" y="122.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
+<rect x="89.00" y="119.00" width="32.0" height="24.0" fill="#e4ede6"/>
+<rect x="89.00" y="119.00" width="32.0" height="9.2" fill="#3b7d4f"/>
+<line x1="89.00" y1="128.20" x2="121.00" y2="128.20" stroke="#a8823a" stroke-width="0.35"/><line x1="89.00" y1="128.85" x2="121.00" y2="128.85" stroke="#a8823a" stroke-width="0.12"/>
+<text x="94.40" y="126.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
+<text x="105.00" y="126.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Vantaggio</text>
+<path d="M115.60 127.30V123.30M114.40 124.60L115.60 123.20L116.80 124.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="105.00" y="131.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >I tuoi tiri per colpire si</text>
+<text x="105.00" y="135.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >fanno con vantaggio.</text>
+<rect x="92.00" y="122.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
+<rect x="121.00" y="119.00" width="32.0" height="24.0" fill="#e4ede6"/>
+<rect x="121.00" y="119.00" width="32.0" height="9.2" fill="#3b7d4f"/>
+<line x1="121.00" y1="128.20" x2="153.00" y2="128.20" stroke="#a8823a" stroke-width="0.35"/><line x1="121.00" y1="128.85" x2="153.00" y2="128.85" stroke="#a8823a" stroke-width="0.12"/>
+<text x="126.40" y="126.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
+<text x="137.00" y="126.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Vantaggio</text>
+<path d="M147.60 127.30V123.30M146.40 124.60L147.60 123.20L148.80 124.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="137.00" y="131.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >I tuoi tiri per colpire si</text>
+<text x="137.00" y="135.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >fanno con vantaggio.</text>
+<rect x="124.00" y="122.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
+<rect x="153.00" y="119.00" width="32.0" height="24.0" fill="#f1e2e0"/>
+<rect x="153.00" y="119.00" width="32.0" height="9.2" fill="#9c2f24"/>
+<line x1="153.00" y1="128.20" x2="185.00" y2="128.20" stroke="#a8823a" stroke-width="0.35"/><line x1="153.00" y1="128.85" x2="185.00" y2="128.85" stroke="#a8823a" stroke-width="0.12"/>
+<text x="158.40" y="126.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
+<text x="169.00" y="126.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Svantaggio</text>
+<path d="M179.60 127.30V123.30M178.40 124.60L179.60 123.20L180.80 124.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="169.00" y="131.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >I tuoi tiri per colpire si</text>
+<text x="169.00" y="135.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >fanno con svantaggio.</text>
+<rect x="156.00" y="122.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
+<rect x="25.00" y="143.00" width="32.0" height="24.0" fill="#f1e2e0"/>
+<rect x="25.00" y="143.00" width="32.0" height="9.2" fill="#9c2f24"/>
+<line x1="25.00" y1="152.20" x2="57.00" y2="152.20" stroke="#a8823a" stroke-width="0.35"/><line x1="25.00" y1="152.85" x2="57.00" y2="152.85" stroke="#a8823a" stroke-width="0.12"/>
+<text x="30.40" y="150.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
+<text x="41.00" y="150.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Svantaggio</text>
+<path d="M51.60 151.30V147.30M50.40 148.60L51.60 147.20L52.80 148.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="41.00" y="155.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >I tuoi tiri per colpire si</text>
+<text x="41.00" y="159.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >fanno con svantaggio.</text>
+<rect x="28.00" y="146.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
+<rect x="57.00" y="143.00" width="32.0" height="24.0" fill="#f1e2e0"/>
+<rect x="57.00" y="143.00" width="32.0" height="9.2" fill="#9c2f24"/>
+<line x1="57.00" y1="152.20" x2="89.00" y2="152.20" stroke="#a8823a" stroke-width="0.35"/><line x1="57.00" y1="152.85" x2="89.00" y2="152.85" stroke="#a8823a" stroke-width="0.12"/>
+<text x="62.40" y="150.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
+<text x="73.00" y="150.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Svantaggio</text>
+<path d="M83.60 151.30V147.30M82.40 148.60L83.60 147.20L84.80 148.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="73.00" y="155.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >I tuoi tiri per colpire si</text>
+<text x="73.00" y="159.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >fanno con svantaggio.</text>
+<rect x="60.00" y="146.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
+<rect x="89.00" y="143.00" width="32.0" height="24.0" fill="#f1e2e0"/>
+<rect x="89.00" y="143.00" width="32.0" height="9.2" fill="#9c2f24"/>
+<line x1="89.00" y1="152.20" x2="121.00" y2="152.20" stroke="#a8823a" stroke-width="0.35"/><line x1="89.00" y1="152.85" x2="121.00" y2="152.85" stroke="#a8823a" stroke-width="0.12"/>
+<text x="94.40" y="150.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
+<text x="105.00" y="150.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Fermo</text>
+<path d="M115.60 151.30V147.30M114.40 148.60L115.60 147.20L116.80 148.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="105.00" y="155.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Muovi: non ti muovi;</text>
+<text x="105.00" y="159.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >esplori dove sei.</text>
+<rect x="92.00" y="146.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
+<rect x="121.00" y="143.00" width="32.0" height="24.0" fill="#f1e2e0"/>
+<rect x="121.00" y="143.00" width="32.0" height="9.2" fill="#9c2f24"/>
+<line x1="121.00" y1="152.20" x2="153.00" y2="152.20" stroke="#a8823a" stroke-width="0.35"/><line x1="121.00" y1="152.85" x2="153.00" y2="152.85" stroke="#a8823a" stroke-width="0.12"/>
+<text x="126.40" y="150.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
+<text x="137.00" y="150.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Fermo</text>
+<path d="M147.60 151.30V147.30M146.40 148.60L147.60 147.20L148.80 148.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="137.00" y="155.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Muovi: non ti muovi;</text>
+<text x="137.00" y="159.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >esplori dove sei.</text>
+<rect x="124.00" y="146.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
+<rect x="153.00" y="143.00" width="32.0" height="24.0" fill="#f1e2e0"/>
+<rect x="153.00" y="143.00" width="32.0" height="9.2" fill="#9c2f24"/>
+<line x1="153.00" y1="152.20" x2="185.00" y2="152.20" stroke="#a8823a" stroke-width="0.35"/><line x1="153.00" y1="152.85" x2="185.00" y2="152.85" stroke="#a8823a" stroke-width="0.12"/>
+<text x="158.40" y="150.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
+<text x="169.00" y="150.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Fermo</text>
+<path d="M179.60 151.30V147.30M178.40 148.60L179.60 147.20L180.80 148.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="169.00" y="155.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Muovi: non ti muovi;</text>
+<text x="169.00" y="159.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >esplori dove sei.</text>
+<rect x="156.00" y="146.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
+<rect x="25.00" y="167.00" width="32.0" height="24.0" fill="#f1e2e0"/>
+<rect x="25.00" y="167.00" width="32.0" height="9.2" fill="#9c2f24"/>
+<line x1="25.00" y1="176.20" x2="57.00" y2="176.20" stroke="#a8823a" stroke-width="0.35"/><line x1="25.00" y1="176.85" x2="57.00" y2="176.85" stroke="#a8823a" stroke-width="0.12"/>
+<text x="30.40" y="174.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
+<text x="41.00" y="174.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Fermo</text>
+<path d="M51.60 175.30V171.30M50.40 172.60L51.60 171.20L52.80 172.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="41.00" y="179.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Muovi: non ti muovi;</text>
+<text x="41.00" y="183.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >esplori dove sei.</text>
+<rect x="28.00" y="170.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
+<g id="tacche-stati"><line x1="28.00" y1="18.50" x2="28.00" y2="22.00" stroke="#000" stroke-width="0.15"/><line x1="28.00" y1="192.00" x2="28.00" y2="195.50" stroke="#000" stroke-width="0.15"/><line x1="54.00" y1="18.50" x2="54.00" y2="22.00" stroke="#000" stroke-width="0.15"/><line x1="54.00" y1="192.00" x2="54.00" y2="195.50" stroke="#000" stroke-width="0.15"/><line x1="60.00" y1="18.50" x2="60.00" y2="22.00" stroke="#000" stroke-width="0.15"/><line x1="60.00" y1="192.00" x2="60.00" y2="195.50" stroke="#000" stroke-width="0.15"/><line x1="86.00" y1="18.50" x2="86.00" y2="22.00" stroke="#000" stroke-width="0.15"/><line x1="86.00" y1="192.00" x2="86.00" y2="195.50" stroke="#000" stroke-width="0.15"/><line x1="92.00" y1="18.50" x2="92.00" y2="22.00" stroke="#000" stroke-width="0.15"/><line x1="92.00" y1="192.00" x2="92.00" y2="195.50" stroke="#000" stroke-width="0.15"/><line x1="118.00" y1="18.50" x2="118.00" y2="22.00" stroke="#000" stroke-width="0.15"/><line x1="118.00" y1="192.00" x2="118.00" y2="195.50" stroke="#000" stroke-width="0.15"/><line x1="124.00" y1="18.50" x2="124.00" y2="22.00" stroke="#000" stroke-width="0.15"/><line x1="124.00" y1="192.00" x2="124.00" y2="195.50" stroke="#000" stroke-width="0.15"/><line x1="150.00" y1="18.50" x2="150.00" y2="22.00" stroke="#000" stroke-width="0.15"/><line x1="150.00" y1="192.00" x2="150.00" y2="195.50" stroke="#000" stroke-width="0.15"/><line x1="156.00" y1="18.50" x2="156.00" y2="22.00" stroke="#000" stroke-width="0.15"/><line x1="156.00" y1="192.00" x2="156.00" y2="195.50" stroke="#000" stroke-width="0.15"/><line x1="182.00" y1="18.50" x2="182.00" y2="22.00" stroke="#000" stroke-width="0.15"/><line x1="182.00" y1="192.00" x2="182.00" y2="195.50" stroke="#000" stroke-width="0.15"/><line x1="20.50" y1="26.00" x2="24.00" y2="26.00" stroke="#000" stroke-width="0.15"/><line x1="186.00" y1="26.00" x2="189.50" y2="26.00" stroke="#000" stroke-width="0.15"/><line x1="20.50" y1="44.00" x2="24.00" y2="44.00" stroke="#000" stroke-width="0.15"/><line x1="186.00" y1="44.00" x2="189.50" y2="44.00" stroke="#000" stroke-width="0.15"/><line x1="20.50" y1="50.00" x2="24.00" y2="50.00" stroke="#000" stroke-width="0.15"/><line x1="186.00" y1="50.00" x2="189.50" y2="50.00" stroke="#000" stroke-width="0.15"/><line x1="20.50" y1="68.00" x2="24.00" y2="68.00" stroke="#000" stroke-width="0.15"/><line x1="186.00" y1="68.00" x2="189.50" y2="68.00" stroke="#000" stroke-width="0.15"/><line x1="20.50" y1="74.00" x2="24.00" y2="74.00" stroke="#000" stroke-width="0.15"/><line x1="186.00" y1="74.00" x2="189.50" y2="74.00" stroke="#000" stroke-width="0.15"/><line x1="20.50" y1="92.00" x2="24.00" y2="92.00" stroke="#000" stroke-width="0.15"/><line x1="186.00" y1="92.00" x2="189.50" y2="92.00" stroke="#000" stroke-width="0.15"/><line x1="20.50" y1="98.00" x2="24.00" y2="98.00" stroke="#000" stroke-width="0.15"/><line x1="186.00" y1="98.00" x2="189.50" y2="98.00" stroke="#000" stroke-width="0.15"/><line x1="20.50" y1="116.00" x2="24.00" y2="116.00" stroke="#000" stroke-width="0.15"/><line x1="186.00" y1="116.00" x2="189.50" y2="116.00" stroke="#000" stroke-width="0.15"/><line x1="20.50" y1="122.00" x2="24.00" y2="122.00" stroke="#000" stroke-width="0.15"/><line x1="186.00" y1="122.00" x2="189.50" y2="122.00" stroke="#000" stroke-width="0.15"/><line x1="20.50" y1="140.00" x2="24.00" y2="140.00" stroke="#000" stroke-width="0.15"/><line x1="186.00" y1="140.00" x2="189.50" y2="140.00" stroke="#000" stroke-width="0.15"/><line x1="20.50" y1="146.00" x2="24.00" y2="146.00" stroke="#000" stroke-width="0.15"/><line x1="186.00" y1="146.00" x2="189.50" y2="146.00" stroke="#000" stroke-width="0.15"/><line x1="20.50" y1="164.00" x2="24.00" y2="164.00" stroke="#000" stroke-width="0.15"/><line x1="186.00" y1="164.00" x2="189.50" y2="164.00" stroke="#000" stroke-width="0.15"/><line x1="20.50" y1="170.00" x2="24.00" y2="170.00" stroke="#000" stroke-width="0.15"/><line x1="186.00" y1="170.00" x2="189.50" y2="170.00" stroke="#000" stroke-width="0.15"/><line x1="20.50" y1="188.00" x2="24.00" y2="188.00" stroke="#000" stroke-width="0.15"/><line x1="186.00" y1="188.00" x2="189.50" y2="188.00" stroke="#000" stroke-width="0.15"/></g>
+<circle cx="76.00" cy="232.00" r="29.00" fill="#cf908a"/><circle cx="76.00" cy="232.00" r="26.00" fill="#a8352a"/><circle cx="76.00" cy="232.00" r="24.60" fill="none" stroke="#e8cd8f" stroke-width="0.3" opacity="0.9"/><circle cx="97.304" cy="219.700" r="0.450" fill="#e8cd8f"/><circle cx="97.304" cy="244.300" r="0.450" fill="#e8cd8f"/><circle cx="76.000" cy="256.600" r="0.450" fill="#e8cd8f"/><circle cx="54.696" cy="244.300" r="0.450" fill="#e8cd8f"/><circle cx="54.696" cy="219.700" r="0.450" fill="#e8cd8f"/><rect x="70.50" y="207.50" width="11.0" height="9.0" fill="#ffffff" stroke="#222222" stroke-width="0.25"/><line x1="71.70" y1="208.70" x2="80.30" y2="215.30" stroke="#bbbbbb" stroke-width="0.15"/><line x1="80.30" y1="208.70" x2="71.70" y2="215.30" stroke="#bbbbbb" stroke-width="0.15"/><path d="M69.80 212.00L67.40 210.60L67.40 213.40Z" fill="#ffffff"/><path d="M82.20 212.00L84.60 210.60L84.60 213.40Z" fill="#ffffff"/><path d="M62.72 213.72A22.6 22.6 0 0 0 54.28 225.77" fill="none" stroke="#ffffff" stroke-width="0.55" stroke-linecap="round"/><path d="M53.71 223.74L54.28 225.77L55.83 224.34" fill="none" stroke="#ffffff" stroke-width="0.55" stroke-linecap="round" stroke-linejoin="round"/><text x="62.40" y="223.28" font-family="Liberation Sans Narrow" font-size="2.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >gira</text><path d="M89.28 213.72A22.6 22.6 0 0 1 97.72 225.77" fill="none" stroke="#ffffff" stroke-width="0.55" stroke-linecap="round"/><path d="M98.29 223.74L97.72 225.77L96.17 224.34" fill="none" stroke="#ffffff" stroke-width="0.55" stroke-linecap="round" stroke-linejoin="round"/><text x="89.60" y="223.28" font-family="Liberation Sans Narrow" font-size="2.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >gira</text><circle cx="76.00" cy="232.00" r="5" fill="none" stroke="#ffffff" stroke-width="0.25" stroke-dasharray="0.9 0.7"/><circle cx="76.00" cy="232.00" r="1.1" fill="#ffffff"/><line x1="74.40" y1="232.00" x2="77.60" y2="232.00" stroke="#2a2118" stroke-width="0.18"/><line x1="76.00" y1="230.40" x2="76.00" y2="233.60" stroke="#2a2118" stroke-width="0.18"/><text x="76.00" y="224.40" font-family="Liberation Sans Narrow" font-size="2.30" fill="#ffffff" text-anchor="middle" >plancia di gioco</text><text x="76.00" y="243.20" font-family="Liberation Sans Narrow" font-size="5.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >PV del mostro</text><text x="76.00" y="247.40" font-family="Liberation Sans Narrow" font-size="2.60" fill="#ffffff" text-anchor="middle" >Rotella dello scontro</text><g transform="translate(74.00,250.40) scale(0.16666666666666666)"><path d="M12 3a8 8 0 0 0-8 8c0 3 1.5 4.5 3 5.5V20h10v-3.5c1.5-1 3-2.5 3-5.5a8 8 0 0 0-8-8z" fill="#ffffff"/><circle cx="9" cy="11" r="2" fill="#f4ead5"/><circle cx="15" cy="11" r="2" fill="#f4ead5"/></g>
+<circle cx="134.00" cy="232.00" r="29.00" fill="#ae9b8a"/><circle cx="134.00" cy="232.00" r="26.00" fill="#6b4a2b"/><circle cx="134.00" cy="232.00" r="24.60" fill="none" stroke="#e8cd8f" stroke-width="0.3" opacity="0.9"/><circle cx="155.304" cy="219.700" r="0.450" fill="#e8cd8f"/><circle cx="155.304" cy="244.300" r="0.450" fill="#e8cd8f"/><circle cx="134.000" cy="256.600" r="0.450" fill="#e8cd8f"/><circle cx="112.696" cy="244.300" r="0.450" fill="#e8cd8f"/><circle cx="112.696" cy="219.700" r="0.450" fill="#e8cd8f"/><rect x="128.50" y="207.50" width="11.0" height="9.0" fill="#ffffff" stroke="#222222" stroke-width="0.25"/><line x1="129.70" y1="208.70" x2="138.30" y2="215.30" stroke="#bbbbbb" stroke-width="0.15"/><line x1="138.30" y1="208.70" x2="129.70" y2="215.30" stroke="#bbbbbb" stroke-width="0.15"/><path d="M127.80 212.00L125.40 210.60L125.40 213.40Z" fill="#ffffff"/><path d="M140.20 212.00L142.60 210.60L142.60 213.40Z" fill="#ffffff"/><path d="M120.72 213.72A22.6 22.6 0 0 0 112.28 225.77" fill="none" stroke="#ffffff" stroke-width="0.55" stroke-linecap="round"/><path d="M111.71 223.74L112.28 225.77L113.83 224.34" fill="none" stroke="#ffffff" stroke-width="0.55" stroke-linecap="round" stroke-linejoin="round"/><text x="120.40" y="223.28" font-family="Liberation Sans Narrow" font-size="2.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >gira</text><path d="M147.28 213.72A22.6 22.6 0 0 1 155.72 225.77" fill="none" stroke="#ffffff" stroke-width="0.55" stroke-linecap="round"/><path d="M156.29 223.74L155.72 225.77L154.17 224.34" fill="none" stroke="#ffffff" stroke-width="0.55" stroke-linecap="round" stroke-linejoin="round"/><text x="147.60" y="223.28" font-family="Liberation Sans Narrow" font-size="2.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >gira</text><circle cx="134.00" cy="232.00" r="5" fill="none" stroke="#ffffff" stroke-width="0.25" stroke-dasharray="0.9 0.7"/><circle cx="134.00" cy="232.00" r="1.1" fill="#ffffff"/><line x1="132.40" y1="232.00" x2="135.60" y2="232.00" stroke="#2a2118" stroke-width="0.18"/><line x1="134.00" y1="230.40" x2="134.00" y2="233.60" stroke="#2a2118" stroke-width="0.18"/><text x="134.00" y="224.40" font-family="Liberation Sans Narrow" font-size="2.30" fill="#ffffff" text-anchor="middle" >plancia di gioco</text><text x="134.00" y="243.20" font-family="Liberation Sans Narrow" font-size="5.10" fill="#ffffff" text-anchor="middle" font-weight="bold" >PV del custode</text><text x="134.00" y="247.40" font-family="Liberation Sans Narrow" font-size="2.60" fill="#ffffff" text-anchor="middle" >le ferite restano</text><g transform="translate(132.00,250.40) scale(0.16666666666666666)"><path d="M12 2l8 3v6c0 5.5-3.6 9.3-8 11-4.4-1.7-8-5.5-8-11V5z" fill="#ffffff"/></g>
+<text x="105.00" y="266.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#6b4a2b" text-anchor="middle" >Stampa su A4 al 100%, solo fronte. Tessere Stato: taglia sul bordo sottile (3 mm di abbondanza).</text><text x="105.00" y="269.60" font-family="Liberation Sans Narrow" font-size="2.80" fill="#6b4a2b" text-anchor="middle" >Righe: 4 Rallentato · 3 Occhio · 2 Sussurro · 3 Riflesso · 4 Silenzio · 4 Fede · 4 Vantaggio · 3 Svantaggio · 4 Fermo.</text><text x="105.00" y="273.20" font-family="Liberation Sans Narrow" font-size="2.80" fill="#6b4a2b" text-anchor="middle" >Uno stato vale un turno: preso nel tuo turno va di traverso, nel turno di un altro dritto (freccia ↑ in alto).</text><text x="105.00" y="276.80" font-family="Liberation Sans Narrow" font-size="2.80" fill="#6b4a2b" text-anchor="middle" >Dischi: ritaglia dove cambia il colore e la finestra bianca, fora il centro. «PV del mostro» e «PV del custode» vanno sulle corone 0-9</text><text x="105.00" y="280.40" font-family="Liberation Sans Narrow" font-size="2.80" fill="#6b4a2b" text-anchor="middle" >della Sala del Tesoro, con un fermacampioni. La Rotella della Profezia è sul foglio 2 delle pedine (pedine.pdf).</text>
 </svg>

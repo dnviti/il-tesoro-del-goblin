@@ -9,8 +9,10 @@ Schema v7 delle carte comuni (dati/carte_comuni.csv) e di classe (dati/classi/<c
 nell'ordine di CLASSI e poi della direzione A/B): id, tipo (TE/TI/TM o Equipaggiamento/Incanto/Mappa), nome, classe
 (nome della classe o «Tutte le classi»), direzione (solo carte di classe: A o B), pl (Equipaggiamenti: Comune 1, Rara 2,
 Leggendaria 3; vuoto per Incanti e Mappe), rarita, slot, testo, testo_situazionale (la riga «Se…», stampata sotto il
-testo), nota (non stampata; se contiene «segnaposto» la carta porta la scritta SEGNAPOSTO). Direzione e PL stanno in
-basso nel riquadro dell'illustrazione. Il testo che non entra nel suo riquadro ferma lo script (preflight di DesignCraft).
+testo), nota (non stampata; se contiene «segnaposto» la carta porta la scritta SEGNAPOSTO). La direzione apre la riga
+del tipo, il PL sta in basso a destra sull'illustrazione. Il testo che non entra nel suo riquadro ferma lo script
+(preflight di DesignCraft); con --tutti-overset lo script non si ferma al primo PDF ed elenca in fondo tutti i testi che
+non entrano (id della carta, stile e caratteri in più), poi esce con errore.
 
 Stampa SOLO FRONTE (v6-bis, 8/11): nessun PDF va stampato sui due lati. Ogni mazzo coperto ha due PDF: <nome>.pdf con i fronti e
 <nome>_retri.pdf con i dorsi. I dorsi NON sono specchiati: il dorso nella posizione p della pagina dei retri che dice «coi
@@ -31,24 +33,38 @@ Formato A3 (`--formato A3`): 16 carte per foglio A3 verticale (4 x 4), blocco 27
 stesse regole; PDF in ../../playtest_v7_A3 e progetti in ./A3. Senza opzione: A4.
 
 Uso: python3 genera_carte.py [--solo NOME] [--formato A4|A3] [--dati CARTELLA] [--uscita CARTELLA] [--arte CARTELLA] [--senza-arte]
-(richiede designcraft-cli)
+[--tutti-overset]   (richiede designcraft-cli)
 --dati legge i CSV da un'altra cartella (per provare dati nuovi); --uscita scrive PDF e progetti .designcraft in un'altra
 cartella, senza toccare playtest_v7*.
 
-Illustrazioni: se esiste ../arte/png/<id>.png (--arte legge da un'altra cartella), l'immagine riempie il riquadro
-dell'illustrazione (proporzionale, centrata, ritagliata, angoli arrotondati) al posto del riquadro tinto e del codice
-segnaposto; il PL resta sopra, le etichette (SEGNAPOSTO/PLAYTEST/PROVVISORIO/BOSS, MAZZO) su un cartellino pergamena. Carte
-Aiuto, Divisori e dorsi non hanno illustrazione. --senza-arte stampa sempre il riquadro tinto (come senza immagini).
+Impaginazione «alla Magic» (11/11): barra del nome in alto; sotto la finestra grande dell'illustrazione (54,5 mm di
+larghezza; 38,1 mm di altezza sulle carte, 36 sui Mostri, 29,6 sui Boss, 42,3 sugli Imprevisti: ARTE_H, arte/formati.csv)
+con la cornice nel colore del tipo; la riga del tipo (sui Mostri PV, ATT, AR e danno); il testo; un filetto e la battuta
+in corsivo in fondo al testo; il piede (rarità o copia, classe, id).
+
+Illustrazioni: se esiste ../arte/png/<id>.png (--arte legge da un'altra cartella), l'immagine riempie la finestra
+dell'illustrazione (proporzionale, centrata, ritagliata) al posto del riquadro tinto e del codice segnaposto; il PL resta
+sopra, le etichette (SEGNAPOSTO/PLAYTEST/PROVVISORIO/BOSS, MAZZO) su un cartellino pergamena. Carte Aiuto, Divisori e
+dorsi non hanno illustrazione. --senza-arte stampa sempre il riquadro tinto (come senza immagini).
 Le carte con più copie (colonna `copia` «n di m»: Specie, Imprevisti) prendono prima <id>-<n>.png, poi <id>.png.
 
 Colonna facoltativa `battuta` (ultima colonna di ogni CSV di carte): una riga di colore, al massimo 70 caratteri e 2 righe,
-in corsivo piccolo nel riquadro dell'illustrazione: senza immagine al posto del codice segnaposto, con l'immagine su una
-fascetta pergamena (85 %) in basso nel riquadro (sui Mostri in corpo 6: 1 riga se entra, se no 2). Vuota o assente: niente.
+in corsivo in fondo al testo della carta sotto un filetto (sui Mostri in corpo 6), 1 riga se entra, se no 2. Vuota o
+assente: niente filetto e niente battuta.
+
+Kit dei motivi (Daniele, 11/11: «leggero flavour steampunk medieval high magic, minimale, bordo leggero che dà spazio ai
+contenuti»; lo stesso dei componenti, descritto in stampa/LEGGIMI.md): cornice nel colore del tipo con un filetto doppio
+d'ottone (filo sottile fuori dal pannello e bordo del pannello), un piccolo ingranaggio su ogni angolo, rivetti agli angoli
+della cornice dell'illustrazione, losanghe d'ottone alle estremità delle barre, losanga di rame al centro del filetto
+della battuta; dorsi con l'emblema grande (ingranaggio, anello di rivetti, stella a 8 punte o il segno del mazzo) e il
+nome del mazzo. Tutto sta nel bordo colorato o sui bordi delle cornici: riquadri di testo e d'illustrazione invariati.
 """
 import csv
 import functools
 import json
+import math
 import pathlib
+import re
 import subprocess
 import sys
 import tempfile
@@ -91,7 +107,9 @@ FILETTO_GAP = 0.3 * MM                         # i filetti interni finiscono 0,3
 
 SWATCH = {
     "Inchiostro": "#2a2118", "Marrone": "#6b4a2b", "Rosso": "#9c2f24", "Oro": "#b8862b",
-    "Blu": "#2f5d7c", "Carta": "#fbf8ef", "Pergamena": "#f1dcae", "OroChiaro": "#f6d68b",
+    "Blu": "#2f5d7c", "Carta": "#f9f2e0", "Pergamena": "#f1dcae", "OroChiaro": "#f6d68b",
+    # kit dei motivi (11/11): ottone scuro sui fondi chiari, ottone chiaro sui fondi colorati, rame per gli accenti
+    "Ottone": "#a8823a", "OttoneChiaro": "#e8cd8f", "Rame": "#a65a32",
     # tipi (legenda dell'autore: Mappa rossa, Incanto blu, Equipaggiamento verde, Classe viola)
     "Mappa": "#9c2f24", "Incanto": "#2f5d7c", "Equipaggiamento": "#3d6f45", "Classe": "#7a4f86",
     # nemici (Carte_Nemico_v2.pptx)
@@ -124,6 +142,10 @@ def lead(v):
     return {"kind": "points", "value": v}
 
 
+# testo delle regole: valori «(+1)» in grassetto; «≤»/«≥» (Noto Serif non li ha, es. «D6 ≤ LV + 2» di TM-09) col font sans
+GREP_TESTO = [{"style": "Valore", "pattern": "\\([+\u2011\u2212-]?\\d+\\)"}, {"style": "Simbolo", "pattern": "[\u2264\u2265]"}]
+
+
 PARA = [
     ("Titolo", {"align": "center"}, {"fontFamily": SERIF, "fontStyle": "Bold", "size": 10.5, "leading": lead(12), "fill": "Inchiostro", "tracking": -5}),
     ("Etichetta", {"align": "left"}, {"fontFamily": SANS, "fontStyle": "SemiBold", "size": 6.5, "leading": lead(7.5), "fill": "Marrone", "tracking": 40}),
@@ -132,11 +154,12 @@ PARA = [
     ("EtichettaDx", {"align": "right"}, {"fontFamily": SANS, "fontStyle": "SemiBold", "size": 6.5, "leading": lead(7.5), "fill": "Marrone", "tracking": 40}),
     ("EtichettaCentro", {"align": "center"}, {"fontFamily": SANS, "fontStyle": "SemiBold", "size": 6.5, "leading": lead(7.5), "fill": "Marrone", "tracking": 40}),
     ("EtichettaFoglio", {"align": "center"}, {"fontFamily": SANS, "fontStyle": "SemiBold", "size": 6.5, "leading": lead(7.5), "fill": "Marrone"}),
-    ("Testo", {"align": "left", "hyphenate": False, "grepStyles": [{"style": "Valore", "pattern": "\\([+\u2011\u2212-]?\\d+\\)"}]},
-     {"fontFamily": SERIF, "fontStyle": "Regular", "size": 9.5, "leading": lead(12), "fill": "Inchiostro"}),
+    # corpo del testo delle regole «alla Magic» (Daniele, 11/11): 7,8 pt su 9,3 (7 righe), perché l'illustrazione resti grande
+    ("Testo", {"align": "left", "hyphenate": False, "grepStyles": GREP_TESTO},
+     {"fontFamily": SERIF, "fontStyle": "Regular", "size": 7.8, "leading": lead(9.3), "fill": "Inchiostro"}),
     # v7: la riga «Se…» (testo_situazionale) sotto l'effetto base
-    ("TestoSituazionale", {"align": "left", "hyphenate": False, "spaceBefore": 2, "grepStyles": [{"style": "Valore", "pattern": "\\([+\u2011\u2212-]?\\d+\\)"}]},
-     {"fontFamily": SERIF, "fontStyle": "Italic", "size": 9.5, "leading": lead(12), "fill": "Inchiostro"}),
+    ("TestoSituazionale", {"align": "left", "hyphenate": False, "spaceBefore": 1.5, "grepStyles": GREP_TESTO},
+     {"fontFamily": SERIF, "fontStyle": "Italic", "size": 7.8, "leading": lead(9.3), "fill": "Inchiostro"}),
     ("TestoCentro", {"align": "center", "hyphenate": False}, {"fontFamily": SERIF, "fontStyle": "Regular", "size": 10.5, "leading": lead(13.5), "fill": "Inchiostro"}),
     ("Classi", {"align": "center"}, {"fontFamily": SERIF, "fontStyle": "Italic", "size": 7, "leading": lead(8), "fill": "Marrone"}),
     # v7: riga in fondo alla Carta Classe «Mazzetto: 6 delle 10 carte di classe · Mano: 3 + 3» (Spec R 13.1)
@@ -147,11 +170,11 @@ PARA = [
     ("CodiceChiaro", {"align": "right"}, {"fontFamily": SANS, "fontStyle": "SemiBold", "size": 6, "leading": lead(7), "fill": "Carta", "tracking": 20}),
     ("Provvisorio", {"align": "left"}, {"fontFamily": SANS, "fontStyle": "Bold", "size": 6, "leading": lead(7), "fill": "Rosso", "tracking": 60}),
     ("Segnaposto", {"align": "center"}, {"fontFamily": SERIF, "fontStyle": "Bold", "size": 26, "leading": lead(28), "fill": "Carta"}),
-    # v7: battuta (colonna facoltativa `battuta`) nel riquadro dell'illustrazione, al massimo 2 righe
-    ("Battuta", {"align": "center", "hyphenate": False}, {"fontFamily": SERIF, "fontStyle": "Italic", "size": 7.2, "leading": lead(8.6), "fill": "Inchiostro"}),
-    # v7: battuta sulla fascetta dei mostri con l'illustrazione (riquadro alto solo 29 pt): 1 riga, 2 se non entra
+    # v7: battuta (colonna facoltativa `battuta`) in fondo al testo sotto un filetto, al massimo 2 righe
+    ("Battuta", {"align": "center", "hyphenate": False}, {"fontFamily": SERIF, "fontStyle": "Italic", "size": 6.6, "leading": lead(7.8), "fill": "Inchiostro"}),
+    # v7: battuta dei Mostri, in fondo alla carta sotto le ricompense: 1 riga, 2 se non entra
     ("BattutaPiccola", {"align": "center", "hyphenate": False}, {"fontFamily": SERIF, "fontStyle": "Italic", "size": 6, "leading": lead(7), "fill": "Inchiostro"}),
-    # v7: lettera della direzione nel tondo della riga del tipo e PL nel riquadro dell'illustrazione
+    # v7: lettera della direzione nel tondo della riga del tipo e PL sull'illustrazione
     ("DirLettera", {"align": "center"}, {"fontFamily": SERIF, "fontStyle": "Bold", "size": 6.5, "leading": lead(7.5), "fill": "Carta"}),
     ("PL", {"align": "center"}, {"fontFamily": SANS, "fontStyle": "Bold", "size": 7.5, "leading": lead(8.5), "fill": "Carta", "tracking": 40}),
     # nemici
@@ -160,7 +183,6 @@ PARA = [
     ("StatNome", {"align": "center"}, {"fontFamily": SANS, "fontStyle": "SemiBold", "size": 6, "leading": lead(7), "fill": "Marrone", "tracking": 40}),
     ("StatValore", {"align": "center"}, {"fontFamily": SERIF, "fontStyle": "Bold", "size": 14, "leading": lead(15), "fill": "Inchiostro"}),
     ("Danno", {"align": "center"}, {"fontFamily": SANS, "fontStyle": "Regular", "size": 7.5, "leading": lead(9), "fill": "Inchiostro"}),
-    ("Sezione", {"align": "left"}, {"fontFamily": SANS, "fontStyle": "Bold", "size": 6.5, "leading": lead(7.5), "fill": "Notte", "tracking": 60}),
     ("TestoNemico", {"align": "left", "hyphenate": False}, {"fontFamily": SERIF, "fontStyle": "Regular", "size": 8.5, "leading": lead(10.2), "fill": "Inchiostro"}),
     # v7: nomi lunghi (fino a 26 caratteri, tono goliardico) su una riga sola
     ("NomeNemicoStretto", {"align": "left"}, {"fontFamily": SERIF, "fontStyle": "Bold", "size": 9, "leading": lead(10.5), "fill": "Inchiostro", "tracking": -10}),
@@ -192,9 +214,21 @@ PARA = [
 PARA += [(n + "Scuro", p, {**c, "fill": "Retro"}) for n, p, c in PARA if n.startswith("Dorso")]
 DORSO_CHIARO = {"Oracolo"}
 
+
+def _ombra(h):
+    """Colore dell'ingranaggio grande dei dorsi: il colore del mazzo scurito del 20 % (schiarito del 14 % se è quasi nero)."""
+    r, g, b = (int(h[i:i + 2], 16) for i in (1, 3, 5))
+    chiaro = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255 < 0.12
+    return "#" + "".join(f"{round(v + (255 - v) * 0.14 if chiaro else v * 0.8):02x}" for v in (r, g, b))
+
+
+# swatch Ombra<colore> dei colori dei dorsi (carte comuni, classi, mostri, imprevisti)
+SWATCH.update({"Ombra" + n: _ombra(SWATCH[n]) for n in ["Retro", "Notte", "Imprevisto", *CLASSI]})
+
 CHAR = [
     ("Valore", {"fontFamily": SERIF, "fontStyle": "Bold"}),
     ("Grassetto", {"fontFamily": SANS, "fontStyle": "SemiBold"}),
+    ("Simbolo", {"fontFamily": SANS, "fontStyle": "Regular"}),
 ]
 
 
@@ -234,7 +268,7 @@ def cmyk(nome):
 class Doc:
     def __init__(self, titolo, pagine):
         self.righe = []
-        self.testi = {}            # indice del comando frame.create -> (foglio, inizio del testo): per i messaggi di overset
+        self.testi = {}            # indice del comando frame.create -> [foglio, inizio del testo, stile, id della carta]
         self.cmd("file.new", preset=FORMATO, pages=pagine, facingPages=False, bleed=0, margins=0, title=titolo, intent="print")
         for nome in SWATCH:
             self.cmd("swatch.create", name=nome, color=cmyk(nome))
@@ -270,7 +304,7 @@ class Doc:
         if paragrafi:
             txt = "\n".join(t for t, _ in paragrafi)
         i = self.cmd("frame.create", spread=sp, rect=[round(v, 3) for v in r], content="text", text=txt)
-        self.testi[i] = (sp, txt[:60])
+        self.testi[i] = [sp, txt[:60].replace("\n", " / "), stile, None]
         self.cmd("selection.set", ids=[f"${i}.id"])
         self.cmd("style.paragraph.apply", name=stile)
         if vj:
@@ -299,8 +333,25 @@ class Doc:
         self.cmd("path.create", spread=sp, anchors=[{"p": [round(a[0], 3), round(a[1], 3)]}, {"p": [round(b[0], 3), round(b[1], 3)]}])
         self.cmd("object.stroke", swatch=swatch, weight=peso)
 
+    def poligono(self, sp, pts, fill=None, stroke=None, peso=0.0):
+        """Tracciato chiuso dai punti pts (ingranaggi, losanghe e stelle del kit dei motivi)."""
+        i = self.cmd("path.create", spread=sp, anchors=[{"p": [round(x, 3), round(y, 3)]} for x, y in pts], closed=True)
+        self.cmd("object.fill", swatch=fill or "[None]")
+        if stroke:
+            self.cmd("object.stroke", swatch=stroke, weight=peso, join="miter")
+        else:
+            self.cmd("object.stroke", swatch="[None]", weight=0)
+        return i
+
     def script(self):
         return "\n".join(self.righe) + "\n"
+
+    def carta(self, primo):
+        """Dà a tutti i testi creati dal comando `primo` in poi (una carta) l'id stampato nel suo riquadro Codice."""
+        nuovi = [v for i, v in self.testi.items() if i >= primo]
+        id_ = next((v[1] for v in nuovi if v[2].startswith("Codice")), None)
+        for v in nuovi:
+            v[3] = id_
 
 
 def origine(pos):
@@ -347,9 +398,77 @@ def segni_taglio(d, sp, sopra, sotto, occupate):
     d.testo(sp, [xa, by1 + TACCA_GAP + su, xb, by1 + TACCA_GAP + TACCA + su], sotto, "EtichettaFoglio", vj="top")
 
 
+# ---------------------------------------------------------------- kit dei motivi (11/11)
+# Uguale a componenti_gen/svg.py (sezione «kit dei motivi») e descritto in stampa/LEGGIMI.md. Misure in pt.
+FILO = 1.6             # filo sottile d'ottone della cornice: SAFE - FILO dal rifilo (fuori dal pannello)
+INGR_R = 3.2           # raggio esterno degli ingranaggi agli angoli del filo sottile (8 denti)
+RIVETTO_R = 1.3        # rivetti agli angoli della cornice dell'illustrazione
+EMBLEMA_Y, EMBLEMA_R = 102.0, 50.0   # centro (dal rifilo in alto) e raggio esterno dell'emblema dei dorsi
+
+
+def ingranaggio_punti(cx, cy, r, denti, prof=0.28):
+    """Contorno chiuso di un ingranaggio di raggio esterno r: `denti` denti trapezi profondi prof * r, il primo in alto
+    (come svg.cog_pts() dei componenti)."""
+    ri, s, pts = r * (1 - prof), 2 * math.pi / denti, []
+    for k in range(denti):
+        a = k * s - math.pi / 2
+        for da, rr in ((-0.27, ri), (-0.15, r), (0.15, r), (0.27, ri)):
+            pts.append((cx + rr * math.cos(a + da * s), cy + rr * math.sin(a + da * s)))
+    return pts
+
+
+def stella_punti(cx, cy, r, punte, rapporto=0.4):
+    """Stella a `punte` punte (raggio interno r * rapporto), la prima in alto: l'accento arcano del kit."""
+    return [(cx + (r if k % 2 == 0 else r * rapporto) * math.cos(math.pi * k / punte - math.pi / 2),
+             cy + (r if k % 2 == 0 else r * rapporto) * math.sin(math.pi * k / punte - math.pi / 2)) for k in range(2 * punte)]
+
+
+def ingranaggio(d, sp, cx, cy, r, denti, colore, foro=None, prof=0.28):
+    """Ingranaggio pieno; foro: colore del tondo al centro (quello del fondo), None senza foro."""
+    d.poligono(sp, ingranaggio_punti(cx, cy, r, denti, prof), fill=colore)
+    if foro:
+        d.rett(sp, [cx - 0.3 * r, cy - 0.3 * r, cx + 0.3 * r, cy + 0.3 * r], fill=foro, forma="ellipse")
+
+
+def rivetto(d, sp, cx, cy, r=RIVETTO_R, colore="OttoneChiaro", bordo="Ottone"):
+    d.rett(sp, [cx - r, cy - r, cx + r, cy + r], fill=colore, stroke=bordo, peso=0.3 if bordo else 0, forma="ellipse")
+
+
+def losanga(d, sp, cx, cy, w, h, colore, bordo=None):
+    d.poligono(sp, [(cx, cy - h / 2), (cx + w / 2, cy), (cx, cy + h / 2), (cx - w / 2, cy)], fill=colore, stroke=bordo, peso=0.3)
+
+
+def filetto_ornato(d, sp, x0, x1, y, col, peso=0.5, centro="Rame"):
+    """Filetto (coordinate del foglio) interrotto al centro da una losanga 4,4 x 1,8 pt nel colore centro."""
+    cx = (x0 + x1) / 2
+    d.linea(sp, (x0, y), (cx - 4, y), col, peso)
+    d.linea(sp, (cx + 4, y), (x1, y), col, peso)
+    losanga(d, sp, cx, y, 4.4, 1.8, centro)
+
+
+def angoli(ox, oy, m):
+    """I 4 angoli del rettangolo a m pt dentro il rifilo."""
+    return [(ox + x, oy + y) for x in (m, CW - m) for y in (m, CH - m)]
+
+
 def cornice(d, sp, ox, oy, colore, fondo="Carta"):
+    """Fronte: fondo e abbondanza nel colore del tipo; filo sottile OttoneChiaro FILO pt fuori dal pannello con un
+    ingranaggio su ogni angolo (foro nel colore del tipo); pannello chiaro (da SAFE, come prima) col bordo Ottone."""
     d.rett(sp, sangue(ox, oy), fill=colore)
-    d.rett(sp, [ox + SAFE, oy + SAFE, ox + CW - SAFE, oy + CH - SAFE], fill=fondo, raggio=4)
+    f = SAFE - FILO
+    d.rett(sp, [ox + f, oy + f, ox + CW - f, oy + CH - f], stroke="OttoneChiaro", peso=0.35, raggio=1.5)
+    d.rett(sp, [ox + SAFE, oy + SAFE, ox + CW - SAFE, oy + CH - SAFE], fill=fondo, stroke="Ottone", peso=0.6, raggio=4)
+    for x, y in angoli(ox, oy, f):
+        ingranaggio(d, sp, x, y, INGR_R, 8, "OttoneChiaro", colore)
+
+
+def cornice_piena(d, sp, ox, oy, colore, linea):
+    """Dorsi e divisori: tutto nel colore del mazzo, filetto doppio nel colore linea e un ingranaggio su ogni angolo."""
+    d.rett(sp, sangue(ox, oy), fill=colore)
+    d.rett(sp, L(ox, oy, SAFE, SAFE, CW - SAFE, CH - SAFE), stroke=linea, peso=1.0, raggio=4)
+    d.rett(sp, L(ox, oy, SAFE + 4, SAFE + 4, CW - SAFE - 4, CH - SAFE - 4), stroke=linea, peso=0.4, raggio=2)
+    for x, y in angoli(ox, oy, SAFE + 1.2):
+        ingranaggio(d, sp, x, y, 3.8, 8, linea, colore)
 
 
 def L(ox, oy, x0, y0, x1, y1):
@@ -359,8 +478,21 @@ def L(ox, oy, x0, y0, x1, y1):
 # ---------------------------------------------------------------- fronti
 
 BATTUTA_MAX = 70   # caratteri (local v7_tono.md); le 2 righe le controlla il preflight
-BANDA_H = 20       # fascetta pergamena della battuta sull'illustrazione: 2 righe di Battuta (interlinea 8,6)
-BANDA_STRETTA_H = (10, 15)   # mostri: fascetta di 1 riga di BattutaPiccola, o di 2 se la battuta non entra in una
+
+# Impaginazione «alla Magic» (Daniele, 11/11): barra del nome in alto; sotto la finestra grande dell'illustrazione, con la
+# sua cornice nel colore del tipo; la riga del tipo; il testo (con la riga «Se…»); in fondo al testo un filetto e la
+# battuta in corsivo; il piede. Misure in pt dall'angolo di rifilo; le immagini (arte/formati.csv) sono ARTE_W x ARTE_H.
+BX = 11                            # barre del nome e del tipo e cornice dell'illustrazione: x BX..CW-BX
+CORNICE = 1.0                      # spessore della cornice dell'illustrazione (dentro c'e' l'immagine)
+TX = 13                            # testi: x TX..CW-TX (152,6 pt)
+ARTE_W = CW - 2 * (BX + CORNICE)   # larghezza dell'immagine: 154,58 pt = 54,53 mm
+# altezza dell'immagine per tipo di formati.csv: carte 38,1 mm (Mappe, Incanti, Equipaggiamenti, carte di classe, Carte
+# Classe, Specie), Mostri 36 mm, Boss 29,6 mm (3 righe di ricompense), Imprevisti 42,3 mm (testo corto)
+ARTE_H = {"carta": 108, "specie": 108, "mostro": 102, "boss": 84, "imprevisto": 120}
+NOME_Y = (10, 23.5)                # barra del nome
+ARTE_Y0 = 25                       # bordo alto della cornice dell'illustrazione
+TIPO_H, TIPO_GAP = 10, 1.2         # barra del tipo, TIPO_GAP sotto la cornice e sopra il testo
+PIEDE_Y = (CH - 17.5, CH - 10.5)   # piede: rarità o copia a sinistra, classe al centro, id a destra
 
 
 def testo_battuta(r):
@@ -369,16 +501,6 @@ def testo_battuta(r):
     if len(t) > BATTUTA_MAX:
         sys.exit(f"{r['id']}: battuta di {len(t)} caratteri (massimo {BATTUTA_MAX}): «{t}»")
     return tipografico(t)
-
-
-def battuta(d, sp, ox, oy, r, y0, y1):
-    """Stampa la battuta della carta centrata tra y0 e y1 nel riquadro dell'illustrazione.
-    Il riquadro alto ~21 pt regge 2 righe: una terza va in overset e ferma lo script. Ritorna True se c'era una battuta."""
-    t = testo_battuta(r)
-    if not t:
-        return False
-    d.testo(sp, L(ox, oy, 17, y0, CW - 17, y1), t, "Battuta", vj="center")
-    return True
 
 
 def arte(r):
@@ -399,43 +521,46 @@ def _font(famiglia, stile):
     return ImageFont.truetype(file, 100)
 
 
+def stile_car(stile):
+    return next(ch for nome, _, ch in PARA if nome == stile)
+
+
 def in_una_riga(t, stile, larghezza):
-    """True se il testo t nello stile di paragrafo `stile` (senza spaziatura) entra in una riga larga `larghezza` pt.
-    Misura con il file del font di fontconfig (stesse larghezze di DesignCraft), con l'1,5 % di margine: se sbaglia, la
-    riga in più va in overset e il preflight ferma lo script."""
-    c = next(ch for nome, _, ch in PARA if nome == stile)
-    return _font(c["fontFamily"], c["fontStyle"]).getlength(t) * c["size"] / 100 * 1.015 <= larghezza
+    """True se il testo t nello stile di paragrafo `stile` entra in una riga larga `larghezza` pt. Misura con il file del
+    font di fontconfig (stesse larghezze di DesignCraft) più la spaziatura dello stile, con l'1,5 % di margine: se
+    sbaglia, la riga in più va in overset e il preflight ferma lo script."""
+    c = stile_car(stile)
+    w = _font(c["fontFamily"], c["fontStyle"]).getlength(t) * c["size"] / 100 + len(t) * c["size"] * c.get("tracking", 0) / 1000
+    return w * 1.015 <= larghezza
 
 
-def riquadro_arte(d, sp, ox, oy, r, box, col, tint, y_battuta, segnaposto=None, stretta=False):
-    """Riquadro dell'illustrazione box = (x0, y0, x1, y1) in coordinate della carta. Con l'immagine (arte()): l'immagine
-    riempie il riquadro e la battuta sta su una fascetta Pergamena all'85 % in fondo al riquadro, alta BANDA_H (2 righe di
-    Battuta; una terza va in overset) o, con stretta (mostri), BANDA_STRETTA_H in BattutaPiccola (1 riga se entra, se no 2).
-    Senza: riquadro tinto (col, tint), battuta centrata tra y_battuta = (y0, y1) o, se non c'è, segnaposto =
-    (rettangolo, testo) in grande. Ritorna True se c'era una battuta."""
+def barra(d, sp, ox, oy, y0, y1, col, pieno=False):
+    """Barra del nome o del tipo, larga quanto la cornice dell'illustrazione: colore del tipo al 16 % (pieno: al 100 %),
+    con una losanga d'ottone su ogni estremità (tra il pannello e il testo, che comincia a TX)."""
+    d.rett(sp, L(ox, oy, BX, y0, CW - BX, y1), fill=col, tint=None if pieno else 0.16, stroke=None if pieno else col,
+           peso=0.6, raggio=2)
+    for x in (BX, CW - BX):
+        losanga(d, sp, ox + x, oy + (y0 + y1) / 2, 2.6, 4.4, "OttoneChiaro", "Ottone")
+
+
+def finestra_arte(d, sp, ox, oy, r, y0, formato, col, segnaposto=None):
+    """Finestra dell'illustrazione dal bordo alto y0: cornice piena nel colore del tipo (col) e, a CORNICE dentro,
+    l'immagine (arte(), riempie la finestra centrata) alta ARTE_H[formato]; senza immagine il riquadro tinto (col al 14 %)
+    col codice segnaposto in grande; un rivetto d'ottone su ogni angolo della cornice. Ritorna il riquadro dell'immagine
+    (x0, y0, x1, y1) in coordinate della carta."""
+    box = (BX + CORNICE, y0 + CORNICE, CW - BX - CORNICE, y0 + CORNICE + ARTE_H[formato])
+    d.rett(sp, L(ox, oy, BX, y0, CW - BX, box[3] + CORNICE), fill=col, raggio=2)
     img = arte(r)
-    if img is None:
-        d.rett(sp, L(ox, oy, *box), fill=col, tint=tint, raggio=2)
-        if battuta(d, sp, ox, oy, r, *y_battuta):
-            return True
+    if img is not None:
+        d.immagine(sp, L(ox, oy, *box), img)
+    else:
+        d.rett(sp, L(ox, oy, *box), fill=col, tint=0.14)
         if segnaposto:
-            d.testo(sp, L(ox, oy, *segnaposto[0]), segnaposto[1], "Segnaposto", vj="center")
-        return False
-    x0, _, x1, y1 = box
-    d.immagine(sp, L(ox, oy, *box), img, raggio=2)
-    t = testo_battuta(r)
-    if not t:
-        return False
-    stile, h = "Battuta", BANDA_H
-    if stretta:
-        stile = "BattutaPiccola"
-        h = BANDA_STRETTA_H[0] if in_una_riga(t, stile, x1 - x0 - 6) else BANDA_STRETTA_H[1]
-    d.rett(sp, L(ox, oy, x0, y1 - h, x1, y1), fill="Pergamena")
-    d.cmd("object.cornerOptions", corners=[{"shape": "none", "size": 0}, {"shape": "none", "size": 0},
-                                           {"shape": "rounded", "size": 2}, {"shape": "rounded", "size": 2}])
-    d.cmd("object.opacity", opacity=0.85)
-    d.testo(sp, L(ox, oy, x0 + 3, y1 - h, x1 - 3, y1), t, stile, vj="center")
-    return True
+            d.testo(sp, L(ox, oy, *box), segnaposto, "Segnaposto", vj="center")
+    for x in (BX + 1.8, CW - BX - 1.8):
+        for y in (y0 + 1.8, box[3] + CORNICE - 1.8):
+            rivetto(d, sp, ox + x, oy + y)
+    return box
 
 
 def etichetta(d, sp, ox, oy, r, box, txt, stile):
@@ -452,43 +577,85 @@ def etichetta(d, sp, ox, oy, r, box, txt, stile):
     # niente angoli arrotondati: object.cornerOptions su un riquadro di testo con autoSize lo stringe a 3 pt (overset)
 
 
+def battuta_in_fondo(d, sp, ox, oy, r, y1, col, stile="Battuta"):
+    """Battuta della carta in corsivo in fondo al testo, che finisce a y1, sotto un filetto sottile nel colore col: 1 riga
+    se entra, se no 2 (una terza va in overset e ferma lo script). Ritorna dove deve finire il testo sopra (y1 se la
+    carta non ha battuta)."""
+    t = testo_battuta(r)
+    if not t:
+        return y1
+    righe = 1 if in_una_riga(t, stile, CW - 2 * TX) else 2
+    y0 = y1 - righe * stile_car(stile)["leading"]["value"]
+    d.testo(sp, L(ox, oy, TX, y0, CW - TX, y1), t, stile, vj="bottom")
+    # filetto poco sopra la battuta: le discendenti dell'ultima riga del testo escono di ~1,3 pt dal fondo del suo riquadro
+    filetto_ornato(d, sp, ox + TX + 8, ox + CW - TX - 8, oy + y0 - 0.5, col)
+    return y0 - 3.0
+
+
+def piede(d, sp, ox, oy, sinistra, id_, classe="", stile_classe="Classi", stile_id="Codice"):
+    """Piede della carta: rarità o copia a sinistra, classe al centro, id a destra (PIEDE_Y). Una classe troppo lunga
+    per stare tra le altre due (la riga del mazzetto delle Carte Classe) va su una riga sua sopra. Ritorna dove deve
+    finire il contenuto sopra il piede."""
+    y0, y1 = PIEDE_Y
+    if sinistra:
+        d.testo(sp, L(ox, oy, TX, y0, CW / 2, y1), sinistra, "Piede", vj="bottom")
+    d.testo(sp, L(ox, oy, CW / 2, y0, CW - TX, y1), id_, stile_id, vj="bottom")
+    if not classe:
+        return y0 - 1
+    if in_una_riga(classe, stile_classe, CW - 2 * TX - 2 * 34):
+        d.testo(sp, L(ox, oy, TX + 34, y0 - 1.5, CW - TX - 34, y1), classe, stile_classe, vj="bottom")
+        return y0 - 1
+    d.testo(sp, L(ox, oy, TX - 2, y0 - 8.5, CW - TX + 2, y0 - 0.5), classe, stile_classe, vj="bottom")
+    return y0 - 9.5
+
+
+def riga_tipo(d, sp, ox, oy, y0, col, testo, direzione=None):
+    """Barra del tipo sotto l'illustrazione (Spec v7 §14.1): per le carte di classe comincia con la direzione, lettera
+    nel tondo del colore della classe. Ritorna il bordo basso della barra."""
+    y1 = y0 + TIPO_H
+    barra(d, sp, ox, oy, y0, y1, col)
+    x = TX
+    if direzione:
+        lettera, classe = direzione
+        d.rett(sp, L(ox, oy, BX + 2, y0 + 1, BX + 10.5, y1 - 1), fill=classe, forma="ellipse")
+        d.testo(sp, L(ox, oy, BX + 2, y0 + 1, BX + 10.5, y1 - 1), lettera, "DirLettera", vj="center")
+        x = BX + 13
+    d.testo(sp, L(ox, oy, x, y0, CW - TX, y1), testo, "Etichetta" if len(testo) <= 34 else "EtichettaStretta", vj="center")
+    return y1
+
+
 def carta_trama(d, sp, ox, oy, r, mazzo=None):
     """Fronte di Mappe, Incanti, Equipaggiamenti e Carte Classe. r: dizionario di carta_v7() o carta_ritratto().
-    Riga del tipo (Spec v7 §14.1): per le carte di classe comincia con la direzione, lettera nel tondo del colore della
-    classe e nome, poi tipo e slot. Riquadro dell'illustrazione (riquadro_arte): in alto l'etichetta rossa
-    (SEGNAPOSTO/PLAYTEST) e il mazzo, in basso a destra il PL. Testo: effetto base e riga «Se…» (corsivo), ~9 righe."""
+    Dall'alto: barra del nome; illustrazione (finestra_arte) con in alto l'etichetta rossa (SEGNAPOSTO/PLAYTEST) e il
+    mazzo, in basso a destra il PL; riga del tipo (riga_tipo: direzione, tipo, slot); testo: effetto base e riga «Se…»
+    (corsivo); filetto e battuta; piede (rarità, classe, id)."""
     tipo = r["tipo"]
     col = TIPO_COLORE[tipo]
     cornice(d, sp, ox, oy, col)
-    d.testo(sp, L(ox, oy, 13, 13, CW - 13, 31), tipografico(r["nome"]), "Titolo", vj="center")
+    barra(d, sp, ox, oy, *NOME_Y, col)
+    d.testo(sp, L(ox, oy, TX, NOME_Y[0], CW - TX, NOME_Y[1]), tipografico(r["nome"]), "Titolo", vj="center")
+    x0, y0, x1, y1 = finestra_arte(d, sp, ox, oy, r, ARTE_Y0, "carta", col, tipo)
+    if r.get("etichetta"):
+        etichetta(d, sp, ox, oy, r, (x0 + 3, y0 + 2.5, x1 - 3, y0 + 10.5), r["etichetta"], "Provvisorio")
+    if mazzo:
+        etichetta(d, sp, ox, oy, r, (x0 + 46, y0 + 2.5, x1 - 3, y0 + 10.5), "MAZZO " + mazzo.upper(), "EtichettaDx")
+    if r.get("pl"):
+        d.rett(sp, L(ox, oy, x1 - 32, y1 - 14.5, x1 - 2.5, y1 - 2.5), fill="Oro", raggio=2)
+        d.testo(sp, L(ox, oy, x1 - 32, y1 - 14.5, x1 - 2.5, y1 - 2.5), f"PL {r['pl']}", "PL", vj="center")
     sx = r["tipo_nome"].upper() + (" · " + r["slot"].upper() if r.get("slot") else "")
-    x_tipo = 14
+    direzione = None
     if r.get("direzione"):
-        d.rett(sp, L(ox, oy, 14, 31.5, 23, 40.5), fill=r["classe"], forma="ellipse")
-        d.testo(sp, L(ox, oy, 14, 31.5, 23, 40.5), r["direzione"], "DirLettera", vj="center")
         sx = r["dir_nome"].upper() + " · " + sx
-        x_tipo = 26
+        direzione = (r["direzione"], r["classe"])
         if len(sx) > 49:   # es. «ARMADIO A DUE ANTE · EQUIPAGGIAMENTO · ARMA DX / SCUDO»: il tipo si abbrevia
             sx = sx.replace("EQUIPAGGIAMENTO", "EQUIP.")
-    d.testo(sp, L(ox, oy, x_tipo, 32, CW - 14, 40), sx, "Etichetta" if len(sx) <= 34 else "EtichettaStretta", vj="center")
-    d.linea(sp, (ox + 14, oy + 42), (ox + CW - 14, oy + 42), col, 0.6)
-    riquadro_arte(d, sp, ox, oy, r, (14, 46, CW - 14, 96), col, 0.14, (57, 79), ((14, 52, CW - 14, 80), tipo))
-    if r.get("etichetta"):
-        etichetta(d, sp, ox, oy, r, (17, 48, CW - 17, 56), r["etichetta"], "Provvisorio")
-    if mazzo:
-        etichetta(d, sp, ox, oy, r, (60, 48, CW - 17, 56), "MAZZO " + mazzo.upper(), "EtichettaDx")
-    if r.get("pl"):
-        d.rett(sp, L(ox, oy, CW - 47, 81, CW - 17, 93), fill="Oro", raggio=2)
-        d.testo(sp, L(ox, oy, CW - 47, 81, CW - 17, 93), f"PL {r['pl']}", "PL", vj="center")
+    y_tipo = riga_tipo(d, sp, ox, oy, y1 + CORNICE + TIPO_GAP, col, sx, direzione)
+    y_fondo = piede(d, sp, ox, oy, r.get("rarita"), r["id"], r["classe_riga"], r.get("stile_classi", "Classi"))
+    y_testo = battuta_in_fondo(d, sp, ox, oy, r, y_fondo, col)
     par = [(tipografico(r["testo"]), "Testo")]
     if r.get("testo_situazionale"):
         par.append((tipografico(r["testo_situazionale"]), "TestoSituazionale"))
-    d.testo(sp, L(ox, oy, 15, 101, CW - 15, CH - 33), "", "Testo", paragrafi=par)
-    d.linea(sp, (ox + 14, oy + CH - 31), (ox + CW - 14, oy + CH - 31), col, 0.6)
-    d.testo(sp, L(ox, oy, 12, CH - 29, CW - 12, CH - 20), r["classe_riga"], r.get("stile_classi", "Classi"))
-    if r.get("rarita"):
-        d.testo(sp, L(ox, oy, 14, CH - 19, 110, CH - 11.5), r["rarita"], "Piede")
-    d.testo(sp, L(ox, oy, 110, CH - 19, CW - 14, CH - 11.5), r["id"], "Codice")
+    d.testo(sp, L(ox, oy, TX, y_tipo + TIPO_GAP, CW - TX, y_testo), "", "Testo", paragrafi=par)
 
 
 def carta_v7(r, classe_mazzo=None):
@@ -529,62 +696,74 @@ def carta_ritratto(d, sp, ox, oy, r):
 
 
 def carta_specie(d, sp, ox, oy, r):
-    """Carta Specie (spec v6-bis §4.2): impaginazione della Carta Classe, colore della specie, bonus grande e nota piccola."""
+    """Carta Specie (spec v6-bis §4.2): impaginazione della Carta Classe, colore della specie; testo: il bonus (corpo del
+    testo) e la nota piccola, poi filetto e battuta; piede: copia e id."""
     col = r["specie"]
     cornice(d, sp, ox, oy, col)
-    d.testo(sp, L(ox, oy, 13, 13, CW - 13, 31), r["nome"], "Titolo", vj="center")
-    d.testo(sp, L(ox, oy, 14, 32, CW - 14, 40), "CARTA SPECIE", "Etichetta")
-    d.linea(sp, (ox + 14, oy + 42), (ox + CW - 14, oy + 42), col, 0.6)
-    riquadro_arte(d, sp, ox, oy, r, (14, 46, CW - 14, 96), col, 0.14, (57, 79), ((14, 57, CW - 14, 87), "TS"))
+    barra(d, sp, ox, oy, *NOME_Y, col)
+    d.testo(sp, L(ox, oy, TX, NOME_Y[0], CW - TX, NOME_Y[1]), r["nome"], "Titolo", vj="center")
+    x0, y0, x1, y1 = finestra_arte(d, sp, ox, oy, r, ARTE_Y0, "specie", col, "TS")
     if r["provvisorio"].strip():
-        etichetta(d, sp, ox, oy, r, (17, 48, CW - 17, 56), "PROVVISORIO", "Provvisorio")
-    d.testo(sp, L(ox, oy, 15, 101, CW - 15, 140), tipografico(r["bonus"]), "Testo")
-    d.testo(sp, L(ox, oy, 15, 140, CW - 15, CH - 22), tipografico(r["nota"]), "Nota")
-    d.testo(sp, L(ox, oy, 14, CH - 19, 110, CH - 11.5), r["copia"], "Piede")
-    d.testo(sp, L(ox, oy, 110, CH - 19, CW - 14, CH - 11.5), r["id"], "Codice")
+        etichetta(d, sp, ox, oy, r, (x0 + 3, y0 + 2.5, x1 - 3, y0 + 10.5), "PROVVISORIO", "Provvisorio")
+    y_tipo = riga_tipo(d, sp, ox, oy, y1 + CORNICE + TIPO_GAP, col, "CARTA SPECIE")
+    y_testo = battuta_in_fondo(d, sp, ox, oy, r, piede(d, sp, ox, oy, r["copia"], r["id"]), col)
+    par = [(tipografico(r["bonus"]), "Testo"), (tipografico(r["nota"]), "Nota")]
+    d.testo(sp, L(ox, oy, TX, y_tipo + TIPO_GAP, CW - TX, y_testo), "", "Testo", paragrafi=par)
+
+
+MOSTRO_Y0 = 33.5   # bordo alto della cornice dell'illustrazione dei Mostri, sotto medaglione, nome e riga del LV
 
 
 def carta_mostro(d, sp, ox, oy, r):
-    """Carta Mostro. Riquadro dell'illustrazione 49-78 pt (battuta o «BOSS»; con l'immagine «BOSS» è sempre l'etichetta
-    rossa), statistiche, danno, abilità (~200 caratteri: 7 righe sui mostri, 6 sui boss, che hanno 3 righe di ricompense)
-    e ricompense."""
+    """Carta Mostro. In alto il medaglione con la lettera, il nome e la riga del LV e del mazzetto con l'id; illustrazione
+    (Mostri ARTE_H["mostro"], Boss ARTE_H["boss"]: hanno 3 righe di ricompense; senza immagine il riquadro tinto, sui boss
+    con «BOSS» in grande, con l'immagine «BOSS» è l'etichetta rossa); sotto, al posto della riga del tipo, PV, ATT, AR e
+    danno; abilità (~170 caratteri, 5 righe); filetto e ricompense («Ricompense:», sui boss «Custode:» e «Mazzetto 3:»);
+    filetto e battuta in corpo 6."""
     cornice(d, sp, ox, oy, "Notte", fondo="Pergamena")
     boss = r["mazzetto"].startswith("3")
-    d.rett(sp, L(ox, oy, 13, 13, 39, 39), fill="Medaglione", stroke="OroNemico", peso=1.2, forma="ellipse")
-    d.testo(sp, L(ox, oy, 13, 13, 39, 39), r["lettera"], "LetteraMed", vj="center")
-    d.testo(sp, L(ox, oy, 43, 13, CW - 13, 31), tipografico(r["nome"]), "NomeNemico" if len(r["nome"]) <= 20 else "NomeNemicoStretto", vj="center")
-    mz = "MAZZETTO " + r["mazzetto"].upper().replace(" / ", " · ")
-    d.testo(sp, L(ox, oy, 43, 31, CW - 13, 39), f"LV {r['lv']} · {mz}", "Etichetta")
-    d.testo(sp, L(ox, oy, 100, 41, CW - 14, 48), r["id"], "Codice")
-    con_battuta = riquadro_arte(d, sp, ox, oy, r, (14, 49, CW - 14, 78), "Notte", 0.12, (57, 77), stretta=True)
-    if boss and (con_battuta or arte(r)):
-        etichetta(d, sp, ox, oy, r, (17, 49.5, CW - 17, 57), "BOSS", "Provvisorio")
-    elif boss:
-        d.testo(sp, L(ox, oy, 14, 49, CW - 14, 78), "BOSS", "Segnaposto", vj="center")
-    # dalla sera dell'8/11 niente Difesa: si colpisce con 2D6 + ATT ≥ AR del bersaglio (3 riquadri)
-    stats = [("PV", r["pv"], "PV"), ("ATT", r["att"], "Inchiostro"), ("AR", r["ar"], "Scudo")]
-    w = (CW - 28 - 2 * 6) / 3
-    for k, (nome, val, colore) in enumerate(stats):
-        x0 = 14 + k * (w + 6)
-        d.rett(sp, L(ox, oy, x0, 81, x0 + w, 113), fill="Carta", stroke=colore, peso=1.2, raggio=2)
-        d.testo(sp, L(ox, oy, x0, 83, x0 + w, 90), nome, "StatNome")
-        d.testo(sp, L(ox, oy, x0, 91, x0 + w, 111), val, "StatValore", vj="center")
-    d.testo(sp, L(ox, oy, 14, 115, CW - 14, 125), "Danno: " + r["danno"], "Danno", vj="center")
-    d.testo(sp, L(ox, oy, 15, 128, CW - 15, 136), "ABILITÀ SPECIALI", "Sezione")
-    if boss:
-        # 3 righe: «Custode» + «Mazzetto 3», che dalla v6 (Indizio se D6 ≤ LV) va a capo
-        y_ric = CH - 11 - 3 * 9 - 9
-    else:
-        y_ric = CH - 13 - 9 - 9 - 2
-    d.testo(sp, L(ox, oy, 15, 137, CW - 15, y_ric - 2), tipografico(r["abilita"]), "TestoNemico")
-    d.linea(sp, (ox + 14, oy + y_ric - 1), (ox + CW - 14, oy + y_ric - 1), "OroNemico", 0.6)
-    d.testo(sp, L(ox, oy, 15, y_ric + 1, CW - 15, y_ric + 9), "RICOMPENSE", "Sezione")
+    # medaglione su un ingranaggio a 16 denti (kit dei motivi): i denti escono di 1 pt dal bordo d'oro
+    ingranaggio(d, sp, ox + BX + 11, oy + 21, 12, 16, "OroNemico", prof=0.1)
+    d.rett(sp, L(ox, oy, BX, 10, BX + 22, 32), fill="Medaglione", stroke="OroNemico", peso=1.2, forma="ellipse")
+    d.testo(sp, L(ox, oy, BX, 10, BX + 22, 32), r["lettera"], "LetteraMed", vj="center")
+    d.testo(sp, L(ox, oy, BX + 25, 10, CW - BX, 22.5), tipografico(r["nome"]),
+            "NomeNemico" if len(r["nome"]) <= 20 else "NomeNemicoStretto", vj="center")
+    lv = f"LV {r['lv']} · MAZZETTO " + r["mazzetto"].upper().replace(" / ", " · ")
+    d.testo(sp, L(ox, oy, BX + 25, 23, CW - BX, 31), lv, "Etichetta" if in_una_riga(lv, "Etichetta", CW - 2 * BX - 25 - 22)
+            else "EtichettaStretta", vj="center")
+    d.testo(sp, L(ox, oy, CW / 2, 23, CW - BX, 31), r["id"], "Codice", vj="center")
+    x0, y0, x1, y1 = finestra_arte(d, sp, ox, oy, r, MOSTRO_Y0, "boss" if boss else "mostro", "Notte", "BOSS" if boss else None)
+    if boss and arte(r):
+        etichetta(d, sp, ox, oy, r, (x0 + 3, y0 + 2.5, x1 - 3, y0 + 10.5), "BOSS", "Provvisorio")
+    # dalla sera dell'8/11 niente Difesa: si colpisce con 2D6 + ATT ≥ AR del bersaglio. Riquadri: nome a sinistra, valore
+    ys0, ys1 = y1 + CORNICE + 1.5, y1 + CORNICE + 17.5
+    stats = [("PV", r["pv"], "PV", 30), ("ATT", r["att"], "Inchiostro", 30), ("AR", r["ar"], "Scudo", 30),
+             ("DANNO", r["danno"], "Marrone", CW - 2 * BX - 90 - 3 * 2.5)]
+    x = BX
+    for nome, val, colore, w in stats:
+        d.rett(sp, L(ox, oy, x, ys0, x + w, ys1), fill="Carta", stroke=colore, peso=1.0, raggio=2)
+        grande = nome != "DANNO"
+        wn = 14 if grande else 25
+        # il nome sta alto e le cifre basse nel loro interlinea: 0,8 pt giù il nome, 1,6 pt su il valore (il danno, in
+        # corpo piccolo, sulla riga del nome)
+        dy = -1.6 if grande else 0.8
+        d.testo(sp, L(ox, oy, x + 1.5, ys0 + 0.8, x + wn, ys1 + 0.8), nome, "StatNome", vj="center")
+        d.testo(sp, L(ox, oy, x + wn - 1, ys0 + dy, x + w - 1, ys1 + dy), val, "StatValore" if grande else "Danno", vj="center")
+        x += w + 2.5
+    y_ric1 = battuta_in_fondo(d, sp, ox, oy, r, CH - 10.5, "OroNemico", "BattutaPiccola")
     if boss:
         m3 = r["ricompensa_se_mazzetto_3"].replace("Forte Volontà", "Forte\u00a0Volontà")   # non spezzare il nome
         ric = [("Custode: " + r["ricompense"], "Ricompensa"), ("Mazzetto 3: " + m3, "Ricompensa")]
-        d.testo(sp, L(ox, oy, 15, y_ric + 9, CW - 15, CH - 11), "", "Ricompensa", paragrafi=ric)
     else:
-        d.testo(sp, L(ox, oy, 15, y_ric + 9, CW - 15, CH - 12), r["ricompense"], "Ricompensa")
+        ric = [("Ricompense: " + r["ricompense"], "Ricompensa")]
+    # righe delle ricompense: 1 per paragrafo se entra (4 pt di margine per il nome in grassetto), se no 2
+    righe = sum(1 if in_una_riga(t, "Ricompensa", CW - 2 * TX - 4) else 2 for t, _ in ric)
+    y_ric0 = y_ric1 - righe * stile_car("Ricompensa")["leading"]["value"] - 0.5
+    d.testo(sp, L(ox, oy, TX, y_ric0, CW - TX, y_ric1), "", "Ricompensa", paragrafi=ric, vj="bottom")
+    d.linea(sp, (ox + BX, oy + y_ric0 - 1.5), (ox + CW - BX, oy + y_ric0 - 1.5), "OroNemico", 0.6)
+    for x in (BX, CW - BX):
+        rivetto(d, sp, ox + x, oy + y_ric0 - 1.5, 0.9, "OroNemico", None)
+    d.testo(sp, L(ox, oy, TX, ys1 + 2, CW - TX, y_ric0 - 3), tipografico(r["abilita"]), "TestoNemico")
 
 
 # colore dell'Imprevisto dal suo id (i nomi possono cambiare col tono v7); id nuovi: colore generico
@@ -592,17 +771,17 @@ IMPREVISTO_COLORE = {"IM-01": "Trappola", "IM-02": "Locanda", "IM-03": "Fonte", 
 
 
 def carta_imprevisto(d, sp, ox, oy, r):
+    """Carta Imprevisto: barra del nome piena nel colore dell'Imprevisto, illustrazione grande, riga del tipo, testo
+    centrato, filetto e battuta, piede (copia e id)."""
     cornice(d, sp, ox, oy, "Imprevisto")
     col = IMPREVISTO_COLORE.get(r["id"], "Imprevisto")
-    d.rett(sp, L(ox, oy, SAFE, SAFE, CW - SAFE, 40), fill=col, raggio=4)
-    d.testo(sp, L(ox, oy, 13, 13, CW - 13, 36), r["nome"], "TitoloChiaro", vj="center")
-    d.testo(sp, L(ox, oy, 14, 43, CW - 14, 51), "IMPREVISTO", "Etichetta")
-    riquadro_arte(d, sp, ox, oy, r, (14, 54, CW - 14, 110), col, 0.14, (71, 93), ((14, 64, CW - 14, 100), "?"))
+    barra(d, sp, ox, oy, NOME_Y[0], 26, col, pieno=True)
+    d.testo(sp, L(ox, oy, TX, NOME_Y[0], CW - TX, 26), r["nome"], "TitoloChiaro", vj="center")
+    x0, y0, x1, y1 = finestra_arte(d, sp, ox, oy, r, 27.5, "imprevisto", col, "?")
+    y_tipo = riga_tipo(d, sp, ox, oy, y1 + CORNICE + TIPO_GAP, col, "IMPREVISTO")
+    y_testo = battuta_in_fondo(d, sp, ox, oy, r, piede(d, sp, ox, oy, r["copia"], r["id"]), col)
     testo = (r.get("testo_bozza") or "").strip() or r["testo"]
-    d.testo(sp, L(ox, oy, 16, 118, CW - 16, CH - 30), tipografico(testo), "TestoCentro", vj="center")
-    d.linea(sp, (ox + 14, oy + CH - 27), (ox + CW - 14, oy + CH - 27), "Imprevisto", 0.6)
-    d.testo(sp, L(ox, oy, 14, CH - 19, 110, CH - 11.5), r["copia"], "Piede")
-    d.testo(sp, L(ox, oy, 110, CH - 19, CW - 14, CH - 11.5), r["id"], "Codice")
+    d.testo(sp, L(ox, oy, TX + 1, y_tipo + TIPO_GAP, CW - TX - 1, y_testo), tipografico(testo), "TestoCentro", vj="center")
 
 
 def carta_aiuto_turno(d, sp, ox, oy, r):
@@ -610,7 +789,7 @@ def carta_aiuto_turno(d, sp, ox, oy, r):
     si giocano le carte. Altezza di ogni riga in pt: nome 10, poi 2 righe di testo (3 per la Fine)."""
     cornice(d, sp, ox, oy, "Oro")
     d.testo(sp, L(ox, oy, 13, 13, CW - 13, 31), r["fronte_titolo"], "Titolo", vj="center")
-    d.linea(sp, (ox + 14, oy + 33), (ox + CW - 14, oy + 33), "Oro", 0.6)
+    filetto_ornato(d, sp, ox + 14, ox + CW - 14, oy + 33, "Oro", 0.6)
     righe = [("•", "inizio", 31), ("1", "passo1", 31), ("2", "passo2", 31), ("3", "passo3", 41)]
     y = 36
     for num, campo, h in righe:
@@ -642,39 +821,62 @@ def carta_aiuto_riepilogo(d, sp, ox, oy, r):
 def divisore(d, sp, ox, oy, r, n):
     """n = carte del tipo nel kit, contate dai CSV in mazzi()."""
     col = TIPO_COLORE[r["codice"]]
-    d.rett(sp, sangue(ox, oy), fill=col)
-    d.rett(sp, L(ox, oy, SAFE, SAFE, CW - SAFE, CH - SAFE), stroke="Carta", peso=0.8, raggio=4)
+    cornice_piena(d, sp, ox, oy, col, "OttoneChiaro")
+    filetto_ornato(d, sp, ox + 40, ox + CW - 40, oy + 40, "OttoneChiaro", 0.4, "OttoneChiaro")
+    filetto_ornato(d, sp, ox + 40, ox + CW - 40, oy + 178, "OttoneChiaro", 0.4, "OttoneChiaro")
     d.testo(sp, L(ox, oy, 13, 18, CW - 13, 30), "DIVISORE", "DorsoSotto")
     d.testo(sp, L(ox, oy, 13, 60, CW - 13, 110), r["codice"], "DivCodice", vj="center")
     d.testo(sp, L(ox, oy, 13, 118, CW - 13, 138), r["titolo"], "DivTitolo", vj="center")
     d.testo(sp, L(ox, oy, 13, 142, CW - 13, 168), f"{r['contenuto_playtest']} · {n} carte", "DivSotto", vj="center")
-    d.testo(sp, L(ox, oy, 110, CH - 19, CW - 14, CH - 11.5), r["id"], "CodiceChiaro")
+    # id dentro il filetto doppio della cornice (il filo interno sta a SAFE + 4)
+    d.testo(sp, L(ox, oy, 110, CH - 24, CW - 17, CH - 16.5), r["id"], "CodiceChiaro")
 
 
 # ---------------------------------------------------------------- dorsi
 
+def emblema(d, sp, ox, oy, linea, ombra, stella=True):
+    """Emblema dei dorsi, centrato a EMBLEMA_Y: ingranaggio a 14 denti (pieno nel colore ombra, bordo linea), anello
+    interno, un rivetto sotto ogni dente e, con stella, la stella arcana a 8 punte con il tondo al centro (senza stella il
+    centro resta libero per il segno grande del mazzo)."""
+    cx, cy, R = ox + CW / 2, oy + EMBLEMA_Y, EMBLEMA_R
+    d.poligono(sp, ingranaggio_punti(cx, cy, R, 14, 0.12), fill=ombra, stroke=linea, peso=0.9)
+    ri = 0.76 * R
+    d.rett(sp, [cx - ri, cy - ri, cx + ri, cy + ri], stroke=linea, peso=0.5, forma="ellipse")
+    for k in range(14):
+        a = 2 * math.pi * k / 14 - math.pi / 2
+        rivetto(d, sp, cx + 0.82 * R * math.cos(a), cy + 0.82 * R * math.sin(a), 0.9, linea, None)
+    if stella:
+        d.poligono(sp, stella_punti(cx, cy, 0.6 * R, 8, 0.42), stroke=linea, peso=0.6)
+        d.rett(sp, [cx - 4, cy - 4, cx + 4, cy + 4], fill=linea, forma="ellipse")
+
+
 def dorso(d, sp, ox, oy, colore, titolo, sotto="", grande="", abb=""):
-    """Dorso di un mazzo coperto; abb = etichetta minuscola nell'abbondanza in basso (sparisce col taglio)."""
+    """Dorso di un mazzo coperto (kit dei motivi, 11/11): cornice_piena, marchio e filetto in alto, emblema grande al
+    centro con la stella o il segno grande del mazzo (numero del mazzetto, «?»), sotto il nome del mazzo e la riga
+    piccola; abb = etichetta minuscola nell'abbondanza in basso (sparisce col taglio)."""
     scuro = colore in DORSO_CHIARO
     inch, suf = ("Retro", "Scuro") if scuro else ("OroChiaro", "")
-    d.rett(sp, sangue(ox, oy), fill=colore)
-    d.rett(sp, L(ox, oy, SAFE, SAFE, CW - SAFE, CH - SAFE), stroke=inch, peso=1.0, raggio=4)
-    d.rett(sp, L(ox, oy, SAFE + 4, SAFE + 4, CW - SAFE - 4, CH - SAFE - 4), stroke=inch, peso=0.4, raggio=2)
+    cornice_piena(d, sp, ox, oy, colore, inch)
     d.testo(sp, L(ox, oy, 16, 24, CW - 16, 34), "IL TESORO DEL GOBLIN", "DorsoMarchio" + suf)
+    filetto_ornato(d, sp, ox + 44, ox + CW - 44, oy + 40, inch, 0.4, inch)
+    emblema(d, sp, ox, oy, inch, "Ombra" + colore, stella=not grande)
     if grande:
-        d.testo(sp, L(ox, oy, 16, 70, CW - 16, 140), grande, "DorsoGrande" + suf, vj="center")
-        d.testo(sp, L(ox, oy, 16, 146, CW - 16, 186), titolo, "DorsoTitolo" + suf, vj="center")
-    else:
-        d.testo(sp, L(ox, oy, 16, 95, CW - 16, 155), titolo, "DorsoTitolo" + suf, vj="center")
+        d.testo(sp, L(ox, oy, 16, EMBLEMA_Y - 35, CW - 16, EMBLEMA_Y + 35), grande, "DorsoGrande" + suf, vj="center")
+    d.testo(sp, L(ox, oy, 16, 158, CW - 16, 198), titolo, "DorsoTitolo" + suf, vj="center")
     if sotto:
         d.testo(sp, L(ox, oy, 16, CH - 40, CW - 16, CH - 26), sotto, "DorsoSotto" + suf, vj="center")
     if abb:
         d.testo(sp, [ox + 14, oy + CH + 0.3 * MM, ox + CW - 14, oy + CH + B - 0.2 * MM], abb, "DorsoAbbondanza" + suf, vj="center")
 
 
+TUTTI_OVERSET = "--tutti-overset" in sys.argv
+OVERSET = []   # con --tutti-overset: i testi che non entrano di tutti i PDF, elencati in fondo
+
+
 def esegui(d, nome, titolo, descr):
     """Esporta il PDF e salva il progetto DesignCraft <nome>.designcraft. Si ferma se un testo non entra nel suo riquadro
-    (overset nel preflight di DesignCraft): il PDF resta scritto per guardarlo, ma il kit non è valido."""
+    (overset nel preflight di DesignCraft): il PDF resta scritto per guardarlo, ma il kit non è valido. Con
+    --tutti-overset non si ferma: raccoglie i testi in OVERSET e va avanti col PDF dopo."""
     d.cmd("file.exportPdf", path=str(PDF_DIR / f"{nome}.pdf"), standard="x4", title=titolo, bleed=False, marks=False)
     pf = d.cmd("preflight.run")
     with tempfile.TemporaryDirectory(prefix="goblin_carte_") as tmp:
@@ -686,11 +888,20 @@ def esegui(d, nome, titolo, descr):
         sys.exit(f"{nome}: designcraft-cli ha fallito\n{out.stdout[-2000:]}\n{out.stderr[-2000:]}")
     res = json.loads(out.stdout)
     frame = {res["results"][i]["id"]: v for i, v in d.testi.items()}
-    overset = [p["message"] + (f": foglio {frame[p['item']][0] + 1}, «{frame[p['item']][1]}…»" if p.get("item") in frame else "")
-               for p in res["results"][pf]["issues"] if p["kind"] == "overset"]
-    if overset:
+    overset = []
+    for p in res["results"][pf]["issues"]:
+        if p["kind"] != "overset":
+            continue
+        n = re.search(r"(\d+) characters?", p["message"])
+        msg = f"{n.group(1)} caratteri in più" if n else p["message"]
+        if p.get("item") in frame:
+            sp, inizio, stile, id_ = frame[p["item"]]
+            msg = f"{id_ or '?'} [{stile}]: {msg}, foglio {sp + 1}, «{inizio}…»"
+        overset.append(msg)
+    if overset and not TUTTI_OVERSET:
         sys.exit(f"{nome}: testo che non entra nel riquadro (accorcialo nel CSV):\n  " + "\n  ".join(overset))
-    print(f"{nome}.pdf: {descr}, {res['completed']} comandi")
+    OVERSET.extend(f"{nome}: {m}" for m in overset)
+    print(f"{nome}.pdf: {descr}, {res['completed']} comandi" + (f", {len(overset)} testi che non entrano" if overset else ""))
 
 
 def fogli_dorsi(carte):
@@ -715,7 +926,9 @@ def costruisci(nome, titolo, carte):
     for k, (fr, rt) in enumerate(carte):
         sp = k // PER_FOGLIO
         ox, oy = origine(k % PER_FOGLIO)
+        primo = len(fronti.righe)
         fr(fronti, sp, ox, oy)
+        fronti.carta(primo)
         occ_f[sp].append((ox, oy))
         if rt:
             rt(retri, pag_r[sp], ox, oy)
@@ -769,7 +982,8 @@ def mazzi():
                   abb=f"Mostro {num} · {r['id']}")
         mostri.append((f(carta_mostro, r), retro))
 
-    impr = [(f(carta_imprevisto, r), f(dorso, "Imprevisto", "Imprevisto", abb=f"Imprevisto · {r['id']} · {r['copia']}"))
+    impr = [(f(carta_imprevisto, r), f(dorso, "Imprevisto", "Imprevisto", grande="?",
+                                         abb=f"Imprevisto · {r['id']} · {r['copia']}"))
             for r in leggi("carte_imprevisto.csv")]
 
     aiuto = []
@@ -801,3 +1015,5 @@ if __name__ == "__main__":
         costruisci(nome, titolo, carte)
         totale += len(carte)
     print("totale carte:", totale)
+    if OVERSET:
+        sys.exit(f"{len(OVERSET)} testi che non entrano nel riquadro (accorciali nel CSV):\n  " + "\n  ".join(OVERSET))

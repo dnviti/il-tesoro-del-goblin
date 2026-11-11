@@ -92,12 +92,12 @@ CA-09,equip,ar=1;mai_perso,
 CA-10,equip,ar=1;parata_sacrifica,
 CA-11,buff,att=2;ar=-2;equip3_danno=1,
 CA-12,danno,n=2;avv;ar_turno=-2;stato_bers=Rallentato;sei=2,
-CA-13,equip,sac_danno=2,(+2) Danni al prossimo attacco solo in questo turno (danno_next)
+CA-13,equip,sac_danno=2;ar_lv3=1,(+2) Danni al prossimo attacco solo in questo turno (danno_next)
 CA-14,equip,pistola,
-CA-15,equip,archibugio,l'IA usa il (+3) quando basta a colpire; il sacrificio per 3 Danni non è modellato
+CA-15,equip,archibugio=1;ar_lv3=2,l'IA usa il (+3) quando basta a colpire e paga (-1) AR; il sacrificio per 3 Danni non è modellato
 CA-16,equip,rid_turno=1;lascia_stato=Fede,«una volta per turno» = fino alla propria Fine
-CA-17,equip,molla,il sacrificio per 3 Danni non è modellato
-CA-18,equip,rid_turno=2;rid_turno_ar=-1,il (-1) AR si paga quando para (dopo il colpo)
+CA-17,equip,molla;rid_turno=1,il sacrificio per 3 Danni non è modellato
+CA-18,equip,rid_turno=2,«una volta per turno» = fino alla propria Fine
 CA-19,cura,n=D6;basso3=D6+2;s=Fede,
 CA-20,prendi_scarti,n=1;equip;n_sac=2;ripiego=fv,l'IA non sacrifica per prenderne 2
 CG-01,equip,mov=2;scarta_pesca,
@@ -117,7 +117,7 @@ CG-14,ricambia,max=2;accanto_stato=Rallentato;scontro_att=-2,scarta e ripesca le
 CG-15,buff,att=2;costo_pv_o_scarta=2;scarti5_danno=1,scarta se ha una carta di poco valore o 2 PV o meno
 CG-16,equip,scambia_turno,a M0 con una carta di poco valore; la carta presa è a caso (la migliore se l'avversario ha più carte)
 CG-17,equip,sac_silenzio,sacrificato a M6 contro il leader con 2 Indizi o più
-CG-18,equip,jetpack=2,paga sempre scartando (mai «dai 1 carta»)
+CG-18,equip,jetpack=2;ar_pv2=2,paga sempre scartando (mai «dai 1 carta»)
 CG-19,mill,n=2;pesca_dopo,la parte «fai lo stesso anche tu» non è usata
 CG-20,tributo,n=2;n2=3,l'avversario scarta solo se ha 6 carte o più; altrimenti ti dà la sua carta peggiore
 CO-01,ritira,proprio;prof=mod;ripiego=fv,
@@ -133,13 +133,13 @@ CO-10,equip,ar=2;prof_scarta=1,
 CO-11,cura,n=1;fv;prof=cura2_pila,
 CO-12,buff,ar=1;prof=ar_fede,
 CO-13,buff,att=1;prof=dmg_turno,
-CO-14,equip,prof_riprova,il D6 ritirato vale solo per la Profezia: il tiro resta com'era (approssimato)
-CO-15,equip,prof_paga,usato se restano più di 3 PV; vale solo il premio piccolo
+CO-14,equip,prof_riprova;ar_lv3=1,il D6 ritirato vale solo per la Profezia: il tiro resta com'era (approssimato)
+CO-15,equip,prof_paga=1;ar_lv3=2,usato se restano più di 2 PV; vale solo il premio piccolo
 CO-16,mod_tiro,n=1;qualsiasi;prof=meno_altrui,
 CO-17,stato_avv,s=Rallentato;prof=scarta_fermo_altrui,
-CO-18,equip,prof_largo,
-CO-19,equip,prof_stati,
-CO-20,equip,prof_resta,
+CO-18,equip,prof_largo;ar_lv3=1,
+CO-19,equip,prof_stati;ar_boss=2,
+CO-20,equip,prof_resta;ar_lv3=1,
 CR-01,amisal,mov=2,scelta: (+2) MOV oppure scry (scry sul mazzo comune = info)
 CR-02,scry_imp,n=3;s=Occhio;mov_fermo=2,
 CR-03,mod_tiro,n=1;scontro_creatura=-1,
@@ -151,12 +151,12 @@ CR-08,ritira,proprio;avv_bonus=1;ripiego=info,ripiego (scry del mazzo comune): i
 CR-09,ruba,n=1,
 CR-10,danno,n=2;avv;indizi3=D6+2,
 CR-11,equip,scry_mostri_entra=2,lo scry N + 1 non è modellato
-CR-12,equip,scry_mostri_turno=2,guarda il proprio mazzetto quando si ferma su una «?» rossa o scoperta
+CR-12,equip,scry_mostri_turno=2;ar_lv3=2,guarda il proprio mazzetto quando si ferma su una «?» rossa o scoperta
 CR-13,gamba,,
 CR-14,scry_imp,n=2,guardare e scambiare le 2 tessere coperte: info
 CR-15,togli_mappa,s=Vantaggio,
-CR-16,equip,info_turno,scry del mazzo comune: info
-CR-17,equip,motosega,scarta una carta che vale 3 o meno
+CR-16,equip,info_turno;ar_boss=2,scry del mazzo comune: info
+CR-17,equip,motosega;dmg_lv3=1,scarta una carta che vale 3 o meno
 CR-18,scambia,n=1,«guarda 2 carte a caso / tutta la mano»: la carta presa è a caso
 CR-19,pietraluce,,«guarda la mano di ogni avversario»: info
 CR-20,annulla,tipo=TI;togli_meno;ripiego=fv,«guarda la mano di un avversario»: info
@@ -170,13 +170,13 @@ CS-07,ritira,qualsiasi;un_dado;ripiego=fv,
 CS-08,stato_avv,s=Silenzio;risposta_fv,
 CS-09,malus,creature_svant_turno;avv_stato=Svantaggio,
 CS-10,equip,att=1;ritira_turno,
-CS-11,equip,incanto_extra=1,l'altro bersaglio è la creatura o l'avversario accanto con più Indizi
-CS-12,equip,cartucciera=1,a M4 nel proprio scontro; il sacrificio per D6 + 2 Danni non è modellato
+CS-11,equip,incanto_extra=1;ar_lv3=1,l'altro bersaglio è la creatura o l'avversario accanto con più Indizi
+CS-12,equip,cartucciera=1;ar_lv3=2,a M4 nel proprio scontro; il sacrificio per D6 + 2 Danni non è modellato
 CS-13,equip,fv_entra;incanto_fv,
 CS-14,danno,n=D6+2;avv;dado_in_piu;splash=1;uccisa_mill,
 CS-15,danno,n=D6-1;avv;dado_in_piu;tutti_stato=Rallentato;se_mappa=TM-04;se_mappa_dmg=2,
-CS-16,equip,sac_annulla_ti,come CG-17: sacrificato contro un Incanto che ha te come bersaglio
-CS-17,equip,incanto_ricambia,scry del mazzo comune: info; scarta e pesca se ha una carta di poco valore
-CS-18,equip,recupera_incanto_entra;incanto_annullato_fv,
+CS-16,equip,sac_annulla_ti;ar_boss=2,come CG-17: sacrificato contro un Incanto che ha te come bersaglio
+CS-17,equip,incanto_ricambia;ar_lv3=1,scry del mazzo comune: info; scarta e pesca se ha una carta di poco valore
+CS-18,equip,recupera_incanto_entra;incanto_annullato_fv;ar_lv3=2,
 CS-19,ritira,qualsiasi;scegli=2;ripiego=fv,l'IA lo gioca come un ritiro: mette 6 (o 1) sul dado peggiore
 CS-20,malus,creatura_att1;creatura_ar=-2;non_boss;avv_stato=Silenzio;avv_stato2=Rallentato,

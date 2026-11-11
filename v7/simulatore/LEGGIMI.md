@@ -108,6 +108,23 @@ python3 v7/simulatore/sim_v7.py --verifica-carte
     non rifà su di sé; CG-20 l'avversario scarta solo con 6 carte o più, altrimenti dà la peggiore; TI-35 senza
     lo scambio; TI-38 ognuno passa le sue 2 carte peggiori; CS-19 mette 6 (o 1) sul dado peggiore.
   - Equipaggiamenti «quando…»: CG-12 tira solo con 3 PV o più e un bersaglio; CO-14 il D6 ritirato vale solo per la
-    Profezia (il tiro resta); TE-26 al posto del tiro solo se per colpire serve 8 o più su 2D6; CA-18 paga (−1) AR
-    dopo il colpo; CA-13 e TE-28 mettono i Danni sul prossimo attacco del turno.
+    Profezia (il tiro resta); TE-26 al posto del tiro solo se per colpire serve 8 o più su 2D6; CA-13 e TE-28
+    mettono i Danni sul prossimo attacco del turno; CA-15 usa il (+3) quando basta a colpire e paga la AR del
+    parametro `archibugio=N`; CO-15 paga `prof_paga=N` PV solo se ne ha più di N + 1.
   - Effetti «una volta per turno» degli Equipaggiamenti valgono fino alla propria Fine (come CS-10).
+- Righe «Se» degli Equipaggiamenti con una statistica (§14.5, bilanciamento dell'11/11): `ar_lv3=N` (AR contro gli
+  attacchi delle creature di LV 3 o più, come TE-22), `ar_boss=N` (contro boss e custode), `ar_pv2=N` (AR con 2 PV
+  o meno, vale anche nel Duello), `dmg_lv3=N` (Danni ai tuoi attacchi contro le creature di LV 3 o più).
+
+## Risultati (11/11, 500 partite per tavolata, seme 1)
+
+Gli Equipaggiamenti di classe nuovi (XX-11..20) alzavano il PL senza dare difese: gli eroi arrivavano prima al
+mazzetto 3 e la partita si allungava di circa 4 round. Senza di loro la partita tornava a circa 11,0/10,4/10,2
+round. Tolti uno alla volta (2000 partite), solo i PL 3 pesavano da soli (CA-15 −0,6 round, CO-15 −0,5): il peso
+veniva dall'insieme. Una (+1) ATT su tutti quasi non cambiava niente; una (+1) AR sì. Gli effetti sono stati
+rivisti di conseguenza (elenco in Spec §19).
+
+| | Round 2/3/4 giocatori | Scontri persi | Mazzetto 3 | Morti a partita (4 g.) | Vittorie per classe (quota equa = 1) |
+|---|---|---|---|---|---|
+| Prima (carte di D22) | 14,6 / 13,9 / 14,1 | 32 % | 22–23 % | 12,8 | da 0,75 (Oracolo) a 1,15 |
+| Dopo il bilanciamento | 11,1 / 10,5 / 10,2 | 22–24 % | 19–21 % | 7,2 | da 0,89 a 1,11 (2000 partite) |

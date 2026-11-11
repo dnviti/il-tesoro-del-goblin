@@ -12,12 +12,13 @@ si calcolano dai dati. Prima di scrivere controlla che ogni casella sia una sola
 plancia girata di 180° sia identica.
 
 Con --tema TEMA ogni esagono è riempito dalla sua tessera illustrata (arte/png/PT-<TEMA>-<TERRENO>-<n>.png, 360 px
-= 30,48 mm a 300 ppi sulla plancia in scala 0,97, ritagliata a esagono; la variante -1/-2 dipende dalla coordinata)
-e la fascia della Sala del Tesoro ha sotto PS-<TEMA>.png schiarita; senza --tema l'aspetto è quello piatto. Le
-immagini sono collegate con un percorso relativo alla cartella dell'SVG scritto (svg.py board() le riporta alla
-cartella delle pagine di stampa). --senza-linee toglie le linee di strada tra le caselle collegate.
+= 30,48 mm a 300 ppi sulla plancia in scala 0,97, ritagliata a esagono; la variante -1/-2 dipende dalla coordinata;
+se la -2 manca si usa la -1 specchiata) e la fascia della Sala del Tesoro ha sotto PS-<TEMA>.png schiarita; senza
+--tema l'aspetto è quello piatto. Le immagini sono collegate con un percorso relativo alla cartella dell'SVG scritto
+(svg.py board() le riporta alla cartella delle pagine di stampa); --arte CARTELLA le prende da un'altra cartella.
+--senza-linee toglie le linee di strada tra le caselle collegate.
 
-Uso: python3 genera_bozza_mappa.py [--dati FILE.py] [--out FILE.svg] [--tema TEMA] [--senza-linee]
+Uso: python3 genera_bozza_mappa.py [--dati FILE.py] [--out FILE.svg] [--tema TEMA] [--arte CARTELLA] [--senza-linee]
 """
 import argparse
 import importlib.util
@@ -281,29 +282,38 @@ def variante(h, terr):
     return f'{terr}-{zlib.crc32(h.encode()) % VARIANTI[terr] + 1}'
 
 
-def tessere(p, tema, cartella):
-    """{«TERRENO-n» o «SALA»: href relativo a `cartella`} delle immagini usate da plancia e legenda (la legenda usa le
-    varianti -1 di tutti i terreni). Se manca un file esce con l'elenco degli id mancanti."""
+def tessere(p, tema, cartella, arte=ARTE):
+    """{«TERRENO-n» o «SALA»: (href relativo a `cartella`, specchiata)} delle immagini usate da plancia e legenda (la
+    legenda usa le varianti -1 di tutti i terreni). Una variante -n che manca usa la -1 specchiata; se manca una -1 o
+    PS-<TEMA> esce con l'elenco degli id mancanti."""
     chiavi = {variante(h, terreno(p, h)) for h in TUTTI} | {f'{t}-1' for t in VARIANTI}
-    file = {k: os.path.join(ARTE, f'PT-{tema}-{k}.png') for k in chiavi}
-    file['SALA'] = os.path.join(ARTE, f'PS-{tema}.png')
-    manca = sorted(os.path.basename(f)[:-4] for f in file.values() if not os.path.isfile(f))
+    file = {k: os.path.join(arte, f'PT-{tema}-{k}.png') for k in chiavi}
+    file['SALA'] = os.path.join(arte, f'PS-{tema}.png')
+    specchio = {k for k, f in file.items() if not k.endswith('-1') and k != 'SALA' and not os.path.isfile(f)}
+    for k in specchio:
+        file[k] = file[k.rsplit('-', 1)[0] + '-1']
+    manca = sorted({os.path.basename(f)[:-4] for f in file.values() if not os.path.isfile(f)})
     if manca:
-        sys.exit(f'tema {tema}: mancano {len(manca)} immagini in {os.path.normpath(ARTE)}: {", ".join(manca)}')
-    return {k: os.path.relpath(f, cartella) for k, f in file.items()}
+        sys.exit(f'tema {tema}: mancano {len(manca)} immagini in {os.path.normpath(arte)}: {", ".join(manca)}')
+    if specchio:
+        print(f'tema {tema}: mancano {", ".join(f"PT-{tema}-{k}" for k in sorted(specchio))}, uso la -1 specchiata')
+    return {k: (os.path.relpath(f, cartella), k in specchio) for k, f in file.items()}
 
 
-def tessera(href, x, y, cid, k=1.0):
-    """tessera ritagliata a esagono (raggio R*k) centrata in (x, y): clipPath e immagine sulla stessa riga."""
+def tessera(img, x, y, cid, k=1.0):
+    """tessera img = (href, specchiata) ritagliata a esagono (raggio R*k) centrata in (x, y): clipPath e immagine sulla
+    stessa riga. Specchiata: girata attorno alla verticale per x (l'esagono è simmetrico, il ritaglio non cambia)."""
+    href, specchiata = img
     t = TESSERA * k
+    giro = f' transform="matrix(-1 0 0 1 {2 * x:.2f} 0)"' if specchiata else ''
     return (f'<clipPath id="{cid}"><polygon points="{punti(x, y, R * k)}"/></clipPath>'
-            f'<image href="{escape(href)}" x="{x - t / 2:.2f}" y="{y - t / 2:.2f}" width="{t:.2f}" height="{t:.2f}" clip-path="url(#{cid})"/>')
+            f'<image href="{escape(href)}" x="{x - t / 2:.2f}" y="{y - t / 2:.2f}" width="{t:.2f}" height="{t:.2f}" clip-path="url(#{cid})"{giro}/>')
 
 
-def fondo_sala(href):
+def fondo_sala(img):
     """PS-<TEMA> sotto la fascia della Sala del Tesoro (a 300 ppi su tutta la larghezza), schiarita da un velo."""
     return (f'<clipPath id="fondo-sala"><rect x="2" y="2" width="{BW - 4:.2f}" height="{SALA_H - 2:.2f}"/></clipPath>'
-            f'<image href="{escape(href)}" x="0" y="0" width="{BW:.2f}" height="{SALA_H:.2f}" clip-path="url(#fondo-sala)"/>'
+            f'<image href="{escape(img[0])}" x="0" y="0" width="{BW:.2f}" height="{SALA_H:.2f}" clip-path="url(#fondo-sala)"/>'
             f'<rect x="2" y="2" width="{BW - 4:.2f}" height="{SALA_H - 2:.2f}" fill="#f4ead5" fill-opacity="0.55"/>')
 
 
@@ -493,10 +503,11 @@ def main():
     ap.add_argument('--out', default=OUT, help='SVG da scrivere (default: idee/v7_bozza_mappa.svg)')
     ap.add_argument('--tema', help='tessere illustrate arte/png/PT-<TEMA>-*.png e PS-<TEMA>.png (es. BASE, TUNDRA); '
                                    'default: aspetto piatto senza immagini')
+    ap.add_argument('--arte', default=ARTE, help='cartella delle immagini di --tema (default: stampa/sorgenti/arte/png)')
     ap.add_argument('--senza-linee', action='store_true', help='niente linee di strada tra le caselle collegate')
     a = ap.parse_args()
     p = prepara(carica_dati(a.dati))
-    arte = tessere(p, a.tema.upper(), os.path.dirname(os.path.abspath(a.out))) if a.tema else None
+    arte = tessere(p, a.tema.upper(), os.path.dirname(os.path.abspath(a.out)), a.arte) if a.tema else None
     s = svg(p, arte, not a.senza_linee)
     with open(a.out, 'w', encoding='utf-8') as f:
         f.write(s)

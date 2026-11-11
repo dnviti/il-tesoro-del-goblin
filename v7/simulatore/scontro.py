@@ -73,6 +73,9 @@ def _danni_bonus(g, e):
     b = sum(c.p.get('dmg', 0) for c in e.equip()) + e.tmp['dmg'] + e.tmp.pop('danno_next', 0)
     if 'Arma DX / Scudo' not in e.slot:
         b += sum(c.p.get('dmg_dx_vuoto', 0) for c in e.equip())
+    sc = g.scontro
+    if sc is not None and not sc.duello and sc.nemico.lv >= 3:      # «Se combatti una creatura di LV 3 o più»
+        b += sum(c.p.get('dmg_lv3', 0) for c in e.equip())
     return b
 
 
@@ -83,11 +86,10 @@ def _danno_finale(g, td, x, extra=0):
     if td.annulla_danni:
         return 0
     d = max(0, d)
-    for c in x.equip():                     # CA-16, CA-18: una volta per turno (-N) ai Danni di un attacco
+    for c in x.equip():                     # CA-16, CA-17, CA-18: una volta per turno (-N) ai Danni di un attacco
         if d and 'rid_turno' in c.p and c.id not in x.usati:
             x.usati.add(c.id)
             d = max(0, d - c.p['rid_turno'])
-            x.tmp['ar'] += c.p.get('rid_turno_ar', 0)
     if d and ia.para_con_equip(g, x, d):
         return 0
     return d
@@ -159,8 +161,10 @@ def attacco_mostro(g, sc):
     m, e = sc.nemico, sc.eroe
     sc.attacchi_mostro += 1
     ar = e.stat(g, 'ar') + (sc.ab('ar_eroe_attacco') or {}).get('n', 0)
-    if m.lv >= 3:
+    if m.lv >= 3:                           # TE-22 e Equipaggiamenti di classe: «Se combatti una creatura di LV 3 o più»
         ar += sum(c.p.get('ar_lv3', 0) for c in e.equip())
+    if sc.boss:                             # «Se combatti un boss» (custode compreso)
+        ar += sum(c.p.get('ar_boss', 0) for c in e.equip())
     sv = g.creature_svant or sc.svant_next or (g.mappa and 'creature_svant' in K.CARTE[g.mappa].p)
     sc.svant_next = False
     t = C.catena_tiro(g, tiri.Tiro(g, m, 'colpo', 2, sc.att_nemico(), ar, vant=-1 if sv else 0, bersaglio=e))
