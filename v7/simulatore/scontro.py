@@ -8,6 +8,9 @@ import tiri
 import ia
 
 
+MAX_ATTACCHI = 3
+
+
 class Creatura:
     def __init__(self, g, mid):
         m = K.MOSTRI[mid]
@@ -27,7 +30,8 @@ class Scontro:
         self.custode, self.duello = custode, duello
         self.boss = not duello and (custode or nemico.tier == 3)
         self.finito = self.fuga_sul_posto = self.ferita = self.colpito = False
-        self.annullato = self.sparito = False   # R 8.12 cambio di plancia; TI-41 il mostro sparisce
+        self.annullato = self.sparito = False
+        self.attacchi_eroe = 0                  # al 3° attacco senza vincere il mostro scappa (mai il custode)   # R 8.12 cambio di mappa; TI-41 il mostro sparisce
         self.mod_att = self.mod_ar = 0
         self.att_fisso = None
         self.svant_next = False
@@ -98,6 +102,8 @@ def _danno_finale(g, td, x, extra=0):
 def attacco_eroe(g, sc, x, y):
     """x attacca y (y = creatura, oppure eroe nel Duello)."""
     primo = sc.primo_tiro and x is sc.eroe
+    if x is sc.eroe and not sc.duello:
+        sc.attacchi_eroe += 1
     sc.primo_tiro = sc.primo_tiro and x is not sc.eroe
     base = x.stat(g, 'att') + x.tmp.pop('colpo_next', 0) + (sc.ab('att_eroe') or {}).get('n', 0)
     soglia = y.stat(g, 'ar') if sc.duello else sc.ar_nemico()
@@ -224,7 +230,7 @@ def tiro_indizio(g, e, lv):
 
 
 def scontro(g, e, mid=None, custode=False):
-    """Scontro con una creatura. Ritorna 'vinto', 'perso', 'fuga' o 'annullato' (cambio di plancia, R 8.12)."""
+    """Scontro con una creatura. Ritorna 'vinto', 'perso', 'fuga', 'fuga_mostro' (scappa dopo il 3° attacco) o 'annullato' (cambio di mappa, R 8.12)."""
     nemico = g.custode if custode else Creatura(g, mid)
     sc = Scontro(g, e, nemico, custode=custode)
     g.scontro = sc
@@ -260,6 +266,9 @@ def scontro(g, e, mid=None, custode=False):
                 esito = 'fuga'
                 break
             attacco_eroe(g, sc, e, nemico)
+        elif sc.attacchi_eroe >= MAX_ATTACCHI and not custode:
+            esito = 'fuga_mostro'           # dopo il 3° attacco il mostro vivo scappa: niente premi
+            break
         else:
             attacco_mostro(g, sc)
         turno_eroe = not turno_eroe
@@ -271,7 +280,7 @@ def scontro(g, e, mid=None, custode=False):
         else:
             esito = 'vinto' if nemico.pv <= 0 and not sc.finito else 'perso'
     sc.finito = True
-    if esito not in ('annullato', 'sparito'):
+    if esito not in ('annullato', 'sparito', 'fuga_mostro') and not sc.scappato:     # il mostro che scappa: niente «a fine scontro»
         AB.fine(g, sc, e, esito)
     g.st['esito_' + esito] += 1
     g.st['mx_n:' + nemico.id] += 1
@@ -294,6 +303,8 @@ def scontro(g, e, mid=None, custode=False):
                 S.prendi_indizio(g, e, 'sussurro')
     elif esito == 'fuga':
         g.st['fughe'] += 1
+    elif esito == 'fuga_mostro':
+        g.st['fughe_mostro'] += 1
     if custode and nemico.pv <= 0:
         g.finita, g.vincitore = True, e
     return esito

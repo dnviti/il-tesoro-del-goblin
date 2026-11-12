@@ -1,0 +1,197 @@
+fiore,faccia,nome,posizione,direzione,terreno,categoria,accidentato
+1,A,Tre boschi,0,centro,prato,libero,0
+1,A,Tre boschi,1,E,bosco,ostacolo,0
+1,A,Tre boschi,2,NE,prato,libero,0
+1,A,Tre boschi,3,NO,bosco,ostacolo,0
+1,A,Tre boschi,4,O,prato,libero,0
+1,A,Tre boschi,5,SO,bosco,ostacolo,0
+1,A,Tre boschi,6,SE,prato,libero,0
+1,B,Tre massi,0,centro,pavimento,libero,0
+1,B,Tre massi,1,E,rocce,ostacolo,0
+1,B,Tre massi,2,NE,pavimento,libero,0
+1,B,Tre massi,3,NO,rocce,ostacolo,0
+1,B,Tre massi,4,O,pavimento,libero,0
+1,B,Tre massi,5,SO,rocce,ostacolo,0
+1,B,Tre massi,6,SE,pavimento,libero,0
+2,A,Bosco a tre punte,0,centro,prato,libero,0
+2,A,Bosco a tre punte,1,E,bosco,ostacolo,0
+2,A,Bosco a tre punte,2,NE,prato,libero,0
+2,A,Bosco a tre punte,3,NO,bosco,ostacolo,0
+2,A,Bosco a tre punte,4,O,prato,libero,0
+2,A,Bosco a tre punte,5,SO,bosco,ostacolo,0
+2,A,Bosco a tre punte,6,SE,prato,libero,0
+2,B,Pietraia,0,centro,pavimento,libero,0
+2,B,Pietraia,1,E,rocce,ostacolo,0
+2,B,Pietraia,2,NE,pavimento,libero,0
+2,B,Pietraia,3,NO,rocce,ostacolo,0
+2,B,Pietraia,4,O,pavimento,libero,0
+2,B,Pietraia,5,SO,rocce,ostacolo,0
+2,B,Pietraia,6,SE,pavimento,libero,0
+3,A,Crocevia nel bosco,0,centro,sentiero,libero,0
+3,A,Crocevia nel bosco,1,E,bosco,ostacolo,0
+3,A,Crocevia nel bosco,2,NE,sentiero,libero,0
+3,A,Crocevia nel bosco,3,NO,bosco,ostacolo,0
+3,A,Crocevia nel bosco,4,O,sentiero,libero,0
+3,A,Crocevia nel bosco,5,SO,bosco,ostacolo,0
+3,A,Crocevia nel bosco,6,SE,sentiero,libero,0
+3,B,Borgo a stella,0,centro,mattonato,libero,0
+3,B,Borgo a stella,1,E,case,ostacolo,0
+3,B,Borgo a stella,2,NE,mattonato,libero,0
+3,B,Borgo a stella,3,NO,case,ostacolo,0
+3,B,Borgo a stella,4,O,mattonato,libero,0
+3,B,Borgo a stella,5,SO,case,ostacolo,0
+3,B,Borgo a stella,6,SE,mattonato,libero,0
+4,A,Boschi e massi,0,centro,prato,libero,0
+4,A,Boschi e massi,1,E,bosco,ostacolo,0
+4,A,Boschi e massi,2,NE,prato,libero,0
+4,A,Boschi e massi,3,NO,rocce,ostacolo,0
+4,A,Boschi e massi,4,O,prato,libero,0
+4,A,Boschi e massi,5,SO,bosco,ostacolo,0
+4,A,Boschi e massi,6,SE,prato,libero,0
+4,B,Tre cascine,0,centro,mattonato,libero,0
+4,B,Tre cascine,1,E,case,ostacolo,0
+4,B,Tre cascine,2,NE,mattonato,libero,0
+4,B,Tre cascine,3,NO,case,ostacolo,0
+4,B,Tre cascine,4,O,mattonato,libero,0
+4,B,Tre cascine,5,SO,case,ostacolo,0
+4,B,Tre cascine,6,SE,mattonato,libero,0
+5,A,Due boschetti,0,centro,prato,libero,0
+5,A,Due boschetti,1,E,bosco,ostacolo,0
+5,A,Due boschetti,2,NE,prato,libero,0
+5,A,Due boschetti,3,NO,bosco,ostacolo,0
+5,A,Due boschetti,4,O,prato,libero,0
+5,A,Due boschetti,5,SO,prato,libero,0
+5,A,Due boschetti,6,SE,prato,libero,0
+5,B,Cava,0,centro,pavimento,libero,0
+5,B,Cava,1,E,rocce,ostacolo,0
+5,B,Cava,2,NE,pavimento,libero,0
+5,B,Cava,3,NO,rocce,ostacolo,0
+5,B,Cava,4,O,pavimento,libero,0
+5,B,Cava,5,SO,rocce,ostacolo,0
+5,B,Cava,6,SE,pavimento,libero,0
+6,A,Bosco e bosco,0,centro,sentiero,libero,0
+6,A,Bosco e bosco,1,E,bosco,ostacolo,0
+6,A,Bosco e bosco,2,NE,sentiero,libero,0
+6,A,Bosco e bosco,3,NO,bosco,ostacolo,0
+6,A,Bosco e bosco,4,O,sentiero,libero,0
+6,A,Bosco e bosco,5,SO,sentiero,libero,0
+6,A,Bosco e bosco,6,SE,sentiero,libero,0
+6,B,Villaggio,0,centro,mattonato,libero,0
+6,B,Villaggio,1,E,case,ostacolo,0
+6,B,Villaggio,2,NE,mattonato,libero,0
+6,B,Villaggio,3,NO,case,ostacolo,0
+6,B,Villaggio,4,O,mattonato,libero,0
+6,B,Villaggio,5,SO,case,ostacolo,0
+6,B,Villaggio,6,SE,mattonato,libero,0
+7,A,Strettoia nel bosco,0,centro,sentiero,libero,0
+7,A,Strettoia nel bosco,1,E,bosco,ostacolo,0
+7,A,Strettoia nel bosco,2,NE,sentiero,libero,0
+7,A,Strettoia nel bosco,3,NO,sentiero,libero,0
+7,A,Strettoia nel bosco,4,O,bosco,ostacolo,0
+7,A,Strettoia nel bosco,5,SO,sentiero,libero,0
+7,A,Strettoia nel bosco,6,SE,sentiero,libero,0
+7,B,Due massi,0,centro,pavimento,libero,0
+7,B,Due massi,1,E,rocce,ostacolo,0
+7,B,Due massi,2,NE,pavimento,libero,0
+7,B,Due massi,3,NO,rocce,ostacolo,0
+7,B,Due massi,4,O,pavimento,libero,0
+7,B,Due massi,5,SO,pavimento,libero,0
+7,B,Due massi,6,SE,pavimento,libero,0
+8,A,Varco,0,centro,prato,libero,0
+8,A,Varco,1,E,bosco,ostacolo,0
+8,A,Varco,2,NE,prato,libero,0
+8,A,Varco,3,NO,prato,libero,0
+8,A,Varco,4,O,rocce,ostacolo,0
+8,A,Varco,5,SO,prato,libero,0
+8,A,Varco,6,SE,prato,libero,0
+8,B,Due case,0,centro,mattonato,libero,0
+8,B,Due case,1,E,case,ostacolo,0
+8,B,Due case,2,NE,mattonato,libero,0
+8,B,Due case,3,NO,case,ostacolo,0
+8,B,Due case,4,O,mattonato,libero,0
+8,B,Due case,5,SO,mattonato,libero,0
+8,B,Due case,6,SE,mattonato,libero,0
+9,A,Ruscello col guado,0,centro,guado,libero,0
+9,A,Ruscello col guado,1,E,acqua,accidentato,1
+9,A,Ruscello col guado,2,NE,bosco,ostacolo,0
+9,A,Ruscello col guado,3,NO,prato,libero,0
+9,A,Ruscello col guado,4,O,acqua,accidentato,1
+9,A,Ruscello col guado,5,SO,bosco,ostacolo,0
+9,A,Ruscello col guado,6,SE,prato,libero,0
+9,B,Massi sparsi,0,centro,pavimento,libero,0
+9,B,Massi sparsi,1,E,rocce,ostacolo,0
+9,B,Massi sparsi,2,NE,pavimento,libero,0
+9,B,Massi sparsi,3,NO,rocce,ostacolo,0
+9,B,Massi sparsi,4,O,pavimento,libero,0
+9,B,Massi sparsi,5,SO,pavimento,libero,0
+9,B,Massi sparsi,6,SE,pavimento,libero,0
+10,A,Ruscello col ponte,0,centro,ponte,libero,0
+10,A,Ruscello col ponte,1,E,acqua,accidentato,1
+10,A,Ruscello col ponte,2,NE,rocce,ostacolo,0
+10,A,Ruscello col ponte,3,NO,prato,libero,0
+10,A,Ruscello col ponte,4,O,acqua,accidentato,1
+10,A,Ruscello col ponte,5,SO,rocce,ostacolo,0
+10,A,Ruscello col ponte,6,SE,prato,libero,0
+10,B,Case sparse,0,centro,mattonato,libero,0
+10,B,Case sparse,1,E,case,ostacolo,0
+10,B,Case sparse,2,NE,mattonato,libero,0
+10,B,Case sparse,3,NO,case,ostacolo,0
+10,B,Case sparse,4,O,mattonato,libero,0
+10,B,Case sparse,5,SO,mattonato,libero,0
+10,B,Case sparse,6,SE,mattonato,libero,0
+11,A,Mulino sul fiume,0,centro,guado,libero,0
+11,A,Mulino sul fiume,1,E,acqua,accidentato,1
+11,A,Mulino sul fiume,2,NE,mattonato,libero,0
+11,A,Mulino sul fiume,3,NO,case,ostacolo,0
+11,A,Mulino sul fiume,4,O,acqua,accidentato,1
+11,A,Mulino sul fiume,5,SO,mattonato,libero,0
+11,A,Mulino sul fiume,6,SE,case,ostacolo,0
+11,B,Rupe,0,centro,rocce,ostacolo,0
+11,B,Rupe,1,E,rocce,ostacolo,0
+11,B,Rupe,2,NE,pavimento,libero,0
+11,B,Rupe,3,NO,pavimento,libero,0
+11,B,Rupe,4,O,pavimento,libero,0
+11,B,Rupe,5,SO,pavimento,libero,0
+11,B,Rupe,6,SE,pavimento,libero,0
+12,A,Fiume col ponte,0,centro,ponte,libero,0
+12,A,Fiume col ponte,1,E,acqua,accidentato,1
+12,A,Fiume col ponte,2,NE,prato,libero,0
+12,A,Fiume col ponte,3,NO,bosco,ostacolo,0
+12,A,Fiume col ponte,4,O,acqua,accidentato,1
+12,A,Fiume col ponte,5,SO,prato,libero,0
+12,A,Fiume col ponte,6,SE,bosco,ostacolo,0
+12,B,Piazza,0,centro,case,ostacolo,0
+12,B,Piazza,1,E,case,ostacolo,0
+12,B,Piazza,2,NE,mattonato,libero,0
+12,B,Piazza,3,NO,mattonato,libero,0
+12,B,Piazza,4,O,mattonato,libero,0
+12,B,Piazza,5,SO,mattonato,libero,0
+12,B,Piazza,6,SE,mattonato,libero,0
+13,A,Lago nel bosco,0,centro,acqua,accidentato,1
+13,A,Lago nel bosco,1,E,acqua,accidentato,1
+13,A,Lago nel bosco,2,NE,prato,libero,0
+13,A,Lago nel bosco,3,NO,bosco,ostacolo,0
+13,A,Lago nel bosco,4,O,prato,libero,0
+13,A,Lago nel bosco,5,SO,bosco,ostacolo,0
+13,A,Lago nel bosco,6,SE,prato,libero,0
+13,B,Miniera,0,centro,pavimento,libero,0
+13,B,Miniera,1,E,rocce,ostacolo,0
+13,B,Miniera,2,NE,pavimento,libero,0
+13,B,Miniera,3,NO,rocce,ostacolo,0
+13,B,Miniera,4,O,pavimento,libero,0
+13,B,Miniera,5,SO,rocce,ostacolo,0
+13,B,Miniera,6,SE,pavimento,libero,0
+14,A,Laghetto tra i massi,0,centro,acqua,accidentato,1
+14,A,Laghetto tra i massi,1,E,prato,libero,0
+14,A,Laghetto tra i massi,2,NE,rocce,ostacolo,0
+14,A,Laghetto tra i massi,3,NO,prato,libero,0
+14,A,Laghetto tra i massi,4,O,bosco,ostacolo,0
+14,A,Laghetto tra i massi,5,SO,prato,libero,0
+14,A,Laghetto tra i massi,6,SE,rocce,ostacolo,0
+14,B,Mercato,0,centro,mattonato,libero,0
+14,B,Mercato,1,E,case,ostacolo,0
+14,B,Mercato,2,NE,mattonato,libero,0
+14,B,Mercato,3,NO,case,ostacolo,0
+14,B,Mercato,4,O,mattonato,libero,0
+14,B,Mercato,5,SO,case,ostacolo,0
+14,B,Mercato,6,SE,mattonato,libero,0

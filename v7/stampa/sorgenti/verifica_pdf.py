@@ -10,11 +10,17 @@ e distanza minima dal bordo del foglio (rasterizzazione a 150 dpi).
   (le tacche e le etichette nel margine sono sottili e non contano) e si aggiunge l'abbondanza.
 
 Stampa solo fronte (v6-bis): nessun PDF puo' essere un fronte-retro interlacciato. ERRORE se una pagina porta la scritta
-«RETRO» (etichetta delle pagine retro dei vecchi PDF fronte-retro). Per ogni carte_<nome>_retri.pdf:
+«RETRO» (etichetta delle pagine retro dei vecchi PDF fronte-retro). Unica eccezione voluta, mappa_fiori.pdf (D24: fiori a
+due facce, fronte/retro manuale sul lato lungo): pagine dispari «fronte», pari «retro»; ogni fiore n ha l'id «nA» sul
+fronte e «nB» sul retro, e il retro sta esattamente dietro il fronte girando il foglio sul lato lungo (la x del retro è
+specchiata: x del bordo destro dell'id sul fronte + quella sul retro uguale per tutti i fiori, stessa y, entro 0,6 mm). Per ogni carte_<nome>_retri.pdf:
 - deve esistere carte_<nome>.pdf; ogni pagina dei retri dice «RETRI … coi fronti del foglio k» (k crescente, al massimo le
   pagine dei fronti: un foglio di fronti senza dorsi non ha la sua pagina dei retri) e porta almeno un dorso;
 - niente specchio: il dorso nella cella p della pagina dei retri del foglio k porta nell'abbondanza l'ID della carta che
   sta nella cella p del foglio k dei fronti (si confrontano le posizioni degli ID letti con pdftotext -bbox).
+
+Per mappa_base.pdf e mappa_fiori.pdf (A4) anche il contorno dell'arte generata: a 300 dpi, per ogni lato di ogni esagono, né vuoti
+(pergamena/carta) appena dentro la linea né arte appena fuori (vedi mappa_compone.py --verifica-pdf).
 
 Uso: python3 v7/stampa/sorgenti/verifica_pdf.py [cartella_pdf] [--margine MM] [--margine-rifilo MM] [--formato A4|A3]
 Senza cartella: v7/stampa/playtest_v7 (A4) o v7/stampa/playtest_v7_A3 (--formato A3).
@@ -62,6 +68,53 @@ def id_per_cella(pdf, formato):
             if 0 <= c < nc and 0 <= r < nr:
                 celle.setdefault((pagina, r * nc + c), m[5])
     return celle
+
+
+ID_FIORE = re.compile(r"^(\d{1,2})([AB])$")
+
+
+def verifica_contorno_arte(pdf):
+    """Contorno dell'arte generata contro la linea vettoriale (a 300 dpi): vuoti dentro, arte fuori. Lo fa
+    arte/mappa_compone.py --verifica-pdf (stessa geometria di gen.py); qui si riportano i suoi ERRORE."""
+    r = subprocess.run([sys.executable, str(pathlib.Path(__file__).resolve().parent / "arte" / "mappa_compone.py"), "--verifica-pdf", str(pdf)],
+                       capture_output=True, text=True)
+    errori = [l[len("ERRORE "):] for l in r.stdout.splitlines() if l.startswith("ERRORE ") and "problemi di contorno" not in l]
+    if r.returncode not in (0, 1):
+        errori.append("verifica del contorno dell'arte non riuscita: " + r.stderr.strip().splitlines()[-1] if r.stderr.strip() else "verifica del contorno dell'arte non riuscita")
+    return errori
+
+
+def verifica_fiori(pdf, pagine, testi):
+    """Errori di mappa_fiori.pdf: pagine alterne fronte/retro e retri allineati ai fronti (vedi docstring del modulo)."""
+    errori = [] if pagine % 2 == 0 else [f"{pagine} pagine: servono coppie fronte/retro"]
+    for k, t in enumerate(testi, 1):
+        atteso = "fronte" if k % 2 else "retro"
+        if f"· {atteso}" not in t:
+            errori.append(f"pag. {k} senza «{atteso}»")
+    out = subprocess.run(["pdftotext", "-bbox", str(pdf), "-"], capture_output=True, text=True).stdout
+    ids, pagina = {}, 0
+    for riga in out.splitlines():
+        if "<page " in riga:
+            pagina += 1
+            continue
+        m = re.search(r'xMin="([\d.]+)" yMin="([\d.]+)" xMax="([\d.]+)" yMax="([\d.]+)">([^<]+)</word>', riga)
+        if m and ID_FIORE.match(m[5]):
+            n, lato = ID_FIORE.match(m[5]).groups()
+            ids[(pagina, int(n), lato)] = (float(m[3]) / PT, (float(m[2]) + float(m[4])) / 2 / PT)   # id allineato a destra
+    somme = []
+    for p in range(1, pagine, 2):
+        fr = {n: xy for (pg, n, l), xy in ids.items() if pg == p and l == "A"}
+        re_ = {n: xy for (pg, n, l), xy in ids.items() if pg == p + 1 and l == "B"}
+        if not fr or set(fr) != set(re_):
+            errori.append(f"fogli {p}-{p + 1}: fiori del fronte {sorted(fr)} e del retro {sorted(re_)} diversi")
+            continue
+        for n in fr:
+            somme.append(fr[n][0] + re_[n][0])
+            if abs(fr[n][1] - re_[n][1]) > 0.6:
+                errori.append(f"fiore {n}: y fronte {fr[n][1]:.1f} mm, y retro {re_[n][1]:.1f} mm")
+    if somme and max(somme) - min(somme) > 0.6:
+        errori.append(f"retri non specchiati: x fronte + x retro da {min(somme):.1f} a {max(somme):.1f} mm")
+    return errori
 
 
 def distanza_rifilo(inchiostro, abbondanza):
@@ -134,6 +187,10 @@ def main():
         errori = [f"pag. {k} è un RETRO (fronte-retro interlacciato)" for k, t in enumerate(testi, 1) if re.search(r"\bRETRO\b", t)]
         if pdf.name.endswith("_retri.pdf"):
             errori += verifica_retri(pdf, pagine, testi, formato)
+        if pdf.name == "mappa_fiori.pdf":
+            errori += verifica_fiori(pdf, pagine, testi)
+        if pdf.name in ("mappa_base.pdf", "mappa_fiori.pdf") and formato == "A4":
+            errori += verifica_contorno_arte(pdf)
         with tempfile.TemporaryDirectory(prefix="goblin_verifica_") as tmp:
             subprocess.run(["pdftoppm", "-r", str(DPI), "-png", str(pdf), f"{tmp}/p"], check=True)
             minimi = []

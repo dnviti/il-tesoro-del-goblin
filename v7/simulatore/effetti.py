@@ -74,7 +74,6 @@ def f_mappa(g, e, c, p, ctx, pila, tiro, voce):
     if g.mappa:
         g.mappa_di.scarti.append(g.mappa)
     g.mappa, g.mappa_di, g.mappa_mov_avv = c.id, e, False
-    S.sposta_tesoro(g)
     g.st['mappe'] += 1
     if 'fv' in p:
         e.fv = True
@@ -87,7 +86,8 @@ def f_mappa(g, e, c, p, ctx, pila, tiro, voce):
         S.pesca(g, e)
     if 'cura' in p:
         S.cura(g, e, tiri.dado(g, p['cura'], e))
-    S.cambia_plancia(g, c.id)               # R 8.12: prima il testo della Mappa, poi la sua plancia
+    S.cambia_plancia(g, c.id)               # R 8.12: prima il testo della Mappa, poi i suoi fiori
+    S.sposta_tesoro(g)                      # ogni Mappa ritira la Cripta (sulla mappa nuova, senza limite)
 
 
 # --- danni, parate, scontro ----------------------------------------------------------------------------
@@ -579,7 +579,7 @@ def f_ritira(g, e, c, p, ctx, pila, tiro, voce):
 
 
 def _togli_mappa(g):
-    """TI-22 / CR-15: la Mappa in gioco va negli scarti di chi l'ha giocata; torna la plancia base (R 8.12)."""
+    """TI-22 / CR-15: la Mappa in gioco va negli scarti di chi l'ha giocata; i 3 fiori tornano come nel montaggio (R 8.12)."""
     g.mappa_di.scarti.append(g.mappa)
     g.mappa = g.mappa_di = None
     S.cambia_plancia(g, None)

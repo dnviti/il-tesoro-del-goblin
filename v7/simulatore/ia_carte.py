@@ -37,7 +37,7 @@ def _punti(g, p, cid, mom, mio, mio_sc):
         return (8 + c.pl, {}) if K.CARTE[old].pl < c.pl else None
     if k == 'mappa':
         if custode_altrui:
-            return 9, {}                    # R 8.12: il cambio di plancia chiude lo scontro col custode
+            return 9, {}                    # R 8.12: il cambio di mappa chiude lo scontro col custode
         if not mio:
             if mom == 'M2' and att.pos == g.mimi and att.indizi >= 3:
                 return 9, {}                # R 8.12: torna sulla Partenza prima del custode
@@ -53,7 +53,7 @@ def _punti(g, p, cid, mom, mio, mio_sc):
             v = max(v, 6)                   # il tesoro cambia Cripta e il leader torna sulla Partenza
         return v, {}
     if k == 'annulla' and 'TM' in q['tipo'].split('|') and g.mappa and custode_altrui:
-        return 9, {'togli_mappa': True}     # TI-22: torna la plancia base e lo scontro col custode finisce
+        return 9, {'togli_mappa': True}     # TI-22: i 3 fiori tornano come prima e lo scontro col custode finisce
     if k == 'danno':
         if vivo and mom in ('M3', 'M4'):
             ctx = {'bers': 'creatura'}
@@ -219,6 +219,8 @@ def apri(g, p, mom):
         if c.tipo == 'TI' and 'Silenzio' in p.stati:
             continue
         r = _punti(g, p, cid, mom, mio, mio_sc)
+        if r and g.round == 1 and ('tutti' in c.p or (isinstance(r[1].get('bers'), S.Eroe) and r[1]['bers'] is not p)):
+            continue                         # primo giro: nessuna carta contro un avversario
         if r and r[0] >= soglia and (best is None or r[0] > best[0]):
             best = (r[0], cid, r[1])
     return (best[1], best[2]) if best else None

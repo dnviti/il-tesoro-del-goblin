@@ -1,0 +1,421 @@
+{
+ "parametri": {
+  "passo": 25.2,
+  "margine": 7.0,
+  "gioco": 0.15,
+  "gioco_fiore": 0.2,
+  "fondo": 1.2,
+  "alloggio_prof": 2.0,
+  "fiore_spessore": 3.0,
+  "tasca_prof": 0.5,
+  "bordino": 0.85,
+  "gioco_carta": 0.25,
+  "fascia_carta": 5.5,
+  "carta_domanda": 20.0,
+  "segnalino_spessore": 2.0,
+  "smusso": 0.4,
+  "raggio_angolo": 3.0,
+  "coda_collo": 2.6,
+  "coda_testa": 4.0,
+  "coda_lunga": 3.9,
+  "numero_alto": 8.0,
+  "cifra_alta": 4.0,
+  "incisione": 0.5
+ },
+ "gioco_carta_mm": 0.25,
+ "piatto_ipotizzato_mm": 220.0,
+ "pezzi": {
+  "fiore": {
+   "volume_atteso_mm3": 9561.646,
+   "volume_mm3": 9561.646,
+   "errore_volume_rel": 2.511662345906833e-10,
+   "massa_pla_g": 11.86,
+   "ingombro_atteso_mm": [
+    75.2,
+    72.2843,
+    3.0
+   ],
+   "ingombro_mm": [
+    75.2,
+    72.2843,
+    3.0
+   ],
+   "avvisi": [],
+   "file": {
+    "triangoli": 212,
+    "bordi_non_manifold": 0,
+    "volume_mm3": 9561.65,
+    "ingombro_mm": [
+     75.2,
+     72.284,
+     3.0
+    ],
+    "3mf": {
+     "unita": "millimeter",
+     "oggetti_mesh": 1,
+     "triangoli": 212
+    }
+   },
+   "carta": {
+    "tasche": "solo sopra, fondo piatto",
+    "pdf": "carta_fiori_3d.pdf",
+    "taglio_dentro_il_contorno_ideale_mm": 1.3,
+    "ingombro_carta_mm": [
+     73.0,
+     69.74
+    ]
+   },
+   "facce_verso_il_basso": 1,
+   "fondo_piatto": true,
+   "spessore_sotto_la_tasca_mm": 2.5,
+   "ok": true
+  },
+  "segnaposto_domanda": {
+   "volume_atteso_mm3": 598.095,
+   "volume_mm3": 598.095,
+   "errore_volume_rel": 6.6507688238192446e-12,
+   "massa_pla_g": 0.74,
+   "ingombro_atteso_mm": [
+    22.2,
+    22.2,
+    2.0
+   ],
+   "ingombro_mm": [
+    22.2,
+    22.2,
+    2.0
+   ],
+   "avvisi": [],
+   "file": {
+    "triangoli": 5224,
+    "bordi_non_manifold": 0,
+    "volume_mm3": 598.04,
+    "ingombro_mm": [
+     22.2,
+     22.2,
+     2.0
+    ],
+    "3mf": {
+     "unita": "millimeter",
+     "oggetti_mesh": 1,
+     "triangoli": 5224
+    }
+   },
+   "carta": {
+    "tasca": "sopra",
+    "pdf": "mappa_fiori.pdf (foglio 3)",
+    "carta_mm": 20.0,
+    "tasca_mm": 20.5
+   },
+   "facce_verso_il_basso": 1,
+   "fondo_piatto": true,
+   "spessore_sotto_la_tasca_mm": 1.5,
+   "ok": true
+  },
+  "segnalino_cripta": {
+   "volume_atteso_mm3": 999.315,
+   "volume_mm3": 999.315,
+   "errore_volume_rel": 6.531234694170871e-13,
+   "massa_pla_g": 1.24,
+   "ingombro_atteso_mm": [
+    27.4,
+    31.6388,
+    2.0
+   ],
+   "ingombro_mm": [
+    27.4,
+    31.6388,
+    2.0
+   ],
+   "avvisi": [],
+   "file": {
+    "triangoli": 68,
+    "bordi_non_manifold": 0,
+    "volume_mm3": 999.32,
+    "ingombro_mm": [
+     27.4,
+     31.639,
+     2.0
+    ],
+    "3mf": {
+     "unita": "millimeter",
+     "oggetti_mesh": 1,
+     "triangoli": 68
+    }
+   },
+   "carta": {
+    "tasca": "sopra",
+    "pdf": "mappa_fiori.pdf (foglio 3)",
+    "carta_da_lato_a_lato_mm": 25.2,
+    "tasca_da_lato_a_lato_mm": 25.7
+   },
+   "facce_verso_il_basso": 1,
+   "fondo_piatto": true,
+   "spessore_sotto_la_tasca_mm": 1.5,
+   "ok": true
+  },
+  "vassoio_NO": {
+   "volume_atteso_senza_scritte_mm3": 40496.05,
+   "volume_senza_scritte_mm3": 40496.05,
+   "errore_volume_rel": 8.219666334458546e-08,
+   "volume_mm3": 40417.66,
+   "incisioni_mm3": 78.39,
+   "massa_pla_g": 50.1,
+   "ingombro_atteso_mm": [
+    174.4,
+    144.9258,
+    3.2
+   ],
+   "ingombro_mm": [
+    174.4,
+    144.9258,
+    3.2
+   ],
+   "code": 23,
+   "incavi": 0,
+   "lati_in_comune": {
+    "NE": 11,
+    "SO": 11,
+    "SE": 1
+   },
+   "scritte_fondo": 27,
+   "avvisi": [],
+   "file": {
+    "triangoli": 7246,
+    "bordi_non_manifold": 0,
+    "volume_mm3": 40414.41,
+    "ingombro_mm": [
+     174.4,
+     144.918,
+     3.2
+    ],
+    "3mf": {
+     "unita": "millimeter",
+     "oggetti_mesh": 1,
+     "triangoli": 7246
+    }
+   },
+   "entra_nel_piatto": true,
+   "ok": true
+  },
+  "vassoio_NE": {
+   "volume_atteso_senza_scritte_mm3": 45011.8,
+   "volume_senza_scritte_mm3": 45011.8,
+   "errore_volume_rel": 4.118688995454876e-08,
+   "volume_mm3": 44945.62,
+   "incisioni_mm3": 66.18,
+   "massa_pla_g": 55.7,
+   "ingombro_atteso_mm": [
+    170.5,
+    144.9258,
+    3.2
+   ],
+   "ingombro_mm": [
+    170.5,
+    144.9258,
+    3.2
+   ],
+   "code": 11,
+   "incavi": 11,
+   "lati_in_comune": {
+    "NO": 11,
+    "SE": 11
+   },
+   "scritte_fondo": 22,
+   "avvisi": [],
+   "file": {
+    "triangoli": 6822,
+    "bordi_non_manifold": 0,
+    "volume_mm3": 44946.55,
+    "ingombro_mm": [
+     170.5,
+     144.918,
+     3.2
+    ],
+    "3mf": {
+     "unita": "millimeter",
+     "oggetti_mesh": 1,
+     "triangoli": 6822
+    }
+   },
+   "entra_nel_piatto": true,
+   "ok": true
+  },
+  "vassoio_SO": {
+   "volume_atteso_senza_scritte_mm3": 45011.8,
+   "volume_senza_scritte_mm3": 45011.8,
+   "errore_volume_rel": 4.093891646233095e-08,
+   "volume_mm3": 44932.09,
+   "incisioni_mm3": 79.71,
+   "massa_pla_g": 55.7,
+   "ingombro_atteso_mm": [
+    174.4,
+    144.9177,
+    3.2
+   ],
+   "ingombro_mm": [
+    174.4,
+    144.9176,
+    3.2
+   ],
+   "code": 11,
+   "incavi": 11,
+   "lati_in_comune": {
+    "NO": 11,
+    "SE": 11
+   },
+   "scritte_fondo": 22,
+   "avvisi": [],
+   "file": {
+    "triangoli": 7004,
+    "bordi_non_manifold": 0,
+    "volume_mm3": 44933.06,
+    "ingombro_mm": [
+     174.4,
+     144.918,
+     3.2
+    ],
+    "3mf": {
+     "unita": "millimeter",
+     "oggetti_mesh": 1,
+     "triangoli": 7004
+    }
+   },
+   "entra_nel_piatto": true,
+   "ok": true
+  },
+  "vassoio_SE": {
+   "volume_atteso_senza_scritte_mm3": 39770.63,
+   "volume_senza_scritte_mm3": 39770.63,
+   "errore_volume_rel": 4.868059375206581e-09,
+   "volume_mm3": 39666.43,
+   "incisioni_mm3": 104.21,
+   "massa_pla_g": 49.2,
+   "ingombro_atteso_mm": [
+    170.5,
+    144.8944,
+    3.2
+   ],
+   "ingombro_mm": [
+    170.5,
+    144.8944,
+    3.2
+   ],
+   "code": 0,
+   "incavi": 23,
+   "lati_in_comune": {
+    "NE": 11,
+    "NO": 1,
+    "SO": 11
+   },
+   "scritte_fondo": 27,
+   "avvisi": [],
+   "file": {
+    "triangoli": 8098,
+    "bordi_non_manifold": 0,
+    "volume_mm3": 39671.68,
+    "ingombro_mm": [
+     170.5,
+     144.894,
+     3.2
+    ],
+    "3mf": {
+     "unita": "millimeter",
+     "oggetti_mesh": 1,
+     "triangoli": 8098
+    }
+   },
+   "entra_nel_piatto": true,
+   "ok": true
+  }
+ },
+ "prove": {
+  "montaggio": {
+   "intersezioni": [],
+   "misure_lato_per_lato": {
+    "taglio": {
+     "misure": 45,
+     "min_mm": 0.3,
+     "max_mm": 0.3
+    },
+    "pomello": {
+     "misure": 45,
+     "min_mm": 0.3,
+     "max_mm": 0.3
+    },
+    "fiore-fiore": {
+     "misure": 81,
+     "min_mm": 0.4,
+     "max_mm": 0.4
+    },
+    "fiore-alloggio": {
+     "misure": 86,
+     "min_mm": 0.2,
+     "max_mm": 0.2
+    },
+    "fiore-alloggio sul taglio": {
+     "misure": 4,
+     "min_mm": 0.35,
+     "max_mm": 0.35
+    }
+   },
+   "fuori_tolleranza": [],
+   "rotazioni_usate_gradi": [
+    0,
+    60,
+    120,
+    180,
+    240,
+    300
+   ]
+  },
+  "presa_code": [
+   {
+    "a": "vassoio_NO",
+    "b": "vassoio_NE",
+    "lati_con_coda": 11,
+    "urto_tirando_0_6mm_mm3": 4.09,
+    "presa_a_trazione_mm": 0.3
+   },
+   {
+    "a": "vassoio_NO",
+    "b": "vassoio_SO",
+    "lati_con_coda": 11,
+    "urto_tirando_0_6mm_mm3": 3.59,
+    "presa_a_trazione_mm": 0.308
+   },
+   {
+    "a": "vassoio_NO",
+    "b": "vassoio_SE",
+    "lati_con_coda": 1,
+    "urto_tirando_0_6mm_mm3": 0.196,
+    "presa_a_trazione_mm": 0.331
+   },
+   {
+    "a": "vassoio_NE",
+    "b": "vassoio_SE",
+    "lati_con_coda": 11,
+    "urto_tirando_0_6mm_mm3": 3.59,
+    "presa_a_trazione_mm": 0.308
+   },
+   {
+    "a": "vassoio_SO",
+    "b": "vassoio_SE",
+    "lati_con_coda": 11,
+    "urto_tirando_0_6mm_mm3": 4.09,
+    "presa_a_trazione_mm": 0.3
+   }
+  ]
+ },
+ "carta_fiori_3d": {
+  "pdf": "carta_fiori_3d.pdf",
+  "fogli": 5,
+  "facce": 28,
+  "rientro_taglio_mm": 1.3,
+  "carta_tagliata_mm": [
+   73.0,
+   69.74
+  ]
+ },
+ "ok": true
+}

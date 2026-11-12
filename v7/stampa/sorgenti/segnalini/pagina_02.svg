@@ -1,282 +1,403 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="210mm" height="297mm" viewBox="0 0 210 297" font-family="Liberation Sans Narrow">
 <text x="105.00" y="11.00" font-family="Liberation Serif" font-size="4.20" fill="#2a2118" text-anchor="middle" font-weight="bold" >Tessere Stato e rotelle del tavolo · foglio 2 di 2</text><line x1="60.43" y1="9.57" x2="42.43" y2="9.57" stroke="#a8823a" stroke-width="0.25"/><polygon points="40.930,8.822 42.430,9.572 40.930,10.322 39.430,9.572" fill="#a65a32"/><line x1="149.57" y1="9.57" x2="167.57" y2="9.57" stroke="#a8823a" stroke-width="0.25"/><polygon points="169.070,8.822 170.570,9.572 169.070,10.322 167.570,9.572" fill="#a65a32"/><text x="105.00" y="16.00" font-family="Liberation Sans Narrow" font-size="2.90" fill="#6b4a2b" text-anchor="middle" >31 tessere Stato 26 × 18 mm · 2 dischi Ø 52 mm · solo fronte</text>
 <rect x="25.00" y="23.00" width="32.0" height="24.0" fill="#f1e2e0"/>
-<rect x="25.00" y="23.00" width="32.0" height="9.2" fill="#9c2f24"/>
-<line x1="25.00" y1="32.20" x2="57.00" y2="32.20" stroke="#a8823a" stroke-width="0.35"/><line x1="25.00" y1="32.85" x2="57.00" y2="32.85" stroke="#a8823a" stroke-width="0.12"/>
-<text x="30.40" y="30.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
-<text x="41.00" y="30.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Rallentato</text>
-<path d="M51.60 31.30V27.30M50.40 28.60L51.60 27.20L52.80 28.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="41.00" y="35.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Muovi: solo 1</text>
-<text x="41.00" y="39.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >esagono, senza dado.</text>
+<rect x="25.00" y="23.00" width="32.0" height="12.2" fill="#9c2f24"/>
+<rect x="28.00" y="35.20" width="26.0" height="8.80" fill="#fffaf0"/>
+<clipPath id="stc21678796"><rect x="28.40" y="26.40" width="8.4" height="8.4" rx="0.8"/></clipPath>
+<g clip-path="url(#stc21678796)"><image href="../arte/png/ST-01.png" x="28.400" y="26.400" width="8.4" height="8.4" preserveAspectRatio="none"/></g>
+<rect x="28.40" y="26.40" width="8.4" height="8.4" rx="0.8" fill="none" stroke="#fffaf0" stroke-width="0.35"/>
+<circle cx="29.90" cy="33.30" r="1.35" fill="#9c2f24" stroke="#fffaf0" stroke-width="0.25"/><text x="29.90" y="34.30" font-family="Liberation Sans Narrow" font-size="2.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
+<line x1="25.00" y1="35.20" x2="57.00" y2="35.20" stroke="#a8823a" stroke-width="0.3"/>
+<text x="44.30" y="31.50" font-family="Liberation Sans Narrow" font-size="3.00" fill="#ffffff" text-anchor="middle" font-weight="bold" >Rallentato</text>
+<path d="M51.80 32.20V28.20M50.60 29.50L51.80 28.10L53.00 29.50" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="41.00" y="37.40" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Muovi: solo 1</text>
+<text x="41.00" y="40.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >esagono, senza dado.</text>
 <rect x="28.00" y="26.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
 <rect x="57.00" y="23.00" width="32.0" height="24.0" fill="#f1e2e0"/>
-<rect x="57.00" y="23.00" width="32.0" height="9.2" fill="#9c2f24"/>
-<line x1="57.00" y1="32.20" x2="89.00" y2="32.20" stroke="#a8823a" stroke-width="0.35"/><line x1="57.00" y1="32.85" x2="89.00" y2="32.85" stroke="#a8823a" stroke-width="0.12"/>
-<text x="62.40" y="30.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
-<text x="73.00" y="30.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Rallentato</text>
-<path d="M83.60 31.30V27.30M82.40 28.60L83.60 27.20L84.80 28.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="73.00" y="35.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Muovi: solo 1</text>
-<text x="73.00" y="39.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >esagono, senza dado.</text>
+<rect x="57.00" y="23.00" width="32.0" height="12.2" fill="#9c2f24"/>
+<rect x="60.00" y="35.20" width="26.0" height="8.80" fill="#fffaf0"/>
+<clipPath id="stc92668429"><rect x="60.40" y="26.40" width="8.4" height="8.4" rx="0.8"/></clipPath>
+<g clip-path="url(#stc92668429)"><image href="../arte/png/ST-01.png" x="60.400" y="26.400" width="8.4" height="8.4" preserveAspectRatio="none"/></g>
+<rect x="60.40" y="26.40" width="8.4" height="8.4" rx="0.8" fill="none" stroke="#fffaf0" stroke-width="0.35"/>
+<circle cx="61.90" cy="33.30" r="1.35" fill="#9c2f24" stroke="#fffaf0" stroke-width="0.25"/><text x="61.90" y="34.30" font-family="Liberation Sans Narrow" font-size="2.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
+<line x1="57.00" y1="35.20" x2="89.00" y2="35.20" stroke="#a8823a" stroke-width="0.3"/>
+<text x="76.30" y="31.50" font-family="Liberation Sans Narrow" font-size="3.00" fill="#ffffff" text-anchor="middle" font-weight="bold" >Rallentato</text>
+<path d="M83.80 32.20V28.20M82.60 29.50L83.80 28.10L85.00 29.50" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="73.00" y="37.40" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Muovi: solo 1</text>
+<text x="73.00" y="40.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >esagono, senza dado.</text>
 <rect x="60.00" y="26.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
 <rect x="89.00" y="23.00" width="32.0" height="24.0" fill="#f1e2e0"/>
-<rect x="89.00" y="23.00" width="32.0" height="9.2" fill="#9c2f24"/>
-<line x1="89.00" y1="32.20" x2="121.00" y2="32.20" stroke="#a8823a" stroke-width="0.35"/><line x1="89.00" y1="32.85" x2="121.00" y2="32.85" stroke="#a8823a" stroke-width="0.12"/>
-<text x="94.40" y="30.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
-<text x="105.00" y="30.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Rallentato</text>
-<path d="M115.60 31.30V27.30M114.40 28.60L115.60 27.20L116.80 28.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="105.00" y="35.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Muovi: solo 1</text>
-<text x="105.00" y="39.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >esagono, senza dado.</text>
+<rect x="89.00" y="23.00" width="32.0" height="12.2" fill="#9c2f24"/>
+<rect x="92.00" y="35.20" width="26.0" height="8.80" fill="#fffaf0"/>
+<clipPath id="stc80062129"><rect x="92.40" y="26.40" width="8.4" height="8.4" rx="0.8"/></clipPath>
+<g clip-path="url(#stc80062129)"><image href="../arte/png/ST-01.png" x="92.400" y="26.400" width="8.4" height="8.4" preserveAspectRatio="none"/></g>
+<rect x="92.40" y="26.40" width="8.4" height="8.4" rx="0.8" fill="none" stroke="#fffaf0" stroke-width="0.35"/>
+<circle cx="93.90" cy="33.30" r="1.35" fill="#9c2f24" stroke="#fffaf0" stroke-width="0.25"/><text x="93.90" y="34.30" font-family="Liberation Sans Narrow" font-size="2.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
+<line x1="89.00" y1="35.20" x2="121.00" y2="35.20" stroke="#a8823a" stroke-width="0.3"/>
+<text x="108.30" y="31.50" font-family="Liberation Sans Narrow" font-size="3.00" fill="#ffffff" text-anchor="middle" font-weight="bold" >Rallentato</text>
+<path d="M115.80 32.20V28.20M114.60 29.50L115.80 28.10L117.00 29.50" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="105.00" y="37.40" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Muovi: solo 1</text>
+<text x="105.00" y="40.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >esagono, senza dado.</text>
 <rect x="92.00" y="26.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
 <rect x="121.00" y="23.00" width="32.0" height="24.0" fill="#f1e2e0"/>
-<rect x="121.00" y="23.00" width="32.0" height="9.2" fill="#9c2f24"/>
-<line x1="121.00" y1="32.20" x2="153.00" y2="32.20" stroke="#a8823a" stroke-width="0.35"/><line x1="121.00" y1="32.85" x2="153.00" y2="32.85" stroke="#a8823a" stroke-width="0.12"/>
-<text x="126.40" y="30.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
-<text x="137.00" y="30.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Rallentato</text>
-<path d="M147.60 31.30V27.30M146.40 28.60L147.60 27.20L148.80 28.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="137.00" y="35.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Muovi: solo 1</text>
-<text x="137.00" y="39.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >esagono, senza dado.</text>
+<rect x="121.00" y="23.00" width="32.0" height="12.2" fill="#9c2f24"/>
+<rect x="124.00" y="35.20" width="26.0" height="8.80" fill="#fffaf0"/>
+<clipPath id="stc92656418"><rect x="124.40" y="26.40" width="8.4" height="8.4" rx="0.8"/></clipPath>
+<g clip-path="url(#stc92656418)"><image href="../arte/png/ST-01.png" x="124.400" y="26.400" width="8.4" height="8.4" preserveAspectRatio="none"/></g>
+<rect x="124.40" y="26.40" width="8.4" height="8.4" rx="0.8" fill="none" stroke="#fffaf0" stroke-width="0.35"/>
+<circle cx="125.90" cy="33.30" r="1.35" fill="#9c2f24" stroke="#fffaf0" stroke-width="0.25"/><text x="125.90" y="34.30" font-family="Liberation Sans Narrow" font-size="2.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
+<line x1="121.00" y1="35.20" x2="153.00" y2="35.20" stroke="#a8823a" stroke-width="0.3"/>
+<text x="140.30" y="31.50" font-family="Liberation Sans Narrow" font-size="3.00" fill="#ffffff" text-anchor="middle" font-weight="bold" >Rallentato</text>
+<path d="M147.80 32.20V28.20M146.60 29.50L147.80 28.10L149.00 29.50" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="137.00" y="37.40" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Muovi: solo 1</text>
+<text x="137.00" y="40.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >esagono, senza dado.</text>
 <rect x="124.00" y="26.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
 <rect x="153.00" y="23.00" width="32.0" height="24.0" fill="#e4ede6"/>
-<rect x="153.00" y="23.00" width="32.0" height="9.2" fill="#3b7d4f"/>
-<line x1="153.00" y1="32.20" x2="185.00" y2="32.20" stroke="#a8823a" stroke-width="0.35"/><line x1="153.00" y1="32.85" x2="185.00" y2="32.85" stroke="#a8823a" stroke-width="0.12"/>
-<text x="158.40" y="30.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
-<text x="169.00" y="30.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Occhio</text>
-<path d="M179.60 31.30V27.30M178.40 28.60L179.60 27.20L180.80 28.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="169.00" y="35.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Prossima Trappola:</text>
-<text x="169.00" y="39.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >nessun effetto. Poi</text>
-<text x="169.00" y="42.31" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >toglilo.</text>
+<rect x="153.00" y="23.00" width="32.0" height="12.2" fill="#3b7d4f"/>
+<rect x="156.00" y="35.20" width="26.0" height="8.80" fill="#fffaf0"/>
+<clipPath id="stc44665900"><rect x="156.40" y="26.40" width="8.4" height="8.4" rx="0.8"/></clipPath>
+<g clip-path="url(#stc44665900)"><image href="../arte/png/ST-02.png" x="156.400" y="26.400" width="8.4" height="8.4" preserveAspectRatio="none"/></g>
+<rect x="156.40" y="26.40" width="8.4" height="8.4" rx="0.8" fill="none" stroke="#fffaf0" stroke-width="0.35"/>
+<circle cx="157.90" cy="33.30" r="1.35" fill="#3b7d4f" stroke="#fffaf0" stroke-width="0.25"/><text x="157.90" y="34.30" font-family="Liberation Sans Narrow" font-size="2.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
+<line x1="153.00" y1="35.20" x2="185.00" y2="35.20" stroke="#a8823a" stroke-width="0.3"/>
+<text x="172.30" y="31.50" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Occhio</text>
+<path d="M179.80 32.20V28.20M178.60 29.50L179.80 28.10L181.00 29.50" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="169.00" y="37.40" font-family="Liberation Sans Narrow" font-size="2.45" fill="#2a2118" text-anchor="middle" >Prossima Trappola:</text>
+<text x="169.00" y="40.29" font-family="Liberation Sans Narrow" font-size="2.45" fill="#2a2118" text-anchor="middle" >nessun effetto. Poi toglilo.</text>
 <rect x="156.00" y="26.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
 <rect x="25.00" y="47.00" width="32.0" height="24.0" fill="#e4ede6"/>
-<rect x="25.00" y="47.00" width="32.0" height="9.2" fill="#3b7d4f"/>
-<line x1="25.00" y1="56.20" x2="57.00" y2="56.20" stroke="#a8823a" stroke-width="0.35"/><line x1="25.00" y1="56.85" x2="57.00" y2="56.85" stroke="#a8823a" stroke-width="0.12"/>
-<text x="30.40" y="54.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
-<text x="41.00" y="54.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Occhio</text>
-<path d="M51.60 55.30V51.30M50.40 52.60L51.60 51.20L52.80 52.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="41.00" y="59.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Prossima Trappola:</text>
-<text x="41.00" y="63.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >nessun effetto. Poi</text>
-<text x="41.00" y="66.31" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >toglilo.</text>
+<rect x="25.00" y="47.00" width="32.0" height="12.2" fill="#3b7d4f"/>
+<rect x="28.00" y="59.20" width="26.0" height="8.80" fill="#fffaf0"/>
+<clipPath id="stc97138339"><rect x="28.40" y="50.40" width="8.4" height="8.4" rx="0.8"/></clipPath>
+<g clip-path="url(#stc97138339)"><image href="../arte/png/ST-02.png" x="28.400" y="50.400" width="8.4" height="8.4" preserveAspectRatio="none"/></g>
+<rect x="28.40" y="50.40" width="8.4" height="8.4" rx="0.8" fill="none" stroke="#fffaf0" stroke-width="0.35"/>
+<circle cx="29.90" cy="57.30" r="1.35" fill="#3b7d4f" stroke="#fffaf0" stroke-width="0.25"/><text x="29.90" y="58.30" font-family="Liberation Sans Narrow" font-size="2.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
+<line x1="25.00" y1="59.20" x2="57.00" y2="59.20" stroke="#a8823a" stroke-width="0.3"/>
+<text x="44.30" y="55.50" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Occhio</text>
+<path d="M51.80 56.20V52.20M50.60 53.50L51.80 52.10L53.00 53.50" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="41.00" y="61.40" font-family="Liberation Sans Narrow" font-size="2.45" fill="#2a2118" text-anchor="middle" >Prossima Trappola:</text>
+<text x="41.00" y="64.29" font-family="Liberation Sans Narrow" font-size="2.45" fill="#2a2118" text-anchor="middle" >nessun effetto. Poi toglilo.</text>
 <rect x="28.00" y="50.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
 <rect x="57.00" y="47.00" width="32.0" height="24.0" fill="#e4ede6"/>
-<rect x="57.00" y="47.00" width="32.0" height="9.2" fill="#3b7d4f"/>
-<line x1="57.00" y1="56.20" x2="89.00" y2="56.20" stroke="#a8823a" stroke-width="0.35"/><line x1="57.00" y1="56.85" x2="89.00" y2="56.85" stroke="#a8823a" stroke-width="0.12"/>
-<text x="62.40" y="54.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
-<text x="73.00" y="54.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Occhio</text>
-<path d="M83.60 55.30V51.30M82.40 52.60L83.60 51.20L84.80 52.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="73.00" y="59.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Prossima Trappola:</text>
-<text x="73.00" y="63.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >nessun effetto. Poi</text>
-<text x="73.00" y="66.31" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >toglilo.</text>
+<rect x="57.00" y="47.00" width="32.0" height="12.2" fill="#3b7d4f"/>
+<rect x="60.00" y="59.20" width="26.0" height="8.80" fill="#fffaf0"/>
+<clipPath id="stc49591269"><rect x="60.40" y="50.40" width="8.4" height="8.4" rx="0.8"/></clipPath>
+<g clip-path="url(#stc49591269)"><image href="../arte/png/ST-02.png" x="60.400" y="50.400" width="8.4" height="8.4" preserveAspectRatio="none"/></g>
+<rect x="60.40" y="50.40" width="8.4" height="8.4" rx="0.8" fill="none" stroke="#fffaf0" stroke-width="0.35"/>
+<circle cx="61.90" cy="57.30" r="1.35" fill="#3b7d4f" stroke="#fffaf0" stroke-width="0.25"/><text x="61.90" y="58.30" font-family="Liberation Sans Narrow" font-size="2.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
+<line x1="57.00" y1="59.20" x2="89.00" y2="59.20" stroke="#a8823a" stroke-width="0.3"/>
+<text x="76.30" y="55.50" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Occhio</text>
+<path d="M83.80 56.20V52.20M82.60 53.50L83.80 52.10L85.00 53.50" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="73.00" y="61.40" font-family="Liberation Sans Narrow" font-size="2.45" fill="#2a2118" text-anchor="middle" >Prossima Trappola:</text>
+<text x="73.00" y="64.29" font-family="Liberation Sans Narrow" font-size="2.45" fill="#2a2118" text-anchor="middle" >nessun effetto. Poi toglilo.</text>
 <rect x="60.00" y="50.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
 <rect x="89.00" y="47.00" width="32.0" height="24.0" fill="#e4ede6"/>
-<rect x="89.00" y="47.00" width="32.0" height="9.2" fill="#3b7d4f"/>
-<line x1="89.00" y1="56.20" x2="121.00" y2="56.20" stroke="#a8823a" stroke-width="0.35"/><line x1="89.00" y1="56.85" x2="121.00" y2="56.85" stroke="#a8823a" stroke-width="0.12"/>
-<text x="94.40" y="54.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
-<text x="105.00" y="54.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Sussurro</text>
-<path d="M115.60 55.30V51.30M114.40 52.60L115.60 51.20L116.80 52.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="105.00" y="59.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Mostro vinto su «?»:</text>
-<text x="105.00" y="63.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >+1 Indizio, poi toglilo.</text>
+<rect x="89.00" y="47.00" width="32.0" height="12.2" fill="#3b7d4f"/>
+<rect x="92.00" y="59.20" width="26.0" height="8.80" fill="#fffaf0"/>
+<clipPath id="stc26487592"><rect x="92.40" y="50.40" width="8.4" height="8.4" rx="0.8"/></clipPath>
+<g clip-path="url(#stc26487592)"><image href="../arte/png/ST-03.png" x="92.400" y="50.400" width="8.4" height="8.4" preserveAspectRatio="none"/></g>
+<rect x="92.40" y="50.40" width="8.4" height="8.4" rx="0.8" fill="none" stroke="#fffaf0" stroke-width="0.35"/>
+<circle cx="93.90" cy="57.30" r="1.35" fill="#3b7d4f" stroke="#fffaf0" stroke-width="0.25"/><text x="93.90" y="58.30" font-family="Liberation Sans Narrow" font-size="2.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
+<line x1="89.00" y1="59.20" x2="121.00" y2="59.20" stroke="#a8823a" stroke-width="0.3"/>
+<text x="108.30" y="55.50" font-family="Liberation Sans Narrow" font-size="3.30" fill="#ffffff" text-anchor="middle" font-weight="bold" >Sussurro</text>
+<path d="M115.80 56.20V52.20M114.60 53.50L115.80 52.10L117.00 53.50" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="105.00" y="61.40" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Mostro vinto su «?»:</text>
+<text x="105.00" y="64.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >+1 Indizio, poi toglilo.</text>
 <rect x="92.00" y="50.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
 <rect x="121.00" y="47.00" width="32.0" height="24.0" fill="#e4ede6"/>
-<rect x="121.00" y="47.00" width="32.0" height="9.2" fill="#3b7d4f"/>
-<line x1="121.00" y1="56.20" x2="153.00" y2="56.20" stroke="#a8823a" stroke-width="0.35"/><line x1="121.00" y1="56.85" x2="153.00" y2="56.85" stroke="#a8823a" stroke-width="0.12"/>
-<text x="126.40" y="54.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
-<text x="137.00" y="54.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Sussurro</text>
-<path d="M147.60 55.30V51.30M146.40 52.60L147.60 51.20L148.80 52.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="137.00" y="59.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Mostro vinto su «?»:</text>
-<text x="137.00" y="63.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >+1 Indizio, poi toglilo.</text>
+<rect x="121.00" y="47.00" width="32.0" height="12.2" fill="#3b7d4f"/>
+<rect x="124.00" y="59.20" width="26.0" height="8.80" fill="#fffaf0"/>
+<clipPath id="stc10345477"><rect x="124.40" y="50.40" width="8.4" height="8.4" rx="0.8"/></clipPath>
+<g clip-path="url(#stc10345477)"><image href="../arte/png/ST-03.png" x="124.400" y="50.400" width="8.4" height="8.4" preserveAspectRatio="none"/></g>
+<rect x="124.40" y="50.40" width="8.4" height="8.4" rx="0.8" fill="none" stroke="#fffaf0" stroke-width="0.35"/>
+<circle cx="125.90" cy="57.30" r="1.35" fill="#3b7d4f" stroke="#fffaf0" stroke-width="0.25"/><text x="125.90" y="58.30" font-family="Liberation Sans Narrow" font-size="2.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
+<line x1="121.00" y1="59.20" x2="153.00" y2="59.20" stroke="#a8823a" stroke-width="0.3"/>
+<text x="140.30" y="55.50" font-family="Liberation Sans Narrow" font-size="3.30" fill="#ffffff" text-anchor="middle" font-weight="bold" >Sussurro</text>
+<path d="M147.80 56.20V52.20M146.60 53.50L147.80 52.10L149.00 53.50" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="137.00" y="61.40" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Mostro vinto su «?»:</text>
+<text x="137.00" y="64.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >+1 Indizio, poi toglilo.</text>
 <rect x="124.00" y="50.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
 <rect x="153.00" y="47.00" width="32.0" height="24.0" fill="#e4ede6"/>
-<rect x="153.00" y="47.00" width="32.0" height="9.2" fill="#3b7d4f"/>
-<line x1="153.00" y1="56.20" x2="185.00" y2="56.20" stroke="#a8823a" stroke-width="0.35"/><line x1="153.00" y1="56.85" x2="185.00" y2="56.85" stroke="#a8823a" stroke-width="0.12"/>
-<text x="158.40" y="54.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
-<text x="169.00" y="54.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Riflesso</text>
-<path d="M179.60 55.30V51.30M178.40 52.60L179.60 51.20L180.80 52.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="169.00" y="59.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Chi ti fa Danni ne</text>
-<text x="169.00" y="63.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >subisce 1.</text>
+<rect x="153.00" y="47.00" width="32.0" height="12.2" fill="#3b7d4f"/>
+<rect x="156.00" y="59.20" width="26.0" height="8.80" fill="#fffaf0"/>
+<clipPath id="stc47471327"><rect x="156.40" y="50.40" width="8.4" height="8.4" rx="0.8"/></clipPath>
+<g clip-path="url(#stc47471327)"><image href="../arte/png/ST-04.png" x="156.400" y="50.400" width="8.4" height="8.4" preserveAspectRatio="none"/></g>
+<rect x="156.40" y="50.40" width="8.4" height="8.4" rx="0.8" fill="none" stroke="#fffaf0" stroke-width="0.35"/>
+<circle cx="157.90" cy="57.30" r="1.35" fill="#3b7d4f" stroke="#fffaf0" stroke-width="0.25"/><text x="157.90" y="58.30" font-family="Liberation Sans Narrow" font-size="2.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
+<line x1="153.00" y1="59.20" x2="185.00" y2="59.20" stroke="#a8823a" stroke-width="0.3"/>
+<text x="172.30" y="55.50" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Riflesso</text>
+<path d="M179.80 56.20V52.20M178.60 53.50L179.80 52.10L181.00 53.50" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="169.00" y="61.40" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Chi ti fa Danni ne</text>
+<text x="169.00" y="64.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >subisce 1.</text>
 <rect x="156.00" y="50.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
 <rect x="25.00" y="71.00" width="32.0" height="24.0" fill="#e4ede6"/>
-<rect x="25.00" y="71.00" width="32.0" height="9.2" fill="#3b7d4f"/>
-<line x1="25.00" y1="80.20" x2="57.00" y2="80.20" stroke="#a8823a" stroke-width="0.35"/><line x1="25.00" y1="80.85" x2="57.00" y2="80.85" stroke="#a8823a" stroke-width="0.12"/>
-<text x="30.40" y="78.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
-<text x="41.00" y="78.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Riflesso</text>
-<path d="M51.60 79.30V75.30M50.40 76.60L51.60 75.20L52.80 76.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="41.00" y="83.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Chi ti fa Danni ne</text>
-<text x="41.00" y="87.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >subisce 1.</text>
+<rect x="25.00" y="71.00" width="32.0" height="12.2" fill="#3b7d4f"/>
+<rect x="28.00" y="83.20" width="26.0" height="8.80" fill="#fffaf0"/>
+<clipPath id="stc54418741"><rect x="28.40" y="74.40" width="8.4" height="8.4" rx="0.8"/></clipPath>
+<g clip-path="url(#stc54418741)"><image href="../arte/png/ST-04.png" x="28.400" y="74.400" width="8.4" height="8.4" preserveAspectRatio="none"/></g>
+<rect x="28.40" y="74.40" width="8.4" height="8.4" rx="0.8" fill="none" stroke="#fffaf0" stroke-width="0.35"/>
+<circle cx="29.90" cy="81.30" r="1.35" fill="#3b7d4f" stroke="#fffaf0" stroke-width="0.25"/><text x="29.90" y="82.30" font-family="Liberation Sans Narrow" font-size="2.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
+<line x1="25.00" y1="83.20" x2="57.00" y2="83.20" stroke="#a8823a" stroke-width="0.3"/>
+<text x="44.30" y="79.50" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Riflesso</text>
+<path d="M51.80 80.20V76.20M50.60 77.50L51.80 76.10L53.00 77.50" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="41.00" y="85.40" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Chi ti fa Danni ne</text>
+<text x="41.00" y="88.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >subisce 1.</text>
 <rect x="28.00" y="74.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
 <rect x="57.00" y="71.00" width="32.0" height="24.0" fill="#e4ede6"/>
-<rect x="57.00" y="71.00" width="32.0" height="9.2" fill="#3b7d4f"/>
-<line x1="57.00" y1="80.20" x2="89.00" y2="80.20" stroke="#a8823a" stroke-width="0.35"/><line x1="57.00" y1="80.85" x2="89.00" y2="80.85" stroke="#a8823a" stroke-width="0.12"/>
-<text x="62.40" y="78.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
-<text x="73.00" y="78.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Riflesso</text>
-<path d="M83.60 79.30V75.30M82.40 76.60L83.60 75.20L84.80 76.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="73.00" y="83.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Chi ti fa Danni ne</text>
-<text x="73.00" y="87.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >subisce 1.</text>
+<rect x="57.00" y="71.00" width="32.0" height="12.2" fill="#3b7d4f"/>
+<rect x="60.00" y="83.20" width="26.0" height="8.80" fill="#fffaf0"/>
+<clipPath id="stc6871671"><rect x="60.40" y="74.40" width="8.4" height="8.4" rx="0.8"/></clipPath>
+<g clip-path="url(#stc6871671)"><image href="../arte/png/ST-04.png" x="60.400" y="74.400" width="8.4" height="8.4" preserveAspectRatio="none"/></g>
+<rect x="60.40" y="74.40" width="8.4" height="8.4" rx="0.8" fill="none" stroke="#fffaf0" stroke-width="0.35"/>
+<circle cx="61.90" cy="81.30" r="1.35" fill="#3b7d4f" stroke="#fffaf0" stroke-width="0.25"/><text x="61.90" y="82.30" font-family="Liberation Sans Narrow" font-size="2.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
+<line x1="57.00" y1="83.20" x2="89.00" y2="83.20" stroke="#a8823a" stroke-width="0.3"/>
+<text x="76.30" y="79.50" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Riflesso</text>
+<path d="M83.80 80.20V76.20M82.60 77.50L83.80 76.10L85.00 77.50" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="73.00" y="85.40" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Chi ti fa Danni ne</text>
+<text x="73.00" y="88.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >subisce 1.</text>
 <rect x="60.00" y="74.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
 <rect x="89.00" y="71.00" width="32.0" height="24.0" fill="#f1e2e0"/>
-<rect x="89.00" y="71.00" width="32.0" height="9.2" fill="#9c2f24"/>
-<line x1="89.00" y1="80.20" x2="121.00" y2="80.20" stroke="#a8823a" stroke-width="0.35"/><line x1="89.00" y1="80.85" x2="121.00" y2="80.85" stroke="#a8823a" stroke-width="0.12"/>
-<text x="94.40" y="78.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
-<text x="105.00" y="78.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Silenzio</text>
-<path d="M115.60 79.30V75.30M114.40 76.60L115.60 75.20L116.80 76.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="105.00" y="83.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Non puoi giocare carte</text>
-<text x="105.00" y="87.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Incanto.</text>
+<rect x="89.00" y="71.00" width="32.0" height="12.2" fill="#9c2f24"/>
+<rect x="92.00" y="83.20" width="26.0" height="8.80" fill="#fffaf0"/>
+<clipPath id="stc29804595"><rect x="92.40" y="74.40" width="8.4" height="8.4" rx="0.8"/></clipPath>
+<g clip-path="url(#stc29804595)"><image href="../arte/png/ST-05.png" x="92.400" y="74.400" width="8.4" height="8.4" preserveAspectRatio="none"/></g>
+<rect x="92.40" y="74.40" width="8.4" height="8.4" rx="0.8" fill="none" stroke="#fffaf0" stroke-width="0.35"/>
+<circle cx="93.90" cy="81.30" r="1.35" fill="#9c2f24" stroke="#fffaf0" stroke-width="0.25"/><text x="93.90" y="82.30" font-family="Liberation Sans Narrow" font-size="2.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
+<line x1="89.00" y1="83.20" x2="121.00" y2="83.20" stroke="#a8823a" stroke-width="0.3"/>
+<text x="108.30" y="79.50" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Silenzio</text>
+<path d="M115.80 80.20V76.20M114.60 77.50L115.80 76.10L117.00 77.50" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="105.00" y="85.40" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Non puoi giocare carte</text>
+<text x="105.00" y="88.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Incanto.</text>
 <rect x="92.00" y="74.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
 <rect x="121.00" y="71.00" width="32.0" height="24.0" fill="#f1e2e0"/>
-<rect x="121.00" y="71.00" width="32.0" height="9.2" fill="#9c2f24"/>
-<line x1="121.00" y1="80.20" x2="153.00" y2="80.20" stroke="#a8823a" stroke-width="0.35"/><line x1="121.00" y1="80.85" x2="153.00" y2="80.85" stroke="#a8823a" stroke-width="0.12"/>
-<text x="126.40" y="78.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
-<text x="137.00" y="78.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Silenzio</text>
-<path d="M147.60 79.30V75.30M146.40 76.60L147.60 75.20L148.80 76.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="137.00" y="83.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Non puoi giocare carte</text>
-<text x="137.00" y="87.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Incanto.</text>
+<rect x="121.00" y="71.00" width="32.0" height="12.2" fill="#9c2f24"/>
+<rect x="124.00" y="83.20" width="26.0" height="8.80" fill="#fffaf0"/>
+<clipPath id="stc92425255"><rect x="124.40" y="74.40" width="8.4" height="8.4" rx="0.8"/></clipPath>
+<g clip-path="url(#stc92425255)"><image href="../arte/png/ST-05.png" x="124.400" y="74.400" width="8.4" height="8.4" preserveAspectRatio="none"/></g>
+<rect x="124.40" y="74.40" width="8.4" height="8.4" rx="0.8" fill="none" stroke="#fffaf0" stroke-width="0.35"/>
+<circle cx="125.90" cy="81.30" r="1.35" fill="#9c2f24" stroke="#fffaf0" stroke-width="0.25"/><text x="125.90" y="82.30" font-family="Liberation Sans Narrow" font-size="2.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
+<line x1="121.00" y1="83.20" x2="153.00" y2="83.20" stroke="#a8823a" stroke-width="0.3"/>
+<text x="140.30" y="79.50" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Silenzio</text>
+<path d="M147.80 80.20V76.20M146.60 77.50L147.80 76.10L149.00 77.50" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="137.00" y="85.40" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Non puoi giocare carte</text>
+<text x="137.00" y="88.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Incanto.</text>
 <rect x="124.00" y="74.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
 <rect x="153.00" y="71.00" width="32.0" height="24.0" fill="#f1e2e0"/>
-<rect x="153.00" y="71.00" width="32.0" height="9.2" fill="#9c2f24"/>
-<line x1="153.00" y1="80.20" x2="185.00" y2="80.20" stroke="#a8823a" stroke-width="0.35"/><line x1="153.00" y1="80.85" x2="185.00" y2="80.85" stroke="#a8823a" stroke-width="0.12"/>
-<text x="158.40" y="78.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
-<text x="169.00" y="78.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Silenzio</text>
-<path d="M179.60 79.30V75.30M178.40 76.60L179.60 75.20L180.80 76.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="169.00" y="83.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Non puoi giocare carte</text>
-<text x="169.00" y="87.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Incanto.</text>
+<rect x="153.00" y="71.00" width="32.0" height="12.2" fill="#9c2f24"/>
+<rect x="156.00" y="83.20" width="26.0" height="8.80" fill="#fffaf0"/>
+<clipPath id="stc56850729"><rect x="156.40" y="74.40" width="8.4" height="8.4" rx="0.8"/></clipPath>
+<g clip-path="url(#stc56850729)"><image href="../arte/png/ST-05.png" x="156.400" y="74.400" width="8.4" height="8.4" preserveAspectRatio="none"/></g>
+<rect x="156.40" y="74.40" width="8.4" height="8.4" rx="0.8" fill="none" stroke="#fffaf0" stroke-width="0.35"/>
+<circle cx="157.90" cy="81.30" r="1.35" fill="#9c2f24" stroke="#fffaf0" stroke-width="0.25"/><text x="157.90" y="82.30" font-family="Liberation Sans Narrow" font-size="2.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
+<line x1="153.00" y1="83.20" x2="185.00" y2="83.20" stroke="#a8823a" stroke-width="0.3"/>
+<text x="172.30" y="79.50" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Silenzio</text>
+<path d="M179.80 80.20V76.20M178.60 77.50L179.80 76.10L181.00 77.50" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="169.00" y="85.40" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Non puoi giocare carte</text>
+<text x="169.00" y="88.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Incanto.</text>
 <rect x="156.00" y="74.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
 <rect x="25.00" y="95.00" width="32.0" height="24.0" fill="#f1e2e0"/>
-<rect x="25.00" y="95.00" width="32.0" height="9.2" fill="#9c2f24"/>
-<line x1="25.00" y1="104.20" x2="57.00" y2="104.20" stroke="#a8823a" stroke-width="0.35"/><line x1="25.00" y1="104.85" x2="57.00" y2="104.85" stroke="#a8823a" stroke-width="0.12"/>
-<text x="30.40" y="102.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
-<text x="41.00" y="102.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Silenzio</text>
-<path d="M51.60 103.30V99.30M50.40 100.60L51.60 99.20L52.80 100.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="41.00" y="107.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Non puoi giocare carte</text>
-<text x="41.00" y="111.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Incanto.</text>
+<rect x="25.00" y="95.00" width="32.0" height="12.2" fill="#9c2f24"/>
+<rect x="28.00" y="107.20" width="26.0" height="8.80" fill="#fffaf0"/>
+<clipPath id="stc86682424"><rect x="28.40" y="98.40" width="8.4" height="8.4" rx="0.8"/></clipPath>
+<g clip-path="url(#stc86682424)"><image href="../arte/png/ST-05.png" x="28.400" y="98.400" width="8.4" height="8.4" preserveAspectRatio="none"/></g>
+<rect x="28.40" y="98.40" width="8.4" height="8.4" rx="0.8" fill="none" stroke="#fffaf0" stroke-width="0.35"/>
+<circle cx="29.90" cy="105.30" r="1.35" fill="#9c2f24" stroke="#fffaf0" stroke-width="0.25"/><text x="29.90" y="106.30" font-family="Liberation Sans Narrow" font-size="2.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
+<line x1="25.00" y1="107.20" x2="57.00" y2="107.20" stroke="#a8823a" stroke-width="0.3"/>
+<text x="44.30" y="103.50" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Silenzio</text>
+<path d="M51.80 104.20V100.20M50.60 101.50L51.80 100.10L53.00 101.50" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="41.00" y="109.40" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Non puoi giocare carte</text>
+<text x="41.00" y="112.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Incanto.</text>
 <rect x="28.00" y="98.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
 <rect x="57.00" y="95.00" width="32.0" height="24.0" fill="#e4ede6"/>
-<rect x="57.00" y="95.00" width="32.0" height="9.2" fill="#3b7d4f"/>
-<line x1="57.00" y1="104.20" x2="89.00" y2="104.20" stroke="#a8823a" stroke-width="0.35"/><line x1="57.00" y1="104.85" x2="89.00" y2="104.85" stroke="#a8823a" stroke-width="0.12"/>
-<text x="62.40" y="102.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
-<text x="73.00" y="102.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Fede</text>
-<path d="M83.60 103.30V99.30M82.40 100.60L83.60 99.20L84.80 100.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="73.00" y="107.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >(+1) AR.</text>
+<rect x="57.00" y="95.00" width="32.0" height="12.2" fill="#3b7d4f"/>
+<rect x="60.00" y="107.20" width="26.0" height="8.80" fill="#fffaf0"/>
+<clipPath id="stc81291301"><rect x="60.40" y="98.40" width="8.4" height="8.4" rx="0.8"/></clipPath>
+<g clip-path="url(#stc81291301)"><image href="../arte/png/ST-06.png" x="60.400" y="98.400" width="8.4" height="8.4" preserveAspectRatio="none"/></g>
+<rect x="60.40" y="98.40" width="8.4" height="8.4" rx="0.8" fill="none" stroke="#fffaf0" stroke-width="0.35"/>
+<circle cx="61.90" cy="105.30" r="1.35" fill="#3b7d4f" stroke="#fffaf0" stroke-width="0.25"/><text x="61.90" y="106.30" font-family="Liberation Sans Narrow" font-size="2.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
+<line x1="57.00" y1="107.20" x2="89.00" y2="107.20" stroke="#a8823a" stroke-width="0.3"/>
+<text x="76.30" y="103.50" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Fede</text>
+<path d="M83.80 104.20V100.20M82.60 101.50L83.80 100.10L85.00 101.50" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="73.00" y="109.40" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >(+1) AR.</text>
 <rect x="60.00" y="98.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
 <rect x="89.00" y="95.00" width="32.0" height="24.0" fill="#e4ede6"/>
-<rect x="89.00" y="95.00" width="32.0" height="9.2" fill="#3b7d4f"/>
-<line x1="89.00" y1="104.20" x2="121.00" y2="104.20" stroke="#a8823a" stroke-width="0.35"/><line x1="89.00" y1="104.85" x2="121.00" y2="104.85" stroke="#a8823a" stroke-width="0.12"/>
-<text x="94.40" y="102.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
-<text x="105.00" y="102.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Fede</text>
-<path d="M115.60 103.30V99.30M114.40 100.60L115.60 99.20L116.80 100.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="105.00" y="107.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >(+1) AR.</text>
+<rect x="89.00" y="95.00" width="32.0" height="12.2" fill="#3b7d4f"/>
+<rect x="92.00" y="107.20" width="26.0" height="8.80" fill="#fffaf0"/>
+<clipPath id="stc19153023"><rect x="92.40" y="98.40" width="8.4" height="8.4" rx="0.8"/></clipPath>
+<g clip-path="url(#stc19153023)"><image href="../arte/png/ST-06.png" x="92.400" y="98.400" width="8.4" height="8.4" preserveAspectRatio="none"/></g>
+<rect x="92.40" y="98.40" width="8.4" height="8.4" rx="0.8" fill="none" stroke="#fffaf0" stroke-width="0.35"/>
+<circle cx="93.90" cy="105.30" r="1.35" fill="#3b7d4f" stroke="#fffaf0" stroke-width="0.25"/><text x="93.90" y="106.30" font-family="Liberation Sans Narrow" font-size="2.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
+<line x1="89.00" y1="107.20" x2="121.00" y2="107.20" stroke="#a8823a" stroke-width="0.3"/>
+<text x="108.30" y="103.50" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Fede</text>
+<path d="M115.80 104.20V100.20M114.60 101.50L115.80 100.10L117.00 101.50" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="105.00" y="109.40" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >(+1) AR.</text>
 <rect x="92.00" y="98.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
 <rect x="121.00" y="95.00" width="32.0" height="24.0" fill="#e4ede6"/>
-<rect x="121.00" y="95.00" width="32.0" height="9.2" fill="#3b7d4f"/>
-<line x1="121.00" y1="104.20" x2="153.00" y2="104.20" stroke="#a8823a" stroke-width="0.35"/><line x1="121.00" y1="104.85" x2="153.00" y2="104.85" stroke="#a8823a" stroke-width="0.12"/>
-<text x="126.40" y="102.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
-<text x="137.00" y="102.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Fede</text>
-<path d="M147.60 103.30V99.30M146.40 100.60L147.60 99.20L148.80 100.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="137.00" y="107.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >(+1) AR.</text>
+<rect x="121.00" y="95.00" width="32.0" height="12.2" fill="#3b7d4f"/>
+<rect x="124.00" y="107.20" width="26.0" height="8.80" fill="#fffaf0"/>
+<clipPath id="stc4733864"><rect x="124.40" y="98.40" width="8.4" height="8.4" rx="0.8"/></clipPath>
+<g clip-path="url(#stc4733864)"><image href="../arte/png/ST-06.png" x="124.400" y="98.400" width="8.4" height="8.4" preserveAspectRatio="none"/></g>
+<rect x="124.40" y="98.40" width="8.4" height="8.4" rx="0.8" fill="none" stroke="#fffaf0" stroke-width="0.35"/>
+<circle cx="125.90" cy="105.30" r="1.35" fill="#3b7d4f" stroke="#fffaf0" stroke-width="0.25"/><text x="125.90" y="106.30" font-family="Liberation Sans Narrow" font-size="2.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
+<line x1="121.00" y1="107.20" x2="153.00" y2="107.20" stroke="#a8823a" stroke-width="0.3"/>
+<text x="140.30" y="103.50" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Fede</text>
+<path d="M147.80 104.20V100.20M146.60 101.50L147.80 100.10L149.00 101.50" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="137.00" y="109.40" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >(+1) AR.</text>
 <rect x="124.00" y="98.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
 <rect x="153.00" y="95.00" width="32.0" height="24.0" fill="#e4ede6"/>
-<rect x="153.00" y="95.00" width="32.0" height="9.2" fill="#3b7d4f"/>
-<line x1="153.00" y1="104.20" x2="185.00" y2="104.20" stroke="#a8823a" stroke-width="0.35"/><line x1="153.00" y1="104.85" x2="185.00" y2="104.85" stroke="#a8823a" stroke-width="0.12"/>
-<text x="158.40" y="102.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
-<text x="169.00" y="102.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Fede</text>
-<path d="M179.60 103.30V99.30M178.40 100.60L179.60 99.20L180.80 100.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="169.00" y="107.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >(+1) AR.</text>
+<rect x="153.00" y="95.00" width="32.0" height="12.2" fill="#3b7d4f"/>
+<rect x="156.00" y="107.20" width="26.0" height="8.80" fill="#fffaf0"/>
+<clipPath id="stc82587902"><rect x="156.40" y="98.40" width="8.4" height="8.4" rx="0.8"/></clipPath>
+<g clip-path="url(#stc82587902)"><image href="../arte/png/ST-06.png" x="156.400" y="98.400" width="8.4" height="8.4" preserveAspectRatio="none"/></g>
+<rect x="156.40" y="98.40" width="8.4" height="8.4" rx="0.8" fill="none" stroke="#fffaf0" stroke-width="0.35"/>
+<circle cx="157.90" cy="105.30" r="1.35" fill="#3b7d4f" stroke="#fffaf0" stroke-width="0.25"/><text x="157.90" y="106.30" font-family="Liberation Sans Narrow" font-size="2.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
+<line x1="153.00" y1="107.20" x2="185.00" y2="107.20" stroke="#a8823a" stroke-width="0.3"/>
+<text x="172.30" y="103.50" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Fede</text>
+<path d="M179.80 104.20V100.20M178.60 101.50L179.80 100.10L181.00 101.50" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="169.00" y="109.40" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >(+1) AR.</text>
 <rect x="156.00" y="98.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
 <rect x="25.00" y="119.00" width="32.0" height="24.0" fill="#e4ede6"/>
-<rect x="25.00" y="119.00" width="32.0" height="9.2" fill="#3b7d4f"/>
-<line x1="25.00" y1="128.20" x2="57.00" y2="128.20" stroke="#a8823a" stroke-width="0.35"/><line x1="25.00" y1="128.85" x2="57.00" y2="128.85" stroke="#a8823a" stroke-width="0.12"/>
-<text x="30.40" y="126.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
-<text x="41.00" y="126.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Vantaggio</text>
-<path d="M51.60 127.30V123.30M50.40 124.60L51.60 123.20L52.80 124.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="41.00" y="131.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >I tuoi tiri per colpire si</text>
-<text x="41.00" y="135.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >fanno con vantaggio.</text>
+<rect x="25.00" y="119.00" width="32.0" height="12.2" fill="#3b7d4f"/>
+<rect x="28.00" y="131.20" width="26.0" height="8.80" fill="#fffaf0"/>
+<clipPath id="stc44914413"><rect x="28.40" y="122.40" width="8.4" height="8.4" rx="0.8"/></clipPath>
+<g clip-path="url(#stc44914413)"><image href="../arte/png/ST-07.png" x="28.400" y="122.400" width="8.4" height="8.4" preserveAspectRatio="none"/></g>
+<rect x="28.40" y="122.40" width="8.4" height="8.4" rx="0.8" fill="none" stroke="#fffaf0" stroke-width="0.35"/>
+<circle cx="29.90" cy="129.30" r="1.35" fill="#3b7d4f" stroke="#fffaf0" stroke-width="0.25"/><text x="29.90" y="130.30" font-family="Liberation Sans Narrow" font-size="2.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
+<line x1="25.00" y1="131.20" x2="57.00" y2="131.20" stroke="#a8823a" stroke-width="0.3"/>
+<text x="44.30" y="127.50" font-family="Liberation Sans Narrow" font-size="3.10" fill="#ffffff" text-anchor="middle" font-weight="bold" >Vantaggio</text>
+<path d="M51.80 128.20V124.20M50.60 125.50L51.80 124.10L53.00 125.50" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="41.00" y="133.40" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >I tuoi tiri per colpire si</text>
+<text x="41.00" y="136.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >fanno con vantaggio.</text>
 <rect x="28.00" y="122.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
 <rect x="57.00" y="119.00" width="32.0" height="24.0" fill="#e4ede6"/>
-<rect x="57.00" y="119.00" width="32.0" height="9.2" fill="#3b7d4f"/>
-<line x1="57.00" y1="128.20" x2="89.00" y2="128.20" stroke="#a8823a" stroke-width="0.35"/><line x1="57.00" y1="128.85" x2="89.00" y2="128.85" stroke="#a8823a" stroke-width="0.12"/>
-<text x="62.40" y="126.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
-<text x="73.00" y="126.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Vantaggio</text>
-<path d="M83.60 127.30V123.30M82.40 124.60L83.60 123.20L84.80 124.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="73.00" y="131.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >I tuoi tiri per colpire si</text>
-<text x="73.00" y="135.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >fanno con vantaggio.</text>
+<rect x="57.00" y="119.00" width="32.0" height="12.2" fill="#3b7d4f"/>
+<rect x="60.00" y="131.20" width="26.0" height="8.80" fill="#fffaf0"/>
+<clipPath id="stc92461483"><rect x="60.40" y="122.40" width="8.4" height="8.4" rx="0.8"/></clipPath>
+<g clip-path="url(#stc92461483)"><image href="../arte/png/ST-07.png" x="60.400" y="122.400" width="8.4" height="8.4" preserveAspectRatio="none"/></g>
+<rect x="60.40" y="122.40" width="8.4" height="8.4" rx="0.8" fill="none" stroke="#fffaf0" stroke-width="0.35"/>
+<circle cx="61.90" cy="129.30" r="1.35" fill="#3b7d4f" stroke="#fffaf0" stroke-width="0.25"/><text x="61.90" y="130.30" font-family="Liberation Sans Narrow" font-size="2.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
+<line x1="57.00" y1="131.20" x2="89.00" y2="131.20" stroke="#a8823a" stroke-width="0.3"/>
+<text x="76.30" y="127.50" font-family="Liberation Sans Narrow" font-size="3.10" fill="#ffffff" text-anchor="middle" font-weight="bold" >Vantaggio</text>
+<path d="M83.80 128.20V124.20M82.60 125.50L83.80 124.10L85.00 125.50" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="73.00" y="133.40" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >I tuoi tiri per colpire si</text>
+<text x="73.00" y="136.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >fanno con vantaggio.</text>
 <rect x="60.00" y="122.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
 <rect x="89.00" y="119.00" width="32.0" height="24.0" fill="#e4ede6"/>
-<rect x="89.00" y="119.00" width="32.0" height="9.2" fill="#3b7d4f"/>
-<line x1="89.00" y1="128.20" x2="121.00" y2="128.20" stroke="#a8823a" stroke-width="0.35"/><line x1="89.00" y1="128.85" x2="121.00" y2="128.85" stroke="#a8823a" stroke-width="0.12"/>
-<text x="94.40" y="126.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
-<text x="105.00" y="126.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Vantaggio</text>
-<path d="M115.60 127.30V123.30M114.40 124.60L115.60 123.20L116.80 124.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="105.00" y="131.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >I tuoi tiri per colpire si</text>
-<text x="105.00" y="135.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >fanno con vantaggio.</text>
+<rect x="89.00" y="119.00" width="32.0" height="12.2" fill="#3b7d4f"/>
+<rect x="92.00" y="131.20" width="26.0" height="8.80" fill="#fffaf0"/>
+<clipPath id="stc44926424"><rect x="92.40" y="122.40" width="8.4" height="8.4" rx="0.8"/></clipPath>
+<g clip-path="url(#stc44926424)"><image href="../arte/png/ST-07.png" x="92.400" y="122.400" width="8.4" height="8.4" preserveAspectRatio="none"/></g>
+<rect x="92.40" y="122.40" width="8.4" height="8.4" rx="0.8" fill="none" stroke="#fffaf0" stroke-width="0.35"/>
+<circle cx="93.90" cy="129.30" r="1.35" fill="#3b7d4f" stroke="#fffaf0" stroke-width="0.25"/><text x="93.90" y="130.30" font-family="Liberation Sans Narrow" font-size="2.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
+<line x1="89.00" y1="131.20" x2="121.00" y2="131.20" stroke="#a8823a" stroke-width="0.3"/>
+<text x="108.30" y="127.50" font-family="Liberation Sans Narrow" font-size="3.10" fill="#ffffff" text-anchor="middle" font-weight="bold" >Vantaggio</text>
+<path d="M115.80 128.20V124.20M114.60 125.50L115.80 124.10L117.00 125.50" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="105.00" y="133.40" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >I tuoi tiri per colpire si</text>
+<text x="105.00" y="136.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >fanno con vantaggio.</text>
 <rect x="92.00" y="122.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
 <rect x="121.00" y="119.00" width="32.0" height="24.0" fill="#e4ede6"/>
-<rect x="121.00" y="119.00" width="32.0" height="9.2" fill="#3b7d4f"/>
-<line x1="121.00" y1="128.20" x2="153.00" y2="128.20" stroke="#a8823a" stroke-width="0.35"/><line x1="121.00" y1="128.85" x2="153.00" y2="128.85" stroke="#a8823a" stroke-width="0.12"/>
-<text x="126.40" y="126.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
-<text x="137.00" y="126.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Vantaggio</text>
-<path d="M147.60 127.30V123.30M146.40 124.60L147.60 123.20L148.80 124.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="137.00" y="131.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >I tuoi tiri per colpire si</text>
-<text x="137.00" y="135.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >fanno con vantaggio.</text>
+<rect x="121.00" y="119.00" width="32.0" height="12.2" fill="#3b7d4f"/>
+<rect x="124.00" y="131.20" width="26.0" height="8.80" fill="#fffaf0"/>
+<clipPath id="stc15349208"><rect x="124.40" y="122.40" width="8.4" height="8.4" rx="0.8"/></clipPath>
+<g clip-path="url(#stc15349208)"><image href="../arte/png/ST-07.png" x="124.400" y="122.400" width="8.4" height="8.4" preserveAspectRatio="none"/></g>
+<rect x="124.40" y="122.40" width="8.4" height="8.4" rx="0.8" fill="none" stroke="#fffaf0" stroke-width="0.35"/>
+<circle cx="125.90" cy="129.30" r="1.35" fill="#3b7d4f" stroke="#fffaf0" stroke-width="0.25"/><text x="125.90" y="130.30" font-family="Liberation Sans Narrow" font-size="2.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >+</text>
+<line x1="121.00" y1="131.20" x2="153.00" y2="131.20" stroke="#a8823a" stroke-width="0.3"/>
+<text x="140.30" y="127.50" font-family="Liberation Sans Narrow" font-size="3.10" fill="#ffffff" text-anchor="middle" font-weight="bold" >Vantaggio</text>
+<path d="M147.80 128.20V124.20M146.60 125.50L147.80 124.10L149.00 125.50" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="137.00" y="133.40" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >I tuoi tiri per colpire si</text>
+<text x="137.00" y="136.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >fanno con vantaggio.</text>
 <rect x="124.00" y="122.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
 <rect x="153.00" y="119.00" width="32.0" height="24.0" fill="#f1e2e0"/>
-<rect x="153.00" y="119.00" width="32.0" height="9.2" fill="#9c2f24"/>
-<line x1="153.00" y1="128.20" x2="185.00" y2="128.20" stroke="#a8823a" stroke-width="0.35"/><line x1="153.00" y1="128.85" x2="185.00" y2="128.85" stroke="#a8823a" stroke-width="0.12"/>
-<text x="158.40" y="126.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
-<text x="169.00" y="126.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Svantaggio</text>
-<path d="M179.60 127.30V123.30M178.40 124.60L179.60 123.20L180.80 124.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="169.00" y="131.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >I tuoi tiri per colpire si</text>
-<text x="169.00" y="135.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >fanno con svantaggio.</text>
+<rect x="153.00" y="119.00" width="32.0" height="12.2" fill="#9c2f24"/>
+<rect x="156.00" y="131.20" width="26.0" height="8.80" fill="#fffaf0"/>
+<clipPath id="stc4422975"><rect x="156.40" y="122.40" width="8.4" height="8.4" rx="0.8"/></clipPath>
+<g clip-path="url(#stc4422975)"><image href="../arte/png/ST-08.png" x="156.400" y="122.400" width="8.4" height="8.4" preserveAspectRatio="none"/></g>
+<rect x="156.40" y="122.40" width="8.4" height="8.4" rx="0.8" fill="none" stroke="#fffaf0" stroke-width="0.35"/>
+<circle cx="157.90" cy="129.30" r="1.35" fill="#9c2f24" stroke="#fffaf0" stroke-width="0.25"/><text x="157.90" y="130.30" font-family="Liberation Sans Narrow" font-size="2.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
+<line x1="153.00" y1="131.20" x2="185.00" y2="131.20" stroke="#a8823a" stroke-width="0.3"/>
+<text x="172.30" y="127.50" font-family="Liberation Sans Narrow" font-size="2.70" fill="#ffffff" text-anchor="middle" font-weight="bold" >Svantaggio</text>
+<path d="M179.80 128.20V124.20M178.60 125.50L179.80 124.10L181.00 125.50" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="169.00" y="133.40" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >I tuoi tiri per colpire si</text>
+<text x="169.00" y="136.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >fanno con svantaggio.</text>
 <rect x="156.00" y="122.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
 <rect x="25.00" y="143.00" width="32.0" height="24.0" fill="#f1e2e0"/>
-<rect x="25.00" y="143.00" width="32.0" height="9.2" fill="#9c2f24"/>
-<line x1="25.00" y1="152.20" x2="57.00" y2="152.20" stroke="#a8823a" stroke-width="0.35"/><line x1="25.00" y1="152.85" x2="57.00" y2="152.85" stroke="#a8823a" stroke-width="0.12"/>
-<text x="30.40" y="150.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
-<text x="41.00" y="150.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Svantaggio</text>
-<path d="M51.60 151.30V147.30M50.40 148.60L51.60 147.20L52.80 148.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="41.00" y="155.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >I tuoi tiri per colpire si</text>
-<text x="41.00" y="159.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >fanno con svantaggio.</text>
+<rect x="25.00" y="143.00" width="32.0" height="12.2" fill="#9c2f24"/>
+<rect x="28.00" y="155.20" width="26.0" height="8.80" fill="#fffaf0"/>
+<clipPath id="stc62618736"><rect x="28.40" y="146.40" width="8.4" height="8.4" rx="0.8"/></clipPath>
+<g clip-path="url(#stc62618736)"><image href="../arte/png/ST-08.png" x="28.400" y="146.400" width="8.4" height="8.4" preserveAspectRatio="none"/></g>
+<rect x="28.40" y="146.40" width="8.4" height="8.4" rx="0.8" fill="none" stroke="#fffaf0" stroke-width="0.35"/>
+<circle cx="29.90" cy="153.30" r="1.35" fill="#9c2f24" stroke="#fffaf0" stroke-width="0.25"/><text x="29.90" y="154.30" font-family="Liberation Sans Narrow" font-size="2.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
+<line x1="25.00" y1="155.20" x2="57.00" y2="155.20" stroke="#a8823a" stroke-width="0.3"/>
+<text x="44.30" y="151.50" font-family="Liberation Sans Narrow" font-size="2.70" fill="#ffffff" text-anchor="middle" font-weight="bold" >Svantaggio</text>
+<path d="M51.80 152.20V148.20M50.60 149.50L51.80 148.10L53.00 149.50" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="41.00" y="157.40" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >I tuoi tiri per colpire si</text>
+<text x="41.00" y="160.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >fanno con svantaggio.</text>
 <rect x="28.00" y="146.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
 <rect x="57.00" y="143.00" width="32.0" height="24.0" fill="#f1e2e0"/>
-<rect x="57.00" y="143.00" width="32.0" height="9.2" fill="#9c2f24"/>
-<line x1="57.00" y1="152.20" x2="89.00" y2="152.20" stroke="#a8823a" stroke-width="0.35"/><line x1="57.00" y1="152.85" x2="89.00" y2="152.85" stroke="#a8823a" stroke-width="0.12"/>
-<text x="62.40" y="150.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
-<text x="73.00" y="150.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Svantaggio</text>
-<path d="M83.60 151.30V147.30M82.40 148.60L83.60 147.20L84.80 148.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="73.00" y="155.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >I tuoi tiri per colpire si</text>
-<text x="73.00" y="159.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >fanno con svantaggio.</text>
+<rect x="57.00" y="143.00" width="32.0" height="12.2" fill="#9c2f24"/>
+<rect x="60.00" y="155.20" width="26.0" height="8.80" fill="#fffaf0"/>
+<clipPath id="stc75242986"><rect x="60.40" y="146.40" width="8.4" height="8.4" rx="0.8"/></clipPath>
+<g clip-path="url(#stc75242986)"><image href="../arte/png/ST-08.png" x="60.400" y="146.400" width="8.4" height="8.4" preserveAspectRatio="none"/></g>
+<rect x="60.40" y="146.40" width="8.4" height="8.4" rx="0.8" fill="none" stroke="#fffaf0" stroke-width="0.35"/>
+<circle cx="61.90" cy="153.30" r="1.35" fill="#9c2f24" stroke="#fffaf0" stroke-width="0.25"/><text x="61.90" y="154.30" font-family="Liberation Sans Narrow" font-size="2.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
+<line x1="57.00" y1="155.20" x2="89.00" y2="155.20" stroke="#a8823a" stroke-width="0.3"/>
+<text x="76.30" y="151.50" font-family="Liberation Sans Narrow" font-size="2.70" fill="#ffffff" text-anchor="middle" font-weight="bold" >Svantaggio</text>
+<path d="M83.80 152.20V148.20M82.60 149.50L83.80 148.10L85.00 149.50" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="73.00" y="157.40" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >I tuoi tiri per colpire si</text>
+<text x="73.00" y="160.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >fanno con svantaggio.</text>
 <rect x="60.00" y="146.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
 <rect x="89.00" y="143.00" width="32.0" height="24.0" fill="#f1e2e0"/>
-<rect x="89.00" y="143.00" width="32.0" height="9.2" fill="#9c2f24"/>
-<line x1="89.00" y1="152.20" x2="121.00" y2="152.20" stroke="#a8823a" stroke-width="0.35"/><line x1="89.00" y1="152.85" x2="121.00" y2="152.85" stroke="#a8823a" stroke-width="0.12"/>
-<text x="94.40" y="150.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
-<text x="105.00" y="150.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Fermo</text>
-<path d="M115.60 151.30V147.30M114.40 148.60L115.60 147.20L116.80 148.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="105.00" y="155.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Muovi: non ti muovi;</text>
-<text x="105.00" y="159.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >esplori dove sei.</text>
+<rect x="89.00" y="143.00" width="32.0" height="12.2" fill="#9c2f24"/>
+<rect x="92.00" y="155.20" width="26.0" height="8.80" fill="#fffaf0"/>
+<clipPath id="stc9336519"><rect x="92.40" y="146.40" width="8.4" height="8.4" rx="0.8"/></clipPath>
+<g clip-path="url(#stc9336519)"><image href="../arte/png/ST-09.png" x="92.400" y="146.400" width="8.4" height="8.4" preserveAspectRatio="none"/></g>
+<rect x="92.40" y="146.40" width="8.4" height="8.4" rx="0.8" fill="none" stroke="#fffaf0" stroke-width="0.35"/>
+<circle cx="93.90" cy="153.30" r="1.35" fill="#9c2f24" stroke="#fffaf0" stroke-width="0.25"/><text x="93.90" y="154.30" font-family="Liberation Sans Narrow" font-size="2.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
+<line x1="89.00" y1="155.20" x2="121.00" y2="155.20" stroke="#a8823a" stroke-width="0.3"/>
+<text x="108.30" y="151.50" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Fermo</text>
+<path d="M115.80 152.20V148.20M114.60 149.50L115.80 148.10L117.00 149.50" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="105.00" y="157.40" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Muovi: non ti muovi;</text>
+<text x="105.00" y="160.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >esplori dove sei.</text>
 <rect x="92.00" y="146.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
 <rect x="121.00" y="143.00" width="32.0" height="24.0" fill="#f1e2e0"/>
-<rect x="121.00" y="143.00" width="32.0" height="9.2" fill="#9c2f24"/>
-<line x1="121.00" y1="152.20" x2="153.00" y2="152.20" stroke="#a8823a" stroke-width="0.35"/><line x1="121.00" y1="152.85" x2="153.00" y2="152.85" stroke="#a8823a" stroke-width="0.12"/>
-<text x="126.40" y="150.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
-<text x="137.00" y="150.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Fermo</text>
-<path d="M147.60 151.30V147.30M146.40 148.60L147.60 147.20L148.80 148.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="137.00" y="155.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Muovi: non ti muovi;</text>
-<text x="137.00" y="159.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >esplori dove sei.</text>
+<rect x="121.00" y="143.00" width="32.0" height="12.2" fill="#9c2f24"/>
+<rect x="124.00" y="155.20" width="26.0" height="8.80" fill="#fffaf0"/>
+<clipPath id="stc38346886"><rect x="124.40" y="146.40" width="8.4" height="8.4" rx="0.8"/></clipPath>
+<g clip-path="url(#stc38346886)"><image href="../arte/png/ST-09.png" x="124.400" y="146.400" width="8.4" height="8.4" preserveAspectRatio="none"/></g>
+<rect x="124.40" y="146.40" width="8.4" height="8.4" rx="0.8" fill="none" stroke="#fffaf0" stroke-width="0.35"/>
+<circle cx="125.90" cy="153.30" r="1.35" fill="#9c2f24" stroke="#fffaf0" stroke-width="0.25"/><text x="125.90" y="154.30" font-family="Liberation Sans Narrow" font-size="2.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
+<line x1="121.00" y1="155.20" x2="153.00" y2="155.20" stroke="#a8823a" stroke-width="0.3"/>
+<text x="140.30" y="151.50" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Fermo</text>
+<path d="M147.80 152.20V148.20M146.60 149.50L147.80 148.10L149.00 149.50" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="137.00" y="157.40" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Muovi: non ti muovi;</text>
+<text x="137.00" y="160.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >esplori dove sei.</text>
 <rect x="124.00" y="146.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
 <rect x="153.00" y="143.00" width="32.0" height="24.0" fill="#f1e2e0"/>
-<rect x="153.00" y="143.00" width="32.0" height="9.2" fill="#9c2f24"/>
-<line x1="153.00" y1="152.20" x2="185.00" y2="152.20" stroke="#a8823a" stroke-width="0.35"/><line x1="153.00" y1="152.85" x2="185.00" y2="152.85" stroke="#a8823a" stroke-width="0.12"/>
-<text x="158.40" y="150.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
-<text x="169.00" y="150.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Fermo</text>
-<path d="M179.60 151.30V147.30M178.40 148.60L179.60 147.20L180.80 148.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="169.00" y="155.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Muovi: non ti muovi;</text>
-<text x="169.00" y="159.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >esplori dove sei.</text>
+<rect x="153.00" y="143.00" width="32.0" height="12.2" fill="#9c2f24"/>
+<rect x="156.00" y="155.20" width="26.0" height="8.80" fill="#fffaf0"/>
+<clipPath id="stc85893956"><rect x="156.40" y="146.40" width="8.4" height="8.4" rx="0.8"/></clipPath>
+<g clip-path="url(#stc85893956)"><image href="../arte/png/ST-09.png" x="156.400" y="146.400" width="8.4" height="8.4" preserveAspectRatio="none"/></g>
+<rect x="156.40" y="146.40" width="8.4" height="8.4" rx="0.8" fill="none" stroke="#fffaf0" stroke-width="0.35"/>
+<circle cx="157.90" cy="153.30" r="1.35" fill="#9c2f24" stroke="#fffaf0" stroke-width="0.25"/><text x="157.90" y="154.30" font-family="Liberation Sans Narrow" font-size="2.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
+<line x1="153.00" y1="155.20" x2="185.00" y2="155.20" stroke="#a8823a" stroke-width="0.3"/>
+<text x="172.30" y="151.50" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Fermo</text>
+<path d="M179.80 152.20V148.20M178.60 149.50L179.80 148.10L181.00 149.50" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="169.00" y="157.40" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Muovi: non ti muovi;</text>
+<text x="169.00" y="160.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >esplori dove sei.</text>
 <rect x="156.00" y="146.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
 <rect x="25.00" y="167.00" width="32.0" height="24.0" fill="#f1e2e0"/>
-<rect x="25.00" y="167.00" width="32.0" height="9.2" fill="#9c2f24"/>
-<line x1="25.00" y1="176.20" x2="57.00" y2="176.20" stroke="#a8823a" stroke-width="0.35"/><line x1="25.00" y1="176.85" x2="57.00" y2="176.85" stroke="#a8823a" stroke-width="0.12"/>
-<text x="30.40" y="174.90" font-family="Liberation Sans Narrow" font-size="4.20" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
-<text x="41.00" y="174.60" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Fermo</text>
-<path d="M51.60 175.30V171.30M50.40 172.60L51.60 171.20L52.80 172.60" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="41.00" y="179.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Muovi: non ti muovi;</text>
-<text x="41.00" y="183.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >esplori dove sei.</text>
+<rect x="25.00" y="167.00" width="32.0" height="12.2" fill="#9c2f24"/>
+<rect x="28.00" y="179.20" width="26.0" height="8.80" fill="#fffaf0"/>
+<clipPath id="stc94578414"><rect x="28.40" y="170.40" width="8.4" height="8.4" rx="0.8"/></clipPath>
+<g clip-path="url(#stc94578414)"><image href="../arte/png/ST-09.png" x="28.400" y="170.400" width="8.4" height="8.4" preserveAspectRatio="none"/></g>
+<rect x="28.40" y="170.40" width="8.4" height="8.4" rx="0.8" fill="none" stroke="#fffaf0" stroke-width="0.35"/>
+<circle cx="29.90" cy="177.30" r="1.35" fill="#9c2f24" stroke="#fffaf0" stroke-width="0.25"/><text x="29.90" y="178.30" font-family="Liberation Sans Narrow" font-size="2.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >−</text>
+<line x1="25.00" y1="179.20" x2="57.00" y2="179.20" stroke="#a8823a" stroke-width="0.3"/>
+<text x="44.30" y="175.50" font-family="Liberation Sans Narrow" font-size="3.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >Fermo</text>
+<path d="M51.80 176.20V172.20M50.60 173.50L51.80 172.10L53.00 173.50" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="41.00" y="181.40" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >Muovi: non ti muovi;</text>
+<text x="41.00" y="184.70" font-family="Liberation Sans Narrow" font-size="2.80" fill="#2a2118" text-anchor="middle" >esplori dove sei.</text>
 <rect x="28.00" y="170.00" width="26.0" height="18.0" rx="1.2" fill="none" stroke="#222222" stroke-width="0.12" opacity="0.8"/>
 <g id="tacche-stati"><line x1="28.00" y1="18.50" x2="28.00" y2="22.00" stroke="#000" stroke-width="0.15"/><line x1="28.00" y1="192.00" x2="28.00" y2="195.50" stroke="#000" stroke-width="0.15"/><line x1="54.00" y1="18.50" x2="54.00" y2="22.00" stroke="#000" stroke-width="0.15"/><line x1="54.00" y1="192.00" x2="54.00" y2="195.50" stroke="#000" stroke-width="0.15"/><line x1="60.00" y1="18.50" x2="60.00" y2="22.00" stroke="#000" stroke-width="0.15"/><line x1="60.00" y1="192.00" x2="60.00" y2="195.50" stroke="#000" stroke-width="0.15"/><line x1="86.00" y1="18.50" x2="86.00" y2="22.00" stroke="#000" stroke-width="0.15"/><line x1="86.00" y1="192.00" x2="86.00" y2="195.50" stroke="#000" stroke-width="0.15"/><line x1="92.00" y1="18.50" x2="92.00" y2="22.00" stroke="#000" stroke-width="0.15"/><line x1="92.00" y1="192.00" x2="92.00" y2="195.50" stroke="#000" stroke-width="0.15"/><line x1="118.00" y1="18.50" x2="118.00" y2="22.00" stroke="#000" stroke-width="0.15"/><line x1="118.00" y1="192.00" x2="118.00" y2="195.50" stroke="#000" stroke-width="0.15"/><line x1="124.00" y1="18.50" x2="124.00" y2="22.00" stroke="#000" stroke-width="0.15"/><line x1="124.00" y1="192.00" x2="124.00" y2="195.50" stroke="#000" stroke-width="0.15"/><line x1="150.00" y1="18.50" x2="150.00" y2="22.00" stroke="#000" stroke-width="0.15"/><line x1="150.00" y1="192.00" x2="150.00" y2="195.50" stroke="#000" stroke-width="0.15"/><line x1="156.00" y1="18.50" x2="156.00" y2="22.00" stroke="#000" stroke-width="0.15"/><line x1="156.00" y1="192.00" x2="156.00" y2="195.50" stroke="#000" stroke-width="0.15"/><line x1="182.00" y1="18.50" x2="182.00" y2="22.00" stroke="#000" stroke-width="0.15"/><line x1="182.00" y1="192.00" x2="182.00" y2="195.50" stroke="#000" stroke-width="0.15"/><line x1="20.50" y1="26.00" x2="24.00" y2="26.00" stroke="#000" stroke-width="0.15"/><line x1="186.00" y1="26.00" x2="189.50" y2="26.00" stroke="#000" stroke-width="0.15"/><line x1="20.50" y1="44.00" x2="24.00" y2="44.00" stroke="#000" stroke-width="0.15"/><line x1="186.00" y1="44.00" x2="189.50" y2="44.00" stroke="#000" stroke-width="0.15"/><line x1="20.50" y1="50.00" x2="24.00" y2="50.00" stroke="#000" stroke-width="0.15"/><line x1="186.00" y1="50.00" x2="189.50" y2="50.00" stroke="#000" stroke-width="0.15"/><line x1="20.50" y1="68.00" x2="24.00" y2="68.00" stroke="#000" stroke-width="0.15"/><line x1="186.00" y1="68.00" x2="189.50" y2="68.00" stroke="#000" stroke-width="0.15"/><line x1="20.50" y1="74.00" x2="24.00" y2="74.00" stroke="#000" stroke-width="0.15"/><line x1="186.00" y1="74.00" x2="189.50" y2="74.00" stroke="#000" stroke-width="0.15"/><line x1="20.50" y1="92.00" x2="24.00" y2="92.00" stroke="#000" stroke-width="0.15"/><line x1="186.00" y1="92.00" x2="189.50" y2="92.00" stroke="#000" stroke-width="0.15"/><line x1="20.50" y1="98.00" x2="24.00" y2="98.00" stroke="#000" stroke-width="0.15"/><line x1="186.00" y1="98.00" x2="189.50" y2="98.00" stroke="#000" stroke-width="0.15"/><line x1="20.50" y1="116.00" x2="24.00" y2="116.00" stroke="#000" stroke-width="0.15"/><line x1="186.00" y1="116.00" x2="189.50" y2="116.00" stroke="#000" stroke-width="0.15"/><line x1="20.50" y1="122.00" x2="24.00" y2="122.00" stroke="#000" stroke-width="0.15"/><line x1="186.00" y1="122.00" x2="189.50" y2="122.00" stroke="#000" stroke-width="0.15"/><line x1="20.50" y1="140.00" x2="24.00" y2="140.00" stroke="#000" stroke-width="0.15"/><line x1="186.00" y1="140.00" x2="189.50" y2="140.00" stroke="#000" stroke-width="0.15"/><line x1="20.50" y1="146.00" x2="24.00" y2="146.00" stroke="#000" stroke-width="0.15"/><line x1="186.00" y1="146.00" x2="189.50" y2="146.00" stroke="#000" stroke-width="0.15"/><line x1="20.50" y1="164.00" x2="24.00" y2="164.00" stroke="#000" stroke-width="0.15"/><line x1="186.00" y1="164.00" x2="189.50" y2="164.00" stroke="#000" stroke-width="0.15"/><line x1="20.50" y1="170.00" x2="24.00" y2="170.00" stroke="#000" stroke-width="0.15"/><line x1="186.00" y1="170.00" x2="189.50" y2="170.00" stroke="#000" stroke-width="0.15"/><line x1="20.50" y1="188.00" x2="24.00" y2="188.00" stroke="#000" stroke-width="0.15"/><line x1="186.00" y1="188.00" x2="189.50" y2="188.00" stroke="#000" stroke-width="0.15"/></g>
 <circle cx="76.00" cy="232.00" r="29.00" fill="#cf908a"/><circle cx="76.00" cy="232.00" r="26.00" fill="#a8352a"/><circle cx="76.00" cy="232.00" r="24.60" fill="none" stroke="#e8cd8f" stroke-width="0.3" opacity="0.9"/><circle cx="97.304" cy="219.700" r="0.450" fill="#e8cd8f"/><circle cx="97.304" cy="244.300" r="0.450" fill="#e8cd8f"/><circle cx="76.000" cy="256.600" r="0.450" fill="#e8cd8f"/><circle cx="54.696" cy="244.300" r="0.450" fill="#e8cd8f"/><circle cx="54.696" cy="219.700" r="0.450" fill="#e8cd8f"/><rect x="70.50" y="207.50" width="11.0" height="9.0" fill="#ffffff" stroke="#222222" stroke-width="0.25"/><line x1="71.70" y1="208.70" x2="80.30" y2="215.30" stroke="#bbbbbb" stroke-width="0.15"/><line x1="80.30" y1="208.70" x2="71.70" y2="215.30" stroke="#bbbbbb" stroke-width="0.15"/><path d="M69.80 212.00L67.40 210.60L67.40 213.40Z" fill="#ffffff"/><path d="M82.20 212.00L84.60 210.60L84.60 213.40Z" fill="#ffffff"/><path d="M62.72 213.72A22.6 22.6 0 0 0 54.28 225.77" fill="none" stroke="#ffffff" stroke-width="0.55" stroke-linecap="round"/><path d="M53.71 223.74L54.28 225.77L55.83 224.34" fill="none" stroke="#ffffff" stroke-width="0.55" stroke-linecap="round" stroke-linejoin="round"/><text x="62.40" y="223.28" font-family="Liberation Sans Narrow" font-size="2.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >gira</text><path d="M89.28 213.72A22.6 22.6 0 0 1 97.72 225.77" fill="none" stroke="#ffffff" stroke-width="0.55" stroke-linecap="round"/><path d="M98.29 223.74L97.72 225.77L96.17 224.34" fill="none" stroke="#ffffff" stroke-width="0.55" stroke-linecap="round" stroke-linejoin="round"/><text x="89.60" y="223.28" font-family="Liberation Sans Narrow" font-size="2.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >gira</text><circle cx="76.00" cy="232.00" r="5" fill="none" stroke="#ffffff" stroke-width="0.25" stroke-dasharray="0.9 0.7"/><circle cx="76.00" cy="232.00" r="1.1" fill="#ffffff"/><line x1="74.40" y1="232.00" x2="77.60" y2="232.00" stroke="#2a2118" stroke-width="0.18"/><line x1="76.00" y1="230.40" x2="76.00" y2="233.60" stroke="#2a2118" stroke-width="0.18"/><text x="76.00" y="224.40" font-family="Liberation Sans Narrow" font-size="2.30" fill="#ffffff" text-anchor="middle" >plancia di gioco</text><text x="76.00" y="243.20" font-family="Liberation Sans Narrow" font-size="5.40" fill="#ffffff" text-anchor="middle" font-weight="bold" >PV del mostro</text><text x="76.00" y="247.40" font-family="Liberation Sans Narrow" font-size="2.60" fill="#ffffff" text-anchor="middle" >Rotella dello scontro</text><g transform="translate(74.00,250.40) scale(0.16666666666666666)"><path d="M12 3a8 8 0 0 0-8 8c0 3 1.5 4.5 3 5.5V20h10v-3.5c1.5-1 3-2.5 3-5.5a8 8 0 0 0-8-8z" fill="#ffffff"/><circle cx="9" cy="11" r="2" fill="#f4ead5"/><circle cx="15" cy="11" r="2" fill="#f4ead5"/></g>

@@ -2,7 +2,7 @@
 <rect x="6.5" y="6.5" width="284.0" height="407.0" fill="none" stroke="#000000" stroke-width="0.25"/>
 <text x="148.50" y="11.00" font-family="Liberation Sans Narrow" font-size="3.00" fill="#6b4a2b" text-anchor="middle" >↑ alto (lato corto di ingresso)</text>
 <text x="148.50" y="21.00" font-family="Liberation Serif" font-size="6.00" fill="#000000" text-anchor="middle" font-weight="bold" >Prova di stampa A3 · Il Tesoro del Goblin</text>
-<text x="148.50" y="27.00" font-family="Liberation Sans Narrow" font-size="3.20" fill="#6b4a2b" text-anchor="middle" >Un solo foglio A3, SOLO FRONTE: tutto il kit v7 si stampa solo fronte</text>
+<text x="148.50" y="27.00" font-family="Liberation Sans Narrow" font-size="3.20" fill="#6b4a2b" text-anchor="middle" >Un solo foglio A3, SOLO FRONTE: il kit v7 è solo fronte, tranne i fiori della mappa (mappa_fiori.pdf)</text>
 <text x="20.00" y="49.00" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="start" font-weight="bold" >Righello: 100 mm esatti tra lo 0 e il 10</text>
 <line x1="20.00" y1="58.00" x2="120.00" y2="58.00" stroke="#000000" stroke-width="0.25"/>
 <line x1="20.00" y1="58.00" x2="20.00" y2="63.00" stroke="#000000" stroke-width="0.2"/>
@@ -121,11 +121,11 @@
 <rect x="232" y="35" width="50" height="50" fill="none" stroke="#000000" stroke-width="0.4"/>
 <text x="257.00" y="61.00" font-family="Liberation Sans Narrow" font-size="3.60" fill="#000000" text-anchor="middle" font-weight="bold" >50 × 50 mm</text>
 <text x="257.00" y="67.00" font-family="Liberation Sans Narrow" font-size="2.80" fill="#6b4a2b" text-anchor="middle" >misura i lati</text>
-<text x="20.00" y="104.00" font-family="Liberation Sans Narrow" font-size="3.50" fill="#000000" text-anchor="start" >1. Stampa al 100% («Dimensioni effettive», MAI «Adatta alla pagina»), carta A3, SOLO FRONTE (niente fronte-retro, nemmeno manuale).</text>
+<text x="20.00" y="104.00" font-family="Liberation Sans Narrow" font-size="3.50" fill="#000000" text-anchor="start" >1. Stampa al 100% («Dimensioni effettive», MAI «Adatta alla pagina»), carta A3, SOLO FRONTE. Unica eccezione: mappa_fiori.pdf, fronte e retro a mano (le istruzioni sono sui fogli).</text>
 <text x="20.00" y="110.58" font-family="Liberation Sans Narrow" font-size="3.50" fill="#000000" text-anchor="start" >2. Scala: misura il righello (100 mm tra 0 e 10) e il quadrato (50 mm). Va bene entro ±1 mm. Se no, disattiva «adatta/riduci» e ristampa.</text>
 <text x="20.00" y="117.15" font-family="Liberation Sans Narrow" font-size="3.50" fill="#000000" text-anchor="start" >3. Margini: il riquadro sottile a 6,5 mm dal bordo deve vedersi su tutti e 4 i lati. Se manca un lato la stampante taglia il margine: carte, plance e tacche stanno oltre i 6,5 mm.</text>
 <text x="20.00" y="123.73" font-family="Liberation Sans Narrow" font-size="3.50" fill="#000000" text-anchor="start" >Se tutto torna, stampa il resto del kit nell’ordine dell’elenco qui sotto. Le carte e i loro dorsi sono su fogli separati: si uniscono a mano (colla stick o bustina).</text>
-<text x="20.00" y="136.30" font-family="Liberation Sans Narrow" font-size="3.40" fill="#000000" text-anchor="start" font-weight="bold" >File del kit A3 (fogli, tutti solo fronte)</text>
+<text x="20.00" y="136.30" font-family="Liberation Sans Narrow" font-size="3.40" fill="#000000" text-anchor="start" font-weight="bold" >File del kit A3 (fogli)</text>
 <text x="24.00" y="142.30" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="start" >00_prova_stampa.pdf</text><text x="273.00" y="142.30" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="end" >1</text>
 <line x1="24.00" y1="143.60" x2="273.00" y2="143.60" stroke="#999999" stroke-width="0.1"/>
 <text x="24.00" y="147.50" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="start" >carte_comuni.pdf + carte_comuni_retri.pdf</text><text x="273.00" y="147.50" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="end" >6 + 6</text>
@@ -148,9 +148,9 @@
 <line x1="24.00" y1="190.40" x2="273.00" y2="190.40" stroke="#999999" stroke-width="0.1"/>
 <text x="24.00" y="194.30" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="start" >tessere_esplorazione.pdf (e tessere Stato, Profezia)</text><text x="273.00" y="194.30" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="end" >1</text>
 <line x1="24.00" y1="195.60" x2="273.00" y2="195.60" stroke="#999999" stroke-width="0.1"/>
-<text x="24.00" y="199.50" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="start" >tessere_mappa.pdf (162 esagoni, Sala del Tesoro, 24 muri)</text><text x="273.00" y="199.50" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="end" >2</text>
+<text x="24.00" y="199.50" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="start" >sala_tesoro.pdf (Sala del Tesoro, A3 orizzontale)</text><text x="273.00" y="199.50" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="end" >1</text>
 <line x1="24.00" y1="200.80" x2="273.00" y2="200.80" stroke="#999999" stroke-width="0.1"/>
-<text x="24.00" y="204.70" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="start" >preset_mappa.pdf (10 schemi, carta comune)</text><text x="273.00" y="204.70" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="end" >10</text>
+<text x="24.00" y="204.70" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="start" >mappa 12×12: si stampa dai PDF A4 (mappa_base, mappa_fiori, mappa_preset)</text><text x="273.00" y="204.70" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="end" >0</text>
 <line x1="24.00" y1="206.00" x2="273.00" y2="206.00" stroke="#999999" stroke-width="0.1"/>
-<text x="273.00" y="211.40" font-family="Liberation Sans Narrow" font-size="3.40" fill="#000000" text-anchor="end" font-weight="bold" >Totale: 54 fogli A3</text>
+<text x="273.00" y="211.40" font-family="Liberation Sans Narrow" font-size="3.40" fill="#000000" text-anchor="end" font-weight="bold" >Totale: 43 fogli A3</text>
 </svg>

@@ -1,0 +1,66 @@
+{
+  "nota": "colore piatto di ogni terreno nelle guide; 'sfondo' = pergamena fuori dal fiore e negli spazi dei fiori della base",
+  "linee": "#1a1a1a, 1 px sui lati degli esagoni",
+  "colori": {
+    "prato": {
+      "hex": "#a8e063",
+      "en": "meadow",
+      "categoria": "libero"
+    },
+    "sentiero": {
+      "hex": "#c9954a",
+      "en": "dirt path",
+      "categoria": "libero"
+    },
+    "mattonato": {
+      "hex": "#e0763c",
+      "en": "brick paving",
+      "categoria": "libero"
+    },
+    "pavimento": {
+      "hex": "#b7b0d6",
+      "en": "stone pavers",
+      "categoria": "libero"
+    },
+    "guado": {
+      "hex": "#5fd3d0",
+      "en": "ford (stepping stones across water)",
+      "categoria": "acqua"
+    },
+    "ponte": {
+      "hex": "#7b4a21",
+      "en": "wooden bridge over water",
+      "categoria": "acqua"
+    },
+    "acqua": {
+      "hex": "#2a62c9",
+      "en": "water",
+      "categoria": "acqua"
+    },
+    "bosco": {
+      "hex": "#1b5e2f",
+      "en": "forest",
+      "categoria": "ostacolo-bosco"
+    },
+    "rocce": {
+      "hex": "#6b6b6b",
+      "en": "boulders",
+      "categoria": "ostacolo-rocce"
+    },
+    "case": {
+      "hex": "#b8322a",
+      "en": "village houses",
+      "categoria": "ostacolo-case"
+    },
+    "partenza": {
+      "hex": "#f4d21f",
+      "en": "start hex",
+      "categoria": "libero"
+    },
+    "sfondo": {
+      "hex": "#f1dcae",
+      "en": "neutral parchment background / flower slot",
+      "categoria": "sfondo"
+    }
+  }
+}

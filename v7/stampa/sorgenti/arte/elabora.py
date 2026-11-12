@@ -201,7 +201,8 @@ def main():
     cli_y = posizione(a.posizione_y, Y_PAROLE) if a.posizione_y else (0.0 if a.alto else 1.0 if a.basso else None)
 
     ritagli = {r["id"]: r for r in leggi(RITAGLI)} if RITAGLI.is_file() else {}
-    ids = sorted({p.stem for p in GREZZE.iterdir() if p.suffix in (".webp", ".png")}) if a.tutti else a.id
+    # MF-* e MB-* (mappa 12x12) li compone mappa_compone.py: allineamento alla guida e ritaglio sul contorno
+    ids = sorted({p.stem for p in GREZZE.iterdir() if p.suffix in (".webp", ".png") and not p.stem.startswith(("MF-", "MB-"))}) if a.tutti else a.id
     fatte = saltate = 0
     senza_tipo = []
     for i in ids:

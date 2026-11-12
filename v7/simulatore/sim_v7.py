@@ -5,7 +5,7 @@ Uso (dalla radice del repository):
   python3 v7/simulatore/sim_v7.py --partite 2000 --seme 1            # base v7 (D18, D19)
   python3 v7/simulatore/sim_v7.py --partite 2000 --seme 1 --op1      # una opzione di R 7.12
 Opzioni: --op1 --op2 --op5 (R 7.12); confronti con la v6: --ar-v6 (AR dei mostri v6), --indizio-lv (D6 <= LV);
-varianti del §16: --dado-sommato (N6), --chi-tira-non-risponde (N1), --penalita-meno (N2).
+montaggio: --preset (preset «Strettoie» invece del draft, D24); varianti del §16: --dado-sommato (N6), --chi-tira-non-risponde (N1), --penalita-meno (N2).
 --giocatori 2,3,4 (default: tutti e tre, come il simulatore v6), --processi N.
 Solo libreria standard."""
 import argparse
@@ -19,7 +19,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import carte as K          # noqa: E402
 import regole as R         # noqa: E402
 
-FLAG = ('op1', 'op2', 'op5', 'ar_v6', 'indizio_lv', 'dado_sommato', 'chi_tira_non_risponde', 'penalita_meno')
+FLAG = ('op1', 'op2', 'op5', 'preset', 'ar_v6', 'indizio_lv', 'dado_sommato', 'chi_tira_non_risponde', 'penalita_meno')
 
 
 def una_partita(arg):
@@ -65,6 +65,8 @@ def rapporto_n(n, ris):
         rt = [x['round_tesoro'] for x in fin if x['round_tesoro']]
         r.append(f"Round del 3° Indizio (tesoro individuato): media {_media(rt):.1f}; tentativi sul custode per "
                  f"partita {st['tentativi_custode'] / N:.2f}")
+    r.append(f"Movimento per turno: tirato {st['mov_tirato'] / st['turni']:.2f}, speso (passi fatti, con i costi) "
+             f"{st['mov_speso'] / st['turni']:.2f}")
     pres, vit, presd, vitd = Counter(), Counter(), Counter(), Counter()
     for x in ris:
         for c, d in x['eroi']:
@@ -96,7 +98,7 @@ def rapporto_n(n, ris):
     r.append(f"Scontri per partita {sc / N:.1f}: mazzetto 1 {st['scontri_mazzetto_1'] / sc:.1%}, mazzetto 2 "
              f"{st['scontri_mazzetto_2'] / sc:.1%}, mazzetto 3 {st['scontri_mazzetto_3'] / sc:.1%}, custode "
              f"{st['scontri_custode'] / sc:.1%}; vinti {st['esito_vinto'] / sc:.1%}, persi {st['esito_perso'] / sc:.1%}, "
-             f"fughe {st['esito_fuga'] / sc:.1%} (comprese quelle del mostro, NE-29: {st['mostri_scappati'] / sc:.1%})")
+             f"fughe {st['esito_fuga'] / sc:.1%}, il mostro scappa dopo il 3° attacco {st['esito_fuga_mostro'] / sc:.1%} (fughe comprese quelle del mostro, NE-29: {st['mostri_scappati'] / sc:.1%})")
     r.append(f"Catene: aperte da carte {st['catene_carta'] / N:.1f} a partita, con risposte "
              f"{st['catene_carta_risposte'] / max(1, st['catene_carta']):.1%}; aperte da tiri {st['catene_tiro'] / N:.1f}, "
              f"con risposte {st['catene_tiro_risposte'] / max(1, st['catene_tiro']):.1%}; in tutto "
@@ -113,9 +115,12 @@ def rapporto_n(n, ris):
              f"{st['profezie'] / N:.2f} (indovinate {st['profezie_indovinate'] / max(1, st['profezie']):.0%})")
     cambi = [x['st']['cambi_plancia'] + x['st']['cambi_plancia_base'] for x in ris]
     r.append(f"Cambi di plancia (R 8.12) {_media(cambi):.2f} a partita (verso una Mappa {st['cambi_plancia'] / N:.2f}, "
-             f"ritorni alla base con TI-22/TI-33/CR-15 {st['cambi_plancia_base'] / N:.2f}); partite con almeno un cambio "
+             f"ritorni al montaggio con TI-22/TI-33/CR-15 {st['cambi_plancia_base'] / N:.2f}); partite con almeno un cambio "
              f"{sum(c > 0 for c in cambi) / N:.0%}; scontri annullati {st['scontri_annullati'] / N:.2f} "
              f"(col custode {st['custode_annullato'] / N:.2f}), Duelli annullati {st['duelli_annullati'] / N:.2f}")
+    r.append(f"Cripta (D24): {st['cripta_tirata'] / N:.2f} tiri a partita; spostata dal punto tirato (ostacolo o Partenza) "
+             f"{st['cripta_spostata'] / max(1, st['cripta_tirata']):.0%}; caduta su un «?» (resta, il «?» va in riserva) "
+             f"{st['cripta_su_domanda'] / N:.2f} a partita")
     r.append("Poteri usati per partita in cui la classe gioca: " + ', '.join(
         f"{c} {st['potere_' + c] / pres[c]:.2f}" for c in K.CLASSI if pres[c]))
     r.append(f"Giocate di carte con effetto non modellato (info): {st['info'] / N:.2f} a partita "

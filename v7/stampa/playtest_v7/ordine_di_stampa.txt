@@ -1,5 +1,5 @@
-Il Tesoro del Goblin - kit di playtest v7 (11/11/2026) - ordine di stampa A4
-Tutto SOLO FRONTE, scala 100 %, carta A4, 1 pagina = 1 foglio. Percorsi relativi a v7/stampa/playtest_v7/.
+Il Tesoro del Goblin - kit di playtest v7 (12/11/2026) - ordine di stampa A4
+Tutto SOLO FRONTE, scala 100 %, carta A4, 1 pagina = 1 foglio, tranne mappa_fiori.pdf (fronte/retro, vedi sotto). Percorsi relativi a v7/stampa/playtest_v7/.
 Carta: "comune" = 80 g; "cartoncino" = 160-200 g.
 Regole: v7/regolamento/Spec_v7.md. Il regolamento per i giocatori (v7/regolamento/Regolamento_playtest_v7.docx)
 si esporta in PDF solo dopo l'approvazione: non è in questo elenco.
@@ -24,11 +24,14 @@ contro dorso.
 14  segnalini.pdf                            2  cartoncino (segnalini; 31 tessere Stato e dischi del tavolo)
 15  tessere_esplorazione.pdf                 1  cartoncino
 16  pedine.pdf                               2  cartoncino (eroi, MIMI, Geronimo, 6 Boss; Rotella della Profezia sul foglio 2)
-17  tessere_mappa.pdf                        3  cartoncino (162 tessere esagonali della mappa, 54 per foglio)
-18  sala_tesoro.pdf                          1  cartoncino (Sala del Tesoro in 2 pezzi da unire; 24 muri)
-19  preset_mappa.pdf                        10  comune (10 schemi: plancia base «Strettoie» e TM-01...TM-09)
+17  mappa_base.pdf                          2  cartoncino 250-300 g (base della mappa 12x12 in 2 meta' da unire col nastro)
+18  mappa_fiori.pdf                          6  cartoncino 250-300 g, FRONTE/RETRO a mano: 3 fogli (14 fiori, 24 segnaposto «?», Cripta)
+19  sala_tesoro.pdf                          1  cartoncino (Sala del Tesoro in 2 pezzi da unire)
+20  mappa_preset.pdf                        10  comune (10 schemi: «Strettoie» e TM-01...TM-09, con i 3 fiori del cambio)
 
-Fogli da stampare: 87, tutte le pagine dei PDF (comune 11 = prova 1 + 10 schemi dei preset; cartoncino 76).
-La mappa si compone con le tessere esagonali (11/11): ogni foglio di preset_mappa.pdf e' lo schema di una plancia (la base
-e una per carta Mappa, R 8.12) con le tessere che servono e i passi di montaggio; in playtest le tessere si compongono
-anche liberamente. Le plance intere non si stampano piu' (si rifanno con build.sh ... --plance, vedi ../LEGGIMI.md).
+Fogli da stampare: 89 (92 pagine): cartoncino 78, comune 11 = prova 1 + 10 schemi dei preset.
+mappa_fiori.pdf (D24, Epson ET-2870 senza fronte-retro automatico): stampa la pagina 1 (fronte del foglio 1), rimetti
+il foglio nel cassetto girato sul LATO LUNGO e stampa la pagina 2 (retro); poi 3-4 e 5-6 allo stesso modo. Prova prima
+con carta comune e guarda in controluce: il contorno del fronte deve cadere dentro l'abbondanza di 2 mm del retro.
+La mappa 12x12 (12/11): base con le 6 Partenze, 14 fiori a due facce posati con il draft o con un preset (mappa_preset.pdf).
+Tessere esagonali singole, muri e plance intere non ci sono piu'.

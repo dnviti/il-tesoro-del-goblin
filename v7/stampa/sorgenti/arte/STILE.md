@@ -44,3 +44,22 @@ La battuta resta sulla carta, in corsivo in fondo al testo sotto un filetto (non
 
 - `formati.csv`: tipo, misura in mm e in px a 300 ppi di ogni riquadro, con il punto del generatore che lo disegna.
 - `python3 elabora.py <id> [--tipo <tipo>] [--alto|--basso|--sinistra|--destra] [--zoom Z]` rifà una illustrazione; `--tutti` elabora ogni `grezze/*.png` con tipo noto e salta quelle già fatte (`--forza` le rifà). Posizione e zoom del ritaglio per id in `ritagli.csv` (colonne `id,tipo,orizzontale,verticale,zoom`): le grezze 16:9 delle carte usano già tutta l'altezza, quindi la posizione verticale conta solo con zoom > 1, che serve a togliere la fascia pergamena vuota in fondo alle grezze fatte per la vecchia fascetta della battuta. Dettagli in testa allo script.
+
+## Mappa 12×12 (12/11): terreno generato su guide
+
+Il terreno dei 14 fiori (28 facce) e della base è generato con gpt-image-2 a partire da guide piatte (`mappa_guide/`: `MF-<NN><A|B>.png` 1024 × 1024, `MB-NO|NE|SO|SE.png` 1536 × 1024, palette, geometria e `prompt.csv` in `mappa_guide/LEGGIMI.md`). Dati e geometria sono quelli del kit (`dati/fiori.csv`, `base12.csv`), per questo i terreni non si possono sbagliare di posto: si controllano con `mappa_compone.py --verifica`.
+
+Flusso: `grezze/MF-*.webp` e `grezze/MB-*.webp` (come escono dal generatore; la misura può essere diversa dalla guida, per esempio 1254 × 1254, ma la stessa proporzione) → `python3 mappa_compone.py` (allinea alla guida con scala e traslazione piccole, ritaglia sul contorno + 2 mm di abbondanza, quarti della base cuciti lungo i lati degli esagoni, look condiviso di `elabora.py`) → `png/MF-<NN><A|B>.png` (941 × 914 px, 300 ppi) e `png/MB-BASE.png` (3721 × 3180 px) → `componenti_gen/fiori12.py` li usa come fondo di fiori e base se ci sono (altrimenti resta il vettoriale); sopra restano bordi sottili, bordo degli ostacoli, «+1» dell'acqua, Partenze, freccia, id, coordinate e spazi numerati. I fogli dei preset restano vettoriali. `elabora.py --tutti` salta MF-* e MB-*.
+
+Comandi (dalla radice del repo):
+
+```
+python3 v7/stampa/sorgenti/arte/mappa_compone.py --verifica   # terreni: esce con 1 se un esagono non somiglia al dato
+python3 v7/stampa/sorgenti/arte/mappa_compone.py              # allinea, ritaglia, scrive arte/png/MF-*.png e MB-BASE.png
+python3 v7/stampa/sorgenti/arte/mappa_compone.py --verifica-pdf  # contorno dell'arte sui PDF: vuoti dentro, arte fuori (anche in verifica_pdf.py)
+bash v7/stampa/sorgenti/componenti_gen/build.sh v7/stampa/sorgenti v7/stampa/playtest_v7   # kit: mappa_base, mappa_fiori, ...
+python3 v7/stampa/3d_solidcraft/carta_fiori_3d.py              # carta_fiori_3d.pdf (variante 3D)
+python3 v7/stampa/sorgenti/verifica_pdf.py                     # controlli di stampa
+```
+
+Contorno degli esagoni (12/11, difetto sulla base): il modello disegna ogni esagono vicino alla guida ma non esatto (bordi spostati fino a ~1,3 mm, a volte un cordolo color pergamena dentro il bordo). `mappa_compone.py` adatta quindi ogni esagono (scala e traslazione sul suo bordo scuro), scarta il bordo del modello e il cordolo, e ritaglia l'arte esattamente sul contorno vettoriale (+0,1 mm sotto la linea); la linea sottile è l'unico contorno. `--verifica-pdf` rende i PDF a 300 dpi e controlla ogni lato (vuoto dentro, arte fuori).

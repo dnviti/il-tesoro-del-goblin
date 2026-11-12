@@ -1,4 +1,4 @@
-import math, os, re
+import math
 INK='#2a2118'; BROWN='#6b4a2b'; RED='#9c2f24'; GOLD='#b8862b'; BLUE='#2f5d7c'
 LINE='#b9a582'; PAPER='#f4ead5'
 
@@ -115,59 +115,11 @@ def dial_ring(cx,cy,vals,k=1.0,mh=4.5,sf=2.0,gap=0.6,gold=(),red=(),col=INK,hole
     o.append('</g>')
     return ''.join(o)
 
-# ---------- board (plancia v7) ----------
-# La mappa v7 è la bozza v7/idee/v7_bozza_mappa.svg (D16: esempio per il playtest, linee di strada comprese). La bozza usa
-# la stessa griglia e la stessa cornice della plancia v6 (10 x 10 esagoni, W = 26, viewBox 366,6 x 461,5): dal suo gruppo
-# «plancia-v7» si prendono esagoni, terreno, strade, muri, Partenze, Cripte, «?», coordinate e Promemoria; il fondo e la
-# fascia della Sala del Tesoro (lì solo segnaposto tratteggiati) si ridisegnano come nella v6, con le corone vere delle
-# rotelle del tavolo e i cerchi «Spostamenti del tesoro». La legenda a destra della bozza non è sulla plancia.
-# board(bozza=...) prende la mappa da un'altra plancia scritta da genera_bozza_mappa.py (es. una plancia per carta Mappa,
-# --tema con le tessere illustrate): la fascia illustrata della Sala (riga con id="fondo-sala") resta sotto la Sala.
-BOZZA_V7=os.path.join(os.path.dirname(os.path.abspath(__file__)),'..','..','..','idee','v7_bozza_mappa.svg')
-SALA_Y=104.0   # nella bozza la fascia della Sala del Tesoro finisce sopra y 104 (mappa e Promemoria stanno sotto)
-_Y=re.compile(r'\b(?:y|cy|y1)="(-?[\d.]+)"|points="[\d.]+,([\d.]+)|\bd="M\s*[\d.]+[ ,]([\d.]+)')
-_HREF=re.compile(r'\bhref="([^"#:]+)"')   # immagini con percorso relativo alla bozza (non data:, non #id)
-
-def mappa_bozza(path=BOZZA_V7, cartella=None):
-    """elementi del gruppo «plancia-v7» della bozza senza il fondo e senza la fascia della Sala del Tesoro (prima
-    coordinata y di ogni riga < SALA_Y), tranne la sua illustrazione (id="fondo-sala"). Ogni riga della bozza è un
-    elemento o un gruppo di elementi della stessa casella. Le immagini, relative alla cartella della bozza, diventano
-    relative a `cartella` (la cartella dell'SVG che conterrà la plancia) o assolute se cartella è None."""
-    s=open(path,encoding='utf-8').read()
-    corpo=s.split('<g id="plancia-v7">',1)[1].split('</g>',1)[0]
-    assert '<g' not in corpo, 'bozza v7: gruppi annidati in plancia-v7'
-    righe=[]
-    for r in corpo.strip().split('\n'):
-        if r.startswith('<rect x="1" y="1"'): continue          # fondo della plancia, ridisegnato da board()
-        m=_Y.search(r); y=float(next(g for g in m.groups() if g is not None))
-        if y>SALA_Y or 'id="fondo-sala"' in r: righe.append(r)
-    out='\n'.join(righe).replace('font-family="serif"','font-family="Cinzel"')
-    assert out.count('>?</text>')==20 and out.count('>Promemoria<')==1, 'bozza v7: attese 20 caselle «?» e il Promemoria'
-    base=os.path.dirname(os.path.abspath(path))
-    def href(m):
-        f=os.path.normpath(os.path.join(base,m.group(1)))
-        assert os.path.isfile(f), f'bozza {path}: immagine mancante {f}'
-        return f'href="{os.path.relpath(f,cartella) if cartella else f}"'
-    return _HREF.sub(href,out)
-
-def board(W=26, mm=0.97, bozza=BOZZA_V7, cartella=None):
-    # mm = millimetri stampati per unità del disegno (la plancia si stampa in scala 0,97): rotelle e cerchi in mm veri
-    # bozza: SVG di genera_bozza_mappa.py da cui prendere la mappa; cartella: vedi mappa_bozza()
-    R=W/math.sqrt(3); step=1.5*R
-    mapw=W*10.5; maph=9*step+2*R
-    pad=W*1.8; top=W*4.5; bottom=W*4.3
-    bw=mapw+2*pad; bh=maph+top+bottom
-    o=[f'<svg viewBox="0 0 {bw:.1f} {bh:.1f}" xmlns="http://www.w3.org/2000/svg" font-family="Alegreya Sans">']
-    o.append(f'<rect x="1" y="1" width="{bw-2:.1f}" height="{bh-2:.1f}" rx="{W*0.5}" fill="#efe1c3" stroke="{BROWN}" stroke-width="2"/>')
-    o.append(mappa_bozza(bozza, cartella))
-    o += sala_tesoro(bw, W, mm)
-    o.append('</svg>')
-    return '\n'.join(o)
-
+# ---------- Sala del Tesoro ----------
 def sala_tesoro(bw, W=26, mm=0.97):
-    """elementi della fascia della Sala del Tesoro (larga bw unità del disegno, alta SALA_Y): titolo, cerchi di Custode,
-    MIMI e Boss, corone 0-9 delle rotelle del tavolo e cerchi «Spostamenti del tesoro». La disegnano board() (plancia
-    intera) e gen.py sala() (la Sala come pezzo a parte, per la mappa a tessere)."""
+    """elementi della fascia della Sala del Tesoro (larga bw unità del disegno, alta circa 104): titolo, cerchi di Custode,
+    MIMI e Boss, corone 0-9 delle rotelle del tavolo e cerchi «Spostamenti del tesoro». La disegna gen.py sala_disegno()
+    (la Sala come pezzo a parte, accanto alla mappa)."""
     o=[]
     o.append(f'<text x="{bw/2:.1f}" y="{W*0.95:.1f}" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="{W*0.55:.1f}" fill="{BROWN}">Sala del Tesoro</text>')
     cy=W*1.75

@@ -1,4 +1,4 @@
-Il Tesoro del Goblin - kit di playtest v7 (11/11/2026) - ordine di stampa A3
+Il Tesoro del Goblin - kit di playtest v7 (12/11/2026) - ordine di stampa A3
 Tutto SOLO FRONTE, scala 100 %, carta A3 (297 x 420 mm), 1 pagina = 1 foglio. Percorsi relativi a v7/stampa/playtest_v7_A3/.
 Carta: "comune" = 80 g; "cartoncino" = 160-200 g.
 Regole: v7/regolamento/Spec_v7.md. Il regolamento per i giocatori (v7/regolamento/Regolamento_playtest_v7.docx)
@@ -23,10 +23,8 @@ contro dorso.
 13  rotelle_eroe.pdf                         1  cartoncino (24 dischi eroe + 2 del tavolo)
 14  componenti_misti.pdf                     1  cartoncino (pedine con 6 Boss, segnalini)
 15  tessere_esplorazione.pdf                 1  cartoncino (con le 31 tessere Stato e la Rotella della Profezia)
-16  tessere_mappa.pdf                        2  cartoncino (162 tessere esagonali della mappa; foglio 2 con la Sala del Tesoro e 24 muri)
-17  preset_mappa.pdf                        10  comune (10 schemi: plancia base «Strettoie» e TM-01...TM-09)
+16  sala_tesoro.pdf                          1  cartoncino (Sala del Tesoro in un pezzo, A3 orizzontale)
 
-Fogli da stampare: 54, tutte le pagine dei PDF (comune 11 = prova 1 + 10 schemi dei preset; cartoncino 43).
-La mappa si compone con le tessere esagonali (11/11): ogni foglio di preset_mappa.pdf e' lo schema di una plancia (la base
-e una per carta Mappa, R 8.12) con le tessere che servono e i passi di montaggio; in playtest le tessere si compongono
-anche liberamente. Le plance intere non si stampano piu' (si rifanno con build.sh ... --plance, vedi ../LEGGIMI.md).
+Fogli da stampare: 43 A3 (cartoncino 42, comune 1 = prova).
+La mappa 12x12 non ha una versione A3: stampa da ../playtest_v7/ mappa_base.pdf (2 fogli A4), mappa_fiori.pdf (3 fogli A4
+fronte/retro, istruzioni nell'ordine di stampa A4) e mappa_preset.pdf (10 fogli A4, carta comune).

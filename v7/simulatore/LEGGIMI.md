@@ -19,6 +19,7 @@ circa 10,6 round sulle tre tavolate). 2000 partite per tavolata girano in pochi 
 |---|---|
 | `--op1` | OP-1: l'eroe attacca sempre per primo, contro ogni creatura (anche boss e custode) |
 | `--op2` | OP-2: il danno del mostro è il suo ATT, senza dado (il tiro per colpire resta 2D6 + ATT ≥ AR) |
+| `--preset` | montaggio: preset «Strettoie» invece del draft |
 | `--op5` | OP-5: Duello, pari all'iniziativa: MOV più alto, poi si ritira (invece di «vince lo sfidante») |
 | `--ar-v6` | confronto: AR dei mostri della v6 (8–11) invece di D19 (⌈AR × 0,75⌉, 6–9) |
 | `--indizio-lv` | confronto: Indizio con D6 ≤ LV (v6) invece di D18 (D6 ≤ LV + 1) |
@@ -44,27 +45,38 @@ Se `carte_mostro.csv` avesse ancora le AR v6, il simulatore applica D19 da sé e
 | `effetti.csv` | id carta → codice effetto + parametri (`k=v;k2`) |
 | `abilita_mostri.csv` | id mostro → codice abilità + parametri; un mostro senza riga è `info` (contato nel rapporto) |
 | `carte.py` | lettura dei CSV, valore delle carte per l'IA |
-| `mappa.py` | plancia base §17 e plance delle 9 Mappe (`plance/<tema>.py`, R 8.12): grafo, muri, distanze. `python3 mappa.py` ricontrolla ogni plancia: 64 esagoni, collegamenti (base 93, Mappe 95–109), Partenza→Cripta 4–8 passi |
+| `mappa.py` | mappa 12×12 (D24, D25): geometria, base e fiori letti da `../stampa/sorgenti/dati/` (`fiori.csv`, `base12.csv`, `preset12.csv`), draft, preset, costi del terreno, movimento, Cripta. `python3 mappa.py` controlla che i 10 preset e 2000 draft a caso restino collegati |
 | `ia.py`, `ia_carte.py` | IA: preparazione, movimento, fuga, Duello, effetti automatici, poteri; carte da aprire e risposte |
 
 Una carta nuova si aggiunge con una riga in `effetti.csv` usando un codice esistente; un codice nuovo va scritto in
 `effetti.py` (funzione `f_<codice>`). Le carte senza riga valgono `info`: si giocano ma non fanno niente e si contano.
 Lo stesso per i mostri con `abilita_mostri.csv` e `mostri.py`.
 
-## Plance delle Mappe (R 8.12)
+## Mappa 12×12 (D24, D25, R 8.12)
 
-La plancia in uso è `g.plancia` (`mappa.BASE` all'inizio). Ogni Mappa ha la sua plancia (`mappa.TEMI`: TM-01
-`forziere`, TM-02 `citta`, TM-03 `foresta`, TM-04 `tundra`, TM-05 `sottovelo`, TM-06 `miniera`, TM-07 `yuma`, TM-08
-`flegias`, TM-09 `mimi`). Quando una Mappa si risolve, prima il suo testo, poi `stato.cambia_plancia`: cambiano
-strade, muri e distanze, e ogni eroe torna sulla sua Partenza iniziale (niente D6 della perdita). Se TI-22 (o TI-33,
-CR-15) toglie la Mappa in gioco torna la plancia base. Uno scontro o un Duello in corso finisce subito senza vincitore
-né ricompense (esito `annullato`: la tessera resta scoperta, la carta Mostro va in fondo, il custode tiene le ferite).
-Partenze, Cripte, «?» e tessere sono uguali su tutte le plance e restano dove sono.
+La mappa in uso è `g.plancia` (`mappa.Plancia`), montata da `g.montaggio` ({spazio: (fiore, faccia, rotazione)}).
+Default: **draft** (i 14 fiori divisi a caso, 7/4/3 a testa con 2/3/4 giocatori, gli avanzi li posano l'ultimo e il
+penultimo; ognuno posa in turno in uno spazio libero, con faccia e rotazione a caso). `--preset` monta invece
+«Strettoie». I 24 «?» vanno a caso su esagoni percorribili a ≥ 2 esagoni da ogni Partenza.
+
+- **Niente muri.** Si cammina ovunque non ci sia un ostacolo (bosco, rocce, case). Entrare costa sempre 1; uscire da un
+  terreno accidentato (`accidentato` in `fiori.csv`/`base12.csv`, per ora l'acqua) costa 1 in più: con 1 MOV si entra in
+  acqua, per uscirne ne servono 2. Mostri scoperti e Cripta con MIMI fermano come prima.
+- **Cripta.** Al 3° Indizio e a ogni «Il tesoro cambia Cripta» (senza limite; ogni carta Mappa la ritira dopo il cambio) si tira 2D6 per la
+  colonna e 2D6 per la riga. Su acqua resta; su un «?» resta e il «?» con la sua tessera va nella riserva; su un ostacolo
+  o una Partenza va sull'esagono percorribile più vicino senza Partenza, senza «?» e fuori da riga e colonna 1 (a pari
+  distanza il più alto, poi il più a sinistra).
+- **Carta Mappa.** Cambia solo i suoi 3 fiori (righe `cambio` di `preset12.csv`, con lo scambio se il fiore sta già in
+  un altro spazio). I «?» (con le tessere) sugli spazi cambiati tornano nella riserva e se ne rimettono altrettanti sui
+  fiori nuovi, su esagoni percorribili a ≥ 2 dalle Partenze (a caso, tessera nuova dalla riserva). Gli eroi tornano
+  sulla Partenza iniziale (niente D6 della perdita); la Cripta si sposta (stesso punto tirato) solo se ora è su un
+  ostacolo. Uno scontro o un Duello in corso finisce senza vincitore né ricompense (esito `annullato`). Se TI-22
+  (o TI-33, CR-15) toglie la Mappa in gioco, i 3 fiori tornano come nel montaggio.
 
 IA: non gioca una Mappa durante il proprio scontro; la gioca (o toglie quella in gioco con TI-22/TI-33/CR-15) per
 chiudere lo scontro di un avversario col custode, oppure a M2 se l'avversario di turno con 3 Indizi è sulla Cripta di
-MIMI. Per il resto gioca le Mappe come prima (anche alla Fine, senza pesare il ritorno di tutti sulla Partenza).
-Il rapporto conta i cambi di plancia, i ritorni alla base e gli scontri annullati.
+MIMI. Il rapporto conta movimento tirato e speso per turno, Cripta (tiri, spostamenti, «?»), cambi di mappa e scontri
+annullati.
 
 Revisione a occhio della mappatura (id, nome, testo stampato, codice usato), poi esce:
 
@@ -128,3 +140,10 @@ rivisti di conseguenza (elenco in Spec §19).
 |---|---|---|---|---|---|
 | Prima (carte di D22) | 14,6 / 13,9 / 14,1 | 32 % | 22–23 % | 12,8 | da 0,75 (Oracolo) a 1,15 |
 | Dopo il bilanciamento | 11,1 / 10,5 / 10,2 | 22–24 % | 19–21 % | 7,2 | da 0,89 a 1,11 (2000 partite) |
+
+## Regole del 12/11 sera
+
+Nessun Equipaggiamento gratis a inizio partita. Primo giro (round 1): niente Duelli e l'IA non gioca carte contro un
+avversario. Nello scontro con un mostro l'eroe ha al massimo 3 attacchi: se il mostro è vivo il suo turno lo fa
+scappare (niente premi, tessera tra le usate, carta in fondo; le abilità «a fine scontro» non scattano; il custode non
+scappa mai).

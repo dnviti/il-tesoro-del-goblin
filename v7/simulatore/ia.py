@@ -42,11 +42,6 @@ def mano_iniziale(g, e, mazzetto):
     return sorted(mazzetto, key=lambda c: (-K.valore(c), g.rng.random()))[:3]
 
 
-def equip_iniziale(g, e):
-    eq = [c for c in e.mano if K.CARTE[c].equip]
-    return max(eq, key=lambda c: (K.CARTE[c].pl, g.rng.random())) if eq else None
-
-
 def pesca_da_pila(g, e):
     return bool(e.pila) and sum(1 for c in e.mano if K.CARTE[c].classe) < 3
 

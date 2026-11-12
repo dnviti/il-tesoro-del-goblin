@@ -18,7 +18,7 @@ class Opzioni:
     def __init__(self, **kw):
         self.limite, self.mano_max, self.soglia = 2, 10, 6
         self.op1 = self.op2 = self.op5 = False
-        self.ar_v6 = self.indizio_lv = False
+        self.ar_v6 = self.indizio_lv = self.preset = False
         self.dado_sommato = self.chi_tira_non_risponde = self.penalita_meno = False
         self.__dict__.update(kw)
 
@@ -44,10 +44,14 @@ class Partita:
         self.round_tesoro = None
         self.creature_svant = False
         self.mappa = self.mappa_di = None
-        self.plancia = M.BASE               # R 8.12: plancia in uso (cambia con la Mappa in gioco)
+        self.cambi = None                   # R 8.12: Mappa che ha cambiato 3 fiori (None = disposizione di montaggio)
+        self.cripta_xy = None               # il punto tirato con 2D6 + 2D6 per la Cripta
         self.mappa_mov_avv = False
-        self.mimi, self.spostamenti, self.tesoro_trovato = None, 0, False
+        self.mimi, self.tesoro_trovato = None, False
         r = self.rng
+        # D24: draft (o preset «Strettoie») dei 14 fiori sulla base; la mappa in uso è `plancia`
+        self.montaggio = M.disposizione_preset(M.BASE) if opz.preset else M.draft(n, r)
+        self.plancia = M.Plancia(M.terreno(self.montaggio))
         classi = r.sample(K.CLASSI, n)
         specie = r.sample(K.SPECIE, n)
         self.eroi = [S.Eroe(i, classi[i], specie[i], r.choice('AB')) for i in range(n)]
@@ -63,7 +67,9 @@ class Partita:
         r.shuffle(self.imprevisti)
         tessere = K.TESSERE[:]
         r.shuffle(tessere)
-        self.tessere = {q: tessere.pop() for q in M.DOMANDE}     # 'rossa'/'blu' coperta, 'scoperta', None
+        # 24 «?» posati a turno su esagoni percorribili a >= 2 esagoni dalle Partenze (qui: a caso)
+        domande = r.sample(self.plancia.idonee_domanda(()), M.N_DOMANDE)
+        self.tessere = {q: tessere.pop() for q in domande}       # 'rossa'/'blu' coperta, 'scoperta', None
         self.riserva, self.usate = tessere, []
         self.scatola = {c: K.CARTE_CLASSE[c][:] for c in K.CLASSI if c not in classi}
         for e in self.eroi:
@@ -74,14 +80,10 @@ class Partita:
             e.pila = [c for c in mazzetto if c not in mano]
             r.shuffle(e.pila)
             e.mano = mano + [self.mazzo.pop() for _ in range(3)]
-            cid = ia.equip_iniziale(self, e)     # R 3.8: non conta per il limite
-            if cid:
-                e.mano.remove(cid)
-                S.equipaggia(self, e, cid)
             e.pv = e.pvmax(self)
         for e in self.eroi:                       # R 3.9
             while True:
-                h = M.PARTENZE[r.randint(1, 6)]
+                h = M.PARTENZE[r.randrange(6)]
                 if all(x.pos != h and not self.plancia.accanto(x.pos, h) for x in self.eroi if x.pos):
                     break
             e.pos = e.partenza = h
@@ -114,7 +116,7 @@ def turno(g, e):
         C.momento(g, 'M2')
     if not g.turno_finito:
         esplora(g, e)
-    if not (g.turno_finito or g.finita) and e.scontri == 0:
+    if not (g.turno_finito or g.finita) and e.scontri == 0 and g.round > 1:     # primo giro: niente Duelli
         vicini = [x for x in S.avversari(g, e) if g.plancia.accanto(e.pos, x.pos)]
         x = ia.sfida(g, e, vicini)
         if x is not None:
@@ -145,7 +147,10 @@ def muovi(g, e):
         bloccati.add(g.mimi)
     occupati = {x.pos for x in g.eroi if x is not e}
     mete = g.plancia.raggiungibili(e.pos, passi, bloccati, occupati) if passi else {e.pos: 0}
-    e.pos = ia.destinazione(g, e, mete)
+    dest = ia.destinazione(g, e, mete)
+    g.st['mov_tirato'] += passi
+    g.st['mov_speso'] += mete[dest]
+    e.pos = dest
     e.mosso = True
 
 
@@ -174,7 +179,7 @@ def esplora(g, e):
             mz.insert(0, mid)                        # NE-44 Permaloso: in cima
         else:
             mz.append(mid)                           # in fondo al suo mazzetto
-        if esito in ('vinto', 'sparito') and not g.finita:      # TI-41: la tessera va tra le usate
+        if esito in ('vinto', 'sparito', 'fuga_mostro') and not g.finita:      # TI-41: la tessera va tra le usate
             g.tessere[h] = None
             g.usate.append('rossa')
     if not g.finita:

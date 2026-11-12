@@ -285,13 +285,31 @@ def sconfitta(g, e):
         g.turno_finito = True
 
 
+def tessera_dalla_riserva(g):
+    """Una tessera Esplorazione coperta: prima dalla riserva, poi dalle usate mescolate (R 8.11); None se finite."""
+    if not g.riserva and g.usate:
+        g.riserva, g.usate = g.usate, []
+        g.rng.shuffle(g.riserva)
+    return g.riserva.pop() if g.riserva else None
+
+
+def togli_domanda(g, h):
+    """Il «?» su `h` e la sua tessera tornano nella riserva."""
+    t = g.tessere.pop(h)
+    if t:
+        g.riserva.append('rossa' if t == 'scoperta' else t)
+
+
 def cambia_plancia(g, mappa):
-    """R 8.12: la plancia della Mappa `mappa` (None = plancia base) prende il posto di quella in uso. Ogni eroe torna
-    sulla sua Partenza iniziale (non è una sconfitta); uno scontro o un Duello in corso finisce senza vincitore."""
-    nuova = M.PLANCE[mappa] if mappa else M.BASE
-    if nuova is g.plancia:
+    """R 8.12 (D24): la Mappa `mappa` (None = nessuna Mappa in gioco) cambia solo i suoi 3 fiori del montaggio; i «?»
+    (con la tessera) su quei fiori tornano nella riserva e li rimette chi ha giocato la carta sui fiori nuovi. La Cripta
+    si sposta (con lo stesso punto 2D6) solo se ora è su un ostacolo. Ogni eroe torna sulla sua Partenza iniziale (non
+    è una sconfitta); uno scontro o un Duello in corso finisce senza vincitore."""
+    if mappa == g.cambi:
         return
-    g.plancia = nuova
+    vecchia = M.disposizione(g.montaggio, g.cambi)
+    nuova = M.disposizione(g.montaggio, mappa)
+    g.cambi = mappa
     g.st['cambi_plancia' if mappa else 'cambi_plancia_base'] += 1
     sc = g.scontro
     if sc is not None and not sc.finito:
@@ -300,6 +318,17 @@ def cambia_plancia(g, mappa):
         g.st['custode_annullato'] += sc.custode
     for x in g.eroi:
         x.pos = x.pos_inizio = x.partenza
+    cambiati = [s for s in nuova if nuova[s] != vecchia[s]]
+    zona = M.esagoni_fiori(cambiati)
+    g.plancia = M.Plancia(M.terreno(nuova))
+    levati = [h for h in g.tessere if h in zona]
+    for h in levati:
+        togli_domanda(g, h)
+    if g.mimi and g.mimi not in g.plancia.libero:
+        posa_cripta(g, g.cripta_xy)
+    ok = [h for h in g.plancia.idonee_domanda(g.tessere) if h in zona and h != g.mimi]
+    for h in g.rng.sample(ok, min(len(levati), len(ok))):
+        g.tessere[h] = tessera_dalla_riserva(g)
 
 
 # --- Indizi e tesoro (§10) ----------------------------------------------------------------------------
@@ -314,7 +343,7 @@ def prendi_indizio(g, e, fonte):
             x.indizi += 1
             g.st['indizi_voce'] += 1
         if g.mimi is None:
-            g.mimi = M.CRIPTE[tiri.d6_tra(g, (1, 2, 3, 4))]
+            posa_cripta(g, tira_cripta(g))
     g.max_indizi = max(g.max_indizi, sum(x.indizi for x in g.eroi))
 
 
@@ -325,11 +354,26 @@ def ruba(g, e, x):
         ricevi(g, e, cid)
 
 
+def tira_cripta(g):
+    """D24: 2D6 per la colonna e 2D6 per la riga (2-12)."""
+    return tuple(g.rng.randint(1, 6) + g.rng.randint(1, 6) for _ in range(2))
+
+
+def posa_cripta(g, xy):
+    """Metti la Cripta (con MIMI e il custode) sul punto tirato `xy`. Se cade su un «?», il «?» e la sua tessera vanno
+    nella riserva e la Cripta resta lì."""
+    g.cripta_xy = xy
+    g.mimi = g.plancia.cripta(*xy, g.tessere)
+    if g.mimi in g.tessere:
+        togli_domanda(g, g.mimi)
+        g.st['cripta_su_domanda'] += 1
+    g.st['cripta_tirata'] += 1
+    g.st['cripta_spostata'] += g.mimi != xy
+
+
 def sposta_tesoro(g):
-    if g.mimi is None or g.spostamenti >= 2:
+    if g.mimi is None:
         return False
-    att = [k for k, h in M.CRIPTE.items() if h != g.mimi]
-    g.mimi = M.CRIPTE[tiri.d6_tra(g, att)]
-    g.spostamenti += 1
+    posa_cripta(g, tira_cripta(g))
     g.st['tesoro_spostato'] += 1
     return True

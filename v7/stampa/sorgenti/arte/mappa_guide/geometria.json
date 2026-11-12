@@ -1,0 +1,94 @@
+{
+  "fiore_guida": {
+    "px": [
+      1024,
+      1024
+    ],
+    "px_per_mm": 12.0,
+    "centro_px": [
+      512.0,
+      512.0
+    ],
+    "ingombro_mm": [
+      75.6,
+      72.74613391789285
+    ],
+    "ingombro_px": [
+      907,
+      873
+    ],
+    "esagono_lato_a_lato_mm": 25.2,
+    "esagono_punta_punta_mm": 29.098,
+    "orientamento": "esagoni a punta in alto; esagono 0 al centro; anello 1-6 antiorario da EST (1 = E, 2 = NE, 3 = NW, 4 = W, 5 = SW, 6 = SE)"
+  },
+  "fiore_stampa": {
+    "px": [
+      941,
+      914
+    ],
+    "mm": [
+      79.6713,
+      77.3853
+    ],
+    "ppi": 300,
+    "abbondanza_mm": 2.0,
+    "nota": "PNG centrato sul centro del fiore; fuori dal contorno + abbondanza l'immagine e' solo estesa (il clip lo taglia)"
+  },
+  "base_guida": {
+    "px": [
+      1536,
+      1024
+    ],
+    "px_per_mm": 7.0,
+    "finestra_mm": [
+      219.429,
+      146.286
+    ],
+    "griglia_mm": [
+      315.0,
+      269.161
+    ],
+    "margine_oltre_bordo_mm": 4.0,
+    "origini_mm": {
+      "NO": [
+        -4.0,
+        -4.0
+      ],
+      "NE": [
+        99.5714,
+        -4.0
+      ],
+      "SO": [
+        -4.0,
+        126.875
+      ],
+      "SE": [
+        99.5714,
+        126.875
+      ]
+    },
+    "pixel": "px = (x_mm - x0) * 7, py = (y_mm - y0) * 7, con x_mm,y_mm nelle coordinate della griglia (0,0 = angolo in alto a sinistra)",
+    "centro_esagono_mm": "x = 25,2 * (c - 0,5 + (0,5 se r pari)), y = R * (1 + 1,5 * (r - 1)), R = 14,549",
+    "sovrapposizione_mm": {
+      "orizzontale": 115.86,
+      "verticale": 15.41
+    },
+    "possesso": "colonna <= 6 -> ovest, riga <= 6 -> nord (taglio lungo i lati degli esagoni)"
+  },
+  "base_stampa": {
+    "px": [
+      3721,
+      3180
+    ],
+    "mm": [
+      315.0447,
+      269.24
+    ],
+    "ppi": 300,
+    "origine_mm": [
+      0,
+      0
+    ]
+  },
+  "palette_file": "palette.json"
+}

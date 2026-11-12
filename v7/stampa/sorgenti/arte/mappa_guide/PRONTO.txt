@@ -1,0 +1,13 @@
+Guide pronte (Phase 1): 28 MF-<NN><A|B>.png 1024x1024 + 4 MB-NO|NE|SO|SE.png 1536x1024, palette.json, geometria.json, prompt.csv, LEGGIMI.md.
+Rigenera: python3 v7/stampa/sorgenti/arte/mappa_guide/genera_guide.py
+
+Cosa mantenere nel prompt (la composizione deve restare quella della guida, il compositore allinea solo piccole differenze):
+- vista dall'alto ortogonale (top-down orthographic, flat map, no perspective, no tilt), stessa inquadratura della guida;
+- NON spostare, ruotare, ingrandire o ritagliare: ogni esagono resta dove sta nella guida, stesso contorno del fiore (esagoni a punta in alto);
+- ogni esagono mostra il terreno del suo colore (vedi palette.json): bosco = verde scuro, prato = verde chiaro, rocce = grigio, case = rosso,
+  acqua = blu, guado = turchese (sassi nell'acqua), ponte = marrone (ponte di legno sull'acqua), sentiero = ocra, mattonato = arancio, pavimento = lavanda/grigio chiaro;
+- gli oggetti restano DENTRO il proprio esagono (alberi, rocce, case non attraversano i lati); i terreni uguali vicini possono fondersi;
+- fuori dal fiore e (base) negli spazi dei fiori: pergamena piatta #f1dcae, nessuna ombra esterna;
+- niente testo, numeri, frecce, griglie, bordi, cornici; al piu' linee sottili tra gli esagoni;
+- stile: STILE.md (cartone, linee a inchiostro tremolanti, colori piatti, pochi oggetti semplici, goliardico).
+Nomi dei grezzi attesi: arte/grezze/MF-<NN><A|B>.webp e arte/grezze/MB-<NO|NE|SO|SE>.webp, stessa inquadratura (stessa proporzione) della guida.
