@@ -271,13 +271,15 @@ Indizi persi sono quasi tutti alla riserva (sconfitte per creature e Trappole), 
 - **Codice**: `stato.ristoro_segna(g, eroe, cosa, senza_d6)` (chiamata da `scontro.scontro`/`scontro.duello` e da
   `stato.sconfitta` quando l'eroe è in uno scontro) annota in `g.ristoro`; `stato.ristoro(g, eroe)`, chiamata da
   `regole.fine` dopo l'eventuale D6 di TI-26, tira il D6, fa il bottino e pesca. Il bottino non è più immediato.
-  Anche lo sfidato di un Duello fa il Ristoro nella Fine del turno dello sfidante. La sconfitta fuori da uno scontro
-  (Trappola, carte, effetti) non è un Ristoro e resta D6 + pesca 1 subito. TC-01 (Assaltatore, non tira il D6 della
-  perdita alla sconfitta) salta anche il D6 del Ristoro in quel caso. Lo scontro annullato dal cambio di mappa non dà
-  Ristoro; il mostro sparito (TI-41) vale come mostro scappato. Il rapporto stampa i Ristori, gli oggetti persi e le
-  carte pescate nel Ristoro a partita.
+  Anche lo sfidato di un Duello fa il Ristoro nella Fine del turno dello sfidante, **sfidante per primo** (confermato).
+  Una sconfitta fuori da uno scontro (Trappola, carte, effetti) è anch'essa un Ristoro (D6 + pesca 1): alla tua Fine se
+  è il tuo turno, subito (`stato.ristoro_di`) se è il turno di un altro eroe. Uno scontro o Duello chiuso dal cambio di
+  mappa conta come non vinto: Ristoro con D6 + pesca 1 (per il Duello, a entrambi). Il mostro sparito (TI-41) vale come
+  mostro scappato. TC-01 (Assaltatore) salta solo il D6 del Ristoro dopo una sconfitta (una volta per partita); la carta
+  dice «puoi non tirare il D6 del Ristoro dopo una sconfitta». Il bottino si prende al Ristoro, a fine turno. Il
+  rapporto stampa i Ristori, gli oggetti persi e le carte pescate nel Ristoro a partita.
 
-Confronto (13/11, 1000 partite per tavolata, seme 1, mani predefinite; prima di D32 → con D32):
+Confronto (13/11, 1000 partite per tavolata, seme 1, mani predefinite; prima di D32 → con D32 prima dei casi chiusi):
 
 | | 2 / 3 / 4 giocatori |
 |---|---|
@@ -290,3 +292,7 @@ Vittorie per classe, prima → dopo (2 / 3 / 4 giocatori): Assaltatore 53→47 /
 22→21 %, Stregone 39→39 / 30→27 / 24→21 %, Oracolo 48→46 / 33→33 / 24→26 %, Giullare 35→36 / 24→26 / 19→23 %. Il D6
 a ogni scontro rompe molti oggetti (circa 23–31 per partita) e la partita si allunga di circa 2–3 round; il calo
 dell'Assaltatore è probabilmente dovuto agli Equipaggiamenti persi (ipotesi, non misurata).
+
+Dopo i casi chiusi (13/11 23:52; 500 partite per tavolata, seme 1): round 25,2 / 22,5 / 20,4 (finite col custode
+79,6 / 93,2 / 98,4 %), Ristori 41,8 / 47,3 / 52,7 a partita (oggetti persi 24,9 / 28,4 / 31,6), 3° Indizio al round
+14,2 / 11,2 / 9,6; Assaltatore 44,6 / 38,4 / 27,5 %.

@@ -307,8 +307,8 @@ def scontro(g, e, mid=None, custode=False):
         g.st['fughe'] += 1
     elif esito == 'fuga_mostro':
         g.st['fughe_mostro'] += 1
-    if esito in ('fuga', 'fuga_mostro', 'sparito'):
-        S.ristoro_segna(g, e, 'non_vinto')  # D32: l'eroe ha combattuto: Ristoro (D6 + 1 carta)
+    if esito in ('fuga', 'fuga_mostro', 'sparito', 'annullato'):
+        S.ristoro_segna(g, e, 'non_vinto')  # D32: non vinto (anche cambio di mappa): Ristoro (D6 + 1 carta)
     elif esito == 'perso':
         S.ristoro_segna(g, e, 'sconfitta')
     if custode and nemico.pv <= 0:
@@ -345,7 +345,11 @@ def duello(g, a, b):
         x, y = y, x
     g.scontro = None
     perde = a if a.morti > morti[a.idx] else (b if b.morti > morti[b.idx] else None)
-    if perde is None or sc.annullato:
+    if sc.annullato:                        # D32: Duello chiuso dal cambio di mappa = nessun vincitore, Ristoro per entrambi
+        S.ristoro_segna(g, a, 'non_vinto')
+        S.ristoro_segna(g, b, 'non_vinto')
+        return
+    if perde is None:
         return
     vince = b if perde is a else a
     g.st['duelli_vinti_sfidante' if vince is a else 'duelli_vinti_sfidato'] += 1
