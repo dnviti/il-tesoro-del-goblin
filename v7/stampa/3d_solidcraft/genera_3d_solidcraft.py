@@ -8,13 +8,14 @@ Pezzi (mappa da v7/stampa/sorgenti/dati/base12.csv: spazi dei fiori, posizioni 0
 - VASSOIO in 4 parti (NO, NE, SO, SE): fondo, alloggio unico per i 14 fiori, tasca per la carta della base del kit
   (mappa_base.pdf, con le coordinate, ritagliata lungo i contorni d'ottone degli spazi), numeri degli spazi e cifre 1-6
   dell'anello incisi sul fondo dell'alloggio. Le 4 parti si uniscono con code a pomello nel fondo.
-- FIORE da 7 esagoni senza incastri, fondo piatto e tasca per la carta sopra (carta: out/carta_fiori_3d.pdf).
-- SEGNALINO CRIPTA (esagono) con la tasca per la carta di mappa_fiori.pdf.
+- FIORE da 7 esagoni senza incastri, fondo piatto, liscio sopra, spesso alloggio_prof - tasca_prof: la sua faccia di
+  carta (out/carta_fiori_3d.pdf) sta alla stessa quota della carta della base (mappa in piano, Daniele 13/11 21:28).
+- SEGNALINO CRIPTA (esagono) liscio sopra, per la carta di mappa_fiori.pdf.
 - SEGNALINI DEL KIT IN 3D (D29, 13/11): Tessere Esplorazione (36), segnalini tondi Indizio / Forte Volontà / Usato
   (segnalini.csv), tessere Stato (stati.csv) e i dischi delle rotelle (6 per plancia eroe, scontro, custode, Profezia).
-  Ogni pezzo ha il contorno ESATTO del pezzo di carta del kit, fondo piatto, bordino in rilievo e tasca sopra per
-  l'adesivo di segnalini_3d.pdf (tasca = contorno - bordino, adesivo = tasca - gioco_carta). Le rotelle hanno la
-  finestra passante e un mozzo pieno al centro.
+  Ogni pezzo ha il contorno ESATTO del pezzo di carta del kit, fondo piatto, ed è liscio sopra (niente bordino né tasca,
+  Daniele 13/11 21:28): l'adesivo di segnalini_3d.pdf si incolla sopra ed è margine_adesivo per lato più piccolo del
+  pezzo. Le rotelle hanno la finestra passante e il foro del perno.
 - PERNO delle rotelle in 2 pezzi a scatto: perno con la testa sotto la plancia e la gola in cima, fermo piatto con 2
   ganasce a sbalzo che si aprono nel piano e si chiudono nella gola. Tutti e due si stampano piatti senza supporti.
 Quantità dai CSV del kit; 4 file 3MF in out/ (mappa, rotelle_fulcri, segnalini, tessere_esplorazione) su piatti da 220 × 220.
@@ -83,22 +84,23 @@ PARAMETRI = [
     ('gioco', 0.15, 'gioco per lato tra le parti del vassoio e sulle code (0,1-0,25)'),
     ('gioco_fiore', 0.2, 'gioco per lato tra fiore e alloggio: tra due fiori il doppio (0,1-0,35)'),
     ('fondo', 1.2, 'spessore del fondo del vassoio = altezza delle code (1-2); sotto i numeri incisi restano fondo - incisione = 0,8'),
-    ('alloggio_prof', 2.0, 'profondità dell alloggio dei fiori (1,5 ... fiore_spessore)'),
-    ('fiore_spessore', 3.0, 'spessore del fiore (2,5-4): sporge di fiore_spessore - alloggio_prof'),
-    ('tasca_prof', 0.5, 'profondità delle tasche per la carta (cartoncino 0,3-0,4; 0,3-1)'),
-    ('bordino', 0.85, 'bordino tra contorno e tasca della carta (0,6-1,5)'),
-    ('gioco_carta', 0.25, 'gioco per lato tra carta ritagliata e tasca (0,15-0,4)'),
+    ('alloggio_prof', 2.0, 'profondità dell alloggio dei fiori (1,5 ... 3)'),
+    ('fiore_spessore', 1.5, 'spessore del fiore = alloggio_prof - tasca_prof: il sopra del fiore è alla quota del fondo della tasca della carta della base (mappa in piano)'),
+    ('tasca_prof', 0.5, 'profondità della tasca per la carta della base nel vassoio (cartoncino 0,3-0,4; 0,3-1)'),
+    ('bordino', 0.85, 'bordino del vassoio oltre la tasca della carta della base (0,6-1,5)'),
+    ('gioco_carta', 0.25, 'gioco per lato tra carta ritagliata e tasca o finestra (0,15-0,4)'),
+    ('margine_adesivo', 0.2, 'margine per lato tra il contorno del pezzo e l adesivo incollato sopra (0-0,5)'),
     ('fascia_carta', 5.5, 'fascia delle coordinate della carta della base (mappa_base.pdf: FASCIA12 = 5,5; < margine - gioco_carta - 0,8)'),
     ('segnalino_spessore', 2.0, 'spessore di Cripta, tessere, segnalini e Stati (1,5-3)'),
     ('tessera_d', 24.0, 'diametro delle Tessere Esplorazione (tessere_esplorazione.pdf: Ø 24)'),
     ('gettone_d', 20.0, 'diametro dei segnalini Indizio, Forte Volontà e Usato (segnalini.pdf: Ø 20)'),
     ('stato_l', 26.0, 'lato lungo della tessera Stato (segnalini.pdf: 26 × 18)'),
     ('stato_a', 18.0, 'lato corto della tessera Stato'),
-    ('stato_r', 1.2, 'raggio degli angoli della tessera Stato (> bordino)'),
+    ('stato_r', 1.2, 'raggio degli angoli della tessera Stato (> margine_adesivo)'),
     ('rotella_d', 52.0, 'diametro dei dischi delle rotelle (rotelle_eroe.pdf: Ø 52)'),
     ('corona_r', 20.0, 'distanza della finestra dal centro della rotella (corona della plancia, RING_R)'),
     ('rotella_spessore', 2.0, 'spessore dei dischi delle rotelle (1,6-2,5)'),
-    ('mozzo_r', 6.25, 'raggio del mozzo pieno al centro della rotella, dove appoggia il fermo (>= fermo_d/2)'),
+    ('mozzo_r', 6.25, 'raggio della zona senza adesivo al centro della rotella, dove appoggia il fermo (>= fermo_d/2)'),
     ('foro_perno', 3.8, 'diametro del foro delle rotelle (perno_d + 2 × 0,2 di gioco)'),
     ('perno_d', 3.4, 'diametro del perno e del suo dente (3-4)'),
     ('collo_d', 2.9, 'diametro della gola del perno, dove si chiudono le ganasce del fermo (perno_d - 0,5)'),
@@ -108,7 +110,7 @@ PARAMETRI = [
     ('fermo_d', 12.0, 'diametro del fermo (sta sul mozzo: <= 2 × mozzo_r)'),
     ('fermo_h', 1.2, 'spessore del fermo e delle sue ganasce (1-1,6)'),
     ('gioco_assiale', 0.15, 'aria tra il fermo e il dente del perno, con la plancia da carta_plancia'),
-    ('smusso', 0.4, 'smusso degli spigoli di fiore e segnalini, sopra e sotto (0,2-0,6; < bordino)'),
+    ('smusso', 0.4, 'smusso dello spigolo sotto di fiori e segnalini (sopra sono lisci fino al bordo) (0,2-0,6)'),
     ('raggio_angolo', 3.0, 'raggio degli angoli esterni del vassoio (0,5-6)'),
     ('coda_collo', 2.6, 'larghezza del collo della coda a pomello (2-3)'),
     ('coda_testa', 4.0, 'diametro del pomello (coda_collo + 1 ... 5)'),
@@ -426,49 +428,46 @@ def check_files(nome, atteso_mm3):
 
 # ---- fiore -------------------------------------------------------------------------------------------------------
 class Fiore:
+    """fiore da 7 esagoni, liscio sopra (Daniele, 13/11 21:28): la faccia di carta si incolla sulla faccia di sopra.
+    Spesso alloggio_prof - tasca_prof: il sopra del fiore è alla quota del fondo della tasca della carta della base, così
+    la faccia del fiore e la carta della base stanno alla stessa altezza (mappa in piano). Smusso solo sotto."""
     nome = 'fiore'
 
     def __init__(self):
+        assert abs(P['fiore_spessore'] - (P['alloggio_prof'] - P['tasca_prof'])) < 1e-9, 'fiore_spessore deve essere alloggio_prof - tasca_prof'
         self.contorno = linearize(lambda v: flower_local(v, v['gioco_fiore']), ['passo', 'gioco_fiore'])[0]
-        self.tasca = linearize(lambda v: flower_local(v, v['gioco_fiore'] + v['bordino']), ['passo', 'gioco_fiore', 'bordino'])[0]
 
     def expected(self):
         F = flower_local(P, P['gioco_fiore'])
-        T = flower_local(P, P['gioco_fiore'] + P['bordino'])
         H = P['fiore_spessore']
-        vol = chamfered_volume(F, P['smusso'], H) - T.area * P['tasca_prof']
         b = F.bounds
-        return vol, [round(b[2] - b[0], 4), round(b[3] - b[1], 4), H]
+        return chamfered_volume(F, P['smusso'], H, sopra=False), [round(b[2] - b[0], 4), round(b[3] - b[1], 4), H]
 
     def commands(self, body='fiore'):
         F = flower_local(P, P['gioco_fiore'])
-        H = P['fiore_spessore']
         cs = list(F.exterior.coords)
         mids = [((a[0] + b[0]) / 2, (a[1] + b[1]) / 2) for a, b in zip(cs, cs[1:])]
         return [
             {'command': 'sketch.create', 'params': {'plane': 'XY', 'name': 'Contorno'}}, sketch_poly(self.contorno),
             {'command': 'sketch.finish', 'params': {}},
             {'command': 'solid.extrude', 'params': {'distance': 'fiore_spessore', 'operation': 'new', 'name': 'Fiore', 'body_name': body}},
-            {'command': 'solid.chamfer', 'params': {'edges': [[x, y, z] for z in (0.0, H) for x, y in mids], 'distance': 'smusso',
-                                                    'tangent_chain': False, 'body': body, 'name': 'Smussi'}},
-            {'command': 'sketch.create', 'params': {'plane': 'XY', 'offset': 'fiore_spessore', 'name': 'Tasca sopra'}}, sketch_poly(self.tasca),
-            {'command': 'sketch.finish', 'params': {}},
-            {'command': 'solid.extrude', 'params': {'distance': 'tasca_prof', 'direction': 'negative', 'operation': 'cut',
-                                                    'name': 'Tasca sopra', 'targets': [body]}},
+            {'command': 'solid.chamfer', 'params': {'edges': [[x, y, 0.0] for x, y in mids], 'distance': 'smusso',
+                                                    'tangent_chain': False, 'body': body, 'name': 'Smusso sotto'}},
         ]
 
-
     def carta(self):
-        taglio = flower_local(P, P['gioco_fiore'] + P['bordino'] + P['gioco_carta'])
-        return {'tasche': 'solo sopra, fondo piatto', 'pdf': 'carta_fiori_3d.pdf',
-                'taglio_dentro_il_contorno_ideale_mm': round(P['gioco_fiore'] + P['bordino'] + P['gioco_carta'], 3),
+        r = P['gioco_fiore'] + P['margine_adesivo']
+        taglio = flower_local(P, r)
+        return {'sopra': 'liscio, faccia incollata sopra', 'pdf': 'carta_fiori_3d.pdf', 'taglio_dentro_il_contorno_ideale_mm': round(r, 3),
                 'ingombro_carta_mm': [round(taglio.bounds[2] - taglio.bounds[0], 2), round(taglio.bounds[3] - taglio.bounds[1], 2)]}
 
 
-def chamfered_volume(F, c, H):
-    """prisma di pianta F e altezza H con smusso c sugli spigoli sopra e sotto (area(d) quadratica: Simpson esatto)."""
+def chamfered_volume(F, c, H, sopra=True):
+    """prisma di pianta F e altezza H con smusso c sullo spigolo sotto (e sopra, se sopra) (area(d) quadratica: Simpson
+    esatto)."""
     a = [F.buffer(-d, join_style='mitre', mitre_limit=10, quad_segs=1024).area for d in (c, c / 2, 0)]
-    return F.area * (H - 2 * c) + 2 * c * (a[0] + 4 * a[1] + a[2]) / 6
+    n = 2 if sopra else 1
+    return F.area * (H - n * c) + n * c * (a[0] + 4 * a[1] + a[2]) / 6
 
 
 def ev(e, vals=None):
@@ -490,14 +489,13 @@ def copie_csv(nome):
 
 
 class Piatto:
-    """pezzo piatto col contorno ESATTO del pezzo di carta del kit (fondo piatto, smusso sopra e sotto): bordino in rilievo
-    e tasca sopra per l'adesivo di segnalini_3d.pdf. Tasca = contorno - bordino; adesivo = tasca - gioco_carta. Le
-    sottoclassi danno il contorno (schizzo e shapely, spostato di d verso l'interno), i punti degli spigoli da smussare,
-    l'eventuale mozzo pieno al centro e i fori passanti."""
+    """pezzo piatto col contorno ESATTO del pezzo di carta del kit (Daniele, 13/11 21:28): fondo piatto con lo smusso
+    sotto, faccia di sopra liscia fino al bordo (niente bordino, niente tasca, niente smusso sopra) per l'adesivo di
+    segnalini_3d.pdf: adesivo = contorno - margine_adesivo per lato. Le sottoclassi danno il contorno (schizzo e shapely,
+    spostato di d verso l'interno), il punto dello spigolo sotto e i fori passanti."""
     spessore = 'segnalino_spessore'
-    spess_min = 1.2           # pieno minimo sotto la tasca
+    spess_min = 1.2           # spessore minimo
     facce_giu = 1             # facce rivolte in giù: solo il fondo
-    mozzo = None              # raggio (espressione) del mozzo pieno, alto quanto il pezzo
 
     def fori(self):
         """fori passanti: [(comandi dello schizzo, poligono shapely)]."""
@@ -505,20 +503,10 @@ class Piatto:
 
     def commands(self, body=None):
         body = body or self.nome
-        H = ev(self.spessore)
-        c = [{'command': 'sketch.create', 'params': {'plane': 'XY', 'name': 'Contorno'}}, *self.schizzo('0*bordino'),
+        c = [{'command': 'sketch.create', 'params': {'plane': 'XY', 'name': 'Contorno'}}, *self.schizzo('0*margine_adesivo'),
              {'command': 'sketch.finish', 'params': {}},
              {'command': 'solid.extrude', 'params': {'distance': self.spessore, 'operation': 'new', 'name': 'Pezzo', 'body_name': body}},
-             {'command': 'solid.chamfer', 'params': {'edges': self.spigoli(H), 'distance': 'smusso', 'body': body, 'name': 'Smussi'}},
-             {'command': 'sketch.create', 'params': {'plane': 'XY', 'offset': self.spessore, 'name': 'Tasca'}}, *self.schizzo('bordino'),
-             {'command': 'sketch.finish', 'params': {}},
-             {'command': 'solid.extrude', 'params': {'distance': 'tasca_prof', 'direction': 'negative', 'operation': 'cut', 'name': 'Tasca',
-                                                     'targets': [body]}}]
-        if self.mozzo:
-            c += [{'command': 'sketch.create', 'params': {'plane': 'XY', 'offset': f'{self.spessore} - tasca_prof', 'name': 'Mozzo'}},
-                  {'command': 'sketch.circle.center', 'params': {'center': ['0*mozzo_r', '0*mozzo_r'], 'radius': self.mozzo}},
-                  {'command': 'sketch.finish', 'params': {}},
-                  {'command': 'solid.extrude', 'params': {'distance': 'tasca_prof', 'operation': 'join', 'name': 'Mozzo', 'targets': [body]}}]
+             {'command': 'solid.chamfer', 'params': {'edges': self.spigoli(), 'distance': 'smusso', 'body': body, 'name': 'Smusso sotto'}}]
         for k, (sk, _) in enumerate(self.fori()):
             c += [{'command': 'sketch.create', 'params': {'plane': 'XY', 'offset': self.spessore, 'name': f'Foro {k + 1}'}}, *sk,
                   {'command': 'sketch.finish', 'params': {}},
@@ -526,29 +514,22 @@ class Piatto:
                                                           'name': f'Foro {k + 1}', 'targets': [body]}}]
         return c
 
-    def tasca(self):
-        t = self.forma(P['bordino'])
-        return t.difference(disco(ev(self.mozzo))) if self.mozzo else t
-
     def adesivo(self):
         """sagoma dell'adesivo (taglio di segnalini_3d.pdf), y in su, origine al centro del pezzo."""
-        a = self.forma(P['bordino'] + P['gioco_carta'])
-        return a.difference(disco(ev(self.mozzo) + P['gioco_carta'])) if self.mozzo else a
+        return self.forma(P['margine_adesivo'])
 
     def expected(self):
-        H, d = ev(self.spessore), P['tasca_prof']
-        F, T = self.forma(0.0), self.tasca()
-        vol = chamfered_volume(F, P['smusso'], H) - T.area * d
-        for _, g in self.fori():
-            vol -= g.intersection(T).area * (H - d) + g.difference(T).area * H
+        H = ev(self.spessore)
+        F = self.forma(0.0)
+        vol = chamfered_volume(F, P['smusso'], H, sopra=False) - sum(g.area for _, g in self.fori()) * H
         b = F.bounds
         return vol, [round(b[2] - b[0], 4), round(b[3] - b[1], 4), H]
 
     def carta(self):
-        ba, bt = self.adesivo().bounds, self.tasca().bounds
-        return {'tasca': 'sopra', 'pdf': 'segnalini_3d.pdf', 'contorno_come_la_carta_mm': self.misura_carta(),
-                'tasca_mm': [round(bt[2] - bt[0], 3), round(bt[3] - bt[1], 3)], 'adesivo_mm': [round(ba[2] - ba[0], 3), round(ba[3] - ba[1], 3)],
-                'gioco_adesivo_tasca_mm': round(((bt[2] - bt[0]) - (ba[2] - ba[0])) / 2, 3)}
+        ba, bt = self.adesivo().bounds, self.forma(0.0).bounds
+        return {'sopra': 'liscio, adesivo incollato sulla faccia di sopra', 'pdf': 'segnalini_3d.pdf',
+                'contorno_come_la_carta_mm': self.misura_carta(), 'adesivo_mm': [round(ba[2] - ba[0], 3), round(ba[3] - ba[1], 3)],
+                'margine_adesivo_mm': round(((bt[2] - bt[0]) - (ba[2] - ba[0])) / 2, 3)}
 
 
 class Tondo(Piatto):
@@ -563,9 +544,8 @@ class Tondo(Piatto):
     def forma(self, d):
         return disco(P[self.dpar] / 2 - d)
 
-    def spigoli(self, H):
-        R = P[self.dpar] / 2
-        return [[R, 0, 0], [R, 0, H]]
+    def spigoli(self):
+        return [[P[self.dpar] / 2, 0, 0]]
 
     def misura_carta(self):
         return [P[self.dpar]] * 2
@@ -582,19 +562,19 @@ class Stato(Piatto):
     def forma(self, d):
         return rett_tondo(P['stato_l'] - 2 * d, P['stato_a'] - 2 * d, P['stato_r'] - d)
 
-    def spigoli(self, H):
-        return [[0, -P['stato_a'] / 2, 0], [0, -P['stato_a'] / 2, H]]
+    def spigoli(self):
+        return [[0, -P['stato_a'] / 2, 0]]
 
     def misura_carta(self):
         return [P['stato_l'], P['stato_a']]
 
 
 class Rotella(Tondo):
-    """disco Ø 52 della rotella: finestra passante a corona_r dal centro (in alto, +y), larga e alta come quella del disco
-    di carta + gioco_carta per lato (l'adesivo, intagliato sulla finestra di carta, copre il bordo della plastica); mozzo
-    pieno al centro col foro del perno. L'adesivo è una corona con l'intaglio della finestra aperto verso il bordo."""
+    """disco Ø 52 della rotella, liscio sopra: finestra passante a corona_r dal centro (in alto, +y), larga e alta come
+    quella del disco di carta + gioco_carta per lato (l'adesivo, intagliato sulla finestra di carta, copre il bordo della
+    plastica), foro del perno al centro. L'adesivo è una corona con l'intaglio della finestra aperto verso il bordo e un
+    foro di raggio mozzo_r + gioco_carta: lì appoggia il fermo, sulla plastica."""
     spessore = 'rotella_spessore'
-    mozzo = 'mozzo_r'
 
     def __init__(self, finestra):
         self.ww, self.wh = finestra
@@ -608,7 +588,7 @@ class Rotella(Tondo):
                 ([{'command': 'sketch.rectangle.two_point', 'params': {'p0': [f'-({ww})', f'corona_r - ({wh})'], 'p1': [ww, f'corona_r + {wh}']}}], fin)]
 
     def adesivo(self):
-        a = super().adesivo()
+        a = super().adesivo().difference(disco(P['mozzo_r'] + P['gioco_carta']))
         ww, wh = self.ww / 2, self.wh / 2
         return a.difference(box(-ww, P['corona_r'] - wh, ww, P['rotella_d']))
 
@@ -728,42 +708,26 @@ def hex_local(vals, apotema):
     return Polygon([(r * math.cos(math.radians(90 + 60 * k)), r * math.sin(math.radians(90 + 60 * k))) for k in range(6)])
 
 
-class Cripta:
-    """segnalino Cripta: esagono con la tasca sopra per la carta esagonale da passo (mappa_fiori.pdf, foglio 3). Sporge
-    di gioco_carta + bordino oltre l'esagono della mappa: è un segnalino che si appoggia sopra."""
+class Cripta(Piatto):
+    """segnalino Cripta: esagono liscio sopra; l'adesivo è la carta esagonale da passo (25,2, come l'esagono della mappa e
+    la carta di mappa_fiori.pdf), il pezzo è margine_adesivo per lato più grande (25,6 da lato a lato)."""
     nome = 'segnalino_cripta'
 
     def __init__(self):
-        self.contorno = linearize(lambda v: hex_local(v, v['passo'] / 2 + v['gioco_carta'] + v['bordino']), ['passo', 'gioco_carta', 'bordino'])[0]
-        self.tasca = linearize(lambda v: hex_local(v, v['passo'] / 2 + v['gioco_carta']), ['passo', 'gioco_carta'])[0]
+        self.contorno = linearize(lambda v: hex_local(v, v['passo'] / 2 + v['margine_adesivo']), ['passo', 'margine_adesivo'])[0]
 
-    def expected(self):
-        F = hex_local(P, P['passo'] / 2 + P['gioco_carta'] + P['bordino'])
-        T = hex_local(P, P['passo'] / 2 + P['gioco_carta'])
-        H = P['segnalino_spessore']
-        b = F.bounds
-        return chamfered_volume(F, P['smusso'], H) - T.area * P['tasca_prof'], [round(b[2] - b[0], 4), round(b[3] - b[1], 4), H]
+    def schizzo(self, d):
+        return [sketch_poly(self.contorno)]
 
-    def commands(self, body=None):
-        body = body or self.nome
-        H = P['segnalino_spessore']
-        cs = list(hex_local(P, P['passo'] / 2 + P['gioco_carta'] + P['bordino']).exterior.coords)
-        mids = [((a[0] + b[0]) / 2, (a[1] + b[1]) / 2) for a, b in zip(cs, cs[1:])]
-        return [
-            {'command': 'sketch.create', 'params': {'plane': 'XY', 'name': 'Esagono'}}, sketch_poly(self.contorno),
-            {'command': 'sketch.finish', 'params': {}},
-            {'command': 'solid.extrude', 'params': {'distance': 'segnalino_spessore', 'operation': 'new', 'name': 'Esagono', 'body_name': body}},
-            {'command': 'solid.chamfer', 'params': {'edges': [[x, y, z] for z in (0.0, H) for x, y in mids], 'distance': 'smusso',
-                                                    'tangent_chain': False, 'body': body, 'name': 'Smussi'}},
-            {'command': 'sketch.create', 'params': {'plane': 'XY', 'offset': 'segnalino_spessore', 'name': 'Tasca'}}, sketch_poly(self.tasca),
-            {'command': 'sketch.finish', 'params': {}},
-            {'command': 'solid.extrude', 'params': {'distance': 'tasca_prof', 'direction': 'negative', 'operation': 'cut', 'name': 'Tasca',
-                                                    'targets': [body]}},
-        ]
+    def forma(self, d):
+        return hex_local(P, P['passo'] / 2 + P['margine_adesivo'] - d)
 
-    def carta(self):
-        return {'tasca': 'sopra', 'pdf': 'mappa_fiori.pdf (foglio 3)', 'carta_da_lato_a_lato_mm': P['passo'],
-                'tasca_da_lato_a_lato_mm': round(P['passo'] + 2 * P['gioco_carta'], 3)}
+    def spigoli(self):
+        cs = list(self.forma(0.0).exterior.coords)
+        return [[(a[0] + b[0]) / 2, (a[1] + b[1]) / 2, 0.0] for a, b in zip(cs, cs[1:])]
+
+    def misura_carta(self):
+        return [P['passo'], P['passo']]
 
 
 # ---- vassoio -----------------------------------------------------------------------------------------------------
@@ -941,28 +905,29 @@ def costruisci(pz, tmp):
     giu = [f for f in fc if f.get('plane_normal') and f['plane_normal'][2] < -0.999]
     # fondo piatto: una sola faccia verso il basso a z = 0 (il perno ha in più il sotto del dente, sbalzo di 0,25 mm)
     fondo_piatto = (len(giu) == getattr(pz, 'facce_giu', 1) and sum(abs(f['centroid'][2]) < 1e-6 for f in giu) == 1)
-    spess = min(f['centroid'][2] for f in fc if f.get('plane_normal') and f['plane_normal'][2] > 0.999)   # fondo della tasca
+    su = [f for f in fc if f.get('plane_normal') and f['plane_normal'][2] > 0.999]
+    spess = min(f['centroid'][2] for f in su)            # faccia rivolta in su più bassa
     r = {'volume_atteso_mm3': round(vol, 3), 'volume_mm3': round(m['volume_mm3'], 3),
          'errore_volume_rel': abs(m['volume_mm3'] - vol) / vol, 'massa_pla_g': round(m['volume_mm3'] * 1.24e-3, 2),
          'ingombro_atteso_mm': bb, 'ingombro_mm': [round(m['bbox']['max'][i] - m['bbox']['min'][i], 4) for i in range(3)],
          'avvisi': warnings(out), 'file': files, 'carta': pz.carta(),
-         'facce_verso_il_basso': len(giu), 'fondo_piatto': fondo_piatto, 'spessore_sotto_la_tasca_mm': round(spess, 4)}
+         'facce_verso_il_basso': len(giu), 'fondo_piatto': fondo_piatto, 'faccia_in_su_piu_bassa_mm': round(spess, 4)}
     r['ok'] = bool(r['errore_volume_rel'] < 1e-4 and not r['avvisi'] and fok and fondo_piatto
                    and spess >= getattr(pz, 'spess_min', 1.2) - 1e-9 and abs(m['bbox']['min'][2]) < 1e-6
                    and all(abs(a - b) < 2e-3 for a, b in zip(bb, r['ingombro_mm'])))
-    if isinstance(pz, Piatto):   # tasca misurata sull'STL: ingombro delle pareti verticali alte tasca_prof sotto la faccia di sopra
-        tri = read_stl(os.path.join(OUT, pz.nome + '.stl'))
-        c = (tri.reshape(-1, 3).max(0) + tri.reshape(-1, 3).min(0)) / 2
-        H, d = tri[:, :, 2].max(), P['tasca_prof']
-        nz = np.cross(tri[:, 1] - tri[:, 0], tri[:, 2] - tri[:, 0])
-        nz = np.abs(nz[:, 2]) / np.linalg.norm(nz, axis=1)
-        pareti = tri[(nz < 1e-3) & (tri[:, :, 2].min(1) > H - d - 1e-4)]     # pareti della tasca (e del mozzo, che sta dentro)
-        w = pareti.reshape(-1, 3)[:, :2] - c[:2]
-        t = [round(float(w[:, i].max() - w[:, i].min()), 4) for i in (0, 1)]
-        a = pz.adesivo().bounds
-        g = [round((t[0] - (a[2] - a[0])) / 2, 4), round((t[1] - (a[3] - a[1])) / 2, 4) if not isinstance(pz, Rotella) else None]
-        r['carta'].update({'tasca_misurata_stl_mm': t, 'gioco_adesivo_tasca_misurato_mm': g})   # rotelle: in y c'è l'intaglio
-        r['ok'] &= all(abs(x - P['gioco_carta']) <= 0.2 for x in g if x is not None)
+    if isinstance(pz, (Piatto, Fiore)):   # sopra liscio: una sola faccia in su, a z = spessore; il suo ingombro (STL) contro l'adesivo
+        H = m['bbox']['max'][2]
+        liscio = len(su) == 1 and abs(su[0]['centroid'][2] - H) < 1e-6
+        tri = read_stl(os.path.join(OUT, pz.nome + '.stl')).reshape(-1, 3)
+        top = tri[np.abs(tri[:, 2] - H) < 1e-4][:, :2]
+        t = [round(float(top[:, i].max() - top[:, i].min()), 4) for i in (0, 1)]
+        r['carta'].update({'sopra_liscio': liscio, 'faccia_di_sopra_misurata_stl_mm': t})
+        r['ok'] &= liscio
+        if isinstance(pz, Piatto):
+            a = pz.adesivo().bounds
+            g = [round((t[0] - (a[2] - a[0])) / 2, 4), round((t[1] - (a[3] - a[1])) / 2, 4) if not isinstance(pz, Rotella) else None]
+            r['carta']['margine_adesivo_misurato_mm'] = g     # rotelle: in y c'è l'intaglio della finestra
+            r['ok'] &= all(abs(x - P['margine_adesivo']) <= 0.2 for x in g if x is not None)
     print('PEZZO', pz.nome, json.dumps({k: r[k] for k in r if k != 'file'}, ensure_ascii=False))
     snapshot(sc, os.path.join(OUT, pz.nome + '.png'), w=800, h=600)
     return r, r['ok']
@@ -1053,8 +1018,8 @@ def main():
             ris['pezzi'][pz.nome], k = costruisci(pz, tmp)
             ok &= k
 
-        # carta delle facce dei fiori per la versione 3D (facce A e B separate, taglio dentro il contorno ideale)
-        rientro = P['gioco_fiore'] + P['bordino'] + P['gioco_carta']
+        # carta delle facce dei fiori per la versione 3D: taglio margine_adesivo dentro il contorno del fiore
+        rientro = P['gioco_fiore'] + P['margine_adesivo']
         ris['carta_fiori_3d'] = carta_fiori_3d.genera(os.path.join(OUT, 'carta_fiori_3d.pdf'), rientro, tmp)
         print('CARTA', json.dumps(ris['carta_fiori_3d'], ensure_ascii=False))
 
@@ -1175,6 +1140,33 @@ def main():
         print('PROVA montaggio', json.dumps(prova, ensure_ascii=False))
         snapshot(va, os.path.join(OUT, 'verifica_vassoio_fiori.png'), 'iso', 1400, 1000)
         snapshot(va, os.path.join(OUT, 'verifica_vassoio_fiori_alto.png'), 'top', 1400, 1200)
+        # mappa in piano: quote delle facce rivolte in su degli STL dei quarti (numeri incisi, fondo dell'alloggio, fondo della
+        # tasca della carta, cornice) e sopra del fiore posato sul fondo dell'alloggio: deve stare al fondo della tasca
+        livelli = {}
+        for qt in quarti:
+            tri = read_stl(os.path.join(OUT, qt.nome + '.stl'))
+            n = np.cross(tri[:, 1] - tri[:, 0], tri[:, 2] - tri[:, 0])
+            su = (n[:, 2] / np.linalg.norm(n, axis=1)) > 0.999
+            livelli[qt.nome] = sorted({round(float(z), 4) for z in tri[su][:, :, 2].mean(1)})
+        zs = livelli[quarti[0].nome]
+        assert all(v == zs for v in livelli.values()) and len(zs) == 4, livelli
+        z_alloggio, z_carta = zs[1], zs[2]                # [incisioni, alloggio, tasca della carta, cornice]
+        h_fiore = float(np.ptp(read_stl(os.path.join(OUT, 'fiore.stl'))[:, :, 2]))
+        piano = {'facce_in_su_dei_quarti_mm': zs, 'fondo_alloggio_mm': z_alloggio, 'fondo_tasca_carta_base_mm': z_carta,
+                 'spessore_fiore_stl_mm': round(h_fiore, 4), 'sopra_del_fiore_mm': round(z_alloggio + h_fiore, 4),
+                 'differenza_mm': round(z_alloggio + h_fiore - z_carta, 4),
+                 'nota': 'carta della base e faccia del fiore dello stesso cartoncino: le due superfici stampate alla stessa quota'}
+        ris['prove']['mappa_in_piano'] = piano
+        ok &= abs(piano['differenza_mm']) < 1e-3
+        print('PROVA piano', json.dumps(piano, ensure_ascii=False))
+        # sezione dove un fiore confina con la cornice di carta (lato E/O dell'esagono, stessa riga): fiore verde, vassoio marrone
+        h, nb, s = next((h, M.HX[(M.AX[h][0] + 1, M.AX[h][1])], s) for s in sorted(M.SPAZI) for h in SPAZIO_CELLE[s]
+                        if M.HX.get((M.AX[h][0] + 1, M.AX[h][1])) in M.BASE)
+        x1, y1 = xy(centre_u(h), P)
+        x2, _ = xy(centre_u(nb), P)
+        snapshot(va, os.path.join(OUT, 'verifica_fiore_cornice_sezione.png'),
+                 {'target': [(x1 + x2) / 2, y1, 1.6], 'yaw': math.pi, 'pitch': 0.0, 'distance': 22}, 1400, 700,
+                 ['--section', f'y={y1}', '--body', f'Fiore_S{s}:color=#3a8a3a', '--body', f'vassoio_{quarter_of(nb)}:color=#8a6a4a'])
 
         # 4. presa delle code: ogni coppia di parti vicine, la seconda tirata via di SPOSTA_PROVA mm, deve urtare
         presa = []
@@ -1422,20 +1414,20 @@ def anelli_pdf(pdf, n, tmp, larghezza=0.2):
 
 
 def verifica_adesivi(pdf):
-    """ogni taglio da 0,2 mm di segnalini_3d.pdf confrontato con l'adesivo atteso (scarto di Hausdorff) e con la tasca del
-    pezzo 3D (gioco per lato = (tasca - adesivo misurato) / 2, atteso gioco_carta); conteggi per tipo; scala del segmento
-    di 100 mm misurata a 600 dpi (verifica_pdf.lunghezza_segmento)."""
+    """ogni taglio da 0,2 mm di segnalini_3d.pdf confrontato con l'adesivo atteso (scarto di Hausdorff) e con il contorno
+    del pezzo 3D (margine per lato = (contorno - adesivo misurato) / 2, atteso margine_adesivo); conteggi per tipo; scala
+    del segmento di 100 mm misurata a 600 dpi (verifica_pdf.lunghezza_segmento)."""
     sys.path.insert(0, os.path.join(QUI, '..', 'sorgenti'))
     import verifica_pdf  # noqa: E402
-    cripta = hex_local(P, P['passo'] / 2)                 # la carta della Cripta (25,2), tasca = + gioco_carta
     n = {o: c for o, _, c in oggetti_3mf()}
+    # Indizi, Forte Volontà, Usato, Stati e Cripta sono a doppia faccia (Daniele 13/11 22:36): un adesivo sopra e uno sul fondo piatto
     tipi = {'tessera (fronte e dorso)': (Tondo('t', 'tessera_d'), 2 * n['tessera_esplorazione']),
-            'segnalino tondo': (Tondo('s', 'gettone_d'), n['segnalino_indizio'] + n['segnalino_forte_volonta'] + n['segnalino_usato']),
-            'tessera Stato': (Stato(), n['tessera_stato'])}
+            'segnalino tondo (sopra e fondo)': (Tondo('s', 'gettone_d'), 2 * (n['segnalino_indizio'] + n['segnalino_forte_volonta'] + n['segnalino_usato'])),
+            'tessera Stato (sopra e fondo)': (Stato(), 2 * n['tessera_stato'])}
     for f in dict.fromkeys(f for _, f, _ in ROTELLE_3D):
         tipi[f'rotella {f[0]}x{f[1]}'] = (Rotella(f), sum(c for _, f2, c in ROTELLE_3D if f2 == f))
-    attesi = {t: (pz.adesivo(), pz.tasca()) for t, (pz, _) in tipi.items()}
-    attesi['Cripta'] = (cripta, hex_local(P, P['passo'] / 2 + P['gioco_carta']))
+    tipi['Cripta (sopra e fondo)'] = (Cripta(), 2)        # adesivo = la carta esagonale da passo (25,2)
+    attesi = {t: (pz.adesivo(), pz.forma(0.0)) for t, (pz, _) in tipi.items()}
     dims = {t: (a.bounds[2] - a.bounds[0], a.bounds[3] - a.bounds[1], len(a.interiors) > 0) for t, (a, _) in attesi.items()}
     conta = {t: 0 for t in attesi}
     peggio = {t: {'scarto_max_mm': 0.0, 'gioco_min_mm': 9.0, 'gioco_max_mm': 0.0} for t in attesi}
@@ -1465,12 +1457,13 @@ def verifica_adesivi(pdf):
                 p = peggio[t]
                 p['scarto_max_mm'] = round(max(p['scarto_max_mm'], sc), 4)
                 p['gioco_min_mm'], p['gioco_max_mm'] = round(min(p['gioco_min_mm'], gx), 4), round(max(p['gioco_max_mm'], gx), 4)
-    attesi_n = {t: c for t, (_, c) in tipi.items()} | {'Cripta': 1}
+    attesi_n = {t: c for t, (_, c) in tipi.items()}
     ok = (conta == attesi_n and all(v is not None and abs(v / 100 - 1) <= 5e-4 for v in scala)
-          and all(p['scarto_max_mm'] <= 0.2 and abs(p['gioco_min_mm'] - P['gioco_carta']) <= 0.2 and abs(p['gioco_max_mm'] - P['gioco_carta']) <= 0.2
+          and all(p['scarto_max_mm'] <= 0.2 and abs(p['gioco_min_mm'] - P['margine_adesivo']) <= 0.2 and abs(p['gioco_max_mm'] - P['margine_adesivo']) <= 0.2
                   for p in peggio.values()))
     return {'pdf': os.path.basename(pdf), 'pagine': pagine, 'segmento_100mm_misurato': [round(v, 3) if v else None for v in scala],
-            'adesivi': {t: {'trovati': conta[t], 'attesi': attesi_n[t], **peggio[t]} for t in attesi}, 'gioco_carta_atteso_mm': P['gioco_carta'], 'ok': bool(ok)}
+            'adesivi': {t: {'trovati': conta[t], 'attesi': attesi_n[t], **{k.replace('gioco', 'margine'): v for k, v in peggio[t].items()}}
+                        for t in attesi}, 'margine_adesivo_atteso_mm': P['margine_adesivo'], 'ok': bool(ok)}
 
 
 if __name__ == '__main__':

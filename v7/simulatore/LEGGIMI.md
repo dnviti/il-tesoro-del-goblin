@@ -37,7 +37,7 @@ Se `carte_mostro.csv` avesse ancora le AR v6, il simulatore applica D19 da sé e
 |---|---|
 | `sim_v7.py` | riga di comando, partite in parallelo, rapporto |
 | `regole.py` | preparazione (§3), turno, movimento, esplorazione, Imprevisti, rifornimento delle tessere Esplorazione, Fine |
-| `stato.py` | eroe, mano massima (D8), pesca e riciclo, bottino dei mostri, Stati, slot e PL, D6 della perdita (D7), sconfitta, Indizi e tesoro |
+| `stato.py` | eroe, mano massima (D8), pesca e riciclo, bottino dei mostri, Stati, slot e PL, D6 della perdita (D7), sconfitta, Ristoro (D32), Indizi e tesoro |
 | `catena.py` | catene (D4/D9): giro orario, 1 carta per giocatore per catena, 2 per periodo, LIFO, tiri che aprono catene, momenti M0–M6 |
 | `tiri.py` | tiri, ritiri con penalità cumulativa (D1), vantaggio, dado in più, Profezie (R 13.5) |
 | `scontro.py` | iniziativa, colpo e danno, fuga, ricompense (D11: bottino, Indizio), custode, Duello |
@@ -170,8 +170,8 @@ Sostituiscono la parte mano/mazzetto di D22, R 3.6, R 3.7, R 12.1–12.3 e le ri
   scelta approvata da Daniele). `--mano-ia` ignora la tabella e fa scegliere le 5 carte all'IA (`ia.mano_iniziale`:
   per valore, al massimo 4 della propria direzione); una classe senza voce nella tabella fa lo stesso.
 - **Niente pesca a inizio turno**, nemmeno al primo, e niente pesca automatica dalla pila di classe. Le carte
-  arrivano dal bottino, dalle carte che dicono «pesca» (dal mazzo comune) e dalla sconfitta (pesca 1 carta,
-  invariata). Dalla pila di classe pesca solo un testo che lo dice (CO-11, valore esatto della Profezia):
+  arrivano dal bottino, dalle carte che dicono «pesca» (dal mazzo comune) e dal Ristoro (D32: pesca 1 carta dopo ogni
+  esito non vinto, sconfitta compresa). Dalla pila di classe pesca solo un testo che lo dice (CO-11, valore esatto della Profezia):
   `S.pesca(..., dalla_pila=True)`, con pila vuota → mazzo comune (R 12.6).
 - **Bottino** (`stato.loot`): chi sconfigge un mostro dei mazzetti 1 e 2 rivela le prime 3 carte del mazzo comune, ne
   tiene 1 (l'IA la migliore, `ia._val_mano`) e mette le altre 2 coperte in fondo al mazzo comune. Niente bottino per
@@ -256,3 +256,37 @@ Vittorie per classe, prima → dopo (2 / 3 / 4 giocatori): Assaltatore 55→53 /
 20→22 %, Stregone 56→39 / 32→30 / 26→24 %, Oracolo 49→48 / 33→33 / 24→24 %, Giullare 46→35 / 31→24 / 21→19 %. Gli
 Indizi persi sono quasi tutti alla riserva (sconfitte per creature e Trappole), quindi la partita si allunga di circa
 9 / 8 / 6 round.
+
+## D32, il Ristoro (13/11, Daniele)
+
+- **Regola**: alla **Fine** del turno di ogni eroe che ha combattuto (mostro o Duello, qualunque esito) c'è il **Ristoro**.
+  Si tira **sempre** il D6 della perdita (un Equipaggiamento può rompersi): vittoria, sconfitta, fuga dell'eroe, fuga del
+  mostro. Poi: vinto un mostro dei mazzetti 1–2 → bottino (prime 3 carte comuni, ne tiene 1, 2 in fondo, come prima);
+  ogni esito non vinto (sconfitta, fuga dell'eroe, il mostro scappa dopo 3 attacchi o sparisce) → pesca 1 carta comune.
+  La sconfitta aggiunge: Partenza, Danni a 0, perde 1 Indizio (D31). Il vecchio D6 e la pesca della sconfitta **sono** il
+  Ristoro: niente doppio tiro né doppia carta. Boss, custode e Duello vinti: solo il D6.
+- **Duello**: il vincitore prende **1 carta a caso, coperta, dalla mano dello sconfitto** (mano massima 10; se la mano è
+  vuota niente) più l'Indizio e la Forte Volontà (prima: la carta migliore dagli scarti). Lo sconfitto è sconfitto
+  (Partenza, Indizio al vincitore); tutti e due fanno il Ristoro (D6), lo sconfitto pesca anche 1 carta.
+- **Codice**: `stato.ristoro_segna(g, eroe, cosa, senza_d6)` (chiamata da `scontro.scontro`/`scontro.duello` e da
+  `stato.sconfitta` quando l'eroe è in uno scontro) annota in `g.ristoro`; `stato.ristoro(g, eroe)`, chiamata da
+  `regole.fine` dopo l'eventuale D6 di TI-26, tira il D6, fa il bottino e pesca. Il bottino non è più immediato.
+  Anche lo sfidato di un Duello fa il Ristoro nella Fine del turno dello sfidante. La sconfitta fuori da uno scontro
+  (Trappola, carte, effetti) non è un Ristoro e resta D6 + pesca 1 subito. TC-01 (Assaltatore, non tira il D6 della
+  perdita alla sconfitta) salta anche il D6 del Ristoro in quel caso. Lo scontro annullato dal cambio di mappa non dà
+  Ristoro; il mostro sparito (TI-41) vale come mostro scappato. Il rapporto stampa i Ristori, gli oggetti persi e le
+  carte pescate nel Ristoro a partita.
+
+Confronto (13/11, 1000 partite per tavolata, seme 1, mani predefinite; prima di D32 → con D32):
+
+| | 2 / 3 / 4 giocatori |
+|---|---|
+| Round (partite finite) | 22,7 / 19,7 / 16,9 → 24,8 / 22,4 / 19,8 |
+| Finite col custode (le altre in stallo a 60 round) | 84,4 / 94,6 / 98,8 % → 83,9 / 92,6 / 97,3 % |
+| Round del 3° Indizio | 13,6 / 10,9 / 9,5 → 13,9 / 11,0 / 9,3 |
+| Ristori a partita | – → 37,1 / 44,8 / 49,0 (oggetti persi 23,3 / 28,5 / 31,1) |
+
+Vittorie per classe, prima → dopo (2 / 3 / 4 giocatori): Assaltatore 53→47 / 43→37 / 35→31 %, Ricercatore 37→42 / 28→31 /
+22→21 %, Stregone 39→39 / 30→27 / 24→21 %, Oracolo 48→46 / 33→33 / 24→26 %, Giullare 35→36 / 24→26 / 19→23 %. Il D6
+a ogni scontro rompe molti oggetti (circa 23–31 per partita) e la partita si allunga di circa 2–3 round; il calo
+dell'Assaltatore è probabilmente dovuto agli Equipaggiamenti persi (ipotesi, non misurata).

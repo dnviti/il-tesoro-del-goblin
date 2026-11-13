@@ -11,14 +11,14 @@ Dal 13/11 (D29: i 24 segnaposto «?» non ci sono più) sono in 3D anche **tutti
 | Pezzo | Quanti | Ingombro (mm) | PLA |
 |---|---|---|---|
 | `vassoio_NO`, `vassoio_NE`, `vassoio_SO`, `vassoio_SE` | 1 per tipo | 174,4 × 144,9 × 3,2 al massimo, code comprese | 49-56 g l'uno, 210 g in tutto |
-| `fiore` | 14 | 75,2 × 72,3 × 3 | 9,6 g |
-| `segnalino_cripta` | 1 | 27,4 × 31,6 × 2 (esagono) | 1,2 g |
-| `tessera_esplorazione` | 36 | Ø 24 × 2 | 0,9 g |
-| `segnalino_tondo` (oggetti `segnalino_indizio`, `segnalino_forte_volonta`, `segnalino_usato`) | 16 + 4 + 20 | Ø 20 × 2 | 0,6 g |
-| `tessera_stato` | 31 | 26 × 18 × 2 | 0,9 g |
-| `rotella_finestra_11x9` (oggetti `rotella_PV`, `_ATT`, `_MOV`, `_AR`, `_scontro`, `_custode`) | 4 + 4 + 4 + 4 + 1 + 1 | Ø 52 × 2 | 3,9 g |
-| `rotella_finestra_9x9` (oggetti `rotella_Danni`, `rotella_PL`) | 4 + 4 | Ø 52 × 2 | 3,9 g |
-| `rotella_finestra_10x9` (oggetto `rotella_Profezia`) | 1 | Ø 52 × 2 | 3,9 g |
+| `fiore` | 14 | 75,2 × 72,3 × 1,5 | 7,0 g |
+| `segnalino_cripta` | 1 | 25,6 × 29,6 × 2 (esagono) | 1,4 g |
+| `tessera_esplorazione` | 36 | Ø 24 × 2 | 1,1 g |
+| `segnalino_tondo` (oggetti `segnalino_indizio`, `segnalino_forte_volonta`, `segnalino_usato`) | 16 + 4 + 20 | Ø 20 × 2 | 0,8 g |
+| `tessera_stato` | 31 | 26 × 18 × 2 | 1,1 g |
+| `rotella_finestra_11x9` (oggetti `rotella_PV`, `_ATT`, `_MOV`, `_AR`, `_scontro`, `_custode`) | 4 + 4 + 4 + 4 + 1 + 1 | Ø 52 × 2 | 5,0 g |
+| `rotella_finestra_9x9` (oggetti `rotella_Danni`, `rotella_PL`) | 4 + 4 | Ø 52 × 2 | 5,0 g |
+| `rotella_finestra_10x9` (oggetto `rotella_Profezia`) | 1 | Ø 52 × 2 | 5,0 g |
 | `perno` | 27 | Ø 10 × 5,55 | 0,12 g |
 | `fermo` | 27 | Ø 12 × 1,2 | 0,13 g |
 
@@ -28,17 +28,17 @@ Dal 13/11 (D29: i 24 segnaposto «?» non ci sono più) sono in 3D anche **tutti
   - Sopra ha una **tasca per la carta della base**: è `mappa_base.pdf` con le coordinate, ritagliata lungo il contorno d'ottone degli spazi.
   - Sul fondo dell'alloggio sono **incisi il numero di ogni spazio e le cifre 1-6 dell'anello**, come sulla carta della base, che lì viene tolta. Servono per la freccia dei preset.
   - Le 4 parti si uniscono con **code a pomello** nel fondo, lungo i lati degli esagoni. Una coda per lato del taglio: 23 tra NO e le altre, 11 tra NE e SE, 11 tra SO e SE.
-- **Fiore**: rosetta **senza incastri**, spessa 3 mm. Sporge 1 mm dal vassoio, così si prende con le dita.
-  - **Fondo piatto** (12/11, Daniele dopo la prima stampa): la tasca per la carta c'è **solo sopra**, profonda 0,5, con 2,5 mm di pieno sotto. Il fiore 3D quindi non si volta: porta una sola faccia.
-  - Entra in qualsiasi spazio, girato di 60° in 60°.
-  - Gli spigoli sono smussati di 0,4 mm, sopra e sotto.
-- **Segnalino Cripta**: tasca sopra per la carta del foglio 3 di `mappa_fiori.pdf` (esagono da 25,2; le due facce sono uguali). Sporge di 1,1 mm per lato oltre l'esagono della mappa: è un segnalino che si appoggia sopra.
+- **Pezzi lisci sopra** (Daniele, 13/11 21:28: supera la regola «bordino + tasca sopra»): fiori, tessere, Stati, segnalini, Cripta e rotelle hanno la **faccia di sopra liscia fino al bordo**, senza bordino, senza tasca e senza smusso; l'adesivo si incolla sopra ed è **0,2 mm più piccolo per lato** (`margine_adesivo`, tolleranza di incollaggio). Sotto: fondo piatto con smusso di 0,4. Solo il vassoio ha ancora la tasca per la carta.
+- **Fiore**: rosetta **senza incastri**, spessa **1,5 mm = `alloggio_prof` − `tasca_prof`**: posato sul fondo dell'alloggio (z = 1,2) ha il sopra a z = 2,7, **la stessa quota del fondo della tasca della carta della base**. Con la faccia del fiore e la carta della base dello stesso cartoncino, la mappa stampata è in piano. Gioco laterale 0,2 per lato, nessun gioco in altezza (il fiore appoggia sul fondo).
+  - Porta una sola faccia (sopra). Entra in qualsiasi spazio, girato di 60° in 60°.
+  - Si prende spingendo su un lato o capovolgendo il vassoio: non sporge più.
+- **Segnalino Cripta**: esagono da 25,6 da lato a lato, liscio sopra; si incolla sopra la carta esagonale da 25,2 (`mappa_fiori.pdf`, foglio 3, o `segnalini_3d.pdf`). Sporge 0,2 per lato oltre l'esagono della mappa.
 - **Segnalini del kit in 3D** (tessere Esplorazione, Indizio, Forte Volontà, Usato, tessere Stato, dischi delle rotelle):
   - il **contorno è esattamente quello del pezzo di carta** (Ø 24, Ø 20, 26 × 18 con angoli da 1,2, Ø 52), così il pezzo 3D sta negli stessi posti della carta: esagono della mappa, cerchi Ø 22 e riquadri degli Stati della plancia, corone delle rotelle;
-  - fondo piatto, smusso di 0,4 sopra e sotto, **bordino da 0,85 e tasca sopra profonda 0,5** (stessa regola dei fiori): l'adesivo è la tasca meno 0,25 per lato, cioè 2,2 mm più piccolo del pezzo di carta (Ø 21,8, Ø 17,8, 23,8 × 15,8, corona Ø 49,8);
+  - adesivi: Ø 23,6, Ø 19,6, 25,6 × 17,6, corona Ø 51,6;
   - la **tessera Stato è rettangolare** come la carta: si vede se è verticale o orizzontale;
-  - la **tessera Esplorazione** porta il fronte nella tasca sopra e il **dorso incollato sul fondo piatto** (adesivo Ø 21,8 al centro, 1,1 mm di margine): coperta mostra il dorso;
-  - la **rotella** ha la **finestra passante** a 20 mm dal centro, grande quanto quella del disco di carta + 0,25 per lato (l'adesivo, intagliato sulla finestra di carta, copre il bordo della plastica), e un **mozzo pieno** di raggio 6,25 al centro col foro Ø 3,8 del perno: l'adesivo è una corona con il foro Ø 13 e l'intaglio della finestra aperto verso il bordo.
+  - la **tessera Esplorazione** porta il fronte sopra e il **dorso incollato sul fondo piatto** (adesivo Ø 23,6: sul fondo sporge 0,2 mm sullo smusso di 0,4, quindi va incollato bene al centro): coperta mostra il dorso;
+  - la **rotella** ha la **finestra passante** a 20 mm dal centro, grande quanto quella del disco di carta + 0,25 per lato (l'adesivo, intagliato sulla finestra di carta, copre il bordo della plastica), e il foro Ø 3,8 del perno: l'adesivo è una corona con il foro Ø 13 (lì il fermo appoggia sulla plastica) e l'intaglio della finestra aperto verso il bordo.
 - **Perno della rotella** in 2 pezzi a scatto (uno per rotella, 27):
   - **perno**: testa Ø 10 × 0,8 **sotto la plancia**, fusto Ø 3,4 che passa nel foro Ø 4 della plancia e nel foro Ø 3,8 della rotella, **gola** Ø 2,9 sopra il mozzo, **dente** Ø 3,4 e punta a cono a 45°. Si stampa in piedi sulla testa; l'unico sbalzo è il sotto del dente, 0,25 mm in orizzontale;
   - **fermo**: disco Ø 12 × 1,2 con **2 ganasce a sbalzo** (lunghe 4,2, larghe 1 alla radice, fessure da 0,7) che si aprono **nel piano** quando la punta ci passa in mezzo e si richiudono nella gola. Si stampa piatto, su una faccia qualsiasi;
@@ -63,20 +63,22 @@ Prima ho fatto e controllato pezzi a incastro, con una coda e un incavo su ogni 
   - **Scala**: `verifica_pdf.py` misura a 600 dpi il segmento di 100 mm di ogni foglio (errore oltre lo 0,05 %). I PDF di `vectorcraft-cli` sono esatti (100 mm = 100,00 mm): lo 0,12 % che si vedeva con `pdftocairo -svg` era un artefatto di quello strumento (aggiunge una matrice 0,998785 che nel PDF non c'è).
   - Il vassoio non è cambiato. `mappa_base.pdf` (base intera con l'interno, con segmento di controllo di 100 mm) si genera sempre e serve per la versione carta e per i test.
 - **Fiori**: `out/carta_fiori_3d.pdf`, 5 fogli A4, **solo fronte**, 28 facce, una per pezzo.
-  - La **linea di taglio è 1,3 mm dentro il contorno ideale**: 0,2 di gioco del fiore, 0,85 di bordino e 0,25 di gioco della carta.
-  - La faccia tagliata misura 73,0 × 69,7 mm.
+  - La **linea di taglio è 0,4 mm dentro il contorno ideale**: 0,2 di gioco del fiore e 0,2 di `margine_adesivo`.
   - La freccia d'ottone e l'id piccolo sono spostati dentro la linea di taglio.
-  - Si incolla una faccia nella tasca sopra del fiore 3D. Per avere anche le facce B servono altri 14 fiori 3D.
+  - Si incolla una faccia sopra il fiore 3D (liscio). Per avere anche le facce B servono altri 14 fiori 3D.
   - Il PDF usa il disegno di `sorgenti/componenti_gen/fiori12.py`: vettoriale, oppure l'arte generata `sorgenti/arte/png/MF-<NN><A|B>.png` se c'è (`GOBLIN_ARTE_MAPPA=CARTELLA` per un'altra cartella). Senza arte `mappa_fiori.pdf` e `carta_fiori_3d.pdf` restano uguali.
-- **Cripta**: la carta di `mappa_fiori.pdf`, foglio 3 (anche in `segnalini_3d.pdf`), tagliata sulla sua linea. Tasca esagonale da 25,7, profonda 0,5.
-- **Adesivi dei segnalini e delle rotelle**: `playtest_v7/segnalini_3d.pdf`, 6 fogli A4 solo fronte, ognuno col segmento di controllo di 100 mm. Lo genera `gen.py segnalini_3d()` dentro `build.sh` (misure delle tasche lette da questo script, `G3.P`):
-  1. fronti delle 36 Tessere Esplorazione (Ø 21,8) e la carta della Cripta;
-  2. dorsi delle 36 tessere (Ø 21,8, da incollare sul fondo piatto);
-  3. 31 tessere Stato (23,8 × 15,8) e 40 segnalini tondi (Ø 17,8: 16 Indizio, 4 Forte Volontà, 20 Usato);
-  4. e 5. le 6 rotelle di 2 plance per foglio (PV, Danni, ATT, MOV, AR, PL), corone Ø 49,8 col foro Ø 13 e l'intaglio della finestra;
-  6. rotelle dello scontro, del custode e della Profezia.
-  - L'arte è quella dei pezzi di carta: tessere e segnalini in scala uniforme (0,908 e 0,89), Stati in scala 23,8/26 × 15,8/18 (la larghezza cresce del 4 % rispetto all'altezza), rotelle in scala 1 (la finestra deve stare sulla corona della plancia) tagliate sulla corona dell'adesivo.
-  - **Controllo**: `python3 v7/stampa/3d_solidcraft/genera_3d_solidcraft.py --verifica-adesivi playtest_v7/segnalini_3d.pdf` legge ogni linea di taglio (tratto da 0,2 mm) dal PDF, la confronta con l'adesivo atteso (scarto di Hausdorff), misura il gioco per lato verso la tasca, conta gli adesivi per tipo e misura a 600 dpi il segmento di 100 mm di ogni foglio. Esce con errore oltre 0,2 mm o con conteggi sbagliati.
+- **Cripta**: la carta di `mappa_fiori.pdf`, foglio 3 (anche in `segnalini_3d.pdf`), tagliata sulla sua linea (25,2) e incollata sopra il segnalino 3D da 25,6.
+- **Adesivi dei segnalini e delle rotelle**: `playtest_v7/segnalini_3d.pdf`, 9 fogli A4 solo fronte, ognuno col segmento di controllo di 100 mm. Lo genera `gen.py segnalini_3d()` dentro `build.sh` (misure lette da questo script, `G3.P`). Ogni adesivo è il contorno del pezzo 3D meno `margine_adesivo` (0,2) per lato. **Indizi, Forte Volontà, Usato, Stati e Cripta sono a doppia faccia** (Daniele 13/11 22:36): un adesivo sopra e uno uguale sul fondo piatto (Stati con la stessa orientazione):
+  1. fronti delle 36 Tessere Esplorazione (Ø 23,6) e la carta della Cripta (sopra);
+  2. dorsi delle 36 tessere (Ø 23,6, da incollare sul fondo piatto) e la Cripta per il fondo;
+  3. 31 tessere Stato (25,6 × 17,6), sopra;
+  4. le stesse 31 tessere Stato per il fondo;
+  5. 40 segnalini tondi (Ø 19,6: 16 Indizio, 4 Forte Volontà, 20 Usato), sopra;
+  6. gli stessi 40 segnalini per il fondo;
+  7. e 8. le 6 rotelle di 2 plance per foglio (PV, Danni, ATT, MOV, AR, PL), corone Ø 51,6 col foro Ø 13 e l'intaglio della finestra;
+  9. rotelle dello scontro, del custode e della Profezia.
+  - L'arte è quella dei pezzi di carta: tessere e segnalini in scala uniforme (0,983 e 0,98), Stati in scala 25,6/26 × 17,6/18, rotelle in scala 1 (la finestra deve stare sulla corona della plancia) tagliate sulla corona dell'adesivo.
+  - **Controllo**: `python3 v7/stampa/3d_solidcraft/genera_3d_solidcraft.py --verifica-adesivi playtest_v7/segnalini_3d.pdf` legge ogni linea di taglio (tratto da 0,2 mm) dal PDF, la confronta con l'adesivo atteso (scarto di Hausdorff), misura il margine per lato verso il contorno del pezzo (atteso 0,2), conta gli adesivi per tipo e misura a 600 dpi il segmento di 100 mm di ogni foglio. Esce con errore oltre 0,2 mm o con conteggi sbagliati.
 - **Plancia eroe e basi delle rotelle** (svg.py `dial_ring`): al centro di ogni corona c'è il cerchio **Ø 4** del foro per il perno 3D (col punteruolo al centro resta buono per il fermacampioni). Il foro Ø 4 si fa con una fustella da pelle o un punteruolo largo; la testa Ø 10 del perno lo copre.
 
 ## File
@@ -129,7 +131,7 @@ python3 v7/stampa/3d_solidcraft/render_3d.py [segnalini|piatto|plancia|mappa ...
 ```
 
 Da lanciare dopo `genera_3d_solidcraft.py` e la build A4 del kit (usa `playtest_v7/segnalini_3d.pdf`, `carta_base_3d.pdf`, `plance_eroe.pdf` e `out/carta_fiori_3d.pdf`). Circa 2 minuti. Solo SolidCraft: la scena si costruisce con le classi del generatore, ogni corpo riceve una texture «base color» proiettata dall'alto (`render.surface.import`, frame in mm del mondo) e `solidcraft-cli render` fa il ray tracing CPU.
-- La texture di un pezzo è grande quanto il suo ingombro: colore del filamento, con l'arte della carta esattamente dove sta la carta. Adesivi ritagliati da `segnalini_3d.pdf` (300 dpi) sulla loro linea di taglio letta dal PDF e centrati nella tasca; facce dei fiori da `carta_fiori_3d.pdf`, girate come nel preset (60° × (freccia − 1)); cornice della base dal foglio del quarto di `carta_base_3d.pdf`, con la sua traslazione; plancia da `plance_eroe.pdf`, in 4 pezzi. Carta a faccia in su: niente specchi.
+- La texture di un pezzo è grande quanto il suo ingombro: colore del filamento, con l'arte della carta esattamente dove sta la carta. Adesivi ritagliati da `segnalini_3d.pdf` (300 dpi) sulla loro linea di taglio letta dal PDF e centrati sulla faccia di sopra; facce dei fiori da `carta_fiori_3d.pdf`, girate come nel preset (60° × (freccia − 1)); cornice della base dal foglio del quarto di `carta_base_3d.pdf`, con la sua traslazione; plancia da `plance_eroe.pdf`, in 4 pezzi. Carta a faccia in su: niente specchi.
 - Le tessere coperte sono capovolte e mostrano il dorso incollato sul fondo piatto.
 - **Limiti di SolidCraft** (0.41): al massimo 32 immagini diverse per scena (le copie dello stesso adesivo usano la stessa immagine), 1024 × 1024 px l'una e un tetto di memoria del ray tracing: lo script riduce tutte le texture in proporzione fino a 6 milioni di pixel per scena. Sul vassoio e sui fiori la carta resta a circa 4-5 px/mm: si legge nei render, non negli ingrandimenti. La proiezione è dall'alto: i fianchi dei pezzi prendono il colore del filamento.
 
@@ -143,22 +145,23 @@ I parametri sono in cima a `genera_3d_solidcraft.py` (`PARAMETRI`, in mm): si ca
 | `gioco_fiore` | 0,2 | gioco per lato tra fiore e alloggio (0,4 tra due fiori) |
 | `fondo` | 1,2 | fondo del vassoio, che è anche l'altezza delle code |
 | `alloggio_prof` | 2 | profondità dell'alloggio dei fiori |
-| `fiore_spessore` | 3 | spessore del fiore |
-| `tasca_prof` | 0,5 | profondità delle tasche per la carta |
-| `bordino` | 0,85 | bordino tra contorno e tasca |
-| `gioco_carta` | 0,25 | gioco per lato tra carta e tasca |
+| `fiore_spessore` | 1,5 | spessore del fiore = `alloggio_prof` − `tasca_prof` (lo script lo controlla): sopra del fiore alla quota del fondo della tasca della carta |
+| `tasca_prof` | 0,5 | profondità della tasca per la carta della base (solo nel vassoio) |
+| `bordino` | 0,85 | bordino del vassoio oltre la tasca della carta della base |
+| `gioco_carta` | 0,25 | gioco per lato tra carta e tasca del vassoio, e tra finestra di carta e finestra della rotella |
+| `margine_adesivo` | 0,2 | margine per lato tra il contorno dei pezzi lisci e l'adesivo incollato sopra |
 | `fascia_carta` | 5,5 | fascia della carta della base (`FASCIA12` del kit) |
 | `segnalino_spessore` | 2 | spessore di Cripta, tessere, segnalini e Stati |
 | `tessera_d`, `gettone_d` | 24 / 20 | diametro delle Tessere Esplorazione e dei segnalini tondi (come la carta) |
 | `stato_l`, `stato_a`, `stato_r` | 26 / 18 / 1,2 | tessera Stato e raggio degli angoli (come la carta) |
 | `rotella_d`, `corona_r`, `rotella_spessore` | 52 / 20 / 2 | disco della rotella, distanza della finestra dal centro, spessore |
-| `mozzo_r` | 6,25 | mozzo pieno al centro della rotella, dove appoggia il fermo |
+| `mozzo_r` | 6,25 | zona al centro della rotella senza adesivo, dove il fermo appoggia sulla plastica |
 | `foro_perno`, `perno_d`, `collo_d` | 3,8 / 3,4 / 2,9 | foro della rotella, fusto e dente del perno, gola |
 | `testa_d`, `testa_h` | 10 / 0,8 | testa del perno, sotto la plancia |
 | `carta_plancia` | 0,3 | spessore della plancia di cartoncino: con 0,1-0,45 il fermo scatta ancora |
 | `fermo_d`, `fermo_h` | 12 / 1,2 | fermo del perno |
 | `gioco_assiale` | 0,15 | aria tra fermo e dente con la plancia da 0,3 |
-| `smusso` | 0,4 | smusso degli spigoli di fiore e segnalini |
+| `smusso` | 0,4 | smusso dello spigolo sotto di fiori e segnalini (sopra sono lisci fino al bordo) |
 | `raggio_angolo` | 3 | angoli esterni del vassoio |
 | `coda_collo`, `coda_testa`, `coda_lunga` | 2,6 / 4 / 3,9 | coda a pomello tra le parti, come nella versione Blender |
 | `numero_alto`, `cifra_alta`, `incisione` | 8 / 4 / 0,4 | numeri incisi sul fondo: 0,4 mm di profondità, sotto restano 0,8 mm di fondo (13/11, scelta di Daniele: prima 0,5 e 0,7 mm) |
@@ -172,8 +175,9 @@ I parametri sono in cima a `genera_3d_solidcraft.py` (`PARAMETRI`, in mm): si ca
   - tra due fiori vicini: **0,40 mm** su 81 lati, con i fiori girati di 0-300°;
   - tra fiore e parete dell'alloggio: **0,20 mm** su 86 lati. Su 4 lati la parete cade su un taglio del vassoio, che la arretra di 0,15 mm, e il gioco è 0,35 mm.
 - **Presa delle code**: tirando una parte di 0,6 mm le code urtano (3,6-4,1 mm³ di intersezione; 0,2 mm³ tra NO e SE, che hanno un solo lato in comune). Il gioco a trazione è 0,30-0,33 mm.
-- **Fondo piatto**: fiore, Cripta, tessere, segnalini, Stati, rotelle e fermo hanno una sola faccia rivolta verso il basso, a z = 0 (il perno ha in più il sotto del dente, sbalzo di 0,25 mm). Sotto la tasca restano 2,5 mm (fiore) e 1,5 mm (segnalini e rotelle). Il vassoio ha il fondo pieno: sotto la tasca della carta 2,7 mm, sotto l'alloggio 1,2 mm, **0,8 mm sotto i numeri incisi** (misurato sul 3MF: facce rivolte in su a z = 0,8 / 1,2 / 2,7 / 3,2; prima l'incisione era 0,5 mm e sotto i numeri restavano 0,7 mm). Gli incavi delle code sono tacche aperte sul bordo del taglio.
-- **Tasche dei segnalini misurate sull'STL** (vertici della faccia di sopra): tessera Ø 22,3, segnalino Ø 18,3, Stato 24,3 × 16,3, rotella Ø 50,3; con gli adesivi di `segnalini_3d.pdf` il gioco misurato è 0,249-0,252 mm per lato (atteso 0,25).
+- **Fondo piatto e sopra liscio**: fiore, Cripta, tessere, segnalini, Stati, rotelle e fermo hanno una sola faccia rivolta verso il basso, a z = 0 (il perno ha in più il sotto del dente, sbalzo di 0,25 mm), e fiore e segnalini una sola faccia rivolta verso l'alto, a z = spessore (controllato sul modello SolidCraft). Il vassoio ha il fondo pieno: sotto la tasca della carta 2,7 mm, sotto l'alloggio 1,2 mm, **0,8 mm sotto i numeri incisi**. Gli incavi delle code sono tacche aperte sul bordo del taglio.
+- **Mappa in piano** (misurato sugli STL): facce in su dei quarti a z = 0,8 / 1,2 / 2,7 / 3,2 (numeri incisi, fondo dell'alloggio, fondo della tasca della carta, cornice); fiore spesso 1,5 posato sul fondo dell'alloggio → sopra del fiore a **2,7 = fondo della tasca della carta, differenza 0,000 mm**. Con la faccia del fiore e la carta della base dello stesso cartoncino le due superfici stampate sono alla stessa quota. Sezione: `out/verifica_fiore_cornice_sezione.png` (fiore verde, vassoio marrone).
+- **Faccia di sopra misurata sull'STL**: tessera Ø 24, segnalino Ø 20, Stato 26 × 18, rotella Ø 52; con gli adesivi di `segnalini_3d.pdf` il margine misurato è 0,2 mm per lato (atteso 0,2).
 - **Perno montato** (`verifica_perno.solidcraft`, plancia da 0,3): 0 intersezioni; gioco fusto-foro della rotella **0,20 mm**, gola-sede del fermo **0,05 mm**, dente-fermo **0,15 mm** in altezza (raggi e assi dei cilindri). Alzando il fermo all'altezza del dente le ganasce lo urtano (0,27 mm³): il dente tiene. Ogni ganascia si apre di 0,20 mm quando passa il dente: deformazione alla radice ≈ 1,7 % (PLA: ~3 % al limite elastico).
 - **Parete minima**: la coda ha un collo da 2,3 mm. Il ponte sopra l'incavo è largo al massimo 4,3 mm.
 
@@ -186,7 +190,7 @@ I parametri sono in cima a `genera_3d_solidcraft.py` (`PARAMETRI`, in mm): si ca
   - l'incavo delle code è aperto sotto, con un ponte di 4,3 mm al massimo sopra;
   - attiva la compensazione del «piede d'elefante» (0,1-0,15 mm).
 - **Fiori:** si stampano su una faccia qualsiasi. In un piatto da 220 ne entrano 4 in fila (2 × 2) e fino a 6 se lo slicer li incastra tra loro: per 14 fiori servono 3-4 piatti.
-- **Segnalini, tessere, Stati e rotelle:** con la tasca in alto.
+- **Fiori, segnalini, tessere, Stati e rotelle:** col fondo (smussato) sul piatto, la faccia liscia in alto.
 - **Perni:** in piedi sulla testa, senza supporti (il dente sporge di 0,25 mm). **Fermi:** piatti; le fessure da 0,7 mm devono restare aperte (se si chiudono, ugello 0,4 e niente «ironing»).
 - **Prima prova del perno:** stampa 2 perni, 2 fermi e una rotella. Se il fermo non scatta o si spezza porta `collo_d` a 3,0 (ganasce che si aprono di meno); se scatta ma il dente non tiene porta `collo_d` a 2,8. Se la rotella gira dura porta `gioco_assiale` a 0,25.
 - **Montaggio del vassoio** (la coda sta sempre sulla parte posata prima):

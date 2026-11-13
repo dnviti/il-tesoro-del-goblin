@@ -291,8 +291,10 @@ def scontro(g, e, mid=None, custode=False):
         if custode:
             g.finita, g.vincitore = True, e
         else:
-            if nemico.tier in (1, 2):       # D11 (13/11): bottino di 3 carte comuni; la Forte Volontà non è più un premio dei mostri
-                S.loot(g, e)
+            if nemico.tier in (1, 2):       # D11, D32: il bottino si fa nel Ristoro di fine turno
+                S.ristoro_segna(g, e, 'bottino')
+            else:
+                S.ristoro_segna(g, e, 'vinto')
             if e.ha('motosega') and e.mano and ia._val_mano(e, ia.da_scartare(g, e)) <= 3:
                 S.scarta(g, e, ia.da_scartare(g, e))      # CR-17: scarta 1, ruba 1 carta a un avversario
                 S.ruba(g, e, S.leader(g, e))
@@ -305,6 +307,10 @@ def scontro(g, e, mid=None, custode=False):
         g.st['fughe'] += 1
     elif esito == 'fuga_mostro':
         g.st['fughe_mostro'] += 1
+    if esito in ('fuga', 'fuga_mostro', 'sparito'):
+        S.ristoro_segna(g, e, 'non_vinto')  # D32: l'eroe ha combattuto: Ristoro (D6 + 1 carta)
+    elif esito == 'perso':
+        S.ristoro_segna(g, e, 'sconfitta')
     if custode and nemico.pv <= 0:
         g.finita, g.vincitore = True, e
     return esito
@@ -347,8 +353,8 @@ def duello(g, a, b):
         perde.indizi -= 1
         S.prendi_indizio(g, vince, 'duelli')
         S.cripta_via(g)
-    if perde.scarti:
-        cid = max(perde.scarti, key=K.valore)
-        perde.scarti.remove(cid)
-        S.ricevi(g, vince, cid)
+    if perde.mano:                          # D32: il vincitore prende 1 carta a caso coperta dalla mano dello sconfitto
+        S.ruba(g, vince, perde)
     vince.fv = True
+    S.ristoro_segna(g, vince, 'vinto')      # D32: entrambi fanno il Ristoro (lo sconfitto pesca 1: `sconfitta`)
+    S.ristoro_segna(g, perde, 'vinto')

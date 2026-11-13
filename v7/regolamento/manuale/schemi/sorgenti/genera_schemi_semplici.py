@@ -269,24 +269,24 @@ def s7():
     # i 5 passi (R 11.4; D31: -1 Indizio)
     bw, bh, by = 84, 74, 100
     pitch = (X1 - X0 - bw) / 4
-    steps = ['Danni = PV', 'D6 della perdita', 'Partenza iniziale', 'Perdi 1 Indizio', ('Danni a 0', '+ 1 carta comune')]
+    steps = ['Danni = PV', 'Partenza iniziale', 'Perdi 1 Indizio', 'Danni a 0', ('Ristoro', 'D6 + 1 carta')]   # D32: il D6 e la carta sono il Ristoro, a fine turno
     for i, st in enumerate(steps):
         x = X0 + pitch * i; cx = x + bw / 2; cy = by + 19
         o.append(box(x, by, bw, bh, PAPER, BRASS, 1.8, 7))
         if i == 0:
             o.append(heart(cx, cy, 29, PAPER))
         elif i == 1:
-            o.append(die(cx, cy, 28, 3, PAPER, INK, 8, 2.0))
-        elif i == 2:
             hx = [(cx + 16 * math.cos(math.radians(a)), cy + 16 * math.sin(math.radians(a)), True) for a in (-90, -30, 30, 90, 150, 210)]
             o.append(poly(hx, fill=SAND, amp=.4, step=12)); o.append(P(wob(sc(hx, .82, cx, cy), .2, 12), True, 'none', BRASS, 1.2))
             o.append(pawn(cx - 4, cy + 6, 18, BLUE)); o.append(T(cx + 8, cy + 8, '1', 11, 700, INK, serif=True))
-        elif i == 3:
+        elif i == 2:
             o.append(icon('ic_indizio', cx - 9, cy, 30, 49)); o.append(T(cx + 17, cy + 5, '−1', 13, 700, RED, serif=True))
+        elif i == 3:
+            o.append(heart(cx, cy, 29, RED))
         else:
-            o.append(heart(cx - 17, cy, 24, RED)); o.append(T(cx - 1.5, cy + 4.5, '+', 13, 700, BROWN))
+            o.append(die(cx - 17, cy, 24, 3, PAPER, INK, 8, 1.8))
             o.append(icon('ic_carta', cx + 16, cy, 30, 47))
-        small = {2: ('occupata? Esagono', 'libero accanto'), 3: (f'all\'eroe che ti batte,', 'se no nella riserva')}
+        small = {1: ('occupata? Esagono', 'libero accanto'), 2: (f'all\'eroe che ti batte,', 'se no nella riserva')}
         if i in small:
             o.append(T(cx, by + 44, st, 10.5, 700))
             o.append(T(cx, by + 55, small[i][0], 9.5, 400, BROWN)); o.append(T(cx, by + 65, small[i][1], 9.5, 400, BROWN))
@@ -307,7 +307,7 @@ def s7():
     o.append(T(tr - wa + 19, ya + 10.6, ta, 9.5, 700, INK, 'start'))
     xc1 = tr - wa - 8; xc0 = xc1 - wc
     assert xc0 >= X0 + 6, 'cartellino della Cripta troppo largo'
-    o.append(tag(xc0, ya, wc, 14, tc, notch=X0 + pitch * 3 + bw / 2))
+    o.append(tag(xc0, ya, wc, 14, tc, notch=X0 + pitch * 2 + bw / 2))
     o.append(icon('ic_tesoro', xc0 + 10, ya + 7, 14, 50))
     o.append(T(xc0 + 19, ya + 10.6, tc, 9.5, 700, INK, 'start'))
     wd = tw(td, 9.5, 700) + 34
@@ -353,8 +353,8 @@ def s5():
     o.append(T((xs[4] + xs[5]) / 2, ty + 3.6, 'Niente', 10, 700, GREYT))
     o.append(T(125, 101, 'LV 1: 1–2 · LV 2: 1–3 · LV 3: 1–4 · LV 4: 1–5 · LV 5: sempre', 9, 400))
     o.append(dline((14, 107), (236, 107)))
-    # il bottino: 3 carte del mazzo comune, ne tieni 1, le altre 2 coperte in fondo
-    o.append(T(125, 120, 'Mazzetto 1 o 2: bottino!', 10, 700, BROWN))
+    # il bottino (D32: si prende al Ristoro): 3 carte del mazzo comune, ne tieni 1, le altre 2 coperte in fondo
+    o.append(T(125, 120, 'Mazzetto 1 o 2: bottino al Ristoro!', 10, 700, BROWN))
     for k in (2, 1, 0):
         o.append(box(13 + k * 1.4, 124 - k * 1.4, 17, 24, GOLDL if k == 0 else PAPER, INK, 1.3, 2.5))
     o.append(P(wob(star4(21.5, 136, 4.5, .45), .05, 20), True, BRASS, 'none', 0))
@@ -369,12 +369,12 @@ def s5():
     lines = ['Prendi le prime 3 carte', 'del mazzo comune: tienine 1,', 'le altre 2 coperte in fondo.']
     for k, t in enumerate(lines):
         o.append(T(110, 131 + 11 * k, t, 9, 400, INK, 'start'))
-    prem = ['Mazzetto 3: niente bottino', 'La carta Mostro torna in fondo al suo mazzetto', 'Solo il custode di MIMI tiene le ferite']
+    prem = ['Mazzetto 3: niente bottino', 'Ristoro: D6 della perdita sempre, anche se vinci', 'Non vinto (sconfitta, fuga): pesca 1 carta']
     for k, t in enumerate(prem):
         yy = 167 + 11 * k
         if k == 0: o.append(cross(14, yy - 3, 2.8, RED, 1.6, False))
-        elif k == 1: o.append(P(rot(rr(10.5, yy - 6, 7, 6, 1, .05, 10), -8, 14, yy - 3), True, BLUE, INK, 1.0))
-        else: o.append(heart(14, yy - 3.2, 8.5, RED))
+        elif k == 1: o.append(die(14, yy - 3.2, 9, 5, PAPER, INK, 0, 1.0))
+        else: o.append(P(rot(rr(10.5, yy - 6, 7, 6, 1, .05, 10), -8, 14, yy - 3), True, BLUE, INK, 1.0))
         o.append(T(24, yy, t, 9, 400, INK, 'start'))
     export('S5-indizio', W, H, ''.join(o))
 
@@ -404,13 +404,13 @@ def s2():
     o.append(arrow([(px, 92), (px, 117)], BROWN, 3.0, 8, 6.5, fill=COPPER))
     o.append(pawn(px, 146, 24, BLUE))
     o.append(T(px, 158, 'Tocca a', 9.5, 700)); o.append(T(px, 168, 'sinistra', 9.5, 700))
-    items = ['Ultime carte', f'Finiscono gli effetti {LQ}in questo turno{RQ}', ('Togli i tuoi Stati verticali,', 'poi gira in verticale gli orizzontali'),
+    items = ['Ultime carte', 'Ristoro se hai combattuto', f'Finiscono gli effetti {LQ}in questo turno{RQ}', ('Togli i tuoi Stati verticali,', 'poi gira in verticale gli orizzontali'),
              'Carte giocate negli scarti', 'Rifornisci le tessere']
-    yy = 118
+    yy = 114
     for t in items:
         o.append(disc(20, yy - 3, 2.3, COPPER, INK, .8, .05))
         for part in (t if isinstance(t, tuple) else (t,)):
-            o.append(T(27, yy, part, 9.5, 400, INK, 'start')); yy += 12
+            o.append(T(27, yy, part, 9.5, 400, INK, 'start')); yy += 10.8
     export('S2-turno', W, H, ''.join(o))
 
 # ================================================================ S4-scontro  515 x 170

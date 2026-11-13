@@ -93,6 +93,8 @@ def rapporto_n(n, ris):
              f"massimo {max(pvs)}; 6 o più nel {sum(v >= 6 for v in pvs) / len(pvs):.1%} dei turni")
     r.append(f"Bottino (mostri dei mazzetti 1-2 sconfitti, 1 carta tenuta su 3 rivelate): {st['loot'] / N:.2f} a partita; "
              f"riciclo degli scarti comuni {st['ricicli'] / N:.2f} a partita")
+    r.append(f"Ristoro (D32, D6 della perdita dopo ogni scontro o Duello): {st['ristori'] / N:.2f} a partita; "
+             f"oggetti persi {st['oggetti_persi'] / N:.2f} a partita; carte pescate nel Ristoro {st['ristoro_pesca'] / N:.2f} a partita")
     giri = sum(x['round'] for x in ris)
     r.append(f"Carte giocate: {st['carte_giocate'] / giri:.2f} per round (tavolo), "
              f"{st['carte_giocate'] / giri / n:.2f} per giocatore per round; fuori turno "

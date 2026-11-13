@@ -344,7 +344,8 @@
 <text x="12.00" y="281.08" font-family="Liberation Sans Narrow" font-size="2.60" fill="#2a2118" text-anchor="start" >segnalini_3d.pdf</text>
 <text x="64.00" y="281.08" font-family="Liberation Sans Narrow" font-size="2.60" fill="#2a2118" text-anchor="start" >carta adesiva o cartoncino 160 g</text>
 <text x="110.00" y="281.08" font-family="Liberation Sans Narrow" font-size="2.60" fill="#2a2118" text-anchor="start" >solo fronte, 100% (print-scaling=none)</text>
-<text x="152.00" y="281.08" font-family="Liberation Sans Narrow" font-size="2.60" fill="#2a2118" text-anchor="start" >6 fogli: fronti e dorsi delle 36 tessere, Cripta, 31</text>
-<text x="152.00" y="284.18" font-family="Liberation Sans Narrow" font-size="2.60" fill="#2a2118" text-anchor="start" >Stati, 40 segnalini, 27 rotelle</text>
-<line x1="10.00" y1="285.48" x2="200.00" y2="285.48" stroke="#c9b98f" stroke-width="0.15"/>
+<text x="152.00" y="281.08" font-family="Liberation Sans Narrow" font-size="2.60" fill="#2a2118" text-anchor="start" >9 fogli: fronti e dorsi delle 36 tessere + Cripta</text>
+<text x="152.00" y="284.18" font-family="Liberation Sans Narrow" font-size="2.60" fill="#2a2118" text-anchor="start" >(sopra e fondo), 31 Stati e 40 segnalini (un foglio</text>
+<text x="152.00" y="287.28" font-family="Liberation Sans Narrow" font-size="2.60" fill="#2a2118" text-anchor="start" >sopra e uno per il fondo), 27 rotelle</text>
+<line x1="10.00" y1="288.58" x2="200.00" y2="288.58" stroke="#c9b98f" stroke-width="0.15"/>
 </svg>

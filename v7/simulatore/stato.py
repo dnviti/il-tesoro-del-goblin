@@ -313,15 +313,21 @@ def ferisci(g, bersaglio, n, fonte):
 
 
 def sconfitta(g, e, fonte=None):
-    """Sconfitta (R 11.1, D31): perdi 1 Indizio se ne hai (`indizio_perso`), poi D6 della perdita (TC-01 Assaltatore: no).
+    """Sconfitta (R 11.1, D31, D32): perdi 1 Indizio se ne hai (`indizio_perso`), torni alla Partenza, Danni a 0.
+    In uno scontro o Duello il D6 della perdita e la carta pescata sono il Ristoro di fine turno (`ristoro`, senza doppio tiro);
+    fuori da uno scontro (Trappola, effetti) restano subito D6 e pesca 1. TC-01 Assaltatore: niente D6 della perdita.
     `fonte`: Eroe che ha inflitto i Danni (None = creatura, custode, Trappola, costo o effetto proprio)."""
     e.morti += 1
     g.st['morti'] += 1
     indizio_perso(g, e, fonte)
-    if e.classe == 'Assaltatore' and e.potere and e.pl() >= 2:
+    in_scontro = bool(g.scontro and e in g.scontro.lati())
+    senza_d6 = e.classe == 'Assaltatore' and e.potere and e.pl() >= 2
+    if senza_d6:
         e.potere = False                    # TC-01: non tira il D6 della perdita
         g.st['potere_Assaltatore'] += 1
-    else:
+    if in_scontro:
+        ristoro_segna(g, e, 'sconfitta', senza_d6)
+    elif not senza_d6:
         perdita(g, e)
     occ = {x.pos for x in g.eroi if x is not e}
     if e.partenza in occ:
@@ -330,11 +336,40 @@ def sconfitta(g, e, fonte=None):
     else:
         e.pos = e.partenza
     e.danni = 0
-    pesca(g, e)
-    if g.scontro and e in g.scontro.lati():
+    if in_scontro:
         g.scontro.finito = True
+    else:
+        pesca(g, e)
     if g.eroi[g.attivo] is e:
         g.turno_finito = True
+
+
+def ristoro_segna(g, e, cosa, senza_d6=False):
+    """D32: annota per il Ristoro di fine turno cosa è successo a `e` in uno scontro o Duello. `cosa`: 'bottino' (mostro dei
+    mazzetti 1-2 vinto: bottino), 'vinto' (vittoria senza bottino: boss, custode, Duello), 'sconfitta' (sconfitta: carta da
+    pescare), 'non_vinto' (fuga dell'eroe, fuga o sparizione del mostro: carta da pescare)."""
+    r = g.ristoro.setdefault(e, {'bottino': 0, 'carta': False, 'senza_d6': False})
+    r['senza_d6'] = r['senza_d6'] or senza_d6
+    if cosa == 'bottino':
+        r['bottino'] += 1
+    elif cosa in ('sconfitta', 'non_vinto'):
+        r['carta'] = True
+
+
+def ristoro(g, e):
+    """D32, Ristoro alla Fine del turno di chi ha combattuto (mostro o Duello, qualunque esito; anche lo sfidato di un Duello):
+    sempre il D6 della perdita (l'Equipaggiamento può rompersi); poi bottino per ogni mostro dei mazzetti 1-2 vinto,
+    e 1 carta comune pescata se c'è stato un esito non vinto (sconfitta, fuga, mostro scappato). Un solo D6 e una sola carta."""
+    for x in list(g.ristoro):
+        r = g.ristoro.pop(x)
+        g.st['ristori'] += 1
+        if not r['senza_d6']:
+            perdita(g, x)
+        for _ in range(r['bottino']):
+            loot(g, x)
+        if r['carta']:
+            pesca(g, x)
+            g.st['ristoro_pesca'] += 1
 
 
 def indizio_perso(g, e, fonte):

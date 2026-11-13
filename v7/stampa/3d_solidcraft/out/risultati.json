@@ -6,10 +6,11 @@
   "gioco_fiore": 0.2,
   "fondo": 1.2,
   "alloggio_prof": 2.0,
-  "fiore_spessore": 3.0,
+  "fiore_spessore": 1.5,
   "tasca_prof": 0.5,
   "bordino": 0.85,
   "gioco_carta": 0.25,
+  "margine_adesivo": 0.2,
   "fascia_carta": 5.5,
   "segnalino_spessore": 2.0,
   "tessera_d": 24.0,
@@ -43,10 +44,10 @@
  "piatto_ipotizzato_mm": 220.0,
  "pezzi": {
   "tessera_esplorazione": {
-   "volume_atteso_mm3": 697.564,
-   "volume_mm3": 697.564,
-   "errore_volume_rel": 9.928244480431853e-08,
-   "massa_pla_g": 0.86,
+   "volume_atteso_mm3": 898.814,
+   "volume_mm3": 898.814,
+   "errore_volume_rel": 9.852158793353142e-08,
+   "massa_pla_g": 1.11,
    "ingombro_atteso_mm": [
     24.0,
     24.0,
@@ -59,9 +60,9 @@
    ],
    "avvisi": [],
    "file": {
-    "triangoli": 5662,
+    "triangoli": 4168,
     "bordi_non_manifold": 0,
-    "volume_mm3": 697.5,
+    "volume_mm3": 898.72,
     "ingombro_mm": [
      24.0,
      24.0,
@@ -70,44 +71,41 @@
     "3mf": {
      "unita": "millimeter",
      "oggetti_mesh": 1,
-     "triangoli": 5662
+     "triangoli": 4168
     }
    },
    "carta": {
-    "tasca": "sopra",
+    "sopra": "liscio, adesivo incollato sulla faccia di sopra",
     "pdf": "segnalini_3d.pdf",
     "contorno_come_la_carta_mm": [
      24.0,
      24.0
     ],
-    "tasca_mm": [
-     22.3,
-     22.3
-    ],
     "adesivo_mm": [
-     21.8,
-     21.8
+     23.6,
+     23.6
     ],
-    "gioco_adesivo_tasca_mm": 0.25,
-    "tasca_misurata_stl_mm": [
-     22.3,
-     22.3
+    "margine_adesivo_mm": 0.2,
+    "sopra_liscio": true,
+    "faccia_di_sopra_misurata_stl_mm": [
+     24.0,
+     24.0
     ],
-    "gioco_adesivo_tasca_misurato_mm": [
-     0.25,
-     0.25
+    "margine_adesivo_misurato_mm": [
+     0.2,
+     0.2
     ]
    },
    "facce_verso_il_basso": 1,
    "fondo_piatto": true,
-   "spessore_sotto_la_tasca_mm": 1.5,
+   "faccia_in_su_piu_bassa_mm": 2.0,
    "ok": true
   },
   "segnalino_tondo": {
-   "volume_atteso_mm3": 486.888,
-   "volume_mm3": 486.888,
-   "errore_volume_rel": 9.951632664927388e-08,
-   "massa_pla_g": 0.6,
+   "volume_atteso_mm3": 623.359,
+   "volume_mm3": 623.359,
+   "errore_volume_rel": 9.861619621526684e-08,
+   "massa_pla_g": 0.77,
    "ingombro_atteso_mm": [
     20.0,
     20.0,
@@ -120,9 +118,9 @@
    ],
    "avvisi": [],
    "file": {
-    "triangoli": 3468,
+    "triangoli": 3292,
     "bordi_non_manifold": 0,
-    "volume_mm3": 486.78,
+    "volume_mm3": 623.24,
     "ingombro_mm": [
      20.0,
      20.0,
@@ -131,44 +129,41 @@
     "3mf": {
      "unita": "millimeter",
      "oggetti_mesh": 1,
-     "triangoli": 3468
+     "triangoli": 3292
     }
    },
    "carta": {
-    "tasca": "sopra",
+    "sopra": "liscio, adesivo incollato sulla faccia di sopra",
     "pdf": "segnalini_3d.pdf",
     "contorno_come_la_carta_mm": [
      20.0,
      20.0
     ],
-    "tasca_mm": [
-     18.3,
-     18.3
-    ],
     "adesivo_mm": [
-     17.8,
-     17.8
+     19.6,
+     19.6
     ],
-    "gioco_adesivo_tasca_mm": 0.25,
-    "tasca_misurata_stl_mm": [
-     18.3,
-     18.3
+    "margine_adesivo_mm": 0.2,
+    "sopra_liscio": true,
+    "faccia_di_sopra_misurata_stl_mm": [
+     20.0,
+     20.0
     ],
-    "gioco_adesivo_tasca_misurato_mm": [
-     0.25,
-     0.25
+    "margine_adesivo_misurato_mm": [
+     0.2,
+     0.2
     ]
    },
    "facce_verso_il_basso": 1,
    "fondo_piatto": true,
-   "spessore_sotto_la_tasca_mm": 1.5,
+   "faccia_in_su_piu_bassa_mm": 2.0,
    "ok": true
   },
   "tessera_stato": {
-   "volume_atteso_mm3": 721.919,
-   "volume_mm3": 721.919,
-   "errore_volume_rel": 9.614969228221787e-09,
-   "massa_pla_g": 0.9,
+   "volume_atteso_mm3": 926.72,
+   "volume_mm3": 926.72,
+   "errore_volume_rel": 4.2384566390697475e-09,
+   "massa_pla_g": 1.15,
    "ingombro_atteso_mm": [
     26.0,
     18.0,
@@ -181,9 +176,9 @@
    ],
    "avvisi": [],
    "file": {
-    "triangoli": 494,
+    "triangoli": 396,
     "bordi_non_manifold": 0,
-    "volume_mm3": 721.88,
+    "volume_mm3": 926.68,
     "ingombro_mm": [
      26.0,
      18.0,
@@ -192,44 +187,41 @@
     "3mf": {
      "unita": "millimeter",
      "oggetti_mesh": 1,
-     "triangoli": 494
+     "triangoli": 396
     }
    },
    "carta": {
-    "tasca": "sopra",
+    "sopra": "liscio, adesivo incollato sulla faccia di sopra",
     "pdf": "segnalini_3d.pdf",
     "contorno_come_la_carta_mm": [
      26.0,
      18.0
     ],
-    "tasca_mm": [
-     24.3,
-     16.3
-    ],
     "adesivo_mm": [
-     23.8,
-     15.8
+     25.6,
+     17.6
     ],
-    "gioco_adesivo_tasca_mm": 0.25,
-    "tasca_misurata_stl_mm": [
-     24.3,
-     16.3
+    "margine_adesivo_mm": 0.2,
+    "sopra_liscio": true,
+    "faccia_di_sopra_misurata_stl_mm": [
+     26.0,
+     18.0
     ],
-    "gioco_adesivo_tasca_misurato_mm": [
-     0.25,
-     0.25
+    "margine_adesivo_misurato_mm": [
+     0.2,
+     0.2
     ]
    },
    "facce_verso_il_basso": 1,
    "fondo_piatto": true,
-   "spessore_sotto_la_tasca_mm": 1.5,
+   "faccia_in_su_piu_bassa_mm": 2.0,
    "ok": true
   },
   "rotella_finestra_11x9": {
-   "volume_atteso_mm3": 3102.504,
-   "volume_mm3": 3102.504,
-   "errore_volume_rel": 1.0434877395918093e-07,
-   "massa_pla_g": 3.85,
+   "volume_atteso_mm3": 3993.249,
+   "volume_mm3": 3993.249,
+   "errore_volume_rel": 1.0364176812498591e-07,
+   "massa_pla_g": 4.95,
    "ingombro_atteso_mm": [
     52.0,
     52.0,
@@ -242,9 +234,9 @@
    ],
    "avvisi": [],
    "file": {
-    "triangoli": 2536,
+    "triangoli": 1288,
     "bordi_non_manifold": 0,
-    "volume_mm3": 3101.18,
+    "volume_mm3": 3991.68,
     "ingombro_mm": [
      52.0,
      52.0,
@@ -253,25 +245,21 @@
     "3mf": {
      "unita": "millimeter",
      "oggetti_mesh": 1,
-     "triangoli": 2536
+     "triangoli": 1288
     }
    },
    "carta": {
-    "tasca": "sopra",
+    "sopra": "liscio, adesivo incollato sulla faccia di sopra",
     "pdf": "segnalini_3d.pdf",
     "contorno_come_la_carta_mm": [
      52.0,
      52.0
     ],
-    "tasca_mm": [
-     50.3,
-     50.3
-    ],
     "adesivo_mm": [
-     49.8,
-     49.185
+     51.6,
+     51.007
     ],
-    "gioco_adesivo_tasca_mm": 0.25,
+    "margine_adesivo_mm": 0.2,
     "finestra_carta_mm": [
      11,
      9
@@ -282,25 +270,26 @@
     ],
     "foro_adesivo_mm": 13.0,
     "foro_perno_mm": 3.8,
-    "tasca_misurata_stl_mm": [
-     50.3,
-     50.2877
+    "sopra_liscio": true,
+    "faccia_di_sopra_misurata_stl_mm": [
+     52.0,
+     52.0
     ],
-    "gioco_adesivo_tasca_misurato_mm": [
-     0.25,
+    "margine_adesivo_misurato_mm": [
+     0.2,
      null
     ]
    },
    "facce_verso_il_basso": 1,
    "fondo_piatto": true,
-   "spessore_sotto_la_tasca_mm": 1.5,
+   "faccia_in_su_piu_bassa_mm": 2.0,
    "ok": true
   },
   "rotella_finestra_9x9": {
-   "volume_atteso_mm3": 3131.159,
-   "volume_mm3": 3131.16,
-   "errore_volume_rel": 1.0299182342800818e-07,
-   "massa_pla_g": 3.88,
+   "volume_atteso_mm3": 4031.249,
+   "volume_mm3": 4031.249,
+   "errore_volume_rel": 1.0266480350970666e-07,
+   "massa_pla_g": 5.0,
    "ingombro_atteso_mm": [
     52.0,
     52.0,
@@ -313,9 +302,9 @@
    ],
    "avvisi": [],
    "file": {
-    "triangoli": 2548,
+    "triangoli": 1280,
     "bordi_non_manifold": 0,
-    "volume_mm3": 3129.83,
+    "volume_mm3": 4029.68,
     "ingombro_mm": [
      52.0,
      52.0,
@@ -324,25 +313,21 @@
     "3mf": {
      "unita": "millimeter",
      "oggetti_mesh": 1,
-     "triangoli": 2548
+     "triangoli": 1280
     }
    },
    "carta": {
-    "tasca": "sopra",
+    "sopra": "liscio, adesivo incollato sulla faccia di sopra",
     "pdf": "segnalini_3d.pdf",
     "contorno_come_la_carta_mm": [
      52.0,
      52.0
     ],
-    "tasca_mm": [
-     50.3,
-     50.3
-    ],
     "adesivo_mm": [
-     49.8,
-     49.39
+     51.6,
+     51.205
     ],
-    "gioco_adesivo_tasca_mm": 0.25,
+    "margine_adesivo_mm": 0.2,
     "finestra_carta_mm": [
      9,
      9
@@ -353,25 +338,26 @@
     ],
     "foro_adesivo_mm": 13.0,
     "foro_perno_mm": 3.8,
-    "tasca_misurata_stl_mm": [
-     50.2916,
-     50.2955
+    "sopra_liscio": true,
+    "faccia_di_sopra_misurata_stl_mm": [
+     52.0,
+     52.0
     ],
-    "gioco_adesivo_tasca_misurato_mm": [
-     0.2458,
+    "margine_adesivo_misurato_mm": [
+     0.2,
      null
     ]
    },
    "facce_verso_il_basso": 1,
    "fondo_piatto": true,
-   "spessore_sotto_la_tasca_mm": 1.5,
+   "faccia_in_su_piu_bassa_mm": 2.0,
    "ok": true
   },
   "rotella_finestra_10x9": {
-   "volume_atteso_mm3": 3116.858,
-   "volume_mm3": 3116.859,
-   "errore_volume_rel": 1.0366389134016103e-07,
-   "massa_pla_g": 3.86,
+   "volume_atteso_mm3": 4012.249,
+   "volume_mm3": 4012.249,
+   "errore_volume_rel": 1.0315097260974474e-07,
+   "massa_pla_g": 4.98,
    "ingombro_atteso_mm": [
     52.0,
     52.0,
@@ -384,9 +370,9 @@
    ],
    "avvisi": [],
    "file": {
-    "triangoli": 2540,
+    "triangoli": 1282,
     "bordi_non_manifold": 0,
-    "volume_mm3": 3115.53,
+    "volume_mm3": 4010.68,
     "ingombro_mm": [
      52.0,
      52.0,
@@ -395,25 +381,21 @@
     "3mf": {
      "unita": "millimeter",
      "oggetti_mesh": 1,
-     "triangoli": 2540
+     "triangoli": 1282
     }
    },
    "carta": {
-    "tasca": "sopra",
+    "sopra": "liscio, adesivo incollato sulla faccia di sopra",
     "pdf": "segnalini_3d.pdf",
     "contorno_come_la_carta_mm": [
      52.0,
      52.0
     ],
-    "tasca_mm": [
-     50.3,
-     50.3
-    ],
     "adesivo_mm": [
-     49.8,
-     49.293
+     51.6,
+     51.111
     ],
-    "gioco_adesivo_tasca_mm": 0.25,
+    "margine_adesivo_mm": 0.2,
     "finestra_carta_mm": [
      10,
      9
@@ -424,18 +406,19 @@
     ],
     "foro_adesivo_mm": 13.0,
     "foro_perno_mm": 3.8,
-    "tasca_misurata_stl_mm": [
-     50.298,
-     50.2919
+    "sopra_liscio": true,
+    "faccia_di_sopra_misurata_stl_mm": [
+     52.0,
+     52.0
     ],
-    "gioco_adesivo_tasca_misurato_mm": [
-     0.249,
+    "margine_adesivo_misurato_mm": [
+     0.2,
      null
     ]
    },
    "facce_verso_il_basso": 1,
    "fondo_piatto": true,
-   "spessore_sotto_la_tasca_mm": 1.5,
+   "faccia_in_su_piu_bassa_mm": 2.0,
    "ok": true
   },
   "perno": {
@@ -483,7 +466,7 @@
    },
    "facce_verso_il_basso": 2,
    "fondo_piatto": true,
-   "spessore_sotto_la_tasca_mm": 0.8,
+   "faccia_in_su_piu_bassa_mm": 0.8,
    "ok": true
   },
   "fermo": {
@@ -528,94 +511,115 @@
    },
    "facce_verso_il_basso": 1,
    "fondo_piatto": true,
-   "spessore_sotto_la_tasca_mm": 1.2,
+   "faccia_in_su_piu_bassa_mm": 1.2,
    "ok": true
   },
   "fiore": {
-   "volume_atteso_mm3": 9561.646,
-   "volume_mm3": 9561.646,
-   "errore_volume_rel": 2.511662345906833e-10,
-   "massa_pla_g": 11.86,
+   "volume_atteso_mm3": 5675.464,
+   "volume_mm3": 5675.464,
+   "errore_volume_rel": 2.566778432278471e-10,
+   "massa_pla_g": 7.04,
    "ingombro_atteso_mm": [
     75.2,
     72.2843,
-    3.0
+    1.5
    ],
    "ingombro_mm": [
     75.2,
     72.2843,
-    3.0
+    1.5
    ],
    "avvisi": [],
    "file": {
-    "triangoli": 212,
+    "triangoli": 104,
     "bordi_non_manifold": 0,
-    "volume_mm3": 9561.65,
+    "volume_mm3": 5675.46,
     "ingombro_mm": [
      75.2,
      72.284,
-     3.0
+     1.5
     ],
     "3mf": {
      "unita": "millimeter",
      "oggetti_mesh": 1,
-     "triangoli": 212
+     "triangoli": 104
     }
    },
    "carta": {
-    "tasche": "solo sopra, fondo piatto",
+    "sopra": "liscio, faccia incollata sopra",
     "pdf": "carta_fiori_3d.pdf",
-    "taglio_dentro_il_contorno_ideale_mm": 1.3,
+    "taglio_dentro_il_contorno_ideale_mm": 0.4,
     "ingombro_carta_mm": [
-     73.0,
-     69.74
+     74.8,
+     71.82
+    ],
+    "sopra_liscio": true,
+    "faccia_di_sopra_misurata_stl_mm": [
+     75.2,
+     72.2843
     ]
    },
    "facce_verso_il_basso": 1,
    "fondo_piatto": true,
-   "spessore_sotto_la_tasca_mm": 2.5,
+   "faccia_in_su_piu_bassa_mm": 1.5,
    "ok": true
   },
   "segnalino_cripta": {
-   "volume_atteso_mm3": 999.315,
-   "volume_mm3": 999.315,
-   "errore_volume_rel": 6.531234694170871e-13,
-   "massa_pla_g": 1.24,
+   "volume_atteso_mm3": 1128.096,
+   "volume_mm3": 1128.096,
+   "errore_volume_rel": 6.502171111717921e-13,
+   "massa_pla_g": 1.4,
    "ingombro_atteso_mm": [
-    27.4,
-    31.6388,
+    25.6,
+    29.5603,
     2.0
    ],
    "ingombro_mm": [
-    27.4,
-    31.6388,
+    25.6,
+    29.5603,
     2.0
    ],
    "avvisi": [],
    "file": {
-    "triangoli": 68,
+    "triangoli": 32,
     "bordi_non_manifold": 0,
-    "volume_mm3": 999.32,
+    "volume_mm3": 1128.1,
     "ingombro_mm": [
-     27.4,
-     31.639,
+     25.6,
+     29.56,
      2.0
     ],
     "3mf": {
      "unita": "millimeter",
      "oggetti_mesh": 1,
-     "triangoli": 68
+     "triangoli": 32
     }
    },
    "carta": {
-    "tasca": "sopra",
-    "pdf": "mappa_fiori.pdf (foglio 3)",
-    "carta_da_lato_a_lato_mm": 25.2,
-    "tasca_da_lato_a_lato_mm": 25.7
+    "sopra": "liscio, adesivo incollato sulla faccia di sopra",
+    "pdf": "segnalini_3d.pdf",
+    "contorno_come_la_carta_mm": [
+     25.2,
+     25.2
+    ],
+    "adesivo_mm": [
+     25.2,
+     29.098
+    ],
+    "margine_adesivo_mm": 0.2,
+    "sopra_liscio": true,
+    "faccia_di_sopra_misurata_stl_mm": [
+     25.6,
+     29.5603
+    ],
+    "margine_adesivo_misurato_mm": [
+     0.2,
+     0.2309
+    ]
    },
    "facce_verso_il_basso": 1,
    "fondo_piatto": true,
-   "spessore_sotto_la_tasca_mm": 1.5,
+   "faccia_in_su_piu_bassa_mm": 2.0,
    "ok": true
   },
   "vassoio_NO": {
@@ -859,6 +863,20 @@
     300
    ]
   },
+  "mappa_in_piano": {
+   "facce_in_su_dei_quarti_mm": [
+    0.8,
+    1.2,
+    2.7,
+    3.2
+   ],
+   "fondo_alloggio_mm": 1.2,
+   "fondo_tasca_carta_base_mm": 2.7,
+   "spessore_fiore_stl_mm": 1.5,
+   "sopra_del_fiore_mm": 2.7,
+   "differenza_mm": 0.0,
+   "nota": "carta della base e faccia del fiore dello stesso cartoncino: le due superfici stampate alla stessa quota"
+  },
   "presa_code": [
    {
     "a": "vassoio_NO",
@@ -901,13 +919,12 @@
   "pdf": "carta_fiori_3d.pdf",
   "fogli": 5,
   "facce": 28,
-  "rientro_taglio_mm": 1.3,
+  "rientro_taglio_mm": 0.4,
   "carta_tagliata_mm": [
-   73.0,
-   69.74
+   74.8,
+   71.82
   ]
  },
- "ok": true,
  "file_3mf": {
   "mappa.3mf": {
    "piatti": 8,
@@ -1160,11 +1177,7 @@
      "tessera_esplorazione": 36
     }
    ]
-  },
-  "anteprima": {
-   "png": "piatto_segnalini.png",
-   "file": "segnalini.3mf",
-   "piatto": 1
   }
- }
+ },
+ "ok": true
 }

@@ -93,7 +93,7 @@ Tira **D6 + MOV**. Bosco, rocce e case no; **uscire dall'acqua** costa 1 passo i
 
 ### Lo scontro
 
-Segui lo schema. Max **3 attacchi**: poi il mostro vivo scappa, senza premi; tessera tra le usate, carta in fondo. Il custode no.
+Segui lo schema. Max **3 attacchi**: poi il mostro vivo scappa, senza premi; tessera tra le usate, carta in fondo. Il custode no. Alla Fine, se hai combattuto, fai il **Ristoro** (pagine 4 e 5).
 
 - **Ritiri:** −1 al primo, −2 al secondo…
 - **Forte Volontà** (max 1): scartala per ritirare 1 D6.
@@ -102,7 +102,7 @@ Segui lo schema. Max **3 attacchi**: poi il mostro vivo scappa, senza premi; tes
 
 ## Pagina 4 — Le carte
 
-[SCHEMA: S5-indizio — Hai vinto lo scontro? Il tiro dell'Indizio e il bottino]
+[SCHEMA: S5-indizio — Hai vinto lo scontro? Il tiro dell'Indizio e il bottino al Ristoro]
 
 [ILLUSTRAZIONE: I4-carte — vignetta: tre eroi che sbattono carte sulla stessa pila, in alto a destra]
 
@@ -128,11 +128,11 @@ Vale il testo della carta, non la battuta in corsivo. «Un avversario»: scegli 
 
 [ILLUSTRAZIONE: I5-morte — Geronimo fantasma (`morte.webp`), accanto allo schema S7]
 
-[SCHEMA: S7-perdita — Danni = PV: il D6 della perdita, il ritorno alla Partenza e l'Indizio perso]
+[SCHEMA: S7-perdita — Danni = PV: il ritorno alla Partenza, l'Indizio perso e il Ristoro (D6 della perdita e 1 carta)]
 
 ### Il Duello
 
-Ti fermi **accanto** a un eroe senza scontri, non nel primo giro? Sfidalo. Rifiuta: gli prendi 1 carta a caso. Accetta: scontro senza fuga (iniziativa pari: più MOV, poi chi sfida). Chi vince: l'Indizio dello sconfitto, 1 carta dai suoi scarti e la **Forte Volontà**.
+Ti fermi **accanto** a un eroe senza scontri, non nel primo giro? Sfidalo. Rifiuta: gli prendi 1 carta a caso. Accetta: scontro senza fuga (iniziativa pari: più MOV, poi chi sfida). Chi vince: l'Indizio dello sconfitto, 1 carta a caso dalla sua mano e la **Forte Volontà**. Poi tutti e due fanno il **Ristoro**; lo sconfitto pesca anche 1 carta.
 
 ### MIMI e la vittoria
 
@@ -184,7 +184,7 @@ In alto, in piccolo: «Carte e risposte: in ogni momento». Sotto, tre medaglion
 2. icona occhio: «2 · Esplora» / «Dove ti fermi»;
 3. icona bandierina: «3 · Fine».
 
-Dal medaglione 3 una freccia scende in un riquadro con i passi della Fine: «Ultime carte» · «Finiscono gli effetti “in questo turno”» · «Togli i tuoi Stati verticali, poi gira in verticale gli orizzontali» · «Carte giocate negli scarti» · «Rifornisci le tessere». Nel riquadro, a destra, una piccola pedina con la scritta «Tocca a sinistra». Non c'è il momento «Inizio»: dal 13/11 non si pesca a inizio turno (D27).
+Dal medaglione 3 una freccia scende in un riquadro con i passi della Fine: «Ultime carte» · «Ristoro se hai combattuto» (D32) · «Finiscono gli effetti “in questo turno”» · «Togli i tuoi Stati verticali, poi gira in verticale gli orizzontali» · «Carte giocate negli scarti» · «Rifornisci le tessere». Nel riquadro, a destra, una piccola pedina con la scritta «Tocca a sinistra». Non c'è il momento «Inizio»: dal 13/11 non si pesca a inizio turno (D27).
 
 ### S3-mappa — Muoversi sulla mappa (pagina 3, un terzo di pagina)
 
@@ -226,9 +226,9 @@ Sotto la striscia, tre righe a bollini:
 
 Titolo: «Hai vinto lo scontro?». Sotto, il tiro dell'Indizio: un bollino con la scritta «LV 3» (la carta Mostro sconfitta, girata un po' storta). Accanto, sei facce di D6 in fila, da 1 a 6. Le facce 1, 2, 3 e 4 sono verdi con una spunta e, sotto, un segnalino Indizio con «Indizio!». Le facce 5 e 6 sono grigie con «Niente». Titolo della riga: «Indizio se il D6 è pari o meno di LV + 1». Sotto, in piccolo: «LV 1: 1–2 · LV 2: 1–3 · LV 3: 1–4 · LV 4: 1–5 · LV 5: sempre».
 
-Dopo una linea tratteggiata, il bottino (D27): titolo «Mazzetto 1 o 2: bottino!». Un mazzo coperto con una freccia verso 3 carte: la prima alzata, con il bordo verde e una spunta; le altre 2 grigie con «in fondo». Accanto: «Prendi le prime 3 carte del mazzo comune: tienine 1, le altre 2 coperte in fondo.»
+Dopo una linea tratteggiata, il bottino (D27, D32): titolo «Mazzetto 1 o 2: bottino al Ristoro!». Un mazzo coperto con una freccia verso 3 carte: la prima alzata, con il bordo verde e una spunta; le altre 2 grigie con «in fondo». Accanto: «Prendi le prime 3 carte del mazzo comune: tienine 1, le altre 2 coperte in fondo.»
 
-In fondo, tre righe con un'icona: «Mazzetto 3: niente bottino», «La carta Mostro torna in fondo al suo mazzetto», «Solo il custode di MIMI tiene le ferite». La Forte Volontà non c'è più: i mostri non la danno (D27).
+In fondo, tre righe con un'icona: «Mazzetto 3: niente bottino», «Ristoro: D6 della perdita sempre, anche se vinci» (dado), «Non vinto (sconfitta, fuga): pesca 1 carta» (carta). La Forte Volontà non c'è più: i mostri non la danno (D27).
 
 ### S6-catena — Il giro delle risposte e la pila (pagina 4, mezza pagina)
 
@@ -256,7 +256,7 @@ Riquadro a parte, in basso: «Effetti automatici: potere della Carta Classe, Equ
 
 Sotto la tabella, in piccolo: «Slot vuoto? Non perdi niente. · Ogni “perdi l'equipaggiamento” usa questo D6».
 
-**In basso,** una fila di 5 passi uniti da frecce (R 11.4): «Danni = PV» (cuore vuoto) → «D6 della perdita» (dado) → «Partenza iniziale» (pedina su un esagono con il numero della Partenza; in piccolo «occupata? Esagono libero accanto», D25) → «Perdi 1 Indizio» (segnalino Indizio con «−1» rosso; in piccolo «all'eroe che ti batte, se no nella riserva»; D31) → «Danni a 0 + 1 carta comune» (cuore pieno e una carta; D30). Cartellini sotto i passi: sotto «Perdi 1 Indizio», con l'icona del forziere, «Nessuno ha più 3 Indizi? La Cripta esce con MIMI; il custode torna nel mazzetto 3» e, sotto, «Al prossimo 3° Indizio: nuovo tiro e nuovo custode» (D31); sotto l'ultimo passo «Tieni mano e Stati»; sotto, a destra, «Era il tuo turno? Vai alla Fine». Nel Duello l'Indizio perso è quello che prende il vincitore (pagina 5, «Il Duello»): uno solo.
+**In basso,** una fila di 5 passi uniti da frecce (R 11.4, R 11.7): «Danni = PV» (cuore vuoto) → «Partenza iniziale» (pedina su un esagono con il numero della Partenza; in piccolo «occupata? Esagono libero accanto», D25) → «Perdi 1 Indizio» (segnalino Indizio con «−1» rosso; in piccolo «all'eroe che ti batte, se no nella riserva»; D31) → «Danni a 0» (cuore pieno; D30) → «Ristoro · D6 + 1 carta» (un dado e una carta; D32: il D6 della perdita e la pesca della sconfitta si fanno alla Fine del turno). Cartellini sotto i passi: sotto «Perdi 1 Indizio», con l'icona del forziere, «Nessuno ha più 3 Indizi? La Cripta esce con MIMI; il custode torna nel mazzetto 3» e, sotto, «Al prossimo 3° Indizio: nuovo tiro e nuovo custode» (D31); sotto l'ultimo passo «Tieni mano e Stati»; sotto, a destra, «Era il tuo turno? Vai alla Fine». Nel Duello l'Indizio perso è quello che prende il vincitore (pagina 5, «Il Duello»): uno solo.
 
 ## Illustrazioni
 

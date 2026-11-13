@@ -10,8 +10,8 @@ genera_3d_solidcraft.py), poi dà a ogni corpo una texture «base color» proiet
 mm del mondo) e fa il render CPU (solidcraft-cli render). La texture di un corpo è un'immagine grande quanto il suo
 ingombro: colore del filamento, con sopra l'arte della carta esattamente dove sta la carta:
 - adesivi di segnalini, tessere, Stati, Cripta e rotelle: ritagliati da playtest_v7/segnalini_3d.pdf (300 dpi) sulla loro
-  linea di taglio (letta dal PDF, come --verifica-adesivi), centrati nella tasca;
-- facce dei fiori: out/carta_fiori_3d.pdf ritagliata sulla linea di taglio, nella tasca del fiore, girata come nel preset;
+  linea di taglio (letta dal PDF, come --verifica-adesivi), centrati sulla faccia di sopra (liscia);
+- facce dei fiori: out/carta_fiori_3d.pdf ritagliata sulla linea di taglio, sopra il fiore, girata come nel preset;
 - cornice della base: playtest_v7/carta_base_3d.pdf, foglio del quarto, posata con la traslazione di carta_base_3d.py;
 - plancia eroe: playtest_v7/plance_eroe.pdf, foglio 1.
 La carta si posa a faccia in su: in alto nell'immagine = +y nel mondo, nessuno specchio. Proiezione dall'alto: sui fianchi
@@ -109,12 +109,13 @@ def adesivi(tmp):
             res.append((ritaglio(img, DPI, [list(pol[0].exterior.coords)] + [list(p.exterior.coords) for p in pol[1:]], (c.x, c.y), lato), lato,
                         len(pol[0].exterior.coords)))
         return res
-    p1 = prendi(1)
+    # segnalini_3d.pdf a 9 fogli, doppia faccia: 1 fronti 36 + Cripta · 2 dorsi 36 + Cripta (fondo) · 3 Stati sopra · 4 Stati fondo ·
+    # 5 segnalini sopra · 6 segnalini fondo · 7-9 rotelle. Le texture si incollano sulla faccia di sopra: fogli «sopra».
+    p1, p2 = prendi(1), prendi(2)
     out['fronte'], out['cripta'] = p1[:36], p1[36:]
-    out['dorso'] = prendi(2)
-    p3 = prendi(3)
-    out['stato'], out['tondo'] = p3[:31], p3[31:]
-    out['rotella'] = prendi(4) + prendi(5) + prendi(6)
+    out['dorso'] = p2[:36]
+    out['stato'], out['tondo'] = prendi(3), prendi(5)
+    out['rotella'] = prendi(7) + prendi(8) + prendi(9)
     assert [len(out[k]) for k in ('fronte', 'cripta', 'dorso', 'stato', 'tondo', 'rotella')] == [36, 1, 36, 31, 40, 27], \
         {k: len(v) for k, v in out.items()}
     return out
@@ -234,9 +235,9 @@ H_SEG = P['segnalino_spessore']
 
 
 def segnalino(sc, pz, base, nome, art, x, y, z=0.0, ang=0.0, capovolto=False):
-    """pezzo piatto con l'adesivo `art` (RGBA, lato) nella tasca (o sul fondo, se capovolto)."""
+    """pezzo piatto con l'adesivo `art` (RGBA, lato) sopra (o sul fondo, se capovolto)."""
     sc.metti(pz, base, nome, x, y, z, ang, capovolto)
-    b = pz.forma(0.0).bounds if hasattr(pz, 'forma') else G.hex_local(P, P['passo'] / 2 + P['gioco_carta'] + P['bordino']).bounds
+    b = pz.forma(0.0).bounds
     lato = max(b[2] - b[0], b[3] - b[1]) + 1.0
     t = Tex(x, y, z + H_SEG, lato, PLA, ang)
     t.incolla(art[0], art[1])
@@ -293,7 +294,7 @@ def mappa(sc, tmp, apri=0.0, alza=0.0):
     fiori, _, _, _, preset = F12.leggi(CB.DATI)
     facce = sorted(fiori, key=lambda f: (f[0], f[1]))
     pdf = os.path.join(OUT, 'carta_fiori_3d.pdf')
-    rientro = P['gioco_fiore'] + P['bordino'] + P['gioco_carta']
+    rientro = P['gioco_fiore'] + P['margine_adesivo']
     fi = G.Fiore()
     for s, (i, lato, fr) in sorted(preset[PRESET]['righe'].items()):
         j = facce.index((i, lato))

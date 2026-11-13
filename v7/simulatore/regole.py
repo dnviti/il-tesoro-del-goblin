@@ -38,6 +38,7 @@ class Partita:
         self.max_indizi = 0
         self.profezie = {}
         self.origine = {}                   # TI-28: carta presa dalla pila di classe di un avversario -> quell'avversario
+        self.ristoro = {}                   # D32: eroe -> cosa ha fatto negli scontri del turno (stato.ristoro_segna)
         self.in_catena = self.in_risposte = False
         self.scontro = None
         self.in_cima = False                # NE-44: la carta Mostro torna in cima al mazzetto
@@ -217,6 +218,7 @@ def fine(g, e):
     """§4.0 Fine: (a) è il momento M6 già giocato; poi (b)-(f)."""
     if e.tmp['perdita_fine']:                        # TI-26: «Alla Fine del turno» = punto (a)
         S.perdita(g, e)
+    S.ristoro(g, e)                                  # D32: Ristoro di chi ha combattuto, alla Fine del turno
     if e.ha('pigiama') and not e.tmp['incanti']:     # TE-31: nessun Incanto giocato in questo turno
         S.cura(g, e, 1, carta=False)
     for x in g.eroi:                                 # (b) effetti «in questo turno» di tutti, Profezie

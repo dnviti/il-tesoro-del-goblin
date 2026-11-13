@@ -169,9 +169,30 @@ def disco_arte(nome, x, y, R, cart, label=None, lcol=None):
     o = [f'<clipPath id="{cid}"><circle cx="{x:.2f}" cy="{y:.2f}" r="{R + BLEED:.2f}"/></clipPath><g clip-path="url(#{cid})">{img}</g>',
          f'<circle cx="{x:.2f}" cy="{y:.2f}" r="{R - 0.3:.2f}" fill="none" stroke="{BRASS}" stroke-width="0.5"/>']
     if label:
-        o.append(f'<text x="{x:.2f}" y="{y + R * 0.78:.2f}" text-anchor="middle" font-family="{SANS}" font-weight="bold" font-size="{R * 0.3:.2f}" '
-                 f'fill="{lcol or INK}" stroke="#fffaf0" stroke-width="{R * 0.07:.2f}" stroke-linejoin="round" paint-order="stroke">{esc(label)}</text>')
+        o.append(etichetta_disco(x, y, R, label, lcol or INK))
     return ''.join(o)
+
+LABEL_MARGINE = 0.9   # mm dal cerchio di taglio (richiesto ≥ 0,8)
+def etichetta_disco(x, y, R, label, lcol):
+    """scritta in basso del disco; «\\n» = due righe. Verifica che ogni riga (con l'alone) stia nel cerchio R - LABEL_MARGINE
+    (alto 0,75 corpo, discesa 0,25); il corpo parte da R·0,3 (una riga) o R·0,27 (due) e scende a passi di 0,05 mm fino a
+    entrare, mai sotto 6 pt (2,117 mm): altrimenti si ferma."""
+    righe = label.split('\n')
+    fs = R * (0.3 if len(righe) == 1 else 0.27)
+    halo = R * 0.07
+    def misure(fs):
+        base = [0.70 * R] if len(righe) == 1 else [0.42 * R + j * 1.08 * fs for j in range(len(righe))]
+        peggio = max(math.hypot(tw(t, fs, SANS, True) / 2 + halo / 2, yb + dy)
+                     for yb, t in zip(base, righe) for dy in (-0.75 * fs - halo / 2, 0.25 * fs + halo / 2))
+        return base, peggio
+    base, peggio = misure(fs)
+    while peggio > R - LABEL_MARGINE and fs > 2.117:
+        fs -= 0.05
+        base, peggio = misure(fs)
+    assert fs >= 2.117 - 1e-6 and peggio <= R - LABEL_MARGINE, f'etichetta «{label}» non entra nel cerchio R={R}: {peggio:.2f} > {R - LABEL_MARGINE:.2f} a {fs:.2f} mm'
+    return ''.join(f'<text x="{x:.2f}" y="{y + yb:.2f}" text-anchor="middle" font-family="{SANS}" font-weight="bold" font-size="{fs:.2f}" '
+                   f'fill="{lcol}" stroke="#fffaf0" stroke-width="{halo:.2f}" stroke-linejoin="round" paint-order="stroke">{esc(t)}</text>'
+                   for yb, t in zip(base, righe))
 
 def esplorazione_pezzi(cs, rows, D, cart=None):
     R = D / 2
@@ -211,11 +232,13 @@ def esplorazione():
 
 # ------------------------------------------------------------------ SEGNALINI (Ø 20) E TESSERE STATO (26 x 18)
 SEGN = {'Indizio': ('pergamena', INK, '#efe1c3', 'Indizio'),
-        'Forte Volontà': ('stella', GOLD, '#efe1c3', 'Forte Volontà'),
+        'Forte Volontà': ('stella', GOLD, '#efe1c3', 'Forte\nVolontà'),
         'Usato': ('spunta', '#2f6b3f', '#dcebd8', 'USATO')}
 SEGN_ARTE = {'Indizio': 'SG-01', 'Forte Volontà': 'SG-03', 'Usato': 'SG-04'}
-def gettoni(cols, x0, y0, per_tipo=True, cart=None):
-    """segnalini tondi Ø 20 a partire da (x0, y0); per_tipo: ogni tipo comincia una riga nuova. Ritorna (svg, conteggi, bbox)."""
+def gettoni(cols, x0, y0, per_tipo=True, cart=None, retro_w=None):
+    """segnalini tondi Ø 20 a partire da (x0, y0); per_tipo: ogni tipo comincia una riga nuova. Ritorna (svg, conteggi, bbox).
+    retro_w = larghezza del foglio: il dorso (stessa faccia, doppia faccia) di ogni segnalino sta in W − x, girando il foglio
+    sul lato lungo, senza linee di taglio né tacche."""
     rows = read('segnalini.csv')
     items = [r['nome'] for r in rows for _ in range(int(r['copie']))]
     assert set(items) == set(SEGN)
@@ -231,12 +254,14 @@ def gettoni(cols, x0, y0, per_tipo=True, cart=None):
         layout = [(nm, i // cols, i % cols) for i, nm in enumerate(items)]
     nrows = max(rr for _, rr, _ in layout) + 1
     gw = (cols - 1) * pitch + D; gh = (nrows - 1) * pitch + D
-    pos = [(nm, x0 + R + cc * pitch, y0 + R + rr * pitch) for nm, rr, cc in layout]
+    pos = [(nm, (retro_w - x if retro_w else x), y) for nm, x, y in [(nm, x0 + R + cc * pitch, y0 + R + rr * pitch) for nm, rr, cc in layout]]
     b = [bleed_disc(x, y, R, SEGN[nm][2]) for nm, x, y in pos]
     for nm, x, y in pos:
         ic, col, fill, lab = SEGN[nm]
         d = cart and disco_arte(SEGN_ARTE[nm], x, y, R, cart, lab.upper() if len(lab) < 8 else lab, INK)
-        b.append(d or disc_piece(x, y, R, fill, ic, lab, col, INK, 1.2, BRASS))
+        b.append(d or disc_piece(x, y, R, fill, ic, lab.replace('\n', ' '), col, INK, 1.2, BRASS))
+    if retro_w:
+        return b, dict(Counter(items)), (x0, y0, x0 + gw, y0 + gh)
     b += [cut_disc(x, y, R) for _, x, y in pos]
     xs = sorted({x0 + i * pitch + o for i in range(cols) for o in (0, D)}); ys = sorted({y0 + i * pitch + o for i in range(nrows) for o in (0, D)})
     bb = (x0, y0, x0 + gw, y0 + gh)
@@ -245,14 +270,16 @@ def gettoni(cols, x0, y0, per_tipo=True, cart=None):
 
 STATO_COL = {'+': '#3b7d4f', '−': '#9c2f24'}
 ST_W, ST_H = 26.0, 18.0
-ST_BANDA = 7.0       # bandella del nome, in alto
+ST_BANDA = 9.2       # bandella in alto: icona a sinistra, nome a destra
+ST_TESTO_MIN = 2.17  # corpo minimo dell'effetto in mm (6 pt = 2,117 mm; le tessere 3D sono ridotte di ~2 %)
+STATI_NON_ENTRANO = []   # effetti che non entrano a ST_TESTO_MIN (la build si ferma)
 ST_NOME_MIN = 3.2    # corpo minimo del nome in mm (9 pt, il minimo delle etichette del kit)
-def stati(cols, x0, y0, cart=None):
+def stati(cols, x0, y0, cart=None, retro_w=None):
     """tessere Stato 26 x 18 (D27, 13/11): solo nome, icona e segno. Bandella in alto nel colore del segno (verde = +,
     aiuta; rossa = −, ostacola) col nome grande; sotto, il segno grande in un tondo, l'illustrazione ST-xx e la freccia ↑
     (punta in alto: tessera verticale; di lato: orizzontale, R 9.1). Gli effetti stanno sulle Carte Aiuto. Ritorna (svg,
     conteggi, bbox)."""
-    rows = read('stati.csv')
+    rows = read('stati.csv'); STATI_NON_ENTRANO.clear()
     items = [r for r in rows for _ in range(int(r['copie']))]
     assert items
     px, py = ST_W + 2 * BLEED, ST_H + 2 * BLEED
@@ -261,6 +288,8 @@ def stati(cols, x0, y0, cart=None):
     pcs = [(x0 + (i % cols) * px, y0 + (i // cols) * py, r) for i, r in enumerate(items)]
     b = []
     for n, (x, y, r) in enumerate(pcs):
+        if retro_w:
+            x = retro_w - x - ST_W        # dorso: stessa faccia, specchiata la posizione (lato lungo), nome dritto
         c = STATO_COL[r['segno']]
         b.append(f'<rect x="{x - BLEED:.2f}" y="{y - BLEED:.2f}" width="{ST_W + 2 * BLEED}" height="{ST_H + 2 * BLEED}" fill="#fffaf0"/>')
         b.append(f'<rect x="{x - BLEED:.2f}" y="{y - BLEED:.2f}" width="{ST_W + 2 * BLEED}" height="{BLEED + ST_BANDA}" fill="{c}"/>')
@@ -268,24 +297,44 @@ def stati(cols, x0, y0, cart=None):
         b.append(line(x - BLEED, y + ST_BANDA, x + ST_W + BLEED, y + ST_BANDA, 0.35, BRASS)
                  + line(x - BLEED, y + ST_BANDA + 0.65, x + ST_W + BLEED, y + ST_BANDA + 0.65, 0.12, BRASS))
         fs = 4.4
-        while tw(r['nome'], fs, SANS, True) > ST_W - 2.4: fs -= 0.1
+        while tw(r['nome'], fs, SANS, True) > 15.6: fs -= 0.1
         assert fs >= ST_NOME_MIN, f"{r['nome']}: nome della tessera Stato sotto {ST_NOME_MIN} mm"
-        b.append(text(x + ST_W / 2, y + ST_BANDA / 2 + fs * 0.36, r['nome'], fs, '#ffffff', 'middle', True))
-        ym = y + ST_BANDA + (ST_H - ST_BANDA) / 2 + 0.3            # asse della parte sotto la bandella
-        b.append(f'<circle cx="{x + 4.4:.2f}" cy="{ym:.2f}" r="3.4" fill="{c}" stroke="{BRASS}" stroke-width="0.3"/>'
-                 + text(x + 4.4, ym + 2.2, r['segno'], 6.2, '#ffffff', 'middle', True))
-        isz = ST_H - ST_BANDA - 1.6
-        ix, iy = x + ST_W / 2 - isz / 2, ym - isz / 2
+        b.append(text(x + 17.0, y + 4.9, r['nome'], fs, '#ffffff', 'middle', True))
+        # layout della v7 del 12/11: icona piccola in alto a sinistra nella bandella (col segno), nome a destra, freccia ↑
+        # sotto il nome (la tessera è verticale quando punta in alto), effetto nella parte bassa
+        ix, iy, isz = x + 0.4, y + 0.4, 8.4
         if cart and os.path.isfile(os.path.join(F12.ARTE_MAPPA, r['id'] + '.png')):   # illustrazione 30 mm a 300 ppi, ridotta
             b.append(f'<clipPath id="stc{n}"><rect x="{ix:.2f}" y="{iy:.2f}" width="{isz:.2f}" height="{isz:.2f}" rx="0.8"/></clipPath>'
                      f'<g clip-path="url(#stc{n})"><image href="{os.path.relpath(os.path.join(F12.ARTE_MAPPA, r["id"] + ".png"), cart).replace("&", "&amp;")}" '
                      f'x="{ix:.3f}" y="{iy:.3f}" width="{isz:.2f}" height="{isz:.2f}" preserveAspectRatio="none"/></g>'
-                     f'<rect x="{ix:.2f}" y="{iy:.2f}" width="{isz:.2f}" height="{isz:.2f}" rx="0.8" fill="none" stroke="{BRASS}" stroke-width="0.3"/>')
-        ax = x + ST_W - 3.6   # freccia ↑: la tessera è verticale quando punta in alto
-        b.append(f'<path d="M{ax:.2f} {ym + 3.2:.2f}V{ym - 3.2:.2f}M{ax - 1.6:.2f} {ym - 1.4:.2f}L{ax:.2f} {ym - 3.3:.2f}L{ax + 1.6:.2f} {ym - 1.4:.2f}" fill="none" stroke="{c}" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"/>')
-        b.append(f'<rect x="{x:.2f}" y="{y:.2f}" width="{ST_W}" height="{ST_H}" rx="1.2" fill="none" stroke="{CUT}" stroke-width="0.12" opacity="0.8"/>')
+                     f'<rect x="{ix:.2f}" y="{iy:.2f}" width="{isz:.2f}" height="{isz:.2f}" rx="0.8" fill="none" stroke="#fffaf0" stroke-width="0.35"/>')
+        b.append(f'<circle cx="{ix + 1.5:.2f}" cy="{iy + isz - 1.5:.2f}" r="1.35" fill="{c}" stroke="#fffaf0" stroke-width="0.25"/>'
+                 + text(ix + 1.5, iy + isz - 0.5, r['segno'], 2.4, '#ffffff', 'middle', True))
+        ax = x + ST_W - 2.4
+        b.append(f'<path d="M{ax:.2f} {y + 8.6:.2f}V{y + 5.6:.2f}M{ax - 1.1:.2f} {y + 6.8:.2f}L{ax:.2f} {y + 5.5:.2f}L{ax + 1.1:.2f} {y + 6.8:.2f}" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>')
+        # effetto: corpo il più grande che entra (da 2,8 mm), mai sotto ST_TESTO_MIN; ≥ 0,8 mm dentro il taglio
+        tx0, tx1, ty0, ty1 = x + 0.8, x + ST_W - 0.8, y + ST_BANDA + 0.6, y + ST_H - 0.8
+        tf = 2.8
+        while True:
+            ls = wrap(r['testo'], tf, tx1 - tx0)
+            if len(ls) * 1.15 * tf - 0.15 * tf <= ty1 - ty0 and all(tw(l_, tf, SANS) <= tx1 - tx0 for l_ in ls):
+                break
+            if tf - 0.05 < ST_TESTO_MIN - 1e-9:
+                STATI_NON_ENTRANO.append(f"{r['nome']} ({tf:.2f} mm, {len(ls)} righe)")
+                tf = ST_TESTO_MIN
+                break
+            tf -= 0.05
+        hh = len(ls) * 1.15 * tf - 0.15 * tf
+        yb = ty0 + (ty1 - ty0 - hh) / 2 + 0.8 * tf
+        for j, l_ in enumerate(ls):
+            b.append(text(x + ST_W / 2, yb + j * 1.15 * tf, l_, tf, INK, 'middle'))
+        if not retro_w:
+            b.append(f'<rect x="{x:.2f}" y="{y:.2f}" width="{ST_W}" height="{ST_H}" rx="1.2" fill="none" stroke="{CUT}" stroke-width="0.12" opacity="0.8"/>')
+    assert not STATI_NON_ENTRANO, 'effetto delle tessere Stato non entra a ' + str(ST_TESTO_MIN) + ' mm: ' + '; '.join(sorted(set(STATI_NON_ENTRANO)))
     xs = sorted({x0 + i * px + o for i in range(cols) for o in (0, ST_W)}); ys = sorted({y0 + i * py + o for i in range(nr) for o in (0, ST_H)})
     bb = (x0, y0, x0 + gw, y0 + gh)
+    if retro_w:
+        return b, dict(Counter(r['nome'] for r in items)), bb
     b.append(edge_ticks(xs, ys, bb).replace('tacche-di-taglio', 'tacche-stati'))
     return b, dict(Counter(r['nome'] for r in items)), bb
 
@@ -539,31 +588,40 @@ def conta(c):
     return ' · '.join(f'{n} {nome}' for nome, n in c.items())
 
 def segnalini():
-    """segnalini.pdf A4: foglio 1 = segnalini Ø 20; foglio 2 = tessere Stato e i 2 dischi delle rotelle del tavolo (la Rotella
-    della Profezia è sul foglio 2 delle pedine)."""
+    """segnalini.pdf A4: foglio 1 = segnalini Ø 20 (doppia faccia), 2 = i loro dorsi; 3 = tessere Stato (doppia faccia) e i 2 dischi delle
+    rotelle del tavolo, 4 = i dorsi degli Stati (la Rotella della Profezia è sul foglio 2 delle pedine)."""
     cols = 6; pitch = 26
     rows = read('segnalini.csv'); nrows = sum(math.ceil(int(r['copie']) / cols) for r in rows)
     gw, gh = (cols - 1) * pitch + 20, (nrows - 1) * pitch + 20
     b, gc, _ = gettoni(cols, (210 - gw) / 2, (297 - gh) / 2, cart=os.path.join(OUT, 'segnalini'))
-    b.insert(0, hdr('Segnalini · foglio 1 di 2', f"{gc['Indizio']} Indizi · {gc['Forte Volontà']} Forte Volontà · {gc['Usato']} Usato  ·  Ø 20 mm  ·  solo fronte"))
-    b.append(ftr(['Stampa su A4 al 100%, solo fronte. Taglia sul cerchio sottile; l’abbondanza di 3 mm esce dal taglio.',
+    b.insert(0, hdr('Segnalini · fronti · foglio 1 di 4', f"{gc['Indizio']} Indizi · {gc['Forte Volontà']} Forte Volontà · {gc['Usato']} Usato  ·  Ø 20 mm  ·  doppia faccia (dorso al foglio 2)"))
+    b.append(ftr(['Stampa il foglio 1, rimetti il foglio nel cassetto girato sul LATO LUNGO e stampa il foglio 2 (dorsi). Taglia sul cerchio sottile; l’abbondanza di 3 mm esce dal taglio.',
                   'Righe 1-3 Indizi, riga 4 Forte Volontà, poi Usato: Carta Classe, «una volta per turno», «la prima volta» dei mostri,',
                   '«Spostamenti del tesoro» e segnaposto delle carte giocate che lasciano la zona (Equipaggiamenti e Mappe).']))
     write('segnalini', 1, page(fonts('\n'.join(b))))
+    # dorsi: la stessa faccia dietro a ogni segnalino (Indizi, Forte Volontà e Usato sono a doppia faccia), posizione specchiata sul lato lungo
+    rb, _, _ = gettoni(cols, (210 - gw) / 2, (297 - gh) / 2, cart=os.path.join(OUT, 'segnalini'), retro_w=210)
+    rb.insert(0, hdr('Segnalini · dorsi · foglio 2 di 4', 'stessa faccia del fronte · senza linee di taglio · fronte/retro sul LATO LUNGO'))
+    rb.append(ftr(['Dorsi: stampa questo foglio dietro il foglio 1 (lato lungo); il cerchio del fronte deve cadere dentro l’abbondanza del dorso. Controlla in controluce.']))
+    write('segnalini', 2, page(fonts('\n'.join(rb))))
     sc_ = 5; sx0 = (210 - ((sc_ - 1) * (ST_W + 2 * BLEED) + ST_W)) / 2
     b, sc, sbb = stati(sc_, sx0, 26.0, os.path.join(OUT, 'segnalini'))   # 31 tessere Stato = 7 righe: y0 26 (non 28) perché il disco del tavolo entri sopra il piede
-    b.insert(0, hdr('Tessere Stato e rotelle del tavolo · foglio 2 di 2',
-                    f'{sum(sc.values())} tessere Stato 26 × 18 mm · 2 dischi Ø 52 mm · solo fronte'))
+    b.insert(0, hdr('Tessere Stato e rotelle del tavolo · foglio 3 di 4',
+                    f'{sum(sc.values())} tessere Stato 26 × 18 mm (doppia faccia, dorsi al foglio 4) · 2 dischi Ø 52 mm (solo fronte)'))
     pitch = DISC_R * 2 + 2 * BLEED; dy = sbb[3] + 18 + DISC_R
     for j, (key, nm, sotto, ic, col) in enumerate(R_TAVOLO):
         b.append(rotella_disco(105 + (j - 0.5) * pitch, dy, col, nm, sotto, ic, TAVOLO_FIN, 'plancia di gioco'))
     assert dy + DISC_R + BLEED < 262
-    b.append(ftr(['Stampa su A4 al 100%, solo fronte. Tessere Stato: taglia sul bordo sottile (3 mm di abbondanza).',
+    b.append(ftr(['Stampa su A4 al 100%. Tessere Stato: taglia sul bordo sottile (3 mm di abbondanza); il dorso è il foglio 4, fronte/retro sul lato lungo. I dischi sono solo fronte.',
                   f'Righe: {conta(sc)}.',
                   'Uno Stato vale il tuo prossimo turno: preso nel tuo turno va orizzontale, nel turno di un altro verticale (freccia ↑ in alto). Gli effetti sono sulle Carte Aiuto.',
                   'Dischi: ritaglia dove cambia il colore e la finestra bianca, fora il centro. «PV del mostro» e «PV del custode» vanno sulle corone 0-9',
                   'della Sala del Tesoro, con un fermacampioni. La Rotella della Profezia è sul foglio 2 delle pedine (pedine.pdf).'], y=266))
-    write('segnalini', 2, page(fonts('\n'.join(b))))
+    write('segnalini', 3, page(fonts('\n'.join(b))))
+    rb, _, _ = stati(sc_, sx0, 26.0, os.path.join(OUT, 'segnalini'), retro_w=210)
+    rb.insert(0, hdr('Tessere Stato · dorsi · foglio 4 di 4', 'stessa faccia del fronte, nome dritto · senza linee di taglio · fronte/retro sul LATO LUNGO'))
+    rb.append(ftr(['Dorsi delle tessere Stato: stampa questo foglio dietro il foglio 3 (lato lungo). Ogni dorso cade dietro il suo fronte; il nome si legge dritto anche girando la tessera sul lato lungo.']))
+    write('segnalini', 4, page(fonts('\n'.join(rb))))
     return dict(gettoni=gc, stati=sc, dischi_tavolo=len(R_TAVOLO))
 
 # ------------------------------------------------------------------ PEDINE
@@ -734,7 +792,7 @@ def sala_a4():
         b.append(crop_marks(PX, PY, PX + WIN, PY + Hb, gap=3.5, ln=3.0))
         b.append(text(105, PY + Hb + 9.5, testo, 2.7, INK, 'middle'))
     t, y = note([f'Stampa su A4 al 100%, solo fronte, su cartoncino. Unisci la Sala: sovrapponi il pezzo 2 alla fascia di {num(ov)} mm a destra del pezzo 1, fai coincidere le 3 croci rosse e incolla.',
-                 'La Sala va accanto alla mappa. Dischi «PV del mostro» e «PV del custode» (segnalini.pdf, foglio 2) sulle corone 0-9, col fermacampioni.'],
+                 'La Sala va accanto alla mappa. Dischi «PV del mostro» e «PV del custode» (segnalini.pdf, foglio 3) sulle corone 0-9, col fermacampioni.'],
                 105, 262, 2.6, 186)
     assert y - 2.6 * 1.27 < 290, 'sala_tesoro: note oltre il margine'
     b.append(t)
@@ -896,6 +954,14 @@ def mappa_preset():
             o.append(text(F12.centro_mappa((c, 1))[0], -FASCIA12 / 2 + 1.3, str(c), 3.6, INK, 'middle', True))
         for r in range(1, 13):
             o.append(text(-FASCIA12 / 2, F12.centro_mappa((1, r))[1] + 1.3, str(r), 3.6, INK, 'middle', True))
+        # arte vera dei fiori (la stessa di mappa_fiori.pdf e della guida di montaggio), sotto a frecce, numeri e bordi
+        dp = os.path.join(OUT, comp)
+        os.makedirs(dp, exist_ok=True)
+        for s, (i, lato, fr) in sorted(p['righe'].items()):
+            cx, cy = F12.centro_mappa(spazi[s][0])
+            # il fiore si disegna con la freccia a est e si ruota: posizione p -> anello (p - 1 + fr - 1) % 6 + 1, antiorario
+            o.append(f'<g transform="rotate({-60 * (fr - 1)} {cx:.3f} {cy:.3f})">'
+                     + F12.fiore(fiori[(i, lato)], cx, cy, 0, f'p{n}s{s}', 0.0, False, None, True, dp) + '</g>')
         for s, (i, lato, fr) in p['righe'].items():
             cc = [F12.centro_mappa(h) for h in spazi[s].values()]
             cambio = p['cambio'].get(s)
@@ -935,10 +1001,10 @@ def mappa_preset():
     return len(preset)
 
 # ------------------------------------------------------------------ PROVA DI STAMPA
-KIT_A4 = [('tessere_esplorazione.pdf', 1), ('segnalini.pdf (segnalini, Stati, dischi del tavolo)', 2),
+KIT_A4 = [('tessere_esplorazione.pdf', 1), ('segnalini.pdf (segnalini, Stati, dischi del tavolo; fronte/retro)', 4),
           ('rotelle_eroe.pdf (24 dischi)', 2), ('plance_eroe.pdf (A4 orizzontale)', 4), ('pedine.pdf (6 Boss, Profezia)', 2)]
 KIT_A3 = [('plance_eroe.pdf (2 plance per foglio)', 2), ('rotelle_eroe.pdf (24 + 2 dischi)', 1),
-          ('componenti_misti.pdf (pedine con 6 Boss, segnalini)', 1), ('tessere_esplorazione.pdf (e tessere Stato, Profezia)', 1)]
+          ('componenti_misti.pdf (pedine con 6 Boss, segnalini; dorsi dei segnalini)', 2), ('tessere_esplorazione.pdf (e tessere Stato con dorsi, Profezia)', 2)]
 # poi i pezzi della mappa (contati da chi li genera): in prova()
 def fogli_carte():
     """[(file, fogli in parole, fogli)] dei PDF delle carte, contati con genera_carte.mazzi() (stessi CSV e stesso formato)."""
@@ -964,7 +1030,7 @@ def prova(PW=210, PH=297, formato='A4', mappa=()):
     b = [f'<rect x="{FR}" y="{FR}" width="{PW - 2 * FR}" height="{PH - 2 * FR}" fill="none" stroke="{K}" stroke-width="0.25"/>',
          text(cx, FR + 4.5, '↑ alto (lato corto di ingresso)', 3.0, BROWN, 'middle'),
          text(cx, 21, f'Prova di stampa {formato} · Il Tesoro del Goblin', 6.0, K, 'middle', True, SERIF),
-         text(cx, 27, f'Un solo foglio {formato}, SOLO FRONTE: il kit v7 è solo fronte, tranne i fiori della mappa (mappa_fiori.pdf)', 3.2, BROWN, 'middle')]
+         text(cx, 27, f'Un solo foglio {formato}, SOLO FRONTE: il kit è solo fronte, tranne fiori, segnalini e tessere Stato (fronte/retro)', 3.2, BROWN, 'middle')]
     rx, ry = 20, 58
     b.append(text(rx, ry - 9, 'Righello: 100 mm esatti tra lo 0 e il 10', 3.2, K, 'start', True))
     b.append(line(rx, ry, rx + 100, ry, 0.25, K))
@@ -978,7 +1044,7 @@ def prova(PW=210, PH=297, formato='A4', mappa=()):
     b.append(text(qx + 25, qy + 26, '50 × 50 mm', 3.6, K, 'middle', True))
     b.append(text(qx + 25, qy + 32, 'misura i lati', 2.8, BROWN, 'middle'))
     y = 104
-    for p in [f'1. Stampa al 100% («Dimensioni effettive», MAI «Adatta alla pagina»), carta {formato}, SOLO FRONTE. Unica eccezione: mappa_fiori.pdf, fronte e retro a mano (le istruzioni sono sui fogli).',
+    for p in [f'1. Stampa al 100% («Dimensioni effettive», MAI «Adatta alla pagina»), carta {formato}, SOLO FRONTE. Eccezioni: mappa_fiori.pdf, segnalini.pdf (A4) / componenti_misti.pdf e tessere_esplorazione.pdf (A3): fronte e retro a mano sul lato lungo (le istruzioni sono sui fogli).',
               '2. Scala: misura il righello (100 mm tra 0 e 10) e il quadrato (50 mm). Va bene entro ±1 mm. Se no, disattiva «adatta/riduci» e ristampa.',
               '3. Margini: il riquadro sottile a 6,5 mm dal bordo deve vedersi su tutti e 4 i lati. Se manca un lato la stampante taglia il margine: carte, plance e tacche stanno oltre i 6,5 mm.',
               'Se tutto torna, stampa il resto del kit nell’ordine dell’elenco qui sotto. Le carte e i loro dorsi sono su fogli separati: si uniscono a mano (colla stick o bustina).']:
@@ -1047,11 +1113,15 @@ def esplorazione_a3():
     b.append(profezia_base(A3W / 2 + 35, py))
     assert sbox[2] + 7.5 <= A3W - 6.5 and py + BASE_PROF / 2 < 385
     b.insert(0, hdr3('Tessere Stato · Tessere Esplorazione · Rotella della Profezia',
-                     f'{sum(sc.values())} tessere Stato 26 × 18 mm · 25 rosse (Mostro) + 11 blu (Imprevisto) Ø {D} mm  ·  foglio 1 di 1  ·  solo fronte, retro bianco'))
+                     f'{sum(sc.values())} tessere Stato 26 × 18 mm (doppia faccia, dorsi al foglio 2) · 25 rosse (Mostro) + 11 blu (Imprevisto) Ø {D} mm  ·  foglio 1 di 2  ·  fronte; Esplorazione retro bianco'))
     b.append(ftr3(['Stampa su A3 al 100% (nessun adattamento alla pagina), solo fronte. Taglia sul cerchio sottile; l’abbondanza di 3 mm esce dal taglio.'] + ESPL_NOTE +
                   [f'Tessere Stato (in alto): {conta(sc)} (freccia ↑ in alto = verticale; gli effetti sono sulle Carte Aiuto).',
                    'Rotella della Profezia (Oracolo): disco sulla base quadrata col fermacampioni. P pari · D dispari · A alto (4+ su D6, 8+ su 2D6) · B basso (3− / 6−).']))
     write('tessere_esplorazione', 1, page(fonts('\n'.join(b)), A3W, A3H))
+    rb, _, _ = stati(sc_, (A3W - ((sc_ - 1) * (ST_W + 2 * BLEED) + ST_W)) / 2, 28.0, os.path.join(OUT, 'tessere_esplorazione'), retro_w=A3W)
+    rb.insert(0, hdr3('Tessere Stato · dorsi', 'foglio 2 di 2  ·  stessa faccia del fronte, nome dritto · senza linee di taglio · fronte/retro sul LATO LUNGO'))
+    rb.append(ftr3(['Dorsi delle tessere Stato (doppia faccia): stampa questo foglio dietro il foglio 1 girando sul LATO LUNGO; ogni dorso cade dietro il suo fronte.']))
+    write('tessere_esplorazione', 2, page(fonts('\n'.join(rb)), A3W, A3H))
     return dict(esplorazione=dict(Counter(r['colore'] for r in rows)), stati=sc)
 
 def misti_a3():
@@ -1060,20 +1130,24 @@ def misti_a3():
     pb, pz = pedine([(EROI + ['Geronimo'], 'eroe', (A3W - (6 * 30 + 24)) / 2, 28.0), (BOSS, 'boss', (A3W - bw) / 2, 124.0)])
     gb, gc, gbox = gettoni(10, (A3W - (9 * 26 + 20)) / 2, 248.0, per_tipo=False, cart=os.path.join(OUT, 'componenti_misti'))
     assert (A3W - bw) / 2 - BLEED >= 6.5 and 124.0 + 2 * (GEO['boss']['fh'] + GEO['boss']['ph']) + 7.5 < gbox[1] - 7.5 and gbox[3] + 7.5 < 385
-    b = [hdr3('Pedine · Segnalini', f'{len(pz)} pedine pieghevoli (6 Boss) · {sum(gc.values())} segnalini Ø 20 mm  ·  foglio 1 di 1  ·  solo fronte, A3 verticale')]
+    b = [hdr3('Pedine · Segnalini', f'{len(pz)} pedine pieghevoli (6 Boss) · {sum(gc.values())} segnalini Ø 20 mm (doppia faccia, dorsi al foglio 2)  ·  foglio 1 di 2  ·  A3 verticale')]
     b += pb + gb
     b.append(ftr3(['Stampa su A3 al 100%, solo fronte. Taglia sul bordo/cerchio sottile; l’abbondanza di 3 mm esce dal taglio.',
                    'Pedine: piega sulla linea tratteggiata bianca (al centro) e incolla fronte e retro; le linguette chiare fanno da piede a T. Eroi 24 mm, Boss 40 mm.',
                    'Le tessere Stato sono sul foglio delle tessere Esplorazione (tessere_esplorazione.pdf).',
                    f"Segnalini: {gc['Indizio']} Indizi (prima riga e inizio della seconda), {gc['Forte Volontà']} Forte Volontà (fine della seconda), {gc['Usato']} Usato (righe 3-4)."]))
     write('componenti_misti', 1, page(fonts('\n'.join(b)), A3W, A3H))
+    rb, _, _ = gettoni(10, (A3W - (9 * 26 + 20)) / 2, 248.0, per_tipo=False, cart=os.path.join(OUT, 'componenti_misti'), retro_w=A3W)
+    rb.insert(0, hdr3('Segnalini · dorsi', 'foglio 2 di 2  ·  stessa faccia del fronte · senza linee di taglio · fronte/retro sul LATO LUNGO'))
+    rb.append(ftr3(['Dorsi dei segnalini (Indizi, Forte Volontà, Usato a doppia faccia): stampa questo foglio dietro il foglio 1 girando sul LATO LUNGO; ogni dorso cade dietro il suo fronte.']))
+    write('componenti_misti', 2, page(fonts('\n'.join(rb)), A3W, A3H))
     return dict(pedine=len(pz), segnalini=gc)
 
 # ---------- segnalini 3D (D29): adesivi da applicare sui pezzi 3D di 3d_solidcraft/genera_3d_solidcraft.py. Ogni pezzo 3D
-# ha il contorno del pezzo di carta; l'adesivo è la tasca meno il gioco (contorno - bordino - gioco_carta): si usa l'arte
-# del pezzo di carta in scala (tessere e segnalini tondi in scala uniforme, Stati 26 × 18 → 23,8 × 15,8 in x e y, cioè
-# +4 % di larghezza), le rotelle in scala 1 (la finestra deve stare sulla corona della plancia) tagliate sulla corona
-# dell'adesivo con l'intaglio della finestra. Cripta: la carta esagonale da 25,2 nella tasca del segnalino (come prima).
+# ha il contorno del pezzo di carta ed è liscio sopra (Daniele, 13/11 21:28): l'adesivo è il contorno meno margine_adesivo
+# (0,2 mm) per lato. Si usa l'arte del pezzo di carta in scala (tessere e segnalini tondi in scala uniforme, Stati 26 × 18
+# → 25,6 × 17,6), le rotelle in scala 1 (la finestra deve stare sulla corona della plancia) tagliate sulla corona
+# dell'adesivo con l'intaglio della finestra. Cripta: la carta esagonale da 25,2 (il pezzo 3D è 25,6).
 def segmento_100(y):
     """segmento di controllo di 100 mm (lo stesso di carta_base_3d.py, misurato da verifica_pdf.py)."""
     return (f'<line x1="55" y1="{y:.2f}" x2="155" y2="{y:.2f}" stroke="{CUT}" stroke-width="0.25"/>'
@@ -1093,7 +1167,7 @@ def segnalini_3d():
     sys.path.insert(0, os.path.join(HERE, '..', '..', '3d_solidcraft'))
     import genera_3d_solidcraft as G3   # noqa: E402  misure delle tasche dal generatore 3D
     P3 = G3.P
-    rientro = P3['bordino'] + P3['gioco_carta']
+    rientro = P3['margine_adesivo']
     Ro = P3['rotella_d'] / 2 - rientro                  # corona dell'adesivo delle rotelle
     Ri = P3['mozzo_r'] + P3['gioco_carta']
     assert abs(Ri - FORO_ADESIVO_R) < 1e-9 and abs(P3['rotella_d'] / 2 - DISC_R) < 1e-9 and abs(P3['corona_r'] - RING_R) < 1e-9
@@ -1115,21 +1189,22 @@ def segnalini_3d():
     cx, cy = 105.0, Y0 + gw + 26.0
     img = F12.immagine_arte('SG-CRIPTA', cx, cy, d)
     ra = F12.R + 1.5 / math.cos(math.radians(30))
+    cr = []
     if img:
         img = f'<clipPath id="s3c"><polygon points="{F12.pts(F12.vertici(cx, cy, ra))}"/></clipPath><g clip-path="url(#s3c)">{img}</g>'
     else:
-        b.append(f'<polygon points="{F12.pts(F12.vertici(cx, cy, ra))}" fill="#8f877c"/>')
-    b.append(F12.segnalino_cripta(cx, cy, img) + f'<polygon points="{F12.pts(F12.vertici(cx, cy))}" fill="none" stroke="{CUT}" stroke-width="0.2"/>')
-    b.append(text(cx, cy + F12.R + 5, 'Cripta (carta da 25,2: tasca del segnalino 3D 25,7)', 2.8, BROWN, 'middle', True))
-    pagine.append(('Tessere Esplorazione · fronti', f'{len(rows)} adesivi Ø {D * s:.1f} mm per la tasca sopra (Ø {D - 2 * P3["bordino"]:.1f}) + la Cripta', b,
-                   ['Fronte nella tasca sopra della tessera 3D; il dorso (pagina 2) si incolla sul fondo piatto.']))
+        cr.append(f'<polygon points="{F12.pts(F12.vertici(cx, cy, ra))}" fill="#8f877c"/>')
+    cr.append(F12.segnalino_cripta(cx, cy, img) + f'<polygon points="{F12.pts(F12.vertici(cx, cy))}" fill="none" stroke="{CUT}" stroke-width="0.2"/>')
+    b += cr + [text(cx, cy + F12.R + 5, 'Cripta, sopra (carta da 25,2 sul segnalino 3D da 25,6; doppia faccia)', 2.8, BROWN, 'middle', True)]
+    pagine.append(('Tessere Esplorazione · fronti', f'{len(rows)} adesivi Ø {D * s:.1f} mm da incollare sopra (tessera Ø {D:g}) + la Cripta', b,
+                   ['Il fronte si incolla sopra la tessera 3D, centrato; il dorso (pagina 2) si incolla sul fondo piatto.']))
     b = [f'<g transform="translate({X0:.4f},{Y0:.4f}) scale({s:.6f})">'
          + ''.join(f'<circle cx="{x:.2f}" cy="{y:.2f}" r="{D / 2 + BLEED:.2f}" fill="#8a5a33"/>' + (disco_arte('TX-RETRO', x, y, D / 2, d) or '') for x, y in cs) + '</g>']
-    b += [taglio_cerchio(*tr(x, y), D / 2 * s) for x, y in cs]
+    b += [taglio_cerchio(*tr(x, y), D / 2 * s) for x, y in cs] + cr + [text(cx, cy + F12.R + 5, 'Cripta, fondo (stessa faccia, sul fondo piatto del segnalino 3D)', 2.8, BROWN, 'middle', True)]
     pagine.append(('Tessere Esplorazione · dorsi', f'{len(rows)} adesivi Ø {D * s:.1f} mm da incollare sul fondo piatto della tessera 3D', b,
-                   ['Il dorso si incolla al centro del fondo piatto (1,1 mm di margine): coperta, la tessera mostra il dorso e tiene il fronte nella tasca.']))
+                   ['Il dorso si incolla al centro del fondo piatto: coperta, la tessera mostra il dorso.']))
 
-    # pagina 3: tessere Stato (in scala 23,8/26 × 15,8/18) e segnalini tondi Ø 20 → 17,8
+    # pagina 3: tessere Stato (in scala 25,6/26 × 17,6/18); pagina 4: segnalini tondi Ø 20 → 19,6
     sw, sh = P3['stato_l'] - 2 * rientro, P3['stato_a'] - 2 * rientro
     sx, sy = sw / ST_W, sh / ST_H
     sc_ = 6; X0 = (210 - ((sc_ - 1) * (ST_W + 2 * BLEED) + ST_W) * sx) / 2; Y0 = 24.0
@@ -1147,18 +1222,24 @@ def segnalini_3d():
     for i in range(n_st):
         x, y = X0 + (i % sc_) * pxs, Y0 + (i // sc_) * pys
         b.append(f'<rect x="{x:.3f}" y="{y:.3f}" width="{sw:.3f}" height="{sh:.3f}" rx="{max(r_ad, 0.0):.3f}" fill="none" stroke="{CUT}" stroke-width="0.2"/>')
-    Yg = Y0 + sbb[3] * sy + 5.0
-    G = P3['gettone_d']; sg = (G - 2 * rientro) / G; gc_ = 8
+    pagine.append(('Tessere Stato · sopra', f'{n_st} adesivi {sw:.1f} × {sh:.1f} mm da incollare sopra la tessera Stato 3D (26 × 18)', b,
+                   [f'Stati: {conta(sconta)}. Doppia faccia: il foglio seguente porta gli stessi adesivi per il fondo piatto.']))
+    pagine.append(('Tessere Stato · fondo', f'{n_st} adesivi {sw:.1f} × {sh:.1f} mm, stessa faccia, da incollare sul fondo piatto della tessera Stato 3D (26 × 18)', b,
+                   ['Stessa orientazione del foglio precedente: il nome si legge dritto anche girando la tessera sul lato lungo.']))
+    Yg = 25.0
+    G = P3['gettone_d']; sg = (G - 2 * rientro) / G; gc_ = 7    # 8 colonne arriverebbero a 3 mm dal bordo del foglio
     gb, gconta, gbb = gettoni(gc_, 0.0, 0.0, per_tipo=False, cart=d)
     Xg = (210 - gbb[2] * sg) / 2
-    b.append(f'<g transform="translate({Xg:.4f},{Yg:.4f}) scale({sg:.6f})">' + ''.join(senza_tacche(gb)) + '</g>')
+    b = [f'<g transform="translate({Xg:.4f},{Yg:.4f}) scale({sg:.6f})">' + ''.join(senza_tacche(gb)) + '</g>']
     n_g = sum(gconta.values()); pg = G + 2 * BLEED
     b += [taglio_cerchio(Xg + (G / 2 + (i % gc_) * pg) * sg, Yg + (G / 2 + (i // gc_) * pg) * sg, G / 2 * sg) for i in range(n_g)]
     assert Yg + gbb[3] * sg < 262, Yg + gbb[3] * sg
-    pagine.append(('Tessere Stato e segnalini', f'{n_st} Stati {sw:.1f} × {sh:.1f} mm · {conta(gconta)} Ø {G * sg:.1f} mm · nella tasca sopra del pezzo 3D', b,
-                   [f'Stati: {conta(sconta)}.', 'Segnalini: Indizi, poi Forte Volontà, poi Usato (in ordine di riga).']))
+    pagine.append(('Segnalini · sopra', f'{conta(gconta)} · adesivi Ø {G * sg:.1f} mm da incollare sopra il segnalino 3D (Ø {G:g})', b,
+                   ['Segnalini a doppia faccia: Indizi, poi Forte Volontà, poi Usato (in ordine di riga). Il foglio seguente porta gli stessi adesivi per il fondo piatto.']))
+    pagine.append(('Segnalini · fondo', f'{conta(gconta)} · stessa faccia, adesivi Ø {G * sg:.1f} mm da incollare sul fondo piatto del segnalino 3D (Ø {G:g})', b,
+                   ['Doppia faccia: la stessa faccia sopra e sotto. Stesso ordine di riga del foglio precedente.']))
 
-    # pagine 4-6: rotelle (scala 1), 12 per foglio (3 × 4), passo 54
+    # pagine 5-7: rotelle (scala 1), 12 per foglio (3 × 4), passo 54
     def adesivo_rotella(cx, cy, disco, win, k):
         a, ri = win[0] / 2, RING_R - win[1] / 2
         yo = math.sqrt(Ro ** 2 - a ** 2)
@@ -1254,7 +1335,7 @@ def guida_montaggio_mappa():
         ('3d_solidcraft/out/tessere_esplorazione.3mf', 'filamento PLA (stampante 3D)', 'n.a.', '1 piatto: 36 Tessere Esplorazione'),
         ('3d_solidcraft/out/carta_fiori_3d.pdf', 'cartoncino 160-250 g', 'solo fronte', '5 fogli, 28 facce (una per fiore 3D)'),
         ('carta_base_3d.pdf', 'cartoncino 250-300 g', 'solo fronte, 100% (print-scaling=none)', '4 fogli: un quarto ciascuno (NO, NE, SO, SE), solo cornice di bordo'),
-        ('segnalini_3d.pdf', 'carta adesiva o cartoncino 160 g', 'solo fronte, 100% (print-scaling=none)', '6 fogli: fronti e dorsi delle 36 tessere, Cripta, 31 Stati, 40 segnalini, 27 rotelle')], y)
+        ('segnalini_3d.pdf', 'carta adesiva o cartoncino 160 g', 'solo fronte, 100% (print-scaling=none)', '9 fogli: fronti e dorsi delle 36 tessere + Cripta (sopra e fondo), 31 Stati e 40 segnalini (un foglio sopra e uno per il fondo), 27 rotelle')], y)
     assert y < 292, y
     write(comp, 1, page(fonts('\n'.join(b))))
 
@@ -1273,14 +1354,14 @@ def guida_montaggio_mappa():
         'Stampa mappa_base.pdf (2 fogli, cartoncino) e taglia ogni metà sulla linea scura esterna e sulla linea di giunzione al centro.',
         'Unisci le due metà da dietro con il nastro adesivo: i rombi di rame sulla giunzione devono combaciare.',
         'Stampa mappa_fiori.pdf fronte/retro: stampa la pagina 1, rimetti il foglio nel cassetto girato sul LATO LUNGO, stampa la pagina 2 (poi 3-4 e 5-6). Prova prima con carta comune e controlla in controluce che il contorno del fronte cada dentro l’abbondanza di 2 mm del retro.',
-        'Ritaglia i 14 fiori sulla linea sottile del contorno e la Cripta sulla sua linea (foglio 3 di mappa_fiori.pdf). Segnalini, Stati e tessere Esplorazione: segnalini.pdf e tessere_esplorazione.pdf.',
+        'Ritaglia i 14 fiori sulla linea sottile del contorno e la Cripta sulla sua linea (foglio 3 di mappa_fiori.pdf). Segnalini, Stati e tessere Esplorazione: segnalini.pdf (4 fogli, fronte/retro sul lato lungo: Indizi, Forte Volontà, Usato e Stati sono a doppia faccia) e tessere_esplorazione.pdf.',
         'Posa i fiori negli spazi numerati della base, con la freccia d’ottone rivolta al numero 1-6 indicato dal preset (mappa_preset.pdf), oppure scegli posto e rotazione col draft.'], y)
     y = sezione('VERSIONE 3D (carta da applicare sulla plastica: carta_base_3d.pdf + carta_fiori_3d.pdf + segnalini)', [
         'Stampa i 4 file 3MF da 3d_solidcraft/out/ (mappa.3mf 8 piatti, rotelle_fulcri.3mf 4, segnalini.3mf 2, tessere_esplorazione.3mf 1; piatti da 220 × 220 mm). Sono 3MF standard senza metadati di piatto: nello slicer separa i piatti a mano o usa «disponi».',
         'Incastra i 4 quarti del vassoio nell’ordine NO → NE → SO → SE con le code a pomello (23 tra NO e gli altri due, 11 tra NE e SE, 11 tra SO e SE). Da verificare con la prima stampa: tenuta delle code e gioco.',
         'Stampa carta_base_3d.pdf: 4 fogli, uno per quarto (NO, NE, SO, SE), solo la cornice di bordo, al 100% con print-scaling=none (controlla il segmento di 100 mm). Ritaglia ogni foglio sulla linea scura (contorno esterno e interno) e posalo nella tasca del quarto corrispondente del vassoio: non si incolla.',
-        'Stampa carta_fiori_3d.pdf, taglia ogni faccia sulla linea scura (1,3 mm dentro il contorno) e incolla una faccia nella tasca sopra di ogni fiore 3D con la colla stick. Il fiore 3D porta una sola faccia (altre 14 facce = altri 14 fiori 3D).',
-        'Stampa segnalini_3d.pdf al 100% (controlla il segmento di 100 mm), ritaglia gli adesivi sulla linea scura e incollali nella tasca sopra di ogni pezzo 3D; il dorso delle tessere Esplorazione va sul fondo piatto. Rotelle: perno dal retro della plancia (foro Ø 4), disco sopra la corona, fermo premuto sulla punta finché scatta.',
+        'Stampa carta_fiori_3d.pdf, taglia ogni faccia sulla linea scura (0,4 mm dentro il contorno dell’esagono) e incollala sopra il fiore 3D con la colla stick: la faccia del fiore viene alla stessa altezza della carta della base. Il fiore 3D porta una sola faccia (altre 14 facce = altri 14 fiori 3D).',
+        'Stampa segnalini_3d.pdf al 100% (controlla il segmento di 100 mm), ritaglia gli adesivi sulla linea scura e incollali sopra ogni pezzo 3D (lisci, 0,2 mm di margine per lato). Indizi, Forte Volontà, Usato, Stati e Cripta sono a doppia faccia: un adesivo sopra e uno uguale sul fondo piatto (fogli «sopra» e «fondo»; Stati con lo stesso orientamento, il nome si legge dritto anche girando la tessera sul lato lungo); il dorso delle tessere Esplorazione va sul fondo piatto. Rotelle: perno dal retro della plancia (foro Ø 4), disco sopra la corona, fermo premuto sulla punta finché scatta.',
         'Posa i fiori negli alloggiamenti del vassoio (si girano di 60° in 60°) con la freccia verso il numero 1-6 inciso sul fondo dello spazio, come da preset o draft.'], y)
     assert y < 292, y
     write(comp, 2, page(fonts('\n'.join(P))))
