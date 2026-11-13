@@ -110,8 +110,8 @@ def dial_ring(cx,cy,vals,k=1.0,mh=4.5,sf=2.0,gap=0.6,gold=(),red=(),col=INK,hole
         for t,fs,by,b in rows:
             c=RED if i in red else col
             o.append(f'<text x="{x:.3f}" y="{y+by:.3f}" text-anchor="middle" font-family="Alegreya Sans"{" font-weight=\"800\"" if b else ""} font-size="{fs:.3f}" fill="{c}">{t}</text>')
-    if hole:
-        o.append(f'<circle cx="0" cy="0" r="1.1" fill="none" stroke="{INK}" stroke-width="0.25"/><path d="M-2.2 0H2.2M0 -2.2V2.2" stroke="{INK}" stroke-width="0.2"/>')
+    if hole:   # foro: punteruolo al centro per il fermacampioni, cerchio Ø 4 per il perno della rotella 3D (3d_solidcraft)
+        o.append(f'<circle cx="0" cy="0" r="2" fill="none" stroke="{INK}" stroke-width="0.25"/><path d="M-3 0H3M0 -3V3" stroke="{INK}" stroke-width="0.2"/>')
     o.append('</g>')
     return ''.join(o)
 

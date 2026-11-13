@@ -19,31 +19,27 @@ def da_scartare(g, e):
     return min(e.mano, key=lambda c: _val_mano(e, c))
 
 
-MAZZETTO = 10          # D22: mazzetto di classe = 10 carte scelte tra quelle della classe (le altre in scatola)
-DA_DIREZIONE = 7       # quante ne prende al massimo dalla propria direzione; il resto dall'altra
+MANO_INIZIALE = 5      # 13/11: la mano iniziale è fatta di 5 carte di classe; le altre 15 sono la pila di classe
+DA_DIREZIONE = 4       # scelta dell'IA: quante ne prende al massimo dalla propria direzione; il resto dall'altra
 
 
-def mazzetto_classe(g, e):
+def mano_iniziale(g, e):
+    """5 carte di classe: la mano predefinita del regolamento (K.MANI_INIZIALI), se la classe ce l'ha e non c'è
+    `--mano-ia`; altrimenti l'IA ne sceglie 5 tra le 20 (per valore, DA_DIREZIONE della propria direzione)."""
+    if not g.opz.mano_ia and e.classe in K.MANI_INIZIALI:
+        return list(K.MANI_INIZIALI[e.classe])
     tutte = K.CARTE_CLASSE[e.classe]
-    if len(tutte) <= MAZZETTO:
-        return list(tutte)
 
     def ordina(cs):       # per valore, a parità a caso
         return sorted(cs, key=lambda c: (-K.valore(c), g.rng.random()))
-    mie = ordina(c for c in tutte if K.CARTE[c].direzione == e.direzione)
-    altre = ordina(c for c in tutte if K.CARTE[c].direzione != e.direzione)
-    scelte = mie[:DA_DIREZIONE]
-    scelte += altre[:MAZZETTO - len(scelte)]
-    resto = ordina(c for c in tutte if c not in scelte)      # se un lato è corto, completa con l'altro
-    return scelte + resto[:MAZZETTO - len(scelte)]
+    scelte = ordina(c for c in tutte if K.CARTE[c].direzione == e.direzione)[:DA_DIREZIONE]
+    resto = ordina(c for c in tutte if c not in scelte)      # le migliori delle altre 16 (di norma dell'altra direzione)
+    return scelte + resto[:MANO_INIZIALE - len(scelte)]
 
 
-def mano_iniziale(g, e, mazzetto):
-    return sorted(mazzetto, key=lambda c: (-K.valore(c), g.rng.random()))[:3]
-
-
-def pesca_da_pila(g, e):
-    return bool(e.pila) and sum(1 for c in e.mano if K.CARTE[c].classe) < 3
+def posto_tessera(g, e, liberi):
+    """D29, N39: dove `e` posa una tessera Esplorazione tra gli esagoni liberi ammessi (qui: a caso, come al montaggio)."""
+    return g.rng.choice(liberi)
 
 
 def scry_mostri(g, e, n):
@@ -85,7 +81,7 @@ def p_duello(g, a, b):
 # --- movimento, fuga, Duello ------------------------------------------------------------------------------
 
 def destinazione(g, e, mete):
-    pronto = e.pv >= min(4, e.pvmax(g))
+    pronto = e.pv >= min(4, e.pv_tot)
     if e.indizi >= 3 and g.mimi:
         if g.mimi in mete and pronto:
             return g.mimi

@@ -204,7 +204,7 @@ def _premio(g, o, k, grande, t):
             S.perdita(g, t.chi)
     elif k == 'cura2_pila':                 # CO-11
         if grande:
-            S.pesca(g, o, dalla_pila=True)
+            S.pesca(g, o, dalla_pila=True)  # «peschi 1 carta dalla tua pila di classe»; vuota → mazzo comune
         else:
             S.cura(g, o, 2)
     elif k == 'ar_fede':                    # CO-12: Stato Fede; valore esatto anche (+2) AR in questo turno

@@ -86,7 +86,7 @@ def f_mappa(g, e, c, p, ctx, pila, tiro, voce):
         S.pesca(g, e)
     if 'cura' in p:
         S.cura(g, e, tiri.dado(g, p['cura'], e))
-    S.cambia_plancia(g, c.id)               # R 8.12: prima il testo della Mappa, poi i suoi fiori
+    S.cambia_plancia(g, c.id, e)               # R 8.12: prima il testo della Mappa, poi i suoi fiori
     S.sposta_tesoro(g)                      # ogni Mappa ritira la Cripta (sulla mappa nuova, senza limite)
 
 
@@ -462,12 +462,21 @@ def f_tempo_scaduto(g, e, c, p, ctx, pila, tiro, voce):
 
 
 def f_vera_volonta(g, e, c, p, ctx, pila, tiro, voce):
-    altre = [k for k, v in g.scatola.items() if k != e.classe and v]
-    if not altre:
-        return
-    box = g.scatola[g.rng.choice(altre)]
-    for _ in range(min(p['n'], len(box))):
-        S.ricevi(g, e, box.pop(g.rng.randrange(len(box))))
+    """TI-28 (13/11, Daniele): `n` carte, ognuna a caso e indipendente dalle altre, dalla scatola di una classe che nessuno
+    gioca oppure dalla pila di classe di un avversario (una fonte con meno carte dà quel che ha). L'IA sceglie per ogni
+    carta la fonte col valore medio più alto, a pari valore a caso. Una carta tolta alla pila di un avversario, quando
+    viene giocata, va negli scarti di quell'avversario (g.origine, S.agli_scarti); dalla scatola, nei propri."""
+    for _ in range(p['n']):
+        fonti = [(box, None) for k, box in g.scatola.items() if k != e.classe and box]
+        fonti += [(x.pila, x) for x in S.avversari(g, e) if x.pila]
+        if not fonti:
+            return
+        fonte, di = max(fonti, key=lambda f: (sum(map(K.valore, f[0])) / len(f[0]), g.rng.random()))
+        cid = fonte.pop(g.rng.randrange(len(fonte)))
+        if di is not None:
+            g.origine[cid] = di
+        S.ricevi(g, e, cid)
+        g.st['vera_volonta_scatola' if di is None else 'vera_volonta_pila'] += 1
 
 
 def f_perdita_tutti(g, e, c, p, ctx, pila, tiro, voce):
@@ -578,11 +587,11 @@ def f_ritira(g, e, c, p, ctx, pila, tiro, voce):
     tiro.ritira(un_dado='un_dado' in p, alza=ctx.get('alza', True))
 
 
-def _togli_mappa(g):
+def _togli_mappa(g, e):
     """TI-22 / CR-15: la Mappa in gioco va negli scarti di chi l'ha giocata; i 3 fiori tornano come nel montaggio (R 8.12)."""
     g.mappa_di.scarti.append(g.mappa)
     g.mappa = g.mappa_di = None
-    S.cambia_plancia(g, None)
+    S.cambia_plancia(g, None, e)
 
 
 def f_annulla(g, e, c, p, ctx, pila, tiro, voce):
@@ -597,7 +606,7 @@ def f_annulla(g, e, c, p, ctx, pila, tiro, voce):
     if bersagli:
         return
     if 'TM' in tipi and ctx.get('togli_mappa') and g.mappa:
-        _togli_mappa(g)
+        _togli_mappa(g, e)
         return
     meno = [s for s in e.stati if s not in S.STATI_PIU]
     if 'togli_meno' in p and meno:          # CR-20: oppure togli i tuoi Stati (−)
@@ -614,7 +623,7 @@ def f_annulla(g, e, c, p, ctx, pila, tiro, voce):
 def f_togli_mappa(g, e, c, p, ctx, pila, tiro, voce):
     """CR-15: togli la Mappa in gioco, poi il tesoro cambia Cripta; prendi lo Stato indicato."""
     if g.mappa:
-        _togli_mappa(g)
+        _togli_mappa(g, e)
     S.sposta_tesoro(g)
     S.dai_stato(g, e, p['s'])
 

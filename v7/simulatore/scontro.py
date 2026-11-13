@@ -291,14 +291,14 @@ def scontro(g, e, mid=None, custode=False):
         if custode:
             g.finita, g.vincitore = True, e
         else:
-            if nemico.tier == 2:
-                e.fv = True                 # D11
+            if nemico.tier in (1, 2):       # D11 (13/11): bottino di 3 carte comuni; la Forte Volontà non è più un premio dei mostri
+                S.loot(g, e)
             if e.ha('motosega') and e.mano and ia._val_mano(e, ia.da_scartare(g, e)) <= 3:
                 S.scarta(g, e, ia.da_scartare(g, e))      # CR-17: scarta 1, ruba 1 carta a un avversario
                 S.ruba(g, e, S.leader(g, e))
             if not senza_indizio and AB.tira_indizio(g, sc, e):
                 tiro_indizio(g, e, nemico.lv)
-            if 'Sussurro' in e.stati and not senza_indizio:     # Mostro vinto su «?»
+            if 'Sussurro' in e.stati and not senza_indizio:     # Mostro vinto su una tessera
                 del e.stati['Sussurro']
                 S.prendi_indizio(g, e, 'sussurro')
     elif esito == 'fuga':

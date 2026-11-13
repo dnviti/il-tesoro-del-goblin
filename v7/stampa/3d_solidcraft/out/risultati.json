@@ -11,8 +11,25 @@
   "bordino": 0.85,
   "gioco_carta": 0.25,
   "fascia_carta": 5.5,
-  "carta_domanda": 20.0,
   "segnalino_spessore": 2.0,
+  "tessera_d": 24.0,
+  "gettone_d": 20.0,
+  "stato_l": 26.0,
+  "stato_a": 18.0,
+  "stato_r": 1.2,
+  "rotella_d": 52.0,
+  "corona_r": 20.0,
+  "rotella_spessore": 2.0,
+  "mozzo_r": 6.25,
+  "foro_perno": 3.8,
+  "perno_d": 3.4,
+  "collo_d": 2.9,
+  "testa_d": 10.0,
+  "testa_h": 0.8,
+  "carta_plancia": 0.3,
+  "fermo_d": 12.0,
+  "fermo_h": 1.2,
+  "gioco_assiale": 0.15,
   "smusso": 0.4,
   "raggio_angolo": 3.0,
   "coda_collo": 2.6,
@@ -20,11 +37,500 @@
   "coda_lunga": 3.9,
   "numero_alto": 8.0,
   "cifra_alta": 4.0,
-  "incisione": 0.5
+  "incisione": 0.4
  },
  "gioco_carta_mm": 0.25,
  "piatto_ipotizzato_mm": 220.0,
  "pezzi": {
+  "tessera_esplorazione": {
+   "volume_atteso_mm3": 697.564,
+   "volume_mm3": 697.564,
+   "errore_volume_rel": 9.928244480431853e-08,
+   "massa_pla_g": 0.86,
+   "ingombro_atteso_mm": [
+    24.0,
+    24.0,
+    2.0
+   ],
+   "ingombro_mm": [
+    24.0,
+    24.0,
+    2.0
+   ],
+   "avvisi": [],
+   "file": {
+    "triangoli": 5662,
+    "bordi_non_manifold": 0,
+    "volume_mm3": 697.5,
+    "ingombro_mm": [
+     24.0,
+     24.0,
+     2.0
+    ],
+    "3mf": {
+     "unita": "millimeter",
+     "oggetti_mesh": 1,
+     "triangoli": 5662
+    }
+   },
+   "carta": {
+    "tasca": "sopra",
+    "pdf": "segnalini_3d.pdf",
+    "contorno_come_la_carta_mm": [
+     24.0,
+     24.0
+    ],
+    "tasca_mm": [
+     22.3,
+     22.3
+    ],
+    "adesivo_mm": [
+     21.8,
+     21.8
+    ],
+    "gioco_adesivo_tasca_mm": 0.25,
+    "tasca_misurata_stl_mm": [
+     22.3,
+     22.3
+    ],
+    "gioco_adesivo_tasca_misurato_mm": [
+     0.25,
+     0.25
+    ]
+   },
+   "facce_verso_il_basso": 1,
+   "fondo_piatto": true,
+   "spessore_sotto_la_tasca_mm": 1.5,
+   "ok": true
+  },
+  "segnalino_tondo": {
+   "volume_atteso_mm3": 486.888,
+   "volume_mm3": 486.888,
+   "errore_volume_rel": 9.951632664927388e-08,
+   "massa_pla_g": 0.6,
+   "ingombro_atteso_mm": [
+    20.0,
+    20.0,
+    2.0
+   ],
+   "ingombro_mm": [
+    20.0,
+    20.0,
+    2.0
+   ],
+   "avvisi": [],
+   "file": {
+    "triangoli": 3468,
+    "bordi_non_manifold": 0,
+    "volume_mm3": 486.78,
+    "ingombro_mm": [
+     20.0,
+     20.0,
+     2.0
+    ],
+    "3mf": {
+     "unita": "millimeter",
+     "oggetti_mesh": 1,
+     "triangoli": 3468
+    }
+   },
+   "carta": {
+    "tasca": "sopra",
+    "pdf": "segnalini_3d.pdf",
+    "contorno_come_la_carta_mm": [
+     20.0,
+     20.0
+    ],
+    "tasca_mm": [
+     18.3,
+     18.3
+    ],
+    "adesivo_mm": [
+     17.8,
+     17.8
+    ],
+    "gioco_adesivo_tasca_mm": 0.25,
+    "tasca_misurata_stl_mm": [
+     18.3,
+     18.3
+    ],
+    "gioco_adesivo_tasca_misurato_mm": [
+     0.25,
+     0.25
+    ]
+   },
+   "facce_verso_il_basso": 1,
+   "fondo_piatto": true,
+   "spessore_sotto_la_tasca_mm": 1.5,
+   "ok": true
+  },
+  "tessera_stato": {
+   "volume_atteso_mm3": 721.919,
+   "volume_mm3": 721.919,
+   "errore_volume_rel": 9.614969228221787e-09,
+   "massa_pla_g": 0.9,
+   "ingombro_atteso_mm": [
+    26.0,
+    18.0,
+    2.0
+   ],
+   "ingombro_mm": [
+    26.0,
+    18.0,
+    2.0
+   ],
+   "avvisi": [],
+   "file": {
+    "triangoli": 494,
+    "bordi_non_manifold": 0,
+    "volume_mm3": 721.88,
+    "ingombro_mm": [
+     26.0,
+     18.0,
+     2.0
+    ],
+    "3mf": {
+     "unita": "millimeter",
+     "oggetti_mesh": 1,
+     "triangoli": 494
+    }
+   },
+   "carta": {
+    "tasca": "sopra",
+    "pdf": "segnalini_3d.pdf",
+    "contorno_come_la_carta_mm": [
+     26.0,
+     18.0
+    ],
+    "tasca_mm": [
+     24.3,
+     16.3
+    ],
+    "adesivo_mm": [
+     23.8,
+     15.8
+    ],
+    "gioco_adesivo_tasca_mm": 0.25,
+    "tasca_misurata_stl_mm": [
+     24.3,
+     16.3
+    ],
+    "gioco_adesivo_tasca_misurato_mm": [
+     0.25,
+     0.25
+    ]
+   },
+   "facce_verso_il_basso": 1,
+   "fondo_piatto": true,
+   "spessore_sotto_la_tasca_mm": 1.5,
+   "ok": true
+  },
+  "rotella_finestra_11x9": {
+   "volume_atteso_mm3": 3102.504,
+   "volume_mm3": 3102.504,
+   "errore_volume_rel": 1.0434877395918093e-07,
+   "massa_pla_g": 3.85,
+   "ingombro_atteso_mm": [
+    52.0,
+    52.0,
+    2.0
+   ],
+   "ingombro_mm": [
+    52.0,
+    52.0,
+    2.0
+   ],
+   "avvisi": [],
+   "file": {
+    "triangoli": 2536,
+    "bordi_non_manifold": 0,
+    "volume_mm3": 3101.18,
+    "ingombro_mm": [
+     52.0,
+     52.0,
+     2.0
+    ],
+    "3mf": {
+     "unita": "millimeter",
+     "oggetti_mesh": 1,
+     "triangoli": 2536
+    }
+   },
+   "carta": {
+    "tasca": "sopra",
+    "pdf": "segnalini_3d.pdf",
+    "contorno_come_la_carta_mm": [
+     52.0,
+     52.0
+    ],
+    "tasca_mm": [
+     50.3,
+     50.3
+    ],
+    "adesivo_mm": [
+     49.8,
+     49.185
+    ],
+    "gioco_adesivo_tasca_mm": 0.25,
+    "finestra_carta_mm": [
+     11,
+     9
+    ],
+    "finestra_plastica_mm": [
+     11.5,
+     9.5
+    ],
+    "foro_adesivo_mm": 13.0,
+    "foro_perno_mm": 3.8,
+    "tasca_misurata_stl_mm": [
+     50.3,
+     50.2877
+    ],
+    "gioco_adesivo_tasca_misurato_mm": [
+     0.25,
+     null
+    ]
+   },
+   "facce_verso_il_basso": 1,
+   "fondo_piatto": true,
+   "spessore_sotto_la_tasca_mm": 1.5,
+   "ok": true
+  },
+  "rotella_finestra_9x9": {
+   "volume_atteso_mm3": 3131.159,
+   "volume_mm3": 3131.16,
+   "errore_volume_rel": 1.0299182342800818e-07,
+   "massa_pla_g": 3.88,
+   "ingombro_atteso_mm": [
+    52.0,
+    52.0,
+    2.0
+   ],
+   "ingombro_mm": [
+    52.0,
+    52.0,
+    2.0
+   ],
+   "avvisi": [],
+   "file": {
+    "triangoli": 2548,
+    "bordi_non_manifold": 0,
+    "volume_mm3": 3129.83,
+    "ingombro_mm": [
+     52.0,
+     52.0,
+     2.0
+    ],
+    "3mf": {
+     "unita": "millimeter",
+     "oggetti_mesh": 1,
+     "triangoli": 2548
+    }
+   },
+   "carta": {
+    "tasca": "sopra",
+    "pdf": "segnalini_3d.pdf",
+    "contorno_come_la_carta_mm": [
+     52.0,
+     52.0
+    ],
+    "tasca_mm": [
+     50.3,
+     50.3
+    ],
+    "adesivo_mm": [
+     49.8,
+     49.39
+    ],
+    "gioco_adesivo_tasca_mm": 0.25,
+    "finestra_carta_mm": [
+     9,
+     9
+    ],
+    "finestra_plastica_mm": [
+     9.5,
+     9.5
+    ],
+    "foro_adesivo_mm": 13.0,
+    "foro_perno_mm": 3.8,
+    "tasca_misurata_stl_mm": [
+     50.2916,
+     50.2955
+    ],
+    "gioco_adesivo_tasca_misurato_mm": [
+     0.2458,
+     null
+    ]
+   },
+   "facce_verso_il_basso": 1,
+   "fondo_piatto": true,
+   "spessore_sotto_la_tasca_mm": 1.5,
+   "ok": true
+  },
+  "rotella_finestra_10x9": {
+   "volume_atteso_mm3": 3116.858,
+   "volume_mm3": 3116.859,
+   "errore_volume_rel": 1.0366389134016103e-07,
+   "massa_pla_g": 3.86,
+   "ingombro_atteso_mm": [
+    52.0,
+    52.0,
+    2.0
+   ],
+   "ingombro_mm": [
+    52.0,
+    52.0,
+    2.0
+   ],
+   "avvisi": [],
+   "file": {
+    "triangoli": 2540,
+    "bordi_non_manifold": 0,
+    "volume_mm3": 3115.53,
+    "ingombro_mm": [
+     52.0,
+     52.0,
+     2.0
+    ],
+    "3mf": {
+     "unita": "millimeter",
+     "oggetti_mesh": 1,
+     "triangoli": 2540
+    }
+   },
+   "carta": {
+    "tasca": "sopra",
+    "pdf": "segnalini_3d.pdf",
+    "contorno_come_la_carta_mm": [
+     52.0,
+     52.0
+    ],
+    "tasca_mm": [
+     50.3,
+     50.3
+    ],
+    "adesivo_mm": [
+     49.8,
+     49.293
+    ],
+    "gioco_adesivo_tasca_mm": 0.25,
+    "finestra_carta_mm": [
+     10,
+     9
+    ],
+    "finestra_plastica_mm": [
+     10.5,
+     9.5
+    ],
+    "foro_adesivo_mm": 13.0,
+    "foro_perno_mm": 3.8,
+    "tasca_misurata_stl_mm": [
+     50.298,
+     50.2919
+    ],
+    "gioco_adesivo_tasca_misurato_mm": [
+     0.249,
+     null
+    ]
+   },
+   "facce_verso_il_basso": 1,
+   "fondo_piatto": true,
+   "spessore_sotto_la_tasca_mm": 1.5,
+   "ok": true
+  },
+  "perno": {
+   "volume_atteso_mm3": 98.672,
+   "volume_mm3": 98.672,
+   "errore_volume_rel": 6.030041877519149e-12,
+   "massa_pla_g": 0.12,
+   "ingombro_atteso_mm": [
+    10.0,
+    10.0,
+    5.55
+   ],
+   "ingombro_mm": [
+    10.0,
+    10.0,
+    5.55
+   ],
+   "avvisi": [],
+   "file": {
+    "triangoli": 3296,
+    "bordi_non_manifold": 0,
+    "volume_mm3": 98.59,
+    "ingombro_mm": [
+     10.0,
+     10.0,
+     5.55
+    ],
+    "3mf": {
+     "unita": "millimeter",
+     "oggetti_mesh": 1,
+     "triangoli": 3296
+    }
+   },
+   "carta": {
+    "quote_z_mm": {
+     "mozzo": 3.1,
+     "gola": 2.9,
+     "dente": 4.45,
+     "dente_alto": 4.85,
+     "punta": 5.55
+    },
+    "gioco_radiale_nel_foro_mm": 0.2,
+    "foro_plancia_mm": 4.0,
+    "interferenza_ganasce_mm": 0.2
+   },
+   "facce_verso_il_basso": 2,
+   "fondo_piatto": true,
+   "spessore_sotto_la_tasca_mm": 0.8,
+   "ok": true
+  },
+  "fermo": {
+   "volume_atteso_mm3": 101.69,
+   "volume_mm3": 101.69,
+   "errore_volume_rel": 1.2749336050769829e-07,
+   "massa_pla_g": 0.13,
+   "ingombro_atteso_mm": [
+    12.0,
+    12.0,
+    1.2
+   ],
+   "ingombro_mm": [
+    12.0,
+    12.0,
+    1.2
+   ],
+   "avvisi": [],
+   "file": {
+    "triangoli": 1188,
+    "bordi_non_manifold": 0,
+    "volume_mm3": 101.64,
+    "ingombro_mm": [
+     12.0,
+     12.0,
+     1.2
+    ],
+    "3mf": {
+     "unita": "millimeter",
+     "oggetti_mesh": 1,
+     "triangoli": 1188
+    }
+   },
+   "carta": {
+    "ganasce": 2,
+    "sbalzo_mm": 4.2,
+    "larghezza_radice_mm": 1.0,
+    "apertura_per_ganascia_mm": 0.2,
+    "deformazione_alla_radice_pct": 1.7,
+    "fessure_mm": 0.7,
+    "gioco_gola_sede_mm": 0.05
+   },
+   "facce_verso_il_basso": 1,
+   "fondo_piatto": true,
+   "spessore_sotto_la_tasca_mm": 1.2,
+   "ok": true
+  },
   "fiore": {
    "volume_atteso_mm3": 9561.646,
    "volume_mm3": 9561.646,
@@ -68,48 +574,6 @@
    "facce_verso_il_basso": 1,
    "fondo_piatto": true,
    "spessore_sotto_la_tasca_mm": 2.5,
-   "ok": true
-  },
-  "segnaposto_domanda": {
-   "volume_atteso_mm3": 598.095,
-   "volume_mm3": 598.095,
-   "errore_volume_rel": 6.6507688238192446e-12,
-   "massa_pla_g": 0.74,
-   "ingombro_atteso_mm": [
-    22.2,
-    22.2,
-    2.0
-   ],
-   "ingombro_mm": [
-    22.2,
-    22.2,
-    2.0
-   ],
-   "avvisi": [],
-   "file": {
-    "triangoli": 5224,
-    "bordi_non_manifold": 0,
-    "volume_mm3": 598.04,
-    "ingombro_mm": [
-     22.2,
-     22.2,
-     2.0
-    ],
-    "3mf": {
-     "unita": "millimeter",
-     "oggetti_mesh": 1,
-     "triangoli": 5224
-    }
-   },
-   "carta": {
-    "tasca": "sopra",
-    "pdf": "mappa_fiori.pdf (foglio 3)",
-    "carta_mm": 20.0,
-    "tasca_mm": 20.5
-   },
-   "facce_verso_il_basso": 1,
-   "fondo_piatto": true,
-   "spessore_sotto_la_tasca_mm": 1.5,
    "ok": true
   },
   "segnalino_cripta": {
@@ -158,8 +622,8 @@
    "volume_atteso_senza_scritte_mm3": 40496.05,
    "volume_senza_scritte_mm3": 40496.05,
    "errore_volume_rel": 8.219666334458546e-08,
-   "volume_mm3": 40417.66,
-   "incisioni_mm3": 78.39,
+   "volume_mm3": 40433.34,
+   "incisioni_mm3": 62.71,
    "massa_pla_g": 50.1,
    "ingombro_atteso_mm": [
     174.4,
@@ -181,9 +645,9 @@
    "scritte_fondo": 27,
    "avvisi": [],
    "file": {
-    "triangoli": 7246,
+    "triangoli": 7248,
     "bordi_non_manifold": 0,
-    "volume_mm3": 40414.41,
+    "volume_mm3": 40429.97,
     "ingombro_mm": [
      174.4,
      144.918,
@@ -192,7 +656,7 @@
     "3mf": {
      "unita": "millimeter",
      "oggetti_mesh": 1,
-     "triangoli": 7246
+     "triangoli": 7248
     }
    },
    "entra_nel_piatto": true,
@@ -201,9 +665,9 @@
   "vassoio_NE": {
    "volume_atteso_senza_scritte_mm3": 45011.8,
    "volume_senza_scritte_mm3": 45011.8,
-   "errore_volume_rel": 4.118688995454876e-08,
-   "volume_mm3": 44945.62,
-   "incisioni_mm3": 66.18,
+   "errore_volume_rel": 4.1186889631257655e-08,
+   "volume_mm3": 44958.86,
+   "incisioni_mm3": 52.94,
    "massa_pla_g": 55.7,
    "ingombro_atteso_mm": [
     170.5,
@@ -224,9 +688,9 @@
    "scritte_fondo": 22,
    "avvisi": [],
    "file": {
-    "triangoli": 6822,
+    "triangoli": 6820,
     "bordi_non_manifold": 0,
-    "volume_mm3": 44946.55,
+    "volume_mm3": 44959.68,
     "ingombro_mm": [
      170.5,
      144.918,
@@ -235,7 +699,7 @@
     "3mf": {
      "unita": "millimeter",
      "oggetti_mesh": 1,
-     "triangoli": 6822
+     "triangoli": 6820
     }
    },
    "entra_nel_piatto": true,
@@ -244,9 +708,9 @@
   "vassoio_SO": {
    "volume_atteso_senza_scritte_mm3": 45011.8,
    "volume_senza_scritte_mm3": 45011.8,
-   "errore_volume_rel": 4.093891646233095e-08,
-   "volume_mm3": 44932.09,
-   "incisioni_mm3": 79.71,
+   "errore_volume_rel": 4.093891613903984e-08,
+   "volume_mm3": 44948.03,
+   "incisioni_mm3": 63.77,
    "massa_pla_g": 55.7,
    "ingombro_atteso_mm": [
     174.4,
@@ -267,9 +731,9 @@
    "scritte_fondo": 22,
    "avvisi": [],
    "file": {
-    "triangoli": 7004,
+    "triangoli": 7002,
     "bordi_non_manifold": 0,
-    "volume_mm3": 44933.06,
+    "volume_mm3": 44948.89,
     "ingombro_mm": [
      174.4,
      144.918,
@@ -278,7 +742,7 @@
     "3mf": {
      "unita": "millimeter",
      "oggetti_mesh": 1,
-     "triangoli": 7004
+     "triangoli": 7002
     }
    },
    "entra_nel_piatto": true,
@@ -287,9 +751,9 @@
   "vassoio_SE": {
    "volume_atteso_senza_scritte_mm3": 39770.63,
    "volume_senza_scritte_mm3": 39770.63,
-   "errore_volume_rel": 4.868059375206581e-09,
-   "volume_mm3": 39666.43,
-   "incisioni_mm3": 104.21,
+   "errore_volume_rel": 4.868059741102559e-09,
+   "volume_mm3": 39687.27,
+   "incisioni_mm3": 83.37,
    "massa_pla_g": 49.2,
    "ingombro_atteso_mm": [
     170.5,
@@ -311,9 +775,9 @@
    "scritte_fondo": 27,
    "avvisi": [],
    "file": {
-    "triangoli": 8098,
+    "triangoli": 8096,
     "bordi_non_manifold": 0,
-    "volume_mm3": 39671.68,
+    "volume_mm3": 39692.42,
     "ingombro_mm": [
      170.5,
      144.894,
@@ -322,7 +786,7 @@
     "3mf": {
      "unita": "millimeter",
      "oggetti_mesh": 1,
-     "triangoli": 8098
+     "triangoli": 8096
     }
    },
    "entra_nel_piatto": true,
@@ -330,6 +794,32 @@
   }
  },
  "prove": {
+  "perno": {
+   "intersezioni": [],
+   "giochi": {
+    "fusto-foro della rotella": {
+     "atteso_mm": 0.2,
+     "misura_mm": 0.2
+    },
+    "gola-sede del fermo": {
+     "atteso_mm": 0.05,
+     "misura_mm": 0.05
+    },
+    "dente-fermo (gioco assiale)": {
+     "atteso_mm": 0.15,
+     "misura_mm": 0.15
+    }
+   },
+   "presa_dente_ganasce_mm3": 0.2722,
+   "quote_z_mm": {
+    "mozzo": 3.1,
+    "gola": 2.9,
+    "dente": 4.45,
+    "dente_alto": 4.85,
+    "punta": 5.55
+   },
+   "ok": true
+  },
   "montaggio": {
    "intersezioni": [],
    "misure_lato_per_lato": {
@@ -417,5 +907,264 @@
    69.74
   ]
  },
- "ok": true
+ "ok": true,
+ "file_3mf": {
+  "mappa.3mf": {
+   "piatti": 8,
+   "istanze": 18,
+   "pezzi": {
+    "vassoio_NO": {
+     "copie": 1,
+     "stl": "vassoio_NO",
+     "piatti": [
+      1
+     ]
+    },
+    "vassoio_NE": {
+     "copie": 1,
+     "stl": "vassoio_NE",
+     "piatti": [
+      2
+     ]
+    },
+    "vassoio_SO": {
+     "copie": 1,
+     "stl": "vassoio_SO",
+     "piatti": [
+      3
+     ]
+    },
+    "vassoio_SE": {
+     "copie": 1,
+     "stl": "vassoio_SE",
+     "piatti": [
+      4
+     ]
+    },
+    "fiore": {
+     "copie": 14,
+     "stl": "fiore",
+     "piatti": [
+      5,
+      6,
+      7,
+      8
+     ]
+    }
+   },
+   "per_piatto": [
+    {
+     "vassoio_NO": 1
+    },
+    {
+     "vassoio_NE": 1
+    },
+    {
+     "vassoio_SO": 1
+    },
+    {
+     "vassoio_SE": 1
+    },
+    {
+     "fiore": 4
+    },
+    {
+     "fiore": 4
+    },
+    {
+     "fiore": 4
+    },
+    {
+     "fiore": 2
+    }
+   ]
+  },
+  "rotelle_fulcri.3mf": {
+   "piatti": 4,
+   "istanze": 81,
+   "pezzi": {
+    "rotella_PV": {
+     "copie": 4,
+     "stl": "rotella_finestra_11x9",
+     "piatti": [
+      1
+     ]
+    },
+    "rotella_Danni": {
+     "copie": 4,
+     "stl": "rotella_finestra_9x9",
+     "piatti": [
+      1
+     ]
+    },
+    "rotella_ATT": {
+     "copie": 4,
+     "stl": "rotella_finestra_11x9",
+     "piatti": [
+      1,
+      2
+     ]
+    },
+    "rotella_MOV": {
+     "copie": 4,
+     "stl": "rotella_finestra_11x9",
+     "piatti": [
+      2
+     ]
+    },
+    "rotella_AR": {
+     "copie": 4,
+     "stl": "rotella_finestra_11x9",
+     "piatti": [
+      2,
+      3
+     ]
+    },
+    "rotella_PL": {
+     "copie": 4,
+     "stl": "rotella_finestra_9x9",
+     "piatti": [
+      3
+     ]
+    },
+    "rotella_scontro": {
+     "copie": 1,
+     "stl": "rotella_finestra_11x9",
+     "piatti": [
+      3
+     ]
+    },
+    "rotella_custode": {
+     "copie": 1,
+     "stl": "rotella_finestra_11x9",
+     "piatti": [
+      3
+     ]
+    },
+    "rotella_Profezia": {
+     "copie": 1,
+     "stl": "rotella_finestra_10x9",
+     "piatti": [
+      3
+     ]
+    },
+    "perno": {
+     "copie": 27,
+     "stl": "perno",
+     "piatti": [
+      3
+     ]
+    },
+    "fermo": {
+     "copie": 27,
+     "stl": "fermo",
+     "piatti": [
+      3,
+      4
+     ]
+    }
+   },
+   "per_piatto": [
+    {
+     "rotella_ATT": 1,
+     "rotella_Danni": 4,
+     "rotella_PV": 4
+    },
+    {
+     "rotella_AR": 2,
+     "rotella_ATT": 3,
+     "rotella_MOV": 4
+    },
+    {
+     "fermo": 2,
+     "perno": 27,
+     "rotella_AR": 2,
+     "rotella_PL": 4,
+     "rotella_Profezia": 1,
+     "rotella_custode": 1,
+     "rotella_scontro": 1
+    },
+    {
+     "fermo": 25
+    }
+   ]
+  },
+  "segnalini.3mf": {
+   "piatti": 2,
+   "istanze": 72,
+   "pezzi": {
+    "tessera_stato": {
+     "copie": 31,
+     "stl": "tessera_stato",
+     "piatti": [
+      1
+     ]
+    },
+    "segnalino_indizio": {
+     "copie": 16,
+     "stl": "segnalino_tondo",
+     "piatti": [
+      1
+     ]
+    },
+    "segnalino_forte_volonta": {
+     "copie": 4,
+     "stl": "segnalino_tondo",
+     "piatti": [
+      1
+     ]
+    },
+    "segnalino_usato": {
+     "copie": 20,
+     "stl": "segnalino_tondo",
+     "piatti": [
+      1,
+      2
+     ]
+    },
+    "segnalino_cripta": {
+     "copie": 1,
+     "stl": "segnalino_cripta",
+     "piatti": [
+      2
+     ]
+    }
+   },
+   "per_piatto": [
+    {
+     "segnalino_forte_volonta": 4,
+     "segnalino_indizio": 16,
+     "segnalino_usato": 11,
+     "tessera_stato": 31
+    },
+    {
+     "segnalino_cripta": 1,
+     "segnalino_usato": 9
+    }
+   ]
+  },
+  "tessere_esplorazione.3mf": {
+   "piatti": 1,
+   "istanze": 36,
+   "pezzi": {
+    "tessera_esplorazione": {
+     "copie": 36,
+     "stl": "tessera_esplorazione",
+     "piatti": [
+      1
+     ]
+    }
+   },
+   "per_piatto": [
+    {
+     "tessera_esplorazione": 36
+    }
+   ]
+  },
+  "anteprima": {
+   "png": "piatto_segnalini.png",
+   "file": "segnalini.3mf",
+   "piatto": 1
+  }
+ }
 }

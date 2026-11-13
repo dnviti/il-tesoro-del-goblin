@@ -47,7 +47,7 @@ def _punti(g, p, cid, mom, mio, mio_sc):
         v = 2
         if 'fv' in q and not p.fv:
             v = 4
-        if 'pesca_tutti' in q or ('recupera' in q and p.scarti) or ('cura' in q and p.pv <= p.pvmax(g) - 3):
+        if 'pesca_tutti' in q or ('recupera' in q and p.scarti) or ('cura' in q and p.pv <= p.pv_tot - 3):
             v = 5
         if ld.indizi >= 3 and g.mimi:
             v = max(v, 6)                   # il tesoro cambia Cripta e il leader torna sulla Partenza
@@ -126,7 +126,7 @@ def _punti(g, p, cid, mom, mio, mio_sc):
     if k == 'cura':
         if p.pv <= 2 or (mio_sc and p.pv <= 3):
             return 7, {}
-        return (5, {}) if mio and p.pv <= p.pvmax(g) - 2 else None
+        return (5, {}) if mio and p.pv <= p.pv_tot - 2 else None
     if k == 'recupera':
         buone = [x for x in p.scarti if K.valore(x) >= 4]
         if not mio or not buone or len(p.mano) > 8:

@@ -4,8 +4,8 @@ mappa (mappa_fiori: fronte/retro manuale, retro specchiato sul lato lungo).
 
 Uso: python3 gen.py <cartella_uscita> [--formato A3] [--dati CARTELLA] [--arte-mappa CARTELLA]
 Scrive <cartella_uscita>/<componente>/pagina_NN.svg (poi importate in VectorCraft e esportate in PDF da build.sh).
-A4: mappa_base (2, la base 12×12 in due metà), mappa_fiori (6 pagine = 3 fogli fronte/retro: 14 fiori, 24 segnaposto «?»,
-Cripta), mappa_preset (10, carta comune), sala_tesoro (1), plance_eroe (4, A4 orizzontale), rotelle_eroe (2),
+A4: mappa_base (2, la base 12×12 in due metà), mappa_fiori (6 pagine = 3 fogli fronte/retro: 14 fiori e la Cripta;
+niente segnaposto «?», D29), mappa_preset (10, carta comune), sala_tesoro (1), plance_eroe (4, A4 orizzontale), rotelle_eroe (2),
 tessere_esplorazione (1), segnalini (2), pedine (2), prova_stampa (1). A3: sala_tesoro (1, A3 orizzontale), plance_eroe
 (2), rotelle_eroe (1), tessere_esplorazione (1, con le tessere Stato e la Rotella della Profezia), componenti_misti (1,
 pedine e segnalini), prova_stampa (1); la mappa A3 non c'è (si stampano i PDF A4 della mappa).
@@ -183,7 +183,7 @@ def esplorazione_pezzi(cs, rows, D, cart=None):
     b += [cut_disc(x, y, R) for x, y in cs]
     return b
 
-ESPL_NOTE = ['Dorso coperto alla pagina 2 (fronte/retro a mano, lato lungo), niente sacchetto: le tessere stanno coperte sulle «?» e nella riserva; la tessera rossa rimasta sulla plancia sta a faccia in su.',
+ESPL_NOTE = ['Dorso coperto alla pagina 2 (fronte/retro a mano, lato lungo): le tessere stanno coperte sulla mappa (24) e nella riserva (12); la rossa rimasta sta a faccia in su.',
              'Ordine: le prime 25 (righe 1-4 e la prima della riga 5) sono rosse, le altre 11 blu.']
 def esplorazione():
     """36 tessere Ø 24 su un foglio A4, solo fronte (retro bianco)."""
@@ -245,8 +245,13 @@ def gettoni(cols, x0, y0, per_tipo=True, cart=None):
 
 STATO_COL = {'+': '#3b7d4f', '−': '#9c2f24'}
 ST_W, ST_H = 26.0, 18.0
+ST_BANDA = 7.0       # bandella del nome, in alto
+ST_NOME_MIN = 3.2    # corpo minimo del nome in mm (9 pt, il minimo delle etichette del kit)
 def stati(cols, x0, y0, cart=None):
-    """tessere Stato 26 x 18 (bandella verde = +, rossa = −; freccia ↑ per leggere dritto/di traverso). Ritorna (svg, conteggi, bbox)."""
+    """tessere Stato 26 x 18 (D27, 13/11): solo nome, icona e segno. Bandella in alto nel colore del segno (verde = +,
+    aiuta; rossa = −, ostacola) col nome grande; sotto, il segno grande in un tondo, l'illustrazione ST-xx e la freccia ↑
+    (punta in alto: tessera verticale; di lato: orizzontale, R 9.1). Gli effetti stanno sulle Carte Aiuto. Ritorna (svg,
+    conteggi, bbox)."""
     rows = read('stati.csv')
     items = [r for r in rows for _ in range(int(r['copie']))]
     assert items
@@ -255,49 +260,29 @@ def stati(cols, x0, y0, cart=None):
     gw, gh = (cols - 1) * px + ST_W, (nr - 1) * py + ST_H
     pcs = [(x0 + (i % cols) * px, y0 + (i // cols) * py, r) for i, r in enumerate(items)]
     b = []
-    for x, y, r in pcs:
+    for n, (x, y, r) in enumerate(pcs):
         c = STATO_COL[r['segno']]
-        b.append(f'<rect x="{x - BLEED:.2f}" y="{y - BLEED:.2f}" width="{ST_W + 2 * BLEED}" height="{ST_H + 2 * BLEED}" fill="{mix(c, 0.86)}"/>')
-        img = cart and F12.immagine_arte(r['id'], x + ST_W / 2, y + ST_H / 2, cart)
-        if img:   # illustrazione piena (senza velo) nel quadrato in alto a sinistra; nome nella bandella a destra, testo sotto su pannello pergamena
-            a_ = 8.4
-            b.append(f'<rect x="{x - BLEED:.2f}" y="{y - BLEED:.2f}" width="{ST_W + 2 * BLEED}" height="{BLEED + 9.2}" fill="{c}"/>')
-            b.append(f'<rect x="{x:.2f}" y="{y + 9.2:.2f}" width="{ST_W}" height="{ST_H - 9.2:.2f}" fill="#fffaf0"/>')
-            ix, iy, isz = x + 0.4, y + 0.4, 8.4
-            b.append(f'<clipPath id="stc{abs(hash((r["id"], round(x), round(y)))) % 10**8}"><rect x="{ix:.2f}" y="{iy:.2f}" width="{isz}" height="{isz}" rx="0.8"/></clipPath>')
-            kk = isz / 30.0
-            b.append(f'<g clip-path="url(#stc{abs(hash((r["id"], round(x), round(y)))) % 10**8})"><image href="{os.path.relpath(os.path.join(F12.ARTE_MAPPA, r["id"] + ".png"), cart).replace("&", "&amp;")}" '
-                     f'x="{ix:.3f}" y="{iy:.3f}" width="{isz}" height="{isz}" preserveAspectRatio="none"/></g>')
-            b.append(f'<rect x="{ix:.2f}" y="{iy:.2f}" width="{isz}" height="{isz}" rx="0.8" fill="none" stroke="#fffaf0" stroke-width="0.35"/>')
-            b.append(f'<circle cx="{ix + 1.5:.2f}" cy="{iy + isz - 1.5:.2f}" r="1.35" fill="{c}" stroke="#fffaf0" stroke-width="0.25"/>'
-                     + text(ix + 1.5, iy + isz - 0.5, r['segno'], 2.4, '#ffffff', 'middle', True))
-            b.append(line(x - BLEED, y + 9.2, x + ST_W + BLEED, y + 9.2, 0.3, BRASS))
-            fs = 3.4
-            while tw(r['nome'], fs, SANS, True) > 12.2: fs -= 0.1
-            b.append(text(x + 16.3, y + 5.5, r['nome'], fs, '#ffffff', 'middle', True))
-            ax = x + ST_W - 2.2
-            b.append(f'<path d="M{ax:.2f} {y + 6.2:.2f}V{y + 2.2:.2f}M{ax - 1.2:.2f} {y + 3.5:.2f}L{ax:.2f} {y + 2.1:.2f}L{ax + 1.2:.2f} {y + 3.5:.2f}" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>')
-            fs = 2.8
-            ls = wrap(r['testo'], fs, ST_W - 2.6)
-            while len(ls) > 3 or (len(ls) > 1 and len(ls[-1]) < 4) or 11.4 + (len(ls) - 1) * fs * 1.18 > 17.0: fs -= 0.05; ls = wrap(r['testo'], fs, ST_W - 2.6)
-            for j, l in enumerate(ls):
-                b.append(text(x + ST_W / 2, y + 11.4 + j * fs * 1.18, l, fs, INK, 'middle'))
-            b.append(f'<rect x="{x:.2f}" y="{y:.2f}" width="{ST_W}" height="{ST_H}" rx="1.2" fill="none" stroke="{CUT}" stroke-width="0.12" opacity="0.8"/>')
-            continue
-        b.append(f'<rect x="{x - BLEED:.2f}" y="{y - BLEED:.2f}" width="{ST_W + 2 * BLEED}" height="{BLEED + 6.2}" fill="{c}"/>')
+        b.append(f'<rect x="{x - BLEED:.2f}" y="{y - BLEED:.2f}" width="{ST_W + 2 * BLEED}" height="{ST_H + 2 * BLEED}" fill="#fffaf0"/>')
+        b.append(f'<rect x="{x - BLEED:.2f}" y="{y - BLEED:.2f}" width="{ST_W + 2 * BLEED}" height="{BLEED + ST_BANDA}" fill="{c}"/>')
         # kit dei motivi: filetto doppio d'ottone sotto la bandella
-        b.append(line(x - BLEED, y + 6.2, x + ST_W + BLEED, y + 6.2, 0.35, BRASS) + line(x - BLEED, y + 6.85, x + ST_W + BLEED, y + 6.85, 0.12, BRASS))
-        b.append(text(x + 2.4, y + 4.9, r['segno'], 4.2, '#ffffff', 'middle', True))
-        fs = 3.4
-        while tw(r['nome'], fs, SANS, True) > 15.5: fs -= 0.1
-        b.append(text(x + ST_W / 2, y + 4.6, r['nome'], fs, '#ffffff', 'middle', True))
-        ax = x + ST_W - 2.4   # freccia ↑: la tessera è dritta quando punta in alto
-        b.append(f'<path d="M{ax:.2f} {y + 5.3:.2f}V{y + 1.3:.2f}M{ax - 1.2:.2f} {y + 2.6:.2f}L{ax:.2f} {y + 1.2:.2f}L{ax + 1.2:.2f} {y + 2.6:.2f}" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>')
-        fs = 2.8   # testo grande quanto entra in 3 righe, senza una parola sola sull'ultima riga
-        ls = wrap(r['testo'], fs, ST_W - 2.6)
-        while len(ls) > 3 or (len(ls) > 1 and len(ls[-1]) < 4): fs -= 0.05; ls = wrap(r['testo'], fs, ST_W - 2.6)
-        for j, l in enumerate(ls):
-            b.append(text(x + ST_W / 2, y + 9.7 + j * fs * 1.18, l, fs, INK, 'middle'))
+        b.append(line(x - BLEED, y + ST_BANDA, x + ST_W + BLEED, y + ST_BANDA, 0.35, BRASS)
+                 + line(x - BLEED, y + ST_BANDA + 0.65, x + ST_W + BLEED, y + ST_BANDA + 0.65, 0.12, BRASS))
+        fs = 4.4
+        while tw(r['nome'], fs, SANS, True) > ST_W - 2.4: fs -= 0.1
+        assert fs >= ST_NOME_MIN, f"{r['nome']}: nome della tessera Stato sotto {ST_NOME_MIN} mm"
+        b.append(text(x + ST_W / 2, y + ST_BANDA / 2 + fs * 0.36, r['nome'], fs, '#ffffff', 'middle', True))
+        ym = y + ST_BANDA + (ST_H - ST_BANDA) / 2 + 0.3            # asse della parte sotto la bandella
+        b.append(f'<circle cx="{x + 4.4:.2f}" cy="{ym:.2f}" r="3.4" fill="{c}" stroke="{BRASS}" stroke-width="0.3"/>'
+                 + text(x + 4.4, ym + 2.2, r['segno'], 6.2, '#ffffff', 'middle', True))
+        isz = ST_H - ST_BANDA - 1.6
+        ix, iy = x + ST_W / 2 - isz / 2, ym - isz / 2
+        if cart and os.path.isfile(os.path.join(F12.ARTE_MAPPA, r['id'] + '.png')):   # illustrazione 30 mm a 300 ppi, ridotta
+            b.append(f'<clipPath id="stc{n}"><rect x="{ix:.2f}" y="{iy:.2f}" width="{isz:.2f}" height="{isz:.2f}" rx="0.8"/></clipPath>'
+                     f'<g clip-path="url(#stc{n})"><image href="{os.path.relpath(os.path.join(F12.ARTE_MAPPA, r["id"] + ".png"), cart).replace("&", "&amp;")}" '
+                     f'x="{ix:.3f}" y="{iy:.3f}" width="{isz:.2f}" height="{isz:.2f}" preserveAspectRatio="none"/></g>'
+                     f'<rect x="{ix:.2f}" y="{iy:.2f}" width="{isz:.2f}" height="{isz:.2f}" rx="0.8" fill="none" stroke="{BRASS}" stroke-width="0.3"/>')
+        ax = x + ST_W - 3.6   # freccia ↑: la tessera è verticale quando punta in alto
+        b.append(f'<path d="M{ax:.2f} {ym + 3.2:.2f}V{ym - 3.2:.2f}M{ax - 1.6:.2f} {ym - 1.4:.2f}L{ax:.2f} {ym - 3.3:.2f}L{ax + 1.6:.2f} {ym - 1.4:.2f}" fill="none" stroke="{c}" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"/>')
         b.append(f'<rect x="{x:.2f}" y="{y:.2f}" width="{ST_W}" height="{ST_H}" rx="1.2" fill="none" stroke="{CUT}" stroke-width="0.12" opacity="0.8"/>')
     xs = sorted({x0 + i * px + o for i in range(cols) for o in (0, ST_W)}); ys = sorted({y0 + i * py + o for i in range(nr) for o in (0, ST_H)})
     bb = (x0, y0, x0 + gw, y0 + gh)
@@ -309,10 +294,11 @@ def stati(cols, x0, y0, cart=None):
 # centro: girando il disco la finestra mostra un solo valore. Ogni rotella: (chiave, nome sul disco, sotto, icona,
 # colore sulla plancia, valori, finestra (larga lungo la corona, alta lungo il raggio), altezza delle cifre, dorati, rossi).
 # PL (D2, Spec R 2.3): somma dei PL degli Equipaggiamenti negli slot, 0-12, senza scritte di livello né di mazzetto.
-# PV max (Spec R 2.3): ogni valore da 5 a 13, perché le carte cambiano i PV massimi di 1 alla volta.
+# PV (Spec R 2.3): punti vita dell'eroe, ogni valore da 5 a 13, perché le carte li cambiano di 1 alla volta (la vecchia
+# rotella dei PV massimi). Danni (13/11, Daniele): i danni subiti, contati in su da 0 a 13 (la vecchia rotella dei PV attuali).
 ROTELLE = [
-    ('PV', 'PV', 'attuali', 'cuore', RED, [(str(v), ()) for v in range(14)], (9.0, 9.0), 4.0, (), (0,)),
-    ('PVM', 'PV max', 'massimi', 'cuore', INK, [(str(v), ()) for v in range(5, 14)], (11.0, 9.0), 4.5, (), ()),
+    ('PV', 'PV', 'punti vita', 'cuore', RED, [(str(v), ()) for v in range(5, 14)], (11.0, 9.0), 4.5, (), ()),
+    ('DANNI', 'Danni', 'danni subiti', 'teschio', INK, [(str(v), ()) for v in range(14)], (9.0, 9.0), 4.0, (), ()),
     ('ATT', 'ATT', 'attacco', 'spade', INK, [(str(v), ()) for v in range(1, 9)], (11.0, 9.0), 4.5, (), ()),
     ('MOV', 'MOV', 'movimento', 'stivale', BROWN, [('−1' if v < 0 else str(v), ()) for v in range(-1, 9)], (11.0, 9.0), 4.5, (), ()),
     ('AR', 'AR', 'armatura', 'scudo', BLUE, [(str(v), ()) for v in range(9, 21)], (11.0, 9.0), 4.5, (), ()),
@@ -324,6 +310,7 @@ SF, GAP = 2.0, 0.6   # righe piccole della corona (corpo, interlinea): come i de
 
 GOLD_R = 4.8   # raggio del cerchio dorato dietro alle etichette «dorate» (svg.dial_ring)
 RAGGIO = {}   # corone con un raggio diverso da RING_R (v6: PE a 19 mm; nella v7 nessuna)
+FORO_ADESIVO_R = 6.5   # raggio del foro al centro dell'adesivo delle rotelle 3D (segnalini_3d.pdf): mozzo_r 6,25 + gioco_carta 0,25
 # Rotella della Profezia (Spec R 2.5, R 13.5): 10 posizioni 1-6, Pari, Dispari, Alto, Basso. Le parole non entrano in una
 # finestra della corona Ø 52: lettera grande e parola piccola sotto. Corona su una base quadrata, disco Ø 52 come le altre.
 PROFEZIA_VALORI = [(str(v), ()) for v in range(1, 7)] + [('P', ('pari',)), ('D', ('dispari',)), ('A', ('alto',)), ('B', ('basso',))]
@@ -390,7 +377,8 @@ def rotella_disco(cx, cy, fill, nome, sotto, ic, win, riga='', rr=RING_R):
         o.append(f'<path d="M{h1[0]:.2f} {h1[1]:.2f}L{p1[0]:.2f} {p1[1]:.2f}L{h2[0]:.2f} {h2[1]:.2f}" fill="none" stroke="#ffffff" stroke-width="0.55" stroke-linecap="round" stroke-linejoin="round"/>')
         am = math.radians(s * 55)
         o.append(text(cx + 16.6 * math.sin(am), cy - 16.6 * math.cos(am) + 0.8, 'gira', 2.4, '#ffffff', 'middle', True))
-    o.append(f'<circle cx="{cx:.2f}" cy="{cy:.2f}" r="5" fill="none" stroke="#ffffff" stroke-width="0.25" stroke-dasharray="0.9 0.7"/>')
+    # cerchio tratteggiato = foro dell'adesivo della rotella 3D (mozzo_r + gioco_carta di 3d_solidcraft: lì sta il fermo del perno)
+    o.append(f'<circle cx="{cx:.2f}" cy="{cy:.2f}" r="{FORO_ADESIVO_R}" fill="none" stroke="#ffffff" stroke-width="0.25" stroke-dasharray="0.9 0.7"/>')
     o.append(f'<circle cx="{cx:.2f}" cy="{cy:.2f}" r="1.1" fill="#ffffff"/>' + line(cx - 1.6, cy, cx + 1.6, cy, 0.18, INK) + line(cx, cy - 1.6, cx, cy + 1.6, 0.18, INK))
     if riga: o.append(text(cx, cy - 7.6, riga, 2.3, '#ffffff', 'middle'))
     fs = 6.0
@@ -422,14 +410,14 @@ PB_W, PB_H = 280.0, 194.0
 FESSURE = [(5.5, 'Elmo', 'elmo'), (72.5, 'Arma DX / Scudo', 'spade'), (139.5, 'Arma SX', 'spade'), (206.5, 'Armatura', 'scudo')]
 FESS_Y, FESS_L = 14.0, 65.0
 CARTE_PB = [(4.0, 'Carta Classe'), (75.0, 'Carta Specie')]   # riquadri 63 x 88 da y 20
-CELLE = {'PV': (142, 18), 'PVM': (209, 18), 'ATT': (142, 76), 'MOV': (209, 76), 'AR': (142, 134), 'PL': (209, 134)}
+CELLE = {'PV': (142, 18), 'DANNI': (209, 18), 'ATT': (142, 76), 'MOV': (209, 76), 'AR': (142, 134), 'PL': (209, 134)}
 TAGLIO = '#d0312d'   # linee da incidere
-NOTE_ROT = {'PV': ['attuali', '0 = sconfitto'], 'PVM': ['massimi'], 'ATT': ['attacco', '2D6 + ATT'],
+NOTE_ROT = {'PV': ['punti vita'], 'DANNI': ['danni subiti', 'Danni = PV: sconfitto'], 'ATT': ['attacco', '2D6 + ATT'],
             'MOV': ['movimento', 'D6 + MOV'], 'AR': ['armatura', 'ti colpisce chi fa 2D6 + ATT ≥ AR'], 'PL': ['power level', 'somma dei PL negli slot']}
 MONTAGGIO = {
     'Carta Classe': ['1 · Incidi col taglierino le linee rosse: 4 fessure in alto e i tagli ai 4 angoli dei due riquadri.',
-                     '2 · Fora con un punteruolo il centro segnato delle 6 rotelle.',
-                     '3 · Monta i 6 dischi (rotelle_eroe.pdf): disco sopra la corona col suo nome, fermacampioni dal davanti, gambe aperte in orizzontale sul retro.',
+                     '2 · Fora il centro segnato delle 6 rotelle: col punteruolo per il fermacampioni, Ø 4 mm per il perno 3D.',
+                     '3 · Monta i 6 dischi (rotelle_eroe.pdf) sopra la corona col loro nome, fermacampioni dal davanti e gambe aperte sul retro, o perno 3D dal retro e fermo davanti.',
                      '4 · Infila i 4 angoli della Carta Classe nei tagli: resta lì per tutta la partita.'],
     'Carta Specie': ['Infila i 4 angoli della Carta Specie nei tagli e gira subito le rotelle del suo bonus.',
                      'Equipaggiamenti: infila la carta nella fessura dal davanti, con il nome in alto: il fondo passa sotto la plancia, il resto sporge sopra il bordo.',
@@ -475,11 +463,11 @@ def plancia_eroe():
     o.append(f'<circle cx="104" cy="128" r="11" fill="#fbf6ea" stroke="{BROWN}" stroke-width="0.3" stroke-dasharray="1.6 1.2"/>' + icon('stella', 104, 128, 9 / 24, mix(GOLD, 0.6)))
     for j, l in enumerate(['ritira 1 D6', 'appena tirato;', 'non si accumula']):
         o.append(text(117.5, 124.5 + j * 3.3, l, 2.5, BROWN))
-    # riquadro Stati: 4 posti da 30 x 32 (tessera 26 x 18 dritta o 18 x 26 di traverso)
+    # riquadro Stati: 4 posti da 30 x 32 (tessera 26 x 18 verticale o 18 x 26 orizzontale)
     o.append(f'<rect x="4" y="144" width="134" height="32" rx="3" fill="#fbf6ea" stroke="{BROWN}" stroke-width="0.3"/>')
     o.append(text(5.8, 151.5, 'Stati', 3.6, INK, 'start', True))
     yy = 156.0
-    for par in ['dritto: toglilo alla tua Fine', 'di traverso: raddrizzalo alla tua Fine']:
+    for par in ['verticale: toglilo alla tua Fine', 'orizzontale: giralo in verticale alla tua Fine']:
         for l in wrap(par, 2.1, 11.6):
             o.append(text(5.8, yy, l, 2.1, BROWN)); yy += 2.6
         yy += 0.8
@@ -489,9 +477,9 @@ def plancia_eroe():
         o.append(f'<rect x="{cx - 13}" y="{cy - 9}" width="26" height="18" rx="1.2" fill="none" stroke="{LINE}" stroke-width="0.3" stroke-dasharray="1.2 1"/>')
         o.append(f'<rect x="{cx - 9}" y="{cy - 13}" width="18" height="26" rx="1.2" fill="none" stroke="{LINE}" stroke-width="0.3" stroke-dasharray="0.5 1"/>')
     # promemoria
-    prom = ['Si parte da PV 5 · PV max 5 · ATT 1 · MOV 1 · AR 9 · PL 0, poi aggiungi il bonus della Carta Specie.',
+    prom = ['Si parte da PV 5 · Danni 0 · ATT 1 · MOV 1 · AR 9 · PL 0, poi aggiungi il bonus della Carta Specie.',
             'Le statistiche cambiano solo con carte, Equipaggiamenti e Stati. Equipaggi o perdi un oggetto: gira subito le rotelle, PL compreso.',
-            'Fine del turno: togli gli stati dritti, raddrizza quelli di traverso, togli gli Usato «una volta per turno» e i segnaposto.']
+            'Fine del turno: togli gli Stati verticali, gira in verticale gli orizzontali, togli gli Usato «una volta per turno» e i segnaposto.']
     for j, l in enumerate(prom):
         fs = 2.5
         while tw(l, fs) > 133: fs -= 0.05
@@ -508,8 +496,8 @@ def plancia_eroe():
         for par in NOTE_ROT[key]:
             for l in wrap(par, 2.1, 12.5):
                 o.append(text(xc + 7, yy, l, 2.1, BROWN, 'middle')); yy += 2.6
-        o.append(text(xc + 7, yc + 47, 'fermacampioni', 1.8, BROWN, 'middle'))
-        o.append(text(xc + 7, yc + 49.4, 'al centro', 1.8, BROWN, 'middle'))
+        o.append(text(xc + 7, yc + 47, 'foro al centro', 1.8, BROWN, 'middle'))
+        o.append(text(xc + 7, yc + 49.4, 'Ø 4 per il perno 3D', 1.8, BROWN, 'middle'))
     o.append(text(142, 191.0, 'Il Tesoro del Goblin · playtest v7', 2.4, BROWN))
     o.append(text(274.5, 191.0, 'Plancia eroe', 2.8, col, 'end', True, SERIF))
     # kit dei motivi: filetto doppio d'ottone a 1,2 / 2 mm dal taglio, ingranaggi agli angoli
@@ -541,9 +529,9 @@ def rotelle_eroe():
         b += dischi_eroe(2, x0, y0, 3)
         assert y0 + 3 * pitch + 2 * DISC_R + BLEED < 262
         b.append(ftr(['Stampa su A4 al 100%, solo fronte (meglio carta 160-200 g, o incolla il foglio su un cartoncino prima di ritagliare).',
-                      'Ritaglia ogni disco dove cambia il colore; ritaglia la finestra bianca col taglierino; fora il centro con un punteruolo.',
+                      'Ritaglia ogni disco dove cambia il colore; ritaglia la finestra bianca col taglierino; fora il centro (punteruolo, o Ø 4 mm per il perno 3D).',
                       'Monta il disco sopra la corona con lo stesso nome della plancia eroe: fermacampioni dal davanti, gambe aperte in orizzontale dietro.',
-                      'Girando il disco la finestra mostra un solo valore. 6 dischi e 6 fermacampioni per plancia.'], y=266))
+                      'Girando il disco la finestra mostra un solo valore. 6 dischi e 6 fermacampioni per plancia (PV, Danni, ATT, MOV, AR, PL).'], y=266))
         write('rotelle_eroe', p + 1, page(fonts('\n'.join(b))))
     return 6 * PLANCE
 
@@ -572,7 +560,7 @@ def segnalini():
     assert dy + DISC_R + BLEED < 262
     b.append(ftr(['Stampa su A4 al 100%, solo fronte. Tessere Stato: taglia sul bordo sottile (3 mm di abbondanza).',
                   f'Righe: {conta(sc)}.',
-                  'Uno stato vale un turno: preso nel tuo turno va di traverso, nel turno di un altro dritto (freccia ↑ in alto).',
+                  'Uno Stato vale il tuo prossimo turno: preso nel tuo turno va orizzontale, nel turno di un altro verticale (freccia ↑ in alto). Gli effetti sono sulle Carte Aiuto.',
                   'Dischi: ritaglia dove cambia il colore e la finestra bianca, fora il centro. «PV del mostro» e «PV del custode» vanno sulle corone 0-9',
                   'della Sala del Tesoro, con un fermacampioni. La Rotella della Profezia è sul foglio 2 delle pedine (pedine.pdf).'], y=266))
     write('segnalini', 2, page(fonts('\n'.join(b))))
@@ -684,7 +672,8 @@ def pedine_pezzi(rows, gruppi):
 
 # ------------------------------------------------------------------ MAPPA 12×12 A FIORI (Daniele, 12/11: D24, D25)
 # Base in 2 fogli A4 (bordo con le 6 Partenze, coordinate, 14 spazi numerati), 14 fiori a due facce stampati fronte/retro
-# (retro specchiato per il fronte-retro manuale sul lato lungo), 24 segnaposto «?», segnalino Cripta, 10 fogli dei preset.
+# (retro specchiato per il fronte-retro manuale sul lato lungo), segnalino Cripta, 10 fogli dei preset. Niente segnaposto «?»
+# (D29, 13/11): le tessere Esplorazione stanno coperte sugli esagoni.
 # Dati: dati/fiori.csv, base12.csv, preset12.csv; disegno dei pezzi: fiori12.py. La Sala del Tesoro resta un pezzo a parte.
 import fiori12 as F12              # noqa: E402
 # --arte-mappa CARTELLA: png dell'arte generata della mappa (MF-<NN><A|B>.png, MB-BASE.png; default arte/png o GOBLIN_ARTE_MAPPA);
@@ -692,7 +681,7 @@ import fiori12 as F12              # noqa: E402
 if '--arte-mappa' in sys.argv:
     F12.ARTE_MAPPA = sys.argv[sys.argv.index('--arte-mappa') + 1]
 ARTE_PNG = os.path.join(HERE, '..', 'arte', 'png')
-ABB12 = 2.0                         # abbondanza di base, fiori, «?» e Cripta (fronte e retro): 1-2 mm di scarto non si vedono
+ABB12 = 2.0                         # abbondanza di base, fiori e Cripta (fronte e retro): 1-2 mm di scarto non si vedono
 FASCIA12 = 5.5                      # fascia delle coordinate attorno alla base
 SALA_BW = 26 * 10.5 + 2 * 26 * 1.8  # la Sala del Tesoro è la fascia alta della vecchia plancia (unità del disegno, W = 26)
 SALA_BH = SALA_BW * 1191 / 4200     # proporzioni di PS-BASE.png
@@ -792,7 +781,7 @@ def nomi_carte():
     return {r['id']: r['nome'] for r in read('carte_comuni.csv') if r['id'].startswith('TM-')}
 
 # ---------- base (2 fogli A4)
-def base12_svg(cornice=False):
+def base12_svg():
     """la base nelle coordinate della mappa (0,0 = angolo della griglia): fascia con le coordinate, spazi vuoti numerati,
     esagoni di bordo, rombi di giunzione sulla metà."""
     fiori, base, spazi, partenze, _ = dati12()
@@ -808,12 +797,6 @@ def base12_svg(cornice=False):
         o += [text(-f / 2, y, str(r), 3.6, INK, 'middle', True), text(L + f / 2, y, str(r), 3.6, INK, 'middle', True)]
     for s, pos in spazi.items():   # spazi vuoti: contorno d'ottone, numero dello spazio, numeri 1-6 dell'anello
         cc = [F12.centro_mappa(h) for h in pos.values()]
-        if cornice:   # carta 3D: gli spazi non si stampano (lì entrano i fiori): bianchi, tagliati e tolti lungo il perimetro
-            o += [f'<polygon points="{F12.pts(F12.vertici(x, y, F12.R + 0.05))}" fill="#ffffff"/>' for x, y in cc]
-            x0, y0 = F12.centro_mappa(pos[0])
-            o.append(text(x0, y0 + 1.0, 'ritaglia e togli', 2.4, '#8a8a8a', 'middle'))
-            o.append(F12.contorno(cc, '#222222', 0.25))
-            continue
         o += [f'<polygon points="{F12.pts(F12.vertici(x, y))}" fill="#efe6cf" stroke="{BRASS}" stroke-opacity="0.55" stroke-width="0.3"/>' for x, y in cc]
         x0, y0 = F12.centro_mappa(pos[0])
         o.append(text(x0, y0 + 4, str(s), 11, BRASS, 'middle', True, SERIF))
@@ -823,11 +806,12 @@ def base12_svg(cornice=False):
     o.append(F12.pezzo(celle, 'base12', partenze=partenze, arte=F12.immagine_arte('MB-BASE', 0, 0, os.path.join(OUT, 'mappa_base'), False)))
     return '\n'.join(o)
 
-def mappa_base(comp='mappa_base', cornice=False):
+def mappa_base():
     """mappa_base: la base 12×12 su 2 fogli A4 verticali (metà sinistra, metà destra), con la linea di giunzione e 5 rombi
     di rame a cavallo della giunzione. Solo fronte, cartoncino."""
+    comp = 'mappa_base'
     f, L, A = FASCIA12, F12.LARGO, F12.ALTO
-    corpo = base12_svg(cornice)
+    corpo = base12_svg()
     m = L / 2                                   # giunzione: a metà larghezza
     larg = f + m + 2 * ABB12                    # 167 mm per metà
     ty = (297 - (A + 2 * f + 2 * ABB12)) / 2 + f + ABB12
@@ -841,20 +825,25 @@ def mappa_base(comp='mappa_base', cornice=False):
         b = [f'<defs><clipPath id="meta{n}"><rect {clip}/></clipPath></defs>',
              f'<g transform="translate({tx:.3f},{ty:.3f})"><g clip-path="url(#meta{n})">{corpo}{giunz}{taglio}</g></g>',
              # niente riquadri sulla mappa: solo una riga piccola nel margine esterno del foglio, fuori dall'area di taglio
-             f'<g transform="rotate(-90 {xr:.2f} 148.5)">' + text(xr, 148.5 + 0.9, (f'CARTA BASE 3D, da applicare sulla plastica 3D · {nome} · cartoncino, 100% · ritaglia contorno esterno e interno' if cornice else f'Base 12×12 · {nome} · cartoncino, 100%'), 2.6, BROWN, 'middle') + '</g>']
+             f'<g transform="rotate(-90 {xr:.2f} 200)">' + text(xr, 200 + 0.9, f'Base 12×12 · {nome} · cartoncino, 100%', 2.6, BROWN, 'middle') + '</g>',
+             # segmento di controllo di 100 mm (verticale, nel margine esterno, fuori dal taglio): a 100 % deve misurare 100 mm;
+             # verifica_pdf.py lo misura sul PDF (errore oltre lo 0,05 %)
+             f'<line x1="{xr:.2f}" y1="20" x2="{xr:.2f}" y2="120" stroke="{CUT}" stroke-width="0.25"/>'
+             + ''.join(f'<line x1="{xr - 2:.2f}" y1="{yy}" x2="{xr + 2:.2f}" y2="{yy}" stroke="{CUT}" stroke-width="0.25"/>' for yy in (20, 120))
+             + f'<g transform="rotate(-90 {xr + 4.2:.2f} 70)">' + text(xr + 4.2, 70, 'controllo 100 mm', 2.4, BROWN, 'middle') + '</g>']
         write(comp, n, page(fonts('\n'.join(b))))
     return dict(fogli=2, base_mm=(round(L + 2 * f, 1), round(A + 2 * f, 1)))
 
-# ---------- fiori fronte/retro (3 fogli = 6 pagine), «?» e Cripta
+# ---------- fiori fronte/retro (3 fogli = 6 pagine) e Cripta
 FIORI_POS = [(63.0, 58.0), (147.0, 58.0), (63.0, 140.0), (147.0, 140.0), (63.0, 222.0), (147.0, 222.0)]   # centri dei fiori sul fronte
 def mappa_fiori():
     """mappa_fiori: pagine dispari = fronti (facce A, linee di taglio), pagine pari = retri (facce B, specchiati sul lato
-    lungo: il retro del pezzo in x sta in 210 - x). Foglio 3: 2 fiori, 24 segnaposto «?» e il segnalino Cripta (due facce
-    uguali). Retri senza linee di taglio; abbondanza ABB12 su tutte e due le facce."""
+    lungo: il retro del pezzo in x sta in 210 - x). Foglio 3: 2 fiori e il segnalino Cripta (due facce uguali); i 24
+    segnaposto «?» sono tolti (D29: le tessere Esplorazione stanno coperte sugli esagoni). Retri senza linee di taglio;
+    abbondanza ABB12 su tutte e due le facce."""
     comp = 'mappa_fiori'
     fiori = dati12()[0]
     blocchi = [list(range(1, 7)), list(range(7, 13)), [13, 14]]
-    dom = [(19.5 + 28.5 * (j % 7), 116.0 + 26.0 * (j // 7)) for j in range(24)]   # 7 per riga, 4 righe (l'ultima con 3)
     cri = (147.0, 194.0)
     pagina = 0
     for k, blocco in enumerate(blocchi, 1):
@@ -869,15 +858,6 @@ def mappa_fiori():
                 x, y = FIORI_POS[j]
                 b.append(F12.fiore(fiori[(i, lato)], sx(x), y, 0, f'f{k}{lato}{j}', ABB12, fronte, f'{i}{lato}', arte=os.path.join(OUT, comp)))
             if k == 3:
-                for j, (x, y) in enumerate(dom):
-                    r = 10.0
-                    img = F12.immagine_arte('SG-DOMANDA', sx(x), y, os.path.join(OUT, comp))
-                    cid = f'q{k}{lato}{j}'
-                    if img:   # arte generata: tagliata sul cerchio r + abbondanza
-                        img = (f'<clipPath id="{cid}"><circle cx="{sx(x):.2f}" cy="{y:.2f}" r="{r + ABB12:.2f}"/></clipPath>'
-                               f'<g clip-path="url(#{cid})">{img}</g>')
-                    b.append(f'<circle cx="{sx(x):.2f}" cy="{y:.2f}" r="{r + ABB12:.2f}" fill="#fffaf0"/>' + F12.segnaposto_domanda(sx(x), y, r, img)
-                             + (f'<circle cx="{sx(x):.2f}" cy="{y:.2f}" r="{r:.2f}" fill="none" stroke="#222222" stroke-width="0.2"/>' if fronte else ''))
                 cx, cy = sx(cri[0]), cri[1]
                 img = F12.immagine_arte('SG-CRIPTA', cx, cy, os.path.join(OUT, comp))
                 if img:   # arte generata: tagliata sull'esagono + abbondanza
@@ -886,7 +866,6 @@ def mappa_fiori():
                 b.append(f'<polygon points="{F12.pts(F12.vertici(cx, cy, F12.R + ABB12 / math.cos(math.radians(30))))}" fill="#8f877c"/>' + F12.segnalino_cripta(cx, cy, img)
                          + (F12.contorno([(cx, cy)], '#222222', 0.25) if fronte else ''))
                 b.append(text(sx(147.0), 218, 'Cripta', 3.0, BROWN, 'middle', True))
-                b.append(text(sx(63.0), 218, '24 segnaposto «?» (Ø 20 mm)', 3.0, BROWN, 'middle', True))
             pie = (['Ogni fiore: taglia sulla linea sottile del contorno; l’abbondanza di 2 mm copre lo scarto tra fronte e retro.',
                     'Id piccolo nell’angolo: numero del fiore e faccia (A sul fronte, B sul retro). La freccia d’ottone indica l’esagono 1 dell’anello.']
                    if fronte else ['Retro: faccia B dei fiori, nella stessa posizione del fronte una volta girato il foglio sul lato lungo.',
@@ -894,7 +873,7 @@ def mappa_fiori():
             b += [text(105, 270 + j * 4, l, 2.6, BROWN, 'middle') for j, l in enumerate(pie)]
             pagina += 1
             write(comp, pagina, page(fonts('\n'.join(b))))
-    return dict(fogli=3, pagine=pagina, fiori=14, domande=len(dom), cripta=1)
+    return dict(fogli=3, pagine=pagina, fiori=14, cripta=1)
 
 # ---------- fogli dei preset (10, carta comune)
 def mappa_preset():
@@ -946,7 +925,7 @@ def mappa_preset():
         b.append(text(14, y, 'Carta Mappa a metà partita (bordi di rame): cambia solo questi 3 fiori, in ordine', 3.2, COPPER, 'start', True)); y += 5
         b.append(text(14, y, '   ·   '.join(f'{c}) spazio {s} ← {p["righe"][s][0]}{p["righe"][s][1]}, freccia {p["righe"][s][2]}' for s, c in cam), 3.4, INK, 'start', True)); y += 6
         regole = ['Se il fiore indicato sta in un altro spazio, scambialo con quello dello spazio indicato: il fiore tolto va nello spazio liberato con la sua faccia e la sua freccia. Poi metti faccia e freccia indicate. Vale anche dopo un draft.',
-                  'Prima del cambio: i «?» e le tessere sui fiori che si muovono tornano nella riserva; chi ha giocato la carta li rimette sui fiori nuovi, su esagoni percorribili ad almeno 2 esagoni dalle Partenze. Poi la Cripta si ritira con 2D6 + 2D6.']
+                  'Prima del cambio: le tessere sui fiori che si muovono tornano coperte nella riserva; chi ha giocato la carta ne rimette altrettante coperte dalla riserva sui fiori nuovi, una per esagono, su esagoni percorribili ad almeno 2 esagoni dalle Partenze. Poi la Cripta si ritira con 2D6 + 2D6.']
         if not p['carta']:
             regole.append('Una Mappa lascia il gioco senza sostituta (TI-22): si applicano le 3 righe di Strettoie.')
         t_, y = note(regole, 14, y, 2.8, 182, BROWN, 'start')
@@ -1038,8 +1017,8 @@ def rotelle_a3():
         b.append(rotella_disco(x0 + DISC_R + j * pitch, ty + DISC_R, col, nm, sotto, ic, TAVOLO_FIN, 'plancia di gioco'))
     tx = x0 + 2 * pitch; yy = ty + 6
     b.append(text(tx, yy, 'Rotelle · A3 · foglio 1 di 1 · solo fronte', 4.0, INK, 'start', True, SERIF)); yy += 6
-    for par in ['Colonne: le 4 plance eroe (dischi identici); righe: PV, PV max, ATT, MOV, AR, PL. In basso a sinistra i 2 dischi del tavolo.',
-                'Stampa al 100%. Ritaglia ogni disco dove cambia il colore e la finestra bianca; fora il centro con un punteruolo.',
+    for par in ['Colonne: le 4 plance eroe (dischi identici); righe: PV, Danni, ATT, MOV, AR, PL. In basso a sinistra i 2 dischi del tavolo.',
+                'Stampa al 100%. Ritaglia ogni disco dove cambia il colore e la finestra bianca; fora il centro (punteruolo, o Ø 4 mm per il perno 3D).',
                 'Disco sopra la corona con lo stesso nome (plancia eroe o Sala del Tesoro), fermacampioni dal davanti, gambe aperte in orizzontale dietro. 27 fermacampioni con la Rotella della Profezia (foglio delle tessere).']:
         for l in wrap(par, 2.6, 2 * pitch - 8):
             b.append(text(tx, yy, l, 2.6, BROWN)); yy += 3.3
@@ -1070,7 +1049,7 @@ def esplorazione_a3():
     b.insert(0, hdr3('Tessere Stato · Tessere Esplorazione · Rotella della Profezia',
                      f'{sum(sc.values())} tessere Stato 26 × 18 mm · 25 rosse (Mostro) + 11 blu (Imprevisto) Ø {D} mm  ·  foglio 1 di 1  ·  solo fronte, retro bianco'))
     b.append(ftr3(['Stampa su A3 al 100% (nessun adattamento alla pagina), solo fronte. Taglia sul cerchio sottile; l’abbondanza di 3 mm esce dal taglio.'] + ESPL_NOTE +
-                  [f'Tessere Stato (in alto): {conta(sc)} (freccia ↑ in alto = dritto).',
+                  [f'Tessere Stato (in alto): {conta(sc)} (freccia ↑ in alto = verticale; gli effetti sono sulle Carte Aiuto).',
                    'Rotella della Profezia (Oracolo): disco sulla base quadrata col fermacampioni. P pari · D dispari · A alto (4+ su D6, 8+ su 2D6) · B basso (3− / 6−).']))
     write('tessere_esplorazione', 1, page(fonts('\n'.join(b)), A3W, A3H))
     return dict(esplorazione=dict(Counter(r['colore'] for r in rows)), stati=sc)
@@ -1090,41 +1069,132 @@ def misti_a3():
     write('componenti_misti', 1, page(fonts('\n'.join(b)), A3W, A3H))
     return dict(pedine=len(pz), segnalini=gc)
 
-# ---------- segnalini 3D: carta da applicare sulla plastica 3D (24 «?» Ø 20 e Cripta esagono 25,2: misure delle carte per le tasche)
+# ---------- segnalini 3D (D29): adesivi da applicare sui pezzi 3D di 3d_solidcraft/genera_3d_solidcraft.py. Ogni pezzo 3D
+# ha il contorno del pezzo di carta; l'adesivo è la tasca meno il gioco (contorno - bordino - gioco_carta): si usa l'arte
+# del pezzo di carta in scala (tessere e segnalini tondi in scala uniforme, Stati 26 × 18 → 23,8 × 15,8 in x e y, cioè
+# +4 % di larghezza), le rotelle in scala 1 (la finestra deve stare sulla corona della plancia) tagliate sulla corona
+# dell'adesivo con l'intaglio della finestra. Cripta: la carta esagonale da 25,2 nella tasca del segnalino (come prima).
+def segmento_100(y):
+    """segmento di controllo di 100 mm (lo stesso di carta_base_3d.py, misurato da verifica_pdf.py)."""
+    return (f'<line x1="55" y1="{y:.2f}" x2="155" y2="{y:.2f}" stroke="{CUT}" stroke-width="0.25"/>'
+            + ''.join(f'<line x1="{x}" y1="{y - 2:.2f}" x2="{x}" y2="{y + 2:.2f}" stroke="{CUT}" stroke-width="0.25"/>' for x in (55, 155))
+            + text(105, y + 5, 'Segmento di controllo: 100 mm esatti. Stampa al 100 % (print-scaling=none, MAI «adatta alla pagina»).', 2.6, BROWN, 'middle'))
+
+def taglio_cerchio(x, y, r):
+    return f'<circle cx="{x:.3f}" cy="{y:.3f}" r="{r:.3f}" fill="none" stroke="{CUT}" stroke-width="0.2"/>'
+
+def senza_tacche(b):
+    return [e for e in b if 'id="tacche' not in e]
+
 def segnalini_3d():
     comp = 'segnalini_3d'
     d = os.path.join(OUT, comp)
     os.makedirs(d, exist_ok=True)
-    R, AB = 10.0, 1.5
-    pitch = 2 * R + 2 * AB + 2.0
-    cols = 6
-    gw = (cols - 1) * pitch + 2 * R
-    x0 = (210 - gw) / 2 + R
-    y0 = 40.0
-    b = [hdr('Segnalini 3D · da applicare sulla plastica 3D', '24 segnaposto «?» Ø 20 mm + Cripta (esagono 25,2 mm)  ·  solo fronte, cartoncino 160-250 g')]
-    for j in range(24):
-        x, y = x0 + (j % cols) * pitch, y0 + (j // cols) * pitch
-        img = F12.immagine_arte('SG-DOMANDA', x, y, d)
-        if img:
-            img = f'<clipPath id="s3q{j}"><circle cx="{x:.2f}" cy="{y:.2f}" r="{R + AB:.2f}"/></clipPath><g clip-path="url(#s3q{j})">{img}</g>'
-        else:
-            b.append(f'<circle cx="{x:.2f}" cy="{y:.2f}" r="{R + AB:.2f}" fill="#fffaf0"/>')
-        b.append(F12.segnaposto_domanda(x, y, R, img))
-        b.append(f'<circle cx="{x:.2f}" cy="{y:.2f}" r="{R:.2f}" fill="none" stroke="{CUT}" stroke-width="0.2"/>')
-    cx, cy = 105.0, y0 + 3 * pitch + 24.0
+    sys.path.insert(0, os.path.join(HERE, '..', '..', '3d_solidcraft'))
+    import genera_3d_solidcraft as G3   # noqa: E402  misure delle tasche dal generatore 3D
+    P3 = G3.P
+    rientro = P3['bordino'] + P3['gioco_carta']
+    Ro = P3['rotella_d'] / 2 - rientro                  # corona dell'adesivo delle rotelle
+    Ri = P3['mozzo_r'] + P3['gioco_carta']
+    assert abs(Ri - FORO_ADESIVO_R) < 1e-9 and abs(P3['rotella_d'] / 2 - DISC_R) < 1e-9 and abs(P3['corona_r'] - RING_R) < 1e-9
+    finestre = {n: f for n, f, _ in G3.ROTELLE_3D}
+    assert all(finestre['rotella_' + nm] == win for _, nm, _, _, _, _, win, _, _, _ in ROTELLE), 'finestre 3D diverse da ROTELLE'
+    assert finestre['rotella_scontro'] == finestre['rotella_custode'] == TAVOLO_FIN and finestre['rotella_Profezia'] == PROFEZIA_FIN
+    assert G3.PLANCE == PLANCE
+    note_base = ['Stampa su A4 al 100%, solo fronte, carta adesiva o cartoncino sottile 160 g. Taglia sulla linea scura (linea spessa = taglio dell’adesivo).']
+    pagine = []
+
+    # pagina 1: fronti delle Tessere Esplorazione + Cripta; pagina 2: dorsi delle tessere
+    rows = read('tessere_esplorazione.csv')
+    D = P3['tessera_d']; s = (D - 2 * rientro) / D; pp = 28.0; cols = 6
+    cs = [(D / 2 + (i % cols) * pp, D / 2 + (i // cols) * pp) for i in range(len(rows))]
+    gw = ((cols - 1) * pp + D) * s; X0, Y0 = (210 - gw) / 2, 25.0
+    tr = lambda x, y: (X0 + x * s, Y0 + y * s)
+    b = [f'<g transform="translate({X0:.4f},{Y0:.4f}) scale({s:.6f})">' + ''.join(esplorazione_pezzi(cs, rows, D, d)) + '</g>']
+    b += [taglio_cerchio(*tr(x, y), D / 2 * s) for x, y in cs]
+    cx, cy = 105.0, Y0 + gw + 26.0
     img = F12.immagine_arte('SG-CRIPTA', cx, cy, d)
-    ra = F12.R + AB / math.cos(math.radians(30))
-    cl = f'<polygon points="{F12.pts(F12.vertici(cx, cy, ra))}"/>'
+    ra = F12.R + 1.5 / math.cos(math.radians(30))
     if img:
-        img = f'<clipPath id="s3c">{cl}</clipPath><g clip-path="url(#s3c)">{img}</g>'
+        img = f'<clipPath id="s3c"><polygon points="{F12.pts(F12.vertici(cx, cy, ra))}"/></clipPath><g clip-path="url(#s3c)">{img}</g>'
     else:
         b.append(f'<polygon points="{F12.pts(F12.vertici(cx, cy, ra))}" fill="#8f877c"/>')
-    b.append(F12.segnalino_cripta(cx, cy, img) + F12.contorno([(cx, cy)], CUT, 0.2))
-    b.append(text(105, cy + 24, 'Cripta', 3.0, BROWN, 'middle', True))
-    b.append(ftr(['Stampa su A4 al 100%, solo fronte. Taglia sulla linea scura: la carta entra nella tasca del segnalino 3D («?» Ø 20 mm, tasca 20,5; Cripta 25,2 mm da lato a lato, tasca 25,7).',
-                  'Incolla ogni carta nella tasca sopra del segnalino 3D. Misure delle carte prese dal generatore 3D (carta_domanda 20 mm); da verificare con la prima stampa.']))
-    write(comp, 1, page(fonts('\n'.join(b))))
-    return dict(domande=24, cripta=1)
+    b.append(F12.segnalino_cripta(cx, cy, img) + f'<polygon points="{F12.pts(F12.vertici(cx, cy))}" fill="none" stroke="{CUT}" stroke-width="0.2"/>')
+    b.append(text(cx, cy + F12.R + 5, 'Cripta (carta da 25,2: tasca del segnalino 3D 25,7)', 2.8, BROWN, 'middle', True))
+    pagine.append(('Tessere Esplorazione · fronti', f'{len(rows)} adesivi Ø {D * s:.1f} mm per la tasca sopra (Ø {D - 2 * P3["bordino"]:.1f}) + la Cripta', b,
+                   ['Fronte nella tasca sopra della tessera 3D; il dorso (pagina 2) si incolla sul fondo piatto.']))
+    b = [f'<g transform="translate({X0:.4f},{Y0:.4f}) scale({s:.6f})">'
+         + ''.join(f'<circle cx="{x:.2f}" cy="{y:.2f}" r="{D / 2 + BLEED:.2f}" fill="#8a5a33"/>' + (disco_arte('TX-RETRO', x, y, D / 2, d) or '') for x, y in cs) + '</g>']
+    b += [taglio_cerchio(*tr(x, y), D / 2 * s) for x, y in cs]
+    pagine.append(('Tessere Esplorazione · dorsi', f'{len(rows)} adesivi Ø {D * s:.1f} mm da incollare sul fondo piatto della tessera 3D', b,
+                   ['Il dorso si incolla al centro del fondo piatto (1,1 mm di margine): coperta, la tessera mostra il dorso e tiene il fronte nella tasca.']))
+
+    # pagina 3: tessere Stato (in scala 23,8/26 × 15,8/18) e segnalini tondi Ø 20 → 17,8
+    sw, sh = P3['stato_l'] - 2 * rientro, P3['stato_a'] - 2 * rientro
+    sx, sy = sw / ST_W, sh / ST_H
+    sc_ = 6; X0 = (210 - ((sc_ - 1) * (ST_W + 2 * BLEED) + ST_W) * sx) / 2; Y0 = 24.0
+    sb, sconta, sbb = stati(sc_, 0.0, 0.0, d)
+    n_st = sum(sconta.values())
+    b = [f'<g transform="translate({X0:.4f},{Y0:.4f}) scale({sx:.6f},{sy:.6f})">' + ''.join(senza_tacche(sb)) + '</g>']
+    r_ad = P3['stato_r'] - rientro if P3['stato_r'] > rientro else 0.0
+    pxs, pys, nr = (ST_W + 2 * BLEED) * sx, (ST_H + 2 * BLEED) * sy, math.ceil(n_st / sc_)
+    # tra un adesivo e l'altro resta 1 mm di abbondanza, il resto è bianco: le bandelle non fanno righe scure lunghe (il
+    # segmento di 100 mm di verifica_pdf.py deve essere l'unico tratto scuro lungo 97-103 mm)
+    for j in range(sc_ - 1):
+        b.append(f'<rect x="{X0 + j * pxs + sw + 1:.3f}" y="{Y0 - BLEED:.3f}" width="{pxs - sw - 2:.3f}" height="{nr * pys + BLEED:.3f}" fill="#ffffff"/>')
+    for j in range(nr - 1):
+        b.append(f'<rect x="{X0 - BLEED:.3f}" y="{Y0 + j * pys + sh + 1:.3f}" width="{sc_ * pxs + BLEED:.3f}" height="{pys - sh - 2:.3f}" fill="#ffffff"/>')
+    for i in range(n_st):
+        x, y = X0 + (i % sc_) * pxs, Y0 + (i // sc_) * pys
+        b.append(f'<rect x="{x:.3f}" y="{y:.3f}" width="{sw:.3f}" height="{sh:.3f}" rx="{max(r_ad, 0.0):.3f}" fill="none" stroke="{CUT}" stroke-width="0.2"/>')
+    Yg = Y0 + sbb[3] * sy + 5.0
+    G = P3['gettone_d']; sg = (G - 2 * rientro) / G; gc_ = 8
+    gb, gconta, gbb = gettoni(gc_, 0.0, 0.0, per_tipo=False, cart=d)
+    Xg = (210 - gbb[2] * sg) / 2
+    b.append(f'<g transform="translate({Xg:.4f},{Yg:.4f}) scale({sg:.6f})">' + ''.join(senza_tacche(gb)) + '</g>')
+    n_g = sum(gconta.values()); pg = G + 2 * BLEED
+    b += [taglio_cerchio(Xg + (G / 2 + (i % gc_) * pg) * sg, Yg + (G / 2 + (i // gc_) * pg) * sg, G / 2 * sg) for i in range(n_g)]
+    assert Yg + gbb[3] * sg < 262, Yg + gbb[3] * sg
+    pagine.append(('Tessere Stato e segnalini', f'{n_st} Stati {sw:.1f} × {sh:.1f} mm · {conta(gconta)} Ø {G * sg:.1f} mm · nella tasca sopra del pezzo 3D', b,
+                   [f'Stati: {conta(sconta)}.', 'Segnalini: Indizi, poi Forte Volontà, poi Usato (in ordine di riga).']))
+
+    # pagine 4-6: rotelle (scala 1), 12 per foglio (3 × 4), passo 54
+    def adesivo_rotella(cx, cy, disco, win, k):
+        a, ri = win[0] / 2, RING_R - win[1] / 2
+        yo = math.sqrt(Ro ** 2 - a ** 2)
+        est = (f'M{cx + a:.3f} {cy - yo:.3f}A{Ro:.3f} {Ro:.3f} 0 1 1 {cx - a:.3f} {cy - yo:.3f}'
+               f'L{cx - a:.3f} {cy - ri:.3f}L{cx + a:.3f} {cy - ri:.3f}Z')
+        foro = f'M{cx + Ri:.3f} {cy:.3f}A{Ri:.3f} {Ri:.3f} 0 1 0 {cx - Ri:.3f} {cy:.3f}A{Ri:.3f} {Ri:.3f} 0 1 0 {cx + Ri:.3f} {cy:.3f}Z'
+        return (f'<clipPath id="ar{k}"><path d="{est}"/></clipPath><g clip-path="url(#ar{k})">{disco}</g>'
+                f'<path d="{est} {foro}" fill="none" stroke="{CUT}" stroke-width="0.2"/>')
+    passo = 54.0; X0 = (210 - (2 * passo + 2 * DISC_R)) / 2 + DISC_R; Y0 = 25.0 + DISC_R
+    eroe = [(nm, sotto, ic, win) for _, nm, sotto, ic, _, _, win, _, _, _ in ROTELLE]
+    for f in range(PLANCE // 2):
+        b = []
+        for h in range(2):
+            for k, (nm, sotto, ic, win) in enumerate(eroe):
+                i = h * len(eroe) + k
+                x, y = X0 + (i % 3) * passo, Y0 + (i // 3) * passo
+                b.append(adesivo_rotella(x, y, rotella_disco(x, y, COL_PB, nm, sotto, ic, win, 'plancia eroe'), win, f'{f}{i}'))
+        assert Y0 + 3 * passo + DISC_R < 262
+        pagine.append((f'Rotelle delle plance eroe · plance {2 * f + 1} e {2 * f + 2}',
+                       f'12 adesivi a corona Ø {2 * Ro:.1f} mm, foro Ø {2 * Ri:.1f}, intaglio sulla finestra · righe 1-2 plancia {2 * f + 1}, righe 3-4 plancia {2 * f + 2}', b,
+                       ['Taglia anche il foro al centro e l’intaglio della finestra (si apre verso il bordo). La finestra dell’adesivo combacia con quella del disco 3D.']))
+    tav = [(nm, sotto, ic, TAVOLO_FIN, col) for _, nm, sotto, ic, col in R_TAVOLO] + [('Profezia', 'Oracolo', 'occhio', PROFEZIA_FIN, COL_PROF)]
+    b = []
+    for i, (nm, sotto, ic, win, col) in enumerate(tav):
+        x, y = X0 + i * passo, Y0
+        riga = 'rotella della Profezia' if nm == 'Profezia' else 'plancia di gioco'
+        b.append(adesivo_rotella(x, y, rotella_disco(x, y, col, nm, sotto, ic, win, riga), win, f't{i}'))
+    pagine.append(('Rotelle del tavolo', f'scontro, custode (Sala del Tesoro) e Profezia · adesivi a corona Ø {2 * Ro:.1f} mm', b,
+                   ['La base della Profezia resta di carta (pedine.pdf, foglio 2): il perno 3D passa nel foro Ø 4 della base.']))
+
+    for n, (tit, sub, corpo, note_) in enumerate(pagine, 1):
+        bb = [hdr(f'Adesivi per i pezzi 3D · {tit} · foglio {n} di {len(pagine)}', sub)] + corpo + [segmento_100(266.0)]
+        bb.append(ftr(note_base + note_, y=277))
+        write(comp, n, page(fonts('\n'.join(bb))))
+    return dict(fogli=len(pagine), tessere_fronti=len(rows), tessere_dorsi=len(rows), stati=n_st, segnalini=gconta,
+                rotelle=PLANCE * len(eroe) + len(tav), cripta=1)
 
 # ---------- guida al montaggio della mappa (2 pagine A4): mappa montata col preset Strettoie, cosa stampare, come si monta
 def guida_montaggio_mappa():
@@ -1143,13 +1213,6 @@ def guida_montaggio_mappa():
                  + F12.fiore(fiori[(i, lato)], cx, cy, 0, f'g{s_}', 0.0, False, None, True, d) + '</g>')
     terr = terreno12(righe)
     liberi = [h for h in sorted(terr) if terr[h] in ('prato', 'mattonato', 'pavimento', 'sentiero') and h not in partenze and h not in base]
-    esempi = [h for h in liberi if h[0] in (4, 6, 9) and h[1] in (6, 8, 4)][:3]
-    for k, h in enumerate(esempi):
-        x, y = F12.centro_mappa(h)
-        img = F12.immagine_arte('SG-DOMANDA', x, y, d)
-        if img:
-            img = (f'<clipPath id="gq{k}"><circle cx="{x:.2f}" cy="{y:.2f}" r="10"/></clipPath><g clip-path="url(#gq{k})">{img}</g>')
-        o.append(F12.segnaposto_domanda(x, y, 10.0, img))
     if liberi:
         h = [c for c in liberi if c[0] in (7, 8) and c[1] in (9, 10)][:1] or liberi[:1]
         x, y = F12.centro_mappa(h[0])
@@ -1159,8 +1222,8 @@ def guida_montaggio_mappa():
         o.append(F12.segnalino_cripta(x, y, img))
     o.append('</g>')
     ymap = oy + F12.ALTO * sc
-    b = [hdr('Mappa 12×12 · guida al montaggio', 'esempio montato (versione carta normale): base + 14 fiori nel preset «Strettoie», 3 «?» e la Cripta  ·  pagina 1 di 2')] + o
-    b.append(text(105, ymap + FASCIA12 * sc + 5, 'Le frecce d’ottone dei fiori puntano al numero dell’anello indicato dal preset (mappa_preset.pdf); i «?» e la Cripta sono solo esempi di posizione.', 2.6, BROWN, 'middle'))
+    b = [hdr('Mappa 12×12 · guida al montaggio', 'esempio montato (versione carta normale): base + 14 fiori nel preset «Strettoie» e la Cripta  ·  pagina 1 di 2')] + o
+    b.append(text(105, ymap + FASCIA12 * sc + 5, 'Le frecce d’ottone dei fiori puntano al numero dell’anello indicato dal preset (mappa_preset.pdf); la Cripta è solo un esempio di posizione.', 2.6, BROWN, 'middle'))
     # tabella «Cosa stampare»
     y = ymap + FASCIA12 * sc + 14
     b.append(text(10, y, 'Cosa stampare', 4.0, INK, 'start', True, SERIF)); y += 4
@@ -1182,13 +1245,16 @@ def guida_montaggio_mappa():
         return y + 3
     y = tabella('VERSIONE CARTA NORMALE (niente plastica)', [
         ('mappa_base.pdf', 'cartoncino 250-300 g', 'solo fronte', '2 fogli (metà sinistra e destra)'),
-        ('mappa_fiori.pdf', 'cartoncino 250-300 g', 'fronte/retro a mano, girando sul LATO LUNGO', '3 fogli = 6 pagine: 14 fiori, 24 «?», Cripta'),
+        ('mappa_fiori.pdf', 'cartoncino 250-300 g', 'fronte/retro a mano, girando sul LATO LUNGO', '3 fogli = 6 pagine: 14 fiori, Cripta'),
         ('mappa_preset.pdf', 'carta normale', 'solo fronte', '10 fogli, uno per preset')], y)
     y = tabella('VERSIONE 3D: carta DA APPLICARE SULLA PLASTICA 3D', [
-        ('3d_solidcraft/out/mappa_completa.3mf', 'filamento PLA (stampante 3D)', 'n.a.', '1 file: 9 piatti (4 quarti, 14 fiori, 24 «?», Cripta)'),
+        ('3d_solidcraft/out/mappa.3mf', 'filamento PLA (stampante 3D)', 'n.a.', '8 piatti: 4 quarti del vassoio, 14 fiori'),
+        ('3d_solidcraft/out/rotelle_fulcri.3mf', 'filamento PLA (stampante 3D)', 'n.a.', '4 piatti: 27 rotelle, 27 perni, 27 fermi'),
+        ('3d_solidcraft/out/segnalini.3mf', 'filamento PLA (stampante 3D)', 'n.a.', '2 piatti: 31 Stati, 16 Indizi, 4 Forte Volontà, 20 Usato, Cripta'),
+        ('3d_solidcraft/out/tessere_esplorazione.3mf', 'filamento PLA (stampante 3D)', 'n.a.', '1 piatto: 36 Tessere Esplorazione'),
         ('3d_solidcraft/out/carta_fiori_3d.pdf', 'cartoncino 160-250 g', 'solo fronte', '5 fogli, 28 facce (una per fiore 3D)'),
-        ('carta_base_3d.pdf', 'cartoncino 250-300 g', 'solo fronte', '2 fogli (solo cornice di bordo, per la tasca del vassoio)'),
-        ('segnalini_3d.pdf', 'cartoncino 160-250 g', 'solo fronte', '1 foglio: 24 «?» + Cripta, da applicare sui segnalini 3D')], y)
+        ('carta_base_3d.pdf', 'cartoncino 250-300 g', 'solo fronte, 100% (print-scaling=none)', '4 fogli: un quarto ciascuno (NO, NE, SO, SE), solo cornice di bordo'),
+        ('segnalini_3d.pdf', 'carta adesiva o cartoncino 160 g', 'solo fronte, 100% (print-scaling=none)', '6 fogli: fronti e dorsi delle 36 tessere, Cripta, 31 Stati, 40 segnalini, 27 rotelle')], y)
     assert y < 292, y
     write(comp, 1, page(fonts('\n'.join(b))))
 
@@ -1207,14 +1273,14 @@ def guida_montaggio_mappa():
         'Stampa mappa_base.pdf (2 fogli, cartoncino) e taglia ogni metà sulla linea scura esterna e sulla linea di giunzione al centro.',
         'Unisci le due metà da dietro con il nastro adesivo: i rombi di rame sulla giunzione devono combaciare.',
         'Stampa mappa_fiori.pdf fronte/retro: stampa la pagina 1, rimetti il foglio nel cassetto girato sul LATO LUNGO, stampa la pagina 2 (poi 3-4 e 5-6). Prova prima con carta comune e controlla in controluce che il contorno del fronte cada dentro l’abbondanza di 2 mm del retro.',
-        'Ritaglia i 14 fiori sulla linea sottile del contorno e i 24 segnaposto «?» e la Cripta sulla loro linea (foglio 3 di mappa_fiori.pdf). Segnalini, Stati e tessere Esplorazione: segnalini.pdf e tessere_esplorazione.pdf.',
+        'Ritaglia i 14 fiori sulla linea sottile del contorno e la Cripta sulla sua linea (foglio 3 di mappa_fiori.pdf). Segnalini, Stati e tessere Esplorazione: segnalini.pdf e tessere_esplorazione.pdf.',
         'Posa i fiori negli spazi numerati della base, con la freccia d’ottone rivolta al numero 1-6 indicato dal preset (mappa_preset.pdf), oppure scegli posto e rotazione col draft.'], y)
     y = sezione('VERSIONE 3D (carta da applicare sulla plastica: carta_base_3d.pdf + carta_fiori_3d.pdf + segnalini)', [
-        'Stampa mappa_completa.3mf (9 piatti da 220 × 220 mm). Il file è un 3MF standard senza metadati di piatto: nello slicer separa i piatti a mano o usa «disponi».',
+        'Stampa i 4 file 3MF da 3d_solidcraft/out/ (mappa.3mf 8 piatti, rotelle_fulcri.3mf 4, segnalini.3mf 2, tessere_esplorazione.3mf 1; piatti da 220 × 220 mm). Sono 3MF standard senza metadati di piatto: nello slicer separa i piatti a mano o usa «disponi».',
         'Incastra i 4 quarti del vassoio nell’ordine NO → NE → SO → SE con le code a pomello (23 tra NO e gli altri due, 11 tra NE e SE, 11 tra SO e SE). Da verificare con la prima stampa: tenuta delle code e gioco.',
-        'Stampa carta_base_3d.pdf: solo la cornice di bordo; ritaglia contorno esterno e interno (taglia sulla giunzione e togli i 14 spazi, meglio un filo dentro lo spazio). Posa le due metà nella tasca del vassoio: non si incollano, passano sopra i tagli.',
+        'Stampa carta_base_3d.pdf: 4 fogli, uno per quarto (NO, NE, SO, SE), solo la cornice di bordo, al 100% con print-scaling=none (controlla il segmento di 100 mm). Ritaglia ogni foglio sulla linea scura (contorno esterno e interno) e posalo nella tasca del quarto corrispondente del vassoio: non si incolla.',
         'Stampa carta_fiori_3d.pdf, taglia ogni faccia sulla linea scura (1,3 mm dentro il contorno) e incolla una faccia nella tasca sopra di ogni fiore 3D con la colla stick. Il fiore 3D porta una sola faccia (altre 14 facce = altri 14 fiori 3D).',
-        'Stampa segnalini_3d.pdf (da applicare sulla plastica 3D), ritaglia le 24 carte «?» e la Cripta sulla linea scura e incollale nelle tasche dei segnalini 3D.',
+        'Stampa segnalini_3d.pdf al 100% (controlla il segmento di 100 mm), ritaglia gli adesivi sulla linea scura e incollali nella tasca sopra di ogni pezzo 3D; il dorso delle tessere Esplorazione va sul fondo piatto. Rotelle: perno dal retro della plancia (foro Ø 4), disco sopra la corona, fermo premuto sulla punta finché scatta.',
         'Posa i fiori negli alloggiamenti del vassoio (si girano di 60° in 60°) con la freccia verso il numero 1-6 inciso sul fondo dello spazio, come da preset o draft.'], y)
     assert y < 292, y
     write(comp, 2, page(fonts('\n'.join(P))))
@@ -1234,7 +1300,6 @@ if __name__ == '__main__':
         print(res)
         sys.exit(0)
     res['mappa_base'] = mappa_base()
-    res['carta_base_3d'] = mappa_base('carta_base_3d', True)
     res['mappa_fiori'] = mf = mappa_fiori()
     res['mappa_preset'] = npr = mappa_preset()
     res['segnalini_3d'] = segnalini_3d()
@@ -1246,7 +1311,7 @@ if __name__ == '__main__':
     res['rotelle_eroe'] = rotelle_eroe()
     res['pedine'] = [(n, round(w, 1), round(h, 1)) for n, x, y, w, h in pedine()]
     prova(mappa=[('mappa_base.pdf (base 12×12 in 2 metà da unire)', 2),
-                 (f"mappa_fiori.pdf (14 fiori, 24 «?», Cripta: {mf['fogli']} fogli fronte/retro)", mf['fogli']),
+                 (f"mappa_fiori.pdf (14 fiori, Cripta: {mf['fogli']} fogli fronte/retro)", mf['fogli']),
                  (f'mappa_preset.pdf ({npr} schemi, carta comune)', npr),
                  ('sala_tesoro.pdf (Sala del Tesoro in 2 pezzi)', 1)])
     print(res)

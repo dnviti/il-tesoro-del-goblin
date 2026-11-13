@@ -269,7 +269,7 @@ def s7():
     # i 4 passi
     bw, bh, by = 106, 78, 104
     pitch = (X1 - X0 - bw) / 3
-    steps = ['0 PV', 'D6 della perdita', 'Partenza iniziale', ('PV al massimo', '+ 1 carta comune')]
+    steps = ['Danni = PV', 'D6 della perdita', 'Partenza iniziale', ('Danni di nuovo a 0', '+ 1 carta comune')]
     for i, st in enumerate(steps):
         x = X0 + pitch * i; cx = x + bw / 2; cy = by + 21
         o.append(box(x, by, bw, bh, PAPER, BRASS, 1.8, 7))
@@ -307,20 +307,21 @@ def s7():
     o.append(T(xb0 + 19, yb + 10.6, tb, 9.5, 700, INK, 'start'))
     export('S7-perdita', W, H, ''.join(o))
 
-# ================================================================ S5-indizio  250 x 130
+# ================================================================ S5-indizio  250 x 195
 def s5():
     g.R.seed(5); TXT.clear()
-    W, H = 250, 130
+    W, H = 250, 195
     o = [panel(W, H, inner=False)]
-    o.append(T(125, 16, 'Indizio se il D6 è pari o meno di LV + 1', 10, 700))
-    cx, cy = 28, 42
-    card = rot(rr(cx - 14, cy - 19, 28, 38, 3.5, .3, 10), -9, cx, cy)
+    o.append(T(125, 17, 'Hai vinto lo scontro?', 11, serif=True))
+    o.append(T(125, 31, 'Indizio se il D6 è pari o meno di LV + 1', 9.5, 700))
+    cx, cy = 27, 56
+    card = rot(rr(cx - 13, cy - 18, 26, 36, 3.5, .3, 10), -9, cx, cy)
     o.append(P(card, True, PAPER, INK, 1.7))
-    o.append(P(rot(rr(cx - 11, cy - 16, 22, 32, 2, .2, 10), -9, cx, cy), True, 'none', BRASS, 0.9))
-    o.append(f'<g transform="rotate(-9 {cx} {cy})">' + icon('ic_mostro', cx, cy - 8, 19, 7) + '</g>')
-    (bx, by, _), = rot([(cx, cy + 11, False)], -9, cx, cy)
+    o.append(P(rot(rr(cx - 10, cy - 15, 20, 30, 2, .2, 10), -9, cx, cy), True, 'none', BRASS, 0.9))
+    o.append(f'<g transform="rotate(-9 {cx} {cy})">' + icon('ic_mostro', cx, cy - 7, 18, 7) + '</g>')
+    (bx, by, _), = rot([(cx, cy + 10, False)], -9, cx, cy)
     o.append(disc(bx, by, 11, GOLDL, INK, 1.6, .2)); o.append(T(bx, by + 3.3, 'LV 3', 9.5, 700, INK, serif=True))
-    xs = [68 + 30 * i for i in range(6)]; dy = 33; s = 21
+    xs = [68 + 30 * i for i in range(6)]; dy = 47; s = 21
     for i, x in enumerate(xs):
         v = i + 1
         if v <= 4:
@@ -337,51 +338,66 @@ def s5():
     o.append(icon('ic_segnalino', x0 + 8.5, ty, 19, 9))
     o.append(T(x0 + 21, ty + 3.6, 'Indizio!', 10, 700, GREEN, 'start'))
     o.append(T((xs[4] + xs[5]) / 2, ty + 3.6, 'Niente', 10, 700, GREYT))
-    o.append(T(125, 87, 'LV 1: 1–2 · LV 2: 1–3 · LV 3: 1–4 · LV 4: 1–5 · LV 5: sempre', 9, 400))
-    prem = ['Mazzetto 2: anche la Forte Volontà', 'La carta Mostro torna in fondo al suo mazzetto', 'Solo il custode di MIMI tiene le ferite']
+    o.append(T(125, 101, 'LV 1: 1–2 · LV 2: 1–3 · LV 3: 1–4 · LV 4: 1–5 · LV 5: sempre', 9, 400))
+    o.append(dline((14, 107), (236, 107)))
+    # il bottino: 3 carte del mazzo comune, ne tieni 1, le altre 2 coperte in fondo
+    o.append(T(125, 120, 'Mazzetto 1 o 2: bottino!', 10, 700, BROWN))
+    for k in (2, 1, 0):
+        o.append(box(13 + k * 1.4, 124 - k * 1.4, 17, 24, GOLDL if k == 0 else PAPER, INK, 1.3, 2.5))
+    o.append(P(wob(star4(21.5, 136, 4.5, .45), .05, 20), True, BRASS, 'none', 0))
+    o.append(arrow([(35, 136), (47, 136)], BROWN, 2.2, 6, 4.5, fill=COPPER))
+    for k, x in enumerate((58, 76, 94)):
+        keep = (k == 0)
+        y = 121 if keep else 126
+        o.append(box(x - 7.5, y, 15, 21, PAPER if keep else GREY, GREEN if keep else INK, 1.8 if keep else 1.3, 2.5))
+        if keep:
+            o.append(tick(x, y + 10.5, 4, GREEN, 2.2))
+    o.append(T(85, 156, 'in fondo', 9, 400, GREYT))
+    lines = ['Prendi le prime 3 carte', 'del mazzo comune: tienine 1,', 'le altre 2 coperte in fondo.']
+    for k, t in enumerate(lines):
+        o.append(T(110, 131 + 11 * k, t, 9, 400, INK, 'start'))
+    prem = ['Mazzetto 3: niente bottino', 'La carta Mostro torna in fondo al suo mazzetto', 'Solo il custode di MIMI tiene le ferite']
     for k, t in enumerate(prem):
-        yy = 101 + 11 * k
-        if k == 0: o.append(disc(14, yy - 3, 3.6, RED, INK, 1, .05)); o.append(P(wob(star4(14, yy - 3, 2.4, .4), .05, 20), True, GOLDL, 'none', 0))
+        yy = 167 + 11 * k
+        if k == 0: o.append(cross(14, yy - 3, 2.8, RED, 1.6, False))
         elif k == 1: o.append(P(rot(rr(10.5, yy - 6, 7, 6, 1, .05, 10), -8, 14, yy - 3), True, BLUE, INK, 1.0))
         else: o.append(heart(14, yy - 3.2, 8.5, RED))
         o.append(T(24, yy, t, 9, 400, INK, 'start'))
     export('S5-indizio', W, H, ''.join(o))
 
-# ================================================================ S2-turno  250 x 250
+# ================================================================ S2-turno  250 x 195
 def s2():
     g.R.seed(2); TXT.clear()
-    W, H = 250, 250
+    W, H = 250, 195
     o = [panel(W, H, (1, 1, 0, 0))]
-    rm = 36
-    cs = [(52, 38), (198, 38), (198, 128), (52, 128)]
-    seq = [('ic_carta', 'Inizio', None), ('ic_movimento', '1 · Muovi', 'D6 + MOV'),
-           (ic_occhio, '2 · Esplora', 'Dove ti fermi'), (ic_bandiera, '3 · Fine', None)]
+    o.append(T(125, 15, 'Carte e risposte: in ogni momento', 9, 400, BROWN))
+    rm, cy = 26, 47
+    cs = [42, 125, 208]
+    seq = [('ic_movimento', '1 · Muovi', 'D6 + MOV'), (ic_occhio, '2 · Esplora', 'Dove ti fermi'), (ic_bandiera, '3 · Fine', None)]
     ar = lambda pts: arrow(pts, BROWN, 3.0, 9, 7, fill=COPPER)
-    o.append(ar([(91, 46), (160, 46)])); o.append(ar([(198, 77), (198, 91)]))
-    o.append(ar([(159, 120), (90, 120)])); o.append(ar([(52, 90), (52, 76)]))
-    for i, ((x, y), (ic, l1, l2)) in enumerate(zip(cs, seq)):
-        g.R.seed(20 + i)
-        o.append(P(cog(x, y, rm, 28, .06, .12), True, BRASS, INK, 2.0))
-        o.append(disc(x, y, rm - 3, BRASSL, 'none', 0, .1))
-        o.append(P(ell(x, y, rm - 3, amp=.1, n=26), True, 'none', GOLD, 1.0))
+    o.append(ar([(72, cy), (95, cy)])); o.append(ar([(155, cy), (178, cy)]))
+    for i, (x, (ic, l1, l2)) in enumerate(zip(cs, seq)):
+        g.R.seed(21 + i)
+        o.append(P(cog(x, cy, rm, 22, .06, .12), True, BRASS, INK, 2.0))
+        o.append(disc(x, cy, rm - 3, BRASSL, 'none', 0, .1))
+        o.append(P(ell(x, cy, rm - 3, amp=.1, n=22), True, 'none', GOLD, 1.0))
+        o.append(icon(ic, x, cy, 30, 31 + i))
+        o.append(T(x, cy + rm + 14, l1, 10, 700))
         if l2:
-            o.append(icon(ic, x, y - 18, 24, 30 + i)); o.append(T(x, y + 6, l1, 10, 700)); o.append(T(x, y + 18, l2, 9.5, 400))
-        else:
-            o.append(icon(ic, x, y - 9, 30, 30 + i)); o.append(T(x, y + 21, l1, 10.5, 700))
-    for k, t in enumerate(('Pesca 1 carta:', 'mazzo comune o', 'pila di classe')):
-        o.append(T(125, 13 + 10 * k, t, 9, 500 if k == 0 else 400, INK))
-    o.append(T(125, 88, 'Carte e risposte: in ogni momento', 9, 400, BROWN))
+            o.append(T(x, cy + rm + 26, l2, 9.5, 400))
     # i passi della Fine + pedina
-    o.append(box(12, 170, 226, 70, PAPER, BRASS, 1.6, 6))
-    px = 36
-    o.append(arrow([(px, 165), (px, 187)], BROWN, 3.0, 8, 6.5, fill=COPPER))
-    o.append(pawn(px, 214, 24, BLUE))
-    o.append(T(px, 225, 'Tocca a', 9.5, 700)); o.append(T(px, 235, 'sinistra', 9.5, 700))
-    items = ['Ultime carte', f'Finiscono gli effetti {LQ}in questo turno{RQ}', 'Via i tuoi Stati dritti, raddrizza gli altri',
-             'Carte giocate negli scarti', f'Rifornisci le {LQ}?{RQ}']
-    for k, t in enumerate(items):
-        yy = 183 + 12 * k
-        o.append(disc(70, yy - 3, 2.3, COPPER, INK, .8, .05)); o.append(T(77, yy, t, 9.5, 400, INK, 'start'))
+    o.append(box(12, 104, 226, 82, PAPER, BRASS, 1.6, 6))
+    px = 210
+    o.append(arrow([(px, 92), (px, 117)], BROWN, 3.0, 8, 6.5, fill=COPPER))
+    o.append(pawn(px, 146, 24, BLUE))
+    o.append(T(px, 158, 'Tocca a', 9.5, 700)); o.append(T(px, 168, 'sinistra', 9.5, 700))
+    items = ['Ultime carte', f'Finiscono gli effetti {LQ}in questo turno{RQ}', ('Togli i tuoi Stati verticali,', 'poi gira in verticale gli orizzontali'),
+             'Carte giocate negli scarti', 'Rifornisci le tessere']
+    yy = 118
+    for t in items:
+        o.append(disc(20, yy - 3, 2.3, COPPER, INK, .8, .05))
+        for part in (t if isinstance(t, tuple) else (t,)):
+            o.append(T(27, yy, part, 9.5, 400, INK, 'start')); yy += 12
     export('S2-turno', W, H, ''.join(o))
 
 # ================================================================ S4-scontro  515 x 170
@@ -437,7 +453,7 @@ def s4():
     x = xb_[2]; w = wbl[2]
     o.append(T(x + 24, y + 11.5, 'Ora attacca il mostro', 10, 700, INK, 'start'))
     o.append(icon('ic_mostro', x + 140, y + 11, 18, 15))
-    for k, t in enumerate(('A turno, fino a 0 PV.', 'Dopo 3 attacchi tuoi il mostro', 'scappa (il custode no)')):
+    for k, t in enumerate(('A turno, fino alla sconfitta.', 'Dopo 3 attacchi tuoi il mostro', 'scappa (il custode no)')):
         o.append(T(x + 8, y + 25.5 + 9.3 * k, t, 9.5, 400 if k else 700, INK, 'start'))
     # frecce tra i riquadri
     o.append(arrow([(xa_[2] + 20, Ay + Ah - 1), (xa_[2] + 14, Ay + Ah + 6), (xb_[1] + wbl[1] - 12, Ay + Ah + 6), (xb_[1] + wbl[1] - 8, By + 1.5)],

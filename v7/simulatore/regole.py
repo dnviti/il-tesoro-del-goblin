@@ -1,4 +1,4 @@
-"""Partita v7: preparazione (§3), turno (§4.0), movimento ed esplorazione (§8), Imprevisti, rifornimento delle «?»,
+"""Partita v7: preparazione (§3), turno (§4.0), movimento ed esplorazione (§8), Imprevisti, rifornimento delle tessere Esplorazione,
 Fine del turno. Le catene stanno in catena.py, gli scontri in scontro.py, le scelte in ia.py."""
 import random
 from collections import Counter
@@ -20,6 +20,7 @@ class Opzioni:
         self.op1 = self.op2 = self.op5 = False
         self.ar_v6 = self.indizio_lv = self.preset = False
         self.dado_sommato = self.chi_tira_non_risponde = self.penalita_meno = False
+        self.mano_ia = False                 # --mano-ia: l'IA sceglie le 5 carte iniziali invece della mano predefinita
         self.__dict__.update(kw)
 
 
@@ -33,8 +34,10 @@ class Partita:
         self.giocate_eroe = Counter()
         self.pl_round = []                  # PL medio degli eroi alla fine di ogni round
         self.mano_fine = []                 # carte in mano alla propria Fine
+        self.pv_fine = []                   # PV alla propria Fine
         self.max_indizi = 0
         self.profezie = {}
+        self.origine = {}                   # TI-28: carta presa dalla pila di classe di un avversario -> quell'avversario
         self.in_catena = self.in_risposte = False
         self.scontro = None
         self.in_cima = False                # NE-44: la carta Mostro torna in cima al mazzetto
@@ -67,20 +70,17 @@ class Partita:
         r.shuffle(self.imprevisti)
         tessere = K.TESSERE[:]
         r.shuffle(tessere)
-        # 24 «?» posati a turno su esagoni percorribili a >= 2 esagoni dalle Partenze (qui: a caso)
-        domande = r.sample(self.plancia.idonee_domanda(()), M.N_DOMANDE)
-        self.tessere = {q: tessere.pop() for q in domande}       # 'rossa'/'blu' coperta, 'scoperta', None
+        # D29: 24 tessere coperte posate a turno su esagoni percorribili a >= 2 esagoni dalle Partenze, una per esagono
+        # (qui: a caso); le altre 12 in riserva
+        posti = r.sample(self.plancia.idonee_tessera(()), M.N_TESSERE)
+        self.tessere = {q: tessere.pop() for q in posti}         # esagono -> 'rossa'/'blu' coperta, 'scoperta'
         self.riserva, self.usate = tessere, []
         self.scatola = {c: K.CARTE_CLASSE[c][:] for c in K.CLASSI if c not in classi}
         for e in self.eroi:
-            # D22: mazzetto = 10 carte scelte tra le (20) di classe; le altre vanno in scatola; mano 3 + pila = resto
-            mazzetto = ia.mazzetto_classe(self, e)
-            self.scatola[e.classe] = [c for c in K.CARTE_CLASSE[e.classe] if c not in mazzetto]
-            mano = ia.mano_iniziale(self, e, mazzetto)
-            e.pila = [c for c in mazzetto if c not in mano]
+            # 13/11: mano = 5 carte di classe (predefinita o scelta dall'IA); le altre 15, mescolate, sono la pila di classe
+            e.mano = ia.mano_iniziale(self, e)
+            e.pila = [c for c in K.CARTE_CLASSE[e.classe] if c not in e.mano]
             r.shuffle(e.pila)
-            e.mano = mano + [self.mazzo.pop() for _ in range(3)]
-            e.pv = e.pvmax(self)
         for e in self.eroi:                       # R 3.9
             while True:
                 h = M.PARTENZE[r.randrange(6)]
@@ -108,7 +108,7 @@ def turno(g, e):
     g.turno_finito = False
     e.mosso, e.scontri, e.pos_inizio = False, 0, e.pos
     g.st['turni'] += 1
-    S.pesca(g, e, dalla_pila=ia.pesca_da_pila(g, e))     # R 12.3
+    # niente pesca a inizio turno (13/11, nemmeno al primo): le carte arrivano dal bottino dei mostri (stato.loot)
     C.momento(g, 'M0')
     C.momento(g, 'M1')
     if not g.turno_finito:
@@ -163,8 +163,7 @@ def esplora(g, e):
         return
     t = g.tessere.get(h)
     if t == 'blu':
-        g.tessere[h] = None
-        g.usate.append('blu')
+        g.usate.append(g.tessere.pop(h))
         C.momento(g, 'M3')
         if not g.turno_finito:
             imprevisto(g, e)
@@ -180,8 +179,9 @@ def esplora(g, e):
         else:
             mz.append(mid)                           # in fondo al suo mazzetto
         if esito in ('vinto', 'sparito', 'fuga_mostro') and not g.finita:      # TI-41: la tessera va tra le usate
-            g.tessere[h] = None
-            g.usate.append('rossa')
+            if h in g.tessere:                       # (una carta Mappa può averla già rimandata nella riserva)
+                del g.tessere[h]
+                g.usate.append('rossa')
     if not g.finita:
         C.momento(g, 'M5')
 
@@ -225,19 +225,14 @@ def fine(g, e):
     g.creature_svant = False
     e.stati = {s: False for s, trav in e.stati.items() if trav}   # (c)
     e.usati.clear()                                  # (d)
-    e.scarti += e.zona                               # (e)
+    for cid in e.zona:
+        S.agli_scarti(g, e, cid)                     # (e)
     e.zona = []
     e.giocate = 0
     e.equip_turno = False
     g.mano_fine.append(len(e.mano))
+    g.pv_fine.append(e.pv)
     coperte = sum(1 for t in g.tessere.values() if t in ('rossa', 'blu'))
-    if coperte <= g.opz.soglia:                      # (f) R 8.11
-        vuote = [q for q, t in g.tessere.items() if t is None]
+    if coperte <= g.opz.soglia:                      # (f) D29: chi chiude il turno posa tessere fino a 24 sulla mappa
         g.st['rifornimenti'] += 1
-        for q in vuote:
-            if not g.riserva and g.usate:
-                g.riserva, g.usate = g.usate, []
-                g.rng.shuffle(g.riserva)
-            if not g.riserva:
-                break
-            g.tessere[q] = g.riserva.pop()
+        g.st['tessere_rifornite'] += S.posa_tessere(g, M.N_TESSERE - len(g.tessere), e)

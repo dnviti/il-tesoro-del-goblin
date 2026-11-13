@@ -26,6 +26,7 @@ circa 10,6 round sulle tre tavolate). 2000 partite per tavolata girano in pochi 
 | `--dado-sommato` | N6: il «dado in più» si somma invece di tenere il migliore |
 | `--chi-tira-non-risponde` | N1: chi tira non risponde al proprio tiro |
 | `--penalita-meno` | N2: la penalità dei ritiri è sempre −n |
+| `--mano-ia` | 13/11: l'IA sceglie le 5 carte iniziali di classe invece della mano predefinita (`carte.MANI_INIZIALI`) |
 
 OP-3 e OP-4 sono diventate regole base (D19 e D18): restano solo come confronto (`--ar-v6`, `--indizio-lv`).
 Se `carte_mostro.csv` avesse ancora le AR v6, il simulatore applica D19 da sé e lo scrive nel rapporto.
@@ -35,16 +36,16 @@ Se `carte_mostro.csv` avesse ancora le AR v6, il simulatore applica D19 da sé e
 | File | Contenuto |
 |---|---|
 | `sim_v7.py` | riga di comando, partite in parallelo, rapporto |
-| `regole.py` | preparazione (§3), turno, movimento, esplorazione, Imprevisti, rifornimento delle «?», Fine |
-| `stato.py` | eroe, mano massima (D8), pesca e riciclo, Stati, slot e PL, D6 della perdita (D7), sconfitta, Indizi e tesoro |
+| `regole.py` | preparazione (§3), turno, movimento, esplorazione, Imprevisti, rifornimento delle tessere Esplorazione, Fine |
+| `stato.py` | eroe, mano massima (D8), pesca e riciclo, bottino dei mostri, Stati, slot e PL, D6 della perdita (D7), sconfitta, Indizi e tesoro |
 | `catena.py` | catene (D4/D9): giro orario, 1 carta per giocatore per catena, 2 per periodo, LIFO, tiri che aprono catene, momenti M0–M6 |
 | `tiri.py` | tiri, ritiri con penalità cumulativa (D1), vantaggio, dado in più, Profezie (R 13.5) |
-| `scontro.py` | iniziativa, colpo e danno, fuga, ricompense (D11), custode, Duello |
+| `scontro.py` | iniziativa, colpo e danno, fuga, ricompense (D11: bottino, Indizio), custode, Duello |
 | `mostri.py` | abilità dei mostri: un aggancio per momento dello scontro (inizio, colpo, mancato, sconfitta, fuga, fine) |
 | `effetti.py` | motore delle formule del §14.5, una funzione per codice di `effetti.csv` |
 | `effetti.csv` | id carta → codice effetto + parametri (`k=v;k2`) |
 | `abilita_mostri.csv` | id mostro → codice abilità + parametri; un mostro senza riga è `info` (contato nel rapporto) |
-| `carte.py` | lettura dei CSV, valore delle carte per l'IA |
+| `carte.py` | lettura dei CSV, valore delle carte per l'IA, mani iniziali predefinite (`MANI_INIZIALI`) |
 | `mappa.py` | mappa 12×12 (D24, D25): geometria, base e fiori letti da `../stampa/sorgenti/dati/` (`fiori.csv`, `base12.csv`, `preset12.csv`), draft, preset, costi del terreno, movimento, Cripta. `python3 mappa.py` controlla che i 10 preset e 2000 draft a caso restino collegati |
 | `ia.py`, `ia_carte.py` | IA: preparazione, movimento, fuga, Duello, effetti automatici, poteri; carte da aprire e risposte |
 
@@ -57,25 +58,29 @@ Lo stesso per i mostri con `abilita_mostri.csv` e `mostri.py`.
 La mappa in uso è `g.plancia` (`mappa.Plancia`), montata da `g.montaggio` ({spazio: (fiore, faccia, rotazione)}).
 Default: **draft** (i 14 fiori divisi a caso, 7/4/3 a testa con 2/3/4 giocatori, gli avanzi li posano l'ultimo e il
 penultimo; ognuno posa in turno in uno spazio libero, con faccia e rotazione a caso). `--preset` monta invece
-«Strettoie». I 24 «?» vanno a caso su esagoni percorribili a ≥ 2 esagoni da ogni Partenza.
+«Strettoie». Le tessere Esplorazione (D29) stanno coperte direttamente sugli esagoni, senza segnaposto: 24 sulla mappa, a caso su
+esagoni percorribili a ≥ 2 esagoni da ogni Partenza, una per esagono, e 12 in riserva. Alla Fine del turno, se sulla
+mappa restano al massimo 6 tessere coperte, chi chiude il turno ne posa (prima la riserva, poi le usate rimescolate)
+finché non ce ne sono 24 sulla mappa (contando anche quelle scoperte), con le stesse regole di posa e senza eroi, Cripta
+o altre tessere sull'esagono.
 
 - **Niente muri.** Si cammina ovunque non ci sia un ostacolo (bosco, rocce, case). Entrare costa sempre 1; uscire da un
   terreno accidentato (`accidentato` in `fiori.csv`/`base12.csv`, per ora l'acqua) costa 1 in più: con 1 MOV si entra in
   acqua, per uscirne ne servono 2. Mostri scoperti e Cripta con MIMI fermano come prima.
 - **Cripta.** Al 3° Indizio e a ogni «Il tesoro cambia Cripta» (senza limite; ogni carta Mappa la ritira dopo il cambio) si tira 2D6 per la
-  colonna e 2D6 per la riga. Su acqua resta; su un «?» resta e il «?» con la sua tessera va nella riserva; su un ostacolo
-  o una Partenza va sull'esagono percorribile più vicino senza Partenza, senza «?» e fuori da riga e colonna 1 (a pari
+  colonna e 2D6 per la riga. Su acqua resta; su una tessera Esplorazione resta e la tessera torna coperta nella riserva; su un ostacolo
+  o una Partenza va sull'esagono percorribile più vicino senza Partenza, senza tessera e fuori da riga e colonna 1 (a pari
   distanza il più alto, poi il più a sinistra).
 - **Carta Mappa.** Cambia solo i suoi 3 fiori (righe `cambio` di `preset12.csv`, con lo scambio se il fiore sta già in
-  un altro spazio). I «?» (con le tessere) sugli spazi cambiati tornano nella riserva e se ne rimettono altrettanti sui
-  fiori nuovi, su esagoni percorribili a ≥ 2 dalle Partenze (a caso, tessera nuova dalla riserva). Gli eroi tornano
+  un altro spazio). Le tessere sugli spazi cambiati tornano nella riserva e chi ha giocato la carta ne posa altrettante dalla
+  riserva sui fiori nuovi, su esagoni percorribili a ≥ 2 dalle Partenze (a caso, una per esagono). Gli eroi tornano
   sulla Partenza iniziale (niente D6 della perdita); la Cripta si sposta (stesso punto tirato) solo se ora è su un
   ostacolo. Uno scontro o un Duello in corso finisce senza vincitore né ricompense (esito `annullato`). Se TI-22
   (o TI-33, CR-15) toglie la Mappa in gioco, i 3 fiori tornano come nel montaggio.
 
 IA: non gioca una Mappa durante il proprio scontro; la gioca (o toglie quella in gioco con TI-22/TI-33/CR-15) per
 chiudere lo scontro di un avversario col custode, oppure a M2 se l'avversario di turno con 3 Indizi è sulla Cripta di
-MIMI. Il rapporto conta movimento tirato e speso per turno, Cripta (tiri, spostamenti, «?»), cambi di mappa e scontri
+MIMI. Il rapporto conta movimento tirato e speso per turno, Cripta (tiri, spostamenti, tessere), rifornimenti delle tessere, cambi di mappa e scontri
 annullati.
 
 Revisione a occhio della mappatura (id, nome, testo stampato, codice usato), poi esce:
@@ -95,7 +100,7 @@ python3 v7/simulatore/sim_v7.py --verifica-carte
   solo informativo (mai usato).
 - Effetti automatici (Forte Volontà, potere dello Stregone, CS-10, TE-10) si usano a pila vuota, prima di applicare
   il risultato del tiro, non a metà del giro delle risposte.
-- Il potere del Ricercatore guarda il mazzetto Mostri del proprio PL quando si ferma su una «?»; CR-02/CR-05
+- Il potere del Ricercatore guarda il mazzetto Mostri del proprio PL quando si ferma su una tessera Esplorazione; CR-02/CR-05
   mettono le Trappole in fondo alle carte guardate. Lo scry si fa sempre a proprio vantaggio.
 - Il 2° Equipaggiamento si gioca solo nel proprio turno al momento M0/M1/M5/M6; non si sostituisce un oggetto
   con uno di PL uguale o minore.
@@ -147,3 +152,65 @@ Nessun Equipaggiamento gratis a inizio partita. Primo giro (round 1): niente Due
 avversario. Nello scontro con un mostro l'eroe ha al massimo 3 attacchi: se il mostro è vivo il suo turno lo fa
 scappare (niente premi, tessera tra le usate, carta in fondo; le abilità «a fine scontro» non scattano; il custode non
 scappa mai).
+
+## Regole del 13/11 (mano, bottino, niente pesca)
+
+Sostituiscono la parte mano/mazzetto di D22, R 3.6, R 3.7, R 12.1–12.3 e le ricompense di D11.
+
+- **Mano iniziale**: 5 carte di classe scelte liberamente tra le 20; niente carte comuni. Le altre 15, mescolate e
+  coperte, sono la **pila di classe** del giocatore (`Eroe.pila`; non tornano nella scatola). Non esiste più il
+  mazzetto di classe da 10. TI-28 (`vera_volonta`, decisione del 13/11) prende 2 carte a caso, ognuna per conto suo,
+  dalla scatola di una classe che nessuno gioca oppure dalla pila di classe di un avversario (una fonte con meno carte
+  dà quel che ha); l'IA sceglie per ogni carta la fonte col valore medio più alto. Una carta tolta alla pila di un
+  avversario finisce sempre negli scarti di quell'avversario, giocata o no (zona alla Fine, Equipaggiamento che lascia lo
+  slot, scarto dalla mano per costo, mano massima o mill: `stato.agli_scarti`, memoria in `g.origine`); una dalla
+  scatola, negli scarti di chi la possiede. Il testo stampato della carta è ancora da aggiornare. La mano predefinita per
+  classe sta in **`carte.MANI_INIZIALI`** (classe → 5 id, controllati all'avvio: 5 carte distinte della classe;
+  scelta approvata da Daniele). `--mano-ia` ignora la tabella e fa scegliere le 5 carte all'IA (`ia.mano_iniziale`:
+  per valore, al massimo 4 della propria direzione); una classe senza voce nella tabella fa lo stesso.
+- **Niente pesca a inizio turno**, nemmeno al primo, e niente pesca automatica dalla pila di classe. Le carte
+  arrivano dal bottino, dalle carte che dicono «pesca» (dal mazzo comune) e dalla sconfitta (pesca 1 carta,
+  invariata). Dalla pila di classe pesca solo un testo che lo dice (CO-11, valore esatto della Profezia):
+  `S.pesca(..., dalla_pila=True)`, con pila vuota → mazzo comune (R 12.6).
+- **Bottino** (`stato.loot`): chi sconfigge un mostro dei mazzetti 1 e 2 rivela le prime 3 carte del mazzo comune, ne
+  tiene 1 (l'IA la migliore, `ia._val_mano`) e mette le altre 2 coperte in fondo al mazzo comune. Niente bottino per
+  boss (mazzetto 3), custode, mostro scappato o sparito (TI-41), scontro annullato, Duello. Vale anche per il mostro
+  «sconfitto» senza Indizio da Elemosina (NE-40). Mano massima 10 (R 12.4): se è piena si scarta 1 prima di prendere.
+  Se il mazzo ha meno di 3 carte si rimescolano in fondo le carte comuni di tutti gli scarti (R 12.6, le carte
+  rimaste restano in cima); se ne restano ancora meno si guarda quel che c'è.
+- **Forte Volontà** non è più una ricompensa dei mostri (nemmeno del mazzetto 2): si ottiene solo vincendo un Duello e
+  con le carte che lo dicono. Il tiro Indizio alla vittoria (D6 ≤ LV + 1) è invariato.
+- Stati: stessa meccanica; nei commenti «verticale» = dritto, «orizzontale» = di traverso.
+
+Confronto (13/11, 1000 partite per tavolata, seme 1; «dopo» con le mani predefinite):
+
+| | Round 2/3/4 giocatori | Turni a partita (≈ round × giocatori) | Mano alla Fine | Mano a 10 | Scontri vinti |
+|---|---|---|---|---|---|
+| Prima (3 di classe + 3 comuni, pesca a inizio turno, FV dal mazzetto 2) | 13,2 / 12,6 / 11,9 | 25,8 / 36,9 / 46,2 | 6,2–6,4 | 3,4–4,3 % dei turni | 49–50 % |
+| Dopo (mani predefinite, bottino, niente pesca) | 13,8 / 12,1 / 11,1 | ≈ 27,6 / 36,3 / 44,4 | 2,5–2,6 | 0 % | 58–62 % |
+| Dopo con `--mano-ia` | 16,8 / 14,6 / 13,7 | ≈ 33,6 / 43,8 / 54,8 | 3,1 | 0 % | 40–41 % |
+
+Vittorie per classe, prima → dopo con le mani predefinite (2 / 3 / 4 giocatori): Assaltatore 53→57 / 36→42 / 26→32 %,
+Ricercatore 46→42 / 32→30 / 21→22 %, Stregone 51→52 / 37→33 / 28→27 %, Oracolo 45→52 / 28→33 / 23→24 %,
+Giullare 54→47 / 34→28 / 27→21 %. Con le mani predefinite il mazzetto 3 è il 3–5 % degli scontri (prima 22 %: il PL
+resta basso, quindi si combattono soprattutto mostri dei mazzetti 1–2);
+senza pesca la mano resta a 2–3 carte (vuota nell'8 % dei turni) e si gioca circa 0,9 carte per giocatore per round
+(prima 1,2). L'Assaltatore è la classe avvantaggiata, il Giullare la più debole.
+
+## D29 e D30 (13/11)
+
+- **D29, tessere Esplorazione**: niente segnaposto «?»; le tessere stanno coperte direttamente sugli esagoni (24 sulla
+  mappa, 12 in riserva), vedi «Mappa 12×12». Rifornimento alla Fine: con al massimo 6 tessere coperte si posano tessere
+  fino a 24 sulla mappa (`stato.posa_tessere`).
+- **D30 rivisto (13/11), PV e Danni**: l'eroe ha PV totali (5 di partenza, la Specie non ne dà, `Eroe.pv_tot` = 5 + gli
+  «(+N) PV» degli Equipaggiamenti finché equipaggiati, per ora solo TE-23: `pv=1` in `effetti.csv`) e Danni subiti
+  (`Eroe.danni`, partono da 0). È sconfitto quando i Danni raggiungono i PV totali e dopo la sconfitta i Danni tornano a
+  0. «Togli N Danni» (le cure, ex «recuperi N PV») non scendono sotto 0, quindi i PV rimasti non superano i totali.
+  Equipaggiare TE-23 alza i PV senza toccare i Danni (come curare 1); se l'oggetto esce dallo slot i PV calano, i Danni
+  restano ma si fermano a PV − 1 (mai una sconfitta per aver perso un oggetto). `Eroe.pv` è la proprietà «PV rimasti»
+  (PV totali − Danni): su di essa valgono le soglie «N PV o meno» delle carte e dell'IA. Il rapporto stampa i PV rimasti
+  medi alla propria Fine.
+- **N39, rifornimento delle tessere**: le tessere si posano a turno a partire da chi chiude il turno
+  (`stato.posa_tessere`, ognuno con `ia.posto_tessera`, per ora a caso come al montaggio), solo su esagoni liberi
+  percorribili a ≥ 2 dalle Partenze, senza eroi, Cripta o altre tessere. Dopo una carta Mappa le tessere tolte le posa
+  per intero chi ha giocato la carta.

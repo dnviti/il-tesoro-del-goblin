@@ -5,7 +5,8 @@ Uso (dalla radice del repository):
   python3 v7/simulatore/sim_v7.py --partite 2000 --seme 1            # base v7 (D18, D19)
   python3 v7/simulatore/sim_v7.py --partite 2000 --seme 1 --op1      # una opzione di R 7.12
 Opzioni: --op1 --op2 --op5 (R 7.12); confronti con la v6: --ar-v6 (AR dei mostri v6), --indizio-lv (D6 <= LV);
-montaggio: --preset (preset «Strettoie» invece del draft, D24); varianti del §16: --dado-sommato (N6), --chi-tira-non-risponde (N1), --penalita-meno (N2).
+montaggio: --preset (preset «Strettoie» invece del draft, D24); --mano-ia (l'IA sceglie le 5 carte iniziali di classe invece
+della mano predefinita K.MANI_INIZIALI); varianti del §16: --dado-sommato (N6), --chi-tira-non-risponde (N1), --penalita-meno (N2).
 --giocatori 2,3,4 (default: tutti e tre, come il simulatore v6), --processi N.
 Solo libreria standard."""
 import argparse
@@ -19,7 +20,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import carte as K          # noqa: E402
 import regole as R         # noqa: E402
 
-FLAG = ('op1', 'op2', 'op5', 'preset', 'ar_v6', 'indizio_lv', 'dado_sommato', 'chi_tira_non_risponde', 'penalita_meno')
+FLAG = ('op1', 'op2', 'op5', 'preset', 'ar_v6', 'indizio_lv', 'dado_sommato', 'chi_tira_non_risponde', 'penalita_meno',
+        'mano_ia')
 
 
 def una_partita(arg):
@@ -31,7 +33,7 @@ def una_partita(arg):
         'vincitore': (v.classe, v.direzione) if v else None,
         'eroi': [(e.classe, e.direzione) for e in g.eroi],
         'morti': sum(e.morti for e in g.eroi),
-        'mano': g.mano_fine, 'pl': g.pl_round, 'st': g.st, 'uso': g.uso, 'info': g.info,
+        'mano': g.mano_fine, 'pv': g.pv_fine, 'pl': g.pl_round, 'st': g.st, 'uso': g.uso, 'info': g.info,
         'giocate_eroe': sum(g.giocate_eroe.values()), 'max_indizi': g.max_indizi,
         'round_tesoro': g.round_tesoro,
     }
@@ -86,6 +88,11 @@ def rapporto_n(n, ris):
     r.append(f"Mano alla propria Fine: media {_media(mani):.2f}; a 10 nel {sum(m >= 10 for m in mani) / len(mani):.1%} "
              f"dei turni; vuota nel {sum(m == 0 for m in mani) / len(mani):.1%}; scarti per la mano massima "
              f"{st['scarti_mano_max'] / N:.2f} a partita")
+    pvs = [v for x in ris for v in x['pv']]
+    r.append(f"PV rimasti (totali - Danni) alla propria Fine: media {_media(pvs):.2f}, mediana {statistics.median(pvs)}, "
+             f"massimo {max(pvs)}; 6 o più nel {sum(v >= 6 for v in pvs) / len(pvs):.1%} dei turni")
+    r.append(f"Bottino (mostri dei mazzetti 1-2 sconfitti, 1 carta tenuta su 3 rivelate): {st['loot'] / N:.2f} a partita; "
+             f"riciclo degli scarti comuni {st['ricicli'] / N:.2f} a partita")
     giri = sum(x['round'] for x in ris)
     r.append(f"Carte giocate: {st['carte_giocate'] / giri:.2f} per round (tavolo), "
              f"{st['carte_giocate'] / giri / n:.2f} per giocatore per round; fuori turno "
@@ -110,8 +117,8 @@ def rapporto_n(n, ris):
     mi = [x['max_indizi'] for x in ris]
     r.append(f"Segnalini Indizio in gioco insieme: massimo {max(mi)}, 99° percentile {pct(mi, .99)}, media del "
              f"massimo {_media(mi):.1f}; partite oltre i 16 stampati {sum(m > 16 for m in mi) / N:.2%}")
-    r.append(f"Duelli {st['duelli'] / N:.2f} a partita, rifiutati {st['duelli_rifiutati'] / N:.2f}; rifornimenti «?» "
-             f"{st['rifornimenti'] / N:.2f}; tesoro spostato {st['tesoro_spostato'] / N:.2f}; Profezie "
+    r.append(f"Duelli {st['duelli'] / N:.2f} a partita, rifiutati {st['duelli_rifiutati'] / N:.2f}; rifornimenti delle tessere "
+             f"{st['rifornimenti'] / N:.2f} ({st['tessere_rifornite'] / N:.2f} tessere posate); tesoro spostato {st['tesoro_spostato'] / N:.2f}; Profezie "
              f"{st['profezie'] / N:.2f} (indovinate {st['profezie_indovinate'] / max(1, st['profezie']):.0%})")
     cambi = [x['st']['cambi_plancia'] + x['st']['cambi_plancia_base'] for x in ris]
     r.append(f"Cambi di plancia (R 8.12) {_media(cambi):.2f} a partita (verso una Mappa {st['cambi_plancia'] / N:.2f}, "
@@ -119,8 +126,8 @@ def rapporto_n(n, ris):
              f"{sum(c > 0 for c in cambi) / N:.0%}; scontri annullati {st['scontri_annullati'] / N:.2f} "
              f"(col custode {st['custode_annullato'] / N:.2f}), Duelli annullati {st['duelli_annullati'] / N:.2f}")
     r.append(f"Cripta (D24): {st['cripta_tirata'] / N:.2f} tiri a partita; spostata dal punto tirato (ostacolo o Partenza) "
-             f"{st['cripta_spostata'] / max(1, st['cripta_tirata']):.0%}; caduta su un «?» (resta, il «?» va in riserva) "
-             f"{st['cripta_su_domanda'] / N:.2f} a partita")
+             f"{st['cripta_spostata'] / max(1, st['cripta_tirata']):.0%}; caduta su una tessera (resta, la tessera va in riserva) "
+             f"{st['cripta_su_tessera'] / N:.2f} a partita")
     r.append("Poteri usati per partita in cui la classe gioca: " + ', '.join(
         f"{c} {st['potere_' + c] / pres[c]:.2f}" for c in K.CLASSI if pres[c]))
     r.append(f"Giocate di carte con effetto non modellato (info): {st['info'] / N:.2f} a partita "
@@ -204,6 +211,8 @@ def main():
            f"{ {t: len(v) for t, v in K.MAZZETTI.items()} } (+ custode tra i boss), abilità dei mostri info: "
            f"{[m for m, v in K.ABILITA.items() if v[0][0] == 'info'] or 'nessuna'}; codici sconosciuti: "
            f"{abilita_ignote() or 'nessuno'}"]
+    out.append("Mano iniziale: 5 carte di classe, nessuna comune; " + ("scelte dall'IA (--mano-ia)" if a.mano_ia else
+               "predefinita per classe (K.MANI_INIZIALI)") + "; le altre 15 sono la pila di classe")
     if not K.AR_CSV_V7:
         out.append("ATTENZIONE: carte_mostro.csv ha ancora le AR v6 (8-11): il simulatore applica D19 da sé.")
     out.append('')

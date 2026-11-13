@@ -52,7 +52,7 @@ def anello(s, k):
 
 DATI = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'stampa', 'sorgenti', 'dati')
 BASE = 'Strettoie'          # preset del montaggio veloce senza carta Mappa
-N_DOMANDE = 24
+N_TESSERE = 24        # D29: tessere Esplorazione sulla mappa (le altre 12 in riserva)
 
 
 def _csv(nome):
@@ -142,18 +142,20 @@ class Plancia:
         mete = {h: d for h, d in dist.items() if h != da and h not in occupati}
         return mete or {da: 0}
 
-    def cripta(self, x, y, domande=()):
-        """D24: Cripta sul punto (x, y) tirato con 2D6 + 2D6. Sull'acqua o su una «?» (`domande`: esagoni con un
-        «?») resta lì. Su un ostacolo o su una Partenza va sull'esagono percorribile più vicino (si contano anche gli
-        ostacoli) che non sia Partenza, «?», riga o colonna 1; a pari distanza più in alto, poi più a sinistra."""
+    def cripta(self, x, y, tessere=()):
+        """D24: Cripta sul punto (x, y) tirato con 2D6 + 2D6. Sull'acqua o su una tessera Esplorazione (`tessere`: esagoni
+        con una tessera) resta lì. Su un ostacolo o su una Partenza va sull'esagono percorribile più vicino (si contano
+        anche gli ostacoli) che non sia Partenza, senza tessera, riga o colonna 1; a pari distanza più in alto, poi più a
+        sinistra."""
         h = (x, y)
         if h in self.libero and h not in PARTENZE:
             return h
-        return min((v for v in self.libero if v not in PARTENZE and v not in domande and v[0] > 1 and v[1] > 1),
+        return min((v for v in self.libero if v not in PARTENZE and v not in tessere and v[0] > 1 and v[1] > 1),
                    key=lambda v: (distanza(v, h), v[1], v[0]))
 
-    def idonee_domanda(self, occupate):
-        """D24 (R 8.11): esagoni percorribili ad almeno 2 esagoni da ogni Partenza, senza un'altra «?»."""
+    def idonee_tessera(self, occupate):
+        """D29: esagoni percorribili ad almeno 2 esagoni da ogni Partenza e non in `occupate` (un'altra tessera, un eroe,
+        la Cripta)."""
         return [h for h in CELLE if h in self.libero and h not in occupate and h not in PARTENZE
                 and all(distanza(h, p) >= 2 for p in PARTENZE)]
 

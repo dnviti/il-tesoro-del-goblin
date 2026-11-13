@@ -256,31 +256,32 @@ def misure(t):
             'ammasso_max': max(am, default=0)}
 
 
-# ------------------------------------------------------------------ «?» e Cripta
-N_DOMANDE = 24
+# ------------------------------------------------------------------ Tessere Esplorazione coperte e Cripta (D29: niente segnaposto «?»)
+N_TESSERE = 24     # tessere Esplorazione coperte posate sugli esagoni al montaggio; le altre 12 restano nella riserva
 P2D6 = {s: (6 - abs(s - 7)) / 36 for s in range(2, 13)}
 # per ogni punto tirabile, tutti gli esagoni in ordine di ricerca: distanza, poi y, poi x
 ORDINE = {(x, y): sorted(CELLE, key=lambda h: (dist(h, (x, y)), h[1], h[0])) for x in range(2, 13) for y in range(2, 13)}
 
 
-def idonei_domanda(t, partenze=PARTENZE):
-    """«?»: su qualsiasi esagono percorribile (anche acqua), non Partenza, ad almeno 2 esagoni da ogni Partenza."""
+def idonei_tessera(t, partenze=PARTENZE):
+    """Tessera coperta: su qualsiasi esagono percorribile (anche acqua), non Partenza, ad almeno 2 esagoni da ogni Partenza;
+    una sola tessera per esagono."""
     return [h for h in CELLE if percorribile(t[h]) and t[h] != 'partenza' and all(dist(h, p) >= 2 for p in partenze)]
 
 
-def posa_domande(t, rnd, n=N_DOMANDE, partenze=PARTENZE):
-    return set(rnd.sample(idonei_domanda(t, partenze), n))
+def posa_tessere(t, rnd, n=N_TESSERE, partenze=PARTENZE):
+    return set(rnd.sample(idonei_tessera(t, partenze), n))
 
 
-def cripta(t, x, y, domande=frozenset()):
-    """Cripta su (x, y) tirato con 2D6 + 2D6. Su una «?» resta lì («?» e tessera tornano coperti nella riserva);
-    sull'acqua resta. Si sposta solo da un ostacolo o da una Partenza: va sull'esagono percorribile più vicino che non
-    sia una Partenza, non abbia una «?» e non stia in riga o colonna 1; a pari distanza y più piccola, poi x più
+def cripta(t, x, y, tessere=frozenset()):
+    """Cripta su (x, y) tirato con 2D6 + 2D6. Su un esagono con una tessera coperta resta lì (la tessera torna coperta nella
+    riserva); sull'acqua resta. Si sposta solo da un ostacolo o da una Partenza: va sull'esagono percorribile più vicino che
+    non sia una Partenza, non abbia una tessera e non stia in riga o colonna 1; a pari distanza y più piccola, poi x più
     piccola. La Cripta sbarra il passaggio come un mostro scoperto."""
     if percorribile(t[(x, y)]) and t[(x, y)] != 'partenza':
         return (x, y), 0
     for h in ORDINE[(x, y)]:
-        if percorribile(t[h]) and t[h] != 'partenza' and h not in domande and h[0] >= 2 and h[1] >= 2:
+        if percorribile(t[h]) and t[h] != 'partenza' and h not in tessere and h[0] >= 2 and h[1] >= 2:
             return h, dist(h, (x, y))
 
 
@@ -301,20 +302,20 @@ def simula(prove, seme=12):
     rnd = random.Random(seme)
     m = collections.defaultdict(list)
     spost, perp, calore = [], [[] for _ in PARTENZE], collections.Counter()
-    su_domanda = 0
+    su_tessera = 0
     for _ in range(prove):
         t = mappa(draft_casuale(rnd))
         for k, v in misure(t).items():
             m[k].append(v)
-        dom = posa_domande(t, rnd)
+        tess = posa_tessere(t, rnd)
         x, y = sum(rnd.randint(1, 6) for _ in range(2)), sum(rnd.randint(1, 6) for _ in range(2))
-        c, s = cripta(t, x, y, dom)
-        su_domanda += c in dom
+        c, s = cripta(t, x, y, tess)
+        su_tessera += c in tess
         spost.append(s)
         calore[c] += 1
         for i, p in enumerate(PARTENZE):
             perp[i].append(passi(t, p).get(c, 99))
-    return m, spost, perp, calore, su_domanda
+    return m, spost, perp, calore, su_tessera
 
 
 def avversario(rnd, giri, passi_):
@@ -508,26 +509,26 @@ def cerca_cambio(tema, preset, partenze_da, seme=1):
 def tempi(p, giocatori=None):
     """secondi per montare la mappa: giocatori = 2, 3, 4 (draft), None (preset) o 'cambio' (carta Mappa: 3 fiori).
     Costanti di tempo_setup.py più stime nuove [INFERENZA]: decidere un fiore (spazio, rotazione, faccia) 3 / 6 / 12 s,
-    una «?» 1 / 2,5 / 5 s; pescare un fiore 1 s; con 3 e 4 giocatori si vede l'85 % e il 75 % della decisione."""
+    una tessera Esplorazione coperta 1 / 2,5 / 5 s; pescare un fiore 1 s; con 3 e 4 giocatori si vede l'85 % e il 75 % della decisione."""
     k = ts.k
     sovrap = {None: 0.85, 'cambio': 1.0, 2: 1.0, 3: 0.85, 4: 0.75}[giocatori]
     dec_fiore = {'veloce': 3, 'tipico': 6, 'lento': 12}[p] * sovrap
-    dec_dom = {'veloce': 1, 'tipico': 2.5, 'lento': 5}[p] * sovrap
+    dec_tess = {'veloce': 1, 'tipico': 2.5, 'lento': 5}[p] * sovrap
     base_ = 2 * (k('presa_grande', p) + k('posa_grande', p) + k('orienta_grande', p))
     girare = {'veloce': 0.4, 'tipico': 0.6, 'lento': 0.9}[p]
     posa_fiore = k('presa_medio', p) + ts.fitts(p, 'toll_toppa') + k('orienta_multi', p) + k('urti_medio', p)
-    posa_dom = k('presa_tile', p) + ts.fitts(p, 'toll_toppa')
+    posa_tess = k('presa_tile', p) + ts.fitts(p, 'toll_toppa')
     fisso = k('apertura', p) + k('sala', p)
-    dom = N_DOMANDE * (dec_dom + posa_dom) + 0.5 * N_DOMANDE
+    tess = N_TESSERE * (dec_tess + posa_tess) + 0.5 * N_TESSERE
     cerca = k('confronto', p) * (14 + 3) / 4
     da_foglio = k('lettura_pezzo', p) + cerca + girare + posa_fiore
     if giocatori == 'cambio':
-        # 3 righe; in media 2,5 fiori si scambiano (togli + rimetti); le «?» di quei fiori (~4) tornano nella riserva e
+        # 3 righe; in media 2,5 fiori si scambiano (togli + rimetti); le tessere di quei fiori (~4) tornano nella riserva e
         # chi ha giocato la carta le rimette sui fiori nuovi (decisione + posa); Cripta: 2D6 + 2D6 e posa
-        return 3 * da_foglio + 2.5 * (k('togli', p) + posa_fiore) + 4 * (k('togli', p) + dec_dom + posa_dom) + 6 + 6
+        return 3 * da_foglio + 2.5 * (k('togli', p) + posa_fiore) + 4 * (k('togli', p) + dec_tess + posa_tess) + 6 + 6
     if giocatori is None:
-        return fisso + base_ + 14 * da_foglio + dom
-    return fisso + base_ + 14 * 1.0 + 0.5 * (14 + N_DOMANDE) + 14 * (dec_fiore + girare + posa_fiore) + dom
+        return fisso + base_ + 14 * da_foglio + tess
+    return fisso + base_ + 14 * 1.0 + 0.5 * (14 + N_TESSERE) + 14 * (dec_fiore + girare + posa_fiore) + tess
 
 
 # ------------------------------------------------------------------ dati del kit (CSV)
@@ -645,7 +646,7 @@ def main():
 
     print('## Simulazione dei draft casuali\n')
     prove = 1000 if veloce else 5000
-    m, spost, perp, calore, sudom = simula(prove)
+    m, spost, perp, calore, sutess = simula(prove)
     righe = [('mappa tutta collegata (tutte le Partenze, nessuna sacca)', f"{100 * statistics.mean(m['collegata']):.1f} %"),
              ('ostacoli (bosco, rocce, case): media, min–max', f"{100 * statistics.mean(m['ostacoli']):.1f} % ({100 * min(m['ostacoli']):.0f}–{100 * max(m['ostacoli']):.0f} %)"),
              ('terreno accidentato (acqua): media', f"{100 * statistics.mean(m['accidentati']):.1f} %"),
@@ -653,7 +654,7 @@ def main():
              ('ammasso di ostacoli più grande: media (max)', f"{statistics.mean(m['ammasso_max']):.1f} ({max(m['ammasso_max'])})"),
              ('vicoli ciechi per mappa: media', f"{statistics.mean(m['ciechi']):.1f}"),
              ('Cripta spostata (da ostacolo o Partenza)', f"{100 * sum(s > 0 for s in spost) / len(spost):.1f} % (max {max(spost)} esagoni)"),
-             ('Cripta su una «?» (resta lì; «?» e tessera tornano nella riserva)', f'{100 * sudom / prove:.1f} %')]
+             ('Cripta su una tessera coperta (resta lì; la tessera torna nella riserva)', f'{100 * sutess / prove:.1f} %')]
     tab(righe, ('misura', f'su {prove} draft'))
     medie = [statistics.mean(v) for v in perp]
     print('Passi di MOV dalla Partenza alla Cripta (acqua = 2), media per Partenza: '

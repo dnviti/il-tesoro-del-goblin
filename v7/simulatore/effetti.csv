@@ -30,7 +30,7 @@ TE-19,equip,att=3;vant_boss,
 TE-20,equip,ar=1;mov=1,
 TE-21,equip,mov=2,
 TE-22,equip,ar=2;ar_lv3=1,
-TE-23,equip,ar=2;pvmax=1,
+TE-23,equip,ar=2;pv=1,
 TE-24,equip,ar=1;vant,
 TE-25,equip,ar=2;mov=1;lascia_recupera=1,
 TE-26,equip,colpo_sicuro=2,l'IA lo usa al posto del tiro quando per colpire le serve 8 o più su 2D6

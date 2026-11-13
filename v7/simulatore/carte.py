@@ -79,6 +79,19 @@ for _r in _righe('carte_comuni.csv') + [r for c in CLASSI for r in _righe(os.pat
 
 MANCANTI = sorted(set(CARTE) - set(EFFETTI))   # carte senza riga in effetti.csv: trattate come 'info'
 
+# Mano iniziale (13/11): 5 carte di classe scelte tra le 20, niente carte comuni; le altre 15 formano, mescolate e coperte,
+# la pila di classe del giocatore (non tornano nella scatola). Mano predefinita per classe: classe -> 5 id di quella classe
+# (scelta approvata da Daniele il 13/11). `--mano-ia` la ignora e fa scegliere le 5 carte all'IA (ia.mano_iniziale).
+MANI_INIZIALI = {
+    'Assaltatore': ['CA-05', 'CA-04', 'CA-02', 'CA-06', 'CA-19'],
+    'Ricercatore': ['CR-04', 'CR-06', 'CR-01', 'CR-03', 'CR-08'],
+    'Stregone': ['CS-01', 'CS-03', 'CS-04', 'CS-07', 'CS-09'],
+    'Oracolo': ['CO-09', 'CO-10', 'CO-02', 'CO-03', 'CO-06'],
+    'Giullare': ['CG-01', 'CG-12', 'CG-16', 'CG-13', 'CG-05'],
+}
+for _c, _ids in MANI_INIZIALI.items():
+    assert len(_ids) == len(set(_ids)) == 5 and all(i in CARTE_CLASSE[_c] for i in _ids), f"MANI_INIZIALI[{_c}]"
+
 MOSTRI = {}
 for _r in _righe('carte_mostro.csv'):
     MOSTRI[_r['id']] = Mostro(_r['id'], _r['nome'], int(_r['mazzetto'][0]), int(_r['lv']), int(_r['pv']),

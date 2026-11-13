@@ -1,9 +1,10 @@
 # Mappa 12×12 a fiori: progetto
 
 12/11/2026. Sostituisce il lavoro precedente sui fiori (`../fiori/`). Contiene tutte le decisioni di Daniele della giornata:
-- §8 della fase A: ostacoli al 26 %, base in 2 fogli, Partenze non simmetriche ma bilanciate, Cripta su «?», carta Mappa che cambia 3 fiori, vicoli ciechi accettati;
+- §8 della fase A: ostacoli al 26 %, base in 2 fogli, Partenze non simmetriche ma bilanciate, Cripta sulle tessere Esplorazione coperte, carta Mappa che cambia 3 fiori, vicoli ciechi accettati;
 - la regola del terreno delle 19:01;
-- le decisioni dell'orchestratore su «?» e Cripta.
+- le decisioni dell'orchestratore sulle tessere Esplorazione e sulla Cripta;
+- D29 (13/11, 16:40): i 24 segnaposto «?» sono tolti; le 36 tessere Esplorazione stanno coperte direttamente sugli esagoni (24 sulla mappa al montaggio, 12 nella riserva).
 
 La Spec, il simulatore e il manuale li aggiornano altri. Il kit di stampa è fatto: vedi il §8.
 
@@ -17,7 +18,7 @@ File di questa cartella:
 
   Tutti i numeri di questo documento sono il suo output.
 - `preset12.py`: i 10 preset e i loro 3 fiori di cambio.
-- `disegna12.py`: mock-up con il disegno del kit. Genera `m12_pezzi` (i 14 fiori), `m12_draft` (draft casuale con «?» e Cripta) e `m12_strettoie`.
+- `disegna12.py`: mock-up con il disegno del kit. Genera `m12_pezzi` (i 14 fiori), `m12_draft` (draft casuale con le 24 tessere coperte e la Cripta) e `m12_strettoie`.
 
 ## 1. Regole (testo per il regolamento)
 
@@ -34,22 +35,22 @@ File di questa cartella:
 1. Metti al centro la base (i 2 fogli uniti), con le 6 Partenze già stampate, e accanto la Sala del Tesoro.
 2. Mescola i 14 fiori in un sacchetto o nella scatola, senza guardare. Ognuno ne pesca: con 2 giocatori 7, con 3 giocatori 4, con 4 giocatori 3. Con 3 o 4 giocatori i 2 avanzi restano scoperti accanto alla base.
 3. A turno, dal primo giocatore in senso orario, posa uno dei tuoi fiori in uno spazio libero, con la faccia e la rotazione che vuoi. Alla fine i 2 avanzi li posa uno a testa l'ultimo giocatore del giro e poi il penultimo.
-4. Dividete i 24 segnaposto «?» (2 giocatori 12, 3 giocatori 8, 4 giocatori 6). A turno posane uno su un esagono percorribile (libero o acqua; mai una Partenza) ad almeno 2 esagoni da ogni Partenza, uno per esagono. Poi una tessera Esplorazione coperta su ogni «?», come oggi.
+4. Mescola le 36 tessere Esplorazione a faccia in giù: 12 restano nella riserva, le altre 24 si dividono tra i giocatori (2 giocatori 12, 3 giocatori 8, 4 giocatori 6). A turno posane una, coperta, su un esagono percorribile (libero o acqua; mai una Partenza) ad almeno 2 esagoni da ogni Partenza, una per esagono.
 5. Ogni eroe tira il D6 per la sua Partenza iniziale, come oggi.
 
 **Montaggio con un preset.** Al posto dei passi 2 e 3: il foglio del preset (`mappa_preset.pdf`) dice, per ogni spazio, il fiore con la faccia (per esempio «9A») e il numero 1-6 dell'anello dello spazio verso cui va la freccia d'ottone del fiore. Poi i passi 4 e 5.
 
 **Cripta.**
 - La prima volta che un eroe prende il 3° Indizio, tira 2D6 per la x e 2D6 per la y e metti la Cripta su (x, y). Va sempre da 2 a 12, quindi riga e colonna 1 non hanno mai la Cripta.
-- Se l'esagono ha una «?», la Cripta resta lì e la «?» con la sua tessera torna coperta nella riserva. Sull'acqua resta.
-- Si sposta solo da un ostacolo o da una Partenza. Va sull'esagono percorribile più vicino che non sia una Partenza, non abbia una «?» e non stia in riga o colonna 1; a pari distanza vince quello più in alto (y più piccola), poi quello più a sinistra (x più piccola).
+- Se l'esagono ha una tessera coperta, la Cripta resta lì e la tessera torna coperta nella riserva. Sull'acqua resta.
+- Si sposta solo da un ostacolo o da una Partenza. Va sull'esagono percorribile più vicino che non sia una Partenza, non abbia una tessera e non stia in riga o colonna 1; a pari distanza vince quello più in alto (y più piccola), poi quello più a sinistra (x più piccola).
 - La Cripta sbarra il passaggio come un mostro scoperto.
 - «Il tesoro cambia Cripta»: togli la Cripta e tira di nuovo.
 
 **Carta Mappa a metà partita (solo 3 fiori).**
 - Il foglio della carta ha 3 righe «spazio · fiore e faccia · freccia», da applicare in ordine. Se il fiore indicato sta in un altro spazio, si scambia con quello che occupa lo spazio indicato: il fiore tolto va nello spazio liberato con la sua faccia e la sua freccia. Poi si mettono la faccia e la freccia indicate.
 - Vale uguale se la mappa in gioco viene da un draft o da un altro preset.
-- Prima del cambio, le «?» e le loro tessere sui fiori che si muovono tornano nella riserva; chi ha giocato la carta le rimette sui fiori nuovi, su esagoni percorribili ad almeno 2 esagoni dalle Partenze.
+- Prima del cambio, le tessere coperte sui fiori che si muovono tornano nella riserva; chi ha giocato la carta le rimette (coperte) sui fiori nuovi, su esagoni percorribili ad almeno 2 esagoni dalle Partenze.
 - Poi la Cripta si ritira col 2D6 + 2D6.
 - Se una Mappa lascia il gioco senza sostituta (TI-22), si applicano le 3 righe di Strettoie.
 
@@ -99,7 +100,7 @@ Ostacoli per faccia: da 2 a 3, in media 2,46. Sulle 28 facce ci sono 25 bosco, 2
 | ammasso di ostacoli più grande | 3,7 esagoni in media (massimo 6) |
 | vicoli ciechi | 1,6 per mappa (accettati) |
 | Cripta spostata (da ostacolo o Partenza) | 34,4 %, al massimo di 2 esagoni |
-| Cripta su una «?» (resta lì) | 18,9 % |
+| Cripta su una tessera coperta (resta lì) | 18,9 % |
 | passi di MOV Partenza → Cripta, media | P1 7,56 · P2 8,12 · P3 7,50 · P4 7,31 · P5 7,80 · P6 8,32 |
 | ricerca del caso peggiore (60 × 300 mosse) | nessun piazzamento con parti staccate |
 
@@ -128,10 +129,10 @@ Come leggere le colonne:
 ## 6. Tempi
 
 Il modello è quello di `../modello_tempi.py` (le costanti della proposta del 12/11), più queste stime [INFERENZA]:
-- decidere dove posare un fiore: 3 / 6 / 12 s; una «?»: 1 / 2,5 / 5 s;
+- decidere dove posare un fiore: 3 / 6 / 12 s; una tessera Esplorazione coperta: 1 / 2,5 / 5 s;
 - con 3 e 4 giocatori conta l'85 % e il 75 % della decisione, perché gli altri pensano mentre aspettano.
 
-Come nel confronto con oggi, le tessere Esplorazione sopra le «?» non sono comprese.
+La posa delle 24 tessere coperte è compresa (D29: prima era la posa dei segnaposto «?»); non è compreso il tempo per mescolare le 36 tessere.
 
 | | Veloce | Tipico | Lento |
 |---|---|---|---|
@@ -139,7 +140,7 @@ Come nel confronto con oggi, le tessere Esplorazione sopra le «?» non sono com
 | draft, 3 giocatori | 3:06 | **5:05** | 8:23 |
 | draft, 4 giocatori | 3:00 | **4:50** | 7:55 |
 | preset | 2:32 | **4:11** | 6:50 |
-| carta Mappa a metà partita (3 fiori, «?» da rimettere, Cripta di nuovo) | 0:47 | **1:10** | 1:44 |
+| carta Mappa a metà partita (3 fiori, tessere da rimettere, Cripta di nuovo) | 0:47 | **1:10** | 1:44 |
 | oggi (100 tile + 16 muri, 10×10) | 7:00 | 11:13 | 17:57 |
 
 ## 7. Dati del kit (`v7/stampa/sorgenti/dati/`)
@@ -158,7 +159,7 @@ Come nel confronto con oggi, le tessere Esplorazione sopra le «?» non sono com
 | File | Pagine | Contenuto |
 |---|---|---|
 | `mappa_base.pdf` | 2 | la base in 2 metà, cartoncino da 250-300 g; si taglia sulla linea esterna e sulla giunzione; 5 rombi di rame a cavallo della giunzione per allinearle; si uniscono col nastro dietro |
-| `mappa_fiori.pdf` | 6 = 3 fogli fronte/retro | pagine dispari fronte (facce A con le linee di taglio), pari retro (facce B specchiate per girare il foglio sul lato lungo dell'Epson ET-2870, senza linee); abbondanza di 2 mm su tutte e due le facce; id piccolo nell'angolo; foglio 3 con 24 segnaposto «?» (Ø 20 mm) e il segnalino Cripta, a due facce uguali |
+| `mappa_fiori.pdf` | 6 = 3 fogli fronte/retro | pagine dispari fronte (facce A con le linee di taglio), pari retro (facce B specchiate per girare il foglio sul lato lungo dell'Epson ET-2870, senza linee); abbondanza di 2 mm su tutte e due le facce; id piccolo nell'angolo; foglio 3 con il segnalino Cripta, a due facce uguali (i 24 segnaposto «?» sono tolti, D29) |
 | `mappa_preset.pdf` | 10 (carta comune) | schema di ogni preset con fiore e faccia in grande per ogni spazio, la freccia e il suo numero, i 3 fiori di cambio con il bordo di rame e numerati, le regole del cambio |
 | `sala_tesoro.pdf` | 1 | la Sala del Tesoro (rotelle del custode e dello scontro, Spostamenti del tesoro), senza i muri |
 

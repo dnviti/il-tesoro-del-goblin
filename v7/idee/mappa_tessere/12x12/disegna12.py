@@ -5,7 +5,7 @@ mappa12.py: SVG in mm 1:1 e PNG (ImageMagick) in questa cartella.
 Uso (dalla radice del repo):  python3 v7/idee/mappa_tessere/12x12/disegna12.py
 
   m12_pezzi.svg/.png       i 14 fiori, faccia A sopra e faccia B sotto, con id e freccia;
-  m12_draft.svg/.png       una mappa da draft casuale (seme fisso): base, 14 fiori, 24 «?» con la tessera, Cripta tirata;
+  m12_draft.svg/.png       una mappa da draft casuale (seme fisso): base, 14 fiori, 24 Tessere Esplorazione coperte, Cripta tirata;
   m12_strettoie.svg/.png   il preset «Strettoie», pezzi staccati di qualche mm.
 Terreno dalle 19:01: libero (prato, mattonato, pavimento, sentiero, guado, ponte), accidentato (acqua, «+1»), ostacoli
 (bosco, rocce, case: scuri e col bordo netto).
@@ -54,7 +54,7 @@ def pezzi_svg():
                      'Terreno libero chiaro (prato, sentiero, mattonato, pavimento), acqua accidentata con «+1», ostacoli scuri col bordo netto.', 0, -14)
 
 
-def mappa_svg(disp, titolo, sotto, domande=(), cripta=None, staccati=0.0, cid='m'):
+def mappa_svg(disp, titolo, sotto, tessere=(), cripta=None, staccati=0.0, cid='m'):
     t = M.mappa(disp)
     L, A = F.LARGO, F.ALTO
     num = {h: i for i, h in enumerate(M.PARTENZE, 1)}
@@ -72,11 +72,11 @@ def mappa_svg(disp, titolo, sotto, domande=(), cripta=None, staccati=0.0, cid='m
         x0, y0 = F.centro_mappa(M.SPAZI[s])
         dx, dy = (x0 - cx) * staccati, (y0 - cy) * staccati
         o.append(f'<g transform="translate({dx:.2f} {dy:.2f})">' + F.fiore(faccia_kit(i, lato), x0, y0, rot, f'{cid}{s}', 0, True, f'{i + 1}{"AB"[lato]}') + '</g>')
-    for h in domande:   # segnaposto «?» con la tessera Esplorazione coperta sopra (Ø 24)
+    for h in tessere:   # Tessera Esplorazione coperta (Ø 24) direttamente sull'esagono, dorso senza «?» (D29)
         x, y = F.centro_mappa(h)
         o.append(f'<circle cx="{x + 0.5:.2f}" cy="{y + 0.8:.2f}" r="11.6" fill="#000" opacity="0.25"/>'
-                 f'<circle cx="{x:.2f}" cy="{y:.2f}" r="11.6" fill="#3b2a1c" stroke="{BRASS}" stroke-width="0.8"/>'
-                 f'<text x="{x:.2f}" y="{y + 4.6:.2f}" text-anchor="middle" font-family="{F.SERIF}" font-weight="bold" font-size="13" fill="#b8862b">?</text>')
+                 f'<circle cx="{x:.2f}" cy="{y:.2f}" r="11.6" fill="#8a5a33" stroke="{BRASS}" stroke-width="0.8"/>'
+                 f'<circle cx="{x:.2f}" cy="{y:.2f}" r="8.4" fill="none" stroke="{BRASS}" stroke-width="0.4"/>')
     if cripta:
         o.append(F.segnalino_cripta(*F.centro_mappa(cripta)))
     return documento(L + 2 * FASCIA + 28, A + 2 * FASCIA + 36, ''.join(o), titolo, sotto)
@@ -95,13 +95,13 @@ def main():
     rnd = random.Random(2026)
     d = M.draft_casuale(rnd)
     t = M.mappa(d)
-    dom = M.posa_domande(t, rnd)
+    tess = M.posa_tessere(t, rnd)
     x, y = sum(rnd.randint(1, 6) for _ in range(2)), sum(rnd.randint(1, 6) for _ in range(2))
-    c, sp = M.cripta(t, x, y, dom)
-    nota = f'spostata di {sp} esagon{"o" if sp == 1 else "i"}' if sp else ('sulla «?»: «?» e tessera tornano nella riserva' if c in dom else 'nessuno spostamento')
+    c, sp = M.cripta(t, x, y, tess)
+    nota = f'spostata di {sp} esagon{"o" if sp == 1 else "i"}' if sp else ('su una tessera coperta: la tessera torna nella riserva' if c in tess else 'nessuno spostamento')
     scrivi('m12_draft', mappa_svg(d, 'Mappa 12×12 da draft casuale',
-                                  f'Base con le 6 Partenze, 14 fiori posati a caso, 24 «?» coperte; Cripta tirata in ({x}, {y}): {nota}.',
-                                  dom - {c}, c, cid='d'))
+                                  f'Base con le 6 Partenze, 14 fiori posati a caso, 24 Tessere Esplorazione coperte sugli esagoni; Cripta tirata in ({x}, {y}): {nota}.',
+                                  tess - {c}, c, cid='d'))
     pr, _ = M.carica_preset()
     scrivi('m12_strettoie', mappa_svg(pr['Strettoie'], 'Preset «Strettoie» 12×12',
                                       'Stessi 14 fiori in spazio, faccia e rotazione fissi (freccia d\'ottone); pezzi staccati di qualche mm.',

@@ -22,6 +22,8 @@ specchiata: x del bordo destro dell'id sul fronte + quella sul retro uguale per 
 Per mappa_base.pdf e mappa_fiori.pdf (A4) anche il contorno dell'arte generata: a 300 dpi, per ogni lato di ogni esagono, né vuoti
 (pergamena/carta) appena dentro la linea né arte appena fuori (vedi mappa_compone.py --verifica-pdf).
 
+Scala reale: su mappa_base.pdf e carta_base_3d.pdf si misura a 600 dpi il segmento di controllo di 100 mm (errore oltre lo 0,05 %).
+
 Uso: python3 v7/stampa/sorgenti/verifica_pdf.py [cartella_pdf] [--margine MM] [--margine-rifilo MM] [--formato A4|A3]
 Senza cartella: v7/stampa/playtest_v7 (A4) o v7/stampa/playtest_v7_A3 (--formato A3).
 Esce con codice 1 se un PDF non è nel formato atteso, ha font non incorporati, ha inchiostro nella fascia
@@ -81,6 +83,46 @@ def verifica_contorno_arte(pdf):
     errori = [l[len("ERRORE "):] for l in r.stdout.splitlines() if l.startswith("ERRORE ") and "problemi di contorno" not in l]
     if r.returncode not in (0, 1):
         errori.append("verifica del contorno dell'arte non riuscita: " + r.stderr.strip().splitlines()[-1] if r.stderr.strip() else "verifica del contorno dell'arte non riuscita")
+    return errori
+
+
+TACCA = 0.25             # mm: larghezza delle tacche alle estremità del segmento (gen.py, carta_base_3d.py)
+SCALA_TOL = 0.0005        # 0,05 %
+SCALA_MIN, SCALA_MAX = 2300, 2430   # px a 600 dpi (97-103 mm): lunghezza dei tratti candidati al segmento di 100 mm
+
+
+def lunghezza_segmento(png):
+    """lunghezza in mm del segmento di controllo da 100 mm nel PNG a 600 dpi: tratto nero orizzontale o verticale lungo 97-103 mm
+    (con le tacche d'estremità, larghe TACCA mm, che lo allungano di TACCA), bordi a mezza intensità interpolati (~0,01 mm).
+    None se non c'è."""
+    im = np.asarray(Image.open(png).convert("L")).astype(float)
+    for a in (im, im.T):                          # orizzontale, poi verticale
+        buio = a < 110
+        for y in np.nonzero(buio.sum(axis=1) >= SCALA_MIN)[0]:
+            riga = buio[y].astype(np.int8)
+            d = np.diff(np.concatenate(([0], riga, [0])))
+            for s, e in zip(np.nonzero(d == 1)[0], np.nonzero(d == -1)[0]):
+                if SCALA_MIN <= e - s <= SCALA_MAX:
+                    r = a[y]
+                    fl = (255 - r[s - 1]) / 255.0 if s > 0 else 0.0
+                    fr = (255 - r[e]) / 255.0 if e < len(r) else 0.0
+                    return (e - s + fl + fr) / 600 * 25.4 - TACCA
+    return None
+
+
+def verifica_scala(pdf, pagine):
+    """Scala reale (100 mm di controllo misurati a 600 dpi) di mappa_base.pdf e carta_base_3d.pdf: errore oltre lo 0,05 %."""
+    errori = []
+    with tempfile.TemporaryDirectory(prefix="goblin_scala_") as tmp:
+        for n in range(1, pagine + 1):
+            subprocess.run(["pdftoppm", "-r", "600", "-gray", "-f", str(n), "-l", str(n), "-png", str(pdf), f"{tmp}/s{n}"], check=True)
+            f = next(pathlib.Path(tmp).glob(f"s{n}-*.png"))
+            mm = lunghezza_segmento(f)
+            f.unlink()
+            if mm is None:
+                errori.append(f"pag. {n}: segmento di controllo di 100 mm non trovato")
+            elif abs(mm / 100 - 1) > SCALA_TOL:
+                errori.append(f"pag. {n}: scala {mm:.3f} mm per 100 mm ({(mm / 100 - 1) * 100:+.3f} %, limite 0,05 %)")
     return errori
 
 
@@ -191,6 +233,10 @@ def main():
             errori += verifica_fiori(pdf, pagine, testi)
         if pdf.name in ("mappa_base.pdf", "mappa_fiori.pdf") and formato == "A4":
             errori += verifica_contorno_arte(pdf)
+        if pdf.name in ("mappa_base.pdf", "carta_base_3d.pdf") and formato == "A4":
+            errori += verifica_scala(pdf, pagine)
+            if pdf.name == "carta_base_3d.pdf" and pagine != 4:
+                errori.append(f"{pagine} pagine: servono 4 fogli (NO, NE, SO, SE)")
         with tempfile.TemporaryDirectory(prefix="goblin_verifica_") as tmp:
             subprocess.run(["pdftoppm", "-r", str(DPI), "-png", str(pdf), f"{tmp}/p"], check=True)
             minimi = []

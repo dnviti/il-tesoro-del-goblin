@@ -22,8 +22,8 @@ import zlib
 from svg import INK, BROWN, GOLD, PAPER, BRASS, BRASS_L, COPPER, PLATE, cog
 
 # Arte generata (arte/mappa_compone.py): png/MF-<NN><A|B>.png (fiore + abbondanza di 2 mm, 300 ppi, centrato sul fiore) e
-# png/MB-BASE.png (griglia intera 315 × 269,16 mm, 300 ppi, origine nell'angolo in alto a sinistra), png/SG-DOMANDA.png e
-# png/SG-CRIPTA.png (segnalini «?» e Cripta + abbondanza, centrati sul segnalino). Se un png manca si
+# png/MB-BASE.png (griglia intera 315 × 269,16 mm, 300 ppi, origine nell'angolo in alto a sinistra) e png/SG-CRIPTA.png
+# (segnalino Cripta + abbondanza, centrato sul segnalino). Se un png manca si
 # usa il disegno vettoriale. Cartella: variabile GOBLIN_ARTE_MAPPA, oppure gen.py --arte-mappa, altrimenti arte/png.
 ARTE_MAPPA = os.environ.get('GOBLIN_ARTE_MAPPA') or os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'arte', 'png')
 PPM_ARTE = 300 / 25.4
@@ -156,20 +156,6 @@ def icona_partenza(x, y, n):
             f'<path d="M{x + 3.4:.2f} {y - 9.2:.2f} l4 1.3 l-4 1.3 z" fill="{COPPER}"/>'
             f'<circle cx="{x:.2f}" cy="{y:.2f}" r="5.8" fill="{VIOLA}" stroke="#fffaf0" stroke-width="0.7"/>'
             f'<text x="{x:.2f}" y="{y + 2.8:.2f}" text-anchor="middle" font-family="{SANS}" font-weight="bold" font-size="8" fill="#fff">{n}</text>')
-
-
-def segnaposto_domanda(x, y, r=10.0, arte=None):
-    """segnaposto «?» (Ø 20 mm): resta sulla mappa quando la tessera Esplorazione (Ø 24) se ne va (rifornimento).
-    arte: svg di un <image> (vedi immagine_arte, arte/png/SG-DOMANDA.png) al posto del fondo vettoriale; il «?» grande resta
-    vettoriale, nella zona scura a sinistra dell'arte, con il contorno pergamena per il contrasto."""
-    if arte:
-        qx, qy, fs = x - r * 0.42, y - r * 0.1, r * 1.35
-        return (f'{arte}<circle cx="{x:.2f}" cy="{y:.2f}" r="{r - 0.35:.2f}" fill="none" stroke="{BRASS}" stroke-width="0.7"/>'
-                f'<text x="{qx:.2f}" y="{qy + fs * 0.34:.2f}" text-anchor="middle" font-family="{SERIF}" font-weight="bold" font-size="{fs:.2f}" '
-                f'fill="{INK}" stroke="#fffaf0" stroke-width="{fs * 0.12:.2f}" stroke-linejoin="round" paint-order="stroke">?</text>')
-    return (f'<circle cx="{x:.2f}" cy="{y:.2f}" r="{r:.2f}" fill="#fffaf0" stroke="{BRASS}" stroke-width="0.7"/>'
-            f'<circle cx="{x:.2f}" cy="{y:.2f}" r="{r - 1.4:.2f}" fill="none" stroke="{BRASS}" stroke-width="0.25"/>'
-            f'<text x="{x:.2f}" y="{y + r * 0.5:.2f}" text-anchor="middle" font-family="{SERIF}" font-weight="bold" font-size="{r * 1.45:.2f}" fill="{INK}">?</text>')
 
 
 def segnalino_cripta(x, y, arte=None):

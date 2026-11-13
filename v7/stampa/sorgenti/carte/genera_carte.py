@@ -148,6 +148,8 @@ GREP_TESTO = [{"style": "Valore", "pattern": "\\([+\u2011\u2212-]?\\d+\\)"}, {"s
 
 PARA = [
     ("Titolo", {"align": "center"}, {"fontFamily": SERIF, "fontStyle": "Bold", "size": 10.5, "leading": lead(12), "fill": "Inchiostro", "tracking": -5}),
+    # nomi lunghi delle carte (es. TE-22, 30 caratteri) su una riga sola, come NomeNemicoStretto dei Mostri
+    ("TitoloStretto", {"align": "center"}, {"fontFamily": SERIF, "fontStyle": "Bold", "size": 9, "leading": lead(12), "fill": "Inchiostro", "tracking": -10}),
     ("Etichetta", {"align": "left"}, {"fontFamily": SANS, "fontStyle": "SemiBold", "size": 6.5, "leading": lead(7.5), "fill": "Marrone", "tracking": 40}),
     # v7: riga del tipo lunga (direzione · tipo · slot): corpo più piccolo, senza spaziatura
     ("EtichettaStretta", {"align": "left"}, {"fontFamily": SANS, "fontStyle": "SemiBold", "size": 5.2, "leading": lead(7.5), "fill": "Marrone"}),
@@ -162,7 +164,7 @@ PARA = [
      {"fontFamily": SERIF, "fontStyle": "Italic", "size": 7.8, "leading": lead(9.3), "fill": "Inchiostro"}),
     ("TestoCentro", {"align": "center", "hyphenate": False}, {"fontFamily": SERIF, "fontStyle": "Regular", "size": 10.5, "leading": lead(13.5), "fill": "Inchiostro"}),
     ("Classi", {"align": "center"}, {"fontFamily": SERIF, "fontStyle": "Italic", "size": 7, "leading": lead(8), "fill": "Marrone"}),
-    # v7: riga in fondo alla Carta Classe «Mazzetto: 6 delle 10 carte di classe · Mano: 3 + 3» (Spec R 13.1)
+    # v7: riga in fondo alla Carta Classe «Mano: 5 delle 20 carte di classe · le altre: pila di classe» (D27, Spec R 13.1)
     ("ClassiPiccolo", {"align": "center"}, {"fontFamily": SERIF, "fontStyle": "Italic", "size": 6.5, "leading": lead(8), "fill": "Marrone"}),
     ("Piede", {"align": "left"}, {"fontFamily": SANS, "fontStyle": "Regular", "size": 6, "leading": lead(7), "fill": "Marrone"}),
     ("Nota", {"align": "left", "hyphenate": False}, {"fontFamily": SANS, "fontStyle": "Regular", "size": 7.6, "leading": lead(9), "fill": "Marrone"}),
@@ -193,12 +195,16 @@ PARA = [
     # aiuto
     ("PassoNum", {"align": "center"}, {"fontFamily": SERIF, "fontStyle": "Bold", "size": 9, "leading": lead(10), "fill": "Carta"}),
     ("PassoNome", {"align": "left"}, {"fontFamily": SANS, "fontStyle": "Bold", "size": 8.5, "leading": lead(9.5), "fill": "Rosso"}),
-    ("PassoTesto", {"align": "left", "hyphenate": False}, {"fontFamily": SANS, "fontStyle": "Regular", "size": 8.3, "leading": lead(9.6), "fill": "Inchiostro"}),
-    ("PassoRiquadro", {"align": "left", "hyphenate": False, "grepStyles": [{"style": "Grassetto", "pattern": "(Carte|Equipaggiamenti|Mano):"}]},
-     {"fontFamily": SANS, "fontStyle": "Regular", "size": 8.3, "leading": lead(9.6), "fill": "Inchiostro"}),
+    # testo dei passi e del riquadro: 7,4 pt (era 8,3 fino al 12/11) perché sotto entrino gli Stati (D27)
+    ("PassoTesto", {"align": "left", "hyphenate": False}, {"fontFamily": SANS, "fontStyle": "Regular", "size": 7.4, "leading": lead(8.6), "fill": "Inchiostro"}),
+    ("PassoRiquadro", {"align": "left", "hyphenate": False, "grepStyles": [{"style": "Grassetto", "pattern": "(Carte|Equipaggiamenti|Mano|Primo giro):"}]},
+     {"fontFamily": SANS, "fontStyle": "Regular", "size": 7.4, "leading": lead(8.6), "fill": "Inchiostro"}),
     ("RiepTitolo", {"align": "center"}, {"fontFamily": SERIF, "fontStyle": "Bold", "size": 8.5, "leading": lead(9.5), "fill": "Inchiostro"}),
     ("RiepSez", {"align": "left", "spaceBefore": 1.6}, {"fontFamily": SANS, "fontStyle": "Bold", "size": 6.4, "leading": lead(7), "fill": "Rosso", "tracking": 40}),
     ("RiepRiga", {"align": "left", "hyphenate": False}, {"fontFamily": SANS, "fontStyle": "Regular", "size": 6.1, "leading": lead(6.8), "fill": "Inchiostro"}),
+    # Stati sulla carta «Il turno» (D27: le tessere portano solo nome, icona e segno): nome e segno in grassetto
+    ("StatoRiga", {"align": "left", "hyphenate": False, "grepStyles": [{"style": "Grassetto", "pattern": "^\\S+ \\([+\u2212]\\)"}]},
+     {"fontFamily": SANS, "fontStyle": "Regular", "size": 6.1, "leading": lead(6.8), "fill": "Inchiostro"}),
     # divisori e dorsi
     ("DivCodice", {"align": "center"}, {"fontFamily": SERIF, "fontStyle": "Bold", "size": 40, "leading": lead(42), "fill": "Carta"}),
     ("DivTitolo", {"align": "center", "hyphenate": False}, {"fontFamily": SERIF, "fontStyle": "Bold", "size": 12.5, "leading": lead(14), "fill": "Carta", "tracking": 20}),
@@ -633,7 +639,8 @@ def carta_trama(d, sp, ox, oy, r, mazzo=None):
     col = TIPO_COLORE[tipo]
     cornice(d, sp, ox, oy, col)
     barra(d, sp, ox, oy, *NOME_Y, col)
-    d.testo(sp, L(ox, oy, TX, NOME_Y[0], CW - TX, NOME_Y[1]), tipografico(r["nome"]), "Titolo", vj="center")
+    nome = tipografico(r["nome"])
+    d.testo(sp, L(ox, oy, TX, NOME_Y[0], CW - TX, NOME_Y[1]), nome, "Titolo" if in_una_riga(nome, "Titolo", CW - 2 * TX) else "TitoloStretto", vj="center")
     x0, y0, x1, y1 = finestra_arte(d, sp, ox, oy, r, ARTE_Y0, "carta", col, tipo)
     if r.get("etichetta"):
         etichetta(d, sp, ox, oy, r, (x0 + 3, y0 + 2.5, x1 - 3, y0 + 10.5), r["etichetta"], "Provvisorio")
@@ -784,28 +791,51 @@ def carta_imprevisto(d, sp, ox, oy, r):
     d.testo(sp, L(ox, oy, TX + 1, y_tipo + TIPO_GAP, CW - TX - 1, y_testo), tipografico(testo), "TestoCentro", vj="center")
 
 
+def righe_testo(t, stile, larghezza):
+    """Righe che il testo t occupa nello stile di paragrafo `stile` in un riquadro largo `larghezza` pt: a capo tra le
+    parole, con le misure (e il margine) di in_una_riga."""
+    n, riga = 1, ""
+    for parola in t.split():
+        prova = f"{riga} {parola}" if riga else parola
+        if riga and not in_una_riga(prova, stile, larghezza):
+            n, riga = n + 1, parola
+        else:
+            riga = prova
+    return n
+
+
 def carta_aiuto_turno(d, sp, ox, oy, r):
-    """Carta Aiuto «Il turno» (Spec v7 §4.0): Inizio (pesca), i 3 passi numerati e il riquadro senza numero su quando
-    si giocano le carte. Altezza di ogni riga in pt: nome 10, poi 2 righe di testo (3 per la Fine)."""
+    """Carta Aiuto «Il turno» (Spec v7 §4.0; D27: niente pesca, il turno comincia da Muovi): i 3 passi numerati, il
+    riquadro senza numero su quando si giocano le carte e, in fondo, gli Stati (R 9.1): la regola del verso e l'effetto di
+    ognuno da stati.csv, prima quelli che aiutano (+), perché le tessere Stato portano solo nome, icona e segno. Le altezze
+    di passi e riquadro vengono dalle righe misurate (righe_testo); gli Stati prendono lo spazio che resta."""
     cornice(d, sp, ox, oy, "Oro")
-    d.testo(sp, L(ox, oy, 13, 13, CW - 13, 31), r["fronte_titolo"], "Titolo", vj="center")
-    filetto_ornato(d, sp, ox + 14, ox + CW - 14, oy + 33, "Oro", 0.6)
-    righe = [("•", "inizio", 31), ("1", "passo1", 31), ("2", "passo2", 31), ("3", "passo3", 41)]
-    y = 36
-    for num, campo, h in righe:
+    d.testo(sp, L(ox, oy, 13, 11, CW - 13, 25), r["fronte_titolo"], "Titolo", vj="center")
+    filetto_ornato(d, sp, ox + 14, ox + CW - 14, oy + 27, "Oro", 0.6)
+    passo = stile_car("PassoTesto")["leading"]["value"]
+    y = 29
+    for num in "123":
+        testo = tipografico(r[f"passo{num}_testo"])
+        h = 9.5 + righe_testo(testo, "PassoTesto", CW - 14 - 34) * passo
         d.rett(sp, L(ox, oy, 15, y + 1, 29, y + 15), fill="Oro", forma="ellipse")
         d.testo(sp, L(ox, oy, 15, y + 1, 29, y + 15), num, "PassoNum", vj="center")
-        d.testo(sp, L(ox, oy, 34, y + 1, CW - 14, y + 11), r[f"{campo}_nome"], "PassoNome")
-        d.testo(sp, L(ox, oy, 34, y + 10.5, CW - 14, y + h), tipografico(r[f"{campo}_testo"]), "PassoTesto")
-        y += h
+        d.testo(sp, L(ox, oy, 34, y + 0.5, CW - 14, y + 10.5), r[f"passo{num}_nome"], "PassoNome")
+        d.testo(sp, L(ox, oy, 34, y + 9.5, CW - 14, y + h + 1.5), testo, "PassoTesto")
+        y += h + 1
     # riquadro senza numero: quando si giocano le carte (non è un passo)
-    d.rett(sp, L(ox, oy, 14, y + 1, CW - 14, CH - 21), fill="Oro", tint=0.14, raggio=2)
-    d.testo(sp, L(ox, oy, 18, y + 3, CW - 18, CH - 23), tipografico(r["riquadro_carte"]), "PassoRiquadro", vj="center")
-    d.testo(sp, L(ox, oy, 110, CH - 19, CW - 14, CH - 11.5), r["id"], "Codice")
+    testo = tipografico(r["riquadro_carte"])
+    h = righe_testo(testo, "PassoRiquadro", CW - 32) * stile_car("PassoRiquadro")["leading"]["value"] + 3.5
+    d.rett(sp, L(ox, oy, 13, y + 1, CW - 13, y + 1 + h), fill="Oro", tint=0.14, raggio=2)
+    d.testo(sp, L(ox, oy, 16, y + 1.5, CW - 16, y + h + 0.5), testo, "PassoRiquadro", vj="center")
+    stati = sorted(leggi("stati.csv"), key=lambda s: s["segno"] != "+")
+    par = [(r["stati_nome"].upper(), "RiepSez"), (tipografico(r["stati_testo"]), "RiepRiga")]
+    par += [(f"{s['nome']} ({s['segno']}) {tipografico(s['testo'])}", "StatoRiga") for s in stati]
+    d.testo(sp, L(ox, oy, 14, y + h + 1.5, CW - 14, CH - 17.5), "", "RiepRiga", paragrafi=par)
+    d.testo(sp, L(ox, oy, 110, CH - 17.5, CW - 14, CH - 10.5), r["id"], "Codice")
 
 
-RIEPILOGO = [("Scontro", "retro_scontro"), ("Ricompense", "retro_ricompense"), ("Tessere «?»", "retro_tessere"),
-             ("Sconfitta (0 PV)", "retro_sconfitta"), ("Mano", "retro_mano"), ("Vittoria", "retro_vittoria")]
+RIEPILOGO = [("Scontro", "retro_scontro"), ("Ricompense", "retro_ricompense"), ("Tessere Esplorazione", "retro_tessere"),
+             ("Sconfitta (Danni = PV)", "retro_sconfitta"), ("Mano", "retro_mano"), ("Vittoria", "retro_vittoria")]
 
 
 def carta_aiuto_riepilogo(d, sp, ox, oy, r):

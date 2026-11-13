@@ -152,7 +152,7 @@
 <line x1="24.00" y1="218.30" x2="186.00" y2="218.30" stroke="#999999" stroke-width="0.1"/>
 <text x="24.00" y="222.20" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="start" >mappa_base.pdf (base 12×12 in 2 metà da unire)</text><text x="186.00" y="222.20" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="end" >2</text>
 <line x1="24.00" y1="223.50" x2="186.00" y2="223.50" stroke="#999999" stroke-width="0.1"/>
-<text x="24.00" y="227.40" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="start" >mappa_fiori.pdf (14 fiori, 24 «?», Cripta: 3 fogli fronte/retro)</text><text x="186.00" y="227.40" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="end" >3</text>
+<text x="24.00" y="227.40" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="start" >mappa_fiori.pdf (14 fiori, Cripta: 3 fogli fronte/retro)</text><text x="186.00" y="227.40" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="end" >3</text>
 <line x1="24.00" y1="228.70" x2="186.00" y2="228.70" stroke="#999999" stroke-width="0.1"/>
 <text x="24.00" y="232.60" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="start" >mappa_preset.pdf (10 schemi, carta comune)</text><text x="186.00" y="232.60" font-family="Liberation Sans Narrow" font-size="3.20" fill="#000000" text-anchor="end" >10</text>
 <line x1="24.00" y1="233.90" x2="186.00" y2="233.90" stroke="#999999" stroke-width="0.1"/>

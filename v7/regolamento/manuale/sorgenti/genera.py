@@ -338,8 +338,8 @@ def tf(spread, x0, y0, x1, blocks, acc, label, icons=None, cols=None, extra=0, v
         cmd('text.thread', {"from": "$%d.id" % f, "rect": thread, "spread": spread})
     return y0 + h
 
-AGREED = {'S1-tavolo': (515, 265), 'S2-turno': (250, 250), 'S3-mappa': (515, 235), 'S4-scontro': (515, 170),
-          'S5-indizio': (250, 130), 'S6-catena': (515, 280), 'S7-perdita': (515, 220)}
+AGREED = {'S1-tavolo': (515, 265), 'S2-turno': (250, 195), 'S3-mappa': (515, 235), 'S4-scontro': (515, 170),
+          'S5-indizio': (250, 195), 'S6-catena': (515, 280), 'S7-perdita': (515, 220)}
 def svg_size(sid, default):
     return AGREED[sid]
 def page_title(p):
@@ -388,13 +388,12 @@ def page2():
     s1w, s1h = svg_size('S1-tavolo', (515, 300))
     prep = [b for b in section(2, 'Preparazione') if b[0] in ('h3', 'ol')]
     y1 = tf(s, C1[0], TOP, C1[1], prep, 'Oro', 'p2-preparazione', icons={'Preparazione': 'esagono'})
-    s2w, s2h = svg_size('S2-turno', (250, 250))
+    s2w, s2h = svg_size('S2-turno', (250, 185))
     schema(s, 'S2-turno', [C2[0], TOP + 4, C2[0] + s2w, TOP + 4 + s2h])
-    turno = [b for b in TXT[2] if b[0] == 'p' and b[1].startswith('⟪Il turno')]
-    y2 = tf(s, C2[0], TOP + 4 + s2h + 6, C2[1], turno, 'Oro', 'p2-turno') if turno else TOP + 4 + s2h
-    tab = first(2, 'table')[1]
-    trans = [list(r) for r in zip(*tab)]
-    yt = tf(s, L, max(y1, y2) + 2, R, [('table', trans)], 'Oro', 'p2-rotelle', cols=[70] + [89.056] * 5)
+    tabs = {b[1][0][0]: b[1] for b in TXT[2] if b[0] == 'table'}
+    y2 = tf(s, C2[0], TOP + 4 + s2h + 6, C2[1], [('table', tabs['Classe'])], 'Oro', 'p2-mano-pronta', cols=[82, 168])
+    trans = [list(r) for r in zip(*tabs['Rotella'])]
+    yt = tf(s, L, max(y1, y2) + 2, R, [('table', trans)], 'Oro', 'p2-rotelle', cols=[70] + [(R - L - 70) / 6] * 6)
     schema(s, "S1-tavolo", [L, yt + 4, L + s1w, yt + 4 + s1h])
 
 def page3():
@@ -413,34 +412,27 @@ def page3():
     y = max(y1, y2) + 2
     s4y = BOT - s4h
     hs = hgt('p3-scontro')
-    ys = tf(s, C1[0], max(y, s4y - 6 - hs + 9), C1[1], strip_markers(section(3, 'Lo scontro')), 'Rosso', 'p3-scontro', icons={'Lo scontro': 'mostro'})
-    s4y = max(ys + 6, s4y)
-    ch = min(s4y - 8 - (y2 + 6), 250 / 1.5)
-    if ch >= 100:
-        cw = ch * 1.5
-        cx = (C2[0] + C2[1]) / 2
-        illus(s, 'combattimento', [cx - cw / 2, y2 + 6, cx + cw / 2, y2 + 6 + ch])
+    sc = strip_markers(section(3, 'Lo scontro'))
+    ys = tf(s, C1[0], max(y, s4y - 6 - hs + 9), C1[1], [b for b in sc if b[0] != 'ul'], 'Rosso', 'p3-scontro', icons={'Lo scontro': 'mostro'})
+    # ritiri e Forte Volontà nella colonna destra, allineati in basso con «Lo scontro»
+    yr = tf(s, C2[0], max(y2 + 4, ys - hgt('p3-ritiri')), C2[1], [b for b in sc if b[0] == 'ul'], 'Rosso', 'p3-ritiri')
+    s4y = max(ys + 6, yr + 6, s4y)
     schema(s, 'S4-scontro', [L, s4y, L + s4w, s4y + s4h])
 
 def page4():
     s = 3
     banner(s, page_title(4), 'Blu')
-    s5w, s5h = svg_size('S5-indizio', (250, 130))
-    schema(s, 'S5-indizio', [C2[1] - s5w, TOP, C2[1], TOP + s5h])
-    flow = strip_markers(section(4, 'Hai vinto lo scontro?')) + strip_markers(section(4, 'Le carte'))
-    tot = hgt('p4-flusso')
-    ytop = TOP - 9
-    right0 = TOP + s5h + 10
-    yb = (ytop + tot + right0) / 2 + 10      # both columns end here
-    tf(s, C1[0], TOP, C1[1], flow, 'Blu', 'p4-flusso', icons={'Hai vinto lo scontro?': 'indizio', 'Le carte': 'carta'},
-       h=yb - ytop, thread=[C2[0], right0, C2[1], yb])
+    s5w, s5h = svg_size('S5-indizio', (250, 200))
+    schema(s, 'S5-indizio', [C2[0], TOP, C2[0] + s5w, TOP + s5h])
+    flow = strip_markers(section(4, 'Le carte'))
+    yf = tf(s, C1[0], TOP, C1[1], flow, 'Blu', 'p4-flusso', icons={'Le carte': 'carta'})
     s6w, s6h = svg_size('S6-catena', (515, 280))
-    y = yb + 4
+    y = max(yf, TOP + s5h) + 4
     schema(s, 'S6-catena', [L, y, L + s6w, y + s6h])
     y += s6h + 12
-    mr = strip_markers(section(4, 'Mano, ritiri, Stati'))
+    mr = strip_markers(section(4, 'Mano e Stati'))
     ul = mr[1][1]
-    tf(s, C1[0], y, C1[1], [mr[0], ('ul', ul[:3])], 'Blu', 'p4-mano-1', icons={'Mano, ritiri, Stati': 'mano10'})
+    tf(s, C1[0], y, C1[1], [mr[0], ('ul', ul[:3])], 'Blu', 'p4-mano-1', icons={'Mano e Stati': 'mano10'})
     tf(s, C2[0], y + 22, C2[1], [('ul', ul[3:])], 'Blu', 'p4-mano-2')
 
 def page5():

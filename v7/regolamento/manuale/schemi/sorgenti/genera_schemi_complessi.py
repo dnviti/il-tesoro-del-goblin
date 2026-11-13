@@ -165,8 +165,8 @@ def s3():
     def ctr(row, col):
         return (x0 + w / 2 + col * w + (w / 2 if row == 1 else 0), y0 + r + row * 1.5 * r)
     grid = [[('Partenza 1', 'start'), ('Prato', 'prato'), ('Bosco', 'wood'), ('Rocce', 'rock'), ('Prato', 'prato')],
-            [('Mattonato', 'matt'), ('Acqua', 'water'), ('Prato', 'prato'), ('?', 'red'), ('Ponte', 'bridge')],
-            [('Case', 'house'), ('Prato', 'prato'), ('?', 'covered'), ('Mattonato', 'matt'), ('Acqua', 'water')]]
+            [('Mattonato', 'matt'), ('Acqua', 'water'), ('Prato', 'prato'), ('Prato', 'red'), ('Ponte', 'bridge')],
+            [('Case', 'house'), ('Prato', 'prato'), ('Prato', 'covered'), ('Mattonato', 'matt'), ('Acqua', 'water')]]
     FILL = {'start': '#e8cf9a', 'prato': '#c7df8c', 'matt': '#e8cf9a', 'wood': '#3f6f3a', 'rock': '#bdb6ab', 'water': '#a6d0e2',
             'bridge': '#a6d0e2', 'house': '#dcb08f', 'red': '#c7df8c', 'covered': '#c7df8c'}
     hexes = []; glyphs = []; labels = []
@@ -230,7 +230,7 @@ def s3():
             if (ri, ci) == (1, 1): ly = cy + 19
             if kind in ('wood', 'rock', 'house', 'water', 'bridge'): ly = cy + 19
             col_ = '#f4f0e0' if kind == 'wood' else INK
-            labels.append(T(cx + ldx, ly, '«?»' if lab == '?' else lab, 10 if lab == '?' else 9.5, 700 if lab == '?' else 500, fill=col_))
+            labels.append(T(cx + ldx, ly, lab, 9.5, 500, fill=col_))
     c = {k: ctr(*v) for k, v in {1: (0, 1), 2: (1, 1), 3: (1, 1), 4: (2, 2)}.items()}
     cp = {1: (c[1][0] + 2, c[1][1] + 2), 2: (c[2][0] - 8, c[2][1] - 6), 3: (c[3][0] + 12, c[3][1] - 6), 4: (c[4][0] - 14, c[4][1] - 8)}
     start = ctr(0, 0); m = ctr(1, 3); ponte = ctr(1, 4)
@@ -611,22 +611,18 @@ def s1_left():
         o.append(rotella(cxr, sy0 + 25, 7.5, None, win=False))
         o.append(TL(cxr, sy0 + 42, lines, 9, lh=9.2, weight=500))
     ry = sy0 + 78
-    o.append(icon('ic_tesoro', sx0 + 13, ry, 22) + T(sx0 + 13, ry + 19, 'MIMI', 9, 700))
-    cx_, cy_ = sx0 + 43, ry
+    o.append(icon('ic_tesoro', sx0 + 28, ry, 22) + T(sx0 + 28, ry + 19, 'MIMI', 9, 700))
+    cx_, cy_ = sx0 + 82, ry
     o.append(P(ell(cx_, cy_ + 1, 6.5, 7, amp=.2, n=12), True, INK, 'none'))
     for sx in (-1, 1):
         o.append(P(wob(C((cx_ + sx * 4, cy_ - 3), (cx_ + sx * 9, cy_ - 9), (cx_ + sx * 7.5, cy_ - 1.5)), .1, 10), True, INK, 'none'))
         o.append(P(ell(cx_ + sx * 2.8, cy_ + .5, 1.4, amp=0, n=6), True, GOLDL, 'none'))
     o.append(P(wob(C((cx_ - 3, cy_ + 7), (cx_ + 3, cy_ + 7), (cx_ + 8, cy_ + 13), (cx_ - 8, cy_ + 13)), .1, 10), True, INK, 'none'))
     o.append(TL(cx_, ry + 19, ['Custode', 'di MIMI'], 9, lh=9.2, weight=700))
-    qx = sx0 + 85
-    for k in range(2):
-        o.append(P(rr(qx - 11 + k * 13, ry - 7, 9, 9, 1.5, .1, 12), True, GOLDL, BRASS, 1.2))
-    o.append(TL(qx, ry + 10, ['Spostamenti', 'del tesoro'], 9, lh=9.2, weight=500))
     # cartellini
     o.append(P(rr(22, 160, 120, 85, 5, .25, 14), True, GOLDL, BRASS, 1.3))
     lines = [('Fiori a testa: 7 · 4 · 3', 700), ('(con 2 · 3 · 4 giocatori)', 500),
-             ('«?» a testa: 12 · 8 · 6', 700), ('ad almeno 2 esagoni', 500), ('da ogni Partenza', 500),
+             ('Tessere a testa: 12 · 8 · 6', 700), ('ad almeno 2 esagoni', 500), ('da ogni Partenza', 500),
              ('Avanzano 2 fiori:', 700), ('ultimo e penultimo', 500), ('Faccia e verso liberi', 700)]
     for s_, wt in lines: pass
     for (s_, wt), yy in zip(lines, (170, 179, 190, 199, 208, 219, 228, 238)):
@@ -665,22 +661,26 @@ def s1_right():
     o.append(T(117, 27, 'Infilale negli angoli', 9.5, 700))
     o.append(mini_arrow(76, 22, 58, 22) + mini_arrow(158, 22, 176, 22))
     o.append(rotella(14, 54, 8, win=False))
-    o.append(TL(26, 51, ['Rotella della Profezia', '(solo Oracolo)'], 9, lh=9.8, anchor='start', weight=500))
+    o.append(TL(26, 45, ['Rotella della', 'Profezia', '(solo Oracolo)'], 9, lh=9.4, anchor='start', weight=500))
     for i in range(3):
-        o.append(P(ell(116 + i * 12, 50, 5, amp=.1, n=10), True, GOLDL, BRASS, 1.3) + P(ell(116 + i * 12, 50, 1.8, amp=0, n=6), True, BRASS, 'none'))
-    o.append(T(128, 66, 'Indizi', 9, 700))
-    o.append(P(ell(172, 50, 6, amp=.1, n=10), True, VIOLET, INK, 1.3) + P(ell(172, 50, 2.2, amp=0, n=6), True, PAPER, 'none'))
-    o.append(T(172, 66, 'Forte Volontà', 9, 700))
-    o.append(P(rr(203, 40, 26, 34, 4, .2, 12), True, PARCH, INK, 1.3))
-    o.append(T(216, 49, 'Stati', 9, 700))
-    o.append(tile_stato(209, 62, 7, 13, 0, BLUE) + tile_stato(222, 63, 7, 13, 90, COPPER))
+        o.append(P(ell(92 + i * 12, 50, 5, amp=.1, n=10), True, GOLDL, BRASS, 1.3) + P(ell(92 + i * 12, 50, 1.8, amp=0, n=6), True, BRASS, 'none'))
+    o.append(T(104, 66, 'Indizi', 9, 700))
+    o.append(P(ell(144, 50, 6, amp=.1, n=10), True, VIOLET, INK, 1.3) + P(ell(144, 50, 2.2, amp=0, n=6), True, PAPER, 'none'))
+    o.append(T(144, 66, 'Forte Volontà', 9, 700))
+    # Stati: verticale (preso nel turno di un altro) e orizzontale (preso nel tuo turno)
+    o.append(P(rr(171, 38, 59.5, 40, 4, .2, 12), True, PARCH, INK, 1.3))
+    o.append(T(200.75, 47, 'Stati', 9, 700))
+    o.append(tile_stato(178, 57, 6.5, 12, 0, BLUE) + T(185, 60.5, 'verticale', 9, 500, 'start'))
+    o.append(tile_stato(178.5, 70.5, 6.5, 12, 90, COPPER) + T(186.5, 74, 'orizzontale', 9, 500, 'start'))
     o.append(T(117, 85, 'Le statistiche stanno solo sulle rotelle · valori di partenza', 9, 700))
-    vals = [('PV', 5), ('PV max', 5), ('ATT', 1), ('MOV', 1), ('AR', 9), ('PL', 0)]
+    # D30: PV (5–13) e Danni (0–13), una rotella ciascuno
+    vals = [('PV', 5), ('Danni', 0), ('ATT', 1), ('MOV', 1), ('AR', 9), ('PL', 0)]
     for i, (nm, v) in enumerate(vals):
         cx = 24 + i * 37.5
         o.append(rotella(cx, 105, 12, v))
         o.append(T(cx, 126, nm, 9.5, 700))
-    o.append(T(62, 136, 'da 5 a 13', 9, 500))
+    o.append(T(24, 136, 'da 5 a 13', 9, 500))
+    o.append(T(61.5, 136, 'da 0 a 13', 9, 500))
     o.append(TL(227, 136, ['somma dei PL degli', 'Equipaggiamenti'], 9, lh=9.2, anchor='end', weight=500))
     o.append(T(117, 155, 'Bonus di Incanti, Stati e Mappe: non girano le rotelle', 9, 500))
     specs = [(['elmo'], ['Elmo']), (['spada', 'scudo'], ['Arma DX /', 'Scudo']), (['spada'], ['Arma SX']), (['armatura'], ['Armatura'])]

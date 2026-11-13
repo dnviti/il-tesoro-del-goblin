@@ -24,8 +24,8 @@ che somigli al terreno dei dati (vedi SOGLIE e verifica_esagono()). Non scrive n
 Uso (da qualsiasi cartella):
   python3 mappa_compone.py                         compone tutto ciò che c'è in grezze/ (MF-* e MB-*)
   python3 mappa_compone.py MF-03A MB-NO ...        solo questi id (per la base servono tutti e 4 i quarti)
-  SG-DOMANDA, SG-CRIPTA: segnalini «?» (cerchio Ø 20 mm) e Cripta (esagono 25,2 mm), grezze 1254², ritaglio + abbondanza di 2 mm
-  riflessa -> png/SG-DOMANDA.png (284 x 284 px) e png/SG-CRIPTA.png (345 x 399 px); nessuna verifica dei terreni
+  SG-CRIPTA: segnalino Cripta (esagono 25,2 mm), grezza 1254², ritaglio + abbondanza di 2 mm riflessa -> png/SG-CRIPTA.png
+  (345 x 399 px); nessuna verifica dei terreni (i segnaposto «?» non ci sono più, D29)
   python3 mappa_compone.py --verifica [id ...]     controlla i terreni (senza comporre); --report FILE.csv scrive ogni esagono
   Opzioni: --grezze DIR, --uscita DIR (default png/), --guide DIR, --senza-look, --soglia nome=valore (vedi SOGLIE)
 """
@@ -418,14 +418,13 @@ def centri_base_guida(q, hx):
     return ((cx - x0) * M.BASE_PX_MM, (cy - y0) * M.BASE_PX_MM)
 
 
-# ------------------------------------------------------------------ segnalini «?» (cerchio Ø 20 mm) e Cripta (esagono 25,2 mm)
-# grezze/SG-DOMANDA.webp e SG-CRIPTA.webp (1254²): centro e px/mm misurati sul bordo dell'arte (bbox dei pixel non pergamena).
+# ------------------------------------------------------------------ segnalino Cripta (esagono 25,2 mm)
+# grezze/SG-CRIPTA.webp (1254²): centro e px/mm misurati sul bordo dell'arte (bbox dei pixel non pergamena).
 # Stati: quadrato 30 mm = tutta la grezza (l'illustrazione si vede intera, il kit la riduce a ~8 mm).
 # Segnalini e tessere (grezze 1254²). forma: cerchio/esagono = arte che riempie la forma (bordo scuro scartato, abbondanza
 # riflessa, `raggio` mm e `abb` mm); quadro = oggetto su pergamena: la grezza è ridimensionata a `lato_mm` e centrata su un
 # rettangolo `out_mm` (w, h) con pergamena riflessa intorno (il kit la taglia sulla forma).
-SEGNALI = {"SG-DOMANDA": {"forma": "cerchio", "centro": (625.0, 626.0), "px_mm": 1234 / 20.0, "raggio": 10.0, "abb": M.ABB},
-           "SG-CRIPTA": {"forma": "esagono", "centro": (627.0, 628.5), "px_mm": 42.1, "abb": M.ABB},
+SEGNALI = {"SG-CRIPTA": {"forma": "esagono", "centro": (627.0, 628.5), "px_mm": 42.1, "abb": M.ABB},
            "TX-ROSSA": {"forma": "cerchio", "centro": (627.0, 627.0), "px_mm": 1205 / 24.0, "raggio": 12.0, "abb": 3.0},
            "TX-BLU": {"forma": "cerchio", "centro": (627.0, 627.0), "px_mm": 1205 / 24.0, "raggio": 12.0, "abb": 3.0},
            "TX-RETRO": {"forma": "cerchio", "centro": (624.5, 623.5), "px_mm": 1213 / 24.0, "raggio": 12.0, "abb": 3.0}}
@@ -668,23 +667,6 @@ def controlla_esagono(img, cx, cy, vicino_vuoto, nome, errori, abb=0.0, sbordo_c
                     errori.append(f"{nome} lato {k}: {f:.0%} di arte fuori dal contorno")
 
 
-def controlla_cerchio(img, cx, cy, r, nome, errori, abb=M.ABB):
-    """segnalino tondo: anello 0,3-1,0 mm dentro il bordo senza vuoti, anello oltre l'abbondanza senza arte."""
-    h, w = img.shape[:2]
-
-    def anello(d0, d1):
-        pts_ = [(int(round((cx + d * math.cos(a)) * PPM300)), int(round((cy + d * math.sin(a)) * PPM300)))
-                for d in np.arange(d0, d1, 0.1) for a in np.radians(np.arange(0, 360, 4))]
-        pts_ = [p for p in pts_ if 0 <= p[0] < w and 0 <= p[1] < h]
-        return np.array([img[y, x] for x, y in pts_])
-    f = vicino(anello(r - 1.0, r - 0.3), GAP_COLORI, GAP_TOL).mean()
-    if f > GAP_FRAZIONE:
-        errori.append(f"{nome}: {f:.0%} di vuoto dentro il bordo")
-    f = 1 - vicino(anello(r + abb + 0.5, r + abb + 1.2), ((255, 255, 255),), GAP_TOL).mean()
-    if f > SBORDO_FRAZIONE:
-        errori.append(f"{nome}: {f:.0%} di arte fuori dal bordo")
-
-
 def verifica_pdf_mappa(pdf, fiori, terr):
     """controlla mappa_base.pdf, mappa_fiori.pdf o carta_fiori_3d.pdf; ritorna la lista degli errori."""
     import tempfile
@@ -750,11 +732,9 @@ def verifica_pdf_mappa(pdf, fiori, terr):
                             return not any(abs(c[0] - nc[0]) < 1 and abs(c[1] - nc[1]) < 1 for c in centri)
                         controlla_esagono(pagine[n], hx_, hy_, vuoto, f"{pdf.name} pag.{n} fiore {i}{lato} pos {p}", errori,
                                           abb=0.0 if tre_d else M.ABB, sbordo_colori=((255, 255, 255),))
-            if not tre_d:       # segnalini «?» e Cripta (foglio 3, pagine 5 e 6)
+            if not tre_d:       # segnalino Cripta (foglio 3, pagine 5 e 6; D29: niente più segnaposto «?»)
                 for n in (5, 6):
                     sx = (lambda x: x) if n == 5 else (lambda x: 210 - x)
-                    for j in range(24):
-                        controlla_cerchio(pagine[n], sx(19.5 + 28.5 * (j % 7)), 116.0 + 26.0 * (j // 7), 10.0, f"{pdf.name} pag.{n} segnaposto «?» {j + 1}", errori)
                     controlla_esagono(pagine[n], sx(147.0), 194.0, lambda ang: True, f"{pdf.name} pag.{n} Cripta", errori,
                                       abb=M.ABB, sbordo_colori=((255, 255, 255),))
     return errori
