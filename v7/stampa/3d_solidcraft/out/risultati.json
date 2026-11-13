@@ -22,14 +22,16 @@
   "corona_r": 20.0,
   "rotella_spessore": 2.0,
   "mozzo_r": 6.25,
-  "foro_perno": 3.8,
-  "perno_d": 3.4,
-  "collo_d": 2.9,
+  "foro_rotella": 6.4,
   "testa_d": 10.0,
-  "testa_h": 0.8,
+  "testa_h": 2.0,
+  "gambo_d": 3.0,
+  "costola": 0.25,
+  "foro_femmina": 3.2,
+  "manica_d": 6.0,
+  "fondo_femmina": 0.6,
   "carta_plancia": 0.3,
-  "fermo_d": 12.0,
-  "fermo_h": 1.2,
+  "carta_min": 0.1,
   "gioco_assiale": 0.15,
   "smusso": 0.4,
   "raggio_angolo": 3.0,
@@ -217,35 +219,35 @@
    "faccia_in_su_piu_bassa_mm": 2.0,
    "ok": true
   },
-  "rotella_finestra_11x9": {
-   "volume_atteso_mm3": 3993.249,
-   "volume_mm3": 3993.249,
-   "errore_volume_rel": 1.0364176812498591e-07,
-   "massa_pla_g": 4.95,
+  "rotella_tacca_11x9": {
+   "volume_atteso_mm3": 3928.68,
+   "volume_mm3": 3928.68,
+   "errore_volume_rel": 9.679073837038806e-08,
+   "massa_pla_g": 4.87,
    "ingombro_atteso_mm": [
     52.0,
-    52.0,
+    51.3562,
     2.0
    ],
    "ingombro_mm": [
     52.0,
-    52.0,
+    51.3562,
     2.0
    ],
    "avvisi": [],
    "file": {
-    "triangoli": 1288,
+    "triangoli": 1958,
     "bordi_non_manifold": 0,
-    "volume_mm3": 3991.68,
+    "volume_mm3": 3927.76,
     "ingombro_mm": [
      52.0,
-     52.0,
+     51.345,
      2.0
     ],
     "3mf": {
      "unita": "millimeter",
      "oggetti_mesh": 1,
-     "triangoli": 1288
+     "triangoli": 1958
     }
    },
    "carta": {
@@ -264,19 +266,21 @@
      11,
      9
     ],
-    "finestra_plastica_mm": [
-     11.5,
-     9.5
+    "tacca_plastica_larga_mm": 11.5,
+    "tacca_dal_centro_mm": [
+     15.25,
+     26.0
     ],
+    "intaglio_adesivo_dal_centro_mm": 15.5,
     "foro_adesivo_mm": 13.0,
-    "foro_perno_mm": 3.8,
+    "foro_rotella_mm": 6.4,
     "sopra_liscio": true,
     "faccia_di_sopra_misurata_stl_mm": [
-     52.0,
-     52.0
+     51.9998,
+     51.3449
     ],
     "margine_adesivo_misurato_mm": [
-     0.2,
+     0.1999,
      null
     ]
    },
@@ -285,35 +289,35 @@
    "faccia_in_su_piu_bassa_mm": 2.0,
    "ok": true
   },
-  "rotella_finestra_9x9": {
-   "volume_atteso_mm3": 4031.249,
-   "volume_mm3": 4031.249,
-   "errore_volume_rel": 1.0266480350970666e-07,
-   "massa_pla_g": 5.0,
+  "rotella_tacca_9x9": {
+   "volume_atteso_mm3": 3969.367,
+   "volume_mm3": 3969.368,
+   "errore_volume_rel": 9.710916669778387e-08,
+   "massa_pla_g": 4.92,
    "ingombro_atteso_mm": [
     52.0,
-    52.0,
+    51.5624,
     2.0
    ],
    "ingombro_mm": [
     52.0,
-    52.0,
+    51.5624,
     2.0
    ],
    "avvisi": [],
    "file": {
-    "triangoli": 1280,
+    "triangoli": 2180,
     "bordi_non_manifold": 0,
-    "volume_mm3": 4029.68,
+    "volume_mm3": 3968.46,
     "ingombro_mm": [
-     52.0,
-     52.0,
+     51.988,
+     51.559,
      2.0
     ],
     "3mf": {
      "unita": "millimeter",
      "oggetti_mesh": 1,
-     "triangoli": 1280
+     "triangoli": 2180
     }
    },
    "carta": {
@@ -332,19 +336,21 @@
      9,
      9
     ],
-    "finestra_plastica_mm": [
-     9.5,
-     9.5
+    "tacca_plastica_larga_mm": 9.5,
+    "tacca_dal_centro_mm": [
+     15.25,
+     26.0
     ],
+    "intaglio_adesivo_dal_centro_mm": 15.5,
     "foro_adesivo_mm": 13.0,
-    "foro_perno_mm": 3.8,
+    "foro_rotella_mm": 6.4,
     "sopra_liscio": true,
     "faccia_di_sopra_misurata_stl_mm": [
-     52.0,
-     52.0
+     51.9882,
+     51.5587
     ],
     "margine_adesivo_misurato_mm": [
-     0.2,
+     0.1941,
      null
     ]
    },
@@ -353,35 +359,35 @@
    "faccia_in_su_piu_bassa_mm": 2.0,
    "ok": true
   },
-  "rotella_finestra_10x9": {
-   "volume_atteso_mm3": 4012.249,
-   "volume_mm3": 4012.249,
-   "errore_volume_rel": 1.0315097260974474e-07,
-   "massa_pla_g": 4.98,
+  "rotella_tacca_10x9": {
+   "volume_atteso_mm3": 3948.92,
+   "volume_mm3": 3948.921,
+   "errore_volume_rel": 9.695741343645227e-08,
+   "massa_pla_g": 4.9,
    "ingombro_atteso_mm": [
     52.0,
-    52.0,
+    51.4644,
     2.0
    ],
    "ingombro_mm": [
     52.0,
-    52.0,
+    51.4644,
     2.0
    ],
    "avvisi": [],
    "file": {
-    "triangoli": 1282,
+    "triangoli": 2184,
     "bordi_non_manifold": 0,
-    "volume_mm3": 4010.68,
+    "volume_mm3": 3948.01,
     "ingombro_mm": [
-     52.0,
-     52.0,
+     51.996,
+     51.457,
      2.0
     ],
     "3mf": {
      "unita": "millimeter",
      "oggetti_mesh": 1,
-     "triangoli": 1282
+     "triangoli": 2184
     }
    },
    "carta": {
@@ -400,19 +406,21 @@
      10,
      9
     ],
-    "finestra_plastica_mm": [
-     10.5,
-     9.5
+    "tacca_plastica_larga_mm": 10.5,
+    "tacca_dal_centro_mm": [
+     15.25,
+     26.0
     ],
+    "intaglio_adesivo_dal_centro_mm": 15.5,
     "foro_adesivo_mm": 13.0,
-    "foro_perno_mm": 3.8,
+    "foro_rotella_mm": 6.4,
     "sopra_liscio": true,
     "faccia_di_sopra_misurata_stl_mm": [
-     52.0,
-     52.0
+     51.9962,
+     51.4574
     ],
     "margine_adesivo_misurato_mm": [
-     0.2,
+     0.1981,
      null
     ]
    },
@@ -421,97 +429,103 @@
    "faccia_in_su_piu_bassa_mm": 2.0,
    "ok": true
   },
-  "perno": {
-   "volume_atteso_mm3": 98.672,
-   "volume_mm3": 98.672,
-   "errore_volume_rel": 6.030041877519149e-12,
-   "massa_pla_g": 0.12,
+  "rivetto_maschio": {
+   "volume_atteso_mm3": 135.392,
+   "volume_mm3": 135.392,
+   "errore_volume_rel": 4.9446922256678745e-12,
+   "massa_pla_g": 0.17,
    "ingombro_atteso_mm": [
     10.0,
     10.0,
-    5.55
+    5.45
    ],
    "ingombro_mm": [
     10.0,
     10.0,
-    5.55
+    5.45
    ],
    "avvisi": [],
    "file": {
-    "triangoli": 3296,
+    "triangoli": 3568,
     "bordi_non_manifold": 0,
-    "volume_mm3": 98.59,
+    "volume_mm3": 135.32,
     "ingombro_mm": [
      10.0,
      10.0,
-     5.55
+     5.45
     ],
     "3mf": {
      "unita": "millimeter",
      "oggetti_mesh": 1,
-     "triangoli": 3296
+     "triangoli": 3568
     }
    },
    "carta": {
-    "quote_z_mm": {
-     "mozzo": 3.1,
-     "gola": 2.9,
-     "dente": 4.45,
-     "dente_alto": 4.85,
-     "punta": 5.55
-    },
-    "gioco_radiale_nel_foro_mm": 0.2,
-    "foro_plancia_mm": 4.0,
-    "interferenza_ganasce_mm": 0.2
-   },
-   "facce_verso_il_basso": 2,
-   "fondo_piatto": true,
-   "faccia_in_su_piu_bassa_mm": 0.8,
-   "ok": true
-  },
-  "fermo": {
-   "volume_atteso_mm3": 101.69,
-   "volume_mm3": 101.69,
-   "errore_volume_rel": 1.2749336050769829e-07,
-   "massa_pla_g": 0.13,
-   "ingombro_atteso_mm": [
-    12.0,
-    12.0,
-    1.2
-   ],
-   "ingombro_mm": [
-    12.0,
-    12.0,
-    1.2
-   ],
-   "avvisi": [],
-   "file": {
-    "triangoli": 1188,
-    "bordi_non_manifold": 0,
-    "volume_mm3": 101.64,
-    "ingombro_mm": [
-     12.0,
-     12.0,
-     1.2
+    "testa_mm": [
+     10.0,
+     2.0
     ],
-    "3mf": {
-     "unita": "millimeter",
-     "oggetti_mesh": 1,
-     "triangoli": 1188
-    }
-   },
-   "carta": {
-    "ganasce": 2,
-    "sbalzo_mm": 4.2,
-    "larghezza_radice_mm": 1.0,
-    "apertura_per_ganascia_mm": 0.2,
-    "deformazione_alla_radice_pct": 1.7,
-    "fessure_mm": 0.7,
-    "gioco_gola_sede_mm": 0.05
+    "gambo_d_mm": 3.0,
+    "gambo_con_costole_d_mm": 3.5,
+    "gambo_lungo_mm": 3.45,
+    "costole": 4,
+    "costola_larga_mm": 0.6,
+    "interferenza_costola_foro_femmina_mm": 0.15,
+    "gioco_nel_foro_plancia_mm": 0.25,
+    "stampa": "cima della cupola sul piatto, gambo in su"
    },
    "facce_verso_il_basso": 1,
    "fondo_piatto": true,
-   "faccia_in_su_piu_bassa_mm": 1.2,
+   "faccia_in_su_piu_bassa_mm": 2.0,
+   "ok": true
+  },
+  "rivetto_femmina": {
+   "volume_atteso_mm3": 141.672,
+   "volume_mm3": 141.672,
+   "errore_volume_rel": 3.700562257397154e-12,
+   "massa_pla_g": 0.18,
+   "ingombro_atteso_mm": [
+    10.0,
+    10.0,
+    4.15
+   ],
+   "ingombro_mm": [
+    10.0,
+    10.0,
+    4.15
+   ],
+   "avvisi": [],
+   "file": {
+    "triangoli": 5284,
+    "bordi_non_manifold": 0,
+    "volume_mm3": 141.65,
+    "ingombro_mm": [
+     10.0,
+     10.0,
+     4.15
+    ],
+    "3mf": {
+     "unita": "millimeter",
+     "oggetti_mesh": 1,
+     "triangoli": 5284
+    }
+   },
+   "carta": {
+    "testa_mm": [
+     10.0,
+     2.0
+    ],
+    "manica_d_mm": 6.0,
+    "manica_lunga_mm": 2.15,
+    "foro_d_mm": 3.2,
+    "foro_profondo_mm": 3.55,
+    "gioco_radiale_rotella_mm": 0.2,
+    "gioco_assiale_rotella_mm": 0.15,
+    "stampa": "cima della cupola sul piatto, manica in su"
+   },
+   "facce_verso_il_basso": 1,
+   "fondo_piatto": true,
+   "faccia_in_su_piu_bassa_mm": 0.6,
    "ok": true
   },
   "fiore": {
@@ -798,31 +812,94 @@
   }
  },
  "prove": {
-  "perno": {
-   "intersezioni": [],
-   "giochi": {
-    "fusto-foro della rotella": {
-     "atteso_mm": 0.2,
-     "misura_mm": 0.2
+  "rivetto": {
+   "plancia_0.1": {
+    "plancia_mm": 0.1,
+    "intersezioni": [],
+    "giochi": {
+     "manica-foro della rotella": {
+      "atteso_mm": 0.2,
+      "misura_mm": 0.2
+     },
+     "testa della femmina-rotella (gioco assiale)": {
+      "atteso_mm": 0.15,
+      "misura_mm": 0.15
+     },
+     "gambo-foro della femmina (tra le costole)": {
+      "atteso_mm": 0.1,
+      "misura_mm": 0.1
+     },
+     "punta del gambo-fondo del foro": {
+      "atteso_mm": 0.2,
+      "misura_mm": 0.2
+     }
     },
-    "gola-sede del fermo": {
-     "atteso_mm": 0.05,
-     "misura_mm": 0.05
+    "pressione_costole_mm3": {
+     "atteso": 0.9678,
+     "misura": 0.9678
     },
-    "dente-fermo (gioco assiale)": {
-     "atteso_mm": 0.15,
-     "misura_mm": 0.15
-    }
+    "costole_nel_foro_mm": 2.75,
+    "gambo_nel_foro_mm": 3.35,
+    "ok": true
    },
-   "presa_dente_ganasce_mm3": 0.2722,
-   "quote_z_mm": {
-    "mozzo": 3.1,
-    "gola": 2.9,
-    "dente": 4.45,
-    "dente_alto": 4.85,
-    "punta": 5.55
+   "plancia_0.3": {
+    "plancia_mm": 0.3,
+    "intersezioni": [],
+    "giochi": {
+     "manica-foro della rotella": {
+      "atteso_mm": 0.2,
+      "misura_mm": 0.2
+     },
+     "testa della femmina-rotella (gioco assiale)": {
+      "atteso_mm": 0.15,
+      "misura_mm": 0.15
+     },
+     "gambo-foro della femmina (tra le costole)": {
+      "atteso_mm": 0.1,
+      "misura_mm": 0.1
+     },
+     "punta del gambo-fondo del foro": {
+      "atteso_mm": 0.4,
+      "misura_mm": 0.4
+     }
+    },
+    "pressione_costole_mm3": {
+     "atteso": 0.8913,
+     "misura": 0.8913
+    },
+    "costole_nel_foro_mm": 2.55,
+    "gambo_nel_foro_mm": 3.15,
+    "ok": true
    },
-   "ok": true
+   "plancia_0.45": {
+    "plancia_mm": 0.45,
+    "intersezioni": [],
+    "giochi": {
+     "manica-foro della rotella": {
+      "atteso_mm": 0.2,
+      "misura_mm": 0.2
+     },
+     "testa della femmina-rotella (gioco assiale)": {
+      "atteso_mm": 0.15,
+      "misura_mm": 0.15
+     },
+     "gambo-foro della femmina (tra le costole)": {
+      "atteso_mm": 0.1,
+      "misura_mm": 0.1
+     },
+     "punta del gambo-fondo del foro": {
+      "atteso_mm": 0.55,
+      "misura_mm": 0.55
+     }
+    },
+    "pressione_costole_mm3": {
+     "atteso": 0.8339,
+     "misura": 0.8339
+    },
+    "costole_nel_foro_mm": 2.4,
+    "gambo_nel_foro_mm": 3.0,
+    "ok": true
+   }
   },
   "montaggio": {
    "intersezioni": [],
@@ -1002,21 +1079,21 @@
    "pezzi": {
     "rotella_PV": {
      "copie": 4,
-     "stl": "rotella_finestra_11x9",
+     "stl": "rotella_tacca_11x9",
      "piatti": [
       1
      ]
     },
     "rotella_Danni": {
      "copie": 4,
-     "stl": "rotella_finestra_9x9",
+     "stl": "rotella_tacca_9x9",
      "piatti": [
       1
      ]
     },
     "rotella_ATT": {
      "copie": 4,
-     "stl": "rotella_finestra_11x9",
+     "stl": "rotella_tacca_11x9",
      "piatti": [
       1,
       2
@@ -1024,14 +1101,14 @@
     },
     "rotella_MOV": {
      "copie": 4,
-     "stl": "rotella_finestra_11x9",
+     "stl": "rotella_tacca_11x9",
      "piatti": [
       2
      ]
     },
     "rotella_AR": {
      "copie": 4,
-     "stl": "rotella_finestra_11x9",
+     "stl": "rotella_tacca_11x9",
      "piatti": [
       2,
       3
@@ -1039,42 +1116,42 @@
     },
     "rotella_PL": {
      "copie": 4,
-     "stl": "rotella_finestra_9x9",
+     "stl": "rotella_tacca_9x9",
      "piatti": [
       3
      ]
     },
     "rotella_scontro": {
      "copie": 1,
-     "stl": "rotella_finestra_11x9",
+     "stl": "rotella_tacca_11x9",
      "piatti": [
       3
      ]
     },
     "rotella_custode": {
      "copie": 1,
-     "stl": "rotella_finestra_11x9",
+     "stl": "rotella_tacca_11x9",
      "piatti": [
       3
      ]
     },
     "rotella_Profezia": {
      "copie": 1,
-     "stl": "rotella_finestra_10x9",
+     "stl": "rotella_tacca_10x9",
      "piatti": [
       3
      ]
     },
-    "perno": {
+    "rivetto_maschio": {
      "copie": 27,
-     "stl": "perno",
+     "stl": "rivetto_maschio",
      "piatti": [
       3
      ]
     },
-    "fermo": {
+    "rivetto_femmina": {
      "copie": 27,
-     "stl": "fermo",
+     "stl": "rivetto_femmina",
      "piatti": [
       3,
       4
@@ -1093,8 +1170,8 @@
      "rotella_MOV": 4
     },
     {
-     "fermo": 2,
-     "perno": 27,
+     "rivetto_femmina": 17,
+     "rivetto_maschio": 27,
      "rotella_AR": 2,
      "rotella_PL": 4,
      "rotella_Profezia": 1,
@@ -1102,7 +1179,7 @@
      "rotella_scontro": 1
     },
     {
-     "fermo": 25
+     "rivetto_femmina": 10
     }
    ]
   },

@@ -365,11 +365,13 @@ FORO_ADESIVO_R = 6.5   # raggio del foro al centro dell'adesivo delle rotelle 3D
 PROFEZIA_VALORI = [(str(v), ()) for v in range(1, 7)] + [('P', ('pari',)), ('D', ('dispari',)), ('A', ('alto',)), ('B', ('basso',))]
 PROFEZIA_FIN, PROFEZIA_MH, COL_PROF = (10.0, 9.0), 4.0, '#b8862b'
 BASE_PROF = 58.0   # lato della base della Profezia (taglio sul bordo sottile, fondo chiaro senza abbondanza)
-def verifica_rotella(nome, vals, win, mh, gold=(), marg=0.5, rr=RING_R):
+def verifica_rotella(nome, vals, win, mh, gold=(), marg=0.5, rr=RING_R, tacca=False):
     """Per ogni posizione: la finestra contiene tutta l'etichetta (>= marg mm dal bordo) e nessun pezzo delle altre
-    (separazione >= marg mm, test degli assi separatori tra rettangoli; cerchi dorati come cerchi). Ritorna
-    (margine proprio, distanza dai vicini)."""
+    (separazione >= marg mm, test degli assi separatori tra rettangoli; cerchi dorati come cerchi). tacca: la finestra
+    è la tacca della rotella 3D (Unmatched, 14/11), larga come la finestra ma aperta fino al bordo del disco Ø 52.
+    Ritorna (margine proprio, distanza dai vicini)."""
     n = len(vals); ww, wh = win
+    vlo, vhi = -wh / 2, (DISC_R - rr if tacca else wh / 2)   # finestra lungo il raggio, dal centro della corona (+ = verso il bordo)
     def lab(i):
         a = math.radians(dial_angle(i, n)); x, y = rr * math.sin(a), -rr * math.cos(a)
         main, smalls = vals[i]
@@ -381,12 +383,12 @@ def verifica_rotella(nome, vals, win, mh, gold=(), marg=0.5, rr=RING_R):
     for i in range(n):
         a = math.radians(dial_angle(i, n))
         c = (rr * math.sin(a), -rr * math.cos(a)); u = (math.cos(a), math.sin(a)); v = (math.sin(a), -math.cos(a))
-        wpts = [(c[0] + su * ww / 2 * u[0] + sv * wh / 2 * v[0], c[1] + su * ww / 2 * u[1] + sv * wh / 2 * v[1]) for su in (-1, 1) for sv in (-1, 1)]
-        loc = lambda px, py: (abs((px - c[0]) * u[0] + (py - c[1]) * u[1]), abs((px - c[0]) * v[0] + (py - c[1]) * v[1]))
+        wpts = [(c[0] + su * ww / 2 * u[0] + sv * v[0], c[1] + su * ww / 2 * u[1] + sv * v[1]) for su in (-1, 1) for sv in (vlo, vhi)]
+        loc = lambda px, py: (abs((px - c[0]) * u[0] + (py - c[1]) * u[1]), (px - c[0]) * v[0] + (py - c[1]) * v[1])
         for j in range(n):
             x, y, w, h = lab(j)
             if j == i:
-                own = min(own, min(min(ww / 2 - du, wh / 2 - dv) for du, dv in map(lambda p: loc(*p), corners(x, y, w, h))))
+                own = min(own, min(min(ww / 2 - du, dv - vlo, vhi - dv) for du, dv in map(lambda p: loc(*p), corners(x, y, w, h))))
                 if j in gold: own = min(own, min(ww, wh) / 2 - GOLD_R)
                 continue
             lp = corners(x, y, w, h); gap_max = -99.0
@@ -396,8 +398,8 @@ def verifica_rotella(nome, vals, win, mh, gold=(), marg=0.5, rr=RING_R):
             nb = min(nb, gap_max)
             if j in gold:
                 du, dv = loc(x, y)
-                nb = min(nb, math.hypot(max(du - ww / 2, 0), max(dv - wh / 2, 0)) - GOLD_R)
-    assert own >= marg and nb >= marg, f'rotella {nome}: finestra {win} margine {own:.2f} mm, vicini a {nb:.2f} mm'
+                nb = min(nb, math.hypot(max(du - ww / 2, 0), max(dv - vhi, vlo - dv, 0)) - GOLD_R)
+    assert own >= marg and nb >= marg, f'rotella {nome}: {"tacca" if tacca else "finestra"} {win} margine {own:.2f} mm, vicini a {nb:.2f} mm'
     return round(own, 2), round(nb, 2)
 
 def rotella_disco(cx, cy, fill, nome, sotto, ic, win, riga='', rr=RING_R):
@@ -426,7 +428,7 @@ def rotella_disco(cx, cy, fill, nome, sotto, ic, win, riga='', rr=RING_R):
         o.append(f'<path d="M{h1[0]:.2f} {h1[1]:.2f}L{p1[0]:.2f} {p1[1]:.2f}L{h2[0]:.2f} {h2[1]:.2f}" fill="none" stroke="#ffffff" stroke-width="0.55" stroke-linecap="round" stroke-linejoin="round"/>')
         am = math.radians(s * 55)
         o.append(text(cx + 16.6 * math.sin(am), cy - 16.6 * math.cos(am) + 0.8, 'gira', 2.4, '#ffffff', 'middle', True))
-    # cerchio tratteggiato = foro dell'adesivo della rotella 3D (mozzo_r + gioco_carta di 3d_solidcraft: lì sta il fermo del perno)
+    # cerchio tratteggiato = foro dell'adesivo della rotella 3D (mozzo_r + gioco_carta di 3d_solidcraft: lì sta la testa del rivetto)
     o.append(f'<circle cx="{cx:.2f}" cy="{cy:.2f}" r="{FORO_ADESIVO_R}" fill="none" stroke="#ffffff" stroke-width="0.25" stroke-dasharray="0.9 0.7"/>')
     o.append(f'<circle cx="{cx:.2f}" cy="{cy:.2f}" r="1.1" fill="#ffffff"/>' + line(cx - 1.6, cy, cx + 1.6, cy, 0.18, INK) + line(cx, cy - 1.6, cx, cy + 1.6, 0.18, INK))
     if riga: o.append(text(cx, cy - 7.6, riga, 2.3, '#ffffff', 'middle'))
@@ -465,8 +467,8 @@ NOTE_ROT = {'PV': ['punti vita'], 'DANNI': ['danni subiti', 'Danni = PV: sconfit
             'MOV': ['movimento', 'D6 + MOV'], 'AR': ['armatura', 'ti colpisce chi fa 2D6 + ATT ≥ AR'], 'PL': ['power level', 'somma dei PL negli slot']}
 MONTAGGIO = {
     'Carta Classe': ['1 · Incidi col taglierino le linee rosse: 4 fessure in alto e i tagli ai 4 angoli dei due riquadri.',
-                     '2 · Fora il centro segnato delle 6 rotelle: col punteruolo per il fermacampioni, Ø 4 mm per il perno 3D.',
-                     '3 · Monta i 6 dischi (rotelle_eroe.pdf) sopra la corona col loro nome, fermacampioni dal davanti e gambe aperte sul retro, o perno 3D dal retro e fermo davanti.',
+                     '2 · Fora il centro segnato delle 6 rotelle: col punteruolo per il fermacampioni, Ø 4 mm per il rivetto 3D.',
+                     '3 · Monta i 6 dischi (rotelle_eroe.pdf) sopra la corona col loro nome, fermacampioni dal davanti e gambe aperte sul retro, o rotella 3D col rivetto: maschio dal retro, femmina dal davanti, premi.',
                      '4 · Infila i 4 angoli della Carta Classe nei tagli: resta lì per tutta la partita.'],
     'Carta Specie': ['Infila i 4 angoli della Carta Specie nei tagli e gira subito le rotelle del suo bonus.',
                      'Equipaggiamenti: infila la carta nella fessura dal davanti, con il nome in alto: il fondo passa sotto la plancia, il resto sporge sopra il bordo.',
@@ -546,7 +548,7 @@ def plancia_eroe():
             for l in wrap(par, 2.1, 12.5):
                 o.append(text(xc + 7, yy, l, 2.1, BROWN, 'middle')); yy += 2.6
         o.append(text(xc + 7, yc + 47, 'foro al centro', 1.8, BROWN, 'middle'))
-        o.append(text(xc + 7, yc + 49.4, 'Ø 4 per il perno 3D', 1.8, BROWN, 'middle'))
+        o.append(text(xc + 7, yc + 49.4, 'Ø 4 per il rivetto 3D', 1.8, BROWN, 'middle'))
     o.append(text(142, 191.0, 'Il Tesoro del Goblin · playtest v7', 2.4, BROWN))
     o.append(text(274.5, 191.0, 'Plancia eroe', 2.8, col, 'end', True, SERIF))
     # kit dei motivi: filetto doppio d'ottone a 1,2 / 2 mm dal taglio, ingranaggi agli angoli
@@ -578,7 +580,7 @@ def rotelle_eroe():
         b += dischi_eroe(2, x0, y0, 3)
         assert y0 + 3 * pitch + 2 * DISC_R + BLEED < 262
         b.append(ftr(['Stampa su A4 al 100%, solo fronte (meglio carta 160-200 g, o incolla il foglio su un cartoncino prima di ritagliare).',
-                      'Ritaglia ogni disco dove cambia il colore; ritaglia la finestra bianca col taglierino; fora il centro (punteruolo, o Ø 4 mm per il perno 3D).',
+                      'Ritaglia ogni disco dove cambia il colore; ritaglia la finestra bianca col taglierino; fora il centro (punteruolo, o Ø 4 mm per il rivetto 3D).',
                       'Monta il disco sopra la corona con lo stesso nome della plancia eroe: fermacampioni dal davanti, gambe aperte in orizzontale dietro.',
                       'Girando il disco la finestra mostra un solo valore. 6 dischi e 6 fermacampioni per plancia (PV, Danni, ATT, MOV, AR, PL).'], y=266))
         write('rotelle_eroe', p + 1, page(fonts('\n'.join(b))))
@@ -1084,7 +1086,7 @@ def rotelle_a3():
     tx = x0 + 2 * pitch; yy = ty + 6
     b.append(text(tx, yy, 'Rotelle · A3 · foglio 1 di 1 · solo fronte', 4.0, INK, 'start', True, SERIF)); yy += 6
     for par in ['Colonne: le 4 plance eroe (dischi identici); righe: PV, Danni, ATT, MOV, AR, PL. In basso a sinistra i 2 dischi del tavolo.',
-                'Stampa al 100%. Ritaglia ogni disco dove cambia il colore e la finestra bianca; fora il centro (punteruolo, o Ø 4 mm per il perno 3D).',
+                'Stampa al 100%. Ritaglia ogni disco dove cambia il colore e la finestra bianca; fora il centro (punteruolo, o Ø 4 mm per il rivetto 3D).',
                 'Disco sopra la corona con lo stesso nome (plancia eroe o Sala del Tesoro), fermacampioni dal davanti, gambe aperte in orizzontale dietro. 27 fermacampioni con la Rotella della Profezia (foglio delle tessere).']:
         for l in wrap(par, 2.6, 2 * pitch - 8):
             b.append(text(tx, yy, l, 2.6, BROWN)); yy += 3.3
@@ -1259,8 +1261,8 @@ def segnalini_3d():
                 b.append(adesivo_rotella(x, y, rotella_disco(x, y, COL_PB, nm, sotto, ic, win, 'plancia eroe'), win, f'{f}{i}'))
         assert Y0 + 3 * passo + DISC_R < 262
         pagine.append((f'Rotelle delle plance eroe · plance {2 * f + 1} e {2 * f + 2}',
-                       f'12 adesivi a corona Ø {2 * Ro:.1f} mm, foro Ø {2 * Ri:.1f}, intaglio sulla finestra · righe 1-2 plancia {2 * f + 1}, righe 3-4 plancia {2 * f + 2}', b,
-                       ['Taglia anche il foro al centro e l’intaglio della finestra (si apre verso il bordo). La finestra dell’adesivo combacia con quella del disco 3D.']))
+                       f'12 adesivi a corona Ø {2 * Ro:.1f} mm, foro Ø {2 * Ri:.1f}, intaglio della tacca · righe 1-2 plancia {2 * f + 1}, righe 3-4 plancia {2 * f + 2}', b,
+                       ['Taglia anche il foro al centro e l’intaglio della tacca (si apre verso il bordo): combacia con la tacca della rotella 3D, dove si legge il valore della plancia.']))
     tav = [(nm, sotto, ic, TAVOLO_FIN, col) for _, nm, sotto, ic, col in R_TAVOLO] + [('Profezia', 'Oracolo', 'occhio', PROFEZIA_FIN, COL_PROF)]
     b = []
     for i, (nm, sotto, ic, win, col) in enumerate(tav):
@@ -1268,7 +1270,7 @@ def segnalini_3d():
         riga = 'rotella della Profezia' if nm == 'Profezia' else 'plancia di gioco'
         b.append(adesivo_rotella(x, y, rotella_disco(x, y, col, nm, sotto, ic, win, riga), win, f't{i}'))
     pagine.append(('Rotelle del tavolo', f'scontro, custode (Sala del Tesoro) e Profezia · adesivi a corona Ø {2 * Ro:.1f} mm', b,
-                   ['La base della Profezia resta di carta (pedine.pdf, foglio 2): il perno 3D passa nel foro Ø 4 della base.']))
+                   ['La base della Profezia resta di carta (pedine.pdf, foglio 2) ed è il disco di sotto: il rivetto 3D passa nel suo foro Ø 4.']))
 
     for n, (tit, sub, corpo, note_) in enumerate(pagine, 1):
         bb = [hdr(f'Adesivi per i pezzi 3D · {tit} · foglio {n} di {len(pagine)}', sub)] + corpo + [segmento_100(266.0)]
@@ -1330,7 +1332,7 @@ def guida_montaggio_mappa():
         ('mappa_preset.pdf', 'carta normale', 'solo fronte', '10 fogli, uno per preset')], y)
     y = tabella('VERSIONE 3D: carta DA APPLICARE SULLA PLASTICA 3D', [
         ('3d_solidcraft/out/mappa.3mf', 'filamento PLA (stampante 3D)', 'n.a.', '8 piatti: 4 quarti del vassoio, 14 fiori'),
-        ('3d_solidcraft/out/rotelle_fulcri.3mf', 'filamento PLA (stampante 3D)', 'n.a.', '4 piatti: 27 rotelle, 27 perni, 27 fermi'),
+        ('3d_solidcraft/out/rotelle_fulcri.3mf', 'filamento PLA (stampante 3D)', 'n.a.', '4 piatti: 27 rotelle e 27 rivetti'),
         ('3d_solidcraft/out/segnalini.3mf', 'filamento PLA (stampante 3D)', 'n.a.', '2 piatti: 31 Stati, 16 Indizi, 4 Forte Volontà, 20 Usato, Cripta'),
         ('3d_solidcraft/out/tessere_esplorazione.3mf', 'filamento PLA (stampante 3D)', 'n.a.', '1 piatto: 36 Tessere Esplorazione'),
         ('3d_solidcraft/out/carta_fiori_3d.pdf', 'cartoncino 160-250 g', 'solo fronte', '5 fogli, 28 facce (una per fiore 3D)'),
@@ -1361,7 +1363,7 @@ def guida_montaggio_mappa():
         'Incastra i 4 quarti del vassoio nell’ordine NO → NE → SO → SE con le code a pomello (23 tra NO e gli altri due, 11 tra NE e SE, 11 tra SO e SE). Da verificare con la prima stampa: tenuta delle code e gioco.',
         'Stampa carta_base_3d.pdf: 4 fogli, uno per quarto (NO, NE, SO, SE), solo la cornice di bordo, al 100% con print-scaling=none (controlla il segmento di 100 mm). Ritaglia ogni foglio sulla linea scura (contorno esterno e interno) e posalo nella tasca del quarto corrispondente del vassoio: non si incolla.',
         'Stampa carta_fiori_3d.pdf, taglia ogni faccia sulla linea scura (0,4 mm dentro il contorno dell’esagono) e incollala sopra il fiore 3D con la colla stick: la faccia del fiore viene alla stessa altezza della carta della base. Il fiore 3D porta una sola faccia (altre 14 facce = altri 14 fiori 3D).',
-        'Stampa segnalini_3d.pdf al 100% (controlla il segmento di 100 mm), ritaglia gli adesivi sulla linea scura e incollali sopra ogni pezzo 3D (lisci, 0,2 mm di margine per lato). Indizi, Forte Volontà, Usato, Stati e Cripta sono a doppia faccia: un adesivo sopra e uno uguale sul fondo piatto (fogli «sopra» e «fondo»; Stati con lo stesso orientamento, il nome si legge dritto anche girando la tessera sul lato lungo); il dorso delle tessere Esplorazione va sul fondo piatto. Rotelle: perno dal retro della plancia (foro Ø 4), disco sopra la corona, fermo premuto sulla punta finché scatta.',
+        'Stampa segnalini_3d.pdf al 100% (controlla il segmento di 100 mm), ritaglia gli adesivi sulla linea scura e incollali sopra ogni pezzo 3D (lisci, 0,2 mm di margine per lato). Indizi, Forte Volontà, Usato, Stati e Cripta sono a doppia faccia: un adesivo sopra e uno uguale sul fondo piatto (fogli «sopra» e «fondo»; Stati con lo stesso orientamento, il nome si legge dritto anche girando la tessera sul lato lungo); il dorso delle tessere Esplorazione va sul fondo piatto. Rotelle come in Unmatched: rivetto maschio dal retro nel foro Ø 4, rotella sopra, femmina davanti; premi finché tocca la plancia.',
         'Posa i fiori negli alloggiamenti del vassoio (si girano di 60° in 60°) con la freccia verso il numero 1-6 inciso sul fondo dello spazio, come da preset o draft.'], y)
     assert y < 292, y
     write(comp, 2, page(fonts('\n'.join(P))))
@@ -1370,6 +1372,10 @@ if __name__ == '__main__':
     res = {'rotelle': {k: verifica_rotella(k, vals, win, mh, gold, rr=RAGGIO.get(k, RING_R)) for k, _, _, _, _, vals, win, mh, gold, _ in ROTELLE}}
     res['rotelle']['tavolo'] = verifica_rotella('tavolo', TAVOLO_VALORI, TAVOLO_FIN, 4.5)
     res['rotelle']['Profezia'] = verifica_rotella('Profezia', PROFEZIA_VALORI, PROFEZIA_FIN, PROFEZIA_MH)
+    # rotelle 3D: la tacca (aperta fino al bordo) mostra un solo valore della corona della plancia o della base
+    res['tacche_3d'] = {k: verifica_rotella(k, vals, win, mh, gold, rr=RAGGIO.get(k, RING_R), tacca=True) for k, _, _, _, _, vals, win, mh, gold, _ in ROTELLE}
+    res['tacche_3d']['tavolo'] = verifica_rotella('tavolo', TAVOLO_VALORI, TAVOLO_FIN, 4.5, tacca=True)
+    res['tacche_3d']['Profezia'] = verifica_rotella('Profezia', PROFEZIA_VALORI, PROFEZIA_FIN, PROFEZIA_MH, tacca=True)
     if '--formato' in sys.argv and sys.argv[sys.argv.index('--formato') + 1].upper() == 'A3':
         res['sala_tesoro'] = sala_a3()
         res['plance_eroe'] = plance_eroe_a3()

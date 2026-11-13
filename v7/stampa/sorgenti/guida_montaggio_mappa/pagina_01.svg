@@ -317,7 +317,7 @@
 <text x="12.00" y="251.38" font-family="Liberation Sans Narrow" font-size="2.60" fill="#2a2118" text-anchor="start" >3d_solidcraft/out/rotelle_fulcri.3mf</text>
 <text x="64.00" y="251.38" font-family="Liberation Sans Narrow" font-size="2.60" fill="#2a2118" text-anchor="start" >filamento PLA (stampante 3D)</text>
 <text x="110.00" y="251.38" font-family="Liberation Sans Narrow" font-size="2.60" fill="#2a2118" text-anchor="start" >n.a.</text>
-<text x="152.00" y="251.38" font-family="Liberation Sans Narrow" font-size="2.60" fill="#2a2118" text-anchor="start" >4 piatti: 27 rotelle, 27 perni, 27 fermi</text>
+<text x="152.00" y="251.38" font-family="Liberation Sans Narrow" font-size="2.60" fill="#2a2118" text-anchor="start" >4 piatti: 27 rotelle e 27 rivetti</text>
 <line x1="10.00" y1="252.68" x2="200.00" y2="252.68" stroke="#c9b98f" stroke-width="0.15"/>
 <text x="12.00" y="256.08" font-family="Liberation Sans Narrow" font-size="2.60" fill="#2a2118" text-anchor="start" >3d_solidcraft/out/segnalini.3mf</text>
 <text x="64.00" y="256.08" font-family="Liberation Sans Narrow" font-size="2.60" fill="#2a2118" text-anchor="start" >filamento PLA (stampante 3D)</text>

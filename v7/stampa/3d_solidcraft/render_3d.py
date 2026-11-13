@@ -252,19 +252,18 @@ ROT_NOMI = ['PV', 'Danni', 'ATT', 'MOV', 'AR', 'PL']
 FIN = dict((n, f) for n, f, _ in G.ROTELLE_3D)
 
 
-def rotella(sc, nome_rot, nome, art, x, y, z, ang=0.0, perno=True):
+def rotella(sc, nome_rot, nome, art, x, y, z, ang=0.0, rivetto=True):
+    """rotella 3D sulla plancia (z = sopra della plancia) con l'adesivo; rivetto: maschio sotto la plancia, femmina girata
+    con la manica sulla plancia e la testa sopra la rotella (neri come in Unmatched)."""
     pz = G.Rotella(FIN['rotella_' + nome_rot])
     sc.metti(pz, 'm_' + pz.nome, nome, x, y, z, ang)
     t = Tex(x, y, z + P['rotella_spessore'], P['rotella_d'] + 1.0, PLA, ang)
     t.incolla(art[0], art[1])
     sc.tex[nome] = t
-    if perno:
-        q = G.quote_perno()
-        zt = z - P['carta_plancia'] - P['testa_h']       # testa del perno sotto la plancia
-        sc.metti(G.Perno(), 'm_perno', nome + '_perno', x, y, zt)
-        sc.metti(G.Fermo(), 'm_fermo', nome + '_fermo', x, y, zt + G.ev(q['mozzo']), ang)
-        sc.colori[nome + '_perno'] = (60, 96, 160)
-        sc.colori[nome + '_fermo'] = (160, 48, 48)
+    if rivetto:
+        sc.metti(G.RivettoMaschio(), 'm_rivetto_maschio', nome + '_maschio', x, y, z - P['carta_plancia'] - P['testa_h'])
+        sc.metti(G.RivettoFemmina(), 'm_rivetto_femmina', nome + '_femmina', x, y, z, capovolto=True)
+        sc.colori[nome + '_maschio'] = sc.colori[nome + '_femmina'] = (38, 38, 40)
 
 
 # ---- mappa: vassoio con la carta della base e fiori del preset ---------------------------------------------------
@@ -351,7 +350,7 @@ def celle_plancia():
 
 
 def render_plancia(ad, tmp):
-    """plancia eroe 1 (carta da carta_plancia, foro Ø 4) con le 6 rotelle 3D, perni e fermi; valori di partenza
+    """plancia eroe 1 (carta da carta_plancia, foro Ø 4) con le 6 rotelle 3D e i rivetti (maschio sotto, femmina sopra); valori di partenza
     (PV 5, Danni 0, ATT 1, MOV 1, AR 9, PL 0: solo MOV non è in alto, indice 2 di 10)."""
     sc = Scena(tmp)
     W, H, z0 = 280.0, 194.0, P['testa_h']
@@ -372,7 +371,7 @@ def render_plancia(ad, tmp):
             sc.tex[nome] = t
     celle = celle_plancia()
     chiavi = ['PV', 'DANNI', 'ATT', 'MOV', 'AR', 'PL']
-    partenza = {'MOV': -2 * 360 / 10}             # MOV 1 = valore 3 di 10 (da -1): finestra girata in senso orario
+    partenza = {'MOV': -2 * 360 / 10}             # MOV 1 = valore 3 di 10 (da -1): tacca girata in senso orario
     for i, (ch, nm) in enumerate(zip(chiavi, ROT_NOMI)):
         cx, cy = celle[ch][0] + 40, celle[ch][1] + 29
         rotella(sc, nm, f'rotella_{nm}', ad['rotella'][i], cx - W / 2, H / 2 - cy, z0 + P['carta_plancia'], partenza.get(ch, 0.0))
@@ -381,7 +380,7 @@ def render_plancia(ad, tmp):
 
 def render_segnalini(ad, tmp):
     """il set dei segnalini 3D: tessere (rosse, blu, una coperta), Stati (uno orizzontale), Indizio, Forte Volontà,
-    Usato, Cripta e una rotella dello scontro col perno."""
+    Usato, Cripta e una rotella dello scontro col rivetto."""
     sc = Scena(tmp)
     for k, i in enumerate([0, 1, 25, 26]):
         segnalino(sc, TESSERA, 'm_tessera', f'tessera_{k}', ad['fronte'][i], -60 + 30 * k, 40)
@@ -393,7 +392,7 @@ def render_segnalini(ad, tmp):
     for k, i in enumerate([0, 16, 20]):              # Indizio, Forte Volontà, Usato
         segnalino(sc, TONDO, 'm_tondo', f'tondo_{k}', ad['tondo'][i], -66 + 26 * k, -26)
     cripta(sc, ad['cripta'][0], 16, -26)
-    rotella(sc, 'scontro', 'rotella_scontro', ad['rotella'][24], 70, -36, P['testa_h'] + P['carta_plancia'], perno=True)
+    rotella(sc, 'scontro', 'rotella_scontro', ad['rotella'][24], 70, -36, P['testa_h'] + P['carta_plancia'])
     sc.render(os.path.join(OUT, 'render_segnalini.png'), {'target': [5, 2, 0], 'yaw': -0.5, 'pitch': 0.8, 'distance': 200, 'fov': 0.0})
 
 

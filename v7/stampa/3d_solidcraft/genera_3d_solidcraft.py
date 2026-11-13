@@ -15,9 +15,13 @@ Pezzi (mappa da v7/stampa/sorgenti/dati/base12.csv: spazi dei fiori, posizioni 0
   (segnalini.csv), tessere Stato (stati.csv) e i dischi delle rotelle (6 per plancia eroe, scontro, custode, Profezia).
   Ogni pezzo ha il contorno ESATTO del pezzo di carta del kit, fondo piatto, ed è liscio sopra (niente bordino né tasca,
   Daniele 13/11 21:28): l'adesivo di segnalini_3d.pdf si incolla sopra ed è margine_adesivo per lato più piccolo del
-  pezzo. Le rotelle hanno la finestra passante e il foro del perno.
-- PERNO delle rotelle in 2 pezzi a scatto: perno con la testa sotto la plancia e la gola in cima, fermo piatto con 2
-  ganasce a sbalzo che si aprono nel piano e si chiudono nella gola. Tutti e due si stampano piatti senza supporti.
+  pezzo. Le rotelle sono il disco DI SOPRA come in Unmatched (Daniele, 14/11 00:01): la plancia (o la base di carta) è
+  il disco di sotto con i valori stampati sulla corona, la rotella ha la TACCA aperta sul bordo sopra la corona e il
+  foro della manica del rivetto.
+- RIVETTO delle rotelle in 2 pezzi a pressione come in Unmatched: maschio con la testa a cupola bassa Ø 10 × 2 sotto
+  la plancia e il gambo con 4 costole di schiacciamento, femmina con la stessa testa sopra la rotella e la manica su cui
+  gira la rotella; la manica poggia sulla plancia, il gambo entra a pressione nel suo foro. Tutti e due si stampano
+  con la cima della cupola sul piatto, senza supporti.
 Quantità dai CSV del kit; 4 file 3MF in out/ (mappa, rotelle_fulcri, segnalini, tessere_esplorazione) su piatti da 220 × 220.
 
 Lo script calcola la geometria in pianta con shapely, la rende parametrica (ogni coordinata del documento SolidCraft
@@ -98,18 +102,20 @@ PARAMETRI = [
     ('stato_a', 18.0, 'lato corto della tessera Stato'),
     ('stato_r', 1.2, 'raggio degli angoli della tessera Stato (> margine_adesivo)'),
     ('rotella_d', 52.0, 'diametro dei dischi delle rotelle (rotelle_eroe.pdf: Ø 52)'),
-    ('corona_r', 20.0, 'distanza della finestra dal centro della rotella (corona della plancia, RING_R)'),
+    ('corona_r', 20.0, 'distanza dal centro dei valori della corona della plancia (RING_R), letti nella tacca della rotella'),
     ('rotella_spessore', 2.0, 'spessore dei dischi delle rotelle (1,6-2,5)'),
-    ('mozzo_r', 6.25, 'raggio della zona senza adesivo al centro della rotella, dove appoggia il fermo (>= fermo_d/2)'),
-    ('foro_perno', 3.8, 'diametro del foro delle rotelle (perno_d + 2 × 0,2 di gioco)'),
-    ('perno_d', 3.4, 'diametro del perno e del suo dente (3-4)'),
-    ('collo_d', 2.9, 'diametro della gola del perno, dove si chiudono le ganasce del fermo (perno_d - 0,5)'),
-    ('testa_d', 10.0, 'diametro della testa del perno, sotto la plancia (copre il foro Ø 4 della plancia)'),
-    ('testa_h', 0.8, 'spessore della testa del perno (0,6-1,2)'),
-    ('carta_plancia', 0.3, 'spessore della plancia di cartoncino (0,25-0,4)'),
-    ('fermo_d', 12.0, 'diametro del fermo (sta sul mozzo: <= 2 × mozzo_r)'),
-    ('fermo_h', 1.2, 'spessore del fermo e delle sue ganasce (1-1,6)'),
-    ('gioco_assiale', 0.15, 'aria tra il fermo e il dente del perno, con la plancia da carta_plancia'),
+    ('mozzo_r', 6.25, 'raggio della zona senza adesivo al centro della rotella, dove appoggia la testa della femmina del rivetto (>= testa_d/2)'),
+    ('foro_rotella', 6.4, 'diametro del foro delle rotelle: girano sulla manica della femmina (manica_d + 2 × 0,2 di gioco)'),
+    ('testa_d', 10.0, 'diametro delle teste a cupola bassa dei due pezzi del rivetto (coprono il foro Ø 4 della plancia)'),
+    ('testa_h', 2.0, 'altezza delle teste del rivetto (1,6-2,4; la cupola sale a 45° o più: si stampa senza supporti)'),
+    ('gambo_d', 3.0, 'diametro del gambo del maschio senza le costole (con le costole Ø gambo_d + 2 × costola < 4, foro della plancia)'),
+    ('costola', 0.25, 'sporgenza delle 4 costole di schiacciamento del gambo (0,15-0,35)'),
+    ('foro_femmina', 3.2, 'diametro del foro della manica: interferenza delle costole (gambo_d/2 + costola) - foro_femmina/2 = 0,15'),
+    ('manica_d', 6.0, 'diametro esterno della manica della femmina: ci gira la rotella e poggia sulla plancia'),
+    ('fondo_femmina', 0.6, 'spessore tra il fondo del foro della femmina e la cima della sua cupola (0,6-1)'),
+    ('carta_plancia', 0.3, 'spessore della plancia di cartoncino della prova di montaggio (il rivetto va da carta_min a 0,45)'),
+    ('carta_min', 0.1, 'plancia più sottile: con lei la punta del gambo resta 0,2 sotto il fondo del foro della femmina'),
+    ('gioco_assiale', 0.15, 'aria in altezza per la rotella: la manica è lunga rotella_spessore + gioco_assiale, con ogni plancia'),
     ('smusso', 0.4, 'smusso dello spigolo sotto di fiori e segnalini (sopra sono lisci fino al bordo) (0,2-0,6)'),
     ('raggio_angolo', 3.0, 'raggio degli angoli esterni del vassoio (0,5-6)'),
     ('coda_collo', 2.6, 'larghezza del collo della coda a pomello (2-3)'),
@@ -570,22 +576,38 @@ class Stato(Piatto):
 
 
 class Rotella(Tondo):
-    """disco Ø 52 della rotella, liscio sopra: finestra passante a corona_r dal centro (in alto, +y), larga e alta come
-    quella del disco di carta + gioco_carta per lato (l'adesivo, intagliato sulla finestra di carta, copre il bordo della
-    plastica), foro del perno al centro. L'adesivo è una corona con l'intaglio della finestra aperto verso il bordo e un
-    foro di raggio mozzo_r + gioco_carta: lì appoggia il fermo, sulla plastica."""
+    """disco Ø 52 della rotella, il disco DI SOPRA come in Unmatched (Daniele, 14/11 00:01), liscio sopra: TACCA aperta
+    sul bordo in alto (+y), larga come la finestra del disco di carta + gioco_carta per lato, dal bordo fino a
+    corona_r - (alta/2 + gioco_carta) dal centro: lì si legge il valore stampato sulla corona della plancia (l'adesivo,
+    intagliato come la finestra di carta, copre il bordo della plastica). Al centro il foro della manica del rivetto.
+    L'adesivo è una corona con l'intaglio della tacca e un foro di raggio mozzo_r + gioco_carta: lì appoggia la testa
+    della femmina, sulla plastica."""
     spessore = 'rotella_spessore'
 
     def __init__(self, finestra):
         self.ww, self.wh = finestra
-        self.nome, self.dpar = f'rotella_finestra_{finestra[0]:g}x{finestra[1]:g}', 'rotella_d'
+        self.nome, self.dpar = f'rotella_tacca_{finestra[0]:g}x{finestra[1]:g}', 'rotella_d'
 
     def fori(self):
+        """foro della manica e tacca (taglio dopo lo smusso sotto: il rettangolo esce oltre il bordo del disco)."""
         ww, wh = f'{self.ww:g}/2 + gioco_carta', f'{self.wh:g}/2 + gioco_carta'
-        fin = box(-ev(ww), P['corona_r'] - ev(wh), ev(ww), P['corona_r'] + ev(wh))
-        return [([{'command': 'sketch.circle.center', 'params': {'center': ['0*foro_perno', '0*foro_perno'], 'radius': 'foro_perno/2'}}],
-                 disco(P['foro_perno'] / 2)),
-                ([{'command': 'sketch.rectangle.two_point', 'params': {'p0': [f'-({ww})', f'corona_r - ({wh})'], 'p1': [ww, f'corona_r + {wh}']}}], fin)]
+        tacca = box(-ev(ww), P['corona_r'] - ev(wh), ev(ww), P['rotella_d'] / 2 + 1)
+        return [([{'command': 'sketch.circle.center', 'params': {'center': ['0*foro_rotella', '0*foro_rotella'], 'radius': 'foro_rotella/2'}}],
+                 disco(P['foro_rotella'] / 2)),
+                ([{'command': 'sketch.rectangle.two_point', 'params': {'p0': [f'-({ww})', f'corona_r - ({wh})'], 'p1': [ww, 'rotella_d/2 + 1']}}], tacca)]
+
+    def expected(self):
+        """disco smussato sotto, meno il foro e la tacca; la tacca taglia anche lo smusso: nello smusso (45°) la sezione a
+        quota z è il disco di raggio R - smusso + z, integrata con Simpson (area liscia in z)."""
+        H, s, R = ev(self.spessore), P['smusso'], P['rotella_d'] / 2
+        F = self.forma(0.0)
+        (_, foro), (_, tacca) = self.fori()
+        n = 16
+        a = [disco(R - s + s * k / n).intersection(tacca).area for k in range(n + 1)]
+        tolta = s / n / 3 * (a[0] + a[-1] + 4 * sum(a[1:-1:2]) + 2 * sum(a[2:-1:2])) + (H - s) * a[-1]
+        vol = chamfered_volume(F, s, H, sopra=False) - foro.area * H - tolta
+        b = F.difference(tacca).bounds
+        return vol, [round(b[2] - b[0], 4), round(b[3] - b[1], 4), H]
 
     def adesivo(self):
         a = super().adesivo().difference(disco(P['mozzo_r'] + P['gioco_carta']))
@@ -594,8 +616,11 @@ class Rotella(Tondo):
 
     def carta(self):
         c = super().carta()
-        c.update({'finestra_carta_mm': [self.ww, self.wh], 'finestra_plastica_mm': [self.ww + 2 * P['gioco_carta'], self.wh + 2 * P['gioco_carta']],
-                  'foro_adesivo_mm': round(2 * (P['mozzo_r'] + P['gioco_carta']), 3), 'foro_perno_mm': P['foro_perno']})
+        g = P['gioco_carta']
+        c.update({'finestra_carta_mm': [self.ww, self.wh], 'tacca_plastica_larga_mm': self.ww + 2 * g,
+                  'tacca_dal_centro_mm': [round(P['corona_r'] - self.wh / 2 - g, 3), P['rotella_d'] / 2],
+                  'intaglio_adesivo_dal_centro_mm': round(P['corona_r'] - self.wh / 2, 3),
+                  'foro_adesivo_mm': round(2 * (P['mozzo_r'] + g), 3), 'foro_rotella_mm': P['foro_rotella']})
         return c
 
 
@@ -606,101 +631,103 @@ ROTELLE_3D = [('rotella_PV', (11, 9), PLANCE), ('rotella_Danni', (9, 9), PLANCE)
               ('rotella_scontro', (11, 9), 1), ('rotella_custode', (11, 9), 1), ('rotella_Profezia', (10, 9), 1)]
 
 
-def quote_perno():
-    """quote (espressioni, z in su dal piano di stampa = sotto della testa) del perno, montato con la testa sotto la plancia."""
-    zh = 'testa_h + carta_plancia + rotella_spessore'           # sopra del mozzo della rotella: lì appoggia il fermo
-    zn = f'{zh} - 0.2'                                          # inizio della gola (0,2 sotto: margine per la carta più sottile)
-    zl = f'{zh} + fermo_h + gioco_assiale'                      # dente: le ganasce si chiudono sotto di lui
-    zb = f'{zl} + 0.4'
-    zt = f'{zb} + 0.7'                                          # punta a cono a 45°: apre le ganasce
-    return {'mozzo': zh, 'gola': zn, 'dente': zl, 'dente_alto': zb, 'punta': zt}
+# rivetto in 2 pezzi a pressione come in Unmatched (Daniele, 14/11 00:01): espressioni delle lunghezze, z in su dal piatto
+# di stampa = cima della cupola. La manica della femmina poggia sulla plancia: la rotella ha sempre gioco_assiale in
+# altezza; il gambo del maschio è lungo quanto basta perché con la plancia più sottile (carta_min) la punta resti 0,2
+# sotto il fondo del foro della femmina. Più spessa è la plancia, meno entra il gambo (le costole tengono lo stesso).
+MANICA_L = 'rotella_spessore + gioco_assiale'
+GAMBO_L = f'carta_min + {MANICA_L} + testa_h - fondo_femmina - 0.2'
+COSTOLA_L, COSTOLA_DENTRO, COSTOLA_CIMA = 0.6, 0.2, 0.6   # costole: larghe 0,6, entrano 0,2 nel gambo, finiscono 0,6 sotto la punta
+PUNTA, INVITO = 0.4, 0.3                                 # smusso a 45° della punta del gambo e dell'invito del foro della femmina
+FORO_PLANCIA = 4.0                                       # foro della plancia e delle basi di carta (svg.dial_ring)
 
 
-class Perno:
-    """perno della rotella, stampato in piedi sulla testa: testa Ø testa_d sotto la plancia, fusto Ø perno_d nel foro di
-    plancia e rotella, gola Ø collo_d dove si chiude il fermo, dente e punta a cono. Unico sbalzo: il dente, (perno_d -
-    collo_d)/2 = 0,25 mm in orizzontale."""
-    nome = 'perno'
-    spess_min = 0.8
-    facce_giu = 2             # fondo e sotto del dente (sbalzo di 0,25 mm)
+def area_costola_fuori(r):
+    """area della sezione di una costola (rettangolo largo COSTOLA_L, da gambo_d/2 - COSTOLA_DENTRO a gambo_d/2 + costola
+    dal centro) fuori dal cerchio di raggio r (integrale in y con Simpson su 2000 intervalli)."""
+    x0, x1, h = P['gambo_d'] / 2 - COSTOLA_DENTRO, P['gambo_d'] / 2 + P['costola'], COSTOLA_L / 2
+    y = np.linspace(-h, h, 2001)
+    f = np.clip(np.sqrt(np.maximum(r * r - y * y, 0.0)), x0, x1) - x0
+    dentro = (y[1] - y[0]) / 3 * (f[0] + f[-1] + 4 * f[1:-1:2].sum() + 2 * f[2:-1:2].sum())
+    return (x1 - x0) * COSTOLA_L - dentro
 
-    def profilo(self):
-        q = quote_perno()
-        return [('0*perno_d', '0*perno_d'), ('testa_d/2', '0*perno_d'), ('testa_d/2', 'testa_h - 0.3'), ('testa_d/2 - 0.3', 'testa_h'),
-                ('perno_d/2 + 0.3', 'testa_h'), ('perno_d/2', 'testa_h + 0.3'), ('perno_d/2', f'{q["gola"]} - (perno_d - collo_d)/2'),
-                ('collo_d/2', q['gola']), ('collo_d/2', q['dente']), ('perno_d/2', q['dente']), ('perno_d/2', q['dente_alto']),
-                ('perno_d/2 - 0.7', q['punta']), ('0*perno_d', q['punta'])]
+
+class Rivetto:
+    """testa a cupola bassa Ø testa_d × testa_h col sotto piatto, profilo di rivoluzione stampato con la cima della cupola
+    sul piatto: cima piatta di raggio testa_d/2 - 0,9 × testa_h, poi la cupola sale a 45° e più ripida verso il bordo
+    (niente sbalzi oltre 45°). Le sottoclassi aggiungono il gambo o la manica."""
+    facce_giu = 1             # solo la cima della cupola, sul piatto
+
+    @staticmethod
+    def testa():
+        return [('0*testa_d', '0*testa_d'), ('testa_d/2 - 0.9*testa_h', '0*testa_d'), ('testa_d/2 - 0.4*testa_h', '0.5*testa_h'),
+                ('testa_d/2 - 0.1*testa_h', '0.875*testa_h'), ('testa_d/2', 'testa_h')]
 
     def commands(self, body=None):
         body = body or self.nome
         return [{'command': 'sketch.create', 'params': {'plane': 'XZ', 'name': 'Profilo'}},     # schizzo XZ: y = -Z
                 {'command': 'sketch.line', 'params': {'points': [[r, f'-({z})'] for r, z in self.profilo()], 'closed': True}},
                 {'command': 'sketch.finish', 'params': {}},
-                {'command': 'solid.revolve', 'params': {'axis': 'Z', 'operation': 'new', 'name': 'Perno', 'body_name': body}}]
+                {'command': 'solid.revolve', 'params': {'axis': 'Z', 'operation': 'new', 'name': 'Rivetto', 'body_name': body}}]
 
     def expected(self):
         p = Polygon([(ev(r), ev(z)) for r, z in self.profilo()])
         vol = 2 * math.pi * p.area * p.centroid.x             # Pappo
-        R = P['testa_d'] / 2
-        return vol, [2 * R, 2 * R, round(p.bounds[3], 4)]
-
-    def carta(self):
-        q = {k: round(ev(v), 3) for k, v in quote_perno().items()}
-        return {'quote_z_mm': q, 'gioco_radiale_nel_foro_mm': round((P['foro_perno'] - P['perno_d']) / 2, 3),
-                'foro_plancia_mm': 4.0, 'interferenza_ganasce_mm': round(P['perno_d'] / 2 - (P['collo_d'] / 2 + 0.05), 3)}
+        return vol, [P['testa_d'], P['testa_d'], round(p.bounds[3], 4)]
 
 
-# fermo: ganasce a sbalzo parallele all'asse y (radice a y = FERMO_Y0, punta a FERMO_Y1), sede tonda per la gola al centro
-FERMO_Y0, FERMO_Y1, FERMO_FESSURA = -4.2, 2.0, 0.7
+class RivettoMaschio(Rivetto):
+    """maschio: testa sotto la plancia, gambo Ø gambo_d con la punta smussata e 4 costole di schiacciamento (sporgono di
+    costola, finiscono COSTOLA_CIMA sotto la punta) che entrano a pressione nel foro della femmina."""
+    nome = 'rivetto_maschio'
+    spess_min = 1.6
 
+    def profilo(self):
+        return self.testa() + [('gambo_d/2', 'testa_h'), ('gambo_d/2', f'testa_h + {GAMBO_L} - {PUNTA}'),
+                               (f'gambo_d/2 - {PUNTA}', f'testa_h + {GAMBO_L}'), ('0*gambo_d', f'testa_h + {GAMBO_L}')]
 
-class Fermo:
-    """fermo del perno, piatto (si stampa su una faccia qualsiasi): disco Ø fermo_d con 2 ganasce a sbalzo che si aprono
-    nel piano quando la punta del perno ci passa in mezzo e si richiudono nella gola. Fessure da FERMO_FESSURA mm."""
-    nome = 'fermo'
-    spess_min = 1.2
-    facce_giu = 1
-
-    def tagli(self):
-        """[(comandi dello schizzo, poligono)]: sede, fessura centrale, 2 fessure esterne, fessura in punta."""
-        s, y0, y1 = FERMO_FESSURA, FERMO_Y0, FERMO_Y1
-        xi, xe = 'perno_d/2 - 0.5', 'perno_d/2 + 0.5'           # bordo interno della ganascia e bordo esterno (radice larga 1)
-        xf = f'{xe} + {s}'
-
-        def rect(xa, ya, xb, yb):
-            return ([{'command': 'sketch.rectangle.two_point', 'params': {'p0': [xa, ya], 'p1': [xb, yb]}}],
-                    box(ev(xa), ev(ya), ev(xb), ev(yb)))
-        yy0, yy1, yt = f'{y0} + 0*perno_d', f'{y1 + s} + 0*perno_d', f'{y1} + 0*perno_d'
-        return [([{'command': 'sketch.circle.center', 'params': {'center': ['0*collo_d', '0*collo_d'], 'radius': 'collo_d/2 + 0.05'}}],
-                 disco(P['collo_d'] / 2 + 0.05)),
-                rect(f'-({xi})', yy0, xi, yy1), rect(xe, yy0, xf, yy1), rect(f'-({xf})', yy0, f'-({xe})', yy1), rect(f'-({xf})', yt, xf, yy1)]
+    def costole(self):
+        a, i, e = f'{COSTOLA_L / 2} + 0*gambo_d', f'gambo_d/2 - {COSTOLA_DENTRO}', 'gambo_d/2 + costola'
+        rett = [((i, f'-{a}'), (e, a)), ((f'-({e})', f'-{a}'), (f'-({i})', a)), ((f'-{a}', i), (a, e)), ((f'-{a}', f'-({e})'), (a, f'-({i})'))]
+        return [{'command': 'sketch.rectangle.two_point', 'params': {'p0': list(p0), 'p1': list(p1)}} for p0, p1 in rett]
 
     def commands(self, body=None):
         body = body or self.nome
-        c = [{'command': 'sketch.create', 'params': {'plane': 'XY', 'name': 'Disco'}},
-             {'command': 'sketch.circle.center', 'params': {'center': ['0*fermo_d', '0*fermo_d'], 'radius': 'fermo_d/2'}},
-             {'command': 'sketch.finish', 'params': {}},
-             {'command': 'solid.extrude', 'params': {'distance': 'fermo_h', 'operation': 'new', 'name': 'Fermo', 'body_name': body}}]
-        for k, (sk, _) in enumerate(self.tagli()):
-            c += [{'command': 'sketch.create', 'params': {'plane': 'XY', 'offset': 'fermo_h', 'name': f'Taglio {k + 1}'}}, *sk,
-                  {'command': 'sketch.finish', 'params': {}},
-                  {'command': 'solid.extrude', 'params': {'distance': 'fermo_h', 'direction': 'negative', 'operation': 'cut',
-                                                          'name': f'Taglio {k + 1}', 'targets': [body]}}]
-        return c
-
-    def forma(self):
-        return disco(P['fermo_d'] / 2).difference(unary_union([g for _, g in self.tagli()]))
+        return super().commands(body) + [
+            {'command': 'sketch.create', 'params': {'plane': 'XY', 'offset': 'testa_h', 'name': 'Costole'}}, *self.costole(),
+            {'command': 'sketch.finish', 'params': {}},
+            {'command': 'solid.extrude', 'params': {'distance': f'{GAMBO_L} - {COSTOLA_CIMA}', 'operation': 'join', 'name': 'Costole',
+                                                    'targets': [body]}}]
 
     def expected(self):
-        return self.forma().area * P['fermo_h'], [P['fermo_d'], P['fermo_d'], P['fermo_h']]
+        vol, bb = super().expected()
+        return vol + 4 * area_costola_fuori(P['gambo_d'] / 2) * (ev(GAMBO_L) - COSTOLA_CIMA), bb
 
     def carta(self):
-        L = -FERMO_Y0                                          # sbalzo dalla radice alla gola
-        w = 1.0                                                # larghezza della ganascia alla radice
-        d = P['perno_d'] / 2 - (P['collo_d'] / 2 + 0.05)       # quanto si apre ogni ganascia al passaggio del dente
-        return {'ganasce': 2, 'sbalzo_mm': L, 'larghezza_radice_mm': w, 'apertura_per_ganascia_mm': round(d, 3),
-                'deformazione_alla_radice_pct': round(150 * d * w / L ** 2, 2), 'fessure_mm': FERMO_FESSURA,
-                'gioco_gola_sede_mm': 0.05}
+        dc = P['gambo_d'] + 2 * P['costola']
+        return {'testa_mm': [P['testa_d'], P['testa_h']], 'gambo_d_mm': P['gambo_d'], 'gambo_con_costole_d_mm': dc,
+                'gambo_lungo_mm': round(ev(GAMBO_L), 3), 'costole': 4, 'costola_larga_mm': COSTOLA_L,
+                'interferenza_costola_foro_femmina_mm': round(dc / 2 - P['foro_femmina'] / 2, 3),
+                'gioco_nel_foro_plancia_mm': round((FORO_PLANCIA - dc) / 2, 3), 'stampa': 'cima della cupola sul piatto, gambo in su'}
+
+
+class RivettoFemmina(Rivetto):
+    """femmina: testa sopra la rotella, manica Ø manica_d lunga rotella_spessore + gioco_assiale (ci gira la rotella,
+    poggia sulla plancia) col foro cieco Ø foro_femmina e l'invito a 45° in cima."""
+    nome = 'rivetto_femmina'
+    spess_min = 0.6           # fondo del foro, sotto la cima della cupola
+    spessore = f'testa_h + {MANICA_L}'   # altezza (render_3d.py: per capovolgerla)
+
+    def profilo(self):
+        return self.testa() + [('manica_d/2', 'testa_h'), ('manica_d/2', f'testa_h + {MANICA_L}'),
+                               (f'foro_femmina/2 + {INVITO}', f'testa_h + {MANICA_L}'), ('foro_femmina/2', f'testa_h + {MANICA_L} - {INVITO}'),
+                               ('foro_femmina/2', 'fondo_femmina'), ('0*foro_femmina', 'fondo_femmina')]
+
+    def carta(self):
+        return {'testa_mm': [P['testa_d'], P['testa_h']], 'manica_d_mm': P['manica_d'], 'manica_lunga_mm': round(ev(MANICA_L), 3),
+                'foro_d_mm': P['foro_femmina'], 'foro_profondo_mm': round(ev(f'testa_h + {MANICA_L} - fondo_femmina'), 3),
+                'gioco_radiale_rotella_mm': round((P['foro_rotella'] - P['manica_d']) / 2, 3), 'gioco_assiale_rotella_mm': P['gioco_assiale'],
+                'stampa': 'cima della cupola sul piatto, manica in su'}
 
 
 def hex_local(vals, apotema):
@@ -903,7 +930,7 @@ def costruisci(pz, tmp):
     files, fok = check_files(pz.nome, m['volume_mm3'])
     fc = out[-2]['faces']
     giu = [f for f in fc if f.get('plane_normal') and f['plane_normal'][2] < -0.999]
-    # fondo piatto: una sola faccia verso il basso a z = 0 (il perno ha in più il sotto del dente, sbalzo di 0,25 mm)
+    # fondo piatto: una sola faccia verso il basso, a z = 0 (rivetti: la cima della cupola, sul piatto)
     fondo_piatto = (len(giu) == getattr(pz, 'facce_giu', 1) and sum(abs(f['centroid'][2]) < 1e-6 for f in giu) == 1)
     su = [f for f in fc if f.get('plane_normal') and f['plane_normal'][2] > 0.999]
     spess = min(f['centroid'][2] for f in su)            # faccia rivolta in su più bassa
@@ -926,7 +953,7 @@ def costruisci(pz, tmp):
         if isinstance(pz, Piatto):
             a = pz.adesivo().bounds
             g = [round((t[0] - (a[2] - a[0])) / 2, 4), round((t[1] - (a[3] - a[1])) / 2, 4) if not isinstance(pz, Rotella) else None]
-            r['carta']['margine_adesivo_misurato_mm'] = g     # rotelle: in y c'è l'intaglio della finestra
+            r['carta']['margine_adesivo_misurato_mm'] = g     # rotelle: in y c'è l'intaglio della tacca
             r['ok'] &= all(abs(x - P['margine_adesivo']) <= 0.2 for x in g if x is not None)
     print('PEZZO', pz.nome, json.dumps({k: r[k] for k in r if k != 'file'}, ensure_ascii=False))
     snapshot(sc, os.path.join(OUT, pz.nome + '.png'), w=800, h=600)
@@ -936,67 +963,84 @@ def costruisci(pz, tmp):
 def segnalini_3d():
     """i pezzi 3D dei segnalini del kit (D29): un pezzo per geometria; quantità e nomi nel 3MF da oggetti_3mf()."""
     return ([Tondo('tessera_esplorazione', 'tessera_d'), Tondo('segnalino_tondo', 'gettone_d'), Stato()]
-            + [Rotella(f) for f in dict.fromkeys(f for _, f, _ in ROTELLE_3D)] + [Perno(), Fermo()])
+            + [Rotella(f) for f in dict.fromkeys(f for _, f, _ in ROTELLE_3D)] + [RivettoMaschio(), RivettoFemmina()])
 
 
-def prova_perno(tmp):
-    """montaggio perno + plancia (lastra da carta_plancia col foro Ø 4) + rotella + fermo: niente intersezioni, giochi
-    misurati faccia contro faccia, presa del dente (il fermo alzato sul dente deve urtare le ganasce), sezione in PNG."""
-    q = {k: ev(v) for k, v in quote_perno().items()}
-    rot = Rotella((11, 9))
-    cmds = params_cmds() + rot.commands('rotella') + Perno().commands('perno') + Fermo().commands('fermo') + [
+CARTE_PROVA = (0.1, 0.3, 0.45)   # plance della prova di montaggio: la più sottile, quella di carta_plancia, la più spessa
+
+
+def pressione_attesa(tp):
+    """volume delle 4 costole dentro la manica della femmina (la pressione), con la plancia da tp: dalla bocca del foro
+    (invito a 45°) fino alla cima delle costole."""
+    z0, z1 = P['testa_h'] + tp, P['testa_h'] + ev(GAMBO_L) - COSTOLA_CIMA
+    z = np.linspace(z0, z1, 4001)
+    rb = P['foro_femmina'] / 2 + np.clip(INVITO - (z - z0), 0.0, None)
+    a = np.array([area_costola_fuori(r) for r in rb])
+    return 4 * float(np.sum((a[1:] + a[:-1]) / 2 * np.diff(z)))
+
+
+def prova_rivetto(tmp, tp, foto=False):
+    """montaggio maschio + plancia (lastra da tp mm col foro Ø 4) + rotella + femmina (girata, manica sulla plancia):
+    nessuna intersezione tranne le costole nel foro della femmina (la pressione, volume confrontato col calcolo), giochi
+    misurati faccia contro faccia (raggi e assi per i cilindri). Con foto salva il documento, la sezione e la vista in PNG."""
+    th, ml, gl, f = P['testa_h'], ev(MANICA_L), ev(GAMBO_L), P['fondo_femmina']
+    zp = th + tp                 # sopra della plancia = sotto di rotella e manica
+    zf = zp + ml                 # sotto della testa della femmina
+    t = f'{tp} + 0*testa_h'
+    cmds = params_cmds() + Rotella((11, 9)).commands('rotella') + RivettoMaschio().commands('maschio') + RivettoFemmina().commands('femmina') + [
         {'command': 'sketch.create', 'params': {'plane': 'XY', 'offset': 'testa_h', 'name': 'Plancia'}},
         {'command': 'sketch.rectangle.two_point', 'params': {'p0': ['-32 + 0*testa_h', '-32 + 0*testa_h'], 'p1': ['32 + 0*testa_h', '32 + 0*testa_h']}},
         {'command': 'sketch.finish', 'params': {}},
-        {'command': 'solid.extrude', 'params': {'distance': 'carta_plancia', 'operation': 'new', 'name': 'Plancia', 'body_name': 'plancia'}},
-        {'command': 'sketch.create', 'params': {'plane': 'XY', 'offset': 'testa_h + carta_plancia', 'name': 'Foro plancia'}},
-        {'command': 'sketch.circle.center', 'params': {'center': ['0*testa_h', '0*testa_h'], 'radius': '2 + 0*testa_h'}},
+        {'command': 'solid.extrude', 'params': {'distance': t, 'operation': 'new', 'name': 'Plancia', 'body_name': 'plancia'}},
+        {'command': 'sketch.create', 'params': {'plane': 'XY', 'offset': f'testa_h + {t}', 'name': 'Foro plancia'}},
+        {'command': 'sketch.circle.center', 'params': {'center': ['0*testa_h', '0*testa_h'], 'radius': f'{FORO_PLANCIA / 2} + 0*testa_h'}},
         {'command': 'sketch.finish', 'params': {}},
-        {'command': 'solid.extrude', 'params': {'distance': 'carta_plancia', 'direction': 'negative', 'operation': 'cut', 'name': 'Foro plancia',
+        {'command': 'solid.extrude', 'params': {'distance': t, 'direction': 'negative', 'operation': 'cut', 'name': 'Foro plancia',
                                                 'targets': ['plancia']}},
-        {'command': 'solid.move', 'params': {'bodies': ['rotella'], 'translate': [0, 0, 'testa_h + carta_plancia']}},
-        {'command': 'solid.move', 'params': {'bodies': ['fermo'], 'translate': [0, 0, quote_perno()['mozzo']]}}]
+        {'command': 'solid.move', 'params': {'bodies': ['rotella'], 'translate': [0, 0, f'testa_h + {t}']}},
+        {'command': 'solid.move', 'params': {'bodies': ['femmina'], 'axis': [1, 0, 0], 'angle': '180 deg',
+                                             'translate': [0, 0, f'2*testa_h + {t} + {MANICA_L}']}}]
     n_build = len(cmds)
-    zr = P['testa_h'] + P['carta_plancia'] + P['rotella_spessore'] / 2
+    zr, c45 = zp + P['rotella_spessore'] / 2, math.sqrt(0.5)
 
     def fc(body, p):
         return {'type': 'face', 'body': body, 'point': [float(c) for c in p]}
-    misure = [('fusto-foro della rotella', fc('perno', (P['perno_d'] / 2, 0, zr)), fc('rotella', (P['foro_perno'] / 2, 0, zr)),
-               (P['foro_perno'] - P['perno_d']) / 2, True),
-              # nella plancia (z da testa_h a testa_h + carta_plancia) c'è il raccordo a 45° del fusto, da Ø 4,0 a 3,4: la
-              # plancia (foro Ø 4) appoggia sulla testa centrata dal raccordo, quindi lì non c'è un gioco da misurare
-              ('gola-sede del fermo', fc('perno', (P['collo_d'] / 2, 0, q['mozzo'] + P['fermo_h'] / 2)),
-               fc('fermo', (P['collo_d'] / 2 + 0.05, 0, q['mozzo'] + P['fermo_h'] / 2)), 0.05, True),
-              ('dente-fermo (gioco assiale)', fc('perno', (P['perno_d'] / 2 - 0.1, 0, q['dente'])),
-               fc('fermo', (P['perno_d'] / 2 - 0.1, 0, q['mozzo'] + P['fermo_h'])), P['gioco_assiale'], False)]
-    cmds += [{'command': 'inspect.interference', 'params': {'bodies': ['plancia', 'rotella', 'perno', 'fermo']}}]
+    misure = [('manica-foro della rotella', fc('femmina', (P['manica_d'] / 2, 0, zr)), fc('rotella', (P['foro_rotella'] / 2, 0, zr)),
+               (P['foro_rotella'] - P['manica_d']) / 2, True),
+              ('testa della femmina-rotella (gioco assiale)', fc('femmina', (4.0, 0, zf)), fc('rotella', (4.0, 0, zp + P['rotella_spessore'])),
+               P['gioco_assiale'], False),
+              ('gambo-foro della femmina (tra le costole)', fc('maschio', (P['gambo_d'] / 2 * c45, P['gambo_d'] / 2 * c45, zp + 1.2)),
+               fc('femmina', (P['foro_femmina'] / 2 * c45, P['foro_femmina'] / 2 * c45, zp + 1.2)), (P['foro_femmina'] - P['gambo_d']) / 2, True),
+              ('punta del gambo-fondo del foro', fc('maschio', (0.5, 0, th + gl)), fc('femmina', (0.5, 0, zf + th - f)),
+               zf + th - f - (th + gl), False)]
+    cmds += [{'command': 'inspect.interference', 'params': {'bodies': ['plancia', 'rotella', 'maschio', 'femmina'],
+                                                            'exclude_pairs': [['maschio', 'femmina']]}},
+             {'command': 'inspect.interference', 'params': {'bodies': ['maschio', 'femmina']}}]
     cmds += [{'command': 'inspect.measure', 'params': {'items': [a, b]}} for _, a, b, _, _ in misure]
-    va = os.path.join(OUT, 'verifica_perno.solidcraft')
-    out = run_sc(cmds, tmp, 'verifica_perno', ['--save', va])
+    va = os.path.join(OUT if foto else tmp, 'verifica_rivetto.solidcraft')
+    out = run_sc(cmds, tmp, f'verifica_rivetto_{tp:g}', ['--save', va])
     inter = [i for i in out[n_build]['interferences'] if i.get('volume_mm3', 0) > 1e-6]
-    res = {'intersezioni': inter, 'giochi': {}}
-    ok = not inter
-    for (nome, _, _, att, cil), r in zip(misure, out[n_build + 1:]):
+    v = sum(i.get('volume_mm3', 0) for i in out[n_build + 1]['interferences'])
+    att = pressione_attesa(tp)
+    res = {'plancia_mm': tp, 'intersezioni': inter, 'giochi': {},
+           'pressione_costole_mm3': {'atteso': round(att, 4), 'misura': round(v, 4)},
+           'costole_nel_foro_mm': round(th + gl - COSTOLA_CIMA - zp, 3), 'gambo_nel_foro_mm': round(th + gl - zp, 3)}
+    ok = not inter and abs(v - att) <= 0.1 * att
+    for (nome, _, _, a, cil), r in zip(misure, out[n_build + 2:]):
         d = r['distance_mm']
         if cil:   # tra cilindri coassiali contano raggi e assi (la distanza tra facce curve è misurata sulla mesh)
             i1, i2 = r['items']
             d = abs(i2['radius'] - i1['radius']) - math.dist(i1['center'][:2], i2['center'][:2])
-        res['giochi'][nome] = {'atteso_mm': round(att, 3), 'misura_mm': round(d, 4)}
-        ok &= abs(d - att) < 2e-3
-    # presa: il fermo alzato di fermo_h + gioco_assiale + 0,2 mm sta all'altezza del dente: deve urtare le ganasce
-    alza = P['fermo_h'] + P['gioco_assiale'] + 0.2
-    out = run_sc([{'command': 'solid.move', 'params': {'bodies': ['fermo'], 'translate': [0, 0, alza]}},
-                  {'command': 'inspect.interference', 'params': {'bodies': ['perno', 'fermo']}}], tmp, 'presa_perno', ['--in', va])
-    v = sum(i.get('volume_mm3', 0) for i in out[-1]['interferences'])
-    res['presa_dente_ganasce_mm3'] = round(v, 4)
-    ok &= v > 1e-3
-    res['quote_z_mm'] = {k: round(v_, 3) for k, v_ in q.items()}
+        res['giochi'][nome] = {'atteso_mm': round(a, 3), 'misura_mm': round(d, 4)}
+        ok &= abs(d - a) < 2e-3
     res['ok'] = bool(ok)
-    colori = ['--body', 'rotella:color=#c89a50', '--body', 'plancia:color=#e8dcc0', '--body', 'perno:color=#3060a0', '--body', 'fermo:color=#a03030']
-    snapshot(va, os.path.join(OUT, 'verifica_perno_sezione.png'), {'target': [0, 0, 3], 'yaw': math.pi, 'pitch': 0.25, 'distance': 24},
-             1200, 800, ['--section', 'y=0', *colori])
-    snapshot(va, os.path.join(OUT, 'verifica_perno.png'), {'target': [0, 0, 2], 'yaw': 0.6, 'pitch': 0.6, 'distance': 90}, 1200, 800, colori)
-    print('PROVA perno', json.dumps(res, ensure_ascii=False))
+    if foto:
+        colori = ['--body', 'rotella:color=#c89a50', '--body', 'plancia:color=#e8dcc0', '--body', 'maschio:color=#2a2a2a',
+                  '--body', 'femmina:color=#5a5a5a']
+        snapshot(va, os.path.join(OUT, 'verifica_rivetto_sezione.png'), {'target': [0, 0, zp + 1], 'yaw': math.pi, 'pitch': 0.2, 'distance': 26},
+                 1200, 800, ['--section', 'y=0', *colori])
+        snapshot(va, os.path.join(OUT, 'verifica_rivetto.png'), {'target': [0, 0, 2], 'yaw': 0.6, 'pitch': 0.6, 'distance': 90}, 1200, 800, colori)
+    print('PROVA rivetto', json.dumps(res, ensure_ascii=False))
     return res, ok
 
 
@@ -1006,12 +1050,14 @@ def main():
     ris = {'parametri': P, 'gioco_carta_mm': P['gioco_carta'], 'piatto_ipotizzato_mm': PIATTO, 'pezzi': {}, 'prove': {}}
     ok = True
     try:
-        # 1. segnalini del kit, rotelle e perni (D29)
+        # 1. segnalini del kit, rotelle e rivetti (D29)
         for pz in segnalini_3d():
             ris['pezzi'][pz.nome], k = costruisci(pz, tmp)
             ok &= k
-        ris['prove']['perno'], k = prova_perno(tmp)
-        ok &= k
+        ris['prove']['rivetto'] = {}
+        for tp in CARTE_PROVA:
+            ris['prove']['rivetto'][f'plancia_{tp:g}'], k = prova_rivetto(tmp, tp, foto=tp == P['carta_plancia'])
+            ok &= k
         # 2. fiore e Cripta
         fi = Fiore()
         for pz in (fi, Cripta()):
@@ -1209,13 +1255,13 @@ def main():
 def oggetti_3mf():
     """[(oggetto del 3MF, STL in out/, copie)]: tutto il gioco in 3D. Quantità dai CSV del kit (segnalini.csv, stati.csv,
     tessere_esplorazione.csv), dalla mappa (14 fiori) e dalle rotelle (6 per plancia × PLANCE, scontro, custode, Profezia:
-    un perno e un fermo per rotella). Lo stesso STL può dare più oggetti, con nomi diversi per assegnare i colori."""
+    un rivetto maschio e una femmina per rotella). Lo stesso STL può dare più oggetti, con nomi diversi per assegnare i colori."""
     seg = {r['nome']: int(r['copie']) for r in csv.DictReader(open(os.path.join(DATI, 'segnalini.csv'), encoding='utf-8'))}
     tessere = list(csv.DictReader(open(os.path.join(DATI, 'tessere_esplorazione.csv'), encoding='utf-8')))
     n_rot = sum(c for _, _, c in ROTELLE_3D)
     return ([(f'vassoio_{q}', f'vassoio_{q}', 1) for q in QUARTI] + [('fiore', 'fiore', len(M.SPAZI))]
-            + [(n, f'rotella_finestra_{w:g}x{h:g}', c) for n, (w, h), c in ROTELLE_3D]
-            + [('perno', 'perno', n_rot), ('fermo', 'fermo', n_rot),
+            + [(n, f'rotella_tacca_{w:g}x{h:g}', c) for n, (w, h), c in ROTELLE_3D]
+            + [('rivetto_maschio', 'rivetto_maschio', n_rot), ('rivetto_femmina', 'rivetto_femmina', n_rot),
                ('tessera_stato', 'tessera_stato', copie_csv('stati.csv')),
                ('segnalino_indizio', 'segnalino_tondo', seg['Indizio']), ('segnalino_forte_volonta', 'segnalino_tondo', seg['Forte Volontà']),
                ('segnalino_usato', 'segnalino_tondo', seg['Usato']), ('segnalino_cripta', 'segnalino_cripta', 1),
@@ -1226,14 +1272,14 @@ def file_3mf(o):
     """il file 3MF (in out/) dove va l'oggetto o."""
     if o.startswith('vassoio_') or o == 'fiore':
         return 'mappa.3mf'
-    if o.startswith('rotella_') or o in ('perno', 'fermo'):
+    if o.startswith('rotella_') or o.startswith('rivetto_'):
         return 'rotelle_fulcri.3mf'
     if o == 'tessera_esplorazione':
         return 'tessere_esplorazione.3mf'
     return 'segnalini.3mf'
 
 
-FILE_3MF = {'mappa.3mf': 'mappa 12x12 (4 quarti del vassoio, 14 fiori)', 'rotelle_fulcri.3mf': 'rotelle, perni e fermi',
+FILE_3MF = {'mappa.3mf': 'mappa 12x12 (4 quarti del vassoio, 14 fiori)', 'rotelle_fulcri.3mf': 'rotelle e rivetti (maschio e femmina)',
             'segnalini.3mf': 'tessere Stato, Indizi, Forte Volonta, Usato, Cripta', 'tessere_esplorazione.3mf': 'Tessere Esplorazione'}
 
 
