@@ -128,6 +128,9 @@ def rapporto_n(n, ris):
     r.append(f"Cripta (D24): {st['cripta_tirata'] / N:.2f} tiri a partita; spostata dal punto tirato (ostacolo o Partenza) "
              f"{st['cripta_spostata'] / max(1, st['cripta_tirata']):.0%}; caduta su una tessera (resta, la tessera va in riserva) "
              f"{st['cripta_su_tessera'] / N:.2f} a partita")
+    r.append(f"Sconfitta con Indizio (D31): {(st['indizi_persi_riserva'] + st['indizi_persi_eroe']) / N:.2f} Indizi persi a partita "
+             f"(alla riserva {st['indizi_persi_riserva'] / N:.2f}, a un eroe {st['indizi_persi_eroe'] / N:.2f}, ripresi dal vincitore "
+             f"di un Duello {st['indizi_duelli'] / N:.2f}); Cripta tolta {st['cripta_tolta'] / N:.2f} volte a partita")
     r.append("Poteri usati per partita in cui la classe gioca: " + ', '.join(
         f"{c} {st['potere_' + c] / pres[c]:.2f}" for c in K.CLASSI if pres[c]))
     r.append(f"Giocate di carte con effetto non modellato (info): {st['info'] / N:.2f} a partita "
@@ -208,7 +211,7 @@ def main():
     accese = [f for f in FLAG if flag[f]] or ['nessuna (base v7: D18 Indizio D6 <= LV+1, D19 AR x 0,75)']
     out = [f"Simulatore v7: {a.partite} partite per numero di giocatori, seme {a.seme}; opzioni: {', '.join(accese)}",
            f"Dati: {len(K.COMUNI)} comuni, {sum(len(v) for v in K.CARTE_CLASSE.values())} di classe, mostri per mazzetto "
-           f"{ {t: len(v) for t, v in K.MAZZETTI.items()} } (+ custode tra i boss), abilità dei mostri info: "
+           f"{ {t: len(v) for t, v in K.MAZZETTI.items()} } (custode pescato dal mazzetto 3 quando compare la Cripta), abilità dei mostri info: "
            f"{[m for m, v in K.ABILITA.items() if v[0][0] == 'info'] or 'nessuna'}; codici sconosciuti: "
            f"{abilita_ignote() or 'nessuno'}"]
     out.append("Mano iniziale: 5 carte di classe, nessuna comune; " + ("scelte dall'IA (--mano-ia)" if a.mano_ia else

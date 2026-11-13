@@ -1356,20 +1356,10 @@ def un_3mf(nome, oggetti, distanza=5.0):
             '_piatti': piatti, '_oggetti': oggetti, '_mesh': mesh}
 
 
-def anteprima_piatto(info, k, png, tmp):
-    """PNG dall'alto del piatto k (1...) di un 3MF: un 3MF col solo quel piatto, inserito in SolidCraft."""
-    p3 = os.path.join(tmp, f'piatto_{k}.3mf')
-    scrivi_3mf(p3, info['_oggetti'], info['_mesh'], [info['_piatti'][k - 1]], f'piatto {k}')
-    sp = os.path.join(tmp, f'piatto_{k}.json')
-    with open(sp, 'w') as f:
-        json.dump({'commands': [{'command': 'file.insert_mesh', 'params': {'path': p3}}]}, f)
-    snapshot(sp, png, {'target': [PIATTO / 2, PIATTO / 2, 0], 'yaw': 0.0, 'pitch': 1.0, 'distance': 330}, 1400, 1100)
-
-
 def tremf():
-    """scrive i 4 file 3MF di FILE_3MF in out/ (e toglie i 3MF di un pezzo solo che SolidCraft lascia accanto agli STL),
-    controlla che ogni oggetto stia in un solo file con tutte le sue copie, e scrive l'anteprima del piatto 1 di
-    segnalini.3mf (out/piatto_segnalini.png)."""
+    """scrive i 4 file 3MF di FILE_3MF in out/ (e toglie i 3MF di un pezzo solo che SolidCraft lascia accanto agli STL) e
+    controlla che ogni oggetto stia in un solo file con tutte le sue copie. Le anteprime con le texture (piatto 1 di
+    segnalini.3mf compreso) le fa render_3d.py."""
     oggetti = oggetti_3mf()
     res, infos = {}, {}
     for nome in FILE_3MF:
@@ -1380,12 +1370,6 @@ def tremf():
         p = os.path.join(OUT, s + '.3mf')
         if os.path.exists(p):
             os.remove(p)
-    tmp = tempfile.mkdtemp(prefix='mappa3d-piatto-')
-    try:
-        anteprima_piatto(infos['segnalini.3mf'], 1, os.path.join(OUT, 'piatto_segnalini.png'), tmp)
-    finally:
-        shutil.rmtree(tmp, ignore_errors=True)
-    res['anteprima'] = {'png': 'piatto_segnalini.png', 'file': 'segnalini.3mf', 'piatto': 1}
     return res
 
 

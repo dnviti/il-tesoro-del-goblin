@@ -71,6 +71,7 @@ o altre tessere sull'esagono.
   colonna e 2D6 per la riga. Su acqua resta; su una tessera Esplorazione resta e la tessera torna coperta nella riserva; su un ostacolo
   o una Partenza va sull'esagono percorribile più vicino senza Partenza, senza tessera e fuori da riga e colonna 1 (a pari
   distanza il più alto, poi il più a sinistra).
+  Con D31 (13/11) la Cripta può anche essere tolta e rimessa e il custode si pesca dal mazzetto 3 quando compare: vedi «D31».
 - **Carta Mappa.** Cambia solo i suoi 3 fiori (righe `cambio` di `preset12.csv`, con lo scambio se il fiore sta già in
   un altro spazio). Le tessere sugli spazi cambiati tornano nella riserva e chi ha giocato la carta ne posa altrettante dalla
   riserva sui fiori nuovi, su esagoni percorribili a ≥ 2 dalle Partenze (a caso, una per esagono). Gli eroi tornano
@@ -214,3 +215,44 @@ senza pesca la mano resta a 2–3 carte (vuota nell'8 % dei turni) e si gioca ci
   (`stato.posa_tessere`, ognuno con `ia.posto_tessera`, per ora a caso come al montaggio), solo su esagoni liberi
   percorribili a ≥ 2 dalle Partenze, senza eroi, Cripta o altre tessere. Dopo una carta Mappa le tessere tolte le posa
   per intero chi ha giocato la carta.
+
+## D31, la sconfitta costa 1 Indizio (13/11, Daniele)
+
+- **Regola**: chi è sconfitto (Danni = PV) perde anche 1 Indizio, se ne ha. Se è sconfitto da una creatura, dal custode, da
+  una Trappola o da un effetto o un costo proprio, l'Indizio torna nella riserva; se è sconfitto da un altro eroe (una sua
+  carta o un suo attacco fuori dal Duello) lo prende quell'eroe (limiti di mano e altri limiti invariati). Duello: lo
+  sconfitto perde in tutto 1 solo Indizio, quello che il vincitore già prende (R 10.10), niente doppia perdita.
+  Il D6 della perdita e il potere TC-01 dell'Assaltatore non cambiano.
+- **Cripta e custode**: se dopo la perdita nessun eroe ha più 3 Indizi, la Cripta (con MIMI e custode) lascia la mappa;
+  ritorna con un nuovo tiro 2D6 + 2D6 quando un eroe torna a 3 Indizi. La voce (R 10.6, +1 Indizio a ognuno degli altri)
+  si sparge solo la prima volta (`g.tesoro_trovato`). **Il custode non si pesca più al montaggio**: i 6 boss sono tutti il
+  mazzetto 3 (`g.custode` parte `None`). Quando compare la Cripta (`stato.prendi_indizio`) si pesca a caso 1 boss dal
+  mazzetto 3 e diventa il custode a PV pieni (nuova `Creatura`); quando la Cripta se ne va (`stato.cripta_via`) il custode
+  guarisce del tutto e torna nel mazzetto 3, che si rimescola; alla Cripta successiva se ne pesca uno nuovo. Mentre il
+  custode è fuori, il mazzetto 3 ha 5 boss. Le ferite del custode restano solo tra uno scontro e l'altro con la stessa
+  Cripta (anche quando il tesoro cambia Cripta).
+- **Codice**: `stato.sconfitta(g, e, fonte)` (la `fonte` arriva da `danneggia`; Trappola e Speziale sono senza fonte),
+  `stato.indizio_perso`, `stato.cripta_via` (anche da `scontro.duello` dopo il passaggio dell'Indizio) e il nuovo ramo di
+  `stato.prendi_indizio`. Nel Duello `indizio_perso` non fa nulla (sconfitto e `scontro.duello`). Il rapporto stampa
+  «Sconfitta con Indizio (D31)»: Indizi persi a partita (riserva / a un eroe) e Cripta tolta a partita. L'IA non conosce il
+  nuovo rischio: non rinuncia al custode né evita le sconfitte per tenersi gli Indizi.
+- **Risposte di Daniele (13/11)**: se un altro eroe tiene ancora 3 Indizi la Cripta resta; nel Duello il vincitore che
+  arriva a 3 grazie all'Indizio preso tiene la Cripta; niente nuova voce quando la Cripta ritorna; se lo sconfitto è
+  l'attaccante colpito dal Riflesso di un eroe (`danneggia(..., riflesso=False)`), l'Indizio va a chi ha il Riflesso (se
+  il Riflesso colpisce una creatura nessun Indizio cambia). Nessun caso aperto.
+
+Confronto (13/11, 1000 partite per tavolata, seme 1, mani predefinite; prima di D31 → con D31 e il custode pescato alla Cripta):
+
+| | 2 / 3 / 4 giocatori |
+|---|---|
+| Round (partite finite) | 13,9 / 12,1 / 11,0 → 22,7 / 19,7 / 16,9 |
+| Finite col custode (le altre in stallo a 60 round) | 99,9 / 100 / 100 % → 84,4 / 94,6 / 98,8 % |
+| Round del 3° Indizio | 9,8 / 8,3 / 7,4 → 13,6 / 10,9 / 9,5 |
+| Tiri della Cripta a partita | 1,31 / 1,61 / 1,85 → 2,11 / 2,72 / 2,96 |
+| Cripta tolta a partita | 0 → 0,89 / 0,80 / 0,49 |
+| Indizi persi a partita (riserva + eroe) | 0 → 6,80 / 7,60 / 7,70 (all'eroe 0,08 / 0,19 / 0,25) |
+
+Vittorie per classe, prima → dopo (2 / 3 / 4 giocatori): Assaltatore 55→53 / 42→43 / 34→35 %, Ricercatore 45→37 / 29→28 /
+20→22 %, Stregone 56→39 / 32→30 / 26→24 %, Oracolo 49→48 / 33→33 / 24→24 %, Giullare 46→35 / 31→24 / 21→19 %. Gli
+Indizi persi sono quasi tutti alla riserva (sconfitte per creature e Trappole), quindi la partita si allunga di circa
+9 / 8 / 6 round.

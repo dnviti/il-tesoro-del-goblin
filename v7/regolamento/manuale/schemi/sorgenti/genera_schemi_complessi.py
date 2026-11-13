@@ -618,7 +618,7 @@ def s1_left():
         o.append(P(wob(C((cx_ + sx * 4, cy_ - 3), (cx_ + sx * 9, cy_ - 9), (cx_ + sx * 7.5, cy_ - 1.5)), .1, 10), True, INK, 'none'))
         o.append(P(ell(cx_ + sx * 2.8, cy_ + .5, 1.4, amp=0, n=6), True, GOLDL, 'none'))
     o.append(P(wob(C((cx_ - 3, cy_ + 7), (cx_ + 3, cy_ + 7), (cx_ + 8, cy_ + 13), (cx_ - 8, cy_ + 13)), .1, 10), True, INK, 'none'))
-    o.append(TL(cx_, ry + 19, ['Custode', 'di MIMI'], 9, lh=9.2, weight=700))
+    o.append(TL(cx_, ry + 19, ['Custode:', 'con la Cripta'], 9, lh=9.2, weight=700))   # D31: si pesca dal mazzetto 3 quando compare la Cripta
     # cartellini
     o.append(P(rr(22, 160, 120, 85, 5, .25, 14), True, GOLDL, BRASS, 1.3))
     lines = [('Fiori a testa: 7 · 4 · 3', 700), ('(con 2 · 3 · 4 giocatori)', 500),

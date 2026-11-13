@@ -5,7 +5,7 @@ Bozza del 10/11/2026. Destinazione nel repo: `v7/regolamento/Spec_v7.md`.
 È il contratto interno per quattro lavori: chi scrive le carte (fase 3), il simulatore v7 (fase 4, `v7/simulatore/`), i generatori del kit (fase 5, `v7/stampa/`) e chi scrive il regolamento v7 per i giocatori (fase 6). Non è il regolamento: il testo per i giocatori sarà più corto e più semplice (D17).
 
 Fonti, in ordine di precedenza:
-1. le decisioni D1–D30 del 9-13/11 (§1);
+1. le decisioni D1–D31 del 9-13/11 (§1);
 2. il piano `v7/idee/v7_piano_TEMP.docx` aggiornato il 10/11, con i commenti di Desy e le risposte di Daniele;
 3. per tutto quello che la v7 non cambia, il regolamento playtest v6 (`v6_08-11/regolamento/Regolamento_playtest_v6.pdf`) e i CSV v6 (`v6_08-11/stampa/sorgenti/dati/`);
 4. le carte di Desy (`v7/desy_design carte/Carte_nuove_2026-11-05.xlsx`), solo per sapere quali meccaniche esistono; per le carte di classe nuove anche `v7/desy_design carte/Idee desi carte classi.ods` (D22).
@@ -19,7 +19,7 @@ Fonti, in ordine di precedenza:
 - **N-n**: punto aperto nato scrivendo questa spec. I punti aperti, con il default scelto, sono nel §19, l'ultima sezione.
 - I numeri tra parentesi sulle carte sono valori: «(+1) AR» vuol dire 1 in più di AR (v6).
 
-## 1. Decisioni D1–D30 e dove stanno
+## 1. Decisioni D1–D31 e dove stanno
 
 | # | Decisione (testo) | Regole |
 |---|---|---|
@@ -29,7 +29,7 @@ Fonti, in ordine di precedenza:
 | D4 | Equipaggiamenti solo nel proprio turno e solo per aprire una catena. La catena fa un giro in senso orario e si chiude con l'ultimo giocatore. Si risolve LIFO. Durante una catena non se ne apre un'altra. | R 4.2, R 4.5–4.9 |
 | D5 | Il simulatore si aggiorna alla v7. | §16, §17 |
 | D6 | Sacchetto, strade bloccate e ostacoli si risolvono con la nuova mappa (§8 del piano). | §8 |
-| D7 | Ogni «perdi l'equipaggiamento» si risolve col D6 della perdita: 1 tutto, 2 Elmo, 3 Arma DX/Scudo, 4 Arma SX, 5 Armatura (slot vuoto = niente), 6 niente. Costi scelti (sacrificio dell'Assaltatore) ed effetti su un oggetto preciso seguono il testo della carta (da confermare). Morte: D6 della perdita (l'Assaltatore può saltarlo col potere); si torna sulla PROPRIA Partenza iniziale, senza tiro; PV al massimo (dal 13/11, D30: Danni di nuovo a 0); Indizi tenuti; si pesca 1 carta dal mazzo comune. | §11 |
+| D7 | Ogni «perdi l'equipaggiamento» si risolve col D6 della perdita: 1 tutto, 2 Elmo, 3 Arma DX/Scudo, 4 Arma SX, 5 Armatura (slot vuoto = niente), 6 niente. Costi scelti (sacrificio dell'Assaltatore) ed effetti su un oggetto preciso seguono il testo della carta (da confermare). Morte: D6 della perdita (l'Assaltatore può saltarlo col potere); si torna sulla PROPRIA Partenza iniziale, senza tiro; PV al massimo (dal 13/11, D30: Danni di nuovo a 0); Indizi tenuti (dal 13/11, D31: si perde 1 Indizio); si pesca 1 carta dal mazzo comune. | §11 |
 | D8 | Mano massima 10, mai superata in nessun momento. Se una carta deve entrare in una mano che ne ha già 10, PRIMA si scarta 1 carta (9) e POI si prende (10). Vale per pesca, ricompensa, carta presa a un avversario o ripresa dagli scarti, ogni carta di «pesca 2», il +1 del Giullare. Dal 13/11 vale anche per il bottino dei mostri (D27). | R 12.4 |
 | D9 | Regola magna: tutte le carte tranne gli Equipaggiamenti si giocano in qualsiasi fase, nel proprio turno e in quello degli altri, anche in risposta. Ogni giocatore gioca AL MASSIMO 2 CARTE tra una sua Fine del turno e la successiva, contando insieme il proprio turno e quelli degli altri. Resta 1 carta per giocatore in ogni catena. | R 4.1, R 4.3 |
 | D10 | Le Mappe si giocano anche in risposta, anche per spostare il tesoro mentre un eroe arriva sulla Cripta. | R 10.11 |
@@ -53,6 +53,7 @@ Fonti, in ordine di precedenza:
 | D28 | **Tessere Stato, fiori 3D, vassoio; conferme** (Daniele, 13/11 16:20). (1) **Tessere Stato:** sulla tessera stanno solo il nome, l'icona e il segno «+» o «−»; l'effetto completo sta sulle Carte Aiuto e in questa Spec (R 9.6, R 9.7). (2) **Fiori 3D:** 14 fiori a due facce; le stampe 3D servono solo al playtest; gli adesivi si incollano sopra e sotto il fiore stampato; il modello 3D attuale va bene così. (3) **Vassoio 3D:** i numeri incisi degli spazi diventano meno profondi. (4) **Confermati come scritti:** il cambio di mappa durante uno scontro o un Duello lo chiude subito senza vincitore né ricompense (R 8.12); TM-09 (Indizio con D6 ≤ LV + 2 finché è in gioco, §14.5); CS-19 conta come un ritiro, con la penalità, e NE-47 lo blocca (§14.5); tessere Stato una per fonte, al massimo 4 per Stato, 31 in tutto, e se sono finite lo Stato non si prende (R 2.5, N22). | R 2.5, R 8.12, R 9.7, §14.5, §19 |
 | D29 | [PLAYTEST] **Tessere Esplorazione direttamente sulla mappa, pezzi 3D** (Daniele, 13/11 16:40; supera in parte D24). (1) I segnaposto «?» non esistono più: al loro posto vanno le Tessere Esplorazione, coperte. (2) **Montaggio:** mescola le 36 tessere a faccia in giù e dividetene 24 (12 a testa con 2 giocatori, 8 con 3, 6 con 4); a turno ognuno ne posa una coperta su un esagono percorribile (anche acqua, guado o ponte, mai una Partenza) ad almeno 2 esagoni da ogni Partenza, una per esagono. Le altre 12 sono la riserva. (3) Chi si ferma su un esagono con una tessera coperta la gira; le tessere usate vanno tra le usate; una tessera rossa resta scoperta e sbarra il passaggio se l'eroe fugge o perde (come prima). (4) **Rifornimento** alla Fine: se sulla mappa restano 6 tessere coperte o meno, si posano tessere coperte (dalla riserva, poi dalle usate mescolate a faccia in giù) finché sulla mappa ce ne sono di nuovo 24, con le regole del montaggio. (5) **Cripta** su un esagono con una tessera: la tessera, coperta o scoperta, torna coperta nella riserva e la Cripta resta lì; quando la Cripta si sposta da un ostacolo o da una Partenza, va su un esagono senza tessera. (6) **Cambio di mappa:** le tessere degli spazi che cambiano tornano coperte nella riserva; chi ha giocato la Mappa posa altrettante tessere coperte dalla riserva sugli spazi cambiati (percorribili, ad almeno 2 esagoni da ogni Partenza, una per esagono). (7) **Pezzi 3D (playtest):** tutti i segnalini e le tessere esistono anche stampati in 3D: Tessere Esplorazione (adesivo del fronte nella tasca sopra, adesivo del retro incollato sotto), Stati, Indizi, Forte Volontà, Usato, Cripta, e le rotelle con un perno a scatto in due pezzi che passa attraverso la plancia. **Precisazioni di Daniele (13/11):** le 24 tessere contano tutte quelle sulla mappa, coperte e scoperte (N36); una tessera nuova va solo su un esagono percorribile libero, senza eroi, senza Cripta e senza altre tessere (N37); nel rifornimento le tessere si posano a turno, una alla volta, a partire da chi chiude il turno (N39); nel cambio di mappa si prende dalla riserva e poi dalle usate mescolate, e le tessere che non trovano posto tornano nella riserva (N38). | R 2.5, R 3.1, R 3.3, R 4.0, R 7.5, R 8.4, R 8.8, R 8.9, R 8.11, R 8.12, R 11.4, §14.5, §15, §16, §17, §18, §19 |
 | D30 | [PLAYTEST] **PV e Danni** (Daniele, 13/11 circa 17:05). Ogni eroe ha una rotella **PV** (i punti vita totali: è la vecchia rotella dei PV massimi, da 5 a 13) e una rotella **Danni** (i danni subiti, al posto dei «PV attuali»: da 0 a 13). Una rotella ciascuno: 6 rotelle per eroe come prima (PV, Danni, ATT, MOV, AR, PL) e 27 fermacampioni. Si parte con PV 5 e Danni 0. Quando i Danni arrivano ai PV sei sconfitto; dopo la sconfitta i Danni tornano a 0. Tutti i Danni subiti, da attacchi e da carte, vanno sulla rotella Danni. «Recuperi N PV» diventa «Togli N Danni» (mai sotto 0) e «recuperi tutti i PV» diventa «Togli tutti i Danni». «(+N) PV massimi» diventa «(+N) PV» finché l'oggetto è equipaggiato: se lascia lo slot, i PV scendono e i Danni restano, ma se i Danni sarebbero uguali o più dei nuovi PV scendono a PV − 1 (perdere un oggetto non ti sconfigge). **Parole (Daniele, 13/11):** un costo pagato dall'eroe è «segna N Danni» (niente parata, niente Riflesso; prende il posto di «perdi N PV»); un colpo vero è «subisci N Danni»; la condizione «se hai N PV o meno» diventa «se ti mancano N Danni o meno alla sconfitta»; TI-25 «porta i tuoi Danni a PV − 1»; per un eroe «ha 0 PV» diventa «è sconfitto». Mostri e custode tengono i loro PV, che scendono sulla Rotella dello scontro o del custode: solo gli eroi usano PV e Danni. **Casi decisi (Daniele, 13/11):** la Trappola fa «subisci D6 − 1 Danni» (non è un attacco: la parano solo le carte che nominano la Trappola, per esempio TI-06); NE-02 fa «subisci 1 Danno»; TI-20 (con 1–2) fa «segna 1 Danno»; «se il bersaglio ha già subito Danni in questo turno» (CS-01) conta tutti i Danni, anche quelli segnati come costo. Storia: la prima D30 (13/11 16:45: niente PV massimi, PV 0–99 su 2 rotelle decine e unità, alla sconfitta di nuovo 5) è superata e non vale più. | R 2.2, R 2.3, R 2.5, R 3.5, R 5.3, R 6.5, R 7.5, R 7.11, R 8.10, R 10.4, R 11.4, R 11.5, §14.4, §14.5, §15, §18, §19 |
+| D31 | [PLAYTEST] **Alla sconfitta si perde 1 Indizio; il custode si pesca quando compare la Cripta** (Daniele, 13/11 21:05; casi chiusi da Daniele la stessa sera). Quando un eroe è sconfitto (i Danni arrivano ai PV) perde anche 1 Indizio, se ne ha. Se l'ha sconfitto un mostro, il custode, una Trappola o un'altra fonte che non è un eroe, l'Indizio torna nella riserva degli Indizi; se l'ha sconfitto un eroe (nel Duello o con una sua carta), l'Indizio va a quell'eroe (la mano massima e gli altri limiti non c'entrano: non c'è un massimo di Indizi). Conta la fonte dei Danni che portano i Danni ai PV: la carta di un avversario (anche durante lo scontro con un mostro) o i Danni rimandati dal Riflesso di un eroe danno l'Indizio a quell'eroe; i propri costi («segna N Danni») e le proprie carte, mostri, custode, Trappole, Imprevisti e Stati lo mandano nella riserva (N48). Nel Duello chi perde perde 1 solo Indizio in tutto: è quello che il vincitore prende già con R 10.10, non uno in più. Chi con quell'Indizio arriva a 3 individua il tesoro come sempre (R 10.6, N46). **Cripta:** se dopo la perdita nessun eroe ha più 3 Indizi o più, il segnalino Cripta esce dalla mappa con MIMI e il custode; se qualcuno ne ha ancora 3 o più (anche il vincitore del Duello che ci arriva con quell'Indizio), la Cripta resta dov'è (N45). Quando un eroe arriva di nuovo a 3 Indizi la Cripta torna con un nuovo tiro; «la voce si sparge» vale solo la prima volta della partita (N47). **Custode (al posto di N49):** non si pesca più in preparazione: i 6 boss formano il mazzetto 3. Quando compare la Cripta si pesca a caso 1 boss dal mazzetto 3: è il custode, a PV pieni, e va con MIMI. Quando la Cripta esce, il custode guarisce del tutto e torna nel mazzetto 3, che si mescola; quando la Cripta torna si pesca un custode nuovo. | R 3.2, R 6.8, R 8.8, R 10.1, R 10.4, R 10.6, R 10.7, R 10.10, R 10.11, R 11.4–R 11.6, §15, §18, §19 |
 
 ### 1.1 Cosa cambia rispetto alla v6, in breve
 
@@ -63,7 +64,7 @@ Fonti, in ordine di precedenza:
 - 5 classi con 20 carte ciascuna (10 + 10 direzioni, D22); nuove TC-02, TC-04, TC-05 (D3, D12, D13).
 - Carte di classe nuove da Desy, con tono goliardico e senza la riga fissa «+1 AR / +1 AT finché resta equipaggiato»; Oracolo con 10 carte nuove (D22).
 - Nuova mappa 12 × 12: una base stampata e 14 fiori a due facce posati in draft (o con un preset), niente muri; si cammina ovunque tranne che sugli ostacoli e l'acqua è accidentata; la Cripta si tira sulle coordinate; Tessere Esplorazione consumabili posate direttamente sulla mappa; niente sacchetto [PLAYTEST] (D6, D16, D24, D25, D29).
-- Ritiri con penalità (D1). Ricompense senza PE (D11): Indizio e bottino, niente Forte Volontà dai mostri (D27). Plance eroe neutre (D14). PV (5–13) e Danni (0–13): sei sconfitto quando i Danni arrivano ai PV, poi i Danni tornano a 0 (D30).
+- Ritiri con penalità (D1). Ricompense senza PE (D11): Indizio e bottino, niente Forte Volontà dai mostri (D27). Plance eroe neutre (D14). PV (5–13) e Danni (0–13): sei sconfitto quando i Danni arrivano ai PV, poi i Danni tornano a 0 (D30). Alla sconfitta perdi 1 Indizio: a chi ti ha sconfitto se è un eroe, se no nella riserva; se nessuno ha più 3 Indizi, la Cripta esce dalla mappa fino al prossimo 3° Indizio. Il custode si pesca dal mazzetto 3 quando compare la Cripta (D31).
 - Mostri più facili: AR −25 %, da 8–11 a 6–9 (D19); Indizio con D6 ≤ LV + 1, garantito con LV 5 (D18).
 - Mostri raddoppiati: 48 carte (26 nel mazzetto 1, 16 nel mazzetto 2, 6 boss), ognuna con un'abilità che nessun altro mostro ha (D20).
 
@@ -91,7 +92,7 @@ Fonti, in ordine di precedenza:
 |---|---|---|
 | Base della mappa | 1, stampata su 2 fogli A4 da unire al centro (333 × 283 mm con la fascia) | D24. Fascia con le coordinate 1–12 su tutti i lati; i 46 esagoni di bordo con le 6 Partenze e 4 ostacoli singoli (gli altri sono liberi); i 14 spazi numerati dove vanno i fiori, con i numeri 1–6 sull'anello per la rotazione dei preset |
 | Fiori | 14, da 7 esagoni (76 × 73 mm), a due facce: A «verde e acqua», B «pietra e case» | D24. Ogni faccia rispetta la regola di disegno del §17, che tiene la mappa collegata con qualunque posa. Una freccia d'ottone segna la rotazione |
-| Segnalino Cripta | 1 | D24. Le Cripte non sono stampate: il segnalino va sulla mappa quando il tesoro viene individuato (R 8.8, R 10.6) |
+| Segnalino Cripta | 1 | D24. Le Cripte non sono stampate: il segnalino va sulla mappa quando il tesoro viene individuato (R 8.8, R 10.6) ed esce dalla mappa quando, dopo una sconfitta, nessun eroe ha più 3 Indizi (D31) |
 | Sala del Tesoro | 1 pezzo a parte | D23. Rotelle del custode e dello scontro, cerchi di custode, MIMI e boss: prima era la fascia in alto della plancia. Le 2 caselle «Spostamenti del tesoro» della v6 non servono più (D26) |
 | Fogli dei preset | 10 (A4) | D24. Base «Strettoie» e TM-01…09: per ogni spazio il fiore, la faccia e il numero verso cui va la freccia (§17). Il foglio di una Mappa dice anche i 3 fiori del cambio di mappa (R 8.12) |
 | Plance eroe | 4 neutre | D14 |
@@ -127,7 +128,7 @@ Fonti, in ordine di precedenza:
 
 La Cripta non si mette al montaggio: arriva quando il tesoro viene individuato (R 8.8, R 10.6).
 
-**R 3.2 Mostri e boss (v6; 6 boss dal 10/11, D20).** Mescola i mazzetti Mostro 1 e 2. Pesca a caso 1 dei 6 boss: è il custode di MIMI. Gli altri 5, mescolati, formano il mazzetto 3. Metti custode e MIMI nella Sala del Tesoro e gira la Rotella del custode sui PV del custode.
+**R 3.2 Mostri e boss (v6; 6 boss dal 10/11, D20; custode con D31).** Mescola i mazzetti Mostro 1 e 2. I 6 boss, mescolati, formano il mazzetto 3: il custode non si pesca in preparazione (D31). Metti MIMI nella Sala del Tesoro. Il custode si pesca a caso dal mazzetto 3 quando compare la Cripta (R 10.6); allora va con MIMI e giri la Rotella del custode sui suoi PV.
 
 **R 3.3 Tessere (opzione A) [PLAYTEST] (D29).** Le altre 12 Tessere Esplorazione, coperte, formano la riserva. Accanto alla mappa lascia lo spazio per le «tessere usate».
 
@@ -293,7 +294,7 @@ Da usare nel regolamento v7 (fase 6). È il §2.1 del piano, riscritto, con la r
 **R 6.8 Mazzetti (v6 raddoppiati il 10/11, D20; AR con D19).**
 - Mazzetto 1: 26 mostri di LV 1–2 (NE-01…13 della v6, NE-29…41 nuovi).
 - Mazzetto 2: 16 mostri di LV 3–4 (NE-14…21 della v6, NE-42…49 nuovi).
-- Boss: 6 di LV 5 (NE-26…28 della v6, NE-50…52 nuovi). Uno fa da custode (R 3.2); gli altri 5 sono il mazzetto 3.
+- Boss: 6 di LV 5 (NE-26…28 della v6, NE-50…52 nuovi). Formano il mazzetto 3; quando la Cripta è sulla mappa uno di loro è il custode e il mazzetto 3 ha gli altri 5 (R 3.2, R 10.6, D31).
 - Abilità (D20): ogni mostro ha un'abilità che nessun altro dei 48 ha, pesata sul suo LV. Le abilità v6 che erano doppioni sono state cambiate (NE-10, NE-13, NE-15, NE-16, NE-20, NE-27, NE-28; la `nota` della carta dice com'era); le altre restano quelle della v6, alcune con un nome nuovo. Le formule delle abilità sono nel §14.5 («Abilità dei mostri»).
 - Statistiche: i 24 mostri della v6 tengono PV, ATT e LV della v6 (salvo NE-20, ATT 4 → 3 per la sua Nebbia); i 24 nuovi hanno PV, ATT e AR dentro la fascia dei mostri v6 del loro LV [PLAYTEST].
 - L'AR, statica e scritta sulla carta di ogni mostro, è quella della v6 ridotta del 25 % e arrotondata per eccesso (D19): 8 → 6, 9 → 7, 10 → 8, 11 → 9, boss e custode compresi; i mostri nuovi sono nati con l'AR già ridotta. Va da 6 a 9. L'AR degli eroi non cambia (parte da 9).
@@ -399,7 +400,7 @@ Il danno degli eroi resta comunque quello della v6. Nel Duello restano i dadi pe
 
 **R 8.8 Partenze e Cripta (D24, D25) [PLAYTEST].**
 - Le 6 **Partenze** sono esagoni liberi stampati sulla base (coordinate nel §17): ci si passa e ci si ferma.
-- La **Cripta** è un segnalino: non è stampata. Si mette quando il tesoro viene individuato (R 10.6) e si sposta quando il tesoro cambia Cripta (R 10.11). Ci si passa e ci si ferma, salvo quando c'è MIMI (R 8.5).
+- La **Cripta** è un segnalino: non è stampata. Si mette quando il tesoro viene individuato (R 10.6) e si sposta quando il tesoro cambia Cripta (R 10.11). Esce dalla mappa, con MIMI e il custode, quando dopo una sconfitta nessun eroe ha più 3 Indizi o più, e torna con un nuovo tiro quando un eroe arriva di nuovo a 3 Indizi (R 10.6, D31). Ci si passa e ci si ferma, salvo quando c'è MIMI (R 8.5).
 - **Tiro della Cripta:** tira 2D6 per la colonna x e 2D6 per la riga y e metti la Cripta su (x, y). Il risultato va da 2 a 12, quindi la riga 1 e la colonna 1 non hanno mai la Cripta.
 - Se (x, y) è un **ostacolo** o una **Partenza**, la Cripta va sull'esagono percorribile più vicino che non sia una Partenza, non abbia una Tessera Esplorazione e non stia in riga o colonna 1. Le distanze si contano in esagoni, ostacoli compresi. A pari distanza vince quello più in alto (y più piccola), poi quello più a sinistra (x più piccola).
 - Sull'**acqua** la Cripta resta lì.
@@ -483,6 +484,7 @@ Il catalogo (fase 2) può aggiungerne altri. Sulla tessera Stato (26 × 18 mm) n
 **R 10.1 Da dove arrivano gli Indizi (v6).**
 - Dai mostri sconfitti (R 10.2), dai Duelli vinti, dalle carte che lo dicono (per esempio lo Stato Sussurro) e dalla regola del tesoro individuato (R 10.6).
 - Locanda, Fonte, Fabbro e Trappole non danno Indizi. Nessuno parte con un Indizio. Non c'è un massimo per giocatore.
+- Si perde 1 Indizio solo alla sconfitta (R 11.4, D31): va all'eroe che ti ha sconfitto, se no torna nella riserva degli Indizi.
 
 **R 10.2 Tiro per l'Indizio (D18).** Quando sconfiggi un mostro tira 1 D6: prendi 1 Indizio se il risultato è uguale o minore del LV stampato sulla carta + 1 (LV 1 → 1–2, LV 2 → 1–3, LV 3 → 1–4, LV 4 → 1–5). Con LV 5 (i boss del mazzetto 3) l'Indizio è garantito e non si tira. La carta Mostro stampa la soglia («Indizio se D6 ≤ 2») oppure «Indizio garantito». Era OP-4.
 
@@ -506,20 +508,21 @@ Il catalogo (fase 2) può aggiungerne altri. Sulla tessera Stato (26 × 18 mm) n
 
 Le carte Mostro v7 non stampano più «1 PE» né «+1 livello». Dal 13/11 i mostri dei mazzetti 1 e 2 stampano «Bottino · Indizio se D6 ≤ N».
 
-**R 10.4** Se i Danni di un eroe arrivano ai suoi PV per una carta giocata da un avversario fuori da un Duello, è una sconfitta normale e chi ha giocato la carta non prende ricompense (v6, [PLAYTEST]).
+**R 10.4** Se i Danni di un eroe arrivano ai suoi PV per una carta giocata da un avversario fuori da un Duello, è una sconfitta normale e chi ha giocato la carta non prende ricompense (v6, [PLAYTEST]), salvo l'Indizio che lo sconfitto perde: va a lui (R 11.4, D31).
 
 **R 10.5 Ricompense e carte altrui.** Vedi R 4.13 [PLAYTEST].
 
 **R 10.6 Individuare il tesoro (v6, [PLAYTEST]).**
 - Appena metti il 3° Indizio sulla plancia eroe hai individuato il tesoro.
-- Ogni altro eroe prende subito 1 Indizio. Succede solo la prima volta, quando MIMI compare.
-- Se MIMI non è ancora sulla mappa, fai il tiro della Cripta (R 8.8: 2D6 per la colonna, 2D6 per la riga) e metti la Cripta, MIMI e il custode su quell'esagono.
+- Ogni altro eroe prende subito 1 Indizio. Succede solo la prima volta della partita, quando MIMI compare; non quando la Cripta torna dopo essere uscita (D31).
+- Se MIMI non è sulla mappa, fai il tiro della Cripta (R 8.8: 2D6 per la colonna, 2D6 per la riga) e pesca a caso 1 boss dal mazzetto 3: è il custode, a PV pieni (gira la Rotella del custode sui suoi PV). Metti la Cripta, MIMI e il custode su quell'esagono (D31). Vale anche quando ci arrivi con l'Indizio di uno sconfitto (Duello o carta).
+- **La Cripta esce (D31) [PLAYTEST].** Se dopo una sconfitta (R 11.4) nessun eroe ha più 3 Indizi o più, togli dalla mappa la Cripta e MIMI; il custode guarisce del tutto e torna nel mazzetto 3, che si mescola. Se un eroe ha ancora 3 Indizi o più (anche il vincitore del Duello che ci arriva con quell'Indizio), la Cripta resta dov'è e non si ritira. Quando un eroe arriva di nuovo a 3 Indizi, MIMI non è sulla mappa: rifai il tiro della Cripta e pesca un custode nuovo (punto sopra).
 
 **R 10.7 Affrontare il custode (v6).**
 - Solo chi ha 3 Indizi o più, fermandosi sulla Cripta di MIMI nel proprio turno. Con meno di 3 Indizi fermarsi lì non fa niente.
 - Pareggio dell'iniziativa: attacca prima il custode (salvo Monologo, NE-52: R 7.2). Dal custode non si fugge.
-- Le sue ferite restano sulla Rotella del custode: il prossimo lo trova già ferito.
-- Chi perde un Indizio e scende a 2 non può sfidarlo finché non ne trova un altro.
+- Le sue ferite restano sulla Rotella del custode: il prossimo lo trova già ferito. Quando la Cripta esce dalla mappa il custode guarisce e torna nel mazzetto 3 (R 10.6, D31).
+- Chi perde un Indizio (alla sconfitta, D31) e scende a 2 non può sfidarlo finché non ne trova un altro.
 
 **R 10.8 Il Duello: la sfida e il rifiuto (v6).**
 - Se finisci il movimento accanto a un altro eroe (R 8.7) e in questo turno non hai avuto scontri, puoi sfidarlo.
@@ -532,11 +535,11 @@ Le carte Mostro v7 non stampano più «1 PE» né «+1 livello». Dal 13/11 i mo
 - Dal Duello non si fugge. Gli Stati valgono anche nel Duello.
 - L'eccezione v6 «chi si difende gioca 1 carta» non serve più: vale la regola magna (R 4.1).
 
-**R 10.10 Esito del Duello [PLAYTEST] (D11).** Chi vince prende 1 Indizio dallo sconfitto (se ne ha), riprende in mano 1 carta a scelta dagli scarti dello sconfitto (vale R 12.4) e prende la Forte Volontà. Il PE della v6 sparisce. Il Duello non dà bottino (D27). Chi perde subisce la sconfitta normale (§11).
+**R 10.10 Esito del Duello [PLAYTEST] (D11, D31).** Chi vince prende 1 Indizio dallo sconfitto (se ne ha), riprende in mano 1 carta a scelta dagli scarti dello sconfitto (vale R 12.4) e prende la Forte Volontà. Il PE della v6 sparisce. Il Duello non dà bottino (D27). Chi perde subisce la sconfitta normale (§11): l'Indizio che perde alla sconfitta (R 11.4) è proprio quello che prende il vincitore, quindi in tutto ne perde 1 solo (D31).
 
 **R 10.11 Mappe (v6 + D10).**
 - Una Mappa cambia la mappa per tutti (R 8.12). Resta accanto alla mappa finché un'altra Mappa la sostituisce; quella vecchia va negli scarti di chi l'aveva giocata.
-- Se MIMI è sulla mappa, il tesoro cambia Cripta: togli la Cripta e rifai il tiro della Cripta (R 8.8); se la Cripta finisce sullo stesso esagono, ritira. MIMI e il custode si spostano con la Cripta e con le ferite. Gli Indizi restano a tutti. Prima che qualcuno abbia individuato il tesoro non c'è la Cripta e il tesoro non si sposta.
+- Se MIMI è sulla mappa, il tesoro cambia Cripta: togli la Cripta e rifai il tiro della Cripta (R 8.8); se la Cripta finisce sullo stesso esagono, ritira. MIMI e il custode si spostano con la Cripta e con le ferite. Gli Indizi restano a tutti. Prima che qualcuno abbia individuato il tesoro non c'è la Cripta e il tesoro non si sposta; lo stesso vale quando la Cripta è uscita dalla mappa (R 10.6, D31).
 - Le Mappe si giocano anche in risposta (D10), anche per spostare il tesoro mentre un eroe arriva sulla Cripta: nel momento M2 (R 4.16), prima che l'eroe esplori. La mappa cambia e ogni eroe torna sulla sua Partenza iniziale (R 8.12): l'eroe non è più sulla Cripta, non esplora e non affronta il custode, anche se il tesoro non si è spostato.
 - Il MOV di una Mappa vale per tutti finché è in gioco.
 
@@ -561,14 +564,15 @@ Con 2–5, se lo slot è vuoto non perdi niente. Le carte perse vanno nei tuoi s
 **R 11.4 Sconfitta (i Danni arrivano ai PV, D30), in quest'ordine.**
 1. Tira il D6 della perdita. L'Assaltatore può saltarlo con il potere di TC-01.
 2. Torna sulla tua Partenza iniziale (R 3.9), senza tiro. Se è occupata da un altro eroe, vai su un esagono percorribile libero accanto a lei, a tua scelta [PLAYTEST].
-3. Gira i Danni su 0 (D30). Tieni gli Indizi, la mano e gli Stati.
-4. Pesca 1 carta dal mazzo comune (vale R 12.4).
-5. Se ti ha sconfitto un mostro, la sua tessera rossa resta scoperta sul suo esagono e la carta Mostro va in fondo al suo mazzetto. Se ti ha sconfitto il custode, il custode tiene le ferite.
-6. Se era il tuo turno, passi alla Fine.
+3. Perdi 1 Indizio, se ne hai (D31) [PLAYTEST]. Se ti ha sconfitto un eroe (nel Duello o con una sua carta), va a lui; se ti ha sconfitto un mostro, il custode, una Trappola o un'altra fonte che non è un eroe, torna nella riserva degli Indizi. Conta la fonte dei Danni che portano i tuoi Danni ai PV: la carta di un avversario, anche durante lo scontro con un mostro, e i Danni rimandati dal Riflesso di un eroe danno l'Indizio a quell'eroe; i tuoi costi («segna N Danni»), le tue carte, mostri, custode, Trappole, Imprevisti e Stati lo mandano nella riserva. Se poi nessun eroe ha più 3 Indizi o più, la Cripta esce dalla mappa (R 10.6).
+4. Gira i Danni su 0 (D30). Tieni gli altri Indizi, la mano e gli Stati.
+5. Pesca 1 carta dal mazzo comune (vale R 12.4).
+6. Se ti ha sconfitto un mostro, la sua tessera rossa resta scoperta sul suo esagono e la carta Mostro va in fondo al suo mazzetto. Se ti ha sconfitto il custode e la Cripta è ancora sulla mappa, il custode tiene le ferite; se la Cripta è uscita (passo 3), guarisce e torna nel mazzetto 3 (R 10.6).
+7. Se era il tuo turno, passi alla Fine.
 
-**R 11.5** Se una Trappola porta i tuoi Danni ai PV, fai la sconfitta normale con un solo tiro di perdita (v6, [PLAYTEST]).
+**R 11.5** Se una Trappola porta i tuoi Danni ai PV, fai la sconfitta normale con un solo tiro di perdita (v6, [PLAYTEST]); l'Indizio che perdi torna nella riserva (D31).
 
-**R 11.6** Chi perde un Duello subisce la sconfitta normale. Il vincitore prende quello che dice R 10.10.
+**R 11.6** Chi perde un Duello subisce la sconfitta normale. Il vincitore prende quello che dice R 10.10; l'Indizio di R 11.4 è quello che prende il vincitore, non uno in più (D31).
 
 ## 12. Mano, pesca e riciclo (D8)
 
@@ -927,8 +931,10 @@ TE-10,TE,Scudo del Goblin,Tutte le classi,,2,Rara,Arma DX / Scudo,"Finché è eq
 | Creatura | Mostro o boss, mai un eroe. |
 | Creatura ed effetti per eroi | Una creatura non ha mano, Stati, Indizi né slot: ignora «scarta», «prende lo Stato», «non prende l'Indizio» e «tira il D6 della perdita» e applica solo i Danni [PLAYTEST]. Salvo che la carta dica cosa fa la creatura (CO-10). |
 | Avversario | Un altro eroe. |
-| Custode | Il boss che sta con MIMI; sconfiggerlo fa vincere. |
-| Indizio | Segnalino; con 3 si individua il tesoro e si può sfidare il custode. |
+| Custode | Il boss che sta con MIMI; sconfiggerlo fa vincere. Si pesca a caso dal mazzetto 3 quando compare la Cripta; quando la Cripta esce guarisce e torna nel mazzetto 3 (R 10.6, D31). |
+| Indizio | Segnalino; con 3 si individua il tesoro e si può sfidare il custode. Alla sconfitta se ne perde 1: all'eroe che ti ha sconfitto, se no nella riserva degli Indizi (R 11.4, D31). |
+| Riserva degli Indizi | Gli Indizi che nessun eroe ha: da qui si prendono e qui tornano quelli persi contro un mostro, il custode, una Trappola o un'altra fonte che non è un eroe (D31). |
+| Cripta | Segnalino dove stanno MIMI e il custode: arriva col tiro della Cripta al 3° Indizio, con un custode pescato dal mazzetto 3 (R 8.8, R 10.6), ed esce dalla mappa quando, dopo una sconfitta, nessun eroe ha più 3 Indizi o più; torna al prossimo 3° Indizio (D31). |
 | Forte Volontà | Segnalino unico: scartalo per ritirare 1 D6. |
 | PV | Punti vita totali dell'eroe, sulla rotella PV (5–13): si parte da 5; cambiano solo con le carte, per esempio «(+N) PV» finché un oggetto è equipaggiato (D30). |
 | Danni | Sulla rotella Danni (0–13) dell'eroe: i danni subiti. Quando arrivano ai PV sei sconfitto; dopo la sconfitta tornano a 0. «Togli N Danni» li fa scendere, mai sotto 0 (D30). Sui mostri i danni scendono sulla Rotella dello scontro. |
@@ -1044,7 +1050,9 @@ Così due fiori vicini restano sempre collegati da almeno un lato e nessun grupp
 | Indizio | D6 ≤ LV + 1, garantito con LV 5 (D18, deciso il 10/11) | R 10.2 |
 | AR dei mostri | AR v6 −25 % arrotondata per eccesso: da 6 a 9 (D19, deciso il 10/11) | R 6.8 |
 | Locanda | togli 2 Danni + 1 carta dagli scarti (D30) | R 8.10 |
-| Duello | Indizio + 1 carta dagli scarti dello sconfitto + Forte Volontà; niente bottino (D27) | R 10.10 |
+| Duello | Indizio + 1 carta dagli scarti dello sconfitto + Forte Volontà; niente bottino (D27); lo sconfitto perde 1 solo Indizio, quello che prende il vincitore (D31) | R 10.10 |
+| Sconfitta e Indizi | si perde 1 Indizio: all'eroe che ti ha sconfitto (sua carta, Duello, suo Riflesso), se no nella riserva; se nessun eroe ha più 3 Indizi la Cripta esce dalla mappa con MIMI, il custode guarisce e torna nel mazzetto 3; al prossimo 3° Indizio nuovo tiro e custode nuovo, senza «la voce si sparge» (D31) | R 10.6, R 11.4 |
+| Custode | non si pesca in preparazione: i 6 boss sono il mazzetto 3; si pesca a caso dal mazzetto 3 quando compare la Cripta, a PV pieni (D31) | R 3.2, R 6.8, R 10.6 |
 | Tessere | opzione A con D29: 24 Tessere Esplorazione coperte direttamente sulla mappa, 12 in riserva; con 6 coperte o meno, rifornimento fino a 24 | R 3.1, R 3.3, R 8.11 |
 | Movimento | su ogni esagono percorribile; uscire dall'acqua (accidentata) costa 1 MOV in più; fermata sul mostro scoperto | D25, R 8.3–8.5 |
 | Accanto | lato in comune | R 8.7 |
@@ -1070,7 +1078,7 @@ Così due fiori vicini restano sempre collegati da almeno un lato e nessun grupp
 | Sacrificio | il bonus pagato con un sacrificio arriva a +3 anche su Comune e Rara | R 13.2, §14.4 |
 | Composizione delle classi | per direzione (10 carte): da 4 a 8 Equipaggiamenti, almeno 2 Incanti, massimo 2 Leggendarie; niente Mappe (D22) | V14, V15 |
 | Mazzo comune | 81 carte: 31 Equipaggiamenti, 41 Incanti, 9 Mappe (63 prima di D22) | R 2.5 |
-| Dalla v6 restano provvisorie | Trappola che porta i Danni ai PV con un solo tiro di perdita; «la voce si sparge» (+1 Indizio agli altri); niente ricompense a chi sconfigge un eroe con una carta; «creatura»; bonus dello Yumaniano | R 11.5, R 10.6, R 10.4, §14.3 |
+| Dalla v6 restano provvisorie | Trappola che porta i Danni ai PV con un solo tiro di perdita; «la voce si sparge» (+1 Indizio agli altri); niente ricompense a chi sconfigge un eroe con una carta, salvo l'Indizio di D31; «creatura»; bonus dello Yumaniano | R 11.5, R 10.6, R 10.4, §14.3 |
 | Ripieghi delle risposte | mai la pesca: Forte Volontà, uno Stato, (+N) a un prossimo tiro o uno scry | V6 |
 | Riduzione dei Danni | dopo il tiro del danno, minimo 0 | §14.5 |
 | Creature ed effetti per eroi | applicano solo i Danni | §15 |
@@ -1152,6 +1160,11 @@ Da definire con Desy al telefono o su Discord (commento 10). Intanto il playtest
 | N42 | D30: con «segna» (costo) e «subisci» (colpo vero), come si leggono la Trappola e NE-02 Ratto mai vaccinato, che stampano «perdi … PV»? | **Chiuso da Daniele (13/11):** Trappola «subisci D6 − 1 Danni» (non un attacco: la parano solo le carte che nominano la Trappola, R 8.10); NE-02 «subisci 1 Danno»; TI-20 (con 1–2) «segna 1 Danno». In più CS-01 «se il bersaglio ha già subito Danni in questo turno» conta tutti i Danni, anche quelli segnati (§14.5) |
 | N43 | D30: «Scendi a 1 PV» (TI-25) e «non scendi sotto 1» (NE-02, NE-48) | **Chiuso da Daniele (13/11):** TI-25 «porta i tuoi Danni a PV − 1»; «non scendi sotto 1» = i Danni si fermano a PV − 1 (§14.5) |
 | N44 | D30: condizione «se hai N PV o meno» (riga «Se», per esempio CG-18 «2 PV o meno») | **Chiuso da Daniele (13/11):** «se ti mancano N Danni o meno alla sconfitta», cioè PV − Danni ≤ N (§14.5) |
+| N45 | D31: un eroe sconfitto scende sotto 3 Indizi, ma un altro eroe ne ha ancora 3 o più (per esempio quelli che li hanno avuti con «la voce si sparge», o il vincitore del Duello che con quell'Indizio arriva a 3). La Cripta esce lo stesso? | **Chiuso da Daniele (13/11):** no; la Cripta esce solo se nessun eroe ha più 3 Indizi o più, altrimenti resta dov'è (R 10.6) |
+| N46 | D31: chi riceve l'Indizio di uno sconfitto (Duello o carta) e così arriva a 3 individua il tesoro come con ogni 3° Indizio (R 10.6)? | **Chiuso da Daniele (13/11):** sì, vale R 10.6 |
+| N47 | D31: quando la Cripta torna (un eroe arriva di nuovo a 3 Indizi), gli altri eroi prendono di nuovo 1 Indizio («la voce si sparge»)? | **Chiuso da Daniele (13/11):** no, solo la prima volta della partita (R 10.6) |
+| N48 | D31: chi ha sconfitto l'eroe nei casi misti? Per esempio la carta di un avversario dà l'ultimo Danno durante lo scontro con un mostro, oppure l'eroe arriva ai PV con un suo costo («segna N Danni»), una sua carta, un Imprevisto o uno Stato. | **Chiuso da Daniele (13/11):** conta la fonte dei Danni che portano i Danni ai PV; l'Indizio va a un eroe con la sua carta, nel Duello e con i Danni rimandati dal suo Riflesso; con i propri costi e le proprie carte, mostri, custode, Trappole, Imprevisti e Stati torna nella riserva (R 11.4) |
+| N49 | D31: quando la Cripta esce, il custode tiene le ferite e le ritrova al ritorno? | **Superato da Daniele (13/11):** il custode non si pesca più in preparazione; si pesca dal mazzetto 3 quando compare la Cripta e, quando la Cripta esce, guarisce e torna nel mazzetto 3, che si mescola (R 3.2, R 10.6) |
 
 **Decisi nella revisione delle carte del 10/11, da misurare col simulatore:**
 - CA-09 Elmo a prova di testata non torna più in mano quando lo sacrifichi (con CA-08 dava carte oltre V9 e un sacrificio gratis ogni turno): ora (+1) AR e non si perde.

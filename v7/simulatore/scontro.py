@@ -343,9 +343,10 @@ def duello(g, a, b):
         return
     vince = b if perde is a else a
     g.st['duelli_vinti_sfidante' if vince is a else 'duelli_vinti_sfidato'] += 1
-    if perde.indizi:
+    if perde.indizi:                        # D31: l'unico Indizio perso nel Duello è quello che prende il vincitore
         perde.indizi -= 1
         S.prendi_indizio(g, vince, 'duelli')
+        S.cripta_via(g)
     if perde.scarti:
         cid = max(perde.scarti, key=K.valore)
         perde.scarti.remove(cid)

@@ -60,9 +60,9 @@ class Partita:
         self.eroi = [S.Eroe(i, classi[i], specie[i], r.choice('AB')) for i in range(n)]
         self.mazzo = K.COMUNI[:]
         r.shuffle(self.mazzo)
-        boss = K.MAZZETTI[3][:]
+        boss = K.MAZZETTI[3][:]                  # D31: i 6 boss sono tutti il mazzetto 3; il custode si pesca quando compare la Cripta
         r.shuffle(boss)
-        self.custode = X.Creatura(self, boss.pop())
+        self.custode = None
         self.mazzetti = {1: K.MAZZETTI[1][:], 2: K.MAZZETTI[2][:], 3: boss}
         for t in (1, 2):
             r.shuffle(self.mazzetti[t])

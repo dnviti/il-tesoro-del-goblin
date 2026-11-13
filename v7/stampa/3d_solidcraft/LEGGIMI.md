@@ -94,7 +94,8 @@ Sono tutti in `out/`:
 
   I pezzi distano almeno 5 mm tra loro e dal bordo e stanno tutti a z = 0. Un oggetto per nome (lo stesso STL può dare più oggetti: `rotella_PV`, `rotella_ATT`, `segnalino_indizio`... per assegnare i colori), un'istanza per copia, nomi «Piatto N · oggetto»; lo script rilegge ogni file e ricontrolla le quantità. Sono 3MF standard, senza i metadati di piatto di Bambu Studio / OrcaSlicer: nello slicer si separano i piatti a mano o si usa «disponi». Li rifà anche `genera_3d_solidcraft.py --solo-3mf`, dagli STL già in `out/`.
 - `*.stl`: un pezzo per file, in mm. Le parti del vassoio sono nella loro posizione sulla mappa, con l'origine al centro della mappa: lo slicer le porta al centro del piatto.
-- `*.png`: le anteprime. `verifica_vassoio_fiori*.png` mostra il vassoio montato con i 14 fiori; `piatto_segnalini.png` il piatto 1 di `segnalini.3mf`; `verifica_perno_sezione.png` la sezione di perno, plancia, rotella e fermo montati.
+- `*.png`: le anteprime. `verifica_vassoio_fiori*.png` mostra il vassoio montato con i 14 fiori; `verifica_perno_sezione.png` la sezione di perno, plancia, rotella e fermo montati.
+- **Render con le texture della carta** (13/11, `render_3d.py`): `render_montata.png` (vassoio, 14 fiori del preset «Strettoie», 4 tessere coperte, una scoperta e la Cripta), `render_montata_alto.png` (la stessa, dall'alto, nord in alto), `render_esplosa.png` (quarti aperti, fiori alzati), `render_plancia.png` (plancia eroe 1 con le 6 rotelle 3D ai valori di partenza, perni e fermi), `render_segnalini.png` (tessere, Stati, segnalini, Cripta, rotella dello scontro) e `piatto_segnalini.png` (piatto 1 di `segnalini.3mf`).
 - `verifica_perno.solidcraft`: la prova di montaggio del perno (plancia da 0,3 col foro Ø 4, rotella, perno, fermo).
 - `verifica_vassoio_fiori.solidcraft`: la prova di montaggio. I fiori sono girati di (spazio mod 6) × 60°.
 - `carta_fiori_3d.pdf`: le facce dei fiori per la versione 3D.
@@ -120,6 +121,17 @@ Lo script:
 - scrive anteprime, PDF e `risultati.json`.
 
 Se un controllo non passa, si ferma con `CONTROLLI FALLITI`.
+
+### Render con le texture
+
+```
+python3 v7/stampa/3d_solidcraft/render_3d.py [segnalini|piatto|plancia|mappa ...]
+```
+
+Da lanciare dopo `genera_3d_solidcraft.py` e la build A4 del kit (usa `playtest_v7/segnalini_3d.pdf`, `carta_base_3d.pdf`, `plance_eroe.pdf` e `out/carta_fiori_3d.pdf`). Circa 2 minuti. Solo SolidCraft: la scena si costruisce con le classi del generatore, ogni corpo riceve una texture «base color» proiettata dall'alto (`render.surface.import`, frame in mm del mondo) e `solidcraft-cli render` fa il ray tracing CPU.
+- La texture di un pezzo è grande quanto il suo ingombro: colore del filamento, con l'arte della carta esattamente dove sta la carta. Adesivi ritagliati da `segnalini_3d.pdf` (300 dpi) sulla loro linea di taglio letta dal PDF e centrati nella tasca; facce dei fiori da `carta_fiori_3d.pdf`, girate come nel preset (60° × (freccia − 1)); cornice della base dal foglio del quarto di `carta_base_3d.pdf`, con la sua traslazione; plancia da `plance_eroe.pdf`, in 4 pezzi. Carta a faccia in su: niente specchi.
+- Le tessere coperte sono capovolte e mostrano il dorso incollato sul fondo piatto.
+- **Limiti di SolidCraft** (0.41): al massimo 32 immagini diverse per scena (le copie dello stesso adesivo usano la stessa immagine), 1024 × 1024 px l'una e un tetto di memoria del ray tracing: lo script riduce tutte le texture in proporzione fino a 6 milioni di pixel per scena. Sul vassoio e sui fiori la carta resta a circa 4-5 px/mm: si legge nei render, non negli ingrandimenti. La proiezione è dall'alto: i fianchi dei pezzi prendono il colore del filamento.
 
 I parametri sono in cima a `genera_3d_solidcraft.py` (`PARAMETRI`, in mm): si cambiano lì e si rilancia, così si rifanno anche le prove.
 

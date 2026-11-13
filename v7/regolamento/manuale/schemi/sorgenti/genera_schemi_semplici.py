@@ -240,15 +240,15 @@ def s7():
     o = [panel(W, H)]
     X0, X1 = 14, 501
     cw = (X1 - X0) / 6
-    o.append(box(X0, 8, X1 - X0, 80, PAPER, BRASS, 1.8, 7))
+    o.append(box(X0, 8, X1 - X0, 76, PAPER, BRASS, 1.8, 7))
     for i in range(1, 6):
-        o.append(line((X0 + cw * i, 14), (X0 + cw * i, 82), BRASSL, 1.2, .2, extra=' stroke-dasharray="3 3"'))
+        o.append(line((X0 + cw * i, 14), (X0 + cw * i, 78), BRASSL, 1.2, .2, extra=' stroke-dasharray="3 3"'))
     labels = ['Tutto!', 'Elmo', 'Arma DX o Scudo', 'Arma SX', 'Armatura', 'Niente!']
     for i in range(6):
         cx = X0 + cw * (i + .5)
         yes = (i == 5)
-        o.append(die(cx, 20, 18, i + 1, GREEN if yes else PAPER, PAPER if yes else INK, 0, 1.5))
-        iy = 48
+        o.append(die(cx, 19, 18, i + 1, GREEN if yes else PAPER, PAPER if yes else INK, 0, 1.5))
+        iy = 46
         if i == 0:
             for k, (fn, dx, dy) in enumerate((('ic_elmo', -9, -9), ('ic_spada', 9, -9), ('ic_ar', -9, 9), ('ic_corazza', 9, 9))):
                 fnc = fn if fn == 'ic_ar' else globals()[fn]
@@ -264,47 +264,60 @@ def s7():
             o.append(icon(ic_corazza, cx, iy, 32, 45)); o.append(slash(cx, iy, 13))
         else:
             o.append(icon(ic_pollice, cx, iy, 32, 46))
-        o.append(T(cx, 81, labels[i], 10, 700, GREEN if yes else INK))
-    o.append(T(W / 2, 99, f'Slot vuoto? Non perdi niente. · Ogni {LQ}perdi l\'equipaggiamento{RQ} usa questo D6', 9.5, 400, BROWN))
-    # i 4 passi
-    bw, bh, by = 106, 78, 104
-    pitch = (X1 - X0 - bw) / 3
-    steps = ['Danni = PV', 'D6 della perdita', 'Partenza iniziale', ('Danni di nuovo a 0', '+ 1 carta comune')]
+        o.append(T(cx, 78, labels[i], 10, 700, GREEN if yes else INK))
+    o.append(T(W / 2, 95, f'Slot vuoto? Non perdi niente. · Ogni {LQ}perdi l\'equipaggiamento{RQ} usa questo D6', 9.5, 400, BROWN))
+    # i 5 passi (R 11.4; D31: -1 Indizio)
+    bw, bh, by = 84, 74, 100
+    pitch = (X1 - X0 - bw) / 4
+    steps = ['Danni = PV', 'D6 della perdita', 'Partenza iniziale', 'Perdi 1 Indizio', ('Danni a 0', '+ 1 carta comune')]
     for i, st in enumerate(steps):
-        x = X0 + pitch * i; cx = x + bw / 2; cy = by + 21
+        x = X0 + pitch * i; cx = x + bw / 2; cy = by + 19
         o.append(box(x, by, bw, bh, PAPER, BRASS, 1.8, 7))
         if i == 0:
-            o.append(heart(cx, cy, 31, PAPER))
+            o.append(heart(cx, cy, 29, PAPER))
         elif i == 1:
-            o.append(die(cx, cy, 30, 3, PAPER, INK, 8, 2.0))
+            o.append(die(cx, cy, 28, 3, PAPER, INK, 8, 2.0))
         elif i == 2:
-            hx = [(cx + 17 * math.cos(math.radians(a)), cy + 17 * math.sin(math.radians(a)), True) for a in (-90, -30, 30, 90, 150, 210)]
+            hx = [(cx + 16 * math.cos(math.radians(a)), cy + 16 * math.sin(math.radians(a)), True) for a in (-90, -30, 30, 90, 150, 210)]
             o.append(poly(hx, fill=SAND, amp=.4, step=12)); o.append(P(wob(sc(hx, .82, cx, cy), .2, 12), True, 'none', BRASS, 1.2))
-            o.append(pawn(cx - 4, cy + 6, 19, BLUE)); o.append(T(cx + 8, cy + 8, '1', 11, 700, INK, serif=True))
+            o.append(pawn(cx - 4, cy + 6, 18, BLUE)); o.append(T(cx + 8, cy + 8, '1', 11, 700, INK, serif=True))
+        elif i == 3:
+            o.append(icon('ic_indizio', cx - 9, cy, 30, 49)); o.append(T(cx + 17, cy + 5, '−1', 13, 700, RED, serif=True))
         else:
-            o.append(heart(cx - 19, cy, 26, RED)); o.append(T(cx - 2.5, cy + 4.5, '+', 13, 700, BROWN))
-            o.append(icon('ic_carta', cx + 17, cy, 32, 47))
-        if i == 2:
-            o.append(T(cx, by + 50, st, 10.5, 700))
-            o.append(T(cx, by + 61, 'occupata? Strada', 9.5, 400, BROWN)); o.append(T(cx, by + 71.5, 'libera accanto', 9.5, 400, BROWN))
+            o.append(heart(cx - 17, cy, 24, RED)); o.append(T(cx - 1.5, cy + 4.5, '+', 13, 700, BROWN))
+            o.append(icon('ic_carta', cx + 16, cy, 30, 47))
+        small = {2: ('occupata? Esagono', 'libero accanto'), 3: (f'all\'eroe che ti batte,', 'se no nella riserva')}
+        if i in small:
+            o.append(T(cx, by + 44, st, 10.5, 700))
+            o.append(T(cx, by + 55, small[i][0], 9.5, 400, BROWN)); o.append(T(cx, by + 65, small[i][1], 9.5, 400, BROWN))
         elif isinstance(st, tuple):
-            o.append(T(cx, by + 54, st[0], 10.5, 700)); o.append(T(cx, by + 66, st[1], 10.5, 700))
+            o.append(T(cx, by + 49, st[0], 10.5, 700)); o.append(T(cx, by + 61, st[1], 10.5, 700))
         else:
-            o.append(T(cx, by + 61, st, 10.5, 700))
-        if i < 3:
-            o.append(arrow([(x + bw + 2, cy), (x + pitch - 2, cy)], BROWN, 2.8, 7.5, 6, fill=COPPER))
-    # cartellini sotto l'ultimo passo
-    bx = X0 + pitch * 3 + bw / 2; tr = X1 - 6
-    ta, tb = 'Tieni Indizi, mano e Stati', 'Era il tuo turno? Vai alla Fine'
-    wa = tw(ta, 9.5, 700) + 34; wb = tw(tb, 9.5, 700) + 34
-    ya = by + bh + 7; yb = ya
-    o.append(tag(tr - wa, ya, wa, 14, ta, notch=bx))
+            o.append(T(cx, by + 55, st, 10.5, 700))
+        if i < 4:
+            o.append(arrow([(x + bw + 2, cy), (x + pitch - 2, cy)], BROWN, 2.6, 6, 5, fill=COPPER))
+    # cartellini: Cripta sotto il passo dell'Indizio, «Tieni» sotto l'ultimo, poi la Fine
+    tr = X1 - 6; ya = by + bh + 5; yb = ya + 17
+    ta, tb = 'Tieni mano e Stati', 'Era il tuo turno? Vai alla Fine'
+    tc = 'Nessuno ha più 3 Indizi? La Cripta esce con MIMI; il custode torna nel mazzetto 3'
+    td = 'Al prossimo 3° Indizio: nuovo tiro e nuovo custode'
+    wa = tw(ta, 9.5, 700) + 34; wb = tw(tb, 9.5, 700) + 34; wc = tw(tc, 9.5, 700) + 34
+    o.append(tag(tr - wa, ya, wa, 14, ta, notch=X0 + pitch * 4 + bw / 2))
     o.append(disc(tr - wa + 10, ya + 7, 5.3, PAPER, GREEN, 1.3, .1)); o.append(tick(tr - wa + 10, ya + 7.2, 3, GREEN, 1.9))
     o.append(T(tr - wa + 19, ya + 10.6, ta, 9.5, 700, INK, 'start'))
-    xb0 = tr - wa - 8 - wb
-    o.append(tag(xb0, yb, wb, 14, tb))
-    o.append(icon(ic_bandiera, xb0 + 10, yb + 7, 15, 48))
-    o.append(T(xb0 + 19, yb + 10.6, tb, 9.5, 700, INK, 'start'))
+    xc1 = tr - wa - 8; xc0 = xc1 - wc
+    assert xc0 >= X0 + 6, 'cartellino della Cripta troppo largo'
+    o.append(tag(xc0, ya, wc, 14, tc, notch=X0 + pitch * 3 + bw / 2))
+    o.append(icon('ic_tesoro', xc0 + 10, ya + 7, 14, 50))
+    o.append(T(xc0 + 19, ya + 10.6, tc, 9.5, 700, INK, 'start'))
+    wd = tw(td, 9.5, 700) + 34
+    assert xc0 + wd <= tr - wb - 8, 'secondo cartellino della Cripta troppo largo'
+    o.append(tag(xc0, yb, wd, 14, td))
+    o.append(icon('ic_tesoro', xc0 + 10, yb + 7, 14, 51))
+    o.append(T(xc0 + 19, yb + 10.6, td, 9.5, 700, INK, 'start'))
+    o.append(tag(tr - wb, yb, wb, 14, tb))
+    o.append(icon(ic_bandiera, tr - wb + 10, yb + 7, 15, 48))
+    o.append(T(tr - wb + 19, yb + 10.6, tb, 9.5, 700, INK, 'start'))
     export('S7-perdita', W, H, ''.join(o))
 
 # ================================================================ S5-indizio  250 x 195

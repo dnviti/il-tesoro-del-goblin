@@ -42,7 +42,7 @@ Niente cubetti né matita: tutto si segna con rotelle, tessere e pedine.
 
 ### Preparazione
 
-1. Base al centro; mescola i mazzi. Pesca a caso 1 dei 6 Mostri di LV 5: è il **custode di MIMI**. Gli altri 5: **mazzetto 3**.
+1. Base al centro; mescola i mazzi. I 6 Mostri di LV 5: **mazzetto 3**. Appare la Cripta? 1 a caso è il **custode di MIMI**.
 2. Chi ha visto per ultimo un goblin prende **Geronimo** e comincia.
 3. **Fiori** (schema): a turno, uno per spazio, faccia e verso liberi. O un **preset**.
 4. **Tessere** (schema): 24 coperte, a turno, mai su ostacoli; 12 in riserva.
@@ -128,11 +128,11 @@ Vale il testo della carta, non la battuta in corsivo. «Un avversario»: scegli 
 
 [ILLUSTRAZIONE: I5-morte — Geronimo fantasma (`morte.webp`), accanto allo schema S7]
 
-[SCHEMA: S7-perdita — Danni = PV: il D6 della perdita e il ritorno alla Partenza]
+[SCHEMA: S7-perdita — Danni = PV: il D6 della perdita, il ritorno alla Partenza e l'Indizio perso]
 
 ### Il Duello
 
-Ti fermi **accanto** a un eroe senza scontri, non nel primo giro? Sfidalo. Rifiuta: gli prendi 1 carta a caso. Accetta: scontro senza fuga (iniziativa pari: più MOV, poi chi sfida). Chi vince: 1 Indizio e 1 carta dagli scarti dello sconfitto, più la **Forte Volontà**.
+Ti fermi **accanto** a un eroe senza scontri, non nel primo giro? Sfidalo. Rifiuta: gli prendi 1 carta a caso. Accetta: scontro senza fuga (iniziativa pari: più MOV, poi chi sfida). Chi vince: l'Indizio dello sconfitto, 1 carta dai suoi scarti e la **Forte Volontà**.
 
 ### MIMI e la vittoria
 
@@ -165,7 +165,7 @@ Due riquadri affiancati.
   - «Faccia e verso liberi · più veloce: il foglio di un preset»;
   - «Tessere a testa: 12 · 8 · 6 · mai su ostacoli · ad almeno 2 esagoni da ogni Partenza · 1 per esagono» (D29: le Tessere Esplorazione vanno direttamente sulla mappa);
   - il segnalino Cripta messo da parte, con «Cripta: arriva al 3° Indizio»;
-- a destra della mappa un rettangolo: «Sala del Tesoro», con dentro due dischi «Rotella del custode (sui PV del custode)» e «Rotella dello scontro» e, sotto di loro, la pedina di MIMI (forziere) e la sagoma del «Custode di MIMI» (le caselle «Spostamenti del tesoro» non ci sono più: D26);
+- a destra della mappa un rettangolo: «Sala del Tesoro», con dentro due dischi «Rotella del custode (sui PV del custode)» e «Rotella dello scontro» e, sotto di loro, la pedina di MIMI (forziere) e la sagoma del custode con la scritta «Custode: con la Cripta» (D31: il custode non si pesca in preparazione, ma dal mazzetto 3 quando compare la Cripta; le caselle «Spostamenti del tesoro» non ci sono più: D26);
 - in fila sotto la mappa, cinque mazzetti coperti: «Mazzetto 1», «Mazzetto 2», «Mazzetto 3», «Imprevisti», «Mazzo comune»; accanto due mucchietti di tessere tonde: «Riserva» e «Tessere usate»;
 - sui 4 lati del tavolo, 4 rettangoli: «Plancia eroe»; su uno di essi la pedina di Geronimo con l'etichetta «Primo giocatore»;
 - intorno al tavolo una freccia circolare in **senso orario** con la scritta «Senso orario: tocca a sinistra».
@@ -244,7 +244,7 @@ Sotto tutto: «1 carta a testa per giro · nessun altro giro finché la pila non
 
 Riquadro a parte, in basso: «Effetti automatici: potere della Carta Classe, Equipaggiamenti in gioco, Forte Volontà, mostri, Stati. Scattano subito, nessuno risponde, non contano come carte».
 
-### S7-perdita — Danni = PV: il D6 della perdita (pagina 5, un terzo di pagina)
+### S7-perdita — Danni = PV: il D6 della perdita e l'Indizio perso (pagina 5, un terzo di pagina, 515 × 220)
 
 **In alto,** una tabella di 6 colonne. In ogni colonna una faccia del D6 e sotto un'icona e la scritta:
 1. tutti e 4 i pezzi barrati: «Tutto!»;
@@ -256,7 +256,7 @@ Riquadro a parte, in basso: «Effetti automatici: potere della Carta Classe, Equ
 
 Sotto la tabella, in piccolo: «Slot vuoto? Non perdi niente. · Ogni “perdi l'equipaggiamento” usa questo D6».
 
-**In basso,** una fila di 4 passi uniti da frecce: «Danni = PV» (cuore vuoto) → «D6 della perdita» (dado) → «Partenza iniziale» (pedina su un esagono con il numero della Partenza; in piccolo «occupata? Strada libera accanto») → «Danni di nuovo a 0 + 1 carta comune» (cuore pieno e una carta; D30). Cartellini sotto l'ultimo passo: «Tieni Indizi, mano e Stati» e «Era il tuo turno? Vai alla Fine».
+**In basso,** una fila di 5 passi uniti da frecce (R 11.4): «Danni = PV» (cuore vuoto) → «D6 della perdita» (dado) → «Partenza iniziale» (pedina su un esagono con il numero della Partenza; in piccolo «occupata? Esagono libero accanto», D25) → «Perdi 1 Indizio» (segnalino Indizio con «−1» rosso; in piccolo «all'eroe che ti batte, se no nella riserva»; D31) → «Danni a 0 + 1 carta comune» (cuore pieno e una carta; D30). Cartellini sotto i passi: sotto «Perdi 1 Indizio», con l'icona del forziere, «Nessuno ha più 3 Indizi? La Cripta esce con MIMI; il custode torna nel mazzetto 3» e, sotto, «Al prossimo 3° Indizio: nuovo tiro e nuovo custode» (D31); sotto l'ultimo passo «Tieni mano e Stati»; sotto, a destra, «Era il tuo turno? Vai alla Fine». Nel Duello l'Indizio perso è quello che prende il vincitore (pagina 5, «Il Duello»): uno solo.
 
 ## Illustrazioni
 
@@ -311,7 +311,7 @@ La Spec (D23, R 2.5, R 3.1, R 8.1–8.12, R 10.6, R 10.11) descrive ancora la ma
 
 ### Commenti di Desy nel regolamento docx
 
-4. **Boss = custode** (commento 12, Daniele: «perfetto»). Il manuale chiama «custodi» i 6 Mostri di LV 5: uno è il custode di MIMI, gli altri 5 sono il mazzetto 3. Le carte stampano già «3 · PL 8+ / custode»; la Spec e il docx dicono ancora «boss».
+4. **Boss = custode** (commento 12, Daniele: «perfetto»). Il manuale chiama «custodi» i 6 Mostri di LV 5. Dal 13/11 (D31) formano tutti il mazzetto 3 e il custode di MIMI si pesca a caso tra loro quando compare la Cripta (prima: pescato in preparazione, gli altri 5 nel mazzetto 3). Le carte stampano già «3 · PL 8+ / custode»; la Spec e il docx dicono ancora «boss».
 5. **Tabella delle ricompense** (commento 14, Daniele: «si intende che vinci la partita»). Corretto: mazzetto 3 dà solo il tiro per l'Indizio; vince la partita solo chi batte il custode di MIMI.
 6. **«Si arriva a?»** sui PV massimi (commento 7). Risposta dalla Spec R 2.3: da 5 a 13 (pagina 2). *Dal 13/11 (D30) la vecchia rotella dei PV massimi si chiama «PV» (5–13) e al posto dei PV attuali c'è la rotella «Danni» (0–13).*
 7. **Primo giocatore** (commento 4 e note finali di Desy). Resta «chi ha visto per ultimo un goblin» (Desy approva la battuta). Accolta la sua nota: il primo giocatore si decide prima e le classi si scelgono in ordine di turno. La Spec (R 3.5, R 3.10) fa scegliere le classi prima: è un cambio d'ordine, da provare.

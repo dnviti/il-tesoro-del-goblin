@@ -289,16 +289,19 @@ def cura(g, e, n, carta=True):
     e.danni = max(0, e.danni - n)           # «togli N Danni» (ex «recuperi N PV»): mai sotto 0
 
 
-def danneggia(g, e, n, fonte=None):
+def danneggia(g, e, n, fonte=None, riflesso=True):
     """Danni a un eroe. `fonte`: Eroe, creatura o None. Riflesso: chi fa Danni ne subisce 1."""
     if n <= 0 or e.pv <= 0:
         return
     e.pv -= n
     e.tmp['ferito'] += n
     if 'Riflesso' in e.stati and fonte is not None and fonte is not e:
-        ferisci(g, fonte, 1, None)
+        if isinstance(fonte, Eroe):
+            danneggia(g, fonte, 1, e, riflesso=False)       # D31: se lo sconfigge il Riflesso, l'Indizio va a chi lo ha
+        else:
+            ferisci(g, fonte, 1, None)
     if e.pv <= 0:
-        sconfitta(g, e)
+        sconfitta(g, e, fonte)
 
 
 def ferisci(g, bersaglio, n, fonte):
@@ -309,9 +312,12 @@ def ferisci(g, bersaglio, n, fonte):
         g.scontro.danni_creatura(n)
 
 
-def sconfitta(g, e):
+def sconfitta(g, e, fonte=None):
+    """Sconfitta (R 11.1, D31): perdi 1 Indizio se ne hai (`indizio_perso`), poi D6 della perdita (TC-01 Assaltatore: no).
+    `fonte`: Eroe che ha inflitto i Danni (None = creatura, custode, Trappola, costo o effetto proprio)."""
     e.morti += 1
     g.st['morti'] += 1
+    indizio_perso(g, e, fonte)
     if e.classe == 'Assaltatore' and e.potere and e.pl() >= 2:
         e.potere = False                    # TC-01: non tira il D6 della perdita
         g.st['potere_Assaltatore'] += 1
@@ -329,6 +335,33 @@ def sconfitta(g, e):
         g.scontro.finito = True
     if g.eroi[g.attivo] is e:
         g.turno_finito = True
+
+
+def indizio_perso(g, e, fonte):
+    """D31: chi è sconfitto perde 1 Indizio. Sconfitto da un altro eroe (carta o attacco fuori da un Duello) → lo prende lui;
+    da creatura, custode, Trappola o da sé → torna nella riserva. Nel Duello non si perde nulla qui: l'unico Indizio lo prende
+    il vincitore (R 10.10, `scontro.duello`). Se poi nessun eroe ha più 3 Indizi la Cripta se ne va."""
+    sc = g.scontro
+    if not e.indizi or (sc is not None and sc.duello and e in sc.lati()):
+        return
+    e.indizi -= 1
+    if isinstance(fonte, Eroe) and fonte is not e:
+        prendi_indizio(g, fonte, 'sconfitta')
+        g.st['indizi_persi_eroe'] += 1
+    else:
+        g.st['indizi_persi_riserva'] += 1
+    cripta_via(g)
+
+
+def cripta_via(g):
+    """D31: la Cripta (con MIMI e custode) lascia la mappa quando nessun eroe ha più 3 Indizi; ritorna con un nuovo tiro
+    quando un eroe torna a 3 (`prendi_indizio`; la voce, R 10.6, non si ripete)."""
+    if g.mimi is not None and not any(x.indizi >= 3 for x in g.eroi):
+        g.mimi = g.cripta_xy = None
+        g.st['cripta_tolta'] += 1
+        g.mazzetti[3].append(g.custode.id)  # D31: il custode guarisce e torna nel mazzetto 3, che si rimescola
+        g.rng.shuffle(g.mazzetti[3])
+        g.custode = None
 
 
 def tessera_dalla_riserva(g):
@@ -407,8 +440,10 @@ def prendi_indizio(g, e, fonte):
         for x in avversari(g, e):           # «la voce si sparge» (R 10.6)
             x.indizi += 1
             g.st['indizi_voce'] += 1
-        if g.mimi is None:
-            posa_cripta(g, tira_cripta(g))
+    if e.indizi >= 3 and g.mimi is None:    # prima volta, o D31: la Cripta era tolta e ritorna con un nuovo tiro
+        posa_cripta(g, tira_cripta(g))
+        from scontro import Creatura         # import tardivo: scontro importa già stato
+        g.custode = Creatura(g, g.mazzetti[3].pop(g.rng.randrange(len(g.mazzetti[3]))))     # D31: 1 boss a caso, PV pieni
     g.max_indizi = max(g.max_indizi, sum(x.indizi for x in g.eroi))
 
 
