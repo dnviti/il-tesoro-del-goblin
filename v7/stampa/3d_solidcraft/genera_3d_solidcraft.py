@@ -22,7 +22,7 @@ Pezzi (mappa da v7/stampa/sorgenti/dati/base12.csv: spazi dei fiori, posizioni 0
   la plancia e il gambo con 4 costole di schiacciamento, femmina con la stessa testa sopra la rotella e la manica su cui
   gira la rotella; la manica poggia sulla plancia, il gambo entra a pressione nel suo foro. Tutti e due si stampano
   con la cima della cupola sul piatto, senza supporti.
-Quantità dai CSV del kit; 4 file 3MF in out/ (mappa, rotelle_fulcri, segnalini, tessere_esplorazione) su piatti da 220 × 220.
+Quantità dai CSV del kit; 4 file 3MF in out/ (mappa, rotelle_rivetti, segnalini, tessere_esplorazione) su piatti da 220 × 220.
 
 Lo script calcola la geometria in pianta con shapely, la rende parametrica (ogni coordinata del documento SolidCraft
 è un'espressione lineare dei parametri: passo, margine, gioco, bordino...; i coefficienti si ricavano per differenze
@@ -1273,13 +1273,13 @@ def file_3mf(o):
     if o.startswith('vassoio_') or o == 'fiore':
         return 'mappa.3mf'
     if o.startswith('rotella_') or o.startswith('rivetto_'):
-        return 'rotelle_fulcri.3mf'
+        return 'rotelle_rivetti.3mf'
     if o == 'tessera_esplorazione':
         return 'tessere_esplorazione.3mf'
     return 'segnalini.3mf'
 
 
-FILE_3MF = {'mappa.3mf': 'mappa 12x12 (4 quarti del vassoio, 14 fiori)', 'rotelle_fulcri.3mf': 'rotelle e rivetti (maschio e femmina)',
+FILE_3MF = {'mappa.3mf': 'mappa 12x12 (4 quarti del vassoio, 14 fiori)', 'rotelle_rivetti.3mf': 'rotelle e rivetti (maschio e femmina)',
             'segnalini.3mf': 'tessere Stato, Indizi, Forte Volonta, Usato, Cripta', 'tessere_esplorazione.3mf': 'Tessere Esplorazione'}
 
 

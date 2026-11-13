@@ -18,7 +18,7 @@
 <text x="10.00" y="82.70" font-family="Liberation Serif" font-size="4.00" fill="#2a2118" text-anchor="start" font-weight="bold" >VERSIONE 3D (carta da applicare sulla plastica: carta_base_3d.pdf + carta_fiori_3d.pdf + segnalini)</text>
 <line x1="10.00" y1="85.70" x2="200.00" y2="85.70" stroke="#a8823a" stroke-width="0.3"/>
 <circle cx="13.2" cy="90.20" r="2.6" fill="#a65a32"/><text x="13.20" y="91.20" font-family="Liberation Sans Narrow" font-size="3.00" fill="#fff" text-anchor="middle" font-weight="bold" >1</text>
-<text x="19.00" y="91.20" font-family="Liberation Sans Narrow" font-size="3.10" fill="#2a2118" text-anchor="start" >Stampa i 4 file 3MF da 3d_solidcraft/out/ (mappa.3mf 8 piatti, rotelle_fulcri.3mf 4, segnalini.3mf 2, tessere_esplorazione.3mf 1; piatti da 220 × 220 mm).</text>
+<text x="19.00" y="91.20" font-family="Liberation Sans Narrow" font-size="3.10" fill="#2a2118" text-anchor="start" >Stampa i 4 file 3MF da 3d_solidcraft/out/ (mappa.3mf 8 piatti, rotelle_rivetti.3mf 4, segnalini.3mf 2, tessere_esplorazione.3mf 1; piatti da 220 × 220 mm).</text>
 <text x="19.00" y="95.10" font-family="Liberation Sans Narrow" font-size="3.10" fill="#2a2118" text-anchor="start" >Sono 3MF standard senza metadati di piatto: nello slicer separa i piatti a mano o usa «disponi».</text>
 <circle cx="13.2" cy="100.60" r="2.6" fill="#a65a32"/><text x="13.20" y="101.60" font-family="Liberation Sans Narrow" font-size="3.00" fill="#fff" text-anchor="middle" font-weight="bold" >2</text>
 <text x="19.00" y="101.60" font-family="Liberation Sans Narrow" font-size="3.10" fill="#2a2118" text-anchor="start" >Incastra i 4 quarti del vassoio nell’ordine NO → NE → SO → SE con le code a pomello (23 tra NO e gli altri due, 11 tra NE e SE, 11 tra SO e SE). Da</text>

@@ -1332,7 +1332,7 @@ def guida_montaggio_mappa():
         ('mappa_preset.pdf', 'carta normale', 'solo fronte', '10 fogli, uno per preset')], y)
     y = tabella('VERSIONE 3D: carta DA APPLICARE SULLA PLASTICA 3D', [
         ('3d_solidcraft/out/mappa.3mf', 'filamento PLA (stampante 3D)', 'n.a.', '8 piatti: 4 quarti del vassoio, 14 fiori'),
-        ('3d_solidcraft/out/rotelle_fulcri.3mf', 'filamento PLA (stampante 3D)', 'n.a.', '4 piatti: 27 rotelle e 27 rivetti'),
+        ('3d_solidcraft/out/rotelle_rivetti.3mf', 'filamento PLA (stampante 3D)', 'n.a.', '4 piatti: 27 rotelle e 27 rivetti'),
         ('3d_solidcraft/out/segnalini.3mf', 'filamento PLA (stampante 3D)', 'n.a.', '2 piatti: 31 Stati, 16 Indizi, 4 Forte Volontà, 20 Usato, Cripta'),
         ('3d_solidcraft/out/tessere_esplorazione.3mf', 'filamento PLA (stampante 3D)', 'n.a.', '1 piatto: 36 Tessere Esplorazione'),
         ('3d_solidcraft/out/carta_fiori_3d.pdf', 'cartoncino 160-250 g', 'solo fronte', '5 fogli, 28 facce (una per fiore 3D)'),
@@ -1359,7 +1359,7 @@ def guida_montaggio_mappa():
         'Ritaglia i 14 fiori sulla linea sottile del contorno e la Cripta sulla sua linea (foglio 3 di mappa_fiori.pdf). Segnalini, Stati e tessere Esplorazione: segnalini.pdf (4 fogli, fronte/retro sul lato lungo: Indizi, Forte Volontà, Usato e Stati sono a doppia faccia) e tessere_esplorazione.pdf.',
         'Posa i fiori negli spazi numerati della base, con la freccia d’ottone rivolta al numero 1-6 indicato dal preset (mappa_preset.pdf), oppure scegli posto e rotazione col draft.'], y)
     y = sezione('VERSIONE 3D (carta da applicare sulla plastica: carta_base_3d.pdf + carta_fiori_3d.pdf + segnalini)', [
-        'Stampa i 4 file 3MF da 3d_solidcraft/out/ (mappa.3mf 8 piatti, rotelle_fulcri.3mf 4, segnalini.3mf 2, tessere_esplorazione.3mf 1; piatti da 220 × 220 mm). Sono 3MF standard senza metadati di piatto: nello slicer separa i piatti a mano o usa «disponi».',
+        'Stampa i 4 file 3MF da 3d_solidcraft/out/ (mappa.3mf 8 piatti, rotelle_rivetti.3mf 4, segnalini.3mf 2, tessere_esplorazione.3mf 1; piatti da 220 × 220 mm). Sono 3MF standard senza metadati di piatto: nello slicer separa i piatti a mano o usa «disponi».',
         'Incastra i 4 quarti del vassoio nell’ordine NO → NE → SO → SE con le code a pomello (23 tra NO e gli altri due, 11 tra NE e SE, 11 tra SO e SE). Da verificare con la prima stampa: tenuta delle code e gioco.',
         'Stampa carta_base_3d.pdf: 4 fogli, uno per quarto (NO, NE, SO, SE), solo la cornice di bordo, al 100% con print-scaling=none (controlla il segmento di 100 mm). Ritaglia ogni foglio sulla linea scura (contorno esterno e interno) e posalo nella tasca del quarto corrispondente del vassoio: non si incolla.',
         'Stampa carta_fiori_3d.pdf, taglia ogni faccia sulla linea scura (0,4 mm dentro il contorno dell’esagono) e incollala sopra il fiore 3D con la colla stick: la faccia del fiore viene alla stessa altezza della carta della base. Il fiore 3D porta una sola faccia (altre 14 facce = altri 14 fiori 3D).',

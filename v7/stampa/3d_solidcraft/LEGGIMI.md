@@ -92,7 +92,7 @@ Sono tutti in `out/`:
   | File | Pezzi | Piatti |
   |---|---|---|
   | `mappa.3mf` | 4 quarti del vassoio + 14 fiori | 8: un quarto per piatto (1-4), fiori 4 + 4 + 4 + 2 (5-8) |
-  | `rotelle_fulcri.3mf` | 27 rotelle (4 × PV, Danni, ATT, MOV, AR, PL; scontro, custode, Profezia) + 27 rivetti maschio + 27 femmina | 4 |
+  | `rotelle_rivetti.3mf` | 27 rotelle (4 × PV, Danni, ATT, MOV, AR, PL; scontro, custode, Profezia) + 27 rivetti maschio + 27 femmina | 4 |
   | `segnalini.3mf` | 31 tessere Stato, 16 Indizi, 4 Forte Volontà, 20 Usato, 1 Cripta | 2 |
   | `tessere_esplorazione.3mf` | 36 Tessere Esplorazione | 1 |
 
